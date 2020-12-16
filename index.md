@@ -1,53 +1,34 @@
 +++
-title = "Display lint"
+title = "ShowLint"
 tags = ["syntax"]
 reeval = true
 +++
 
-# Display lint
+# ShowLint
 
 ```julia:preliminaries
 # hideall
 using DisplayLint
-project_root()::String = basename(basename(pathof(DisplayLint)))
-
-function ansi2html(text)
-  escape_codes = Dict(
-    "0;30" => "inherit",
-    "0;31" => "red",
-    "0;32" => "green",
-    "0;33" => "brown",
-    "0;34" => "blue",
-    "0;1" => "inherit",
-    "0;100;30" => "inherit",
-    "0;42;30" => "green",
-    # "0;1" => "black"
-  )
-  for code in keys(escape_codes)
-    before = "[" * code * "m"
-    color = escape_codes[code]
-    after = "<span style=\"color:$color;\">"
-    text = replace(text, before => after)
-  end
-  no_color = "[0m"
-  text = replace(text, no_color => "</span>")
-  text = replace(text, r"WARNING: [^\n]*$" => "")
-  text = replace(text, "/pwd/" => "")
-  text = text[1:end-6]
-  text = strip(text)
-  """
-  ~~~ 
-  <pre>
-  <div class="hljs">$text</div>
-  </pre>
-  ~~~
-  """
-end
 ```
 
+This website shows linting results for [patterns](/patterns) on [repositories](/repositories) by using [Comby](https://github.com/comby-tools/comby).
+As an example, lets run the pattern `p1` on this repository.
+The pattern finds toml files containing `name = "..."` and adds a comment before that line:
+
+```julia:pattern
+# hideall
+p1_file = joinpath(project_root, "configs", "p1.toml")
+println(read(p1_file, String))
+```
+\output{pattern}
+
+The output is
+
 ```julia:first
+# hideall
+
 # first_config = joinpath(project_root(), "configs", "one.toml")
-cmd = `comby -config configs/one.toml -f toml`
+cmd = `comby -config configs/p1.toml -f toml`
 stdout = IOBuffer()
 run(pipeline(cmd; stdout))
 out = String(take!(stdout))
@@ -55,5 +36,4 @@ out = String(take!(stdout))
 out = ansi2html(out)
 println(out)
 ```
-
 \textoutput{first}

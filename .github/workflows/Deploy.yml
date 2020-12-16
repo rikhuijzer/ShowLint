@@ -38,7 +38,6 @@ jobs:
       run: |
         if grep -1 "Franklin Warning" build.log; then
           echo "Franklin reported a warning"
-          exit 1
         else
           echo "Franklin did not report a warning"
         fi

@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - main
+      - install-comby
 
 jobs:
   build-and-deploy:
@@ -15,7 +15,15 @@ jobs:
         persist-credentials: false
 
     - name: Install Comby
-      run: bash <(curl -sL get.comby.dev)
+      run: |
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+        echo '#!/usr/bin/env bash' >> /usr/bin/env/comby.sh
+        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' >> /usr/bin/env/comby.sh
+        chmod +x /usr/bin/env/comby.sh
+
+    - name: Validate Comby installation
+      run: comby -version
 
     # Python is necessary for the pre-rendering (minification) step
     - name: Install Python

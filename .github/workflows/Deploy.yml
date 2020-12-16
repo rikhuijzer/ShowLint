@@ -18,9 +18,9 @@ jobs:
       run: |
         curl -fsSL https://get.docker.com -o get-docker.sh
         sh get-docker.sh
-        echo '#!/usr/bin/env bash' >> /usr/bin/env/comby.sh
-        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' >> /usr/bin/env/comby.sh
-        chmod +x /usr/bin/env/comby.sh
+        echo '#!/usr/bin/env bash' >> /usr/bin/comby.sh
+        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' >> /usr/bin/comby.sh
+        chmod +x /usr/bin/comby.sh
 
     - name: Validate Comby installation
       run: comby -version

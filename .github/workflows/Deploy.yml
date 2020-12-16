@@ -14,20 +14,21 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Add script for Comby via Docker
-      run: |
-        echo '#!/usr/bin/env bash' | sudo tee -a /usr/bin/comby.sh
-        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /usr/bin/comby.sh
-        sudo chmod +x /usr/bin/comby.sh
-        sudo cat /usr/bin/comby.sh
-
-    - name: Install Comby
+    - name: Install Docker
       run: |
         curl -fsSL https://get.docker.com -o get-docker.sh
         sh get-docker.sh
 
+    - name: "Install" Comby
+      run: |
+        echo '#!/usr/bin/env bash' | sudo tee -a /usr/bin/comby.sh
+        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /usr/bin/comby.sh
+        sudo chmod +x /usr/bin/comby.sh
+
     - name: Validate Comby installation
-      run: comby -version
+      run: |
+        alias comby="./usr/bin/comby.sh"
+        comby -version
 
     # Python is necessary for the pre-rendering (minification) step
     - name: Install Python

@@ -1,0 +1,7 @@
+name = "DisplayLint"
+uuid = "575342c9-82f4-4a03-ab40-95723c835196"
+authors = ["Rik Huijzer <t.h.huijzer@rug.nl>"]
+version = "0.1.0"
+
+[deps]
+Franklin = "713c75ef-9fc9-4b05-94a9-213340da978e"

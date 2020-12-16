@@ -1,0 +1,7 @@
+[p1]
+
+match='name = ":[name]"' 
+
+rewrite='''
+# This example comment is added by comby.
+name = ":[name]"'''

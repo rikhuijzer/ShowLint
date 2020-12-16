@@ -27,7 +27,7 @@ jobs:
 
     - name: Validate Comby installation
       run: |
-        alias comby="./usr/bin/comby.sh"
+        alias comby="/usr/bin/comby.sh"
         comby -version
 
     # Python is necessary for the pre-rendering (minification) step

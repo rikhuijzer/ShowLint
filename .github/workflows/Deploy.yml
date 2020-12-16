@@ -19,7 +19,7 @@ jobs:
         curl -fsSL https://get.docker.com -o get-docker.sh
         sh get-docker.sh
 
-    - name: "Install" Comby
+    - name: Install Comby
       run: |
         echo '#!/usr/bin/env bash' | sudo tee -a /usr/bin/comby.sh
         echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /usr/bin/comby.sh

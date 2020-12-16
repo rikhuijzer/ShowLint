@@ -1,1 +1,0 @@
-Process(`comby -config configs/one.toml -f toml -color`, ProcessExited(0))

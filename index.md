@@ -12,20 +12,25 @@ using DisplayLint
 project_root()::String = basename(basename(pathof(DisplayLint)))
 
 function ansi2html(text)
-  span_color(color, s) = "<span style=\"color:$color;\">$s</span>"
-  text = strip(text)
-  lines = split(text, '\n')
-  function clean(line) 
-    if contains(line, "------")
-      return span_color("red", "------ " * line[30:end-4])
-    end
-    if contains(line, "++++++")
-      return span_color("green", "++++++ " * line[30:end-4])
-    end
-    line
+  escape_codes = Dict(
+    "0;30" => "inherit",
+    "0;31" => "red",
+    "0;32" => "green",
+    "0;33" => "brown",
+    "0;34" => "blue",
+    "0;1" => "inherit",
+    "0;100;30" => "inherit",
+    "0;42;30" => "green",
+    # "0;1" => "black"
+  )
+  for code in keys(escape_codes)
+    before = "[" * code * "m"
+    color = escape_codes[code]
+    after = "<span style=\"color:$color;\">"
+    text = replace(text, before => after)
   end
-  text = join(clean.(lines), '\n')
-  text = strip(text)
+  no_color = "[0m"
+  text = replace(text, no_color => "</span>")
   """
   ~~~ 
   <pre>
@@ -44,7 +49,7 @@ cmd = `comby -config configs/one.toml -f toml`
 stdout = IOBuffer()
 run(pipeline(cmd; stdout))
 out = String(take!(stdout))
-println(out)
+# println(out)
 out = ansi2html(out)
 println(out)
 ```

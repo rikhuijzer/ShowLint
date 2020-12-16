@@ -1,0 +1,50 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    # Python is necessary for the pre-rendering (minification) step
+    - name: Install python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install Julia
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: 1
+
+    - name: Build site
+      run: julia -e '
+        using Pkg; Pkg.add(["NodeJS", "Franklin"]);
+        using NodeJS; run(`$(npm_cmd()) install highlight.js`);
+        using Franklin;
+        Pkg.activate("."); Pkg.instantiate();
+        optimize();
+        verify_links()' > build.log
+
+    - name: Validate output
+      run: |
+        if grep -1 "Franklin Warning" build.log; then
+          echo "Franklin reported a warning"
+          exit 1
+        else
+          echo "Franklin did not report a warning"
+        fi
+
+    - name: Deploy to secondary branch
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./__site

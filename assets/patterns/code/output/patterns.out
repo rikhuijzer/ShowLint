@@ -1,0 +1,12 @@
+~~~ 
+<h3>p1.toml</h3>
+<pre><code class="plaintext hljs">[p1]
+
+match='name = ":[name]"' 
+
+rewrite='''
+# A new comment.
+name = ":[name]"'''
+</code></pre>
+~~~
+

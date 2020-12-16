@@ -1,0 +1,8 @@
+[p1]
+
+match='name = ":[name]"' 
+
+rewrite='''
+# A new comment.
+name = ":[name]"'''
+

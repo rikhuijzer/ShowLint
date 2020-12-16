@@ -16,10 +16,10 @@ jobs:
 
     - name: Add script for Comby via Docker
       run: |
-        echo '#!/usr/bin/env bash' >> /usr/bin/comby.sh
-        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' >> /usr/bin/comby.sh
-        chmod +x /usr/bin/comby.sh
-        cat /usr/bin/comby.sh
+        echo '#!/usr/bin/env bash' | sudo tee -a /usr/bin/comby.sh
+        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /usr/bin/comby.sh
+        sudo chmod +x /usr/bin/comby.sh
+        sudo cat /usr/bin/comby.sh
 
     - name: Install Comby
       run: |

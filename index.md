@@ -31,12 +31,14 @@ function ansi2html(text)
   end
   no_color = "[0m"
   text = replace(text, no_color => "</span>")
+  text = replace(text, r"WARNING: [^\n]*$" => "")
+  text = replace(text, "/pwd/" => "")
+  text = text[1:end-6]
+  text = strip(text)
   """
   ~~~ 
   <pre>
-  <div class="hljs">
-  $text 
-  </div>
+  <div class="hljs">$text</div>
   </pre>
   ~~~
   """

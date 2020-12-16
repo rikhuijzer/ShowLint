@@ -3,5 +3,5 @@
 match='name = ":[name]"' 
 
 rewrite='''
-# This example comment is added by comby.
+# A new comment.
 name = ":[name]"'''

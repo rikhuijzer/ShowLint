@@ -10,3 +10,13 @@ name = ":[name]"'''
 </code></pre>
 ~~~
 
+~~~ 
+<h3>p2.toml</h3>
+<pre><code class="plaintext hljs">[p2]
+
+match='if :[var] === nothing' 
+
+rewrite='if isnothing(:[var])'
+</code></pre>
+~~~
+

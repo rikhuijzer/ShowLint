@@ -1,6 +1,6 @@
 # This file was generated, do not modify it. # hide
 # hideall
-using DisplayLint
+using ShowLint
 
 dir = joinpath(project_root, patterns_dir)
 

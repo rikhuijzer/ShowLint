@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - main
+      - install-comby
 
 jobs:
   build-and-deploy:
@@ -15,7 +15,23 @@ jobs:
         persist-credentials: false
 
     - name: Install Comby
-      run: bash <(curl -sL get.comby.dev)
+      run: |
+        sudo mkdir /comby
+        sudo chown $USER /comby
+        echo '#!/usr/bin/env bash' | tee -a /comby/comby
+        echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' | tee -a /comby/comby
+        sudo chmod +x /comby/comby
+        # See "Setting an environment variable" in the docs.
+        echo "/comby" >> $GITHUB_PATH
+
+    - name: Install Podman
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install podman
+
+    - name: Validate Comby installation
+      run: |
+        comby -version
 
     # Python is necessary for the pre-rendering (minification) step
     - name: Install Python

@@ -73,9 +73,14 @@ html {
     TEXT GEOMETRY
 ================================================================== */
 
+.franklin-toc {
+  margin-bottom: 2rem;
+}
+
 .franklin-toc li {
   /* Avoid clickable elements being too close together. */
-  margin: 0.6rem 0;
+  margin: 1rem 0;
+  list-style-type: disc;
 }
 
 .franklin-content {
@@ -182,7 +187,7 @@ td {
 }
 
 .franklin-content a {
-  color: #004de6;
+  color: #004de6 !important;
   text-decoration: none;
 }
 

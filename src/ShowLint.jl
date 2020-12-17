@@ -43,13 +43,15 @@ function ansi2html(text)
   text = replace(text, "/repo/" => "")
   text = text[1:end-6]
   text = strip(text)
-  """
-  ~~~ 
-  <pre>
-  <div class="hljs">$text</div>
-  </pre>
-  ~~~
-  """
+  return length(text) < 6 ? 
+        "" :
+        """
+        ~~~ 
+        <pre>
+        <div class="hljs">$text</div>
+        </pre>
+        ~~~
+        """
 end
 
 const clones_dir = joinpath(homedir(), "clones") 
@@ -111,11 +113,6 @@ end
     apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
 
 Apply `pattern` to `repo`.
-
-### Examples
-```
-repo = Repo("https://github.com", "JuliaData/CSV.jl")
-apply("p1", repo)
 ```
 """
 function apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
@@ -149,8 +146,11 @@ end
 function repo_page(repo::Repo)::String
     predicates_str = join(repo.tags_predicates, " && ")
     head = """
-        ### $(repo.name)
-        Showing patterns for which the `tags` satisfy: *$predicates_str*
+        # $(repo.name)
+        Showing patterns for which the `tags` satisfy:
+        *$predicates_str*, and the pattern resulted in at least one match.
+
+        \\toc
 
         """
 
@@ -162,9 +162,12 @@ function repo_page(repo::Repo)::String
         diff = ShowLint.apply(pat, repo)
         title = pat.title
         id = pat.id
+        return diff == "" ? 
+        "" : 
         """
-        $id: [$title](/patterns/#$id)
+        ### $id: [$title](/patterns/#$id)
         $diff
+
         """
     end
     sections = pattern_section.(filtered_patterns)
@@ -180,8 +183,11 @@ We could process all the diffs with this function is called
 or when `serve` runs. It seems less error prone to do it as early
 as possible.
 """
-function create_repo_pages()
-    for repo in repositories
+function create_repo_pages(; debug=false)
+    filtered_repos = debug ? 
+        filter(r->contains(r.name,"Codex.jl"), repositories) :
+        repositories
+    for repo in filtered_repos
         if !isdir(host_dir(repo))
             mkdir(host_dir(repo))
         end

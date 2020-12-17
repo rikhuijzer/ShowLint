@@ -54,11 +54,15 @@ end
 
 const clones_dir = joinpath(homedir(), "clones") 
 
-function target_dir(repo::Repo)
-    name = repo.name
+function host_dir(repo::Repo)
     host = repo.host
     host_dir = startswith(host, "https://") ? host[9:end] : host
-    joinpath(clones_dir, host_dir, name) 
+    host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+end
+
+function target_dir(repo::Repo)
+    name = repo.name
+    joinpath(clones_dir, host_dir(repo), name) 
 end
 
 function clone_repositories()
@@ -135,6 +139,35 @@ function apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
     end
     out = avoid_franklin_parse_errors(out)
     out = ansi2html(out)
+end
+
+"""
+    create_repo_pages()
+
+Create one webpage per repository.
+This step should happen before `serve()` is called.
+"""
+function create_repo_pages()
+    for repo in repositories
+        if !isdir(host_dir(repo))
+            mkdir(host_dir(repo))
+        end
+        name = repo.name
+        franklin_file = lowercase(joinpath(host_dir(repo), "$name.md"))
+        if !isdir(dirname(franklin_file))
+            mkdir(dirname(franklin_file))
+        end
+        open(franklin_file, "w") do io
+            write(io, """
+                +++
+                title = "$(repo.name)"
+                +++
+
+                lorem
+                """
+            )
+        end
+    end
 end
 
 end # module

@@ -1,2 +1,0 @@
-failed process: Process(`podman run --volume /home/runner/work/ShowLint/ShowLint:/project --rm --workdir /project -it comby/comby -config configs/p1.toml -file-extensions toml`, ProcessExited(1)) [1]
-

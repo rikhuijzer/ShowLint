@@ -1,5 +1,0 @@
-[p2]
-
-match='if :[var] === nothing' 
-
-rewrite='if isnothing(:[var])'

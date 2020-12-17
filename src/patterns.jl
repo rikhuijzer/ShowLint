@@ -6,7 +6,7 @@ struct Pattern
 end
 
 patterns = [
-    Pattern(1, "Add comment in Project.toml", ["test", "julia"], """
+    Pattern(1, "Test: Add comment in Project.toml", ["test", "julia"], """
         match='name = ":[name]"' 
 
         rewrite='''

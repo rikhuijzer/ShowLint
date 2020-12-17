@@ -1,4 +1,11 @@
 ### rikhuijzer/Codex.jl
+~~~
+Showing patterns for which the <code>tags</code> satisfy: 
+<code>any_tag</code>
+<br/>
+<br/>
+~~~
+
   1: [Test: Add comment in Project.toml](/patterns/#1)
   ~~~ 
 <pre>
@@ -27,22 +34,12 @@
 
 
 ### JuliaData/CSV.jl
-  1: [Test: Add comment in Project.toml](/patterns/#1)
-  ~~~ 
-<pre>
-<div class="hljs"><span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1,5 +1,6</span> ============================================================
-<span style="color:inherit;"> |</span>using Documenter, CSV
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">makedocs(modules = [CSV], </span><span style="color:red;">sitename</span><span style="color:gray;"> = "CSV.jl", format = Documenter.HTML(canonical = "https://juliadata.github.io/CSV.jl/stable/"))</span></span>
-<span style="color:green;">+|</span></span>makedocs(modules = [CSV], <span style="color:green;">site# A new comment.</span></span>
-<span style="color:green;">+|</span></span><span style="color:green;">name</span> = "CSV.jl", format = Documenter.HTML(canonical = "https://juliadata.github.io/CSV.jl/stable/"))</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>deploydocs(repo = "github.com/JuliaData/CSV.jl.g</div>
-</pre>
 ~~~
-
+Showing patterns for which the <code>tags</code> satisfy: 
+<code>not_test</code>
+<br/>
+<br/>
+~~~
 
   2: [Replace var === nothing](/patterns/#2)
   ~~~ 
@@ -58,6 +55,17 @@
 <span style="color:inherit;"> |</span>        try
 <span style="color:inherit;"> |</span>            date, code, vpos, vlen, tlen = Parsers.xparse(Date, buf, pos, len, options)
 <span style="color:inherit;"> |</span>            if Parsers.ok(code) && vpos + vlen - 1 == len
+<span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
+<span style="color:inherit;"> |</span>    buf = Vector{UInt8}(undef, len)
+<span style="color:inherit;"> |</span>    pos = 1
+<span style="color:inherit;"> |</span>    state = iterate(rows)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">state === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(state)</span></span>
+<span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
+<span style="color:inherit;"> |</span>            with(file, append) do io
+<span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
 <span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-240,7 +240,7</span> ============================================================
@@ -89,28 +97,6 @@
 <span style="color:inherit;"> |</span>        throw(ArgumentError("provide a valid sink argument, like `using DataFrames; CSV.read(source, DataFrame)`"))
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    Tables.CopiedColumns(CSV.File(source; kwargs...)) |> sink
-<span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
-<span style="color:inherit;"> |</span>    buf = Vector{UInt8}(undef, len)
-<span style="color:inherit;"> |</span>    pos = 1
-<span style="color:inherit;"> |</span>    state = iterate(rows)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">state === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(state)</span></span>
-<span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
-<span style="color:inherit;"> |</span>            with(file, append) do io
-<span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
-<span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-117,7 +117,7</span> ============================================================
-<span style="color:inherit;"> |</span>    falses = falsestrings === nothing ? nothing : falsestrings
-<span style="color:inherit;"> |</span>    sentinel = ((isempty(missingstrings) && missingstring == "") || (length(missingstrings) == 1 && missingstrings[1] == "")) ? missing : isempty(missingstrings) ? [missingstring] : missingstrings
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">delim === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(delim)</span></span>
-<span style="color:inherit;"> |</span>        del = isa(source, AbstractString) && endswith(source, ".tsv") ? UInt8('\t') :
-<span style="color:inherit;"> |</span>            isa(source, AbstractString) && endswith(source, ".wsv") ? UInt8(' ') :
-<span style="color:inherit;"> |</span>            UInt8('\n')
 <span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
@@ -121,7 +107,18 @@
 <span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
 <span style="color:inherit;"> |</span>    elseif testfunc isa Function
 <span style="color:inherit;"> |</span>        testfunc(t)
-<span style="color:inherit;"> |</span></div>
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-117,7 +117,7</span> ============================================================
+<span style="color:inherit;"> |</span>    falses = falsestrings === nothing ? nothing : falsestrings
+<span style="color:inherit;"> |</span>    sentinel = ((isempty(missingstrings) && missingstring == "") || (length(missingstrings) == 1 && missingstrings[1] == "")) ? missing : isempty(missingstrings) ? [missingstring] : missingstrings
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">delim === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(delim)</span></span>
+<span style="color:inherit;"> |</span>        del = isa(source, AbstractString) && endswith(source, ".tsv") ? UInt8('\t') :
+<span style="color:inherit;"> |</span>            isa(source, AbstractString) && endswith(source, ".wsv") ? UInt8(' ') :
+<span style="color:inherit;"> |</span>            UInt8('</div>
 </pre>
 ~~~
 

@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Repositories</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item active" href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=repositories ><a href="#repositories">Repositories</a></h1> <p>The repositories listed below are defined in <code>repositories.csv</code>.</p> <h3 id=rikhuijzercodexjl ><a href="#rikhuijzercodexjl">rikhuijzer/Codex.jl</a></h3></p> <p>1: <a href="/patterns/#1">Test: Add comment in Project.toml</a> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Repositories</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item active" href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=repositories ><a href="#repositories">Repositories</a></h1> <p>The repositories listed below are defined in <code>repositories.csv</code>.</p> <p><div class=franklin-toc ><ol><li><a href="#rikhuijzercodexjl">rikhuijzer/Codex.jl</a><li><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></ol></div> </p> <h3 id=rikhuijzercodexjl ><a href="#rikhuijzercodexjl">rikhuijzer/Codex.jl</a></h3></p> Showing patterns for which the <code>tags</code> satisfy: <code>any_tag</code> <br/> <br/> <p>1: <a href="/patterns/#1">Test: Add comment in Project.toml</a> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-2,7 +2,8</span> ============================================================
@@ -13,18 +13,7 @@
 <span style="color:inherit;"> |</span>        "Backup" => "backup.</div>
 </pre> </p> <p>2: <a href="/patterns/#2">Replace var &#61;&#61;&#61; nothing</a> <pre>
 <div class=hljs ></div>
-</pre> </p> <h3 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h3> <p>1: <a href="/patterns/#1">Test: Add comment in Project.toml</a> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1,5 +1,6</span> ============================================================
-<span style="color:inherit;"> |</span>using Documenter, CSV
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">makedocs(modules = [CSV], </span><span style="color:red;">sitename</span><span style="color:gray;"> = "CSV.jl", format = Documenter.HTML(canonical = "https://juliadata.github.io/CSV.jl/stable/"))</span></span>
-<span style="color:green;">+|</span></span>makedocs(modules = [CSV], <span style="color:green;">site# A new comment.</span></span>
-<span style="color:green;">+|</span></span><span style="color:green;">name</span> = "CSV.jl", format = Documenter.HTML(canonical = "https://juliadata.github.io/CSV.jl/stable/"))</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>deploydocs(repo = "github.com/JuliaData/CSV.jl.g</div>
-</pre> </p> <p>2: <a href="/patterns/#2">Replace var &#61;&#61;&#61; nothing</a> <pre>
+</pre> </p> <h3 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h3> Showing patterns for which the <code>tags</code> satisfy: <code>not_test</code> <br/> <br/> <p>2: <a href="/patterns/#2">Replace var &#61;&#61;&#61; nothing</a> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-368,7 +368,7</span> ============================================================
@@ -36,6 +25,17 @@
 <span style="color:inherit;"> |</span>        try
 <span style="color:inherit;"> |</span>            date, code, vpos, vlen, tlen = Parsers.xparse(Date, buf, pos, len, options)
 <span style="color:inherit;"> |</span>            if Parsers.ok(code) && vpos + vlen - 1 == len
+<span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
+<span style="color:inherit;"> |</span>    buf = Vector{UInt8}(undef, len)
+<span style="color:inherit;"> |</span>    pos = 1
+<span style="color:inherit;"> |</span>    state = iterate(rows)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">state === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(state)</span></span>
+<span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
+<span style="color:inherit;"> |</span>            with(file, append) do io
+<span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
 <span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-240,7 +240,7</span> ============================================================
@@ -67,28 +67,6 @@
 <span style="color:inherit;"> |</span>        throw(ArgumentError("provide a valid sink argument, like `using DataFrames; CSV.read(source, DataFrame)`"))
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    Tables.CopiedColumns(CSV.File(source; kwargs...)) |> sink
-<span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
-<span style="color:inherit;"> |</span>    buf = Vector{UInt8}(undef, len)
-<span style="color:inherit;"> |</span>    pos = 1
-<span style="color:inherit;"> |</span>    state = iterate(rows)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">state === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(state)</span></span>
-<span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
-<span style="color:inherit;"> |</span>            with(file, append) do io
-<span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
-<span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-117,7 +117,7</span> ============================================================
-<span style="color:inherit;"> |</span>    falses = falsestrings === nothing ? nothing : falsestrings
-<span style="color:inherit;"> |</span>    sentinel = ((isempty(missingstrings) && missingstring == "") || (length(missingstrings) == 1 && missingstrings[1] == "")) ? missing : isempty(missingstrings) ? [missingstring] : missingstrings
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">delim === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(delim)</span></span>
-<span style="color:inherit;"> |</span>        del = isa(source, AbstractString) && endswith(source, ".tsv") ? UInt8('\t') :
-<span style="color:inherit;"> |</span>            isa(source, AbstractString) && endswith(source, ".wsv") ? UInt8(' ') :
-<span style="color:inherit;"> |</span>            UInt8('\n')
 <span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
@@ -99,5 +77,16 @@
 <span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
 <span style="color:inherit;"> |</span>    elseif testfunc isa Function
 <span style="color:inherit;"> |</span>        testfunc(t)
-<span style="color:inherit;"> |</span></div>
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-117,7 +117,7</span> ============================================================
+<span style="color:inherit;"> |</span>    falses = falsestrings === nothing ? nothing : falsestrings
+<span style="color:inherit;"> |</span>    sentinel = ((isempty(missingstrings) && missingstring == "") || (length(missingstrings) == 1 && missingstrings[1] == "")) ? missing : isempty(missingstrings) ? [missingstring] : missingstrings
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">delim === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(delim)</span></span>
+<span style="color:inherit;"> |</span>        del = isa(source, AbstractString) && endswith(source, ".tsv") ? UInt8('\t') :
+<span style="color:inherit;"> |</span>            isa(source, AbstractString) && endswith(source, ".wsv") ? UInt8(' ') :
+<span style="color:inherit;"> |</span>            UInt8('</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

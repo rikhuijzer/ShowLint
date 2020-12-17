@@ -14,16 +14,16 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Install Docker
+    - name: Install Podman
       run: |
-        curl -fsSL https://get.docker.com -o get-docker.sh
-        sh get-docker.sh
+        sudo apt-get -y update
+        sudo apt-get -y install podman
 
     - name: Install Comby
       run: |
         sudo mkdir /comby
         echo '#!/usr/bin/env bash' | sudo tee -a /comby/comby.sh
-        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /comby/comby.sh
+        echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /comby/comby.sh
         sudo chmod +x /comby/comby.sh
         # See "Setting an environment variable" in the docs.
         echo "/comby" >> $GITHUB_PATH

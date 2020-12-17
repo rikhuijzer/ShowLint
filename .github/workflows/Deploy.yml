@@ -38,6 +38,8 @@ jobs:
         using Pkg; Pkg.add(["NodeJS", "Franklin"]);
         using NodeJS; run(`$(npm_cmd()) install highlight.js`);
         using Franklin;
+        Pkg.develop(path=".");
+        using ShowLint; ShowLint.clone_repositories();
         Pkg.activate("."); Pkg.instantiate();
         optimize();
         verify_links()' > build.log

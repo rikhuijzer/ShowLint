@@ -129,6 +129,10 @@ function apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
     stdout = IOBuffer()
     run(pipeline(cmd; stdout))
     out = String(take!(stdout))
+    grave_accent = '`'
+    devanagari_grave_accent = "&#2387;"
+    out = replace(out, grave_accent => devanagari_grave_accent)
+    out = replace(out, "\"\"\"" => "”””")
     out = ansi2html(out)
 end
 

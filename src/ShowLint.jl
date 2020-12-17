@@ -29,6 +29,7 @@ function ansi2html(text)
     "0;100;30" => "inherit",
     "0;41;30" => "red",
     "0;42;30" => "green",
+    "0;43;30" => "orange",
     "0;2" => "gray"
   )
   for code in keys(escape_codes)
@@ -168,7 +169,9 @@ function repo_page(repo::Repo)::String
         return diff == "" ? 
         "" : 
         """
-        ### $id: [$title](/patterns/#$id)
+        ### $title
+        [Pattern #$id](/patterns/#$id)
+
         $diff
 
         """

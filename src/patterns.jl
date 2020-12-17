@@ -8,13 +8,12 @@ end
 
 patterns = [
     Pattern(1, "Test: Add comment in Project.toml", ["test", "julia"], 
-        "A test pattern to see if things work.", 
+        "A test pattern.", 
         """
         match='name = ":[name]"' 
 
         rewrite='''
-        # A new comment.
-        name = ":[name]"'''
+        name = "Test:[name]"'''
         """
     ),
     Pattern(2, "Avoid var === nothing", ["julia"], 
@@ -34,7 +33,7 @@ patterns = [
         """
     ),
     Pattern(4, "Replace Array{T,1} with Vector{T}", ["julia"], 
-        "Vector{T} is an alias for Array{T,1}.",
+        "Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.",
         """
         match='Array{:[T],1}'
 

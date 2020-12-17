@@ -77,13 +77,16 @@ function clone_repositories()
         mkdir(clones_dir)
     end
     for repo in repositories
+        println("Cloning $(repo.name)")
         name = repo.name
         host = repo.host
         dest = target_dir(repo)
         if isdir(dest)
-            rm(dest; recursive=true, force=true)
+            cd(dest)
+            run(`git pull`)
+        else
+            run(`git clone $host/$name $dest`)
         end
-        run(`git clone $host/$name $dest`)
         println()
     end
 end

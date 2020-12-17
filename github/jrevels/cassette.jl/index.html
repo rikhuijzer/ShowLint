@@ -1,0 +1,37 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>jrevels/Cassette.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=jrevelscassettejl ><a href="#jrevelscassettejl">jrevels/Cassette.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a><li><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a><li><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></ol></div> <h3 id=2_a_hrefpatterns2avoid_var_nothing ><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a></h3> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/overdub.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/overdub.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-521,7 +521,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    #=== set &#96;code_info&#96;/&#96;reflection&#96; fields accordingly ===#
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">code_info.method_for_inference_limit_heuristics</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>code_info.method_for_inference_limit_heuristics<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        code_info.method_for_inference_limit_heuristics = method
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</s</div>
+</pre> <h3 id=3_a_hrefpatterns3avoid_var_nothing ><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a></h3> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/pass.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/pass.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-148,7 +148,7</span> ============================================================
+<span style="color:inherit;"> |</span>    for i in 1:length(code)
+<span style="color:inherit;"> |</span>        stmt = code[i]
+<span style="color:inherit;"> |</span>        nstmts = stmtcount(stmt, i)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">nstmts !== nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(nstmts)</span></span>
+<span style="color:inherit;"> |</span>            addedstmts = nstmts - 1
+<span style="color:inherit;"> |</span>            push!(worklist, (i, addedstmts))
+<span style="color:inherit;"> |</span>            ssachangemap[i] = addeds</div>
+</pre> <h3 id=4_a_hrefpatterns4replace_arrayt1_with_vectort ><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></h3> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-92,7 +92,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test metadata(result, ctx) === Cassette.NoMetaData()
+<span style="color:inherit;"> |</span>@test isa(metameta(result, ctx), Tuple{
+<span style="color:inherit;"> |</span>    Cassette.Immutable{Cassette.Meta{Float64,Cassette.NoMetaMeta}},
+<span style="color:red;">-|</span></span><span style="color:gray;">    Cassette.Immutable{Cassette.Meta{Float64,</span><span style="color:red;">Array</span><span style="color:gray;">{Cassette.Meta{Float64,Cassette.NoMetaMeta}</span><span style="color:red;">,1</span><span style="color:gray;">}}},</span></span>
+<span style="color:green;">+|</span></span>    Cassette.Immutable{Cassette.Meta{Float64,<span style="color:green;">Vector</span>{Cassette.Meta{Float64,Cassette.NoMetaMeta}}}},</span>
+<span style="color:inherit;"> |</span>    Cassette.Immutable{Cassette.Meta{Float64,Cassette.NoMetaMeta}}
+<span style="color:inherit;"> |</span>})
+<span style="color:inherit;"> |</span>@test !hasmetadata(result,</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,0 +1,361 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>GiovineItalia/Gadfly.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=giovineitaliagadflyjl ><a href="#giovineitaliagadflyjl">GiovineItalia/Gadfly.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a><li><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a><li><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></ol></div> <h3 id=2_a_hrefpatterns2avoid_var_nothing ><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a></h3> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/guide.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/guide.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-407,7 +407,7</span> ============================================================
+<span style="color:inherit;"> |</span>    continuous_guide = false
+<span style="color:inherit;"> |</span>    guide_title = guide.title
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">guide_title</span><span style="color:red;"> === nothing</span><span style="color:gray;"> && aes.color_key_title !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>guide_title<span style="color:green;">)</span> && aes.color_key_title !== nothing</span>
+<span style="color:inherit;"> |</span>        guide_title = aes.color_key_title
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-433,7 +433,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">guide_title</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>guide_title<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        guide_title = &#34;Color&#34;
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-865,7 +865,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function render(guide::XLabel, theme::Gadfly.Theme,
+<span style="color:inherit;"> |</span>                aes::Gadfly.Aesthetics)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">guide.label</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || isempty(guide.label)</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>guide.label<span style="color:green;">)</span> || isempty(guide.label)</span>
+<span style="color:inherit;"> |</span>        return nothing
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-932,7 +932,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function render(guide::YLabel, theme::Gadfly.Theme, aes::Gadfly.Aesthetics)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">guide.label</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || isempty(guide.label)</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>guide.label<span style="color:green;">)</span> || isempty(guide.label)</span>
+<span style="color:inherit;"> |</span>        return nothing
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-990,7 +990,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function render(guide::Title, theme::Gadfly.Theme,
+<span style="color:inherit;"> |</span>                aes::Gadfly.Aesthetics)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">guide.label</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || isempty(guide.label)</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>guide.label<span style="color:green;">)</span> || isempty(guide.label)</span>
+<span style="color:inherit;"> |</span>        return nothing
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-178,7 +178,7</span> ============================================================
+<span style="color:inherit;"> |</span>        aval = getfield(a, field)
+<span style="color:inherit;"> |</span>        bval = getfield(b, field)
+<span style="color:inherit;"> |</span>        # TODO: this is a hack to let non-default labelers overide the defaults
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">aval === nothing</span><span style="color:gray;"> || aval === string || aval == showoff</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(aval)</span> || aval === string || aval == showoff</span>
+<span style="color:inherit;"> |</span>            setfield!(a, field, bval)
+<span style="color:inherit;"> |</span>        elseif typeof(aval) <: Dict && typeof(bval) <: Dict
+<span style="color:inherit;"> |</span>            merge!(aval, getfield(b, field))
+<span style="color:red;">------ </span><span style="color:inherit;">src/statistics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/statistics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-257,11 +257,11</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        viewmin, viewmax = extrema(values(groups))
+<span style="color:inherit;"> |</span>        aes_viewminvar = getfield(aes, viewminvar)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">aes_viewminvar</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aes_viewminvar > viewmin</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>aes_viewminvar<span style="color:green;">)</span> || aes_viewminvar > viewmin</span>
+<span style="color:inherit;"> |</span>            setfield!(aes, viewminvar, viewmin)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        aes_viewmaxvar = getfield(aes, viewmaxvar)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">aes_viewmaxvar</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aes_viewmaxvar < viewmax</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>aes_viewmaxvar<span style="color:green;">)</span> || aes_viewmaxvar < viewmax</span>
+<span style="color:inherit;"> |</span>            setfield!(aes, viewmaxvar, viewmax)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-383,7 +383,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    stat.density && (bincounts = bincounts ./ (sum(bincounts) * binwidth))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">aes.color</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>aes.color<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        T = typeof(x_min + 1*binwidth)
+<span style="color:inherit;"> |</span>        setfield!(aes, othervar, Array{Float64}(undef, d))
+<span style="color:inherit;"> |</span>        setfield!(aes, minvar, Array{T}(undef, d))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-441,7 +441,7</span> ============================================================
+<span style="color:inherit;"> |</span>        if stat.position == :stack
+<span style="color:inherit;"> |</span>            viewmax = Float64(maximum(stack_height))
+<span style="color:inherit;"> |</span>            aes_viewmax = getfield(aes, viewmaxvar)
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">aes_viewmax</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aes_viewmax < viewmax</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">isnothing(</span>aes_viewmax<span style="color:green;">)</span> || aes_viewmax < viewmax</span>
+<span style="color:inherit;"> |</span>                setfield!(aes, viewmaxvar, viewmax)
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-554,7 +554,7</span> ============================================================
+<span style="color:inherit;"> |</span>                         aes::Gadfly.Aesthetics)
+<span style="color:inherit;"> |</span>    Gadfly.assert_aesthetics_defined(&#34;DensityStatistic&#34;, aes, :x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">aes.color</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>aes.color<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        isa(aes.x[1], Real) || error(&#34;Kernel density estimation only works on Real types.&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        x_f64 = collect(Float64, aes.x)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-964,12 +964,12</span> ============================================================
+<span style="color:inherit;"> |</span>    setfield!(aes, Symbol(stat.axis, &#34;tickscale&#34;), tickscale)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    viewmin_var = Symbol(stat.axis, &#34;viewmin&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">getfield(aes, viewmin_var)</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || getfield(aes, viewmin_var) > viewmin</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>getfield(aes, viewmin_var)<span style="color:green;">)</span> || getfield(aes, viewmin_var) > viewmin</span>
+<span style="color:inherit;"> |</span>        setfield!(aes, viewmin_var, viewmin)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    viewmax_var = Symbol(stat.axis, &#34;viewmax&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">getfield(aes, viewmax_var)</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || getfield(aes, viewmax_var) < viewmax</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>getfield(aes, viewmax_var)<span style="color:green;">)</span> || getfield(aes, viewmax_var) < viewmax</span>
+<span style="color:inherit;"> |</span>        setfield!(aes, viewmax_var, viewmax)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1026,11 +1026,11</span> ============================================================
+<span style="color:inherit;"> |</span>            yviewmax = maximum(yviewmax, aes.outliers)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">aes.yviewmin</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aes.yviewmin > yviewmin</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>aes.yviewmin<span style="color:green;">)</span> || aes.yviewmin > yviewmin</span>
+<span style="color:inherit;"> |</span>            aes.yviewmin = yviewmin
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">aes.yviewmax</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aes.yviewmax < yviewmax</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>aes.yviewmax<span style="color:green;">)</span> || aes.yviewmax < yviewmax</span>
+<span style="color:inherit;"> |</span>            aes.yviewmax = yviewmax
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1086,11 +1086,11</span> ============================================================
+<span style="color:inherit;"> |</span>        xviewmin = xmin - minspan / 2
+<span style="color:inherit;"> |</span>        xviewmax = xmax + minspan / 2
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">aes.xviewmin</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aes.xviewmin > xviewmin</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>aes.xviewmin<span style="color:green;">)</span> || aes.xviewmin > xviewmin</span>
+<span style="color:inherit;"> |</span>            aes.xviewmin = xviewmin
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">aes.xviewmax</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aes.xviewmax < xviewmax</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>aes.xviewmax<span style="color:green;">)</span> || aes.xviewmax < xviewmax</span>
+<span style="color:inherit;"> |</span>            aes.xviewmax = xviewmax
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1785,7 +1785,7</span> ============================================================
+<span style="color:inherit;"> |</span>    Tx = eltype(aes.x)
+<span style="color:inherit;"> |</span>    Ty = eltype(aes.y)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">aes.color</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>aes.color<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        (aes.x, aes.y) = mean_by_group(aes.x, aes.y, breaks)
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        groups = Dict()
+<span style="color:red;">------ </span><span style="color:inherit;">src/scale.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/scale.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-387,7 +387,7</span> ============================================================
+<span style="color:inherit;"> |</span>            setfield!(aes, var, discretize_make_ia(disc_data.index))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            # The leveler for discrete scales is a closure over the discretized data.
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">scale.labels</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">isnothing(</span>scale.labels<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                function default_labeler(xs)
+<span style="color:inherit;"> |</span>                    lvls = filter(!ismissing, disc_data.values)
+<span style="color:inherit;"> |</span>                    vals = Any[1 <= x <= length(lvls) ? lvls[x] : &#34;&#34; for x in xs]
+<span style="color:red;">------ </span><span style="color:inherit;">src/scale/scales.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/scale/scales.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-153,7 +153,7</span> ============================================================
+<span style="color:inherit;"> |</span>    for (aes, data) in zip(aess, datas)
+<span style="color:inherit;"> |</span>            data.size===nothing && continue
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            ds = if </span><span style="color:gray;">scale.maxvalue</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>            ds = if <span style="color:green;">isnothing(</span>scale.maxvalue<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                    scale.trans.f.(data.size.-smin)
+<span style="color:inherit;"> |</span>                else
+<span style="color:inherit;"> |</span>                    p = (scale.trans.f.(data.size).-scale.trans.f(ticks[1]))./Δ
+<span style="color:red;">------ </span><span style="color:inherit;">src/ticks.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/ticks.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-214,7 +214,7</span> ============================================================
+<span style="color:inherit;"> |</span>                    # TODO: manually setting scale with :day, :minute, etc
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                if </span><span style="color:red;">scale === nothing</span></span>
+<span style="color:green;">+|</span></span>                if <span style="color:green;">isnothing(scale)</span></span>
+<span style="color:inherit;"> |</span>                    for proposed_scale in [Day(1), Hour(1), Minute(1),
+<span style="color:inherit;"> |</span>                                           Second(1), Millisecond(100),
+<span style="color:inherit;"> |</span>                                           Millisecond(10), Millisecond(1)]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-225,7 +225,7</span> ============================================================
+<span style="color:inherit;"> |</span>                    end
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                if </span><span style="color:red;">scale === nothing</span></span>
+<span style="color:green;">+|</span></span>                if <span style="color:green;">isnothing(scale)</span></span>
+<span style="color:inherit;"> |</span>                    scale = Millisecond(1)
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/Gadfly.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Gadfly.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-397,7 +397,7</span> ============================================================
+<span style="color:inherit;"> |</span>    plot_aesthetics = keys(plot.mapping)
+<span style="color:inherit;"> |</span>    for (i, layer) in enumerate(plot.layers)
+<span style="color:inherit;"> |</span>        isa(layer.geom, Geom.Nil) && (layer.geom = Geom.point())
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">layer.data_source</span><span style="color:red;"> === nothing</span><span style="color:gray;"> && isempty(layer.mapping)</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>layer.data_source<span style="color:green;">)</span> && isempty(layer.mapping)</span>
+<span style="color:inherit;"> |</span>            layer.data_source = plot.data_source
+<span style="color:inherit;"> |</span>            layer.mapping = plot.mapping
+<span style="color:inherit;"> |</span>            datas[i] = plot.data
+<span style="color:inherit;">@|</span><span style="color:inherit;">-443,7 +443,7</span> ============================================================
+<span style="color:inherit;"> |</span>    coord = plot.coord
+<span style="color:inherit;"> |</span>    for layer in plot.layers
+<span style="color:inherit;"> |</span>        coord_type = element_coordinate_type(layer.geom)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">coord === nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(coord)</span></span>
+<span style="color:inherit;"> |</span>            coord = coord_type()
+<span style="color:inherit;"> |</span>        elseif typeof(coord) != coord_type
+<span style="color:inherit;"> |</span>            error(&#34;Plot uses multiple coordinates: $(typeof(coord)) and $(coord_type)&#34;)
+<span style="color:red;">------ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-422,7 +422,7</span> ============================================================
+<span style="color:inherit;"> |</span>        bval = getfield(b, field)
+<span style="color:inherit;"> |</span>        if field in clobber_set
+<span style="color:inherit;"> |</span>            setfield!(a, field, bval)
+<span style="color:red;">-|</span></span><span style="color:gray;">        elseif </span><span style="color:gray;">aval === missing || aval</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || aval === string || aval == showoff</span></span>
+<span style="color:green;">+|</span></span>        elseif <span style="color:green;">isnothing(</span>aval === missing || aval<span style="color:green;">)</span> || aval === string || aval == showoff</span>
+<span style="color:inherit;"> |</span>            setfield!(a, field, bval)
+<span style="color:inherit;"> |</span>        elseif field == :xviewmin || field == :yviewmin
+<span style="color:inherit;"> |</span>            bval != nothing && (aval == nothing || aval > bval) && setfield!(a, field, b</div>
+</pre> <h3 id=3_a_hrefpatterns3avoid_var_nothing ><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a></h3> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/compare_examples.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/compare_examples.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-85,7 +85,7</span> ============================================================
+<span style="color:inherit;"> |</span>            for idx in findall(lsame.==false)
+<span style="color:inherit;"> |</span>                # Don't worry about lines that are due to
+<span style="color:inherit;"> |</span>                # Creator/Producer (e.g., Cairo versions)
+<span style="color:red;">-|</span></span><span style="color:gray;">                if </span><span style="color:gray;">findfirst(creator_producer, cached[idx])</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>                if <span style="color:green;">!isnothing(</span>findfirst(creator_producer, cached[idx])<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                    lsame[idx] = true
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-121,7 +121,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(output)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">if </span><span style="color:gray;">prev_theme</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>if <span style="color:green;">!isnothing(</span>prev_theme<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>    ENV[&#34;GADFLY_THEME&#34;] = prev_theme
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/guide.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/guide.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-407,7 +407,7</span> ============================================================
+<span style="color:inherit;"> |</span>    continuous_guide = false
+<span style="color:inherit;"> |</span>    guide_title = guide.title
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">guide_title === nothing && aes.color_key_title</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>guide_title === nothing && aes.color_key_title<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        guide_title = aes.color_key_title
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/geom/subplot.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/geom/subplot.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-300,7 +300,7</span> ============================================================
+<span style="color:inherit;"> |</span>        if i == n
+<span style="color:inherit;"> |</span>            push!(guides, get(geom.guides, Guide.XTicks, Guide.xticks()))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">superplot_aes.xgroup</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>superplot_aes.xgroup<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                gxl = get(geom.guides, Guide.XLabel, Guide.xlabel())
+<span style="color:inherit;"> |</span>                push!(guides, gxl.label==&#34;x&#34; ? Guide.xlabel(xlabels[j], gxl.orientation) : gxl)
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-312,7 +312,7</span> ============================================================
+<span style="color:inherit;"> |</span>        if j == 1
+<span style="color:inherit;"> |</span>            joff += 1
+<span style="color:inherit;"> |</span>            push!(guides, get(geom.guides, Guide.YTicks, Guide.yticks()))
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">superplot_aes.ygroup</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>superplot_aes.ygroup<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                joff += 1
+<span style="color:inherit;"> |</span>                gyl = get(geom.guides, Guide.YLabel, Guide.ylabel())
+<span style="color:inherit;"> |</span>                push!(guides, gyl.label==&#34;y&#34; ? Guide.ylabel(ylabels[i], gyl.orientation) : gyl)
+<span style="color:red;">------ </span><span style="color:inherit;">src/statistics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/statistics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-243,7 +243,7</span> ============================================================
+<span style="color:inherit;"> |</span>        setfield!(aes, viewmaxvar, z)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">stat.position == :stack && aes.color</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>stat.position == :stack && aes.color<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        groups = Dict{Any,Float64}()
+<span style="color:inherit;"> |</span>        for (x, y) in zip(getfield(aes, othervar), vals)
+<span style="color:inherit;"> |</span>            Gadfly.isconcrete(x) || continue
+<span style="color:inherit;">@|</span><span style="color:inherit;">-884,20 +884,20</span> ============================================================
+<span style="color:inherit;"> |</span>    strict_span = false
+<span style="color:inherit;"> |</span>    if typeof(coord) == Coord.Cartesian
+<span style="color:inherit;"> |</span>        if stat.axis == &#34;x&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">coord.xmin</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>coord.xmin<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                minval = coord.xmin
+<span style="color:inherit;"> |</span>                strict_span = true
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">coord.xmax</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>coord.xmax<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                maxval = coord.xmax
+<span style="color:inherit;"> |</span>                strict_span = true
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        elseif stat.axis == &#34;y&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">coord.ymin</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>coord.ymin<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                minval = coord.ymin
+<span style="color:inherit;"> |</span>                strict_span = true
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">coord.ymax</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>coord.ymax<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                maxval = coord.ymax
+<span style="color:inherit;"> |</span>                strict_span = true
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1021,7 +1021,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        yviewmin, yviewmax = minimum(aes.lower_fence), maximum(aes.upper_fence)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">aes.outliers</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(</span>aes.outliers<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>            yviewmin = minimum(yviewmin, aes.outliers)
+<span style="color:inherit;"> |</span>            yviewmax = maximum(yviewmax, aes.outliers)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">------ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-367,7 +367,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        vals = getfield(aes, var)
+<span style="color:inherit;"> |</span>        if isa(vals, AbstractArray) && length(vals)>1 
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:red;">xgroup !== nothing</span><span style="color:gray;"> && length(vals) !== length(xgroup) ||</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(xgroup)</span> && length(vals) !== length(xgroup) ||</span>
+<span style="color:inherit;"> |</span>               ygroup !== nothing && length(vals) !== length(ygroup)
+<span style="color:inherit;"> |</span>                continue
+<span style="color:inherit;"> |</span></div>
+</pre> <h3 id=4_a_hrefpatterns4replace_arrayt1_with_vectort ><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></h3> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/color_misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/color_misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
+<span style="color:inherit;"> |</span>Return the mean of Lab colors &#96;cs&#96; as weighted by &#96;ws&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function weighted_color_mean(
+<span style="color:red;">-|</span></span><span style="color:gray;">        cs::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{Lab{T}</span><span style="color:red;">,1</span><span style="color:gray;">}, ws::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {S <: Number,T}</span></span>
+<span style="color:green;">+|</span></span>        cs::<span style="color:green;">AbstractVector</span>{Lab{T}}, ws::<span style="color:green;">AbstractVector</span>{S}) where {S <: Number,T}</span>
+<span style="color:inherit;"> |</span>    l = 0.0
+<span style="color:inherit;"> |</span>    a = 0.0
+<span style="color:inherit;"> |</span>    b = 0.0
+<span style="color:red;">------ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return ab
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function cat_aes_var!(xs::</span><span style="color:red;">IndirectArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, ys::</span><span style="color:red;">IndirectArray</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T, S}</span></span>
+<span style="color:green;">+|</span></span>function cat_aes_var!(xs::<span style="color:green;">IndirectVector</span>{T}, ys::<span style="color:green;">IndirectVector</span>{S}) where {T, S}</span>
+<span style="color:inherit;"> |</span>    TS = promote_type(T, S)
+<span style="color:inherit;"> |</span>    return append!(IndirectArray(xs.index, convert(Array{TS},xs.values)),
+<span style="color:inherit;"> |</span>                   IndirectArray(ys.index, convert(Array{TS},ys.value</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

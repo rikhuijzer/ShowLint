@@ -1,6 +1,62 @@
 ~~~
 <p>
+<a href="/github/fonsp/pluto.jl">fonsp/Pluto.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/giovineitalia/gadfly.jl">GiovineItalia/Gadfly.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/jrevels/cassette.jl">jrevels/Cassette.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliadata/csv.jl">JuliaData/CSV.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliadata/dataframes.jl">JuliaData/DataFrames.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliadatabases/redis.jl">JuliaDatabases/Redis.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
 <a href="/github/julialang/julia">JuliaLang/julia</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliapy/pycall.jl">JuliaPy/PyCall.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/odow/sddp.jl">odow/SDDP.jl</a> <br/>
 github <br/>
 </p>
 ~~~
@@ -14,7 +70,35 @@ github <br/>
 
 ~~~
 <p>
-<a href="/github/juliadata/csv.jl">JuliaData/CSV.jl</a> <br/>
+<a href="/github/tlienart/franklin.jl">tlienart/Franklin.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/tlienart/franklintemplates.jl">tlienart/FranklinTemplates.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/wikunia/javis.jl">Wikunia/Javis.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/wikunia/constraintsolver.jl">Wikunia/ConstraintSolver.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/queryverse/query.jl">queryverse/Query.jl</a> <br/>
 github <br/>
 </p>
 ~~~

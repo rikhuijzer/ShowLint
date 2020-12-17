@@ -30,10 +30,10 @@ for repo in repositories
 
   for pat in filtered_patterns
     diff = ShowLint.apply(pat, repo)
-    descr = pat.description
+    title = pat.title
     id = pat.id
     println("""
-      $id: [$descr](/patterns/#$id)
+      $id: [$title](/patterns/#$id)
       $diff
     """)
   end

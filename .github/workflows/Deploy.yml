@@ -14,10 +14,6 @@ jobs:
       with:
         persist-credentials: false
 
-    - run: echo $GITHUB_PATH
-
-    - run: echo "/comby" >> $GITHUB_PATH
-
     - name: Install Docker
       run: |
         curl -fsSL https://get.docker.com -o get-docker.sh
@@ -25,6 +21,7 @@ jobs:
 
     - name: Install Comby
       run: |
+        makedir /comby
         echo '#!/usr/bin/env bash' | sudo tee -a /comby/comby.sh
         echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /comby/comby.sh
         sudo chmod +x /comby/comby.sh

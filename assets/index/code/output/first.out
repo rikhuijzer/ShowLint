@@ -1,1 +1,2 @@
-IOError: could not spawn `comby -config configs/p1.toml -f toml`: no such file or directory (ENOENT)
+failed process: Process(`comby -config configs/p1.toml -f toml`, ProcessExited(1)) [1]
+

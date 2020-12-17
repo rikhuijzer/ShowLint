@@ -21,7 +21,7 @@ jobs:
 
     - name: Install Comby
       run: |
-        makedir /comby
+        mkdir /comby
         echo '#!/usr/bin/env bash' | sudo tee -a /comby/comby.sh
         echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /comby/comby.sh
         sudo chmod +x /comby/comby.sh

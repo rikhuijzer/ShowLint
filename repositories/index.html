@@ -23,17 +23,6 @@
 <span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
 <span style="color:inherit;"> |</span>            with(file, append) do io
 <span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
-<span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
-<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
-<span style="color:inherit;"> |</span>    elseif testfunc isa Function
-<span style="color:inherit;"> |</span>        testfunc(t)
-<span style="color:inherit;"> |</span>    else
 <span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-240,7 +240,7</span> ============================================================
@@ -75,5 +64,16 @@
 <span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(delim)</span></span>
 <span style="color:inherit;"> |</span>        del = isa(source, AbstractString) && endswith(source, ".tsv") ? UInt8('\t') :
 <span style="color:inherit;"> |</span>            isa(source, AbstractString) && endswith(source, ".wsv") ? UInt8(' ') :
-<span style="color:inherit;"> |</span>            UInt8('</div>
+<span style="color:inherit;"> |</span>            UInt8('\n')
+<span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
+<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
+<span style="color:inherit;"> |</span>    elseif testfunc isa Function
+<span style="color:inherit;"> |</span>        testfunc(t)
+<span style="color:inherit;"> |</span></div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

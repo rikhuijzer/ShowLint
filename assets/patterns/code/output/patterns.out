@@ -1,8 +1,7 @@
 ~~~ 
-<h3>p1.toml</h3>
-<pre><code class="plaintext hljs">[p1]
-
-match='name = ":[name]"' 
+<h3 id="1">1: Add comment in Project.toml</h3>
+tags: <i>test, julia</i> <br/>
+<pre><code class="plaintext">match='name = ":[name]"' 
 
 rewrite='''
 # A new comment.
@@ -11,10 +10,9 @@ name = ":[name]"'''
 ~~~
 
 ~~~ 
-<h3>p2.toml</h3>
-<pre><code class="plaintext hljs">[p2]
-
-match='if :[var] === nothing' 
+<h3 id="2">2: Replace var === nothing</h3>
+tags: <i>julia</i> <br/>
+<pre><code class="plaintext">match='if :[var] === nothing' 
 
 rewrite='if isnothing(:[var])'
 </code></pre>

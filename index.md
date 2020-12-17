@@ -1,44 +1,25 @@
 +++
 title = "ShowLint"
-tags = ["syntax"]
-reeval = true
+tags = ["syntax", "lint"]
 +++
 
 # ShowLint
 
-```julia:preliminaries
-# hideall
-using ShowLint
-```
+Linters have obvious benefits but, like any tool, can be hard to use.
+Not all users have the time to install a linter and inspect its output.
+Also, some linters show many false-positives and cause the code to be littered with ignore X comments.
+Another problem is that any suggestion by the linter is only interesting once.
+After a decision is made on applying the suggestion, the suggestion should not come back.
 
-This website shows linting results for [patterns](/patterns) on [repositories](/repositories) by using [Comby](https://github.com/comby-tools/comby).
-As an example, lets run the pattern `p1` on this repository.
-The pattern finds toml files containing `name = "..."` and adds a comment before that line:
+So, I figured that it might be useful to periodically generate the lint results for many repositories and show the results on a website.
 
-```julia:pattern
-# hideall
-p1_file = joinpath(project_root, "configs", "p1.toml")
-println(read(p1_file, String))
-```
-\output{pattern}
+This website shows linting results for
 
-The output is
+- [patterns](/patterns) on 
+- [repositories](/repositories) 
 
-```julia:first
-# hideall
+by using [Comby](https://github.com/comby-tools/comby).
 
-cmd = `podman run
-  --volume $project_root:/project
-  --rm
-  --workdir /project
-  -it comby/comby
-  -config configs/p1.toml
-  -file-extensions toml
-  `
-stdout = IOBuffer()
-run(pipeline(cmd; stdout))
-out = String(take!(stdout))
-out = ansi2html(out)
-println(out)
-```
-\textoutput{first}
+If the linter shows useful rewrites, then you can use Comby to create a pull request manually.
+All the required information is available on this website and in Comby's documentation.
+To automate pull request creation, see [Sourcegraph Campaigns](https://sourcegraph.com/campaigns).

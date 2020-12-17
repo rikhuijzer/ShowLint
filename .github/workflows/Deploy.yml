@@ -14,6 +14,10 @@ jobs:
       with:
         persist-credentials: false
 
+    - run: echo $GITHUB_PATH
+
+    - run: echo "/comby" >> $GITHUB_PATH
+
     - name: Install Docker
       run: |
         curl -fsSL https://get.docker.com -o get-docker.sh

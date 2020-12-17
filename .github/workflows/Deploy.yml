@@ -22,8 +22,8 @@ jobs:
     - name: Install Comby
       run: |
         sudo mkdir /comby
-        echo '#!/usr/bin/env bash' | sudo tee -a /comby/comby.sh
-        echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /comby/comby.sh
+        echo '#!/usr/bin/env bash' | tee -a /comby/comby.sh
+        echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' | tee -a /comby/comby.sh
         sudo chmod +x /comby/comby.sh
         # See "Setting an environment variable" in the docs.
         echo "/comby" >> $GITHUB_PATH

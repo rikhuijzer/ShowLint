@@ -64,8 +64,8 @@ function clone_repositories()
         name = repo.name
         host = repo.host
         dest = target_dir(repo)
-        if isdir(target_dir)
-            rm(target_dir; recursive=true, force=true)
+        if isdir(dest)
+            rm(dest; recursive=true, force=true)
         end
         run(`git clone $host/$name $dest`)
         println()

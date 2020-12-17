@@ -16,7 +16,7 @@ This page lists the patterns defined in `configs/`.
 
 ```julia:patterns
 # hideall
-using DisplayLint
+using ShowLint
 
 dir = joinpath(project_root, patterns_dir)
 

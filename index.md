@@ -8,7 +8,7 @@ reeval = true
 
 ```julia:preliminaries
 # hideall
-using DisplayLint
+using ShowLint
 ```
 
 This website shows linting results for [patterns](/patterns) on [repositories](/repositories) by using [Comby](https://github.com/comby-tools/comby).
@@ -27,12 +27,17 @@ The output is
 ```julia:first
 # hideall
 
-# first_config = joinpath(project_root(), "configs", "one.toml")
-cmd = `comby -config configs/p1.toml -f toml`
+cmd = `podman run
+  --volume $project_root:/project
+  --rm
+  --workdir /project
+  -it comby/comby
+  -config configs/p1.toml
+  -file-extensions toml
+  `
 stdout = IOBuffer()
 run(pipeline(cmd; stdout))
 out = String(take!(stdout))
-# println(out)
 out = ansi2html(out)
 println(out)
 ```

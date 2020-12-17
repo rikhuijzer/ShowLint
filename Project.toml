@@ -1,4 +1,4 @@
-name = "DisplayLint"
+name = "ShowLint"
 uuid = "575342c9-82f4-4a03-ab40-95723c835196"
 authors = ["Rik Huijzer <t.h.huijzer@rug.nl>"]
 version = "0.1.0"

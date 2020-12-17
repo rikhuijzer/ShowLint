@@ -14,23 +14,13 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Install Comby
-      run: |
-        sudo mkdir /comby
-        sudo chown $USER /comby
-        echo '#!/usr/bin/env bash' >> /comby/comby
-        echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' >> /comby/comby
-        sudo chmod +x /comby/comby
-        # See "Setting an environment variable" in the docs.
-        echo "/comby" >> $GITHUB_PATH
-
     - name: Install Podman
       run: |
         sudo apt-get -y update
         sudo apt-get -y install podman
 
-    - name: Validate Comby installation
-      run: comby -version
+    - name: Validate that Comby is available
+      run: podman run -it comby/comby -version
 
     # Python is necessary for the pre-rendering (minification) step
     - name: Install Python

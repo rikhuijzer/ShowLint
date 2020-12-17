@@ -9,8 +9,17 @@ The repositories listed below are defined in `repositories.csv`.
 
 ```julia:repos
 # hideall
-using DisplayLint
+using ShowLint
 
-println(repositories())
+for repo in repositories()
+  diff = ShowLint.apply("p2", repo)
+  println("""
+    ~~~
+    <h3>$repo</h3>
+    p2.toml
+    ~~~
+    $diff
+  """)
+end
 ```
-\output{repos}
+\textoutput{repos}

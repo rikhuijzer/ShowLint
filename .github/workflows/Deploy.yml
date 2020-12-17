@@ -14,19 +14,20 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Install Podman
-      run: |
-        sudo apt-get -y update
-        sudo apt-get -y install podman
-
     - name: Install Comby
       run: |
         sudo mkdir /comby
+        sudo chown $USER /comby
         echo '#!/usr/bin/env bash' | tee -a /comby/comby.sh
         echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' | tee -a /comby/comby.sh
         sudo chmod +x /comby/comby.sh
         # See "Setting an environment variable" in the docs.
         echo "/comby" >> $GITHUB_PATH
+
+    - name: Install Podman
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install podman
 
     - name: Validate Comby installation
       run: |

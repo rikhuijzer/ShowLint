@@ -1,5 +1,16 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Wikunia/ConstraintSolver.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=wikuniaconstraintsolverjl ><a href="#wikuniaconstraintsolverjl">Wikunia/ConstraintSolver.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a><li><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a></ol></div> <h3 id=2_a_hrefpatterns2avoid_var_nothing ><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a></h3> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/constraints/all_different/bipartite.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Wikunia/ConstraintSolver.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=wikuniaconstraintsolverjl ><a href="#wikuniaconstraintsolverjl">Wikunia/ConstraintSolver.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a></ol></div> <h3 id=avoid_var_nothing ><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/MOI_wrapper/MOI_wrapper.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/MOI_wrapper/MOI_wrapper.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-126,7 +126,7</span> ============================================================
+<span style="color:inherit;"> |</span>Set the time limit
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function MOI.set(model::Optimizer, ::MOI.TimeLimitSec, value::Union{Nothing,Float64})
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">value === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(value)</span></span>
+<span style="color:inherit;"> |</span>        model.options.time_limit = Inf
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        model.options.time_limit = value
+<span style="color:red;">------ </span><span style="color:inherit;">src/constraints/all_different/bipartite.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/constraints/all_different/bipartite.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-23,7 +23,7</span> ============================================================
 <span style="color:inherit;"> |</span>    l = l_in
@@ -43,17 +54,6 @@
 <span style="color:inherit;"> |</span>            process_nodes = zeros(Int, m + n)
 <span style="color:inherit;"> |</span>            depths = zeros(Int, m + n)
 <span style="color:inherit;"> |</span>            parents = zeros(Int, m + n)
-<span style="color:red;">------ </span><span style="color:inherit;">src/MOI_wrapper/MOI_wrapper.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/MOI_wrapper/MOI_wrapper.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-126,7 +126,7</span> ============================================================
-<span style="color:inherit;"> |</span>Set the time limit
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function MOI.set(model::Optimizer, ::MOI.TimeLimitSec, value::Union{Nothing,Float64})
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">value === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(value)</span></span>
-<span style="color:inherit;"> |</span>        model.options.time_limit = Inf
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        model.options.time_limit = value
 <span style="color:red;">------ </span><span style="color:inherit;">visualizations/plot_search_space.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">visualizations/plot_search_space.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-72,7 +72,7</span> ============================================================
@@ -65,7 +65,7 @@
 <span style="color:inherit;"> |</span>            for vidx in s.indices
 <span style="color:inherit;"> |</span>                plot!(
 <span style="color:inherit;"> |</span>                    rectangle(1, 1, vidx[2] - 1, 9 - vidx[</div>
-</pre> <h3 id=3_a_hrefpatterns3avoid_var_nothing ><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a></h3> <pre>
+</pre> <h3 id=avoid_var_nothing__2 ><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/logs.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/logs.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-49,7 +49,7</span> ============================================================
@@ -77,6 +77,30 @@
 <span style="color:inherit;"> |</span>        tree_log_node.feasible = feasible
 <span style="color:inherit;"> |</span>        close_node!(com, back_idx)
 <span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">benchmark/run_benchmarks.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmark/run_benchmarks.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-46,10 +46,10</span> ============================================================
+<span style="color:inherit;"> |</span>    judged = judge(&#34;ConstraintSolver&#34;, target_config, baseline_config; f = median)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    markdown = sprint(export_markdown, judged)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">args[&#34;file&#34;]</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>args[&#34;file&#34;]<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        export_markdown(args[&#34;file&#34;], judged)
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">args[&#34;comment&#34;]</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>args[&#34;comment&#34;]<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        comment = edit_comment(
+<span style="color:inherit;"> |</span>            &#34;Wikunia/ConstraintSolver.jl&#34;,
+<span style="color:inherit;"> |</span>            Comment(args[&#34;comment&#34;]),
+<span style="color:inherit;">@|</span><span style="color:inherit;">-58,7 +58,7</span> ============================================================
+<span style="color:inherit;"> |</span>            auth = github_auth,
+<span style="color:inherit;"> |</span>        )
+<span style="color:inherit;"> |</span>        println(&#34;Updated comment: $(comment.html_url)&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    elseif </span><span style="color:gray;">args[&#34;pr&#34;]</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    elseif <span style="color:green;">!isnothing(</span>args[&#34;pr&#34;]<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        comment = create_comment(
+<span style="color:inherit;"> |</span>            &#34;Wikunia/ConstraintSolver.jl&#34;,
+<span style="color:inherit;"> |</span>            PullRequest(args[&#34;pr&#34;]),
 <span style="color:red;">------ </span><span style="color:inherit;">src/constraints/table.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/constraints/table.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-51,7 +51,7</span> ============================================================
@@ -106,30 +130,6 @@
 <span style="color:inherit;"> |</span>            # store the smallest number in the block
 <span style="color:inherit;"> |</span>            if rp_idx % 64 == 1
 <span style="color:inherit;"> |</span>                constraint.sum_min[num_64_idx] = row_sums[rp_idx]
-<span style="color:red;">------ </span><span style="color:inherit;">benchmark/run_benchmarks.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">benchmark/run_benchmarks.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-46,10 +46,10</span> ============================================================
-<span style="color:inherit;"> |</span>    judged = judge(&#34;ConstraintSolver&#34;, target_config, baseline_config; f = median)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    markdown = sprint(export_markdown, judged)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">args[&#34;file&#34;]</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>args[&#34;file&#34;]<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        export_markdown(args[&#34;file&#34;], judged)
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">args[&#34;comment&#34;]</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>args[&#34;comment&#34;]<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        comment = edit_comment(
-<span style="color:inherit;"> |</span>            &#34;Wikunia/ConstraintSolver.jl&#34;,
-<span style="color:inherit;"> |</span>            Comment(args[&#34;comment&#34;]),
-<span style="color:inherit;">@|</span><span style="color:inherit;">-58,7 +58,7</span> ============================================================
-<span style="color:inherit;"> |</span>            auth = github_auth,
-<span style="color:inherit;"> |</span>        )
-<span style="color:inherit;"> |</span>        println(&#34;Updated comment: $(comment.html_url)&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">    elseif </span><span style="color:gray;">args[&#34;pr&#34;]</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    elseif <span style="color:green;">!isnothing(</span>args[&#34;pr&#34;]<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        comment = create_comment(
-<span style="color:inherit;"> |</span>            &#34;Wikunia/ConstraintSolver.jl&#34;,
-<span style="color:inherit;"> |</span>            PullRequest(args[&#34;pr&#34;]),
 <span style="color:red;">------ </span><span style="color:inherit;">src/ConstraintSolver.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/ConstraintSolver.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-159,7 +159,7</span> ============================================================

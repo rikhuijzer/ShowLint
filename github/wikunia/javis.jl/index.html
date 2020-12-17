@@ -1,5 +1,16 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Wikunia/Javis.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=wikuniajavisjl ><a href="#wikuniajavisjl">Wikunia/Javis.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a><li><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a><li><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></ol></div> <h3 id=2_a_hrefpatterns2avoid_var_nothing ><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a></h3> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/luxor_overrides.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Wikunia/Javis.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=wikuniajavisjl ><a href="#wikuniajavisjl">Wikunia/Javis.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=avoid_var_nothing ><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/structs/Action.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/structs/Action.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-100,7 +100,7</span> ============================================================
+<span style="color:inherit;"> |</span>    keep = true,
+<span style="color:inherit;"> |</span>)
+<span style="color:inherit;"> |</span>    anim = Animation([0.0, 1.0], [rotation.from, rotation.to], [easing])
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">rotation.center</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>rotation.center<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        return Action(frames, anim, rotate(), transition = rotation; keep = keep)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    Action(frames, anim, rotate_around(rotation.center); keep = keep)
+<span style="color:red;">------ </span><span style="color:inherit;">src/luxor_overrides.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/luxor_overrides.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-186,7 +186,7</span> ============================================================
 <span style="color:inherit;"> |</span>    halignment = findfirst(isequal(halign), [:left, :center, :right, :centre])
@@ -34,19 +45,8 @@
 <span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>get_frames(elem)<span style="color:green;">)</span></span>
 <span style="color:inherit;"> |</span>            set_frames!(parent, elem, last_frames; is_first = is_first)
 <span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        last_frames = get_frames(elem)
-<span style="color:red;">------ </span><span style="color:inherit;">src/structs/Action.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/structs/Action.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-100,7 +100,7</span> ============================================================
-<span style="color:inherit;"> |</span>    keep = true,
-<span style="color:inherit;"> |</span>)
-<span style="color:inherit;"> |</span>    anim = Animation([0.0, 1.0], [rotation.from, rotation.to], [easing])
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">rotation.center</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>rotation.center<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        return Action(frames, anim, rotate(), transition = rotation; keep = keep)
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    Action(frames, anim, rotate_around(rotation.center); keep = k</div>
-</pre> <h3 id=3_a_hrefpatterns3avoid_var_nothing ><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a></h3> <pre>
+<span style="color:inherit;"> |</span>        last_frames = get_frames(e</div>
+</pre> <h3 id=avoid_var_nothing__2 ><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/svg2luxor.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/svg2luxor.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-182,7 +182,7</span> ============================================================
@@ -69,7 +69,7 @@
 <span style="color:inherit;"> |</span>        last_frames = get_frames(parent)
 <span style="color:inherit;"> |</span>        available_subframes = 1:length(get_frames(parent))
 <span style="color:inherit;"> |</span></div>
-</pre> <h3 id=4_a_hrefpatterns4replace_arrayt1_with_vectort ><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></h3> <pre>
+</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/structs/Object.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/structs/Object.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-31,7 +31,7</span> ============================================================

@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=fonspplutojl ><a href="#fonspplutojl">fonsp/Pluto.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a><li><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a><li><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></ol></div> <h3 id=2_a_hrefpatterns2avoid_var_nothing ><a href="#2_a_hrefpatterns2avoid_var_nothing">2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a></a></h3> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=fonspplutojl ><a href="#fonspplutojl">fonsp/Pluto.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=avoid_var_nothing ><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-124,7 +124,7</span> ============================================================
@@ -46,6 +46,48 @@
 <span style="color:inherit;"> |</span>                @warn &#34;Remote cell not found locally!&#34;
 <span style="color:inherit;"> |</span>            else
 <span style="color:inherit;"> |</span>                push!(args, notebook.cells[index])
+<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-104,7 +104,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function _merge_notebook_compiler_options(notebook::Notebook, options::CompilerOptions)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">notebook.compiler_options</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>notebook.compiler_options<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        return options
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-113,7 +113,7</span> ============================================================
+<span style="color:inherit;"> |</span>        # 1. not specified by notebook options
+<span style="color:inherit;"> |</span>        # 2. notebook specified project options
+<span style="color:inherit;"> |</span>        # 3. general notebook specified options
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">getfield(notebook.compiler_options, each)</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>getfield(notebook.compiler_options, each)<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>            kwargs[each] = getfield(options, each)
+<span style="color:inherit;"> |</span>        elseif each === :project
+<span style="color:inherit;"> |</span>            # some specified processing for notebook project
+<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Update.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Update.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;Update the cell's caches, i.e. parse code and collect metadata.&#34;
+<span style="color:inherit;"> |</span>function update_caches!(notebook::Notebook, cells)
+<span style="color:inherit;"> |</span>    for cell in cells
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">cell.parsedcode</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>cell.parsedcode<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>            cell.parsedcode = parse_custom(notebook, cell)
+<span style="color:inherit;"> |</span>			cell.module_usings = ExpressionExplorer.compute_usings(cell.parsedcode)
+<span style="color:inherit;"> |</span>			cell.rootassignee = ExpressionExplorer.get_rootassignee(cell.parsedcode)
+<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-32,7 +32,7</span> ============================================================
+<span style="color:inherit;"> |</span>        parsed1, next_ind1 = Meta.parse(cell.code, 1, raise=false)
+<span style="color:inherit;"> |</span>        parsed2, next_ind2 = Meta.parse(cell.code, next_ind1, raise=false)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">parsed2 === nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(parsed2)</span></span>
+<span style="color:inherit;"> |</span>            # only whitespace or comments after the first expression
+<span style="color:inherit;"> |</span>            parsed1
+<span style="color:inherit;"> |</span>        else
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-191,14 +191,14</span> ============================================================
@@ -100,62 +142,9 @@
 <span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(d)</span></span>
 <span style="color:inherit;"> |</span>            0
 <span style="color:inherit;"> |</span>        else
-<span style="color:inherit;"> |</span>            b * get(d, (objectid(x), dim), 0)
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-104,7 +104,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function _merge_notebook_compiler_options(notebook::Notebook, options::CompilerOptions)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">notebook.compiler_options</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>notebook.compiler_options<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        return options
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-113,7 +113,7</span> ============================================================
-<span style="color:inherit;"> |</span>        # 1. not specified by notebook options
-<span style="color:inherit;"> |</span>        # 2. notebook specified project options
-<span style="color:inherit;"> |</span>        # 3. general notebook specified options
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">getfield(notebook.compiler_options, each)</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>getfield(notebook.compiler_options, each)<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>            kwargs[each] = getfield(options, each)
-<span style="color:inherit;"> |</span>        elseif each === :project
-<span style="color:inherit;"> |</span>            # some specified processing for notebook project
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Update.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Update.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;Update the cell's caches, i.e. parse code and collect metadata.&#34;
-<span style="color:inherit;"> |</span>function update_caches!(notebook::Notebook, cells)
-<span style="color:inherit;"> |</span>    for cell in cells
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">cell.parsedcode</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>cell.parsedcode<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>            cell.parsedcode = parse_custom(notebook, cell)
-<span style="color:inherit;"> |</span>			cell.module_usings = ExpressionExplorer.compute_usings(cell.parsedcode)
-<span style="color:inherit;"> |</span>			cell.rootassignee = ExpressionExplorer.get_rootassignee(cell.parsedcode)
-<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-32,7 +32,7</span> ============================================================
-<span style="color:inherit;"> |</span>        parsed1, next_ind1 = Meta.parse(cell.code, 1, raise=false)
-<span style="color:inherit;"> |</span>        parsed2, next_ind2 = Meta.parse(cell.code, next_ind1, raise=false)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">parsed2 === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(parsed2)</span></span>
-<span style="color:inherit;"> |</span>            # only whitespace or comments after the first expression
-<span style="color:inherit;"> |</span>            parsed1
-<span style="color:inherit;"> |</span></div>
-</pre> <h3 id=3_a_hrefpatterns3avoid_var_nothing ><a href="#3_a_hrefpatterns3avoid_var_nothing">3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a></a></h3> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/runner/Loader.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/Loader.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>let
-<span style="color:inherit;"> |</span>    i = findfirst(isequal(pluto_dir), LOAD_PATH)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">i !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(i)</span></span>
-<span style="color:inherit;"> |</span>        deleteat!(LOAD_PATH, i)
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
+<span style="color:inherit;"> |</span>            b * get(d, (objectid(x), dim)</div>
+</pre> <h3 id=avoid_var_nothing__2 ><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-67,7 +67,7</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -199,6 +188,17 @@
 <span style="color:inherit;"> |</span>                if isopen(client.stream)
 <span style="color:inherit;"> |</span>                    if client.stream isa HTTP.WebSockets.WebSocket
 <span style="color:inherit;"> |</span>                        client.stream.frame_type = HTTP.WebSockets.WS_BINARY
+<span style="color:red;">------ </span><span style="color:inherit;">src/runner/Loader.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/Loader.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>let
+<span style="color:inherit;"> |</span>    i = findfirst(isequal(pluto_dir), LOAD_PATH)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">i !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(i)</span></span>
+<span style="color:inherit;"> |</span>        deleteat!(LOAD_PATH, i)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-302,7 +302,7</span> ============================================================
@@ -248,7 +248,7 @@
 <span style="color:inherit;"> |</span>                # 2.
 <span style="color:inherit;"> |</span>                # we have a named tuple, e.g. (a=1, b=2)
 <span style="color:inherit;"> |</span>                new_args = map(ex.args)</div>
-</pre> <h3 id=4_a_hrefpatterns4replace_arrayt1_with_vectort ><a href="#4_a_hrefpatterns4replace_arrayt1_with_vectort">4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></a></h3> <pre>
+</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-177,7 +177,7</span> ============================================================
@@ -271,46 +271,6 @@
 <span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
 <span style="color:inherit;"> |</span>	
 <span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;Run given cells and all the cells that depend on them, based on the topology information before and after the changes.&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span></span>
-<span style="color:green;">+|</span></span>function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::<span style="color:green;">Vector</span>{Cell}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span>
-<span style="color:inherit;"> |</span>	# make sure that we're the only &#96;run_reactive!&#96; being executed - like a semaphor
-<span style="color:inherit;"> |</span>	take!(notebook.executetoken)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-34,7 +34,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	# get the new topological order
-<span style="color:inherit;"> |</span>	new_order = topological_order(notebook, new_topology, union(cells, keys(old_order.errable)))
-<span style="color:red;">-|</span></span><span style="color:gray;">	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">} # TODO: think if old error cell order matters</span></span>
-<span style="color:green;">+|</span></span>	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::<span style="color:green;">Vector</span>{Cell} # TODO: think if old error cell order matters</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	# change the bar on the sides of cells to &#34;queued&#34;
-<span style="color:inherit;"> |</span>	local listeners = ClientSession[]
-<span style="color:inherit;">@|</span><span style="color:inherit;">-123,7 +123,7</span> ============================================================
-<span style="color:inherit;"> |</span>###
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;Do all the things!&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function update_save_run!(session::ServerSession, notebook::Notebook, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span></span>
-<span style="color:green;">+|</span></span>function update_save_run!(session::ServerSession, notebook::Notebook, cells::<span style="color:green;">Vector</span>{Cell}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span>
-<span style="color:inherit;"> |</span>	update_caches!(notebook, cells)
-<span style="color:inherit;"> |</span>	old = notebook.topology
-<span style="color:inherit;"> |</span>	new = notebook.topology = updated_topology(old, notebook, cells)
-<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-81,7 +81,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#96;expression_boundaries(&#34;sqrt(1)\n\n123&#34;) == [ncodeunits(&#34;sqrt(1)\n\n&#34;) + 1, ncodeunits(&#34;sqrt(1)\n\n123&#34;) + 1]&#96;
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function expression_boundaries(code::String, start=1)::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Integer</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>function expression_boundaries(code::String, start=1)::<span style="color:green;">Vector</span>{<:Integer}</span>
-<span style="color:inherit;"> |</span>    expr, next = Meta.parse(code, start, raise=false)
-<span style="color:inherit;"> |</span>    if next <= ncodeunits(code)
-<span style="color:inherit;"> |</span>        [next, expression_boundaries(code, next)...]
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -382,6 +342,46 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function cell_index_from_id(notebook::Notebook, cell_id::UUID)::Union{Int,Nothing}
 <span style="color:inherit;"> |</span>    findfirst(c -> c.cell_id == cell_id, notebook.cells)
+<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;Run given cells and all the cells that depend on them, based on the topology information before and after the changes.&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span></span>
+<span style="color:green;">+|</span></span>function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::<span style="color:green;">Vector</span>{Cell}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span>
+<span style="color:inherit;"> |</span>	# make sure that we're the only &#96;run_reactive!&#96; being executed - like a semaphor
+<span style="color:inherit;"> |</span>	take!(notebook.executetoken)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-34,7 +34,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	# get the new topological order
+<span style="color:inherit;"> |</span>	new_order = topological_order(notebook, new_topology, union(cells, keys(old_order.errable)))
+<span style="color:red;">-|</span></span><span style="color:gray;">	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">} # TODO: think if old error cell order matters</span></span>
+<span style="color:green;">+|</span></span>	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::<span style="color:green;">Vector</span>{Cell} # TODO: think if old error cell order matters</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	# change the bar on the sides of cells to &#34;queued&#34;
+<span style="color:inherit;"> |</span>	local listeners = ClientSession[]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-123,7 +123,7</span> ============================================================
+<span style="color:inherit;"> |</span>###
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;Do all the things!&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function update_save_run!(session::ServerSession, notebook::Notebook, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span></span>
+<span style="color:green;">+|</span></span>function update_save_run!(session::ServerSession, notebook::Notebook, cells::<span style="color:green;">Vector</span>{Cell}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span>
+<span style="color:inherit;"> |</span>	update_caches!(notebook, cells)
+<span style="color:inherit;"> |</span>	old = notebook.topology
+<span style="color:inherit;"> |</span>	new = notebook.topology = updated_topology(old, notebook, cells)
+<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-81,7 +81,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#96;expression_boundaries(&#34;sqrt(1)\n\n123&#34;) == [ncodeunits(&#34;sqrt(1)\n\n&#34;) + 1, ncodeunits(&#34;sqrt(1)\n\n123&#34;) + 1]&#96;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function expression_boundaries(code::String, start=1)::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Integer</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function expression_boundaries(code::String, start=1)::<span style="color:green;">Vector</span>{<:Integer}</span>
+<span style="color:inherit;"> |</span>    expr, next = Meta.parse(code, start, raise=false)
+<span style="color:inherit;"> |</span>    if next <= ncodeunits(code)
+<span style="color:inherit;"> |</span>        [next, expression_boundaries(code, next)...]
 <span style="color:red;">------ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================

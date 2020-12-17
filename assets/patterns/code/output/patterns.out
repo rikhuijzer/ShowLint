@@ -4,13 +4,12 @@
 ~~~
 tags: *test, julia*
 
-A test pattern to see if things work.
+A test pattern.
 ~~~
 <pre><code class="plaintext">match='name = ":[name]"' 
 
 rewrite='''
-# A new comment.
-name = ":[name]"'''
+name = "Test:[name]"'''
 </code></pre>
 ~~~
 
@@ -48,7 +47,7 @@ rewrite='if !isnothing(:[var])'
 ~~~
 tags: *julia*
 
-Vector{T} is an alias for Array{T,1}.
+Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
 ~~~
 <pre><code class="plaintext">match='Array{:[T],1}'
 

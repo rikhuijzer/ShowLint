@@ -8,8 +8,10 @@ export project_root,
     ansi2html,
     clone_repositories,
     target_dir,
+    patterns,
     repositories
 
+include("patterns.jl")
 include("repositories.jl")
 
 const project_root = pwd()

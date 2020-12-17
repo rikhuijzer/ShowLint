@@ -12,22 +12,22 @@ reeval = true
 patterns_dir = "configs"
 ```
 
-This page lists the patterns defined in `configs/`.
+This page lists the patterns as defined in `src/patterns.jl`.
 
 ```julia:patterns
 # hideall
 using ShowLint
 
-dir = joinpath(project_root, patterns_dir)
-
-pattern_files = readdir(dir)
-
-for file in pattern_files
-  content = read(joinpath(dir, file), String)
+for pattern in patterns
+  id = pattern.id
+  descr = pattern.description
+  tags = join(pattern.tags, ", ")
+  toml = pattern.toml
   println("""
   ~~~ 
-  <h3>$file</h3>
-  <pre><code class="plaintext hljs">$content</code></pre>
+  <h3 id="$id">$id: $descr</h3>
+  tags: <i>$tags</i> <br/>
+  <pre><code class="plaintext">$toml</code></pre>
   ~~~
   """)
 end

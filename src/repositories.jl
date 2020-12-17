@@ -3,7 +3,7 @@ struct Repo
     name::String
 end
 
-const repositories = [
+repositories = [
     Repo("https://github.com", "rikhuijzer/Codex.jl"),
     Repo("https://github.com", "JuliaData/CSV.jl")
 ]

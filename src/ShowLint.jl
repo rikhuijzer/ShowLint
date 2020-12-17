@@ -86,7 +86,11 @@ function create_config(pat::Pattern, dir)::String
 
         $toml
         """
-    foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+    if isdir(dir)
+        foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+    else
+        mkdir(dir)
+    end
     file = joinpath(dir, "$name.toml")
     open(file, "w") do io
         write(io, text)

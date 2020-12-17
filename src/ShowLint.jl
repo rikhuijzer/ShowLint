@@ -6,8 +6,11 @@ import CSV
 
 export project_root,
     ansi2html,
-    repositories,
-    clone_repositories
+    clone_repositories,
+    target_dir,
+    repositories
+
+include("repositories.jl")
 
 const project_root = pwd()
 
@@ -44,47 +47,46 @@ function ansi2html(text)
   """
 end
 
-function repositories()
-    repositories_file = joinpath(project_root, "repositories.csv")
-    df = CSV.read(repositories_file, DataFrame)
-    string.(df[:, :name])
-end
-
 const clones_dir = joinpath(homedir(), "clones") 
+
+function target_dir(repo::Repo)
+    name = repo.name
+    host = repo.host
+    host_dir = startswith(host, "https://") ? host[9:end] : host
+    joinpath(clones_dir, host_dir, name) 
+end
 
 function clone_repositories()
     if !isdir(clones_dir)
         mkdir(clones_dir)
     end
-    for name in repositories()
-        target_dir = joinpath(clones_dir, name) 
+    for repo in repositories
+        name = repo.name
+        host = repo.host
+        dest = target_dir(repo)
         if isdir(target_dir)
             rm(target_dir; recursive=true, force=true)
         end
-        run(`git clone https://github.com/$name $target_dir`)
+        run(`git clone $host/$name $dest`)
+        println()
     end
 end
 
 """
-    apply(pattern, repository)
+    apply(pattern, repo::Repo; file_extensions="jl")::String
 
-Apply `pattern` to `repository`.
+Apply `pattern` to `repo`.
 
 ### Examples
 ```
-apply("p1", "JuliaData/CSV.jl")
+repo = Repo("https://github.com", "JuliaData/CSV.jl")
+apply("p1", repo)
 ```
 """
-function apply(pattern, repository; file_extensions="jl")::String
+function apply(pattern, repo::Repo; file_extensions="jl")::String
     configs_dir = "configs"
     configs_path = joinpath(project_root, "configs")
-    configs_volume = "$configs_path:/configs"
-    repo_path = joinpath(clones_dir, repository)
-    repo_volume = "$repo_path:/repo"
-
-    config_flag = "-config /configs/$pattern.toml"
-    directory_flag = "-directory /repo" 
-    comby_flags = "$config_flag $directory_flag -f $file_extensions"
+    repo_path = target_dir(repo)
 
     # Not pretty, but it works.
     cmd = `podman run

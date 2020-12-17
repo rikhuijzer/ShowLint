@@ -11,11 +11,11 @@ The repositories listed below are defined in `repositories.csv`.
 # hideall
 using ShowLint
 
-for repo in repositories()
+for repo in repositories
   diff = ShowLint.apply("p2", repo)
   println("""
     ~~~
-    <h3>$repo</h3>
+    <h3>$(repo.name)</h3>
     p2.toml
     ~~~
     $diff

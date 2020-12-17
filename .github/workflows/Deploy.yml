@@ -18,9 +18,9 @@ jobs:
       run: |
         sudo mkdir /comby
         sudo chown $USER /comby
-        echo '#!/usr/bin/env bash' | tee -a /comby/comby.sh
-        echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' | tee -a /comby/comby.sh
-        sudo chmod +x /comby/comby.sh
+        echo '#!/usr/bin/env bash' | tee -a /comby/comby
+        echo 'podman run --volume $PWD:/pwd -it comby/comby "$@"' | tee -a /comby/comby
+        sudo chmod +x /comby/comby
         # See "Setting an environment variable" in the docs.
         echo "/comby" >> $GITHUB_PATH
 

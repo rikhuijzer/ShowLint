@@ -1,21 +1,21 @@
   ~~~
+  <h3>rikhuijzer/Codex.jl</h3>
+  p2.toml
+  ~~~
+  ~~~ 
+<pre>
+<div class="hljs"></div>
+</pre>
+~~~
+
+
+  ~~~
   <h3>JuliaData/CSV.jl</h3>
   p2.toml
   ~~~
   ~~~ 
 <pre>
-<div class="hljs"><span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
-<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
-<span style="color:inherit;"> |</span>    elseif testfunc isa Function
-<span style="color:inherit;"> |</span>        testfunc(t)
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<div class="hljs"><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-368,7 +368,7</span> ============================================================
 <span style="color:inherit;"> |</span>    if Parsers.ok(code) && vpos + vlen - 1 == len
@@ -37,6 +37,17 @@
 <span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
 <span style="color:inherit;"> |</span>            with(file, append) do io
 <span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
+<span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
+<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
+<span style="color:inherit;"> |</span>    elseif testfunc isa Function
+<span style="color:inherit;"> |</span>        testfunc(t)
+<span style="color:inherit;"> |</span>    else
 <span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-240,7 +240,7</span> ============================================================

@@ -1,16 +1,7 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Repositories</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item active" href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=repositories ><a href="#repositories">Repositories</a></h1> <p>The repositories listed below are defined in <code>repositories.csv</code>.</p> <h3>JuliaData/CSV.jl</h3> p2.toml <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
-<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
-<span style="color:inherit;"> |</span>    elseif testfunc isa Function
-<span style="color:inherit;"> |</span>        testfunc(t)
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Repositories</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item active" href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=repositories ><a href="#repositories">Repositories</a></h1> <p>The repositories listed below are defined in <code>repositories.csv</code>.</p> <h3>rikhuijzer/Codex.jl</h3> p2.toml <pre>
+<div class=hljs ></div>
+</pre> </p> <p> <h3>JuliaData/CSV.jl</h3> p2.toml <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-368,7 +368,7</span> ============================================================
 <span style="color:inherit;"> |</span>    if Parsers.ok(code) && vpos + vlen - 1 == len
@@ -32,6 +23,17 @@
 <span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
 <span style="color:inherit;"> |</span>            with(file, append) do io
 <span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
+<span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
+<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
+<span style="color:inherit;"> |</span>    elseif testfunc isa Function
+<span style="color:inherit;"> |</span>        testfunc(t)
+<span style="color:inherit;"> |</span>    else
 <span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-240,7 +240,7</span> ============================================================

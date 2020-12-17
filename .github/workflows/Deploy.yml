@@ -25,13 +25,14 @@ jobs:
 
     - name: Install Comby
       run: |
-        echo '#!/usr/bin/env bash' | sudo tee -a /usr/bin/comby.sh
-        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /usr/bin/comby.sh
-        sudo chmod +x /usr/bin/comby.sh
+        echo '#!/usr/bin/env bash' | sudo tee -a /comby/comby.sh
+        echo 'docker run --volume $PWD:/pwd -it comby/comby "$@"' | sudo tee -a /comby/comby.sh
+        sudo chmod +x /comby/comby.sh
+        # See "Setting an environment variable" in the docs.
+        echo "/comby" >> $GITHUB_PATH
 
     - name: Validate Comby installation
       run: |
-        alias comby="/usr/bin/comby.sh"
         comby -version
 
     # Python is necessary for the pre-rendering (minification) step

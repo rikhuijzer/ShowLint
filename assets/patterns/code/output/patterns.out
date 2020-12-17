@@ -1,6 +1,11 @@
+
 ~~~ 
 <h3 id="1">1: Test: Add comment in Project.toml</h3>
-tags: <i>test, julia</i> <br/>
+~~~
+tags: *test, julia*
+
+A test pattern to see if things work.
+~~~
 <pre><code class="plaintext">match='name = ":[name]"' 
 
 rewrite='''
@@ -9,12 +14,45 @@ name = ":[name]"'''
 </code></pre>
 ~~~
 
+
 ~~~ 
-<h3 id="2">2: Replace var === nothing</h3>
-tags: <i>julia</i> <br/>
+<h3 id="2">2: Avoid var === nothing</h3>
+~~~
+tags: *julia*
+
+Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.
+~~~
 <pre><code class="plaintext">match='if :[var] === nothing' 
 
 rewrite='if isnothing(:[var])'
+</code></pre>
+~~~
+
+
+~~~ 
+<h3 id="3">3: Avoid var !== nothing</h3>
+~~~
+tags: *julia*
+
+See [pattern 2](#2).
+~~~
+<pre><code class="plaintext">match='if :[var] !== nothing'
+
+rewrite='if !isnothing(:[var])'
+</code></pre>
+~~~
+
+
+~~~ 
+<h3 id="4">4: Replace Array{T,1} with Vector{T}</h3>
+~~~
+tags: *julia*
+
+Vector{T} is an alias for Array{T,1}.
+~~~
+<pre><code class="plaintext">match='Array{:[T],1}'
+
+rewrite='Vector{:[T]}'
 </code></pre>
 ~~~
 

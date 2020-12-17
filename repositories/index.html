@@ -11,10 +11,96 @@
 <span style="color:inherit;"> |</span>    pages = [
 <span style="color:inherit;"> |</span>        "Codex" => "index.md",
 <span style="color:inherit;"> |</span>        "Backup" => "backup.</div>
-</pre> </p> <p>2: <a href="/patterns/#2">Replace var &#61;&#61;&#61; nothing</a> <pre>
+</pre> </p> <p>2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a> <pre>
 <div class=hljs ></div>
-</pre> </p> <h3 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h3> Showing patterns for which the <code>tags</code> satisfy: <code>not_test</code> <br/> <br/> <p>2: <a href="/patterns/#2">Replace var &#61;&#61;&#61; nothing</a> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+</pre> </p> <p>3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a> <pre>
+<div class=hljs ></div>
+</pre> </p> <p>4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/df-transformations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/df-transformations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
+<span style="color:inherit;"> |</span>Let `o` be an `ordering::Ordering`.
+<span style="color:inherit;"> |</span>Enforces that the columns `o.col` of `df` are ordered according to `o.newlevels` if `o.newlevels` is not `missing`.
+<span style="color:inherit;"> |</span>"""
+<span style="color:red;">-|</span></span><span style="color:gray;">function order_with(df::DataFrame, orderings::</span><span style="color:red;">Array</span><span style="color:gray;">{Ordering</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
+<span style="color:green;">+|</span></span>function order_with(df::DataFrame, orderings::<span style="color:green;">Vector</span>{Ordering})::DataFrame</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(df)
+<span style="color:inherit;"> |</span>    for o in orderings
+<span style="color:inherit;"> |</span>        if o.newlevels != nothing
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
+<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
+<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
+<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
+<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,19 +15,19</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>n_equal(a::Array, b::Array)::Number = count(map(t -> t[1] == t[2], zip(a, b)))
+<span style="color:inherit;"> |</span>n_equal(a::Array, b::String)::Number = n_equal(a, map(i -> b, 1:length(a)))
+<span style="color:red;">-|</span></span><span style="color:gray;">n_weetniet(preds::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">})::Int64 = length(filter(v -> v == "Weet ik niet", preds))</span></span>
+<span style="color:green;">+|</span></span>n_weetniet(preds::<span style="color:green;">Vector</span>{Int64})::Int64 = length(filter(v -> v == "Weet ik niet", preds))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">get_answers(i::Number, df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">} = df[i, :][3:end]</span></span>
+<span style="color:green;">+|</span></span>get_answers(i::Number, df::DataFrame)::<span style="color:green;">Vector</span>{Any} = df[i, :][3:end]</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">get_numbers(i::Number, df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">} = map(str2int, get_answers(i, df))</span></span>
+<span style="color:green;">+|</span></span>get_numbers(i::Number, df::DataFrame)::<span style="color:green;">Vector</span>{Int64} = map(str2int, get_answers(i, df))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function n_correct(df::DataFrame, solutions::Array)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function n_correct(df::DataFrame, solutions::Array)::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:inherit;"> |</span>	map(i -> n_equal(get_numbers(i, df), solutions), 1:nrow(df))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function n_incorrect(df::DataFrame, solutions::Array)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function n_incorrect(df::DataFrame, solutions::Array)::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:inherit;"> |</span>	map(n -> length(solutions) - n, n_correct(df, solutions))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function n_weetniet(df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function n_weetniet(df::DataFrame)::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:inherit;"> |</span>	map(i -> n_equal(get_answers(i, df), "Weet ik niet"), 1:nrow(df))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,8 +8,8</span> ============================================================
+<span style="color:inherit;"> |</span>using Query
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>struct Items
+<span style="color:red;">-|</span></span><span style="color:gray;">    normal::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    normal::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    reversed::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    reversed::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>reverse(x::Int) = 6 - x
+<span style="color:inherit;">@|</span><span style="color:inherit;">-205,7 +205,7</span> ============================================================
+<span style="color:inherit;"> |</span>Joines multiple `questionnaires` for the members of `groups`, where `groups` ensures that the joins do not remove rows which shouldn't be removed.
+<span style="color:inherit;"> |</span>For instance, given questionnaires `"A"` and `"B"` containing respectively columns `:a1`, `:a2` and `:b1`, this method will return `{ group, id, A_a1, A_a2, B_b1 }`.
+<span style="color:inherit;"> |</span>"""
+<span style="color:red;">-|</span></span><span style="color:gray;">function join_questionnaires(raw_dir::String, questionnaires::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}, groups::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
+<span style="color:green;">+|</span></span>function join_questionnaires(raw_dir::String, questionnaires::<span style="color:green;">Vector</span>{String}, groups::<span style="color:green;">Vector</span>{String})::DataFrame</span>
+<span style="color:inherit;"> |</span>    function prepare_responses(q::String)::DataFrame
+<span style="color:inherit;"> |</span>        df = first_measurement(raw_dir, q)
+<span style="color:inherit;"> |</span>        filter!(:group => x -> x in groups,</div>
+</pre> </p> <h3 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h3> Showing patterns for which the <code>tags</code> satisfy: <code>not_test</code> <br/> <br/> <p>2: <a href="/patterns/#2">Avoid var &#61;&#61;&#61; nothing</a> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
+<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
+<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
+<span style="color:inherit;"> |</span>    elseif testfunc isa Function
+<span style="color:inherit;"> |</span>        testfunc(t)
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-368,7 +368,7</span> ============================================================
 <span style="color:inherit;"> |</span>    if Parsers.ok(code) && vpos + vlen - 1 == len
@@ -25,17 +111,6 @@
 <span style="color:inherit;"> |</span>        try
 <span style="color:inherit;"> |</span>            date, code, vpos, vlen, tlen = Parsers.xparse(Date, buf, pos, len, options)
 <span style="color:inherit;"> |</span>            if Parsers.ok(code) && vpos + vlen - 1 == len
-<span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
-<span style="color:inherit;"> |</span>    buf = Vector{UInt8}(undef, len)
-<span style="color:inherit;"> |</span>    pos = 1
-<span style="color:inherit;"> |</span>    state = iterate(rows)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">state === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(state)</span></span>
-<span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
-<span style="color:inherit;"> |</span>            with(file, append) do io
-<span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
 <span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-240,7 +240,7</span> ============================================================
@@ -56,6 +131,17 @@
 <span style="color:inherit;"> |</span>        try
 <span style="color:inherit;"> |</span>            date, code, vpos, vlen, tlen = Parsers.xparse(Date, buf, pos, len, options)
 <span style="color:inherit;"> |</span>            if Parsers.ok(code)
+<span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
+<span style="color:inherit;"> |</span>    buf = Vector{UInt8}(undef, len)
+<span style="color:inherit;"> |</span>    pos = 1
+<span style="color:inherit;"> |</span>    state = iterate(rows)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">state === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(state)</span></span>
+<span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
+<span style="color:inherit;"> |</span>            with(file, append) do io
+<span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
 <span style="color:red;">------ </span><span style="color:inherit;">src/CSV.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/CSV.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-39,7 +39,7</span> ============================================================
@@ -67,17 +153,6 @@
 <span style="color:inherit;"> |</span>        throw(ArgumentError("provide a valid sink argument, like `using DataFrames; CSV.read(source, DataFrame)`"))
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    Tables.CopiedColumns(CSV.File(source; kwargs...)) |> sink
-<span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
-<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
-<span style="color:inherit;"> |</span>    elseif testfunc isa Function
-<span style="color:inherit;"> |</span>        testfunc(t)
-<span style="color:inherit;"> |</span>    else
 <span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-117,7 +117,7</span> ============================================================
@@ -89,4 +164,181 @@
 <span style="color:inherit;"> |</span>        del = isa(source, AbstractString) && endswith(source, ".tsv") ? UInt8('\t') :
 <span style="color:inherit;"> |</span>            isa(source, AbstractString) && endswith(source, ".wsv") ? UInt8(' ') :
 <span style="color:inherit;"> |</span>            UInt8('</div>
+</pre> </p> <p>3: <a href="/patterns/#3">Avoid var &#33;&#61;&#61; nothing</a> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-150,7 +150,7</span> ============================================================
+<span style="color:inherit;"> |</span>    partition::Bool=false,
+<span style="color:inherit;"> |</span>    kwargs...)
+<span style="color:inherit;"> |</span>    checkvaliddelim(delim)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">writeheader !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(writeheader)</span></span>
+<span style="color:inherit;"> |</span>        Base.depwarn("`writeheader=$writeheader` is deprecated in favor of `header=$writeheader`", :write)
+<span style="color:inherit;"> |</span>        header = writeheader
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-231,10 +231,10</span> ============================================================
+<span style="color:inherit;"> |</span>    debug::Bool=false,
+<span style="color:inherit;"> |</span>    )
+<span style="color:inherit;"> |</span>    rowsguess, ncols, buf, len, datapos, datarow, options, coloptions, positions, types, flags, pool, customtypes = h.rowsguess, h.cols, h.buf, h.len, h.datapos, h.datarow, h.options, h.coloptions, h.positions, h.types, h.flags, h.pool, h.customtypes
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">startingbyteposition !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(startingbyteposition)</span></span>
+<span style="color:inherit;"> |</span>        datapos = startingbyteposition
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">endingbyteposition !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(endingbyteposition)</span></span>
+<span style="color:inherit;"> |</span>        len = endingbyteposition
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    transpose = gettranspose(h)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-265,7 +265,7</span> ============================================================
+<span style="color:inherit;"> |</span>        # we add some cushion so we hopefully get the limit row correctly w/o shooting past too far and needing to resize! down
+<span style="color:inherit;"> |</span>        # but we also don't guarantee limit will be exact w/ multithreaded parsing
+<span style="color:inherit;"> |</span>        origrowsguess = rowsguess
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">limit !== nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(limit)</span></span>
+<span style="color:inherit;"> |</span>            limitposguess = ceil(Int64, (limit / (origrowsguess * 0.8)) * len)
+<span style="color:inherit;"> |</span>            newlen = [0, limitposguess, min(limitposguess * 2, len)]
+<span style="color:inherit;"> |</span>            findrowstarts!(buf, len, options, newlen, ncols, types, flags, lines_to_check)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
+<span style="color:inherit;"> |</span>        # multithreaded
+<span style="color:inherit;"> |</span>        finalrows, columns = multithreadparse(types, flags, buf, options, coloptions, rowsguess, datarow - 1, pool, refs, ncols, typemap, customtypes, limit, tasks, ranges, maxwarnings, debug)
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">limit !== nothing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(limit)</span></span>
+<span style="color:inherit;"> |</span>            rowsguess = limit
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        columns = allocate(rowsguess, ncols, types, flags, refs)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-403,7 +403,7</span> ============================================================
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        x = ChainedVector([convert(vectype(T), parent(pertaskcolumns[i][col])) for i = 1:N])
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">limit !== nothing</span><span style="color:gray;"> && limit < length(x)</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(limit)</span> && limit < length(x)</span>
+<span style="color:inherit;"> |</span>        resize!(x, limit)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    return x
+<span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-92,10 +92,10</span> ============================================================
+<span style="color:inherit;"> |</span>    (types !== nothing && any(x->!isconcretetype(x) && !(x isa Union), types isa AbstractDict ? values(types) : types)) && throw(ArgumentError("Non-concrete types passed in `types` keyword argument, please provide concrete types for columns: $types"))
+<span style="color:inherit;"> |</span>    checkvaliddelim(delim)
+<span style="color:inherit;"> |</span>    ignorerepeated && delim === nothing && throw(ArgumentError("auto-delimiter detection not supported when `ignorerepeated=true`; please provide delimiter like `delim=','`"))
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">use_mmap</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>use_mmap<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>        Base.depwarn("`use_mmap` keyword argument is deprecated and will be removed in the next release", :Header)
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">skipto !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(skipto)</span></span>
+<span style="color:inherit;"> |</span>        if datarow != -1
+<span style="color:inherit;"> |</span>            @warn "both `skipto` and `datarow` arguments provided, using `skipto`"
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-226,9 +226,9</span> ============================================================
+<span style="color:inherit;"> |</span>    customtypes = Tuple{(nonstandardtype(T) for T in vcat(types, values(typemap)...) if nonstandardtype(T) !== Union{})...}
+<span style="color:inherit;"> |</span>    # figure out if we'll drop any columns while parsing
+<span style="color:inherit;"> |</span>    todrop = Int[]
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">select !== nothing</span><span style="color:gray;"> && drop !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(select)</span> && drop !== nothing</span>
+<span style="color:inherit;"> |</span>        error("`select` and `drop` keywords were both provided; only one or the other is allowed")
+<span style="color:red;">-|</span></span><span style="color:gray;">    elseif </span><span style="color:red;">select !== nothing</span></span>
+<span style="color:green;">+|</span></span>    elseif <span style="color:green;">!isnothing(select)</span></span>
+<span style="color:inherit;"> |</span>        if select isa AbstractVector{Int}
+<span style="color:inherit;"> |</span>            for i = 1:ncols
+<span style="color:inherit;"> |</span>                i in select || push!(todrop, i)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-249,7 +249,7</span> ============================================================
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            error("`select` keyword argument must be an `AbstractVector` of `Int`, `Symbol`, `String`, or `Bool`, or a selector function of the form `(i, name) -> keep::Bool`")
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">    elseif </span><span style="color:red;">drop !== nothing</span></span>
+<span style="color:green;">+|</span></span>    elseif <span style="color:green;">!isnothing(drop)</span></span>
+<span style="color:inherit;"> |</span>        if drop isa AbstractVector{Int}
+<span style="color:inherit;"> |</span>            for i = 1:ncols
+<span style="color:inherit;"> |</span>                i in drop && push!(todrop</div>
+</pre> </p> <p>4: <a href="/patterns/#4">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-25,24 +25,24</span> ============================================================
+<span style="color:inherit;"> |</span>@testset "PooledArrays" begin
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer("X\nb\nc\na\nc"), pool=true)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
+<span style="color:inherit;"> |</span>    @test f.X == ["b", "c", "a", "c"]
+<span style="color:inherit;"> |</span>    @test f.X.refs[2] == f.X.refs[4]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer("X\nb\nc\na\nc"), pool=0.6)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
+<span style="color:inherit;"> |</span>    @test f.X == ["b", "c", "a", "c"]
+<span style="color:inherit;"> |</span>    @test f.X.refs[2] == f.X.refs[4]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer("X\nb\nc\n\nc"), pool=true, ignoreemptylines=false)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
+<span style="color:inherit;"> |</span>    @test f.X[3] === missing
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer("X\nc\nc\n\nc\nc\nc\nc\nc\nc"), ignoreemptylines=false)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (9, 1)
+<span style="color:inherit;"> |</span>    @test isequal(f.X, ["c", "c", missing, "c", "c", "c", "c", "c", "c"])
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/precompile.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/precompile.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,29 +1,29</span> ============================================================
+<span style="color:inherit;"> |</span>function _precompile_()
+<span style="color:inherit;"> |</span>    ccall(:jl_generating_output, Cint, ()) == 1 || return nothing
+<span style="color:red;">-|</span></span><span style="color:gray;">    Base.precompile(Tuple{Core.kwftype(typeof(CSV.Type)),NamedTuple{(:debug,),Tuple{Bool}},Type{CSV.File},CSV.Header{false,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">}}})</span></span>
+<span style="color:green;">+|</span></span>    Base.precompile(Tuple{Core.kwftype(typeof(CSV.Type)),NamedTuple{(:debug,),Tuple{Bool}},Type{CSV.File},CSV.Header{false,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},<span style="color:green;">Vector</span>{UInt8}}})</span>
+<span style="color:inherit;"> |</span>    Base.precompile(Tuple{Type{CSV.File},String})
+<span style="color:red;">-|</span></span><span style="color:gray;">    Base.precompile(Tuple{Type{CSV.Header{false,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">}}},String,</span><span style="color:red;">Array</span><span style="color:gray;">{Symbol</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Int64,UInt8,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Int64,Int64,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Nothing,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">},</span><span style="color:red;">Array</span><span style="color:gray;">{Type</span><span style="color:red;">,1</span><span style="color:gray;">},</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">},</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">},Float64,Bool,Type{T} where T})</span></span>
+<span style="color:green;">+|</span></span>    Base.precompile(Tuple{Type{CSV.Header{false,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},<span style="color:green;">Vector</span>{UInt8}}},String,<span style="color:green;">Vector</span>{Symbol},Int64,Int64,UInt8,<span style="color:green;">Vector</span>{UInt8},Int64,Int64,Int64,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Nothing,<span style="color:green;">Vector</span>{Int64},<span style="color:green;">Vector</span>{Type},<span style="color:green;">Vector</span>{UInt8},<span style="color:green;">Vector</span>{Int64},Float64,Bool,Type{T} where T})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    Base.precompile(Tuple{typeof(CSV.detectcolumnnames),</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Int64,Int64,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Int64,Bool})</span></span>
+<span style="color:green;">+|</span></span>    Base.precompile(Tuple{typeof(CSV.detectcolumnnames),<span style="color:green;">Vector</span>{UInt8},Int64,Int64,Int64,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Int64,Bool})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    Base.precompile(Tuple{typeof(CSV.makechain),Type{</span><span style="color:red;">Array</span><span style="color:gray;">{Union{Missing, Bool}</span><span style="color:red;">,1</span><span style="color:gray;">}},</span><span style="color:red;">Array</span><span style="color:gray;">{Union{Missing, Bool}</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Int64,</span><span style="color:red;">Array</span><span style="color:gray;">{Array{AbstractArray{T,1} where T,1}</span><span style="color:red;">,1</span><span style="color:gray;">},Int64})</span></span>
+<span style="color:green;">+|</span></span>    Base.precompile(Tuple{typeof(CSV.makechain),Type{<span style="color:green;">Vector</span>{Union{Missing, Bool}}},<span style="color:green;">Vector</span>{Union{Missing, Bool}},Int64,Int64,<span style="color:green;">Vector</span>{Array{AbstractArray{T,1} where T,1}},Int64})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    Base.precompile(Tuple{typeof(CSV.multithreadparse),</span><span style="color:red;">Array</span><span style="color:gray;">{Type</span><span style="color:red;">,1</span><span style="color:gray;">},</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">},</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Int64,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Nothing,Int64,Int64,Float64,</span><span style="color:red;">Array</span><span style="color:gray;">{CSV.RefPool</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Dict{Type,Type},Bool,Type{T} where T,Int64,Int64,Bool})</span></span>
+<span style="color:green;">+|</span></span>    Base.precompile(Tuple{typeof(CSV.multithreadparse),<span style="color:green;">Vector</span>{Type},<span style="color:green;">Vector</span>{UInt8},<span style="color:green;">Vector</span>{UInt8},Int64,Int64,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Nothing,Int64,Int64,Float64,<span style="color:green;">Vector</span>{CSV.RefPool},Int64,Dict{Type,Type},Bool,Type{T} where T,Int64,Int64,Bool})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    Base.precompile(Tuple{typeof(CSV.parsefilechunk!),Val{false},Int64,Dict{Type,Type},</span><span style="color:red;">Array</span><span style="color:gray;">{AbstractArray{T,1} where T</span><span style="color:red;">,1</span><span style="color:gray;">},</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Int64,Int64,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">},Float64,</span><span style="color:red;">Array</span><span style="color:gray;">{CSV.RefPool</span><span style="color:red;">,1</span><span style="color:gray;">},Int64,Int64,</span><span style="color:red;">Array</span><span style="color:gray;">{Type</span><span style="color:red;">,1</span><span style="color:gray;">},</span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">},Bool,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Nothing,Type{Tuple{}},Int})</span></span>
+<span style="color:green;">+|</span></span>    Base.precompile(Tuple{typeof(CSV.parsefilechunk!),Val{false},Int64,Dict{Type,Type},<span style="color:green;">Vector</span>{AbstractArray{T,1} where T},<span style="color:green;">Vector</span>{UInt8},Int64,Int64,Int64,<span style="color:green;">Vector</span>{Int64},Float64,<span style="color:green;">Vector</span>{CSV.RefPool},Int64,Int64,<span style="color:green;">Vector</span>{Type},<span style="color:green;">Vector</span>{UInt8},Bool,Parsers.Options{false,false,true,false,Missing,UInt8,Nothing},Nothing,Type{Tuple{}},Int})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    Base.precompile(Tuple{typeof(CSV.promote_types),Any,Any})</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,</span><span style="color:red;">Array</span><span style="color:gray;">{Union{Missing, Bool}</span><span style="color:red;">,1</span><span style="color:gray;">}}})</span></span>
+<span style="color:green;">+|</span></span>    Base.precompile(Tuple{typeof(CSV.promote_types),Any,Any})</span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,<span style="color:green;">Vector</span>{Union{Missing, Bool}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,ChainedVector{Union{Missing, Bool},</span><span style="color:red;">Array</span><span style="color:gray;">{Union{Missing, Bool}</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,ChainedVector{Union{Missing, Bool},<span style="color:green;">Vector</span>{Union{Missing, Bool}}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,PooledArrays.PooledArray{Union{Missing, String},UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,PooledArrays.PooledArray{Union{Missing, String},UInt32,1,<span style="color:green;">Vector</span>{UInt32}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,PooledArrays.PooledArray{Union{Missing, String},UInt32,1,ChainedVector{UInt32,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,PooledArrays.PooledArray{Union{Missing, String},UInt32,1,ChainedVector{UInt32,<span style="color:green;">Vector</span>{UInt32}}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Date,1,Dates.Date,Missing,</span><span style="color:red;">Array</span><span style="color:gray;">{Dates.Date</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Date,1,Dates.Date,Missing,<span style="color:green;">Vector</span>{Dates.Date}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Date,1,Dates.Date,Missing,ChainedVector{Dates.Date,</span><span style="color:red;">Array</span><span style="color:gray;">{Dates.Date</span><span style="color:red;">,1</span><span style="color:gray;">}}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Date,1,Dates.Date,Missing,ChainedVector{Dates.Date,<span style="color:green;">Vector</span>{Dates.Date}}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.DateTime,1,Dates.DateTime,Missing,</span><span style="color:red;">Array</span><span style="color:gray;">{Dates.DateTime</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.DateTime,1,Dates.DateTime,Missing,<span style="color:green;">Vector</span>{Dates.DateTime}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.DateTime,1,Dates.DateTime,Missing,ChainedVector{Dates.DateTime,</span><span style="color:red;">Array</span><span style="color:gray;">{Dates.DateTime</span><span style="color:red;">,1</span><span style="color:gray;">}}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.DateTime,1,Dates.DateTime,Missing,ChainedVector{Dates.DateTime,<span style="color:green;">Vector</span>{Dates.DateTime}}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Time,1,Dates.Time,Missing,</span><span style="color:red;">Array</span><span style="color:gray;">{Dates.Time</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Time,1,Dates.Time,Missing,<span style="color:green;">Vector</span>{Dates.Time}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Time,1,Dates.Time,Missing,ChainedVector{Dates.Time,</span><span style="color:red;">Array</span><span style="color:gray;">{Dates.Time</span><span style="color:red;">,1</span><span style="color:gray;">}}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Dates.Time,1,Dates.Time,Missing,ChainedVector{Dates.Time,<span style="color:green;">Vector</span>{Dates.Time}}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Float64,1,Float64,Missing,</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Float64,1,Float64,Missing,<span style="color:green;">Vector</span>{Float64}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Float64,1,Float64,Missing,ChainedVector{Float64,</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Float64,1,Float64,Missing,ChainedVector{Float64,<span style="color:green;">Vector</span>{Float64}}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Int64,1,Int64,Missing,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Int64,1,Int64,Missing,<span style="color:green;">Vector</span>{Int64}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Int64,1,Int64,Missing,ChainedVector{Int64,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{Int64,1,Int64,Missing,ChainedVector{Int64,<span style="color:green;">Vector</span>{Int64}}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{String,1,UndefInitializer,Missing,</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{String,1,UndefInitializer,Missing,<span style="color:green;">Vector</span>{String}}}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{String,1,UndefInitializer,Missing,ChainedVector{String,</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}}}}})</span></span>
+<span style="color:green;">+|</span></span>    isdefined(CSV, Symbol("#28#29")) && Base.precompile(Tuple{getfield(CSV, Symbol("#28#29")),Tuple{Symbol,SentinelArray{String,1,UndefInitializer,Missing,ChainedVector{String,<span style="color:green;">Vector</span>{String}}}}})</span>
+<span style="color:inherit;"> |</span>    isdefined(CSV, Symbol("#34#39")) && Base.precompile(Tuple{getfield(CSV, Symbol("#34#39"))})
+<span style="color:inherit;"> |</span>    isdefined(CSV, Symbol("#36#41")) && Base.precompile(Tuple{getfield(CSV, Symbol("#36#41"))})
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

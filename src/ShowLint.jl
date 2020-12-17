@@ -4,7 +4,10 @@ using DataFrames
 
 import CSV
 
-export project_root,
+export 
+    Pattern,
+    Repo,
+    project_root,
     ansi2html,
     clone_repositories,
     target_dir,
@@ -74,8 +77,25 @@ function clone_repositories()
     end
 end
 
+function create_config(pat::Pattern, dir)::String
+    id = pat.id
+    toml = pat.toml
+    name = "p$id"
+    text = """
+        [$name] 
+
+        $toml
+        """
+    foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+    file = joinpath(dir, "$name.toml")
+    open(file, "w") do io
+        write(io, text)
+    end
+    name
+end
+
 """
-    apply(pattern, repo::Repo; file_extensions="jl")::String
+    apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
 
 Apply `pattern` to `repo`.
 
@@ -85,10 +105,12 @@ repo = Repo("https://github.com", "JuliaData/CSV.jl")
 apply("p1", repo)
 ```
 """
-function apply(pattern, repo::Repo; file_extensions="jl")::String
+function apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
     configs_dir = "configs"
     configs_path = joinpath(project_root, "configs")
     repo_path = target_dir(repo)
+
+    name = create_config(pat, configs_path)
 
     # Not pretty, but it works.
     cmd = `podman run
@@ -96,7 +118,7 @@ function apply(pattern, repo::Repo; file_extensions="jl")::String
         --volume $repo_path:/repo
         --rm
         -it comby/comby
-        -config /configs/$pattern.toml
+        -config /configs/$name.toml
         -directory /repo
         -file-extensions $file_extensions
         `

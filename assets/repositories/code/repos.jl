@@ -3,12 +3,15 @@
 using ShowLint
 
 for repo in repositories
-  diff = ShowLint.apply("p2", repo)
-  println("""
-    ~~~
-    <h3>$(repo.name)</h3>
-    p2.toml
-    ~~~
-    $diff
-  """)
+  println("### $(repo.name)")
+
+  for pat in patterns
+    diff = ShowLint.apply(pat, repo)
+    descr = pat.description
+    id = pat.id
+    println("""
+      $id: [$descr](/patterns/#$id)
+      $diff
+    """)
+  end
 end

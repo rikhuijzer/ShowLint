@@ -1,9 +1,5 @@
 module ShowLint
 
-using DataFrames
-
-import CSV
-
 export 
     Pattern,
     Repo,
@@ -119,15 +115,18 @@ end
 Apply `pattern` to `repo`.
 ```
 """
-function apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
+function apply(pat::Pattern, repo::Repo; 
+    file_extensions="jl", in_place=false)
+
     configs_dir = "configs"
     configs_path = joinpath(project_root, "configs")
     repo_path = target_dir(repo)
 
     name = create_config(pat, configs_path)
 
-    # Not pretty, but it works.
-    cmd = `podman run
+    # Not pretty but it works.
+    cmd = !in_place ? 
+        `podman run
         --volume $configs_path:/configs
         --volume $repo_path:/repo
         --rm
@@ -135,7 +134,18 @@ function apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
         -config /configs/$name.toml
         -directory /repo
         -file-extensions $file_extensions
+        ` :
+        `podman run
+        --volume $configs_path:/configs
+        --volume $repo_path:/repo
+        --rm
+        -it comby/comby
+        -config /configs/$name.toml
+        -directory /repo
+        -file-extensions $file_extensions
+        -in-place
         `
+
     stdout = IOBuffer()
     run(pipeline(cmd; stdout))
     out = String(take!(stdout))
@@ -143,8 +153,11 @@ function apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
         out = replace(out, '`' => "&#96;")
         out = replace(out, '"' => "&#34;")
     end
-    out = avoid_franklin_parse_errors(out)
-    out = ansi2html(out)
+    if return_diff
+        out = avoid_franklin_parse_errors(out)
+        out = ansi2html(out)
+    end
+    return out
 end
 
 function repo_page(repo::Repo)::String

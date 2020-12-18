@@ -1,0 +1,33 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/WebSockets.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliawebwebsocketsjl ><a href="#juliawebwebsocketsjl">JuliaWeb/WebSockets.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">benchmark/ws_hts.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmark/ws_hts.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-106,7 +106,7</span> ============================================================
+<span style="color:inherit;"> |</span>            response = resp_HTTP(request.target, response)
+<span style="color:inherit;"> |</span>        elseif request.method == &#34;HEAD&#34;
+<span style="color:inherit;"> |</span>            response = resp_HTTP(request.target, response)
+<span style="color:red;">-|</span></span><span style="color:gray;">            response.body = </span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
+<span style="color:green;">+|</span></span>            response.body = <span style="color:green;">Vector</span>{UInt8}()</span>
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            response = HTTP.Response(501, &#34;Not implemented method: $(request.method), fix $id&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">------ </span><span style="color:inherit;">src/WebSockets.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/WebSockets.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># revisit the need for defining this union type for method definitions. The functions would
+<span style="color:inherit;"> |</span># probably work just as fine with duck typing.
+<span style="color:red;">-|</span></span><span style="color:gray;">const Dt = Union{ReinterpretArray{UInt8,1,UInt16,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt16</span><span style="color:red;">,1</span><span style="color:gray;">}},</span></span>
+<span style="color:green;">+|</span></span>const Dt = Union{ReinterpretArray{UInt8,1,UInt16,<span style="color:green;">Vector</span>{UInt16}},</span>
+<span style="color:inherit;"> |</span>            Vector{UInt8},
+<span style="color:inherit;"> |</span>            CodeUnits{UInt8,String}   }
+<span style="color:inherit;"> |</span>&#34;A reasonable amount of time&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-159,7 +159,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#96;&#96;&#96;
+<span style="color:inherit;"> |</span>Also see function subprotocol
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">const SUBProtocols= </span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
+<span style="color:green;">+|</span></span>const SUBProtocols= <span style="color:green;">Vector</span>{String}()</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    write_fragment(io, islast, opcode, hasmask, data::Array{UIn</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,25 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/CSV.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=use_ismissing_instead_of_and ><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/basics.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/basics.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-324,7 +324,7</span> ============================================================
-<span style="color:inherit;"> |</span>@test row.date == Date(2019, 1, 1)
-<span style="color:inherit;"> |</span>@test row.datetime == DateTime(2019, 1, 1, 1, 2, 3)
-<span style="color:inherit;"> |</span>@test row.bool === true
-<span style="color:red;">-|</span></span><span style="color:gray;">@test row.</span><span style="color:red;">null === missing</span></span>
-<span style="color:green;">+|</span></span>@test row.<span style="color:green;">ismissing(null)</span></span>
-<span style="color:inherit;"> |</span>@test row.str == &#34;hey&#34;
-<span style="color:inherit;"> |</span>@test row.catg == &#34;abc&#34;
-<span style="color:inherit;"> |</span>@test typeof(row.catg) == String
-<span style="color:inherit;">@|</span><span style="color:inherit;">-472,7 +472,7</span> ============================================================
-<span style="color:inherit;"> |</span>@test row.time == Dates.Time(12)
-<span style="color:inherit;"> |</span>@test row.bool
-<span style="color:inherit;"> |</span>@test row.lazy == &#34;hey&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">@test row.</span><span style="color:gray;">lazy_missing</span><span style="color:red;"> === missing</span></span>
-<span style="color:green;">+|</span></span>@test row.<span style="color:green;">ismissing(</span>lazy_missing<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@test CSV.File(IOBuffer(&#34;col1\n1&#34;)).col1 == [1]
-<span style="color:inherit;"> |</s</div>
-</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/CSV.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a><li><a href="#use_ismissing">Use ismissing</a><li><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-25,24 +25,24</span> ============================================================
@@ -106,4 +85,37 @@
 <span style="color:inherit;"> |</span>    isdefined(CSV, Symbol(&#34;#34#39&#34;)) && Base.precompile(Tuple{getfield(CSV, Symbol(&#34;#34#39&#34;))})
 <span style="color:inherit;"> |</span>    isdefined(CSV, Symbol(&#34;#36#41&#34;)) && Base.precompile(Tuple{getfield(CSV, Symbol(&#34;#36#41&#34;))})
 <span style="color:inherit;"> |</span</div>
+</pre> <h3 id=use_ismissing ><a href="#use_ismissing">Use ismissing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/basics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-324,7 +324,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test row.date == Date(2019, 1, 1)
+<span style="color:inherit;"> |</span>@test row.datetime == DateTime(2019, 1, 1, 1, 2, 3)
+<span style="color:inherit;"> |</span>@test row.bool === true
+<span style="color:red;">-|</span></span><span style="color:gray;">@test row.</span><span style="color:red;">null === missing</span></span>
+<span style="color:green;">+|</span></span>@test row.<span style="color:green;">ismissing(null)</span></span>
+<span style="color:inherit;"> |</span>@test row.str == &#34;hey&#34;
+<span style="color:inherit;"> |</span>@test row.catg == &#34;abc&#34;
+<span style="color:inherit;"> |</span>@test typeof(row.catg) == String
+<span style="color:inherit;">@|</span><span style="color:inherit;">-472,7 +472,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test row.time == Dates.Time(12)
+<span style="color:inherit;"> |</span>@test row.bool
+<span style="color:inherit;"> |</span>@test row.lazy == &#34;hey&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">@test row.</span><span style="color:gray;">lazy_missing</span><span style="color:red;"> === missing</span></span>
+<span style="color:green;">+|</span></span>@test row.<span style="color:green;">ismissing(</span>lazy_missing<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@test CSV.File(IOBuffer(&#34;col1\n1&#34;)).col1 == [1]
+<span style="color:inherit;"> |</s</div>
+</pre> <h3 id=avoid_x_-_fx ><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/basics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-399,7 +399,7</span> ============================================================
+<span style="color:inherit;"> |</span># 578
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;h1234567890123456\t&#34;^2262 * &#34;lasthdr\r\n&#34; *&#34;dummy dummy dummy\r\n&#34;* (&#34;1.23\t&#34;^2262 * &#34;2.46\r\n&#34;)^10), datarow=3, threaded=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (10, 2263)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test all(</span><span style="color:red;">x -> eltype(x)</span><span style="color:gray;"> == Float64, f.columns)</span></span>
+<span style="color:green;">+|</span></span>@test all(<span style="color:green;">eltype</span> == Float64, f.columns)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Date constructor throws which breaks CSV parsing error handling flow
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;date\n2020-05-05\n2020-05-32&#3</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

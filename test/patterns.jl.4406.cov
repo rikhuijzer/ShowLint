@@ -1,0 +1,30 @@
+        - import JSON
+        - 
+        - @testset "Patterns" begin
+        -     @test SL.patterns_have_valid_indexes()
+        - 
+        -     function apply(pat::Pattern, code::String; file_extension="jl")
+       10         test_dir = joinpath(SL.clones_dir, "test", "test")
+        5         rm(test_dir; recursive=true, force=true)
+        5         mkpath(test_dir)
+        - 
+        5         code_file = joinpath(test_dir, "code.$file_extension")
+        5         open(code_file, "w") do io
+        -             write(io, code)
+        -         end
+        -         
+       10         repo = Repo("test", "test", [SL.default])
+        - 
+        5         SL.apply(pat, repo; in_place=true)
+        - 
+        5         read(code_file, String)
+        -     end
+        - 
+        -     P = SL.patterns
+        - 
+        -     @test apply(P[1], "AbstractArray{Int,1}") == "AbstractVector{Int}"
+        -     @test apply(P[2], "if x === missing") == "if ismissing(x)"
+        -     @test apply(P[2], "x !== missing") == "!ismissing(x)"
+        -     @test apply(P[3], "map(x -> f(x), A)") == "map(f, A)"
+        -     @test apply(P[3], "y = x -> f(x)") == "y = f"
+        - end

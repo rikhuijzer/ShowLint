@@ -1,5 +1,26 @@
 ~~~
 <p>
+<a href="/github/alan-turing-institute/mlj.jl">alan-turing-institute/MLJ.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/fluxml/macrotools.jl">FluxML/MacroTools.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/fluxml/zygote.jl">FluxML/Zygote.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
 <a href="/github/fonsp/pluto.jl">fonsp/Pluto.jl</a> <br/>
 github <br/>
 </p>
@@ -21,6 +42,13 @@ github <br/>
 
 ~~~
 <p>
+<a href="/github/juliacollections/memoize.jl">JuliaCollections/Memoize.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
 <a href="/github/juliadata/csv.jl">JuliaData/CSV.jl</a> <br/>
 github <br/>
 </p>
@@ -35,6 +63,27 @@ github <br/>
 
 ~~~
 <p>
+<a href="/github/juliadata/dataframesmeta.jl">JuliaData/DataFramesMeta.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliadata/tables.jl">JuliaData/Tables.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliadata/yaml.jl">JuliaData/YAML.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
 <a href="/github/juliadatabases/redis.jl">JuliaDatabases/Redis.jl</a> <br/>
 github <br/>
 </p>
@@ -42,7 +91,28 @@ github <br/>
 
 ~~~
 <p>
-<a href="/github/julialang/julia">JuliaLang/julia</a> <br/>
+<a href="/github/julialang/packagecompiler.jl">JuliaLang/PackageCompiler.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliaplots/makie.jl">JuliaPlots/Makie.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliaplots/plots.jl">JuliaPlots/Plots.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliastats/distributions.jl">JuliaStats/Distributions.jl</a> <br/>
 github <br/>
 </p>
 ~~~
@@ -50,6 +120,27 @@ github <br/>
 ~~~
 <p>
 <a href="/github/juliapy/pycall.jl">JuliaPy/PyCall.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliaweb/http.jl">JuliaWeb/HTTP.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/juliaweb/websockets.jl">JuliaWeb/WebSockets.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/jump-dev/jump.jl">jump-dev/JuMP.jl</a> <br/>
 github <br/>
 </p>
 ~~~
@@ -64,6 +155,13 @@ github <br/>
 ~~~
 <p>
 <a href="/github/rikhuijzer/codex.jl">rikhuijzer/Codex.jl</a> <br/>
+github <br/>
+</p>
+~~~
+
+~~~
+<p>
+<a href="/github/sciml/differentialequations.jl">SciML/DifferentialEquations.jl</a> <br/>
 github <br/>
 </p>
 ~~~

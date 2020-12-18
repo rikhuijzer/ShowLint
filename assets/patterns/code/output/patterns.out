@@ -1,21 +1,20 @@
 
 ~~~ 
-<h3 id="1">1: Prefix project name with Test.</h3>
+<h3 id="1">1: Replace Array{T,1} with Vector{T}</h3>
 ~~~
-tags: *test, julia*
+tags: *julia*
 
-A test pattern.
+Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
 ~~~
-<pre><code class="plaintext">match='name = ":[name]"' 
+<pre><code class="plaintext">match='Array{:[T],1}'
 
-rewrite='''
-name = "Test:[name]"'''
+rewrite='Vector{:[T]}'
 </code></pre>
 ~~~
 
 
 ~~~ 
-<h3 id="2">2: Use ismissing instead of === and !==</h3>
+<h3 id="2">2: Use ismissing</h3>
 ~~~
 tags: *julia*
 
@@ -31,15 +30,15 @@ rewrite=':[first]ismissing(:[var])'
 
 
 ~~~ 
-<h3 id="3">3: Replace Array{T,1} with Vector{T}</h3>
+<h3 id="3">3: Avoid x -> f(x)</h3>
 ~~~
 tags: *julia*
 
-Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
+From the Julia [Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
 ~~~
-<pre><code class="plaintext">match='Array{:[T],1}'
+<pre><code class="plaintext">match=':[[var]] -> :[function](:[var])' 
 
-rewrite='Vector{:[T]}'
+rewrite=':[function]'
 </code></pre>
 ~~~
 

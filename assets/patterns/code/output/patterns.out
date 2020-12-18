@@ -21,11 +21,11 @@ tags: *julia*
 
 Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.
 ~~~
-<pre><code class="plaintext">match=':[var] :[neg~[=|!]]== missing' 
+<pre><code class="plaintext">match=':[[var]] :[first~[=|!]]== missing' 
 
-rule='where rewrite :[neg] { "=" -> "" }'
+rule='where rewrite :[first] { "=" -> "" }'
 
-rewrite=':[neg]ismissing(:[var])'
+rewrite=':[first]ismissing(:[var])'
 </code></pre>
 ~~~
 

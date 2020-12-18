@@ -22,6 +22,6 @@ import JSON
 
     pats = S.patterns
 
-    @test apply(pats[2], "x === missing") == "ismissing(x)"
+    @test apply(pats[2], "if x === missing") == "if ismissing(x)"
     @test apply(pats[2], "x !== missing") == "!ismissing(x)"
 end

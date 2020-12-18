@@ -2,11 +2,11 @@
 
 rewrite=&#x27;&#x27;&#x27;
 name = &quot;Test:[name]&quot;&#x27;&#x27;&#x27;
-</code></pre> </p> <p> <h3 id=2 >2: Use ismissing instead of === and !==</h3> tags: <em>julia</em></p> <p>Note that <code>ismissing</code> can be slower, see <a href="https://github.com/JuliaLang/julia/issues/27681">https://github.com/JuliaLang/julia/issues/27681</a>. <pre><code class="plaintext hljs">match=&#x27;:[var] :[neg~[=|!]]== missing&#x27; 
+</code></pre> </p> <p> <h3 id=2 >2: Use ismissing instead of === and !==</h3> tags: <em>julia</em></p> <p>Note that <code>ismissing</code> can be slower, see <a href="https://github.com/JuliaLang/julia/issues/27681">https://github.com/JuliaLang/julia/issues/27681</a>. <pre><code class="plaintext hljs">match=&#x27;:[[var]] :[first~[=|!]]== missing&#x27; 
 
-rule=&#x27;where rewrite :[neg] { &quot;=&quot; -&gt; &quot;&quot; }&#x27;
+rule=&#x27;where rewrite :[first] { &quot;=&quot; -&gt; &quot;&quot; }&#x27;
 
-rewrite=&#x27;:[neg]ismissing(:[var])&#x27;
+rewrite=&#x27;:[first]ismissing(:[var])&#x27;
 </code></pre> </p> <p> <h3 id=3 >3: Replace Array{T,1} with Vector{T}</h3> tags: <em>julia</em></p> <p>Vector&#123;T&#125; and AbstractVector&#123;T&#125; are aliases for respectively Array&#123;T,1&#125; and AbstractArray&#123;T,1&#125;. <pre><code class="plaintext hljs">match=&#x27;Array{:[T],1}&#x27;
 
 rewrite=&#x27;Vector{:[T]}&#x27;

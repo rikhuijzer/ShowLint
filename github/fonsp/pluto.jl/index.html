@@ -1,22 +1,31 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=fonspplutojl ><a href="#fonspplutojl">fonsp/Pluto.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=use_ismissing_instead_of_and ><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs >WARNING: The match template starts with a :[hole]. You almost never want to start a template with :[hole], since it matches everything including newlines up to the part that comes after it. This can make things slow. :[[hole]] might be what you're looking for instead, like when you want to match an assignment foo = bar(args) on a line, use :[[var]] = bar(args). :[hole] is typically useful inside balanced delimiters.
-Timeout for input: Path: src/webserver/Dynamic.jl!
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
 <span style="color:inherit;"> |</span>    if message.cell !== nothing
 <span style="color:inherit;"> |</span>        to_send[:cell_id] = message.cell.cell_id
 <span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if message.initiator</span><span style="color:red;"> !== missing</span></span>
-<span style="color:green;">+|</span></span><span style="color:green;">!ismissing(</span>    if message.initiator<span style="color:green;">)</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if message.</span><span style="color:red;">initiator !== missing</span></span>
+<span style="color:green;">+|</span></span>    if message.<span style="color:green;">!ismissing(initiator)</span></span>
 <span style="color:inherit;"> |</span>        to_send[:initiator_id] = message.initiator.client_id
 <span style="color:inherit;"> |</span>        to_send[:request_id] = message.initiator.request_id
 <span style="color:inherit;"> |</span>    end
-Timeout for input: Path: src/runner/PlutoRunner.jl!
-Timeout for input: Path: sample/test1.jl!
-Timeout for input: Path: test/React.jl!
-Timeout for input: Path: test/ExpressionExplorer.jl!
-Timeout for input: Path: src/analysis/ExpressionExplorer</div>
+<span style="color:red;">------ </span><span style="color:inherit;">test/React.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/React.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-35,11 +35,11</span> ============================================================
+<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[1:2])
+<span style="color:inherit;"> |</span>        @test notebook.cells[1].output_repr == notebook.cells[2].output_repr
+<span style="color:inherit;"> |</span>        @test notebook.cells[1].rootassignee == :x
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test notebook.cells[1].</span><span style="color:red;">runtime !== missing</span></span>
+<span style="color:green;">+|</span></span>        @test notebook.cells[1].<span style="color:green;">!ismissing(runtime)</span></span>
+<span style="color:inherit;"> |</span>        setcode(notebook.cells[1], &#34;x = 12&#34;)
+<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[1])
+<span style="color:inherit;"> |</span>        @test notebook.cells[1].output_repr == notebook.cells[2].output_repr
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test notebook.cells[2].</span><span style="color:red;">runtime !== missing</span></span>
+<span style="color:green;">+|</span></span>        @test notebook.cells[2].<span style="color:green;">!ismissing(runtime)</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[3])
+<span style="color:inherit;"> |</span>        @test notebook.cells[3].errored == f</div>
 </pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
@@ -29,6 +38,17 @@ Timeout for input: Path: src/analysis/ExpressionExplorer</div>
 <span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
 <span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
 <span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
+<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
+<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
+<span style="color:inherit;"> |</span>	
+<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
+<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
+<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -76,17 +96,6 @@ Timeout for input: Path: src/analysis/ExpressionExplorer</div>
 <span style="color:inherit;"> |</span>    for (i, row) in zip(1:L,rows)
 <span style="color:inherit;"> |</span>        row_data[i] = (i, row_data_for(row))
 <span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
-<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
-<span style="color:inherit;"> |</span>	
-<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
-<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
-<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================

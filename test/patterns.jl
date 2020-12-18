@@ -24,5 +24,4 @@ import JSON
 
     @test apply(pats[2], "x === missing") == "ismissing(x)"
     @test apply(pats[2], "x !== missing") == "!ismissing(x)"
-    @test apply(pats[2], "y; x === missing") == "y; ismissing(x)"
 end

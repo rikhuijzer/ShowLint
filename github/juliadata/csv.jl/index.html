@@ -1,157 +1,17 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/CSV.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=use_ismissing_instead_of_and ><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/basics.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/basics.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-50,7 +50,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># #329
-<span style="color:inherit;"> |</span>f = CSV.File(joinpath(dir, &#34;test_types.csv&#34;), types=Dict(:string=>Union{Missing,DateTime}), silencewarnings=true)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.string[</span><span style="color:red;">1] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.string[<span style="color:green;">1ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># #352
-<span style="color:inherit;"> |</span>@test_throws KeyError first(CSV.File(joinpath(dir, &#34;test_types.csv&#34;))).a
-<span style="color:inherit;">@|</span><span style="color:inherit;">-153,18 +153,18</span> ============================================================
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n1\n\n&#34;), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] == 1
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># missing => int
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\n1\n&#34;), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
-<span style="color:inherit;"> |</span>@test f.x[2] == 1
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># missing => int => float
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\n1\n3.14\n&#34;), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (3, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
-<span style="color:inherit;"> |</span>@test f.x[2] === 1.0
-<span style="color:inherit;"> |</span>@test f.x[3] === 3.14
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-172,7 +172,7</span> ============================================================
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n1\n\n3.14\n&#34;), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (3, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] === 1.0
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
-<span style="color:inherit;"> |</span>@test f.x[3] === 3.14
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># int => float => missing
-<span style="color:inherit;">@|</span><span style="color:inherit;">-180,7 +180,7</span> ============================================================
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (3, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] === 1.0
-<span style="color:inherit;"> |</span>@test f.x[2] === 3.14
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">3] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">3ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># int => string
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n1\nabc&#34;))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-204,7 +204,7</span> ============================================================
-<span style="color:inherit;"> |</span># missing => int => float => string
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\n1\n3.14\nabc&#34;), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (4, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
-<span style="color:inherit;"> |</span>@test f.x[2] == &#34;1&#34;
-<span style="color:inherit;"> |</span>@test f.x[3] == &#34;3.14&#34;
-<span style="color:inherit;"> |</span>@test f.x[4] == &#34;abc&#34;
-<span style="color:inherit;">@|</span><span style="color:inherit;">-212,14 +212,14</span> ============================================================
-<span style="color:inherit;"> |</span># missing => catg
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\na\n&#34;), pool=true, ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
-<span style="color:inherit;"> |</span>@test f.x[2] == &#34;a&#34;
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># catg => missing
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\na\n\n&#34;), pool=true, ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] == &#34;a&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># catg => string
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\na\nb\na\nb\na\nb\na\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nn\nm\no\np\nq\nr\n&#34;), pool=0.5)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-252,7 +252,7</span> ============================================================
-<span style="color:inherit;"> |</span># invalid integer
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\nabc\n&#34;), type=Int)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (1, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@test_throws CSV.Error CSV.File(IOBuffer(&#34;x\nabc\n&#34;), type=Int, strict=true)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-289,25 +289,25</span> ============================================================
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\ntrue\n\n&#34;), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] === true
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># Union{Date, Missing}
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n2019-01-01\n\n&#34;), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] === Date(2019, 1, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># use_mmap=false
-<span style="color:inherit;"> |</span>f = @test_deprecated CSV.File(IOBuffer(&#34;x\n2019-01-01\n\n&#34;), ignoreemptylines=false, use_mmap=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] === Date(2019, 1, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># types is Dict{String, Type}
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n2019-01-01\n\n&#34;), types=Dict(&#34;x&#34;=>Date), ignoreemptylines=false)
-<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
-<span style="color:inherit;"> |</span>@test f.x[1] === Date(2019, 1, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># various CSV.File/CSV.Row properties
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;int,float,date,datetime,bool,null,str,catg,int_float\n1,3.14,2019-01-01,2019-01-01T01:02:03,true,,hey,abc,2\n2,NaN,2019-01-02,2019-01-03T01:02:03,false,,there,abc,3.14\n&#34;), pool=0.3)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-324,7 +324,7</span> ============================================================
-<span style="color:inherit;"> |</span>@test row.date == Date(2019, 1, 1)
-<span style="color:inherit;"> |</span>@test row.datetime == DateTime(2019, 1, 1, 1, 2, 3)
-<span style="color:inherit;"> |</span>@test row.bool === true
-<span style="color:red;">-|</span></span><span style="color:gray;">@test row.</span><span style="color:red;">null === missing</span></span>
-<span style="color:green;">+|</span></span>@test row.<span style="color:green;">nulismissing(l)</span></span>
-<span style="color:inherit;"> |</span>@test row.str == &#34;hey&#34;
-<span style="color:inherit;"> |</span>@test row.catg == &#34;abc&#34;
-<span style="color:inherit;"> |</span>@test typeof(row.catg) == String
-<span style="color:inherit;">@|</span><span style="color:inherit;">-472,7 +472,7</span> ============================================================
-<span style="color:inherit;"> |</span>@test row.time == Dates.Time(12)
-<span style="color:inherit;"> |</span>@test row.bool
-<span style="color:inherit;"> |</span>@test row.lazy == &#34;hey&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">@test row.lazy_</span><span style="color:red;">missing === missing</span></span>
-<span style="color:green;">+|</span></span>@test row.lazy_<span style="color:green;">missinismissing(g)</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@test CSV.File(IOBuffer(&#34;col1\n1&#34;)).col1 == [1]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-516,8 +516,8</span> ============================================================
-<span style="color:inherit;"> |</span>                                       a,b
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>                                       &#34;&#34;&#34;), ignoreemptylines=false)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">end] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">endismissing(])</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test f.y[</span><span style="color:red;">end] === missing</span></span>
-<span style="color:green;">+|</span></span>@test f.y[<span style="color:green;">endismissing(])</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># 679
-<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;a,b,c\n1,2,3\n4,5,6\n&#34;); select=[&#34;a&#34;], types=Dict(2=>Int8))
+<div class=hljs >WARNING: The match template starts with a :[hole]. You almost never want to start a template with :[hole], since it matches everything including newlines up to the part that comes after it. This can make things slow. :[[hole]] might be what you're looking for instead, like when you want to match an assignment foo = bar(args) on a line, use :[[var]] = bar(args). :[hole] is typically useful inside balanced delimiters.
+Timeout for input: Path: test/iteration.jl!
+Timeout for input: Path: src/file.jl!
+Timeout for input: Path: test/basics.jl!
+Timeout for input: Path: src/utils.jl!
 <span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-39,7 +39,7</span> ============================================================
 <span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\n\nc&#34;), pool=true, ignoreemptylines=false)
 <span style="color:inherit;"> |</span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,Array{UInt32,1}}
 <span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test f.X[</span><span style="color:red;">3] === missing</span></span>
-<span style="color:green;">+|</span></span>    @test f.X[<span style="color:green;">3ismissing(])</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test f.X[3]</span><span style="color:red;"> === missing</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">ismissing(</span>    @test f.X[3]<span style="color:green;">)</span></span>
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nc\nc\n\nc\nc\nc\nc\nc\nc&#34;), ignoreemptylines=false)
 <span style="color:inherit;"> |</span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,Array{UInt32,1}}
@@ -159,55 +19,16 @@
 <span style="color:inherit;"> |</span>    push!(poslens, CSV.poslen(Parsers.SENTINEL, Int64(0), Int64(0)))
 <span style="color:inherit;"> |</span>    x = CSV.LazyStringVector{Union{Missing, String}}(buffer, e, poslens)
 <span style="color:inherit;"> |</span>    @test isequal(x, [&#34;hey&#34;, &#34;there&#34;, &#34;sailor&#34;, &#34;esc\&#34;aped&#34;, missing])
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test x[</span><span style="color:red;">end] === missing</span></span>
-<span style="color:green;">+|</span></span>    @test x[<span style="color:green;">endismissing(])</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test x[end]</span><span style="color:red;"> === missing</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">ismissing(</span>    @test x[end]<span style="color:green;">)</span></span>
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-317,7 +317,7</span> ============================================================
-<span style="color:inherit;"> |</span>    (&#34;latest (1).csv&#34;, (header=0, missingstring=&#34;\\N&#34;, pool=true),
-<span style="color:inherit;"> |</span>        (1000, 25),
-<span style="color:inherit;"> |</span>        NamedTuple{(:Column1, :Column2, :Column3, :Column4, :Column5, :Column6, :Column7, :Column8, :Column9, :Column10, :Column11, :Column12, :Column13, :Column14, :Column15, :Column16, :Column17, :Column18, :Column19, :Column20, :Column21, :Column22, :Column23, :Column24, :Column25),Tuple{String,String,Int64,Int64,String,Int64,String,Int64,Date,Date,Int64,String,Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Int64},Union{Missing, Float64},Float64,Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Int64},Float64,Union{Missing, Float64},Union{Missing, Float64}}},
-<span style="color:red;">-|</span></span><span style="color:gray;">        t -> @test(t.Column17[end-</span><span style="color:red;">2] === missing</span><span style="color:gray;">)</span></span>
-<span style="color:green;">+|</span></span>        t -> @test(t.Column17[end-<span style="color:green;">2ismissing(])</span>)</span>
-<span style="color:inherit;"> |</span>    ),
-<span style="color:inherit;"> |</span>    # #217
-<span style="color:inherit;"> |</span>    (IOBuffer(&#34;aa,bb\n1,\&#34;1,b,c\&#34;\n&#34;), (pool=fals</div>
+Timeout for input: Path: src/precompile.jl!
+Timeout for input: Path: src/write.jl!
+Timeout for input: Path: test/testfiles</div>
 </pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-25,24 +25,24</span> ============================================================
-<span style="color:inherit;"> |</span>@testset &#34;PooledArrays&#34; begin
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\na\nc&#34;), pool=true)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
-<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
-<span style="color:inherit;"> |</span>    @test f.X == [&#34;b&#34;, &#34;c&#34;, &#34;a&#34;, &#34;c&#34;]
-<span style="color:inherit;"> |</span>    @test f.X.refs[2] == f.X.refs[4]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\na\nc&#34;), pool=0.6)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
-<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
-<span style="color:inherit;"> |</span>    @test f.X == [&#34;b&#34;, &#34;c&#34;, &#34;a&#34;, &#34;c&#34;]
-<span style="color:inherit;"> |</span>    @test f.X.refs[2] == f.X.refs[4]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\n\nc&#34;), pool=true, ignoreemptylines=false)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
-<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
-<span style="color:inherit;"> |</span>    @test f.X[3] === missing
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nc\nc\n\nc\nc\nc\nc\nc\nc&#34;), ignoreemptylines=false)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
-<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (9, 1)
-<span style="color:inherit;"> |</span>    @test isequal(f.X, [&#34;c&#34;, &#34;c&#34;, missing, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;])
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/precompile.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/precompile.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/precompile.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1,29 +1,29</span> ============================================================
 <span style="color:inherit;"> |</span>function _precompile_()
@@ -261,5 +82,36 @@
 <span style="color:green;">+|</span></span>    isdefined(CSV, Symbol(&#34;#28#29&#34;)) && Base.precompile(Tuple{getfield(CSV, Symbol(&#34;#28#29&#34;)),Tuple{Symbol,SentinelArray{String,1,UndefInitializer,Missing,ChainedVector{String,<span style="color:green;">Vector</span>{String}}}}})</span>
 <span style="color:inherit;"> |</span>    isdefined(CSV, Symbol(&#34;#34#39&#34;)) && Base.precompile(Tuple{getfield(CSV, Symbol(&#34;#34#39&#34;))})
 <span style="color:inherit;"> |</span>    isdefined(CSV, Symbol(&#34;#36#41&#34;)) && Base.precompile(Tuple{getfield(CSV, Symbol(&#34;#36#41&#34;))})
-<span style="color:inherit;"> |</span</div>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-25,24 +25,24</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;PooledArrays&#34; begin
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\na\nc&#34;), pool=true)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
+<span style="color:inherit;"> |</span>    @test f.X == [&#34;b&#34;, &#34;c&#34;, &#34;a&#34;, &#34;c&#34;]
+<span style="color:inherit;"> |</span>    @test f.X.refs[2] == f.X.refs[4]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\na\nc&#34;), pool=0.6)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArrays.PooledArray{String,UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
+<span style="color:inherit;"> |</span>    @test f.X == [&#34;b&#34;, &#34;c&#34;, &#34;a&#34;, &#34;c&#34;]
+<span style="color:inherit;"> |</span>    @test f.X.refs[2] == f.X.refs[4]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\n\nc&#34;), pool=true, ignoreemptylines=false)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
+<span style="color:inherit;"> |</span>    @test f.X[3] === missing
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nc\nc\n\nc\nc\nc\nc\nc\nc&#34;), ignoreemptylines=false)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,</span><span style="color:red;">Array</span><span style="color:gray;">{UInt32</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,<span style="color:green;">Vector</span>{UInt32}}</span>
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (9, 1)
+<span style="color:inherit;"> |</span>    @test isequal(f.X, [&#34;c&#34;, &#34;c&#34;, missing, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;, &#34;c&#34;])
+<span style="color:inherit;"> |</s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

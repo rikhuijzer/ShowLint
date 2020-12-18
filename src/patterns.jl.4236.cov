@@ -1,5 +1,5 @@
         - struct Pattern
-        3     id::Int
+        -     id::Int
         -     title::String
         -     tags::Vector{String}
         -     description::String
@@ -19,7 +19,7 @@
         -     Pattern(2, "Use ismissing instead of === and !==", ["julia"], 
         -         "Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.",
         -         """
-        -         match=':[var~[^;]] :[neg~[=|!]]== missing' 
+        -         match=':[var] :[neg~[=|!]]== missing' 
         - 
         -         rule='where rewrite :[neg] { "=" -> "" }'
         - 
@@ -37,5 +37,5 @@
         - ]
         - 
         - function patterns_have_valid_indexes()::Bool
-        -     collect(1:length(patterns)) == [p.id for p in patterns]
+        1     collect(1:length(patterns)) == [p.id for p in patterns]
         - end

@@ -19,7 +19,7 @@ patterns = [
     Pattern(2, "Use ismissing instead of === and !==", ["julia"], 
         "Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.",
         """
-        match=':[var~[^;]] :[neg~[=|!]]== missing' 
+        match=':[var] :[neg~[=|!]]== missing' 
 
         rule='where rewrite :[neg] { "=" -> "" }'
 

@@ -1,59 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>tlienart/Franklin.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=tlienartfranklinjl ><a href="#tlienartfranklinjl">tlienart/Franklin.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=avoid_var_nothing ><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils/html.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils/html.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-91,7 +91,7</span> ============================================================
-<span style="color:inherit;"> |</span>    for line in split(c, '\n')
-<span style="color:inherit;"> |</span>        m  = match(REGEX_CODE_HIDE, line)
-<span style="color:inherit;"> |</span>        ml = match(REGEX_LIT_HIDE, line)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">m === ml</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>m === ml<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>            println(buf, line)
-<span style="color:inherit;"> |</span>        elseif m !== nothing
-<span style="color:inherit;"> |</span>            # does it have a &#34;all&#34; or not?
-<span style="color:red;">------ </span><span style="color:inherit;">src/manager/post_processing.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/manager/post_processing.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-205,7 +205,7</span> ============================================================
-<span style="color:inherit;"> |</span>    allok = true
-<span style="color:inherit;"> |</span>    page  = read(path, String)
-<span style="color:inherit;"> |</span>    for m in eachmatch(r&#34;\shref=\&#34;(https?://)?(.*?)(?:#(.*?))?\&#34;&#34;, page)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">m.captures[1]</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>m.captures[1]<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>            # internal link, remove the front / otherwise it fails with joinpath
-<span style="color:inherit;"> |</span>            link = replace(m.captures[2], r&#34;^\/&#34;=>&#34;&#34;)
-<span style="color:inherit;"> |</span>            # if it's empty it's &#96;href=&#34;/&#34;&#96; which is always ok
-<span style="color:inherit;">@|</span><span style="color:inherit;">-227,7 +227,7</span> ============================================================
-<span style="color:inherit;"> |</span>                        rpage = page
-<span style="color:inherit;"> |</span>                    end
-<span style="color:inherit;"> |</span>                    # look for &#96;id=...&#96; either with or without quotation marks
-<span style="color:red;">-|</span></span><span style="color:gray;">                    if </span><span style="color:gray;">match(Regex(&#34;id=(?:\&#34;)?$anchor(?:\&#34;)?&#34;), rpage)</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>                    if <span style="color:green;">isnothing(</span>match(Regex(&#34;id=(?:\&#34;)?$anchor(?:\&#34;)?&#34;), rpage)<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>                        allok && println(&#34;&#34;)
-<span style="color:inherit;"> |</span>                        println(&#34;- internal link issue on page $mdpath: $link.&#34;)
-<span style="color:inherit;"> |</span>                        allok = f</div>
-</pre> <h3 id=avoid_var_nothing__2 ><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils/html.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils/html.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-93,7 +93,7</span> ============================================================
-<span style="color:inherit;"> |</span>        ml = match(REGEX_LIT_HIDE, line)
-<span style="color:inherit;"> |</span>        if m === ml === nothing
-<span style="color:inherit;"> |</span>            println(buf, line)
-<span style="color:red;">-|</span></span><span style="color:gray;">        elseif </span><span style="color:red;">m !== nothing</span></span>
-<span style="color:green;">+|</span></span>        elseif <span style="color:green;">!isnothing(m)</span></span>
-<span style="color:inherit;"> |</span>            # does it have a &#34;all&#34; or not?
-<span style="color:inherit;"> |</span>            isnothing(m.captures[2]) && continue
-<span style="color:inherit;"> |</span>            # if it doesn return an empty string
-<span style="color:red;">------ </span><span style="color:inherit;">src/converter/markdown/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/converter/markdown/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-94,7 +94,7</span> ============================================================
-<span style="color:inherit;"> |</span>        τ.name == :MD_DEF_OPEN || continue
-<span style="color:inherit;"> |</span>        # look ahead stopping with the first LINE_RETURN
-<span style="color:inherit;"> |</span>        j = findfirst(τc -> τc.name ∈ (:LINE_RETURN, :EOS), tokens[i+1:end])
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">j !== nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(j)</span></span>
-<span style="color:inherit;"> |</span>            e = i+j
-<span style="color:inherit;"> |</span>            # discard if it's a single line
-<span style="color:inherit;"> |</span>            any(τx -> τx.name == :LR_INDENT, tokens[i:e]) || cont</div>
-</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>tlienart/Franklin.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=tlienartfranklinjl ><a href="#tlienartfranklinjl">tlienart/Franklin.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/eval/run.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/eval/run.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-73,9 +73,9</span> ============================================================
@@ -69,4 +14,4 @@
 <span style="color:inherit;"> |</span>        &#34;&#34;&#34;
 <span style="color:inherit;"> |</span>    @test !occursin(&#34;redirect_stdout&#34;, F.trim_stacktrace(stacktrace))
 <span style="color:inherit;"> |</s</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

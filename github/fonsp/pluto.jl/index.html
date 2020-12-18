@@ -1,254 +1,32 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=fonspplutojl ><a href="#fonspplutojl">fonsp/Pluto.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=avoid_var_nothing ><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-124,7 +124,7</span> ============================================================
-<span style="color:inherit;"> |</span>    port = session.options.server.port
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    hostIP = parse(Sockets.IPAddr, host)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">port === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(port)</span></span>
-<span style="color:inherit;"> |</span>        port, serversocket = Sockets.listenany(hostIP, UInt16(1234))
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        try
-<span style="color:inherit;">@|</span><span style="color:inherit;">-204,7 +204,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>            # If a &#34;token&#34; url parameter is passed in from binder, then we store it to add to every URL (so that you can share the URL to collaborate).
-<span style="color:inherit;"> |</span>            params = HTTP.queryparams(HTTP.URI(request.target))
-<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">haskey(params, &#34;token&#34;) && session.binder_token</span><span style="color:red;"> === nothing</span>[0;7;2m </span></span>
-<span style="color:green;">+|</span></span>            if <span style="color:green;">isnothing(</span>haskey(params, &#34;token&#34;) && session.binder_token<span style="color:green;">)</span> </span>
-<span style="color:inherit;"> |</span>                session.binder_token = params[&#34;token&#34;]
-<span style="color:inherit;"> |</span>            end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-274,7 +274,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function pretty_address(session::ServerSession, hostIP, port)
-<span style="color:red;">-|</span></span><span style="color:gray;">    root = if </span><span style="color:gray;">session.options.server.root_url</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    root = if <span style="color:green;">isnothing(</span>session.options.server.root_url<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        host_str = string(hostIP)
-<span style="color:inherit;"> |</span>        host_pretty = if isa(hostIP, Sockets.IPv6)
-<span style="color:inherit;"> |</span>            if host_str == &#34;::1&#34;
-<span style="color:inherit;">@|</span><span style="color:inherit;">-329,7 +329,7</span> ============================================================
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        if messagetype === :connect
-<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:red;">notebook === nothing</span></span>
-<span style="color:green;">+|</span></span>            if <span style="color:green;">isnothing(notebook)</span></span>
-<span style="color:inherit;"> |</span>                messagetype === :connect || @warn &#34;Remote notebook not found locally!&#34;
-<span style="color:inherit;"> |</span>            else
-<span style="color:inherit;"> |</span>                client.connected_notebook = notebook
-<span style="color:inherit;">@|</span><span style="color:inherit;">-341,7 +341,7</span> ============================================================
-<span style="color:inherit;"> |</span>        if haskey(parentbody, &#34;cell_id&#34;)
-<span style="color:inherit;"> |</span>            cell_id = UUID(parentbody[&#34;cell_id&#34;])
-<span style="color:inherit;"> |</span>            index = cell_index_from_id(notebook, cell_id)
-<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:red;">index === nothing</span></span>
-<span style="color:green;">+|</span></span>            if <span style="color:green;">isnothing(index)</span></span>
-<span style="color:inherit;"> |</span>                @warn &#34;Remote cell not found locally!&#34;
-<span style="color:inherit;"> |</span>            else
-<span style="color:inherit;"> |</span>                push!(args, notebook.cells[index])
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-104,7 +104,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function _merge_notebook_compiler_options(notebook::Notebook, options::CompilerOptions)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">notebook.compiler_options</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>notebook.compiler_options<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        return options
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-113,7 +113,7</span> ============================================================
-<span style="color:inherit;"> |</span>        # 1. not specified by notebook options
-<span style="color:inherit;"> |</span>        # 2. notebook specified project options
-<span style="color:inherit;"> |</span>        # 3. general notebook specified options
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">getfield(notebook.compiler_options, each)</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>getfield(notebook.compiler_options, each)<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>            kwargs[each] = getfield(options, each)
-<span style="color:inherit;"> |</span>        elseif each === :project
-<span style="color:inherit;"> |</span>            # some specified processing for notebook project
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Update.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Update.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;Update the cell's caches, i.e. parse code and collect metadata.&#34;
-<span style="color:inherit;"> |</span>function update_caches!(notebook::Notebook, cells)
-<span style="color:inherit;"> |</span>    for cell in cells
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">cell.parsedcode</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(</span>cell.parsedcode<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>            cell.parsedcode = parse_custom(notebook, cell)
-<span style="color:inherit;"> |</span>			cell.module_usings = ExpressionExplorer.compute_usings(cell.parsedcode)
-<span style="color:inherit;"> |</span>			cell.rootassignee = ExpressionExplorer.get_rootassignee(cell.parsedcode)
-<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-32,7 +32,7</span> ============================================================
-<span style="color:inherit;"> |</span>        parsed1, next_ind1 = Meta.parse(cell.code, 1, raise=false)
-<span style="color:inherit;"> |</span>        parsed2, next_ind2 = Meta.parse(cell.code, next_ind1, raise=false)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">parsed2 === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(parsed2)</span></span>
-<span style="color:inherit;"> |</span>            # only whitespace or comments after the first expression
-<span style="color:inherit;"> |</span>            parsed1
-<span style="color:inherit;"> |</span>        else
-<span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-191,14 +191,14</span> ============================================================
-<span style="color:inherit;"> |</span>This function is memoized: running the same expression a second time will simply call the same generated function again. This is much faster than evaluating the expression, because the function only needs to be Julia-compiled once. See https://github.com/fonsp/Pluto.jl/pull/720
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function run_expression(expr::Any, cell_id::UUID, function_wrapped_info::Union{Nothing,Tuple{Set{Symbol},Set{Symbol}}}=nothing)
-<span style="color:red;">-|</span></span><span style="color:gray;">    cell_results[cell_id], cell_runtimes[cell_id] = if </span><span style="color:gray;">function_wrapped_info</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    cell_results[cell_id], cell_runtimes[cell_id] = if <span style="color:green;">isnothing(</span>function_wrapped_info<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        proof = ReturnProof()
-<span style="color:inherit;"> |</span>        wrapped = timed_expr(expr, proof)
-<span style="color:inherit;"> |</span>        run_inside_trycatch(wrapped, cell_id, proof)
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        key = expr_hash(expr)
-<span style="color:inherit;"> |</span>        local computer = get(computers, key, nothing)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">computer === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(computer)</span></span>
-<span style="color:inherit;"> |</span>            try
-<span style="color:inherit;"> |</span>                computer = register_computer(expr, key, collect.(function_wrapped_info)...)
-<span style="color:inherit;"> |</span>            catch e
-<span style="color:inherit;">@|</span><span style="color:inherit;">-402,7 +402,7</span> ============================================================
-<span style="color:inherit;"> |</span>const tree_display_extra_items = Dict{UUID,Dict{ObjectDimPair,Int64}}()
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function formatted_result_of(id::UUID, ends_with_semicolon::Bool, showmore::Union{ObjectDimPair,Nothing}=nothing)::NamedTuple{(:output_formatted, :errored, :interrupted, :runtime),Tuple{MimedOutput,Bool,Bool,Union{UInt64,Missing}}}
-<span style="color:red;">-|</span></span><span style="color:gray;">    extra_items = if </span><span style="color:red;">showmore === nothing</span></span>
-<span style="color:green;">+|</span></span>    extra_items = if <span style="color:green;">isnothing(showmore)</span></span>
-<span style="color:inherit;"> |</span>        tree_display_extra_items[id] = Dict{ObjectDimPair,Int64}()
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        old = get!(() -> Dict{ObjectDimPair,Int64}(), tree_display_extra_items, id)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-472,7 +472,7</span> ============================================================
-<span style="color:inherit;"> |</span>    try
-<span style="color:inherit;"> |</span>        new_iocontext = IOContext(default_iocontext, context)
-<span style="color:inherit;"> |</span>        io_sprinted, (value, mime) = sprint_withreturned(show_richest, val; context=new_iocontext)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">value === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(value)</span></span>
-<span style="color:inherit;"> |</span>            if mime ∈ imagemimes
-<span style="color:inherit;"> |</span>                (io_sprinted, mime)
-<span style="color:inherit;"> |</span>            else
-<span style="color:inherit;">@|</span><span style="color:inherit;">-498,7 +498,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    function_wrap_index = findfirst(f -> occursin(&#34;function_wrapped_cell&#34;, String(f.func)), stack)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">function_wrap_index</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>function_wrap_index<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        for _ in 1:2
-<span style="color:inherit;"> |</span>            until = findfirst(b -> b.func == :eval, reverse(stack))
-<span style="color:inherit;"> |</span>            stack = until === nothing ? stack : stack[1:end - until]
-<span style="color:inherit;">@|</span><span style="color:inherit;">-659,7 +659,7</span> ============================================================
-<span style="color:inherit;"> |</span>function get_my_display_limit(@nospecialize(x), dim::Integer, context::IOContext, a::Integer, b::Integer)::Int # needs to be system-dependent Int because it is used as array index
-<span style="color:inherit;"> |</span>    a + let
-<span style="color:inherit;"> |</span>        d = get(context, :extra_items, nothing)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">d === nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">isnothing(d)</span></span>
-<span style="color:inherit;"> |</span>            0
-<span style="color:inherit;"> |</span>        else
-<span style="color:inherit;"> |</span>            b * get(d, (objectid(x), dim)</div>
-</pre> <h3 id=avoid_var_nothing__2 ><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-67,7 +67,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>responses[:move_multiple_cells] = (session::ServerSession, body, notebook::Notebook; initiator::Union{Initiator,Missing}=missing) -> let
-<span style="color:inherit;"> |</span>    indices = cell_index_from_id.([notebook], UUID.(body[&#34;cells&#34;]))
-<span style="color:red;">-|</span></span><span style="color:gray;">    cells = [notebook.cells[i] for i in indices if </span><span style="color:red;">i !== nothing</span><span style="color:gray;">]</span></span>
-<span style="color:green;">+|</span></span>    cells = [notebook.cells[i] for i in indices if <span style="color:green;">!isnothing(i)</span>]</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # Indexing works as if a new cell is added.
-<span style="color:inherit;"> |</span>    # e.g. if the third cell (at julia-index 3) of [0, 1, 2, 3, 4]
-<span style="color:inherit;">@|</span><span style="color:inherit;">-104,7 +104,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>responses[:run_multiple_cells] = (session::ServerSession, body, notebook::Notebook; initiator::Union{Initiator,Missing}=missing) -> let
-<span style="color:inherit;"> |</span>    indices = cell_index_from_id.([notebook], UUID.(body[&#34;cells&#34;]))
-<span style="color:red;">-|</span></span><span style="color:gray;">    cells = [notebook.cells[i] for i in indices if </span><span style="color:red;">i !== nothing</span><span style="color:gray;">]</span></span>
-<span style="color:green;">+|</span></span>    cells = [notebook.cells[i] for i in indices if <span style="color:green;">!isnothing(i)</span>]</span>
-<span style="color:inherit;"> |</span>    # save=true fixes the issue where &#34;Submit all changes&#34; or &#96;Ctrl+S&#96; has no effect.
-<span style="color:inherit;"> |</span>    update_save_run!(session, notebook, cells; run_async=true, save=true)
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=fonspplutojl ><a href="#fonspplutojl">fonsp/Pluto.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=use_ismissing_instead_of_and ><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1,10 +1,10</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function serialize_message_to_stream(io::IO, message::UpdateMessage)
-<span style="color:inherit;"> |</span>    to_send = Dict(:type => message.type, :message => message.message)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">message.notebook</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>message.notebook<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        to_send[:notebook_id] = message.notebook.notebook_id
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">message.cell</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>message.cell<span style="color:green;">)</span></span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>    if message.cell !== nothing
 <span style="color:inherit;"> |</span>        to_send[:cell_id] = message.cell.cell_id
 <span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    if message.initiator !== missing
-<span style="color:inherit;">@|</span><span style="color:inherit;">-65,7 +65,7</span> ============================================================
-<span style="color:inherit;"> |</span>        next_to_send = take!(client.pendingupdates)
-<span style="color:inherit;"> |</span>        
-<span style="color:inherit;"> |</span>        try
-<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">client.stream</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>client.stream<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>                if isopen(client.stream)
-<span style="color:inherit;"> |</span>                    if client.stream isa HTTP.WebSockets.WebSocket
-<span style="color:inherit;"> |</span>                        client.stream.frame_type = HTTP.WebSockets.WS_BINARY
-<span style="color:red;">------ </span><span style="color:inherit;">src/runner/Loader.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/Loader.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>let
-<span style="color:inherit;"> |</span>    i = findfirst(isequal(pluto_dir), LOAD_PATH)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">i !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(i)</span></span>
-<span style="color:inherit;"> |</span>        deleteat!(LOAD_PATH, i)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if message.</span><span style="color:red;">initiator !== missing</span></span>
+<span style="color:green;">+|</span></span>    if message.<span style="color:green;">initiato!ismissing(r)</span></span>
+<span style="color:inherit;"> |</span>        to_send[:initiator_id] = message.initiator.client_id
+<span style="color:inherit;"> |</span>        to_send[:request_id] = message.initiator.request_id
 <span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebServer.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-302,7 +302,7</span> ============================================================
-<span style="color:inherit;"> |</span>        url_params[&#34;secret&#34;] = session.secret
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    fav_notebook = session.options.server.notebook
-<span style="color:red;">-|</span></span><span style="color:gray;">    new_root = if </span><span style="color:gray;">fav_notebook</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    new_root = if <span style="color:green;">!isnothing(</span>fav_notebook<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        key = isurl(fav_notebook) ? &#34;url&#34; : &#34;path&#34;
-<span style="color:inherit;"> |</span>        url_params[key] = string(fav_notebook)
-<span style="color:inherit;"> |</span>        root * &#34;open&#34;
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/WorkspaceManager.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-152,7 +152,7</span> ============================================================
-<span style="color:inherit;"> |</span>            string(&#34;--&#34;, name)
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        value = getfield(options, name)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">value !== nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(value)</span></span>
-<span style="color:inherit;"> |</span>            push!(option_list, string(flagname, &#34;=&#34;, value))
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/SessionActions.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/SessionActions.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
-<span style="color:inherit;"> |</span>    nb = load_notebook(tamepath(path), session.options.evaluation.run_notebook_on_load)
+<span style="color:red;">------ </span><span style="color:inherit;">test/React.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/React.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-35,11 +35,11</span> ============================================================
+<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[1:2])
+<span style="color:inherit;"> |</span>        @test notebook.cells[1].output_repr == notebook.cells[2].output_repr
+<span style="color:inherit;"> |</span>        @test notebook.cells[1].rootassignee == :x
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test notebook.cells[1].</span><span style="color:red;">runtime !== missing</span></span>
+<span style="color:green;">+|</span></span>        @test notebook.cells[1].<span style="color:green;">runtim!ismissing(e)</span></span>
+<span style="color:inherit;"> |</span>        setcode(notebook.cells[1], &#34;x = 12&#34;)
+<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[1])
+<span style="color:inherit;"> |</span>        @test notebook.cells[1].output_repr == notebook.cells[2].output_repr
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test notebook.cells[2].</span><span style="color:red;">runtime !== missing</span></span>
+<span style="color:green;">+|</span></span>        @test notebook.cells[2].<span style="color:green;">runtim!ismissing(e)</span></span>
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # overwrites the notebook environment if specified
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">compiler_options</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>compiler_options<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        nb.compiler_options = compiler_options
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-585,11 +585,11</span> ============================================================
-<span style="color:inherit;"> |</span>        # and explore those :)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        indexoffirstassignment = findfirst(a -> isa(a, Expr) && a.head == :(=), ex.args)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">indexoffirstassignment !== nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(indexoffirstassignment)</span></span>
-<span style="color:inherit;"> |</span>            # we have one of two cases, see next &#96;if&#96;
-<span style="color:inherit;"> |</span>            indexofsecondassignment = findnext(a -> isa(a, Expr) && a.head == :(=), ex.args, indexoffirstassignment + 1)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">length(ex.args) == 1 || indexofsecondassignment</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>            if <span style="color:green;">!isnothing(</span>length(ex.args) == 1 || indexofsecondassignment<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>                # 2.
-<span style="color:inherit;"> |</span>                # we have a named tuple, e.g. (a=1, b=2)
-<span style="color:inherit;"> |</span>                new_args = map(ex.args)</div>
-</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[3])
+<span style="color:inherit;"> |</span>        @test notebook.cells[3].errored == f</div>
+</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-177,7 +177,7</span> ============================================================
@@ -260,17 +38,6 @@
 <span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
 <span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
 <span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
-<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
-<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
-<span style="color:inherit;"> |</span>	
-<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
-<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
-<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -318,6 +85,17 @@
 <span style="color:inherit;"> |</span>    for (i, row) in zip(1:L,rows)
 <span style="color:inherit;"> |</span>        row_data[i] = (i, row_data_for(row))
 <span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
+<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
+<span style="color:inherit;"> |</span>	
+<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
+<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
+<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
@@ -443,4 +221,4 @@
 <span style="color:inherit;"> |</span>	self = topology[myself]
 <span style="color:inherit;"> |</span>	return filter(notebook.cells) do cell
 <span style="color:inherit;"> |</span>		other = topology[c</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

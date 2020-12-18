@@ -1,0 +1,234 @@
+        - module ShowLint
+        - 
+        - export 
+        -     Pattern,
+        -     Repo,
+        -     project_root,
+        -     ansi2html,
+        -     clone_repositories,
+        -     target_dir,
+        -     patterns,
+        -     repositories
+        - 
+        - include("patterns.jl")
+        - include("repositories.jl")
+        - 
+        - const project_root = pwd()
+        - 
+        - function ansi2html(text)
+        0   escape_codes = Dict(
+        -     "0;30" => "inherit",
+        -     "0;31" => "red",
+        -     "0;32" => "green",
+        -     "0;34" => "blue",
+        -     "0;1" => "inherit",
+        -     "0;100;30" => "inherit",
+        -     "0;41;30" => "red",
+        -     "0;42;30" => "green",
+        -     "0;43;30" => "orange",
+        -     "0;2" => "gray"
+        -   )
+        0   for code in keys(escape_codes)
+        0     before = "[" * code * "m"
+        0     color = escape_codes[code]
+        0     after = "<span style=\"color:$color;\">"
+        0     text = replace(text, before => after)
+        -   end
+        0   no_color = "[0m"
+        0   text = replace(text, no_color => "</span>")
+        0   text = replace(text, r"WARNING: [^\n]*$" => "")
+        0   text = replace(text, "/repo/" => "")
+        0   text = text[1:end-6]
+        0   text = strip(text)
+        0   return length(text) < 6 ? 
+        -         "" :
+        -         """
+        -         ~~~ 
+        -         <pre>
+        -         <div class="hljs">$text</div>
+        -         </pre>
+        -         ~~~
+        -         """
+        - end
+        - 
+        - const clones_dir = joinpath(homedir(), "clones") 
+        - 
+        - function host_dir(repo::Repo)
+        3     host = repo.host
+        3     host_dir = startswith(host, "https://") ? host[9:end] : host
+        3     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+        - end
+        - 
+        - function target_dir(repo::Repo)
+        3     name = repo.name
+        3     joinpath(clones_dir, host_dir(repo), name) 
+        - end
+        - 
+        - function page_path(repo::Repo)
+        -     name = repo.name
+        -     lowercase(joinpath(host_dir(repo), "$name.md"))
+        - end
+        - 
+        - function clone_repositories()
+        -     if !isdir(clones_dir)
+        -         mkdir(clones_dir)
+        -     end
+        -     for repo in repositories
+        -         println("Cloning $(repo.name)")
+        -         name = repo.name
+        -         host = repo.host
+        -         dest = target_dir(repo)
+        -         if isdir(dest)
+        -             cd(dest)
+        -             run(`git pull`)
+        -         else
+        -             run(`git clone $host/$name $dest`)
+        -         end
+        -         println()
+        -     end
+        - end
+        - 
+        - function create_config(pat::Pattern, dir)::String
+        3     id = pat.id
+        3     toml = pat.toml
+        3     name = "p$id"
+        3     text = """
+        -         [$name] 
+        - 
+        -         $toml
+        -         """
+        3     if isdir(dir)
+        6         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+        -     else
+        1         mkdir(dir)
+        -     end
+        3     file = joinpath(dir, "$name.toml")
+        3     open(file, "w") do io
+        -         write(io, text)
+        -     end
+        3     name
+        - end
+        - 
+        - """
+        -     apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
+        - 
+        - Apply `pattern` to `repo`.
+        - ```
+        - """
+        - function apply(pat::Pattern, repo::Repo; 
+        -     file_extensions="jl", in_place=false)
+        - 
+        6     configs_dir = "configs"
+        3     configs_path = joinpath(project_root, "configs")
+        3     repo_path = target_dir(repo)
+        - 
+        3     name = create_config(pat, configs_path)
+        - 
+        -     # Not pretty but it works.
+        6     cmd = !in_place ? 
+        -         `podman run
+        -         --volume $configs_path:/configs
+        -         --volume $repo_path:/repo
+        -         --rm
+        -         -it comby/comby
+        -         -config /configs/$name.toml
+        -         -directory /repo
+        -         -file-extensions $file_extensions
+        -         ` :
+        -         `podman run
+        -         --volume $configs_path:/configs
+        -         --volume $repo_path:/repo
+        -         --rm
+        -         -it comby/comby
+        -         -config /configs/$name.toml
+        -         -directory /repo
+        -         -file-extensions $file_extensions
+        -         -in-place
+        -         `
+        - 
+        3     stdout = IOBuffer()
+        3     run(pipeline(cmd; stdout))
+        3     out = String(take!(stdout))
+        3     function avoid_franklin_parse_errors(out)
+        0         out = replace(out, '`' => "&#96;")
+        0         out = replace(out, '"' => "&#34;")
+        -     end
+        3     if !in_place
+        0         out = avoid_franklin_parse_errors(out)
+        0         out = ansi2html(out)
+        -     end
+        3     return out
+        - end
+        - 
+        - function repo_page(repo::Repo)::String
+        -     predicates_str = join(repo.tags_predicates, " && ")
+        -     head = """
+        -         # $(repo.name)
+        -         Showing patterns for which the `tags` satisfy:
+        -         *$predicates_str*, and the pattern resulted in at least one match.
+        - 
+        -         \\toc
+        - 
+        -         """
+        - 
+        -     predicates = repo.tags_predicates
+        -     all_predicates_hold(tags) = all([p(tags) for p in predicates])
+        -     filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
+        - 
+        -     function pattern_section(pat)
+        -         diff = ShowLint.apply(pat, repo)
+        -         title = pat.title
+        -         id = pat.id
+        -         return diff == "" ? 
+        -         "" : 
+        -         """
+        -         ### $title
+        -         [Pattern #$id](/patterns/#$id)
+        - 
+        -         $diff
+        - 
+        -         """
+        -     end
+        -     sections = pattern_section.(filtered_patterns)
+        -     join([head, sections...], '\n') 
+        - end
+        - 
+        - """
+        -     create_repo_pages()
+        - 
+        - Create one webpage per repository.
+        - This step should happen before `serve()` is called.
+        - We could process all the diffs with this function is called
+        - or when `serve` runs. It seems less error prone to do it as early
+        - as possible.
+        - """
+        - function create_repo_pages(; debug=false)
+        -     filtered_repos = debug ? 
+        -         filter(r->contains(r.name,"Codex.jl"), repositories) :
+        -         repositories
+        -     for repo in filtered_repos
+        -         if !isdir(host_dir(repo))
+        -             mkdir(host_dir(repo))
+        -         end
+        -         franklin_file = page_path(repo)
+        -         println("Creating repository page at $franklin_file")
+        -         if !isdir(dirname(franklin_file))
+        -             mkdir(dirname(franklin_file))
+        -         end
+        - 
+        -         open(franklin_file, "w") do io
+        -             write(io, """
+        -                 +++
+        -                 title = "$(repo.name)"
+        -                 +++
+        - 
+        -                 [//]: # (Generated file. Do not modify.)
+        - 
+        -                 $(repo_page(repo))
+        -                 """
+        -             )
+        -         end
+        -     end
+        - end
+        - 
+        - end # module

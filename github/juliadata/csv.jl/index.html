@@ -1,170 +1,181 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/CSV.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=avoid_var_nothing ><a href="#avoid_var_nothing">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-368,7 +368,7</span> ============================================================
-<span style="color:inherit;"> |</span>    if Parsers.ok(code) && vpos + vlen - 1 == len
-<span style="color:inherit;"> |</span>        return float
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">options.dateformat</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>options.dateformat<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        try
-<span style="color:inherit;"> |</span>            date, code, vpos, vlen, tlen = Parsers.xparse(Date, buf, pos, len, options)
-<span style="color:inherit;"> |</span>            if Parsers.ok(code) && vpos + vlen - 1 == len
-<span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
-<span style="color:inherit;"> |</span>    buf = Vector{UInt8}(undef, len)
-<span style="color:inherit;"> |</span>    pos = 1
-<span style="color:inherit;"> |</span>    state = iterate(rows)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">state === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(state)</span></span>
-<span style="color:inherit;"> |</span>        if header isa Vector && !isempty(header)
-<span style="color:inherit;"> |</span>            with(file, append) do io
-<span style="color:inherit;"> |</span>                ! append && opts.bom && (pos = writebom(buf, pos, len) )
-<span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-240,7 +240,7</span> ============================================================
-<span style="color:inherit;"> |</span>    transpose = gettranspose(h)
-<span style="color:inherit;"> |</span>    # determine if we can use threads while parsing
-<span style="color:inherit;"> |</span>    minrows = min(something(limit, typemax(Int64)), rowsguess)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">threaded === nothing</span><span style="color:gray;"> && VERSION >= v&#34;1.3-DEV&#34; && tasks > 1 && !transpose && minrows > (tasks * 5) && (minrows * ncols) >= 5_000</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(threaded)</span> && VERSION >= v&#34;1.3-DEV&#34; && tasks > 1 && !transpose && minrows > (tasks * 5) && (minrows * ncols) >= 5_000</span>
-<span style="color:inherit;"> |</span>        threaded = true
-<span style="color:inherit;"> |</span>    elseif threaded === true
-<span style="color:inherit;"> |</span>        if VERSION < v&#34;1.3-DEV&#34;
-<span style="color:inherit;">@|</span><span style="color:inherit;">-757,7 +757,7</span> ============================================================
-<span style="color:inherit;"> |</span>            @goto stringdetect
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">options.dateformat</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(</span>options.dateformat<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        try
-<span style="color:inherit;"> |</span>            date, code, vpos, vlen, tlen = Parsers.xparse(Date, buf, pos, len, options)
-<span style="color:inherit;"> |</span>            if Parsers.ok(code)
-<span style="color:red;">------ </span><span style="color:inherit;">src/CSV.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/CSV.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/CSV.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatacsvjl ><a href="#juliadatacsvjl">JuliaData/CSV.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=use_ismissing_instead_of_and ><a href="#use_ismissing_instead_of_and">Use ismissing instead of &#61;&#61;&#61; and &#33;&#61;&#61;</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/basics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-50,7 +50,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># #329
+<span style="color:inherit;"> |</span>f = CSV.File(joinpath(dir, &#34;test_types.csv&#34;), types=Dict(:string=>Union{Missing,DateTime}), silencewarnings=true)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.string[</span><span style="color:red;">1] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.string[<span style="color:green;">1ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># #352
+<span style="color:inherit;"> |</span>@test_throws KeyError first(CSV.File(joinpath(dir, &#34;test_types.csv&#34;))).a
+<span style="color:inherit;">@|</span><span style="color:inherit;">-153,18 +153,18</span> ============================================================
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n1\n\n&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># missing => int
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\n1\n&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
+<span style="color:inherit;"> |</span>@test f.x[2] == 1
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># missing => int => float
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\n1\n3.14\n&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (3, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
+<span style="color:inherit;"> |</span>@test f.x[2] === 1.0
+<span style="color:inherit;"> |</span>@test f.x[3] === 3.14
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-172,7 +172,7</span> ============================================================
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n1\n\n3.14\n&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (3, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] === 1.0
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
+<span style="color:inherit;"> |</span>@test f.x[3] === 3.14
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># int => float => missing
+<span style="color:inherit;">@|</span><span style="color:inherit;">-180,7 +180,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (3, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] === 1.0
+<span style="color:inherit;"> |</span>@test f.x[2] === 3.14
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">3] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">3ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># int => string
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n1\nabc&#34;))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-204,7 +204,7</span> ============================================================
+<span style="color:inherit;"> |</span># missing => int => float => string
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\n1\n3.14\nabc&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (4, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
+<span style="color:inherit;"> |</span>@test f.x[2] == &#34;1&#34;
+<span style="color:inherit;"> |</span>@test f.x[3] == &#34;3.14&#34;
+<span style="color:inherit;"> |</span>@test f.x[4] == &#34;abc&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-212,14 +212,14</span> ============================================================
+<span style="color:inherit;"> |</span># missing => catg
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n\na\n&#34;), pool=true, ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
+<span style="color:inherit;"> |</span>@test f.x[2] == &#34;a&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># catg => missing
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\na\n\n&#34;), pool=true, ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] == &#34;a&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># catg => string
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\na\nb\na\nb\na\nb\na\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nn\nm\no\np\nq\nr\n&#34;), pool=0.5)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-252,7 +252,7</span> ============================================================
+<span style="color:inherit;"> |</span># invalid integer
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\nabc\n&#34;), type=Int)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (1, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">1] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">1ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@test_throws CSV.Error CSV.File(IOBuffer(&#34;x\nabc\n&#34;), type=Int, strict=true)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-289,25 +289,25</span> ============================================================
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\ntrue\n\n&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] === true
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Union{Date, Missing}
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n2019-01-01\n\n&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] === Date(2019, 1, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># use_mmap=false
+<span style="color:inherit;"> |</span>f = @test_deprecated CSV.File(IOBuffer(&#34;x\n2019-01-01\n\n&#34;), ignoreemptylines=false, use_mmap=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] === Date(2019, 1, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># types is Dict{String, Type}
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;x\n2019-01-01\n\n&#34;), types=Dict(&#34;x&#34;=>Date), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>@test (length(f), length(f.names)) == (2, 1)
+<span style="color:inherit;"> |</span>@test f.x[1] === Date(2019, 1, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">2] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">2ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># various CSV.File/CSV.Row properties
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;int,float,date,datetime,bool,null,str,catg,int_float\n1,3.14,2019-01-01,2019-01-01T01:02:03,true,,hey,abc,2\n2,NaN,2019-01-02,2019-01-03T01:02:03,false,,there,abc,3.14\n&#34;), pool=0.3)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-324,7 +324,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test row.date == Date(2019, 1, 1)
+<span style="color:inherit;"> |</span>@test row.datetime == DateTime(2019, 1, 1, 1, 2, 3)
+<span style="color:inherit;"> |</span>@test row.bool === true
+<span style="color:red;">-|</span></span><span style="color:gray;">@test row.</span><span style="color:red;">null === missing</span></span>
+<span style="color:green;">+|</span></span>@test row.<span style="color:green;">nulismissing(l)</span></span>
+<span style="color:inherit;"> |</span>@test row.str == &#34;hey&#34;
+<span style="color:inherit;"> |</span>@test row.catg == &#34;abc&#34;
+<span style="color:inherit;"> |</span>@test typeof(row.catg) == String
+<span style="color:inherit;">@|</span><span style="color:inherit;">-472,7 +472,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test row.time == Dates.Time(12)
+<span style="color:inherit;"> |</span>@test row.bool
+<span style="color:inherit;"> |</span>@test row.lazy == &#34;hey&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">@test row.lazy_</span><span style="color:red;">missing === missing</span></span>
+<span style="color:green;">+|</span></span>@test row.lazy_<span style="color:green;">missinismissing(g)</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@test CSV.File(IOBuffer(&#34;col1\n1&#34;)).col1 == [1]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-516,8 +516,8</span> ============================================================
+<span style="color:inherit;"> |</span>                                       a,b
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                                       &#34;&#34;&#34;), ignoreemptylines=false)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.x[</span><span style="color:red;">end] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.x[<span style="color:green;">endismissing(])</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test f.y[</span><span style="color:red;">end] === missing</span></span>
+<span style="color:green;">+|</span></span>@test f.y[<span style="color:green;">endismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># 679
+<span style="color:inherit;"> |</span>f = CSV.File(IOBuffer(&#34;a,b,c\n1,2,3\n4,5,6\n&#34;); select=[&#34;a&#34;], types=Dict(2=>Int8))
+<span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-39,7 +39,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#96;CSV.read&#96; supports all the same keyword arguments as [&#96;CSV.File&#96;](@ref).
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function read(source, sink=nothing; copycols::Bool=false, kwargs...)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">sink === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(sink)</span></span>
-<span style="color:inherit;"> |</span>        throw(ArgumentError(&#34;provide a valid sink argument, like &#96;using DataFrames; CSV.read(source, DataFrame)&#96;&#34;))
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    Tables.CopiedColumns(CSV.File(source; kwargs...)) |> sink
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nb\nc\n\nc&#34;), pool=true, ignoreemptylines=false)
+<span style="color:inherit;"> |</span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,Array{UInt32,1}}
+<span style="color:inherit;"> |</span>    @test (length(f), length(f.names)) == (4, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test f.X[</span><span style="color:red;">3] === missing</span></span>
+<span style="color:green;">+|</span></span>    @test f.X[<span style="color:green;">3ismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    f = CSV.File(IOBuffer(&#34;X\nc\nc\n\nc\nc\nc\nc\nc\nc&#34;), ignoreemptylines=false)
+<span style="color:inherit;"> |</span>    @test typeof(f.X) == PooledArray{Union{Missing, String},UInt32,1,Array{UInt32,1}}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-77,7 +77,7</span> ============================================================
+<span style="color:inherit;"> |</span>    push!(poslens, CSV.poslen(Parsers.SENTINEL, Int64(0), Int64(0)))
+<span style="color:inherit;"> |</span>    x = CSV.LazyStringVector{Union{Missing, String}}(buffer, e, poslens)
+<span style="color:inherit;"> |</span>    @test isequal(x, [&#34;hey&#34;, &#34;there&#34;, &#34;sailor&#34;, &#34;esc\&#34;aped&#34;, missing])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test x[</span><span style="color:red;">end] === missing</span></span>
+<span style="color:green;">+|</span></span>    @test x[<span style="color:green;">endismissing(])</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/testfiles.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/testfiles.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.types) == actual_sch.types
-<span style="color:inherit;"> |</span>    @test Tuple(expected_sch.names) == actual_sch.names
-<span style="color:inherit;"> |</span>    @test (length(t) == 0 ? 0 : length(t[1]), length(t)) == expected_sz
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">testfunc === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(testfunc)</span></span>
-<span style="color:inherit;"> |</span>    elseif testfunc isa Function
-<span style="color:inherit;"> |</span>        testfunc(t)
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-117,7 +117,7</span> ============================================================
-<span style="color:inherit;"> |</span>    falses = falsestrings === nothing ? nothing : falsestrings
-<span style="color:inherit;"> |</span>    sentinel = ((isempty(missingstrings) && missingstring == &#34;&#34;) || (length(missingstrings) == 1 && missingstrings[1] == &#34;&#34;)) ? missing : isempty(missingstrings) ? [missingstring] : missingstrings
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">delim === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">isnothing(delim)</span></span>
-<span style="color:inherit;"> |</span>        del = isa(source, AbstractString) && endswith(source, &#34;.tsv&#34;) ? UInt8('\t') :
-<span style="color:inherit;"> |</span>            isa(source, AbstractString) && endswith(source, &#34;.wsv&#34;) ? UInt8(' ') :
-<span style="color:inherit;"> |</span>            UInt8('</div>
-</pre> <h3 id=avoid_var_nothing__2 ><a href="#avoid_var_nothing__2">Avoid var &#61;&#61;&#61; nothing</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/write.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-150,7 +150,7</span> ============================================================
-<span style="color:inherit;"> |</span>    partition::Bool=false,
-<span style="color:inherit;"> |</span>    kwargs...)
-<span style="color:inherit;"> |</span>    checkvaliddelim(delim)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">writeheader !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(writeheader)</span></span>
-<span style="color:inherit;"> |</span>        Base.depwarn(&#34;&#96;writeheader=$writeheader&#96; is deprecated in favor of &#96;header=$writeheader&#96;&#34;, :write)
-<span style="color:inherit;"> |</span>        header = writeheader
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">------ </span><span style="color:inherit;">src/file.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/file.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-231,10 +231,10</span> ============================================================
-<span style="color:inherit;"> |</span>    debug::Bool=false,
-<span style="color:inherit;"> |</span>    )
-<span style="color:inherit;"> |</span>    rowsguess, ncols, buf, len, datapos, datarow, options, coloptions, positions, types, flags, pool, customtypes = h.rowsguess, h.cols, h.buf, h.len, h.datapos, h.datarow, h.options, h.coloptions, h.positions, h.types, h.flags, h.pool, h.customtypes
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">startingbyteposition !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(startingbyteposition)</span></span>
-<span style="color:inherit;"> |</span>        datapos = startingbyteposition
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">endingbyteposition !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(endingbyteposition)</span></span>
-<span style="color:inherit;"> |</span>        len = endingbyteposition
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    transpose = gettranspose(h)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-265,7 +265,7</span> ============================================================
-<span style="color:inherit;"> |</span>        # we add some cushion so we hopefully get the limit row correctly w/o shooting past too far and needing to resize! down
-<span style="color:inherit;"> |</span>        # but we also don't guarantee limit will be exact w/ multithreaded parsing
-<span style="color:inherit;"> |</span>        origrowsguess = rowsguess
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">limit !== nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(limit)</span></span>
-<span style="color:inherit;"> |</span>            limitposguess = ceil(Int64, (limit / (origrowsguess * 0.8)) * len)
-<span style="color:inherit;"> |</span>            newlen = [0, limitposguess, min(limitposguess * 2, len)]
-<span style="color:inherit;"> |</span>            findrowstarts!(buf, len, options, newlen, ncols, types, flags, lines_to_check)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
-<span style="color:inherit;"> |</span>        # multithreaded
-<span style="color:inherit;"> |</span>        finalrows, columns = multithreadparse(types, flags, buf, options, coloptions, rowsguess, datarow - 1, pool, refs, ncols, typemap, customtypes, limit, tasks, ranges, maxwarnings, debug)
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">limit !== nothing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">!isnothing(limit)</span></span>
-<span style="color:inherit;"> |</span>            rowsguess = limit
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        columns = allocate(rowsguess, ncols, types, flags, refs)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-403,7 +403,7</span> ============================================================
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        x = ChainedVector([convert(vectype(T), parent(pertaskcolumns[i][col])) for i = 1:N])
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">limit !== nothing</span><span style="color:gray;"> && limit < length(x)</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(limit)</span> && limit < length(x)</span>
-<span style="color:inherit;"> |</span>        resize!(x, limit)
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    return x
-<span style="color:red;">------ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/header.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-92,10 +92,10</span> ============================================================
-<span style="color:inherit;"> |</span>    (types !== nothing && any(x->!isconcretetype(x) && !(x isa Union), types isa AbstractDict ? values(types) : types)) && throw(ArgumentError(&#34;Non-concrete types passed in &#96;types&#96; keyword argument, please provide concrete types for columns: $types&#34;))
-<span style="color:inherit;"> |</span>    checkvaliddelim(delim)
-<span style="color:inherit;"> |</span>    ignorerepeated && delim === nothing && throw(ArgumentError(&#34;auto-delimiter detection not supported when &#96;ignorerepeated=true&#96;; please provide delimiter like &#96;delim=','&#96;&#34;))
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:gray;">use_mmap</span><span style="color:red;"> !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(</span>use_mmap<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>        Base.depwarn(&#34;&#96;use_mmap&#96; keyword argument is deprecated and will be removed in the next release&#34;, :Header)
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">skipto !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(skipto)</span></span>
-<span style="color:inherit;"> |</span>        if datarow != -1
-<span style="color:inherit;"> |</span>            @warn &#34;both &#96;skipto&#96; and &#96;datarow&#96; arguments provided, using &#96;skipto&#96;&#34;
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;">@|</span><span style="color:inherit;">-226,9 +226,9</span> ============================================================
-<span style="color:inherit;"> |</span>    customtypes = Tuple{(nonstandardtype(T) for T in vcat(types, values(typemap)...) if nonstandardtype(T) !== Union{})...}
-<span style="color:inherit;"> |</span>    # figure out if we'll drop any columns while parsing
-<span style="color:inherit;"> |</span>    todrop = Int[]
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">select !== nothing</span><span style="color:gray;"> && drop !== nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!isnothing(select)</span> && drop !== nothing</span>
-<span style="color:inherit;"> |</span>        error(&#34;&#96;select&#96; and &#96;drop&#96; keywords were both provided; only one or the other is allowed&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">    elseif </span><span style="color:red;">select !== nothing</span></span>
-<span style="color:green;">+|</span></span>    elseif <span style="color:green;">!isnothing(select)</span></span>
-<span style="color:inherit;"> |</span>        if select isa AbstractVector{Int}
-<span style="color:inherit;"> |</span>            for i = 1:ncols
-<span style="color:inherit;"> |</span>                i in select || push!(todrop, i)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-249,7 +249,7</span> ============================================================
-<span style="color:inherit;"> |</span>        else
-<span style="color:inherit;"> |</span>            error(&#34;&#96;select&#96; keyword argument must be an &#96;AbstractVector&#96; of &#96;Int&#96;, &#96;Symbol&#96;, &#96;String&#96;, or &#96;Bool&#96;, or a selector function of the form &#96;(i, name) -> keep::Bool&#96;&#34;)
-<span style="color:inherit;"> |</span>        end
-<span style="color:red;">-|</span></span><span style="color:gray;">    elseif </span><span style="color:red;">drop !== nothing</span></span>
-<span style="color:green;">+|</span></span>    elseif <span style="color:green;">!isnothing(drop)</span></span>
-<span style="color:inherit;"> |</span>        if drop isa AbstractVector{Int}
-<span style="color:inherit;"> |</span>            for i = 1:ncols
-<span style="color:inherit;"> |</span>                i in drop && push!(todrop</div>
-</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-317,7 +317,7</span> ============================================================
+<span style="color:inherit;"> |</span>    (&#34;latest (1).csv&#34;, (header=0, missingstring=&#34;\\N&#34;, pool=true),
+<span style="color:inherit;"> |</span>        (1000, 25),
+<span style="color:inherit;"> |</span>        NamedTuple{(:Column1, :Column2, :Column3, :Column4, :Column5, :Column6, :Column7, :Column8, :Column9, :Column10, :Column11, :Column12, :Column13, :Column14, :Column15, :Column16, :Column17, :Column18, :Column19, :Column20, :Column21, :Column22, :Column23, :Column24, :Column25),Tuple{String,String,Int64,Int64,String,Int64,String,Int64,Date,Date,Int64,String,Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Int64},Union{Missing, Float64},Float64,Union{Missing, Float64},Union{Missing, Float64},Union{Missing, Int64},Float64,Union{Missing, Float64},Union{Missing, Float64}}},
+<span style="color:red;">-|</span></span><span style="color:gray;">        t -> @test(t.Column17[end-</span><span style="color:red;">2] === missing</span><span style="color:gray;">)</span></span>
+<span style="color:green;">+|</span></span>        t -> @test(t.Column17[end-<span style="color:green;">2ismissing(])</span>)</span>
+<span style="color:inherit;"> |</span>    ),
+<span style="color:inherit;"> |</span>    # #217
+<span style="color:inherit;"> |</span>    (IOBuffer(&#34;aa,bb\n1,\&#34;1,b,c\&#34;\n&#34;), (pool=fals</div>
+</pre> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-25,24 +25,24</span> ============================================================
@@ -251,4 +262,4 @@
 <span style="color:inherit;"> |</span>    isdefined(CSV, Symbol(&#34;#34#39&#34;)) && Base.precompile(Tuple{getfield(CSV, Symbol(&#34;#34#39&#34;))})
 <span style="color:inherit;"> |</span>    isdefined(CSV, Symbol(&#34;#36#41&#34;)) && Base.precompile(Tuple{getfield(CSV, Symbol(&#34;#36#41&#34;))})
 <span style="color:inherit;"> |</span</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 17, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

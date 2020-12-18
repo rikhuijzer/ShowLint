@@ -1,6 +1,6 @@
 
 ~~~ 
-<h3 id="1">1: Test: Add comment in Project.toml</h3>
+<h3 id="1">1: Prefix project name with Test.</h3>
 ~~~
 tags: *test, julia*
 
@@ -15,35 +15,23 @@ name = "Test:[name]"'''
 
 
 ~~~ 
-<h3 id="2">2: Avoid var === nothing</h3>
+<h3 id="2">2: Use ismissing instead of === and !==</h3>
 ~~~
 tags: *julia*
 
 Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.
 ~~~
-<pre><code class="plaintext">match='if :[var] === nothing' 
+<pre><code class="plaintext">match=':[var~[^;]] :[neg~[=|!]]== missing' 
 
-rewrite='if isnothing(:[var])'
+rule='where rewrite :[neg] { "=" -> "" }'
+
+rewrite=':[neg]ismissing(:[var])'
 </code></pre>
 ~~~
 
 
 ~~~ 
-<h3 id="3">3: Avoid var !== nothing</h3>
-~~~
-tags: *julia*
-
-See [pattern 2](#2).
-~~~
-<pre><code class="plaintext">match='if :[var] !== nothing'
-
-rewrite='if !isnothing(:[var])'
-</code></pre>
-~~~
-
-
-~~~ 
-<h3 id="4">4: Replace Array{T,1} with Vector{T}</h3>
+<h3 id="3">3: Replace Array{T,1} with Vector{T}</h3>
 ~~~
 tags: *julia*
 

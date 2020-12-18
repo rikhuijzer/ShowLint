@@ -1,78 +1,78 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>GiovineItalia/Gadfly.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=giovineitaliagadflyjl ><a href="#giovineitaliagadflyjl">GiovineItalia/Gadfly.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a><li><a href="#use_ismissing">Use ismissing</a><li><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/color_misc.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/color_misc.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
-<span style="color:inherit;"> |</span>Return the mean of Lab colors &#96;cs&#96; as weighted by &#96;ws&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function weighted_color_mean(
-<span style="color:red;">-|</span></span><span style="color:gray;">        cs::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{Lab{T}</span><span style="color:red;">,1</span><span style="color:gray;">}, ws::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {S <: Number,T}</span></span>
-<span style="color:green;">+|</span></span>        cs::<span style="color:green;">AbstractVector</span>{Lab{T}}, ws::<span style="color:green;">AbstractVector</span>{S}) where {S <: Number,T}</span>
-<span style="color:inherit;"> |</span>    l = 0.0
-<span style="color:inherit;"> |</span>    a = 0.0
-<span style="color:inherit;"> |</span>    b = 0.0
-<span style="color:red;">------ </span><span style="color:inherit;">src/aesthetics.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/aesthetics.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return ab
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function cat_aes_var!(xs::</span><span style="color:red;">IndirectArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, ys::</span><span style="color:red;">IndirectArray</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T, S}</span></span>
-<span style="color:green;">+|</span></span>function cat_aes_var!(xs::<span style="color:green;">IndirectVector</span>{T}, ys::<span style="color:green;">IndirectVector</span>{S}) where {T, S}</span>
-<span style="color:inherit;"> |</span>    TS = promote_type(T, S)
-<span style="color:inherit;"> |</span>    return append!(IndirectArray(xs.index, convert(Array{TS},xs.values)),
-<span style="color:inherit;"> |</span>                   IndirectArray(ys.index, convert(Array{TS},ys.value</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/color_misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/color_misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
+<span style="color:inherit;"> |</span>Return the mean of Lab colors &#96;cs&#96; as weighted by &#96;ws&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function weighted_color_mean(
+<span style="color:red;">-|</span></span><span style="color:gray;">        cs::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{Lab{T}</span><span style="color:red;">,1</span><span style="color:gray;">}, ws::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {S <: Number,T}</span></span>
+<span style="color:green;">+|</span></span>        cs::<span style="color:green;">AbstractVector</span>{Lab{T}}, ws::<span style="color:green;">AbstractVector</span>{S}) where {S <: Number,T}</span>
+<span style="color:inherit;"> |</span>    l = 0.0
+<span style="color:inherit;"> |</span>    a = 0.0
+<span style="color:inherit;"> |</span>    b = 0.0
+<span style="color:red;">------ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return ab
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function cat_aes_var!(xs::</span><span style="color:red;">IndirectArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, ys::</span><span style="color:red;">IndirectArray</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T, S}</span></span>
+<span style="color:green;">+|</span></span>function cat_aes_var!(xs::<span style="color:green;">IndirectVector</span>{T}, ys::<span style="color:green;">IndirectVector</span>{S}) where {T, S}</span>
+<span style="color:inherit;"> |</span>    TS = promote_type(T, S)
+<span style="color:inherit;"> |</span>    return append!(IndirectArray(xs.index, convert(Array{TS},xs.values)),
+<span style="color:inherit;"> |</span>                   IndirectArray(ys.index, convert(Array{TS},ys.value</div>
 </pre> <h3 id=use_ismissing ><a href="#use_ismissing">Use ismissing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/coord.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/coord.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-138,15 +138,15</span> ============================================================
-<span style="color:inherit;"> |</span>    pad_categorical_x = missing
-<span style="color:inherit;"> |</span>    pad_categorical_y = missing
-<span style="color:inherit;"> |</span>    for aes in aess
-<span style="color:red;">-|</span></span><span style="color:gray;">        if aes.</span><span style="color:gray;">pad_categorical_x</span><span style="color:red;"> !== missing</span></span>
-<span style="color:green;">+|</span></span>        if aes.<span style="color:green;">!ismissing(</span>pad_categorical_x<span style="color:green;">)</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">pad_categorical_x</span><span style="color:red;"> === missing</span></span>
-<span style="color:green;">+|</span></span>            if <span style="color:green;">ismissing(</span>pad_categorical_x<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>                pad_categorical_x = aes.pad_categorical_x
-<span style="color:inherit;"> |</span>            else
-<span style="color:inherit;"> |</span>                pad_categorical_x = pad_categorical_x || aes.pad_categorical_x
-<span style="color:inherit;"> |</span>            end
-<span style="color:inherit;"> |</span>        end
-<span style="color:red;">-|</span></span><span style="color:gray;">        if aes.</span><span style="color:gray;">pad_categorical_y</span><span style="color:red;"> !== missing</span></span>
-<span style="color:green;">+|</span></span>        if aes.<span style="color:green;">!ismissing(</span>pad_categorical_y<span style="color:green;">)</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">pad_categorical_y</span><span style="color:red;"> === missing</span></span>
-<span style="color:green;">+|</span></span>            if <span style="color:green;">ismissing(</span>pad_categorical_y<span style="color:green;">)</span></span>
-<span style="color:inherit;"> |</span>                pad_categorical_y = aes.pad_categorical_y
-<span style="color:inherit;"> |</span>            else
-<span style="color:inherit;"> |</span>                pad_categorical_y = pad_categorical_y || aes.pad_categorical_y
-<span style="color:red;">------ </span><span style="color:inherit;">src/aesthetics.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/aesthetics.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-422,7 +422,7</span> ============================================================
-<span style="color:inherit;"> |</span>        bval = getfield(b, field)
-<span style="color:inherit;"> |</span>        if field in clobber_set
-<span style="color:inherit;"> |</span>            setfield!(a, field, bval)
-<span style="color:red;">-|</span></span><span style="color:gray;">        elseif </span><span style="color:red;">aval === missing</span><span style="color:gray;"> || aval === nothing || aval === string || aval == showoff</span></span>
-<span style="color:green;">+|</span></span>        elseif <span style="color:green;">ismissing(aval)</span> || aval === nothing || aval === string || aval == showoff</span>
-<span style="color:inherit;"> |</span>            setfield!(a, field, bval)
-<span style="color:inherit;"> |</span>        elseif field == :xviewmin || field == :yviewmin
-<span style="color:inherit;"> |</span>            bval != nothing && (aval == nothing || aval > bval) && setfield!(a, field, b</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/coord.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/coord.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-138,15 +138,15</span> ============================================================
+<span style="color:inherit;"> |</span>    pad_categorical_x = missing
+<span style="color:inherit;"> |</span>    pad_categorical_y = missing
+<span style="color:inherit;"> |</span>    for aes in aess
+<span style="color:red;">-|</span></span><span style="color:gray;">        if aes.</span><span style="color:gray;">pad_categorical_x</span><span style="color:red;"> !== missing</span></span>
+<span style="color:green;">+|</span></span>        if aes.<span style="color:green;">!ismissing(</span>pad_categorical_x<span style="color:green;">)</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">pad_categorical_x</span><span style="color:red;"> === missing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">ismissing(</span>pad_categorical_x<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                pad_categorical_x = aes.pad_categorical_x
+<span style="color:inherit;"> |</span>            else
+<span style="color:inherit;"> |</span>                pad_categorical_x = pad_categorical_x || aes.pad_categorical_x
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        if aes.</span><span style="color:gray;">pad_categorical_y</span><span style="color:red;"> !== missing</span></span>
+<span style="color:green;">+|</span></span>        if aes.<span style="color:green;">!ismissing(</span>pad_categorical_y<span style="color:green;">)</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">pad_categorical_y</span><span style="color:red;"> === missing</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">ismissing(</span>pad_categorical_y<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>                pad_categorical_y = aes.pad_categorical_y
+<span style="color:inherit;"> |</span>            else
+<span style="color:inherit;"> |</span>                pad_categorical_y = pad_categorical_y || aes.pad_categorical_y
+<span style="color:red;">------ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/aesthetics.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-422,7 +422,7</span> ============================================================
+<span style="color:inherit;"> |</span>        bval = getfield(b, field)
+<span style="color:inherit;"> |</span>        if field in clobber_set
+<span style="color:inherit;"> |</span>            setfield!(a, field, bval)
+<span style="color:red;">-|</span></span><span style="color:gray;">        elseif </span><span style="color:red;">aval === missing</span><span style="color:gray;"> || aval === nothing || aval === string || aval == showoff</span></span>
+<span style="color:green;">+|</span></span>        elseif <span style="color:green;">ismissing(aval)</span> || aval === nothing || aval === string || aval == showoff</span>
+<span style="color:inherit;"> |</span>            setfield!(a, field, bval)
+<span style="color:inherit;"> |</span>        elseif field == :xviewmin || field == :yviewmin
+<span style="color:inherit;"> |</span>            bval != nothing && (aval == nothing || aval > bval) && setfield!(a, field, b</div>
 </pre> <h3 id=avoid_x_-_fx ><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/misc.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/misc.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-191,7 +191,7</span> ============================================================
-<span style="color:inherit;"> |</span>isnothing(u) = u === nothing
-<span style="color:inherit;"> |</span>issomething(u) = !isnothing(u)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">negate(f) = </span><span style="color:red;">x -> !f(x)</span></span>
-<span style="color:green;">+|</span></span>negate(f) = <span style="color:green;">!f</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function has(xs::AbstractArray{T,N}, y::T) where {T,N}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-338,6 +338,6</span> ============================================================
-<span style="color:inherit;"> |</span>    return IndirectArray(index, convert(Vector{T},levels))
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>function discretize_make_ia(values::CategoricalArray{T}, levels::CategoricalVector{T}) where T
-<span style="color:red;">-|</span></span><span style="color:gray;">    _levels = map!(</span><span style="color:red;">t -> ismissing(t)</span><span style="color:gray;"> ? t : get(t), Vector{T}(undef, length(levels)), levels)</span></span>
-<span style="color:green;">+|</span></span>    _levels = map!(<span style="color:green;">ismissing</span> ? t : get(t), Vector{T}(undef, length(levels)), levels)</span>
-<span style="color:inherit;"> |</span>    discretize_make_ia(values, _levels)
-<span style="color:inherit;"> |</span</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-191,7 +191,7</span> ============================================================
+<span style="color:inherit;"> |</span>isnothing(u) = u === nothing
+<span style="color:inherit;"> |</span>issomething(u) = !isnothing(u)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">negate(f) = </span><span style="color:red;">x -> !f(x)</span></span>
+<span style="color:green;">+|</span></span>negate(f) = <span style="color:green;">!f</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function has(xs::AbstractArray{T,N}, y::T) where {T,N}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-338,6 +338,6</span> ============================================================
+<span style="color:inherit;"> |</span>    return IndirectArray(index, convert(Vector{T},levels))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>function discretize_make_ia(values::CategoricalArray{T}, levels::CategoricalVector{T}) where T
+<span style="color:red;">-|</span></span><span style="color:gray;">    _levels = map!(</span><span style="color:red;">t -> ismissing(t)</span><span style="color:gray;"> ? t : get(t), Vector{T}(undef, length(levels)), levels)</span></span>
+<span style="color:green;">+|</span></span>    _levels = map!(<span style="color:green;">ismissing</span> ? t : get(t), Vector{T}(undef, length(levels)), levels)</span>
+<span style="color:inherit;"> |</span>    discretize_make_ia(values, _levels)
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

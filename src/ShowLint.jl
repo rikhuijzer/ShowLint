@@ -38,6 +38,7 @@ function ansi2html(text)
   text = replace(text, no_color => "</span>")
   text = replace(text, r"WARNING: [^\n]*$" => "")
   text = replace(text, "/repo/" => "")
+  text = replace(text, "" => "") 
   text = text[1:end-6]
   text = strip(text)
   return length(text) < 6 ? 
@@ -194,7 +195,7 @@ function repo_page(repo::Repo)::String
 end
 
 """
-    create_repo_pages()
+    create_repo_pages(; debug=false)
 
 Create one webpage per repository.
 This step should happen before `serve()` is called.

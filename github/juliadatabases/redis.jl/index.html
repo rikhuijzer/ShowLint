@@ -1,22 +1,22 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDatabases/Redis.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatabasesredisjl ><a href="#juliadatabasesredisjl">JuliaDatabases/Redis.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/client.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/client.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-68,7 +68,7</span> ============================================================
-<span style="color:inherit;"> |</span>    r
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function convert_response(::Type{Tuple{Integer,</span><span style="color:red;">Array</span><span style="color:gray;">{AbstractString</span><span style="color:red;">,1</span><span style="color:gray;">}}}, response)</span></span>
-<span style="color:green;">+|</span></span>function convert_response(::Type{Tuple{Integer,<span style="color:green;">Vector</span>{AbstractString}}}, response)</span>
-<span style="color:inherit;"> |</span>    cursor = parse(Int, response[1])
-<span style="color:inherit;"> |</span>    r = Array{AbstractString, 1}()
-<span style="color:inherit;"> |</span>    for item in response[2]
-<span style="color:inherit;">@|</span><span style="color:inherit;">-77,7 +77,7</span> ============================================================
-<span style="color:inherit;"> |</span>    (cursor, r)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function convert_response(::Type{Tuple{Integer,Dict{AbstractString,AbstractString}}}, response::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>function convert_response(::Type{Tuple{Integer,Dict{AbstractString,AbstractString}}}, response::<span style="color:green;">Vector</span>{Any})</span>
-<span style="color:inherit;"> |</span>    cursor = parse(Int, response[1])
-<span style="color:inherit;"> |</span>    return (cursor, convert_response(Dict{AbstractString, AbstractString}, response[2]))
-<span style="color:inherit;"> |</span</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/client.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/client.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-68,7 +68,7</span> ============================================================
+<span style="color:inherit;"> |</span>    r
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function convert_response(::Type{Tuple{Integer,</span><span style="color:red;">Array</span><span style="color:gray;">{AbstractString</span><span style="color:red;">,1</span><span style="color:gray;">}}}, response)</span></span>
+<span style="color:green;">+|</span></span>function convert_response(::Type{Tuple{Integer,<span style="color:green;">Vector</span>{AbstractString}}}, response)</span>
+<span style="color:inherit;"> |</span>    cursor = parse(Int, response[1])
+<span style="color:inherit;"> |</span>    r = Array{AbstractString, 1}()
+<span style="color:inherit;"> |</span>    for item in response[2]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-77,7 +77,7</span> ============================================================
+<span style="color:inherit;"> |</span>    (cursor, r)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function convert_response(::Type{Tuple{Integer,Dict{AbstractString,AbstractString}}}, response::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function convert_response(::Type{Tuple{Integer,Dict{AbstractString,AbstractString}}}, response::<span style="color:green;">Vector</span>{Any})</span>
+<span style="color:inherit;"> |</span>    cursor = parse(Int, response[1])
+<span style="color:inherit;"> |</span>    return (cursor, convert_response(Dict{AbstractString, AbstractString}, response[2]))
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

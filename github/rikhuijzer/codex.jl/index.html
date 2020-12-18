@@ -1,130 +1,130 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>rikhuijzer/Codex.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=rikhuijzercodexjl ><a href="#rikhuijzercodexjl">rikhuijzer/Codex.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a><li><a href="#use_ismissing">Use ismissing</a><li><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/df-transformations.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/df-transformations.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
-<span style="color:inherit;"> |</span>Let &#96;o&#96; be an &#96;ordering::Ordering&#96;.
-<span style="color:inherit;"> |</span>Enforces that the columns &#96;o.col&#96; of &#96;df&#96; are ordered according to &#96;o.newlevels&#96; if &#96;o.newlevels&#96; is not &#96;missing&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function order_with(df::DataFrame, orderings::</span><span style="color:red;">Array</span><span style="color:gray;">{Ordering</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
-<span style="color:green;">+|</span></span>function order_with(df::DataFrame, orderings::<span style="color:green;">Vector</span>{Ordering})::DataFrame</span>
-<span style="color:inherit;"> |</span>    df = DataFrame(df)
-<span style="color:inherit;"> |</span>    for o in orderings
-<span style="color:inherit;"> |</span>        if o.newlevels != nothing
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
-<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
-<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
-<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
-<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-15,19 +15,19</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>n_equal(a::Array, b::Array)::Number = count(map(t -> t[1] == t[2], zip(a, b)))
-<span style="color:inherit;"> |</span>n_equal(a::Array, b::String)::Number = n_equal(a, map(i -> b, 1:length(a)))
-<span style="color:red;">-|</span></span><span style="color:gray;">n_weetniet(preds::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">})::Int64 = length(filter(v -> v == &#34;Weet ik niet&#34;, preds))</span></span>
-<span style="color:green;">+|</span></span>n_weetniet(preds::<span style="color:green;">Vector</span>{Int64})::Int64 = length(filter(v -> v == &#34;Weet ik niet&#34;, preds))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">get_answers(i::Number, df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">} = df[i, :][3:end]</span></span>
-<span style="color:green;">+|</span></span>get_answers(i::Number, df::DataFrame)::<span style="color:green;">Vector</span>{Any} = df[i, :][3:end]</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">get_numbers(i::Number, df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">} = map(str2int, get_answers(i, df))</span></span>
-<span style="color:green;">+|</span></span>get_numbers(i::Number, df::DataFrame)::<span style="color:green;">Vector</span>{Int64} = map(str2int, get_answers(i, df))</span>
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function n_correct(df::DataFrame, solutions::Array)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>function n_correct(df::DataFrame, solutions::Array)::<span style="color:green;">Vector</span>{Int64}</span>
-<span style="color:inherit;"> |</span>	map(i -> n_equal(get_numbers(i, df), solutions), 1:nrow(df))
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function n_incorrect(df::DataFrame, solutions::Array)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>function n_incorrect(df::DataFrame, solutions::Array)::<span style="color:green;">Vector</span>{Int64}</span>
-<span style="color:inherit;"> |</span>	map(n -> length(solutions) - n, n_correct(df, solutions))
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function n_weetniet(df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>function n_weetniet(df::DataFrame)::<span style="color:green;">Vector</span>{Int64}</span>
-<span style="color:inherit;"> |</span>	map(i -> n_equal(get_answers(i, df), &#34;Weet ik niet&#34;), 1:nrow(df))
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-8,8 +8,8</span> ============================================================
-<span style="color:inherit;"> |</span>using Query
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>struct Items
-<span style="color:red;">-|</span></span><span style="color:gray;">    normal::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    normal::<span style="color:green;">Vector</span>{Int}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    reversed::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    reversed::<span style="color:green;">Vector</span>{Int}</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>reverse(x::Int) = 6 - x
-<span style="color:inherit;">@|</span><span style="color:inherit;">-205,7 +205,7</span> ============================================================
-<span style="color:inherit;"> |</span>Joines multiple &#96;questionnaires&#96; for the members of &#96;groups&#96;, where &#96;groups&#96; ensures that the joins do not remove rows which shouldn't be removed.
-<span style="color:inherit;"> |</span>For instance, given questionnaires &#96;&#34;A&#34;&#96; and &#96;&#34;B&#34;&#96; containing respectively columns &#96;:a1&#96;, &#96;:a2&#96; and &#96;:b1&#96;, this method will return &#96;{ group, id, A_a1, A_a2, B_b1 }&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function join_questionnaires(raw_dir::String, questionnaires::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}, groups::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
-<span style="color:green;">+|</span></span>function join_questionnaires(raw_dir::String, questionnaires::<span style="color:green;">Vector</span>{String}, groups::<span style="color:green;">Vector</span>{String})::DataFrame</span>
-<span style="color:inherit;"> |</span>    function prepare_responses(q::String)::DataFrame
-<span style="color:inherit;"> |</span>        df = first_measurement(raw_dir, q)
-<span style="color:inherit;"> |</span>        filter!(:group => x -> x in groups,</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/df-transformations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/df-transformations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
+<span style="color:inherit;"> |</span>Let &#96;o&#96; be an &#96;ordering::Ordering&#96;.
+<span style="color:inherit;"> |</span>Enforces that the columns &#96;o.col&#96; of &#96;df&#96; are ordered according to &#96;o.newlevels&#96; if &#96;o.newlevels&#96; is not &#96;missing&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function order_with(df::DataFrame, orderings::</span><span style="color:red;">Array</span><span style="color:gray;">{Ordering</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
+<span style="color:green;">+|</span></span>function order_with(df::DataFrame, orderings::<span style="color:green;">Vector</span>{Ordering})::DataFrame</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(df)
+<span style="color:inherit;"> |</span>    for o in orderings
+<span style="color:inherit;"> |</span>        if o.newlevels != nothing
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
+<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
+<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
+<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
+<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,19 +15,19</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>n_equal(a::Array, b::Array)::Number = count(map(t -> t[1] == t[2], zip(a, b)))
+<span style="color:inherit;"> |</span>n_equal(a::Array, b::String)::Number = n_equal(a, map(i -> b, 1:length(a)))
+<span style="color:red;">-|</span></span><span style="color:gray;">n_weetniet(preds::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">})::Int64 = length(filter(v -> v == &#34;Weet ik niet&#34;, preds))</span></span>
+<span style="color:green;">+|</span></span>n_weetniet(preds::<span style="color:green;">Vector</span>{Int64})::Int64 = length(filter(v -> v == &#34;Weet ik niet&#34;, preds))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">get_answers(i::Number, df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">} = df[i, :][3:end]</span></span>
+<span style="color:green;">+|</span></span>get_answers(i::Number, df::DataFrame)::<span style="color:green;">Vector</span>{Any} = df[i, :][3:end]</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">get_numbers(i::Number, df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">} = map(str2int, get_answers(i, df))</span></span>
+<span style="color:green;">+|</span></span>get_numbers(i::Number, df::DataFrame)::<span style="color:green;">Vector</span>{Int64} = map(str2int, get_answers(i, df))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function n_correct(df::DataFrame, solutions::Array)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function n_correct(df::DataFrame, solutions::Array)::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:inherit;"> |</span>	map(i -> n_equal(get_numbers(i, df), solutions), 1:nrow(df))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function n_incorrect(df::DataFrame, solutions::Array)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function n_incorrect(df::DataFrame, solutions::Array)::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:inherit;"> |</span>	map(n -> length(solutions) - n, n_correct(df, solutions))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function n_weetniet(df::DataFrame)::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function n_weetniet(df::DataFrame)::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:inherit;"> |</span>	map(i -> n_equal(get_answers(i, df), &#34;Weet ik niet&#34;), 1:nrow(df))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,8 +8,8</span> ============================================================
+<span style="color:inherit;"> |</span>using Query
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>struct Items
+<span style="color:red;">-|</span></span><span style="color:gray;">    normal::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    normal::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    reversed::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    reversed::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>reverse(x::Int) = 6 - x
+<span style="color:inherit;">@|</span><span style="color:inherit;">-205,7 +205,7</span> ============================================================
+<span style="color:inherit;"> |</span>Joines multiple &#96;questionnaires&#96; for the members of &#96;groups&#96;, where &#96;groups&#96; ensures that the joins do not remove rows which shouldn't be removed.
+<span style="color:inherit;"> |</span>For instance, given questionnaires &#96;&#34;A&#34;&#96; and &#96;&#34;B&#34;&#96; containing respectively columns &#96;:a1&#96;, &#96;:a2&#96; and &#96;:b1&#96;, this method will return &#96;{ group, id, A_a1, A_a2, B_b1 }&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function join_questionnaires(raw_dir::String, questionnaires::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}, groups::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
+<span style="color:green;">+|</span></span>function join_questionnaires(raw_dir::String, questionnaires::<span style="color:green;">Vector</span>{String}, groups::<span style="color:green;">Vector</span>{String})::DataFrame</span>
+<span style="color:inherit;"> |</span>    function prepare_responses(q::String)::DataFrame
+<span style="color:inherit;"> |</span>        df = first_measurement(raw_dir, q)
+<span style="color:inherit;"> |</span>        filter!(:group => x -> x in groups,</div>
 </pre> <h3 id=use_ismissing ><a href="#use_ismissing">Use ismissing</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">categorical2simple(A) = map(x -> </span><span style="color:red;">x === missing</span><span style="color:gray;"> ? missing : get(x), A)</span></span>
-<span style="color:green;">+|</span></span>categorical2simple(A) = map(x -> <span style="color:green;">ismissing(x)</span> ? missing : get(x), A)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    dirparent(path)::String
-<span style="color:red;">------ </span><span style="color:inherit;">src/TransformExport/transformexport.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/TransformExport/transformexport.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>Apply regex replace on element &#96;e&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">_rm_description(e) = </span><span style="color:red;">e === missing</span><span style="color:gray;"> ? e : parse(Int, replace(e, _description_regex() => s&#34;\1&#34;))</span></span>
-<span style="color:green;">+|</span></span>_rm_description(e) = <span style="color:green;">ismissing(e)</span> ? e : parse(Int, replace(e, _description_regex() => s&#34;\1&#34;))</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    _rm_descriptions(col)::Array{Int,1}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function _contains_description(col)::Bool 
-<span style="color:inherit;"> |</span>    function is_match(value)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">value === missing</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">ismissing(value)</span></span>
-<span style="color:inherit;"> |</span>            false
-<span style="color:inherit;"> |</span>        else  
-<span style="color:inherit;"> |</span>            contains(value, _description_regex</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">categorical2simple(A) = map(x -> </span><span style="color:red;">x === missing</span><span style="color:gray;"> ? missing : get(x), A)</span></span>
+<span style="color:green;">+|</span></span>categorical2simple(A) = map(x -> <span style="color:green;">ismissing(x)</span> ? missing : get(x), A)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    dirparent(path)::String
+<span style="color:red;">------ </span><span style="color:inherit;">src/TransformExport/transformexport.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/TransformExport/transformexport.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Apply regex replace on element &#96;e&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">_rm_description(e) = </span><span style="color:red;">e === missing</span><span style="color:gray;"> ? e : parse(Int, replace(e, _description_regex() => s&#34;\1&#34;))</span></span>
+<span style="color:green;">+|</span></span>_rm_description(e) = <span style="color:green;">ismissing(e)</span> ? e : parse(Int, replace(e, _description_regex() => s&#34;\1&#34;))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    _rm_descriptions(col)::Array{Int,1}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function _contains_description(col)::Bool 
+<span style="color:inherit;"> |</span>    function is_match(value)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">value === missing</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">ismissing(value)</span></span>
+<span style="color:inherit;"> |</span>            false
+<span style="color:inherit;"> |</span>        else  
+<span style="color:inherit;"> |</span>            contains(value, _description_regex</div>
 </pre> <h3 id=avoid_x_-_fx ><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:orange;">!|</span>categorical2simple(A) = map(x <span style="color:red;">-> x </span>=== missing ? missing : get<span style="color:red;">(x)</span>, A)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    dirparent(path)::String
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-131,8 +131,8</span> ============================================================
-<span style="color:inherit;"> |</span>	answers(row::Number, facet::String) = map(question -> answer(lima_digits, row, question), facets[facet])
-<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">	domains = Set(map(</span><span style="color:red;">key -> string(key)</span><span style="color:gray;">[1], collect(keys(facets))))</span></span>
-<span style="color:green;">+|</span></span>	domains = Set(map(<span style="color:green;">string</span>[1], collect(keys(facets))))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::Array{String,1} = filter(</span><span style="color:red;">key -> string(key)</span><span style="color:gray;">[1] == domain, collect(keys(facets)))</span></span>
-<span style="color:green;">+|</span></span>	get_facets(domain::Char)::Array{String,1} = filter(<span style="color:green;">string</span>[1] == domain, collect(keys(facets)))</span>
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
-<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(doma</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:orange;">!|</span>categorical2simple(A) = map(x <span style="color:red;">-> x </span>=== missing ? missing : get<span style="color:red;">(x)</span>, A)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    dirparent(path)::String
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-131,8 +131,8</span> ============================================================
+<span style="color:inherit;"> |</span>	answers(row::Number, facet::String) = map(question -> answer(lima_digits, row, question), facets[facet])
+<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">	domains = Set(map(</span><span style="color:red;">key -> string(key)</span><span style="color:gray;">[1], collect(keys(facets))))</span></span>
+<span style="color:green;">+|</span></span>	domains = Set(map(<span style="color:green;">string</span>[1], collect(keys(facets))))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::Array{String,1} = filter(</span><span style="color:red;">key -> string(key)</span><span style="color:gray;">[1] == domain, collect(keys(facets)))</span></span>
+<span style="color:green;">+|</span></span>	get_facets(domain::Char)::Array{String,1} = filter(<span style="color:green;">string</span>[1] == domain, collect(keys(facets)))</span>
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
+<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(doma</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

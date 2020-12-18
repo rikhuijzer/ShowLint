@@ -1,51 +1,51 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/DataFramesMeta.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatadataframesmetajl ><a href="#juliadatadataframesmetajl">JuliaData/DataFramesMeta.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a><li><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-120,7 +120,7</span> ============================================================
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        t = @combine(gd, [:i, :g])[!, 2]
-<span style="color:inherit;"> |</span>        @test t == [[1, 2, 3], [1, 1, 1], [4, 5], [2, 2]]
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test t isa Vector{SubArray{Int64,1,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}},false}}</span></span>
-<span style="color:green;">+|</span></span>        @test t isa Vector{SubArray{Int64,1,<span style="color:green;">Vector</span>{Int64},Tuple{<span style="color:green;">Vector</span>{Int64}},false}}</span>
-<span style="color:inherit;"> |</span>        @test @combine(gd, All()).function isa Vector{<:All}
-<span style="color:inherit;"> |</span>        @test @combine(gd, Not(:i)).i_function isa Vector{<:InvertedIndex}
-<span style="color:inherit;"> |</span>        @test @combine(gd, Not([:i, :g])).g == [1, 2]
-<span style="color:inherit;">@|</span><span style="color:inherit;">-237,7 +237,7</span> ============================================================
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        t = @by(df, :g, [:i, :g])[!, 2]
-<span style="color:inherit;"> |</span>        @test t == [[1, 2, 3], [1, 1, 1], [4, 5], [2, 2]]
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test t isa Vector{SubArray{Int64,1,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}},false}}</span></span>
-<span style="color:green;">+|</span></span>        @test t isa Vector{SubArray{Int64,1,<span style="color:green;">Vector</span>{Int64},Tuple{<span style="color:green;">Vector</span>{Int64}},false}}</span>
-<span style="color:inherit;"> |</span>        @test @by(df, :g, All()).function isa Vector{<:All}
-<span style="color:inherit;"> |</span>        @test @by(df, :g, Not(:i)).i_function isa Vector{<:InvertedIndex}
-<span style="color:inherit;"> |</span>        @test @by(df, :g, Not([:i, :g])).g == [1</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-120,7 +120,7</span> ============================================================
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        t = @combine(gd, [:i, :g])[!, 2]
+<span style="color:inherit;"> |</span>        @test t == [[1, 2, 3], [1, 1, 1], [4, 5], [2, 2]]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test t isa Vector{SubArray{Int64,1,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}},false}}</span></span>
+<span style="color:green;">+|</span></span>        @test t isa Vector{SubArray{Int64,1,<span style="color:green;">Vector</span>{Int64},Tuple{<span style="color:green;">Vector</span>{Int64}},false}}</span>
+<span style="color:inherit;"> |</span>        @test @combine(gd, All()).function isa Vector{<:All}
+<span style="color:inherit;"> |</span>        @test @combine(gd, Not(:i)).i_function isa Vector{<:InvertedIndex}
+<span style="color:inherit;"> |</span>        @test @combine(gd, Not([:i, :g])).g == [1, 2]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-237,7 +237,7</span> ============================================================
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        t = @by(df, :g, [:i, :g])[!, 2]
+<span style="color:inherit;"> |</span>        @test t == [[1, 2, 3], [1, 1, 1], [4, 5], [2, 2]]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test t isa Vector{SubArray{Int64,1,</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}},false}}</span></span>
+<span style="color:green;">+|</span></span>        @test t isa Vector{SubArray{Int64,1,<span style="color:green;">Vector</span>{Int64},Tuple{<span style="color:green;">Vector</span>{Int64}},false}}</span>
+<span style="color:inherit;"> |</span>        @test @by(df, :g, All()).function isa Vector{<:All}
+<span style="color:inherit;"> |</span>        @test @by(df, :g, Not(:i)).i_function isa Vector{<:InvertedIndex}
+<span style="color:inherit;"> |</span>        @test @by(df, :g, Not([:i, :g])).g == [1</div>
 </pre> <h3 id=avoid_x_-_fx ><a href="#avoid_x_-_fx">Avoid x -&gt; f&#40;x&#41;</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/performance.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/performance.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-43,7 +43,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function DataFrames_timings(df, gd)
-<span style="color:inherit;"> |</span>	df_res = transform(df,
-<span style="color:orange;">!|</span>		:v1 => (t <span style="color:red;">-> t </span>.- mean<span style="color:red;">(t)</span>) => :res1,
-<span style="color:inherit;"> |</span>		:v2 => demean => :res2,
-<span style="color:inherit;"> |</span>		[:v1, :v2] => (+) => :res3,
-<span style="color:inherit;"> |</span>		:id => string => :res4,
-<span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
-<span style="color:inherit;"> |</span>	)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	gd_res = combine(gd,
-<span style="color:red;">-|</span></span><span style="color:gray;">		:v1 => (</span><span style="color:red;">t -> mean(t)</span><span style="color:gray;">) => :res7,</span></span>
-<span style="color:green;">+|</span></span>		:v1 => (<span style="color:green;">mean</span>) => :res7,</span>
-<span style="color:inherit;"> |</span>		:v2 => mean => :res8,
-<span style="color:inherit;"> |</span>		[:v1, :v2] => ((t, s) -> std(t) + std(s)) => :res9,
-<span style="color:inherit;"> |</span>		[:v1, :v2, :v3] => complicated_scalar => :res10,
-<span style="color:inherit;">@|</span><span style="color:inherit;">-91,7 +91,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	gd_res = @combine(gd,
-<span style="color:inherit;"> |</span>		res7 = mean(:v1),
-<span style="color:red;">-|</span></span><span style="color:gray;">		res8 = (</span><span style="color:red;">t -> mean(t)</span><span style="color:gray;">)(:v2),</span></span>
-<span style="color:green;">+|</span></span>		res8 = (<span style="color:green;">mean</span>)(:v2),</span>
-<span style="color:inherit;"> |</span>		res9 = std(:v1) + std(:v2),
-<span style="color:inherit;"> |</span>		res10 = complicated_scalar(:v1, :v2, :v3),
-<span style="color:inherit;"> |</span>		res11 = first(:v1) + mean(:v2) * std(:v1) + last(</div>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/performance.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/performance.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-43,7 +43,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function DataFrames_timings(df, gd)
+<span style="color:inherit;"> |</span>	df_res = transform(df,
+<span style="color:orange;">!|</span>		:v1 => (t <span style="color:red;">-> t </span>.- mean<span style="color:red;">(t)</span>) => :res1,
+<span style="color:inherit;"> |</span>		:v2 => demean => :res2,
+<span style="color:inherit;"> |</span>		[:v1, :v2] => (+) => :res3,
+<span style="color:inherit;"> |</span>		:id => string => :res4,
+<span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
+<span style="color:inherit;"> |</span>	)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	gd_res = combine(gd,
+<span style="color:red;">-|</span></span><span style="color:gray;">		:v1 => (</span><span style="color:red;">t -> mean(t)</span><span style="color:gray;">) => :res7,</span></span>
+<span style="color:green;">+|</span></span>		:v1 => (<span style="color:green;">mean</span>) => :res7,</span>
+<span style="color:inherit;"> |</span>		:v2 => mean => :res8,
+<span style="color:inherit;"> |</span>		[:v1, :v2] => ((t, s) -> std(t) + std(s)) => :res9,
+<span style="color:inherit;"> |</span>		[:v1, :v2, :v3] => complicated_scalar => :res10,
+<span style="color:inherit;">@|</span><span style="color:inherit;">-91,7 +91,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	gd_res = @combine(gd,
+<span style="color:inherit;"> |</span>		res7 = mean(:v1),
+<span style="color:red;">-|</span></span><span style="color:gray;">		res8 = (</span><span style="color:red;">t -> mean(t)</span><span style="color:gray;">)(:v2),</span></span>
+<span style="color:green;">+|</span></span>		res8 = (<span style="color:green;">mean</span>)(:v2),</span>
+<span style="color:inherit;"> |</span>		res9 = std(:v1) + std(:v2),
+<span style="color:inherit;"> |</span>		res10 = complicated_scalar(:v1, :v2, :v3),
+<span style="color:inherit;"> |</span>		res11 = first(:v1) + mean(:v2) * std(:v1) + last(</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

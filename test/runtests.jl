@@ -1,7 +1,7 @@
 using ShowLint
 using Test
 
-S = ShowLint
+SL = ShowLint
 
 @testset "ShowLint" begin
     include("patterns.jl")

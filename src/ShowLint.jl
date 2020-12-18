@@ -153,7 +153,7 @@ function apply(pat::Pattern, repo::Repo;
         out = replace(out, '`' => "&#96;")
         out = replace(out, '"' => "&#34;")
     end
-    if return_diff
+    if !in_place
         out = avoid_franklin_parse_errors(out)
         out = ansi2html(out)
     end

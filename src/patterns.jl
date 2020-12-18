@@ -32,6 +32,19 @@ patterns = [
 
         rewrite=':[function]'
         """
+    ),
+    Pattern(4, "Omit comparison with boolean constant", ["generic"],
+        "From [staticcheck](https://staticcheck.io/docs/checks).",
+        """
+        match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
+
+        rule='where 
+            rewrite :[first] { "=" -> "" },
+            rewrite :[bool] { "false" -> "!" },
+            rewrite :[bool] { "true" -> "" }'
+
+        rewrite=':[first]:[bool]:[var]'
+        """
     )
 ]
 

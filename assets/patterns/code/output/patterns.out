@@ -42,3 +42,22 @@ rewrite=':[function]'
 </code></pre>
 ~~~
 
+
+~~~ 
+<h3 id="4">4: Omit comparison with boolean constant</h3>
+~~~
+tags: *generic*
+
+From [staticcheck](https://staticcheck.io/docs/checks).
+~~~
+<pre><code class="plaintext">match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
+
+rule='where 
+    rewrite :[first] { "=" -> "" },
+    rewrite :[bool] { "false" -> "!" },
+    rewrite :[bool] { "true" -> "" }'
+
+rewrite=':[first]:[bool]:[var]'
+</code></pre>
+~~~
+

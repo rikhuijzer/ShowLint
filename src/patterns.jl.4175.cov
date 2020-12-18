@@ -1,5 +1,5 @@
         - struct Pattern
-        3     id::Int
+        -     id::Int
         -     title::String
         -     tags::Vector{String}
         -     description::String
@@ -32,9 +32,22 @@
         - 
         -         rewrite=':[function]'
         -         """
+        -     ),
+        -     Pattern(4, "Omit comparison with boolean constant", ["generic"],
+        -         "From [staticcheck](https://staticcheck.io/docs/checks).",
+        -         """
+        -         match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
+        - 
+        -         rule='where 
+        -             rewrite :[first] { "=" -> "" },
+        -             rewrite :[bool] { "false" -> "!" },
+        -             rewrite :[bool] { "true" -> "" }'
+        - 
+        -         rewrite=':[first]:[bool]:[var]'
+        -         """
         -     )
         - ]
         - 
         - function patterns_have_valid_indexes()::Bool
-        -     collect(1:length(patterns)) == [p.id for p in patterns]
+        1     collect(1:length(patterns)) == [p.id for p in patterns]
         - end

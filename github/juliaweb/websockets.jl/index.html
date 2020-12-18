@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/WebSockets.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliawebwebsocketsjl ><a href="#juliawebwebsocketsjl">JuliaWeb/WebSockets.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/WebSockets.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing lint results for <i>&lt;patterns&gt;</i> on <i>&lt;repositories&gt;</i></p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliawebwebsocketsjl ><a href="#juliawebwebsocketsjl">JuliaWeb/WebSockets.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a><li><a href="#omit_comparison_with_boolean_constant">Omit comparison with boolean constant</a></ol></div> <h3 id=replace_arrayt1_with_vectort ><a href="#replace_arrayt1_with_vectort">Replace Array&#123;T,1&#125; with Vector&#123;T&#125;</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">benchmark/ws_hts.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">benchmark/ws_hts.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-106,7 +106,7</span> ============================================================
@@ -30,4 +30,64 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
 <span style="color:inherit;"> |</span>    write_fragment(io, islast, opcode, hasmask, data::Array{UIn</div>
+</pre> <h3 id=omit_comparison_with_boolean_constant ><a href="#omit_comparison_with_boolean_constant">Omit comparison with boolean constant</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/client_server_functions.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/client_server_functions.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-112,7 +112,7</span> ============================================================
+<span style="color:inherit;"> |</span>                if String(readback) == forcecopy_str
+<span style="color:inherit;"> |</span>                    @test true
+<span style="color:inherit;"> |</span>                else
+<span style="color:orange;">!|</span>                    if ws.server<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>                        @error &#34;initatews, echoed string of length &#34;, slen, &#34; differs from sent &#34;
+<span style="color:inherit;"> |</span>                    else
+<span style="color:inherit;"> |</span>                        @test false
+<span style="color:inherit;">@|</span><span style="color:inherit;">-120,7 +120,7</span> ============================================================
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            else
+<span style="color:inherit;"> |</span>                # if run by the server side, this test won't be captured.
+<span style="color:orange;">!|</span>                if ws.server<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>                    @error &#34;initatews, couldn't read &#34;, ws, &#34; length sent is &#34;, slen
+<span style="color:inherit;"> |</span>                else
+<span style="color:inherit;"> |</span>                    @test false
+<span style="color:red;">------ </span><span style="color:inherit;">test/frametest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/frametest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,9 +82,9</span> ============================================================
+<span style="color:inherit;"> |</span>    frag_back = read_frame(dws)
+<span style="color:inherit;"> |</span>    close(dws.socket)
+<span style="color:inherit;"> |</span>    @test frag_back.is_last == fin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv1</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv2</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv2</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv3</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv3</span>
+<span style="color:inherit;"> |</span>    @test frag_back.opcode == op
+<span style="color:inherit;"> |</span>    @test frag_back.is_masked == clientwriting
+<span style="color:inherit;"> |</span>    @test frag_back.payload_len == len
+<span style="color:inherit;">@|</span><span style="color:inherit;">-115,9 +115,9</span> ============================================================
+<span style="color:inherit;"> |</span>    close(dws.socket)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test frag_back.is_last == fin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv1</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv2</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv2</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv3</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv3</span>
+<span style="color:inherit;"> |</span>    @test frag_back.opcode == op
+<span style="color:inherit;"> |</span>    @test frag_back.is_masked == clientwriting
+<span style="color:inherit;"> |</span>    @test frag_back.payload_len == len
+<span style="color:inherit;">@|</span><span style="color:inherit;">-141,9 +141,9</span> ============================================================
+<span style="color:inherit;"> |</span>    close(dws.socket)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test frag_back.is_last == fin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv1</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv2</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv2</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frag_back.</span><span style="color:gray;">rsv3</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test frag_back.<span style="color:green;">!</span>rsv3</span>
+<span style="color:inherit;"> |</span>    @test frag_back.opcode == op
+<span style="color:inherit;"> |</span>    @test frag_back.is_masked == clientwriting
+<span style="color:inherit;"> |</span>    @test frag_back.payload_len ==</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 18, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -87,7 +87,7 @@ html {
   position: relative;
   padding-left: 12.5%;
   padding-right: 12.5%;
-  line-height: 1.35em;
+  line-height: 1.6em;
 }
 
 /* On wide screens, fix content width to a max value. */
@@ -299,7 +299,7 @@ code {
 
 .hljs {
   font-size: var(--small);
-  line-height: 1.35em;
+  line-height: 1.5em;
   border-radius: 10px;
 }
 

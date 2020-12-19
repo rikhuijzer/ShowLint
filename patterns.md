@@ -12,7 +12,12 @@ reeval = true
 patterns_dir = "configs"
 ```
 
-This page lists the patterns as defined in `src/patterns.jl`.
+These patterns use [Comby](https://comby.dev) for "searching and changing code structure".
+Comby allows us to express rewrite rules succinctly.
+Some rewrite suggestions will be inappropriate (false-positive).
+This is unavoidable because these rewrite rules don't take context into account.
+Still, a lot of the rewrites suggested here are appropriate.
+To **interactively review** changes before applying them, use `comby -review`.
 
 ```julia:patterns
 # hideall

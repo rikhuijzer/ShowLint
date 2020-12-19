@@ -50,7 +50,7 @@ body {
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: var(--normal);
-  line-height: 1.5;
+  line-height: 1.5em;
 }
 
 @media (min-width: 38em) {
@@ -121,6 +121,7 @@ h6 {
 p {
   margin-top: 0.3rem;
   margin-bottom: 1.5rem;
+  line-height: 1.4rem;
 }
 
 strong {
@@ -133,7 +134,7 @@ ul,
 ol,
 dl {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.4rem;
 }
 
 dt {

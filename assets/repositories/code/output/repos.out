@@ -1,27 +1,15 @@
-### alan-turing-institute/MLJ.jl
 ~~~
+<h3><a href="https://github.com/FluxML/MacroTools.jl" target="_blank">FluxML/MacroTools.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/alan-turing-institute/MLJ.jl">source</a></i> <br/></span>
-~~~
-
-~~~
-</div>
-~~~
-
-### FluxML/MacroTools.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/FluxML/MacroTools.jl">source</a></i> <br/></span>
 ~~~
 - [Avoid x -> f(x) ➤ 1 hit](/github/fluxml/macrotools.jl/#avoid_x_-_fx_1_hit)
 ~~~
 </div>
 ~~~
 
-### FluxML/Zygote.jl
 ~~~
+<h3><a href="https://github.com/FluxML/Zygote.jl" target="_blank">FluxML/Zygote.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/FluxML/Zygote.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 7 hits](/github/fluxml/zygote.jl/#replace_arrayt1_with_vectort_7_hits)
 - [Avoid x -> f(x) ➤ 13 hits](/github/fluxml/zygote.jl/#avoid_x_-_fx_13_hits)
@@ -29,23 +17,9 @@
 </div>
 ~~~
 
-### fonsp/Pluto.jl
 ~~~
+<h3><a href="https://github.com/GiovineItalia/Gadfly.jl" target="_blank">GiovineItalia/Gadfly.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/fonsp/Pluto.jl">source</a></i> <br/></span>
-~~~
-- [Replace Array{T,1} with Vector{T} ➤ 21 hits](/github/fonsp/pluto.jl/#replace_arrayt1_with_vectort_21_hits)
-- [Use ismissing ➤ 3 hits](/github/fonsp/pluto.jl/#use_ismissing_3_hits)
-- [Avoid x -> f(x) ➤ 1 hit](/github/fonsp/pluto.jl/#avoid_x_-_fx_1_hit)
-- [Omit comparison with boolean constant ➤ 137 hits](/github/fonsp/pluto.jl/#omit_comparison_with_boolean_constant_137_hits)
-~~~
-</div>
-~~~
-
-### GiovineItalia/Gadfly.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/GiovineItalia/Gadfly.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/giovineitalia/gadfly.jl/#replace_arrayt1_with_vectort_4_hits)
 - [Use ismissing ➤ 5 hits](/github/giovineitalia/gadfly.jl/#use_ismissing_5_hits)
@@ -55,31 +29,18 @@
 </div>
 ~~~
 
-### jrevels/Cassette.jl
 ~~~
+<h3><a href="https://github.com/JuliaCollections/Memoize.jl" target="_blank">JuliaCollections/Memoize.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/jrevels/Cassette.jl">source</a></i> <br/></span>
-~~~
-- [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/jrevels/cassette.jl/#replace_arrayt1_with_vectort_1_hit)
-- [Avoid x -> f(x) ➤ 4 hits](/github/jrevels/cassette.jl/#avoid_x_-_fx_4_hits)
-~~~
-</div>
-~~~
-
-### JuliaCollections/Memoize.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaCollections/Memoize.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### JuliaData/CSV.jl
 ~~~
+<h3><a href="https://github.com/JuliaData/CSV.jl" target="_blank">JuliaData/CSV.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaData/CSV.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 42 hits](/github/juliadata/csv.jl/#replace_arrayt1_with_vectort_42_hits)
 - [Use ismissing ➤ 2 hits](/github/juliadata/csv.jl/#use_ismissing_2_hits)
@@ -88,20 +49,18 @@
 </div>
 ~~~
 
-### JuliaData/DataFrames.jl
 ~~~
+<h3><a href="https://github.com/JuliaData/DataFrames.jl" target="_blank">JuliaData/DataFrames.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaData/DataFrames.jl">source</a></i> <br/></span>
 ~~~
 - [Avoid x -> f(x) ➤ 71 hits](/github/juliadata/dataframes.jl/#avoid_x_-_fx_71_hits)
 ~~~
 </div>
 ~~~
 
-### JuliaData/DataFramesMeta.jl
 ~~~
+<h3><a href="https://github.com/JuliaData/DataFramesMeta.jl" target="_blank">JuliaData/DataFramesMeta.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaData/DataFramesMeta.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/juliadata/dataframesmeta.jl/#replace_arrayt1_with_vectort_4_hits)
 - [Avoid x -> f(x) ➤ 3 hits](/github/juliadata/dataframesmeta.jl/#avoid_x_-_fx_3_hits)
@@ -109,70 +68,82 @@
 </div>
 ~~~
 
-### JuliaData/Tables.jl
 ~~~
+<h3><a href="https://github.com/JuliaData/Tables.jl" target="_blank">JuliaData/Tables.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaData/Tables.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### JuliaData/YAML.jl
 ~~~
+<h3><a href="https://github.com/JuliaData/YAML.jl" target="_blank">JuliaData/YAML.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaData/YAML.jl">source</a></i> <br/></span>
 ~~~
 - [Omit comparison with boolean constant ➤ 2 hits](/github/juliadata/yaml.jl/#omit_comparison_with_boolean_constant_2_hits)
 ~~~
 </div>
 ~~~
 
-### JuliaDatabases/Redis.jl
 ~~~
+<h3><a href="https://github.com/JuliaDatabases/Redis.jl" target="_blank">JuliaDatabases/Redis.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaDatabases/Redis.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 2 hits](/github/juliadatabases/redis.jl/#replace_arrayt1_with_vectort_2_hits)
 ~~~
 </div>
 ~~~
 
-### JuliaDebug/Debugger.jl
 ~~~
+<h3><a href="https://github.com/JuliaDebug/Debugger.jl" target="_blank">JuliaDebug/Debugger.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaDebug/Debugger.jl">source</a></i> <br/></span>
 ~~~
 - [Use ismissing ➤ 4 hits](/github/juliadebug/debugger.jl/#use_ismissing_4_hits)
 ~~~
 </div>
 ~~~
 
-### JuliaImages/Images.jl
 ~~~
+<h3><a href="https://github.com/JuliaImages/Images.jl" target="_blank">JuliaImages/Images.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaImages/Images.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 2 hits](/github/juliaimages/images.jl/#replace_arrayt1_with_vectort_2_hits)
 ~~~
 </div>
 ~~~
 
-### JuliaLang/IJulia.jl
 ~~~
+<h3><a href="https://github.com/JuliaLang/IJulia.jl" target="_blank">JuliaLang/IJulia.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaLang/IJulia.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### JuliaLang/julia
 ~~~
+<h3><a href="https://github.com/JuliaLang/PackageCompiler.jl" target="_blank">JuliaLang/PackageCompiler.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaLang/julia">source</a></i> <br/></span>
+~~~
+- [Omit comparison with boolean constant ➤ 3 hits](/github/julialang/packagecompiler.jl/#omit_comparison_with_boolean_constant_3_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaLang/Pkg.jl" target="_blank">JuliaLang/Pkg.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 1 hit](/github/julialang/pkg.jl/#avoid_x_-_fx_1_hit)
+- [Omit comparison with boolean constant ➤ 11 hits](/github/julialang/pkg.jl/#omit_comparison_with_boolean_constant_11_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaLang/julia" target="_blank">JuliaLang/julia</a></h3>
+<div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 290 hits](/github/julialang/julia/#replace_arrayt1_with_vectort_290_hits)
 - [Use ismissing ➤ 18 hits](/github/julialang/julia/#use_ismissing_18_hits)
@@ -182,41 +153,18 @@
 </div>
 ~~~
 
-### JuliaLang/PackageCompiler.jl
 ~~~
+<h3><a href="https://github.com/JuliaPlots/Makie.jl" target="_blank">JuliaPlots/Makie.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaLang/PackageCompiler.jl">source</a></i> <br/></span>
-~~~
-- [Omit comparison with boolean constant ➤ 3 hits](/github/julialang/packagecompiler.jl/#omit_comparison_with_boolean_constant_3_hits)
-~~~
-</div>
-~~~
-
-### JuliaLang/Pkg.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaLang/Pkg.jl">source</a></i> <br/></span>
-~~~
-- [Avoid x -> f(x) ➤ 1 hit](/github/julialang/pkg.jl/#avoid_x_-_fx_1_hit)
-- [Omit comparison with boolean constant ➤ 11 hits](/github/julialang/pkg.jl/#omit_comparison_with_boolean_constant_11_hits)
-~~~
-</div>
-~~~
-
-### JuliaPlots/Makie.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaPlots/Makie.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### JuliaPlots/Plots.jl
 ~~~
+<h3><a href="https://github.com/JuliaPlots/Plots.jl" target="_blank">JuliaPlots/Plots.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaPlots/Plots.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 182 hits](/github/juliaplots/plots.jl/#replace_arrayt1_with_vectort_182_hits)
 - [Avoid x -> f(x) ➤ 2 hits](/github/juliaplots/plots.jl/#avoid_x_-_fx_2_hits)
@@ -225,10 +173,19 @@
 </div>
 ~~~
 
-### JuliaStats/Distributions.jl
 ~~~
+<h3><a href="https://github.com/JuliaPy/PyCall.jl" target="_blank">JuliaPy/PyCall.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaStats/Distributions.jl">source</a></i> <br/></span>
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/juliapy/pycall.jl/#replace_arrayt1_with_vectort_3_hits)
+- [Omit comparison with boolean constant ➤ 11 hits](/github/juliapy/pycall.jl/#omit_comparison_with_boolean_constant_11_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaStats/Distributions.jl" target="_blank">JuliaStats/Distributions.jl</a></h3>
+<div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 2 hits](/github/juliastats/distributions.jl/#replace_arrayt1_with_vectort_2_hits)
 - [Avoid x -> f(x) ➤ 6 hits](/github/juliastats/distributions.jl/#avoid_x_-_fx_6_hits)
@@ -237,21 +194,9 @@
 </div>
 ~~~
 
-### JuliaPy/PyCall.jl
 ~~~
+<h3><a href="https://github.com/JuliaWeb/HTTP.jl" target="_blank">JuliaWeb/HTTP.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaPy/PyCall.jl">source</a></i> <br/></span>
-~~~
-- [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/juliapy/pycall.jl/#replace_arrayt1_with_vectort_3_hits)
-- [Omit comparison with boolean constant ➤ 11 hits](/github/juliapy/pycall.jl/#omit_comparison_with_boolean_constant_11_hits)
-~~~
-</div>
-~~~
-
-### JuliaWeb/HTTP.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaWeb/HTTP.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliaweb/http.jl/#replace_arrayt1_with_vectort_1_hit)
 - [Omit comparison with boolean constant ➤ 5 hits](/github/juliaweb/http.jl/#omit_comparison_with_boolean_constant_5_hits)
@@ -259,10 +204,9 @@
 </div>
 ~~~
 
-### JuliaWeb/WebSockets.jl
 ~~~
+<h3><a href="https://github.com/JuliaWeb/WebSockets.jl" target="_blank">JuliaWeb/WebSockets.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/JuliaWeb/WebSockets.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/juliaweb/websockets.jl/#replace_arrayt1_with_vectort_3_hits)
 - [Omit comparison with boolean constant ➤ 11 hits](/github/juliaweb/websockets.jl/#omit_comparison_with_boolean_constant_11_hits)
@@ -270,10 +214,68 @@
 </div>
 ~~~
 
-### jump-dev/JuMP.jl
 ~~~
+<h3><a href="https://github.com/SciML/DifferentialEquations.jl" target="_blank">SciML/DifferentialEquations.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/jump-dev/JuMP.jl">source</a></i> <br/></span>
+~~~
+- [Omit comparison with boolean constant ➤ 2 hits](/github/sciml/differentialequations.jl/#omit_comparison_with_boolean_constant_2_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/Wikunia/ConstraintSolver.jl" target="_blank">Wikunia/ConstraintSolver.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 9 hits](/github/wikunia/constraintsolver.jl/#avoid_x_-_fx_9_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/Wikunia/Javis.jl" target="_blank">Wikunia/Javis.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 2 hits](/github/wikunia/javis.jl/#replace_arrayt1_with_vectort_2_hits)
+- [Omit comparison with boolean constant ➤ 1 hit](/github/wikunia/javis.jl/#omit_comparison_with_boolean_constant_1_hit)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/alan-turing-institute/MLJ.jl" target="_blank">alan-turing-institute/MLJ.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/fonsp/Pluto.jl" target="_blank">fonsp/Pluto.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 21 hits](/github/fonsp/pluto.jl/#replace_arrayt1_with_vectort_21_hits)
+- [Use ismissing ➤ 3 hits](/github/fonsp/pluto.jl/#use_ismissing_3_hits)
+- [Avoid x -> f(x) ➤ 1 hit](/github/fonsp/pluto.jl/#avoid_x_-_fx_1_hit)
+- [Omit comparison with boolean constant ➤ 137 hits](/github/fonsp/pluto.jl/#omit_comparison_with_boolean_constant_137_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/jrevels/Cassette.jl" target="_blank">jrevels/Cassette.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/jrevels/cassette.jl/#replace_arrayt1_with_vectort_1_hit)
+- [Avoid x -> f(x) ➤ 4 hits](/github/jrevels/cassette.jl/#avoid_x_-_fx_4_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/jump-dev/JuMP.jl" target="_blank">jump-dev/JuMP.jl</a></h3>
+<div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/jump-dev/jump.jl/#replace_arrayt1_with_vectort_4_hits)
 - [Avoid x -> f(x) ➤ 2 hits](/github/jump-dev/jump.jl/#avoid_x_-_fx_2_hits)
@@ -282,20 +284,27 @@
 </div>
 ~~~
 
-### odow/SDDP.jl
 ~~~
+<h3><a href="https://github.com/odow/SDDP.jl" target="_blank">odow/SDDP.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/odow/SDDP.jl">source</a></i> <br/></span>
 ~~~
 - [Omit comparison with boolean constant ➤ 1 hit](/github/odow/sddp.jl/#omit_comparison_with_boolean_constant_1_hit)
 ~~~
 </div>
 ~~~
 
-### rikhuijzer/Codex.jl
 ~~~
+<h3><a href="https://github.com/queryverse/Query.jl" target="_blank">queryverse/Query.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/rikhuijzer/Codex.jl">source</a></i> <br/></span>
+~~~
+- [Omit comparison with boolean constant ➤ 1 hit](/github/queryverse/query.jl/#omit_comparison_with_boolean_constant_1_hit)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/rikhuijzer/Codex.jl" target="_blank">rikhuijzer/Codex.jl</a></h3>
+<div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 12 hits](/github/rikhuijzer/codex.jl/#replace_arrayt1_with_vectort_12_hits)
 - [Use ismissing ➤ 3 hits](/github/rikhuijzer/codex.jl/#use_ismissing_3_hits)
@@ -305,70 +314,54 @@
 </div>
 ~~~
 
-### SciML/DifferentialEquations.jl
 ~~~
+<h3><a href="https://github.com/timholy/ProfileView.jl" target="_blank">timholy/ProfileView.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/SciML/DifferentialEquations.jl">source</a></i> <br/></span>
-~~~
-- [Omit comparison with boolean constant ➤ 2 hits](/github/sciml/differentialequations.jl/#omit_comparison_with_boolean_constant_2_hits)
-~~~
-</div>
-~~~
-
-### timholy/Rebugger.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/timholy/Rebugger.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### timholy/Revise.jl
 ~~~
+<h3><a href="https://github.com/timholy/ProgressMeter.jl" target="_blank">timholy/ProgressMeter.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/timholy/Revise.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### timholy/SnoopCompile.jl
 ~~~
+<h3><a href="https://github.com/timholy/Rebugger.jl" target="_blank">timholy/Rebugger.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/timholy/SnoopCompile.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### timholy/ProgressMeter.jl
 ~~~
+<h3><a href="https://github.com/timholy/Revise.jl" target="_blank">timholy/Revise.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/timholy/ProgressMeter.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### timholy/ProfileView.jl
 ~~~
+<h3><a href="https://github.com/timholy/SnoopCompile.jl" target="_blank">timholy/SnoopCompile.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/timholy/ProfileView.jl">source</a></i> <br/></span>
 ~~~
 
 ~~~
 </div>
 ~~~
 
-### tlienart/Franklin.jl
 ~~~
+<h3><a href="https://github.com/tlienart/Franklin.jl" target="_blank">tlienart/Franklin.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/tlienart/Franklin.jl">source</a></i> <br/></span>
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/tlienart/franklin.jl/#replace_arrayt1_with_vectort_3_hits)
 - [Avoid x -> f(x) ➤ 5 hits](/github/tlienart/franklin.jl/#avoid_x_-_fx_5_hits)
@@ -377,43 +370,11 @@
 </div>
 ~~~
 
-### tlienart/FranklinTemplates.jl
 ~~~
+<h3><a href="https://github.com/tlienart/FranklinTemplates.jl" target="_blank">tlienart/FranklinTemplates.jl</a></h3>
 <div class="repo-nav">
-<span> <i><a href="https://github.com/tlienart/FranklinTemplates.jl">source</a></i> <br/></span>
 ~~~
 
-~~~
-</div>
-~~~
-
-### Wikunia/Javis.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/Wikunia/Javis.jl">source</a></i> <br/></span>
-~~~
-- [Replace Array{T,1} with Vector{T} ➤ 2 hits](/github/wikunia/javis.jl/#replace_arrayt1_with_vectort_2_hits)
-- [Omit comparison with boolean constant ➤ 1 hit](/github/wikunia/javis.jl/#omit_comparison_with_boolean_constant_1_hit)
-~~~
-</div>
-~~~
-
-### Wikunia/ConstraintSolver.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/Wikunia/ConstraintSolver.jl">source</a></i> <br/></span>
-~~~
-- [Avoid x -> f(x) ➤ 9 hits](/github/wikunia/constraintsolver.jl/#avoid_x_-_fx_9_hits)
-~~~
-</div>
-~~~
-
-### queryverse/Query.jl
-~~~
-<div class="repo-nav">
-<span> <i><a href="https://github.com/queryverse/Query.jl">source</a></i> <br/></span>
-~~~
-- [Omit comparison with boolean constant ➤ 1 hit](/github/queryverse/query.jl/#omit_comparison_with_boolean_constant_1_hit)
 ~~~
 </div>
 ~~~

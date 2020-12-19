@@ -10,17 +10,6 @@
 <span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
 <span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
 <span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
-<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
-<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
-<span style="color:inherit;"> |</span>	
-<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
-<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
-<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -68,6 +57,41 @@
 <span style="color:inherit;"> |</span>    for (i, row) in zip(1:L,rows)
 <span style="color:inherit;"> |</span>        row_data[i] = (i, row_data_for(row))
 <span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;Like a [&#96;Diary&#96;](@ref) but more serious. 📓&#34;
+<span style="color:inherit;"> |</span>mutable struct Notebook
+<span style="color:inherit;"> |</span>    &#34;Cells are ordered in a &#96;Notebook&#96;, and this order can be changed by the user. Cells will always have a constant UUID.&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">    cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    cells::<span style="color:green;">Vector</span>{Cell}</span>
+<span style="color:inherit;"> |</span>    
+<span style="color:inherit;"> |</span>    # i still don't really know what an AbstractString is but it makes this package look more professional
+<span style="color:inherit;"> |</span>    path::AbstractString
+<span style="color:inherit;">@|</span><span style="color:inherit;">-35,10 +35,10</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span># We can keep 128 updates pending. After this, any put! calls (i.e. calls that push an update to the notebook) will simply block, which is fine.
+<span style="color:inherit;"> |</span># This does mean that the Notebook can't be used if nothing is clearing the update channel.
+<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString, notebook_id::UUID) = </span></span>
+<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString, notebook_id::UUID) = </span>
+<span style="color:inherit;"> |</span>    Notebook(cells, path, notebook_id, NotebookTopology(), Channel(1024), Token(), nothing)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span></span>
+<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function cell_index_from_id(notebook::Notebook, cell_id::UUID)::Union{Int,Nothing}
+<span style="color:inherit;"> |</span>    findfirst(c -> c.cell_id == cell_id, notebook.cells)
+<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
+<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
+<span style="color:inherit;"> |</span>	
+<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
+<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
+<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
@@ -108,30 +132,6 @@
 <span style="color:inherit;"> |</span>    expr, next = Meta.parse(code, start, raise=false)
 <span style="color:inherit;"> |</span>    if next <= ncodeunits(code)
 <span style="color:inherit;"> |</span>        [next, expression_boundaries(code, next)...]
-<span style="color:red;">------ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;Like a [&#96;Diary&#96;](@ref) but more serious. 📓&#34;
-<span style="color:inherit;"> |</span>mutable struct Notebook
-<span style="color:inherit;"> |</span>    &#34;Cells are ordered in a &#96;Notebook&#96;, and this order can be changed by the user. Cells will always have a constant UUID.&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">    cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    cells::<span style="color:green;">Vector</span>{Cell}</span>
-<span style="color:inherit;"> |</span>    
-<span style="color:inherit;"> |</span>    # i still don't really know what an AbstractString is but it makes this package look more professional
-<span style="color:inherit;"> |</span>    path::AbstractString
-<span style="color:inherit;">@|</span><span style="color:inherit;">-35,10 +35,10</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span># We can keep 128 updates pending. After this, any put! calls (i.e. calls that push an update to the notebook) will simply block, which is fine.
-<span style="color:inherit;"> |</span># This does mean that the Notebook can't be used if nothing is clearing the update channel.
-<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString, notebook_id::UUID) = </span></span>
-<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString, notebook_id::UUID) = </span>
-<span style="color:inherit;"> |</span>    Notebook(cells, path, notebook_id, NotebookTopology(), Channel(1024), Token(), nothing)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span></span>
-<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function cell_index_from_id(notebook::Notebook, cell_id::UUID)::Union{Int,Nothing}
-<span style="color:inherit;"> |</span>    findfirst(c -> c.cell_id == cell_id, notebook.cells)
 <span style="color:red;">------ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================

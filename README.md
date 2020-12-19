@@ -7,7 +7,7 @@
 </h1>
 
 <h3 align="center">
-  Showing static code analysis results for many repositories
+  Showing static code analysis results for open source repositories
 </h3>
 
 Linters have obvious benefits but, like any tool, can be hard to use.

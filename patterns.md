@@ -14,10 +14,14 @@ patterns_dir = "configs"
 
 These patterns use [Comby](https://comby.dev) for "searching and changing code structure".
 Comby allows us to express rewrite rules succinctly.
-Some rewrite suggestions will be inappropriate (false-positive).
-This is unavoidable because these rewrite rules don't take context into account.
-Still, a lot of the rewrites suggested here are appropriate.
-To **interactively review** changes before applying them, use `comby -review`.
+Some suggested rewrites will be inappropriate (false-positive).
+This is unavoidable because, for example, these rewrite rules don't take context into account.
+Nonetheless, a lot of the rewrites suggested here are appropriate.
+Use `comby -review` to **interactively review** and filter out the false-positives.
+
+The tags below can be used to filter out patterns.
+For example, suppose a repository wants to be compatible with Julia `≥1.0`.
+Then, rewrite suggestions which only hold for Julia `≥1.2` should be hidden.
 
 ```julia:patterns
 # hideall

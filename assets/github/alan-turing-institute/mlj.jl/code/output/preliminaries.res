@@ -1,1 +1,0 @@
-Repo("https://github.com", "alan-turing-institute/MLJ.jl", Function[ShowLint.default])

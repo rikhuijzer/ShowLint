@@ -1,5 +1,7 @@
 module ShowLint
 
+using Serialization
+
 export 
     Pattern,
     Repo,
@@ -14,8 +16,6 @@ include("patterns.jl")
 include("repositories.jl")
 
 const project_root = pwd()
-
-PAGES_HEADERS = nothing
 
 function ansi2html(text)
   escape_codes = Dict(
@@ -191,14 +191,7 @@ function repo_page(repo::Repo)
 
         \\toc
 
-        """ * raw"""
-        ```julia:preliminaries
-        using ShowLint
-        SL = ShowLint
-        repo = """ * """$repo
-        ```
-        \\output{preliminaries}
-        """
+        """ 
 
     predicates = repo.tags_predicates
     all_predicates_hold(tags) = all([p(tags) for p in predicates])
@@ -217,8 +210,7 @@ function repo_page(repo::Repo)
             return ""
         else
             push!(headers, header)
-            return 
-            """
+            return """
             ### $header
             [Pattern #$id](/patterns/#$id)
 
@@ -236,7 +228,7 @@ function repo_page(repo::Repo)
 end
 
 """
-    create_repo_pages(; debug=false)
+    create_repo_pages()
 
 Create one webpage per repository.
 This step should happen before `serve()` is called.
@@ -244,14 +236,10 @@ We could process all the diffs when this function is called
 or when `serve` runs. It seems more flexible to do it as early
 as possible.
 """
-function create_repo_pages(; debug=false)
+function create_repo_pages()
     pages_headers = []
 
-    is_codex(r::Repo) = contains(r.name, "Codex.jl")
-    filtered_repos = debug ? 
-        filter(is_codex, repositories) :
-        repositories
-    for repo in filtered_repos
+    for repo in repositories
         if !isdir(host_dir(repo))
             mkdir(host_dir(repo))
         end
@@ -277,7 +265,10 @@ function create_repo_pages(; debug=false)
             )
         end
     end
-    PAGES_HEADERS = pages_headers
+    headers_path = joinpath(project_root, "__site", "pages-headers.txt")
+    mkpath(dirname(headers_path))
+    Serialization.serialize(headers_path, pages_headers)
+    pages_headers
 end
 
 """

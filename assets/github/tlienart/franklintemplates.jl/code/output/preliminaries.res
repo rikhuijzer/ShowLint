@@ -1,1 +1,0 @@
-Repo("https://github.com", "tlienart/FranklinTemplates.jl", Function[ShowLint.default])

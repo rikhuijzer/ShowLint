@@ -15,12 +15,15 @@ for (repo, headers) in zip(repositories, pages_headers)
   sublinks = sublink.(headers)
   sublinks_text = join(sublinks, '\n')
 
+  source_text = "source" # SL.host_dir(repo)
+  source_link = joinpath(repo.host, repo.name)
+
   println(
     """
     ### $link_text
     ~~~
     <div class="repo-nav">
-    <span> source: $(SL.host_dir(repo)) <br/></span>
+    <span> <i><a href="$source_link">$source_text</a></i> <br/></span>
     ~~~
     $sublinks_text
     ~~~

@@ -1,3 +1,45 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/HTTP.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliawebhttpjl ><a href="#juliawebhttpjl">JuliaWeb/HTTP.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> ShowLint
-SL = ShowLint
-repo = Repo(<span class=hljs-string >&quot;https://github.com&quot;</span>, <span class=hljs-string >&quot;JuliaWeb/HTTP.jl&quot;</span>, <span class=hljs-built_in >Function</span>[ShowLint.default])</code></pre> <p>nothing</p> <p>nothing</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 19, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/HTTP.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliawebhttpjl ><a href="#juliawebhttpjl">JuliaWeb/HTTP.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/MessageRequest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/MessageRequest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-77,7 +77,7</span> ============================================================
+<span style="color:inherit;"> |</span>bodylength(body::AbstractString) = sizeof(body)
+<span style="color:inherit;"> |</span>bodylength(body::Form) = length(body)
+<span style="color:inherit;"> |</span>bodylength(body::Vector{T}) where T <: AbstractString = sum(sizeof, body)
+<span style="color:red;">-|</span></span><span style="color:gray;">bodylength(body::Vector{T}) where T <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">} = sum(length, body)</span></span>
+<span style="color:green;">+|</span></span>bodylength(body::Vector{T}) where T <: <span style="color:green;">AbstractVector</span>{UInt8} = sum(length, body)</span>
+<span style="color:inherit;"> |</span>bodylength(body::IOBuffer) = bytesavailable(body)
+<span style="color:inherit;"> |</span>bodylength(body::Vector{IOBuffer}) = sum(bytesavailable, body)
+<span style="color:inherit;"> |</s</div>
+</pre> <h3 id=omit_comparison_with_boolean_constant_5_hits ><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/loopback.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/loopback.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-280,8 +280,8</span> ============================================================
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:orange;">!|</span>        @test body_aborted<span style="color:red;"> == true</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:gray;">body_sent</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>        @test <span style="color:green;">!</span>body_sent</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;libreq - Sleep&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">src/parsemultipart.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/parsemultipart.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-119,14 +119,14</span> ============================================================
+<span style="color:inherit;"> |</span>    escaped = false
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    for offset in eachindex(str)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">escaped</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">!</span>escaped</span>
+<span style="color:orange;">!|</span>            if quotes<span style="color:red;"> == true</span> && str[offset] == '&#34;'
+<span style="color:inherit;"> |</span>                quotes = false
+<span style="color:inherit;"> |</span>            elseif str[offset] == '\\'
+<span style="color:inherit;"> |</span>                escaped = true
+<span style="color:inherit;"> |</span>            elseif str[offset] == '&#34;'
+<span style="color:inherit;"> |</span>                quotes = true
+<span style="color:red;">-|</span></span><span style="color:gray;">            elseif </span><span style="color:gray;">quotes</span><span style="color:red;"> == false</span><span style="color:gray;"> && (str[offset] == ';' || str[offset] == '=')</span></span>
+<span style="color:green;">+|</span></span>            elseif <span style="color:green;">!</span>quotes && (str[offset] == ';' || str[offset] == '=')</span>
+<span style="color:inherit;"> |</span>                prev = prevind(str, offset)
+<span style="color:inherit;"> |</span>                if prev > start
+<span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, pre</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 19, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

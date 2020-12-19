@@ -1,1 +1,0 @@
-Repo("https://github.com", "JuliaPlots/Plots.jl", Function[ShowLint.default])

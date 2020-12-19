@@ -1,1 +1,0 @@
-Repo("https://github.com", "Wikunia/ConstraintSolver.jl", Function[ShowLint.default])

@@ -1,1 +1,0 @@
-Repo("https://github.com", "GiovineItalia/Gadfly.jl", Function[ShowLint.default])

@@ -1,1 +1,0 @@
-Repo("https://github.com", "JuliaCollections/Memoize.jl", Function[ShowLint.default])

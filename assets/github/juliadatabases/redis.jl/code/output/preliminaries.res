@@ -1,1 +1,0 @@
-Repo("https://github.com", "JuliaDatabases/Redis.jl", Function[ShowLint.default])

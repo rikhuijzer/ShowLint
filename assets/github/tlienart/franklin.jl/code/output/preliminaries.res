@@ -1,1 +1,0 @@
-Repo("https://github.com", "tlienart/Franklin.jl", Function[ShowLint.default])

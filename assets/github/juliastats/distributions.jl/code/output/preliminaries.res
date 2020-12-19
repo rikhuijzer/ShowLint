@@ -1,1 +1,0 @@
-Repo("https://github.com", "JuliaStats/Distributions.jl", Function[ShowLint.default])

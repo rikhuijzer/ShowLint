@@ -13,8 +13,10 @@ using Franklin
 # hideall
 using ShowLint
 SL = ShowLint
+using Serialization
 
-pages_headers = SL.PAGES_HEADERS 
+headers_path = joinpath(SL.project_root, "__site", "pages-headers.txt")
+pages_headers = Serialization.deserialize(headers_path)
 ```
 
 ```julia:repos

@@ -44,13 +44,14 @@ jobs:
         using Pkg; Pkg.develop(path="."); 
         using ShowLint; ShowLint.clone_repositories();'
 
+    - name: Create repository pages
+      run: julia -e 'using ShowLint; ShowLint.create_repo_pages()'
+
     - name: Build site
       run: julia -e '
         using Pkg; Pkg.add(["NodeJS", "Franklin"]);
         using NodeJS; run(`$(npm_cmd()) install highlight.js`);
-        Pkg.develop(path="."); using ShowLint;
         Pkg.activate("."); Pkg.instantiate();
-        ShowLint.create_repo_pages();
         using Franklin; optimize()'
 
     - name: Deploy to secondary branch

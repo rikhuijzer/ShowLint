@@ -6,4 +6,5 @@ version = "0.1.0"
 [deps]
 Franklin = "713c75ef-9fc9-4b05-94a9-213340da978e"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

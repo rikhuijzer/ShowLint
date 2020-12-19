@@ -1,1 +1,1 @@
-ShowLint.Repo("https://github.com", "JuliaDatabases/Redis.jl", Function[ShowLint.default])
+Repo("https://github.com", "JuliaDatabases/Redis.jl", Function[ShowLint.default])

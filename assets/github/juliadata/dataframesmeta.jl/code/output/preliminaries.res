@@ -1,1 +1,1 @@
-ShowLint.Repo("https://github.com", "JuliaData/DataFramesMeta.jl", Function[ShowLint.default])
+Repo("https://github.com", "JuliaData/DataFramesMeta.jl", Function[ShowLint.default])

@@ -1,1 +1,1 @@
-ShowLint.Repo("https://github.com", "rikhuijzer/Codex.jl", Function[ShowLint.default])
+Repo("https://github.com", "rikhuijzer/Codex.jl", Function[ShowLint.default])

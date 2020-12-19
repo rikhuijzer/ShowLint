@@ -1,1 +1,1 @@
-ShowLint.Repo("https://github.com", "JuliaCollections/Memoize.jl", Function[ShowLint.default])
+Repo("https://github.com", "JuliaCollections/Memoize.jl", Function[ShowLint.default])

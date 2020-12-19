@@ -1,1 +1,1 @@
-ShowLint.Repo("https://github.com", "SciML/DifferentialEquations.jl", Function[ShowLint.default])
+Repo("https://github.com", "SciML/DifferentialEquations.jl", Function[ShowLint.default])

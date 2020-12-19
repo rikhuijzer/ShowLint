@@ -1,1 +1,1 @@
-ShowLint.Repo("https://github.com", "FluxML/MacroTools.jl", Function[ShowLint.default])
+Repo("https://github.com", "FluxML/MacroTools.jl", Function[ShowLint.default])

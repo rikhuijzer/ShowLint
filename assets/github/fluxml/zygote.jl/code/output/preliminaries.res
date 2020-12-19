@@ -1,1 +1,1 @@
-ShowLint.Repo("https://github.com", "FluxML/Zygote.jl", Function[ShowLint.default])
+Repo("https://github.com", "FluxML/Zygote.jl", Function[ShowLint.default])

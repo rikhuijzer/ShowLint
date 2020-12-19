@@ -84,6 +84,27 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @test_throws ArgumentError combine(dfv, AsTable(:) => identity)
 <span style="color:inherit;"> |</span>    @test combine(dfv, AsTable(:) => identity => AsTable) == dfv
+<span style="color:red;">------ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-37,8 +37,8</span> ============================================================
+<span style="color:inherit;"> |</span>            push!(cs_vec, p)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:orange;">!|</span>    if any(x <span style="color:red;">-> x </span>isa Pair && first<span style="color:red;">(x)</span> isa Tuple, cs_vec)
+<span style="color:red;">-|</span></span><span style="color:gray;">        x = cs_vec[findfirst(</span><span style="color:red;">x -> first(x)</span><span style="color:gray;"> isa Tuple, cs_vec)]</span></span>
+<span style="color:green;">+|</span></span>        x = cs_vec[findfirst(<span style="color:green;">first</span> isa Tuple, cs_vec)]</span>
+<span style="color:inherit;"> |</span>        # an explicit error is thrown as this was allowed in the past
+<span style="color:inherit;"> |</span>        throw(ArgumentError(&#34;passing a Tuple $(first(x)) as column selector is not &#34; *
+<span style="color:inherit;"> |</span>                            &#34;supported, use a vector $(collect(first(x))) instead&#34;))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-615,7 +615,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nms = Symbol[x.name for x in trans_res]
+<span style="color:inherit;"> |</span>    # this check is redundant given we check idx above
+<span style="color:inherit;"> |</span>    # but it is safer to double check and it is cheap
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert all(</span><span style="color:red;">x -> length(x)</span><span style="color:gray;"> == length(outcols[1]), outcols)</span></span>
+<span style="color:green;">+|</span></span>    @assert all(<span style="color:green;">length</span> == length(outcols[1]), outcols)</span>
+<span style="color:inherit;"> |</span>    return idx, DataFrame(outcols, nms, copycols=false)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-765,7 +765,7</span> ============================================================
@@ -382,27 +403,6 @@
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-37,8 +37,8</span> ============================================================
-<span style="color:inherit;"> |</span>            push!(cs_vec, p)
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:orange;">!|</span>    if any(x <span style="color:red;">-> x </span>isa Pair && first<span style="color:red;">(x)</span> isa Tuple, cs_vec)
-<span style="color:red;">-|</span></span><span style="color:gray;">        x = cs_vec[findfirst(</span><span style="color:red;">x -> first(x)</span><span style="color:gray;"> isa Tuple, cs_vec)]</span></span>
-<span style="color:green;">+|</span></span>        x = cs_vec[findfirst(<span style="color:green;">first</span> isa Tuple, cs_vec)]</span>
-<span style="color:inherit;"> |</span>        # an explicit error is thrown as this was allowed in the past
-<span style="color:inherit;"> |</span>        throw(ArgumentError(&#34;passing a Tuple $(first(x)) as column selector is not &#34; *
-<span style="color:inherit;"> |</span>                            &#34;supported, use a vector $(collect(first(x))) instead&#34;))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-615,7 +615,7</span> ============================================================
-<span style="color:inherit;"> |</span>    nms = Symbol[x.name for x in trans_res]
-<span style="color:inherit;"> |</span>    # this check is redundant given we check idx above
-<span style="color:inherit;"> |</span>    # but it is safer to double check and it is cheap
-<span style="color:red;">-|</span></span><span style="color:gray;">    @assert all(</span><span style="color:red;">x -> length(x)</span><span style="color:gray;"> == length(outcols[1]), outcols)</span></span>
-<span style="color:green;">+|</span></span>    @assert all(<span style="color:green;">length</span> == length(outcols[1]), outcols)</span>
-<span style="color:inherit;"> |</span>    return idx, DataFrame(outcols, nms, copycols=false)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">src/dataframerow/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/dataframerow/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-168,7 +168,7</span> ============================================================

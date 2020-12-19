@@ -1,4 +1,14 @@
-# display-lint
+<p align="center">
+  <img src="assets/diff.jpg">
+</p>
+
+<h1 align="center">
+  ShowLint
+</h1>
+
+<h3 align="center">
+  Showing static code analysis results for many repositories
+</h3>
 
 Linters have obvious benefits but, like any tool, can be hard to use.
 Not all users have the time to install a linter and inspect its output.

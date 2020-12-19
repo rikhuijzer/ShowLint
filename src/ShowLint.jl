@@ -265,7 +265,7 @@ function create_repo_pages(; debug=false)
             )
         end
     end
-    headers_path = joinpath(project_root, "__site", "pages-headers.txt")
+    headers_path = joinpath(project_root, "_assets", "pages-headers.txt")
     Serialization.serialize(headers_path, pages_headers)
     pages_headers
 end

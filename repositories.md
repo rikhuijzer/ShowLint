@@ -18,7 +18,7 @@ using ShowLint
 SL = ShowLint
 using Serialization
 
-headers_path = joinpath(SL.project_root, "_assets", "pages-headers.txt")
+headers_path = joinpath(SL.project_root, "__site", "pages-headers.txt")
 pages_headers = Serialization.deserialize(headers_path)
 ```
 

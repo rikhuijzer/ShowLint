@@ -236,7 +236,7 @@ We could process all the diffs when this function is called
 or when `serve` runs. It seems more flexible to do it as early
 as possible.
 """
-function create_repo_pages(; debug=false)
+function create_repo_pages()
     pages_headers = []
 
     for repo in repositories
@@ -265,7 +265,9 @@ function create_repo_pages(; debug=false)
             )
         end
     end
-    headers_path = joinpath(project_root, "_assets", "pages-headers.txt")
+    headers_dir = joinpath(project_root, "__site")
+    mkpath(headers_dir)
+    headers_path = joinpath(headers_dir, "pages-headers.txt")
     Serialization.serialize(headers_path, pages_headers)
     pages_headers
 end

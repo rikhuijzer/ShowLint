@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/diff.jpg">
+  <img src="_assets/diff.jpg">
 </p>
 
 <h1 align="center">

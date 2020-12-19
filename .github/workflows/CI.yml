@@ -55,6 +55,7 @@ jobs:
     - name: Build site (second pass)
       run: julia -e '
         using Pkg; Pkg.activate(".");
+        using Franklin;
         optimize();
         verify_links()'
 

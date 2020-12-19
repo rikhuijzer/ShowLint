@@ -21,6 +21,8 @@ repositories = [
     Repo("https://github.com", "JuliaData/Tables.jl", [default]),
     Repo("https://github.com", "JuliaData/YAML.jl", [default]),
     Repo("https://github.com", "JuliaDatabases/Redis.jl", [default]),
+    Repo("https://github.com", "JuliaDebug/Debugger.jl", [default]),
+    Repo("https://github.com", "JuliaLang/julia", [default]),
     Repo("https://github.com", "JuliaLang/PackageCompiler.jl", [default]),
     Repo("https://github.com", "JuliaPlots/Makie.jl", [default]),
     Repo("https://github.com", "JuliaPlots/Plots.jl", [default]),

@@ -44,10 +44,9 @@ for (repo, headers) in zip(repositories, pages_headers)
 
   println(
     """
-    ### $link_text
     ~~~
+    <h3><a href="$source_link" target="_blank">$link_text</a></h3>
     <div class="repo-nav">
-    <span> <i><a href="$source_link">$source_text</a></i> <br/></span>
     ~~~
     $sublinks_text
     ~~~

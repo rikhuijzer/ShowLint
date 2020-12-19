@@ -87,7 +87,7 @@ html {
 
 .franklin-toc li {
   /* Avoid clickable elements being too close together. */
-  margin: 1rem 0;
+  margin: 0.6rem 0;
   list-style-type: disc;
 }
 

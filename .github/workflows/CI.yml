@@ -41,23 +41,19 @@ jobs:
         using Pkg; Pkg.develop(path="."); 
         using ShowLint; ShowLint.clone_repositories();'
 
-    - name: Build site
+    - name: Build site (first pass)
       run: julia -e '
         using Pkg; Pkg.add(["NodeJS", "Franklin"]);
         using NodeJS; run(`$(npm_cmd()) install highlight.js`);
         using Franklin;
         Pkg.activate("."); Pkg.instantiate();
-        optimize();
-        verify_links()
-        ' > build.log
+        optimize()'
 
-    - name: Validate output
-      run: |
-        if grep -1 "Franklin Warning" build.log; then
-          echo "Franklin reported a warning"
-        else
-          echo "Franklin did not report a warning"
-        fi
+    - name: Build site (second pass)
+      run: julia -e '
+        Pkg.activate(".");
+        optimize();
+        verify_links()'
 
     - name: Deploy to secondary branch
       uses: peaceiris/actions-gh-pages@v3

@@ -245,8 +245,9 @@ as possible.
 function create_repo_pages(; debug=false)
     pages_headers = []
 
+    is_codex(r::Repo) = contains(r.name, "Codex.jl")
     filtered_repos = debug ? 
-        filter(r->contains(r.name,"Codex.jl"), repositories) :
+        filter(is_codex, repositories) :
         repositories
     for repo in filtered_repos
         if !isdir(host_dir(repo))

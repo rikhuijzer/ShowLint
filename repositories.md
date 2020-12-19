@@ -14,7 +14,7 @@ using Franklin
 using ShowLint
 SL = ShowLint
 
-debug = false
+debug = true
 
 if haskey(ENV, "CI")
   debug = false

@@ -110,6 +110,13 @@ function create_config(pat::Pattern, dir)::String
     name
 end
 
+function number_of_matches(err)
+    regex = r"\"number_of_matches\": ([0-9]*)"
+    m = match(regex, err)
+    n_str = m[1]
+    parse(Int, n_str)
+end
+
 """
     apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
 
@@ -128,18 +135,22 @@ function apply(pat::Pattern, repo::Repo;
     # Not pretty but it works.
     cmd = !in_place ? 
         `podman run
+        --rm
         --volume $configs_path:/configs
         --volume $repo_path:/repo
-        --rm
+        --entrypoint="sh"
         -it comby/comby
-        -config /configs/$name.toml
-        -directory /repo
-        -file-extensions $file_extensions
+        -c "comby \
+            -stats \
+            -config /configs/$name.toml \
+            -directory /repo -file-extensions $file_extensions \
+            2>/repo/stderr.log
+        "
         ` :
         `podman run
+        --rm
         --volume $configs_path:/configs
         --volume $repo_path:/repo
-        --rm
         -it comby/comby
         -config /configs/$name.toml
         -directory /repo
@@ -150,15 +161,20 @@ function apply(pat::Pattern, repo::Repo;
     stdout = IOBuffer()
     run(pipeline(cmd; stdout))
     out = String(take!(stdout))
+    err = ""
     function avoid_franklin_parse_errors(out)
         out = replace(out, '`' => "&#96;")
         out = replace(out, '"' => "&#34;")
+        out
     end
     if !in_place
         out = avoid_franklin_parse_errors(out)
-        out = ansi2html(out)
+        if !isnothing(out)
+            out = ansi2html(out)
+        end
+        err = read(joinpath(repo_path, "stderr.log"), String) 
     end
-    return out
+    return (out, err)
 end
 
 function repo_page(repo::Repo)::String
@@ -177,14 +193,15 @@ function repo_page(repo::Repo)::String
     filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
 
     function pattern_section(pat)
-        diff = ShowLint.apply(pat, repo)
+        diff, err = ShowLint.apply(pat, repo)
         title = pat.title
         id = pat.id
+        n_matches = number_of_matches(err)
         return diff == "" ? 
         "" : 
         """
         ### $title
-        [Pattern #$id](/patterns/#$id)
+        [Pattern #$id](/patterns/#$id), $n_matches matches:
 
         $diff
 

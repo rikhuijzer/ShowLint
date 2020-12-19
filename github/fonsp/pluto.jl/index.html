@@ -233,17 +233,7 @@
 <span style="color:inherit;"> |</span>        isenough(x) = x ≥ 0
 <span style="color:inherit;"> |</span>        filter!(isenough ∘ score, results) # too many candiates other</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant ><a href="#omit_comparison_with_boolean_constant">Omit comparison with boolean constant</a></h3> <p><a href="/patterns/#4">Pattern #4</a>, 137 matches:</p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-30,7 +30,7</span> ============================================================
-<span style="color:inherit;"> |</span>        update_save_run!(🍭, notebookA, notebookA.cells[1])
-<span style="color:inherit;"> |</span>        update_save_run!(🍭, notebookB, notebookB.cells[1])
-<span style="color:inherit;"> |</span>
-<span style="color:orange;">!|</span>        @test notebookB.cells[1].errored<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookA))
-<span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookB))
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
 <span style="color:inherit;"> |</span>    elseif header.opcode == WebSockets.WS_CONTINUATION
@@ -253,6 +243,16 @@
 <span style="color:inherit;"> |</span>            return view(ws.rxpayload, 1:l)
 <span style="color:inherit;"> |</span>        else
 <span style="color:inherit;"> |</span>            multi_message_data = UInt8[]
+<span style="color:red;">------ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-30,7 +30,7</span> ============================================================
+<span style="color:inherit;"> |</span>        update_save_run!(🍭, notebookA, notebookA.cells[1])
+<span style="color:inherit;"> |</span>        update_save_run!(🍭, notebookB, notebookB.cells[1])
+<span style="color:inherit;"> |</span>
+<span style="color:orange;">!|</span>        @test notebookB.cells[1].errored<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookA))
+<span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookB))
 <span style="color:red;">------ </span><span style="color:inherit;">test/React.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/React.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-42,12 +42,12</span> ============================================================

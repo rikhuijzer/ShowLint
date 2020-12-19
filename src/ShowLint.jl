@@ -39,6 +39,7 @@ function ansi2html(text)
   text = replace(text, r"WARNING: [^\n]*$" => "")
   text = replace(text, "/repo/" => "")
   text = replace(text, "" => "") 
+  text = replace(text, "<!" => "&#60;!")
   text = text[1:end-6]
   text = strip(text)
   return length(text) < 6 ? 
@@ -177,15 +178,24 @@ function apply(pat::Pattern, repo::Repo;
     return (out, err)
 end
 
-function repo_page(repo::Repo)::String
+function repo_page(repo::Repo)
     predicates_str = join(repo.tags_predicates, " && ")
+    headers = []
     head = """
         # $(repo.name)
+
         Showing patterns for which the `tags` satisfy:
         *$predicates_str*, and the pattern resulted in at least one match.
 
         \\toc
 
+        """ * raw"""
+        ```julia:preliminaries
+        using ShowLint
+        SL = ShowLint
+        repo = """ * """$repo
+        ```
+        \\output{preliminaries}
         """
 
     predicates = repo.tags_predicates
@@ -197,18 +207,30 @@ function repo_page(repo::Repo)::String
         title = pat.title
         id = pat.id
         n_matches = number_of_matches(err)
-        return diff == "" ? 
-        "" : 
-        """
-        ### $title
-        [Pattern #$id](/patterns/#$id), $n_matches matches:
+        n_text = n_matches == 1 ? "hit" : "hits"
+        unicode_em_space = " " 
+        header = "$title$(unicode_em_space)➤$(unicode_em_space)$n_matches $n_text"
 
-        $diff
+        if diff == ""
+            return ""
+        else
+            push!(headers, header)
+            return 
+            """
+            ### $header
+            [Pattern #$id](/patterns/#$id)
 
-        """
+            $diff
+
+            """
+        end
     end
     sections = pattern_section.(filtered_patterns)
-    join([head, sections...], '\n') 
+
+    return (
+        headers = headers,
+        text = join([head, sections...], '\n') 
+    )
 end
 
 """
@@ -216,11 +238,13 @@ end
 
 Create one webpage per repository.
 This step should happen before `serve()` is called.
-We could process all the diffs with this function is called
-or when `serve` runs. It seems less error prone to do it as early
+We could process all the diffs when this function is called
+or when `serve` runs. It seems more flexible to do it as early
 as possible.
 """
 function create_repo_pages(; debug=false)
+    pages_headers = []
+
     filtered_repos = debug ? 
         filter(r->contains(r.name,"Codex.jl"), repositories) :
         repositories
@@ -234,6 +258,9 @@ function create_repo_pages(; debug=false)
             mkdir(dirname(franklin_file))
         end
 
+        page_headers, page_text = repo_page(repo)
+        push!(pages_headers, page_headers)
+
         open(franklin_file, "w") do io
             write(io, """
                 +++
@@ -242,11 +269,23 @@ function create_repo_pages(; debug=false)
 
                 [//]: # (Generated file. Do not modify.)
 
-                $(repo_page(repo))
+                $page_text
                 """
             )
         end
     end
+    return pages_headers
+end
+
+"""
+    toc(repo::Repo)
+
+Copy the table of contents from the generated repo page.
+This is a bit of a hacky way to pass the number of matches
+per pattern per repository. 
+"""
+function toc(repo::Repo)
+    pages_headers = 1
 end
 
 end # module

@@ -1,0 +1,1 @@
+ShowLint.Repo("https://github.com", "jump-dev/JuMP.jl", Function[ShowLint.default])

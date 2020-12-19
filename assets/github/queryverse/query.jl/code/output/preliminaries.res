@@ -1,0 +1,1 @@
+ShowLint.Repo("https://github.com", "queryverse/Query.jl", Function[ShowLint.default])

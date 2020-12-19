@@ -1,0 +1,1 @@
+ShowLint.Repo("https://github.com", "JuliaData/Tables.jl", Function[ShowLint.default])

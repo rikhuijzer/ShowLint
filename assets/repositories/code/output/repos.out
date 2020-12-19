@@ -139,6 +139,29 @@
 </div>
 ~~~
 
+### JuliaDebug/Debugger.jl
+~~~
+<div class="repo-nav">
+<span> source: github <br/></span>
+~~~
+- [Use ismissing ➤ 4 hits](/github/juliadebug/debugger.jl/#use_ismissing_4_hits)
+~~~
+</div>
+~~~
+
+### JuliaLang/julia
+~~~
+<div class="repo-nav">
+<span> source: github <br/></span>
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 290 hits](/github/julialang/julia/#replace_arrayt1_with_vectort_290_hits)
+- [Use ismissing ➤ 18 hits](/github/julialang/julia/#use_ismissing_18_hits)
+- [Avoid x -> f(x) ➤ 28 hits](/github/julialang/julia/#avoid_x_-_fx_28_hits)
+- [Omit comparison with boolean constant ➤ 47 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_47_hits)
+~~~
+</div>
+~~~
+
 ### JuliaLang/PackageCompiler.jl
 ~~~
 <div class="repo-nav">

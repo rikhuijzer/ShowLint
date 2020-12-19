@@ -1,0 +1,1 @@
+ShowLint.Repo("https://github.com", "JuliaPlots/Makie.jl", Function[ShowLint.default])

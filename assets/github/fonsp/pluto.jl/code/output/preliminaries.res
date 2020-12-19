@@ -1,0 +1,1 @@
+ShowLint.Repo("https://github.com", "fonsp/Pluto.jl", Function[ShowLint.default])

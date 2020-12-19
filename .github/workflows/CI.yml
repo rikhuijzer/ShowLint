@@ -1,6 +1,9 @@
 name: CI
 
 on:
+  schedule:
+    # Sunday at 04:15.
+    - cron: "15 4 * * 0"
   push:
     branches:
       - main
@@ -51,7 +54,7 @@ jobs:
 
     - name: Build site (second pass)
       run: julia -e '
-        Pkg.activate(".");
+        using Pkg; Pkg.activate(".");
         optimize();
         verify_links()'
 

@@ -14,13 +14,7 @@ using Franklin
 using ShowLint
 SL = ShowLint
 
-debug = true
-
-if haskey(ENV, "CI")
-  debug = false
-end
-
-pages_headers = SL.create_repo_pages(; debug)
+pages_headers = SL.PAGES_HEADERS 
 ```
 
 ```julia:repos

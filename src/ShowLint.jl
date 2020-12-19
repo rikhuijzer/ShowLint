@@ -15,6 +15,8 @@ include("repositories.jl")
 
 const project_root = pwd()
 
+PAGES_HEADERS = nothing
+
 function ansi2html(text)
   escape_codes = Dict(
     "0;30" => "inherit",
@@ -82,7 +84,7 @@ function clone_repositories()
         dest = target_dir(repo)
         if isdir(dest)
             cd(dest)
-            run(`git pull`)
+            run(`git pull --ff-only`)
         else
             run(`git clone $host/$name $dest`)
         end
@@ -275,7 +277,7 @@ function create_repo_pages(; debug=false)
             )
         end
     end
-    return pages_headers
+    PAGES_HEADERS = pages_headers
 end
 
 """

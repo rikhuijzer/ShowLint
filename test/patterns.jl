@@ -36,6 +36,9 @@ import JSON
     @test apply(P[2], "x !== missing") == "!ismissing(x)"
     @test apply(P[3], "map(x -> f(x), A)") == "map(f, A)"
     @test apply(P[3], "y = x -> f(x)") == "y = f"
+
+    # @test unchanged(P[3], "y = x -> f(x) ? a : b")
+
     @test apply(P[4], "x == true") == "x"
     @test apply(P[4], "x == false") == "!x"
     @test apply(P[4], "x != false") == "!!x"

@@ -1,16 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaIO/JLD.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaIO/JLD.jl" target=_blank >JuliaIO/JLD.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/jldtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/jldtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-947,7 +947,7</span> ============================================================
-<span style="color:inherit;"> |</span>li, lidict = Profile.retrieve()
-<span style="color:inherit;"> |</span>f = tempname()*&#34;.jld&#34;
-<span style="color:inherit;"> |</span>@save f li lidict
-<span style="color:red;">-|</span></span><span style="color:gray;">@test isa(JLD.load(f)[&#34;lidict&#34;], Dict{UInt64,</span><span style="color:red;">Array</span><span style="color:gray;">{Base.StackFrame</span><span style="color:red;">,1</span><span style="color:gray;">}})</span></span>
-<span style="color:green;">+|</span></span>@test isa(JLD.load(f)[&#34;lidict&#34;], Dict{UInt64,<span style="color:green;">Vector</span>{Base.StackFrame}})</span>
-<span style="color:inherit;"> |</span>rm(f)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># Issue #173
-<span style="color:red;">------ </span><span style="color:inherit;">src/JLD00.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/JLD00.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/JLD00.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-563,10 +563,10</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -24,5 +13,16 @@
 <span style="color:green;">+|</span></span>            data::Array{<span style="color:green;">Vector</span>{T}}) where {T<:Union{HDF5.BitsType, String}} =</span>
 <span style="color:inherit;"> |</span>    write(parent, name, data, full_typename(typeof(data)))
 <span style="color:inherit;"> |</span>function write(parent::Union{JldFile, JldGroup}, name::String,
-<span style="color:inherit;"> |</span>                  data::HDF5.VLen{T}, astype::String) whe</div>
+<span style="color:inherit;"> |</span>                  data::HDF5.VLen{T}, astype::String) where T
+<span style="color:red;">------ </span><span style="color:inherit;">test/jldtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/jldtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-947,7 +947,7</span> ============================================================
+<span style="color:inherit;"> |</span>li, lidict = Profile.retrieve()
+<span style="color:inherit;"> |</span>f = tempname()*&#34;.jld&#34;
+<span style="color:inherit;"> |</span>@save f li lidict
+<span style="color:red;">-|</span></span><span style="color:gray;">@test isa(JLD.load(f)[&#34;lidict&#34;], Dict{UInt64,</span><span style="color:red;">Array</span><span style="color:gray;">{Base.StackFrame</span><span style="color:red;">,1</span><span style="color:gray;">}})</span></span>
+<span style="color:green;">+|</span></span>@test isa(JLD.load(f)[&#34;lidict&#34;], Dict{UInt64,<span style="color:green;">Vector</span>{Base.StackFrame}})</span>
+<span style="color:inherit;"> |</span>rm(f)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Issue</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

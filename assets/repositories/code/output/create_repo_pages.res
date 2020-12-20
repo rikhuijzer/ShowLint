@@ -1,4 +1,4 @@
-57-element Array{Any,1}:
+58-element Array{Any,1}:
  Any["Avoid x -> f(x) ➤ 1 hit"]
  Any["Replace Array{T,1} with Vector{T} ➤ 7 hits", "Avoid x -> f(x) ➤ 13 hits"]
  Any["Replace Array{T,1} with Vector{T} ➤ 4 hits", "Use ismissing ➤ 5 hits", "Avoid x -> f(x) ➤ 2 hits", "Omit comparison with boolean constant ➤ 2 hits"]
@@ -49,6 +49,7 @@
  Any["Omit comparison with boolean constant ➤ 1 hit"]
  Any["Omit comparison with boolean constant ➤ 1 hit"]
  Any["Replace Array{T,1} with Vector{T} ➤ 12 hits", "Use ismissing ➤ 3 hits", "Avoid x -> f(x) ➤ 3 hits", "Omit comparison with boolean constant ➤ 1 hit"]
+ Any[]
  Any[]
  Any[]
  Any[]

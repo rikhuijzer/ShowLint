@@ -5,7 +5,7 @@
 <span style="color:inherit;"> |</span>        println(io, &#34;\nComponent loadings&#34;)
 <span style="color:inherit;"> |</span>        printmat = round.(pca.loadings, digits=ndigitsmat)
 <span style="color:inherit;"> |</span>        
-<span style="color:red;">-|</span></span><span style="color:gray;">        if pca.</span><span style="color:red;">rnames !== missing</span>[0;7;2m </span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if pca.</span><span style="color:red;">rnames !== missing</span> </span></span>
 <span style="color:green;">+|</span></span>        if pca.<span style="color:green;">!ismissing(rnames)</span> </span>
 <span style="color:inherit;"> |</span>            pclabs = [Text(&#34;&#34;); Text.( &#34;PC$i&#34; for i in 1:length(pca.rnames))]
 <span style="color:inherit;"> |</span>            pclabs = reshape(pclabs, 1, :)

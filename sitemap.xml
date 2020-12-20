@@ -200,6 +200,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/rikhuijzer/showlint/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/statsmodels.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>

@@ -118,6 +118,35 @@
 <span style="color:inherit;"> |</span>    @test all(map(in(data_out), data_in))
 <span style="color:inherit;"> |</span>    @test length(data_out) == length(data_in)
 <span style="color:inherit;"> |</span>    let f17741 = x -> x < 0 ? false : 1
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # the local partition into the array when viewed as a single dimensional array.
+<span style="color:inherit;"> |</span>    # this can be removed when @distributed or its equivalent supports looping on
+<span style="color:inherit;"> |</span>    # a subset of workers.
+<span style="color:red;">-|</span></span><span style="color:gray;">    loc_subarr_1d::SubArray{T,1,</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{UnitRange{Int}},true}</span></span>
+<span style="color:green;">+|</span></span>    loc_subarr_1d::SubArray{T,1,<span style="color:green;">Vector</span>{T},Tuple{UnitRange{Int}},true}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function SharedArray{T,N}(d,p,r,sn,s) where {T,N}
+<span style="color:inherit;"> |</span>        S = new(RRID(),d,p,r,sn,s,0,view(Array{T}(undef, ntuple(d->0,N)), 1:0))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>SharedArray{T}(I::Integer...; kwargs...) where {T} =
+<span style="color:inherit;"> |</span>    SharedArray{T,length(I)}(I; kwargs...)
+<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer; kwargs...) where {T} =
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(m; kwargs...)</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">SharedVector</span>{T}(m; kwargs...)</span>
+<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer; kwargs...) where {T} =
+<span style="color:inherit;"> |</span>    SharedArray{T,2}(m, n; kwargs...)
+<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer, o::Integer; kwargs...) where {T} =
+<span style="color:inherit;">@|</span><span style="color:inherit;">-280,7 +280,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>A one-dimensional [&#96;SharedArray&#96;](@ref).
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">const SharedVector{T} = </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>const SharedVector{T} = <span style="color:green;">SharedVector</span>{T}</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    SharedMatrix
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/dict.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/dict.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-856,14 +856,14</span> ============================================================
@@ -137,35 +166,6 @@
 <span style="color:inherit;"> |</span>    @test isa(WeakKeyDict(Pair(convert(Vector{Number}, A),2), Pair(B,3), Pair(C,4)), WeakKeyDict{Any,Int})
 <span style="color:inherit;"> |</span>    @test copy(wkd) == wkd
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # the local partition into the array when viewed as a single dimensional array.
-<span style="color:inherit;"> |</span>    # this can be removed when @distributed or its equivalent supports looping on
-<span style="color:inherit;"> |</span>    # a subset of workers.
-<span style="color:red;">-|</span></span><span style="color:gray;">    loc_subarr_1d::SubArray{T,1,</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{UnitRange{Int}},true}</span></span>
-<span style="color:green;">+|</span></span>    loc_subarr_1d::SubArray{T,1,<span style="color:green;">Vector</span>{T},Tuple{UnitRange{Int}},true}</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    function SharedArray{T,N}(d,p,r,sn,s) where {T,N}
-<span style="color:inherit;"> |</span>        S = new(RRID(),d,p,r,sn,s,0,view(Array{T}(undef, ntuple(d->0,N)), 1:0))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>SharedArray{T}(I::Integer...; kwargs...) where {T} =
-<span style="color:inherit;"> |</span>    SharedArray{T,length(I)}(I; kwargs...)
-<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer; kwargs...) where {T} =
-<span style="color:red;">-|</span></span>[0;7;2m    </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(m; kwargs...)</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">SharedVector</span>{T}(m; kwargs...)</span>
-<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer; kwargs...) where {T} =
-<span style="color:inherit;"> |</span>    SharedArray{T,2}(m, n; kwargs...)
-<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer, o::Integer; kwargs...) where {T} =
-<span style="color:inherit;">@|</span><span style="color:inherit;">-280,7 +280,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>A one-dimensional [&#96;SharedArray&#96;](@ref).
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">const SharedVector{T} = </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>const SharedVector{T} = <span style="color:green;">SharedVector</span>{T}</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    SharedMatrix
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/specificity.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/specificity.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-72,8 +72,8</span> ============================================================
@@ -179,17 +179,6 @@
 <span style="color:inherit;"> |</span>@test _bound_vararg_specificity_1(Array{Int,2}, 1, 1) == 0
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># issue #21710
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-499,7 +499,7</span> ============================================================
-<span style="color:inherit;"> |</span>##### Array : internal functions
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># internal array-like type to circumevent the lack of flexibility with reinterpret
-<span style="color:red;">-|</span></span><span style="color:gray;">struct UnsafeView{T} <: </span><span style="color:red;">DenseArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>struct UnsafeView{T} <: <span style="color:green;">DenseVector</span>{T}</span>
-<span style="color:inherit;"> |</span>    ptr::Ptr{T}
-<span style="color:inherit;"> |</span>    len::Int
-<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/subtype.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/subtype.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-20,22 +20,22</span> ============================================================
@@ -456,7 +445,7 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>const menagerie =
 <span style="color:inherit;"> |</span>    Any[Bottom, Any, Int, Int8, Integer, Real,
-<span style="color:red;">-|</span></span>[0;7;2m        </span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}, </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}, </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
 <span style="color:green;">+|</span></span>        <span style="color:green;">Vector</span>{Int}, <span style="color:green;">AbstractVector</span>{Int},</span>
 <span style="color:inherit;"> |</span>        Tuple{Int,Vararg{Integer}}, Tuple{Integer,Vararg{Int}}, Tuple{},
 <span style="color:inherit;"> |</span>        Union{Int,Int8},
@@ -469,7 +458,7 @@
 <span style="color:inherit;"> |</span>        (@UnionAll T @UnionAll S Tuple{T,S}),
 <span style="color:inherit;"> |</span>        (@UnionAll T<:Integer @UnionAll S<:Number Tuple{T,S}),
 <span style="color:inherit;"> |</span>        (@UnionAll T<:Integer @UnionAll S<:Number Tuple{S,T}),
-<span style="color:red;">-|</span></span>[0;7;2m        </span><span style="color:red;">Array</span><span style="color:gray;">{(@UnionAll T Array{T,1})</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">Array</span><span style="color:gray;">{(@UnionAll T Array{T,1})</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
 <span style="color:green;">+|</span></span>        <span style="color:green;">Vector</span>{(@UnionAll T Array{T,1})},</span>
 <span style="color:red;">-|</span></span><span style="color:gray;">        (@UnionAll T </span><span style="color:red;">Array</span><span style="color:gray;">{Array{T,1}</span><span style="color:red;">,1</span><span style="color:gray;">}),</span></span>
 <span style="color:green;">+|</span></span>        (@UnionAll T <span style="color:green;">Vector</span>{Array{T,1}}),</span>
@@ -553,7 +542,7 @@
 <span style="color:inherit;"> |</span>                   Tuple{Ref{Ref{Int}}, Ref{Ref{Int}}})
 <span style="color:inherit;"> |</span>    @testintersect(Tuple{Vector{Pair{K,V}}, Vector{Pair{K,V}}} where K where V,
 <span style="color:red;">-|</span></span><span style="color:gray;">                   Tuple{(</span><span style="color:red;">Array</span><span style="color:gray;">{Pair{Ref{_2},_1}</span><span style="color:red;">,1</span><span style="color:gray;">} where _2 where _1),</span></span>
-<span style="color:red;">-|</span></span>[0;7;2m                         </span><span style="color:red;">Array</span><span style="color:gray;">{Pair{Ref{Int64},Rational{Int64}}</span><span style="color:red;">,1</span><span style="color:gray;">}},</span></span>
+<span style="color:red;">-|</span></span>                         </span><span style="color:red;">Array</span><span style="color:gray;">{Pair{Ref{Int64},Rational{Int64}}</span><span style="color:red;">,1</span><span style="color:gray;">}},</span></span>
 <span style="color:green;">+|</span></span>                   Tuple{(<span style="color:green;">Vector</span>{Pair{Ref{_2},_1}} where _2 where _1),</span>
 <span style="color:green;">+|</span></span>                         <span style="color:green;">Vector</span>{Pair{Ref{Int64},Rational{Int64}}}},</span>
 <span style="color:inherit;"> |</span>                   Tuple{Vector{Pair{Ref{Int64},Rational{Int64}}},
@@ -637,28 +626,17 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@testintersect(Tuple{Pair{Int, DataType}, Any},
 <span style="color:inherit;"> |</span>               Tuple{Pair{A, B} where B<:Type, Int} where A,
-<span style="color:red;">------ </span><span style="color:inherit;">test/testhelpers/OffsetArrays.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/testhelpers/OffsetArrays.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-424,7 +424,7</span> ============================================================
-<span style="color:inherit;"> |</span>    J = map(parentindex, axes(A), (i,j))
-<span style="color:inherit;"> |</span>    Base.replace_in_print_matrix(parent(A), J..., s)
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">-|</span></span><span style="color:gray;">function Base.replace_in_print_matrix(A::</span><span style="color:red;">OffsetArray</span><span style="color:gray;">{<:Any</span><span style="color:red;">,1</span><span style="color:gray;">}, i::Integer, j::Integer, s::AbstractString)</span></span>
-<span style="color:green;">+|</span></span>function Base.replace_in_print_matrix(A::<span style="color:green;">OffsetVector</span>{<:Any}, i::Integer, j::Integer, s::AbstractString)</span>
-<span style="color:inherit;"> |</span>    ip = parentindex(axes(A,1), i)
-<span style="color:inherit;"> |</span>    Base.replace_in_print_matrix(parent(A), ip, j, s)
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Test/test/runtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Test/test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-599,7 +599,7</span> ============================================================
-<span style="color:inherit;"> |</span>@test @inferred inferred_test_function()
-<span style="color:inherit;"> |</span>@test inferred_test_global == 1
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-499,7 +499,7</span> ============================================================
+<span style="color:inherit;"> |</span>##### Array : internal functions
 <span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">struct SillyArray <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">} end</span></span>
-<span style="color:green;">+|</span></span>struct SillyArray <: <span style="color:green;">AbstractVector</span>{Float64} end</span>
-<span style="color:inherit;"> |</span>Base.getindex(a::SillyArray, i) = rand() > 0.5 ? 0 : false
-<span style="color:inherit;"> |</span>@testset &#34;@inferred works with A[i] expressions&#34; begin
-<span style="color:inherit;"> |</span>    @test (@inferred (1:3)[2]) == 2
+<span style="color:inherit;"> |</span># internal array-like type to circumevent the lack of flexibility with reinterpret
+<span style="color:red;">-|</span></span><span style="color:gray;">struct UnsafeView{T} <: </span><span style="color:red;">DenseArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>struct UnsafeView{T} <: <span style="color:green;">DenseVector</span>{T}</span>
+<span style="color:inherit;"> |</span>    ptr::Ptr{T}
+<span style="color:inherit;"> |</span>    len::Int
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/precompile.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/precompile.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-265,7 +265,7</span> ============================================================
@@ -679,6 +657,17 @@
 <span style="color:inherit;"> |</span>        @test pointer_from_objref(ft(PV)[1]) ===
 <span style="color:inherit;"> |</span>              pointer_from_objref(ft(ft(ft(PV)[1].parameters[1])[1])[1])
 <span style="color:inherit;"> |</span>        @test PV === ft(ft(PV)[1].parameters[1])[1]
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Test/test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Test/test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-599,7 +599,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test @inferred inferred_test_function()
+<span style="color:inherit;"> |</span>@test inferred_test_global == 1
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">struct SillyArray <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">} end</span></span>
+<span style="color:green;">+|</span></span>struct SillyArray <: <span style="color:green;">AbstractVector</span>{Float64} end</span>
+<span style="color:inherit;"> |</span>Base.getindex(a::SillyArray, i) = rand() > 0.5 ? 0 : false
+<span style="color:inherit;"> |</span>@testset &#34;@inferred works with A[i] expressions&#34; begin
+<span style="color:inherit;"> |</span>    @test (@inferred (1:3)[2]) == 2
 <span style="color:red;">------ </span><span style="color:inherit;">test/strings/basic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/strings/basic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-374,7 +374,7</span> ============================================================
@@ -699,19 +688,17 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @test gstr[1] == '1'
 <span style="color:inherit;"> |</span>    @test gstr[1:1] == &#34;1&#34;
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/InteractiveUtils/test/runtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/InteractiveUtils/test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-127,8 +127,8</span> ============================================================
-<span style="color:inherit;"> |</span>    b = @code_lowered 1 + 1
-<span style="color:inherit;"> |</span>    @test isa(a, Pair{Core.CodeInfo, DataType})
-<span style="color:inherit;"> |</span>    @test isa(b, Core.CodeInfo)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test isa(a[1].code, </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>    @test isa(a[1].code, <span style="color:green;">Vector</span>{Any})</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test isa(b.code, </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>    @test isa(b.code, <span style="color:green;">Vector</span>{Any})</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    function thing(a::Array, b::Real)
-<span style="color:inherit;"> |</span>        println(&#34;thing&#34;)
+<span style="color:red;">------ </span><span style="color:inherit;">test/testhelpers/OffsetArrays.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/testhelpers/OffsetArrays.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-424,7 +424,7</span> ============================================================
+<span style="color:inherit;"> |</span>    J = map(parentindex, axes(A), (i,j))
+<span style="color:inherit;"> |</span>    Base.replace_in_print_matrix(parent(A), J..., s)
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">-|</span></span><span style="color:gray;">function Base.replace_in_print_matrix(A::</span><span style="color:red;">OffsetArray</span><span style="color:gray;">{<:Any</span><span style="color:red;">,1</span><span style="color:gray;">}, i::Integer, j::Integer, s::AbstractString)</span></span>
+<span style="color:green;">+|</span></span>function Base.replace_in_print_matrix(A::<span style="color:green;">OffsetVector</span>{<:Any}, i::Integer, j::Integer, s::AbstractString)</span>
+<span style="color:inherit;"> |</span>    ip = parentindex(axes(A,1), i)
+<span style="color:inherit;"> |</span>    Base.replace_in_print_matrix(parent(A), ip, j, s)
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/threads_exec.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/threads_exec.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-80,7 +80,7</span> ============================================================
@@ -737,6 +724,19 @@
 <span style="color:inherit;"> |</span>                      (Union{String, T} where T), Ref{Ref{T} where T}, (Ref{Ref{T}} where T),
 <span style="color:inherit;"> |</span>                      (Vector{T} where T<:Real), (Vector{T} where T<:Integer),
 <span style="color:inherit;"> |</span>                      (Vector{T} where T>:Integer),
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/InteractiveUtils/test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/InteractiveUtils/test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-127,8 +127,8</span> ============================================================
+<span style="color:inherit;"> |</span>    b = @code_lowered 1 + 1
+<span style="color:inherit;"> |</span>    @test isa(a, Pair{Core.CodeInfo, DataType})
+<span style="color:inherit;"> |</span>    @test isa(b, Core.CodeInfo)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test isa(a[1].code, </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>    @test isa(a[1].code, <span style="color:green;">Vector</span>{Any})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test isa(b.code, </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>    @test isa(b.code, <span style="color:green;">Vector</span>{Any})</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function thing(a::Array, b::Real)
+<span style="color:inherit;"> |</span>        println(&#34;thing&#34;)
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/LibGit2/src/oid.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/LibGit2/src/oid.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-23,7 +23,7</span> ============================================================
@@ -971,34 +971,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>const BASE_TEST_PATH = joinpath(Sys.BINDIR, &#34;..&#34;, &#34;share&#34;, &#34;julia&#34;, &#34;test&#34;)
 <span style="color:inherit;"> |</span>isdefined(Main, :OffsetArrays) || @eval Main @everywhere include(joinpath($(BASE_TEST_PATH), &#34;testhelpers&#34;, &#34;OffsetArrays.jl&#34;))
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Distributed/src/cluster.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Distributed/src/cluster.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-95,8 +95,8</span> ============================================================
-<span style="color:inherit;"> |</span>@enum WorkerState W_CREATED W_CONNECTED W_TERMINATING W_TERMINATED
-<span style="color:inherit;"> |</span>mutable struct Worker
-<span style="color:inherit;"> |</span>    id::Int
-<span style="color:red;">-|</span></span><span style="color:gray;">    del_msgs::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    del_msgs::<span style="color:green;">Vector</span>{Any}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    add_msgs::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    add_msgs::<span style="color:green;">Vector</span>{Any}</span>
-<span style="color:inherit;"> |</span>    gcflag::Bool
-<span style="color:inherit;"> |</span>    state::WorkerState
-<span style="color:inherit;"> |</span>    c_state::Condition      # wait for state changes
-<span style="color:inherit;">@|</span><span style="color:inherit;">-774,12 +774,12</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>mutable struct ProcessGroup
-<span style="color:inherit;"> |</span>    name::String
-<span style="color:red;">-|</span></span><span style="color:gray;">    workers::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    workers::<span style="color:green;">Vector</span>{Any}</span>
-<span style="color:inherit;"> |</span>    refs::Dict{RRID,Any}                  # global references
-<span style="color:inherit;"> |</span>    topology::Symbol
-<span style="color:inherit;"> |</span>    lazy::Union{Bool, Nothing}
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    ProcessGroup(w::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}) = new(&#34;pg-default&#34;, w, Dict(), :all_to_all, nothing)</span></span>
-<span style="color:green;">+|</span></span>    ProcessGroup(w::<span style="color:green;">Vector</span>{Any}) = new(&#34;pg-default&#34;, w, Dict(), :all_to_all, nothing)</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>const PGRP = ProcessGroup([])
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">base/reflection.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/reflection.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-96,7 +96,7</span> ============================================================
@@ -1073,6 +1045,115 @@
 <span style="color:inherit;"> |</span>                           sv::Union{InferenceState,Nothing})
 <span style="color:inherit;"> |</span>    if f === tuple
 <span style="color:inherit;"> |</span>        return tuple_tfunc(argtypes)
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Distributed/src/cluster.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Distributed/src/cluster.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-95,8 +95,8</span> ============================================================
+<span style="color:inherit;"> |</span>@enum WorkerState W_CREATED W_CONNECTED W_TERMINATING W_TERMINATED
+<span style="color:inherit;"> |</span>mutable struct Worker
+<span style="color:inherit;"> |</span>    id::Int
+<span style="color:red;">-|</span></span><span style="color:gray;">    del_msgs::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    del_msgs::<span style="color:green;">Vector</span>{Any}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    add_msgs::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    add_msgs::<span style="color:green;">Vector</span>{Any}</span>
+<span style="color:inherit;"> |</span>    gcflag::Bool
+<span style="color:inherit;"> |</span>    state::WorkerState
+<span style="color:inherit;"> |</span>    c_state::Condition      # wait for state changes
+<span style="color:inherit;">@|</span><span style="color:inherit;">-774,12 +774,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>mutable struct ProcessGroup
+<span style="color:inherit;"> |</span>    name::String
+<span style="color:red;">-|</span></span><span style="color:gray;">    workers::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    workers::<span style="color:green;">Vector</span>{Any}</span>
+<span style="color:inherit;"> |</span>    refs::Dict{RRID,Any}                  # global references
+<span style="color:inherit;"> |</span>    topology::Symbol
+<span style="color:inherit;"> |</span>    lazy::Union{Bool, Nothing}
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    ProcessGroup(w::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}) = new(&#34;pg-default&#34;, w, Dict(), :all_to_all, nothing)</span></span>
+<span style="color:green;">+|</span></span>    ProcessGroup(w::<span style="color:green;">Vector</span>{Any}) = new(&#34;pg-default&#34;, w, Dict(), :all_to_all, nothing)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>const PGRP = ProcessGroup([])
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/utilities.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/utilities.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-36,7 +36,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return false
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">anymap(f::Function, a::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}) = Any[ f(a[i]) for i in 1:length(a) ]</span></span>
+<span style="color:green;">+|</span></span>anymap(f::Function, a::<span style="color:green;">Vector</span>{Any}) = Any[ f(a[i]) for i in 1:length(a) ]</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>###########
+<span style="color:inherit;"> |</span># scoping #
+<span style="color:inherit;">@|</span><span style="color:inherit;">-123,7 +123,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    if c === nothing && isdefined(m, :source)
+<span style="color:inherit;"> |</span>        src = m.source
+<span style="color:red;">-|</span></span><span style="color:gray;">        if isa(src, </span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>        if isa(src, <span style="color:green;">Vector</span>{UInt8})</span>
+<span style="color:inherit;"> |</span>            c = ccall(:jl_uncompress_ir, Any, (Any, Ptr{Cvoid}, Any), m, C_NULL, src)
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            c = copy(src::CodeInfo)
+<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/typeutils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/typeutils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-43,7 +43,7</span> ============================================================
+<span style="color:inherit;"> |</span># certain combinations of &#96;a&#96; and &#96;b&#96; where one/both isa/are &#96;Union&#96;/&#96;UnionAll&#96; type(s)s.
+<span style="color:inherit;"> |</span>isnotbrokensubtype(@nospecialize(a), @nospecialize(b)) = (!iskindtype(b) || !isType(a) || hasuniquerep(a.parameters[1]) || b <: a)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">argtypes_to_type(argtypes::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}) = Tuple{anymap(widenconst, argtypes)...}</span></span>
+<span style="color:green;">+|</span></span>argtypes_to_type(argtypes::<span style="color:green;">Vector</span>{Any}) = Tuple{anymap(widenconst, argtypes)...}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function isknownlength(t::DataType)
+<span style="color:inherit;"> |</span>    isvatuple(t) || return true
+<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/typeinfer.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/typeinfer.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
+<span style="color:inherit;"> |</span>    start_time::UInt64
+<span style="color:inherit;"> |</span>    cur_start_time::UInt64
+<span style="color:inherit;"> |</span>    time::UInt64
+<span style="color:red;">-|</span></span><span style="color:gray;">    children::Core.</span><span style="color:red;">Array</span><span style="color:gray;">{Timing</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    children::Core.<span style="color:green;">Vector</span>{Timing}</span>
+<span style="color:inherit;"> |</span>    bt         # backtrace collected upon initial entry to typeinf
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>Timing(mi_info, start_time, cur_start_time, time, children) = Timing(mi_info, start_time, cur_start_time, time, children, nothing)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-466,7 +466,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return src
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function annotate_slot_load!(e::Expr, vtypes::VarTable, sv::InferenceState, undefs::</span><span style="color:red;">Array</span><span style="color:gray;">{Bool</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function annotate_slot_load!(e::Expr, vtypes::VarTable, sv::InferenceState, undefs::<span style="color:green;">Vector</span>{Bool})</span>
+<span style="color:inherit;"> |</span>    head = e.head
+<span style="color:inherit;"> |</span>    i0 = 1
+<span style="color:inherit;"> |</span>    if is_meta_expr_head(head) || head === :const
+<span style="color:inherit;">@|</span><span style="color:inherit;">-485,7 +485,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function annotate_slot_load(@nospecialize(e), vtypes::VarTable, sv::InferenceState, undefs::</span><span style="color:red;">Array</span><span style="color:gray;">{Bool</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function annotate_slot_load(@nospecialize(e), vtypes::VarTable, sv::InferenceState, undefs::<span style="color:green;">Vector</span>{Bool})</span>
+<span style="color:inherit;"> |</span>    if isa(e, Expr)
+<span style="color:inherit;"> |</span>        annotate_slot_load!(e, vtypes, sv, undefs)
+<span style="color:inherit;"> |</span>    elseif isa(e, Slot)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-494,7 +494,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return e
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function visit_slot_load!(sl::Slot, vtypes::VarTable, sv::InferenceState, undefs::</span><span style="color:red;">Array</span><span style="color:gray;">{Bool</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function visit_slot_load!(sl::Slot, vtypes::VarTable, sv::InferenceState, undefs::<span style="color:green;">Vector</span>{Bool})</span>
+<span style="color:inherit;"> |</span>    id = slot_id(sl)
+<span style="color:inherit;"> |</span>    s = vtypes[id]
+<span style="color:inherit;"> |</span>    vt = widenconditional(s.typ)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-568,9 +568,9</span> ============================================================
+<span style="color:inherit;"> |</span>    src = sv.src
+<span style="color:inherit;"> |</span>    states = sv.stmt_types
+<span style="color:inherit;"> |</span>    nargs = sv.nargs
+<span style="color:red;">-|</span></span><span style="color:gray;">    nslots = length(states[1]::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>    nslots = length(states[1]::<span style="color:green;">Vector</span>{Any})</span>
+<span style="color:inherit;"> |</span>    undefs = fill(false, nslots)
+<span style="color:red;">-|</span></span><span style="color:gray;">    body = src.code::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    body = src.code::<span style="color:green;">Vector</span>{Any}</span>
+<span style="color:inherit;"> |</span>    nexpr = length(body)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # replace GotoIfNot with its condition if the branch target is unreachable
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/SHA/src/types.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/SHA/src/types.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-10,35 +10,35</span> ============================================================
@@ -1163,37 +1244,26 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function Base.getproperty(ctx::SHA3_CTX, fieldname::Symbol)
-<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/utilities.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/utilities.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-36,7 +36,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return false
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">anymap(f::Function, a::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}) = Any[ f(a[i]) for i in 1:length(a) ]</span></span>
-<span style="color:green;">+|</span></span>anymap(f::Function, a::<span style="color:green;">Vector</span>{Any}) = Any[ f(a[i]) for i in 1:length(a) ]</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>###########
-<span style="color:inherit;"> |</span># scoping #
-<span style="color:inherit;">@|</span><span style="color:inherit;">-123,7 +123,7</span> ============================================================
+<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/abstractinterpretation.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/abstractinterpretation.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-93,7 +93,7</span> ============================================================
+<span style="color:inherit;"> |</span>        valid_worlds = matches.valid_worlds
 <span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    if c === nothing && isdefined(m, :source)
-<span style="color:inherit;"> |</span>        src = m.source
-<span style="color:red;">-|</span></span><span style="color:gray;">        if isa(src, </span><span style="color:red;">Array</span><span style="color:gray;">{UInt8</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>        if isa(src, <span style="color:green;">Vector</span>{UInt8})</span>
-<span style="color:inherit;"> |</span>            c = ccall(:jl_uncompress_ir, Any, (Any, Ptr{Cvoid}, Any), m, C_NULL, src)
-<span style="color:inherit;"> |</span>        else
-<span style="color:inherit;"> |</span>            c = copy(src::CodeInfo)
-<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/typeutils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/typeutils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-43,7 +43,7</span> ============================================================
-<span style="color:inherit;"> |</span># certain combinations of &#96;a&#96; and &#96;b&#96; where one/both isa/are &#96;Union&#96;/&#96;UnionAll&#96; type(s)s.
-<span style="color:inherit;"> |</span>isnotbrokensubtype(@nospecialize(a), @nospecialize(b)) = (!iskindtype(b) || !isType(a) || hasuniquerep(a.parameters[1]) || b <: a)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">argtypes_to_type(argtypes::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}) = Tuple{anymap(widenconst, argtypes)...}</span></span>
-<span style="color:green;">+|</span></span>argtypes_to_type(argtypes::<span style="color:green;">Vector</span>{Any}) = Tuple{anymap(widenconst, argtypes)...}</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function isknownlength(t::DataType)
-<span style="color:inherit;"> |</span>    isvatuple(t) || return true
+<span style="color:inherit;"> |</span>    update_valid_age!(sv, valid_worlds)
+<span style="color:red;">-|</span></span><span style="color:gray;">    applicable = applicable::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    applicable = applicable::<span style="color:green;">Vector</span>{Any}</span>
+<span style="color:inherit;"> |</span>    napplicable = length(applicable)
+<span style="color:inherit;"> |</span>    rettype = Bottom
+<span style="color:inherit;"> |</span>    edgecycle = false
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1364,7 +1364,7</span> ============================================================
+<span style="color:inherit;"> |</span>                frame.cur_hand = Pair{Any,Any}(l, frame.cur_hand)
+<span style="color:inherit;"> |</span>                # propagate type info to exception handler
+<span style="color:inherit;"> |</span>                old = s[l]
+<span style="color:red;">-|</span></span><span style="color:gray;">                new = s[pc]::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>                new = s[pc]::<span style="color:green;">Vector</span>{Any}</span>
+<span style="color:inherit;"> |</span>                newstate_catch = stupdate!(old, new)
+<span style="color:inherit;"> |</span>                if newstate_catch !== false
+<span style="color:inherit;"> |</span>                    if l < frame.pc´´
 <span style="color:red;">------ </span><span style="color:inherit;">base/indices.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/indices.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-239,10 +239,10</span> ============================================================
@@ -1225,67 +1295,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>unsafe_wrap(Atype::Type, p::Ptr, dims::NTuple{N,<:Integer}; own::Bool = false) where {N} =
 <span style="color:inherit;"> |</span>    unsafe_wrap(Atype, p, convert(Tuple{Vararg{Int}}, dims), own = own)
-<span style="color:red;">------ </span><span style="color:inherit;">base/baseext.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/baseext.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
-<span style="color:inherit;"> |</span>Matrix{T}(::UndefInitializer, m::Integer, n::Integer) where {T} = Matrix{T}(undef, Int(m), Int(n))
-<span style="color:inherit;"> |</span>Array{T,N}(::UndefInitializer, d::Vararg{Integer,N}) where {T,N} = Array{T,N}(undef, convert(Tuple{Vararg{Int}}, d))
-<span style="color:inherit;"> |</span># type but not dimensionality specified, accepting dims as series of Integers
-<span style="color:red;">-|</span></span><span style="color:gray;">Array{T}(::UndefInitializer, m::Integer) where {T} = </span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, Int(m))</span></span>
-<span style="color:green;">+|</span></span>Array{T}(::UndefInitializer, m::Integer) where {T} = <span style="color:green;">Vector</span>{T}(undef, Int(m))</span>
-<span style="color:inherit;"> |</span>Array{T}(::UndefInitializer, m::Integer, n::Integer) where {T} = Array{T,2}(undef, Int(m), Int(n))
-<span style="color:inherit;"> |</span>Array{T}(::UndefInitializer, m::Integer, n::Integer, o::Integer) where {T} = Array{T,3}(undef, Int(m), Int(n), Int(o))
-<span style="color:inherit;"> |</span>Array{T}(::UndefInitializer, d::Integer...) where {T} = Array{T}(undef, convert(Tuple{Vararg{Int}}, d))
-<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/typeinfer.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/typeinfer.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
-<span style="color:inherit;"> |</span>    start_time::UInt64
-<span style="color:inherit;"> |</span>    cur_start_time::UInt64
-<span style="color:inherit;"> |</span>    time::UInt64
-<span style="color:red;">-|</span></span><span style="color:gray;">    children::Core.</span><span style="color:red;">Array</span><span style="color:gray;">{Timing</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    children::Core.<span style="color:green;">Vector</span>{Timing}</span>
-<span style="color:inherit;"> |</span>    bt         # backtrace collected upon initial entry to typeinf
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>Timing(mi_info, start_time, cur_start_time, time, children) = Timing(mi_info, start_time, cur_start_time, time, children, nothing)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-466,7 +466,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return src
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function annotate_slot_load!(e::Expr, vtypes::VarTable, sv::InferenceState, undefs::</span><span style="color:red;">Array</span><span style="color:gray;">{Bool</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>function annotate_slot_load!(e::Expr, vtypes::VarTable, sv::InferenceState, undefs::<span style="color:green;">Vector</span>{Bool})</span>
-<span style="color:inherit;"> |</span>    head = e.head
-<span style="color:inherit;"> |</span>    i0 = 1
-<span style="color:inherit;"> |</span>    if is_meta_expr_head(head) || head === :const
-<span style="color:inherit;">@|</span><span style="color:inherit;">-485,7 +485,7</span> ============================================================
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function annotate_slot_load(@nospecialize(e), vtypes::VarTable, sv::InferenceState, undefs::</span><span style="color:red;">Array</span><span style="color:gray;">{Bool</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>function annotate_slot_load(@nospecialize(e), vtypes::VarTable, sv::InferenceState, undefs::<span style="color:green;">Vector</span>{Bool})</span>
-<span style="color:inherit;"> |</span>    if isa(e, Expr)
-<span style="color:inherit;"> |</span>        annotate_slot_load!(e, vtypes, sv, undefs)
-<span style="color:inherit;"> |</span>    elseif isa(e, Slot)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-494,7 +494,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return e
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function visit_slot_load!(sl::Slot, vtypes::VarTable, sv::InferenceState, undefs::</span><span style="color:red;">Array</span><span style="color:gray;">{Bool</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>function visit_slot_load!(sl::Slot, vtypes::VarTable, sv::InferenceState, undefs::<span style="color:green;">Vector</span>{Bool})</span>
-<span style="color:inherit;"> |</span>    id = slot_id(sl)
-<span style="color:inherit;"> |</span>    s = vtypes[id]
-<span style="color:inherit;"> |</span>    vt = widenconditional(s.typ)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-568,9 +568,9</span> ============================================================
-<span style="color:inherit;"> |</span>    src = sv.src
-<span style="color:inherit;"> |</span>    states = sv.stmt_types
-<span style="color:inherit;"> |</span>    nargs = sv.nargs
-<span style="color:red;">-|</span></span><span style="color:gray;">    nslots = length(states[1]::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>    nslots = length(states[1]::<span style="color:green;">Vector</span>{Any})</span>
-<span style="color:inherit;"> |</span>    undefs = fill(false, nslots)
-<span style="color:red;">-|</span></span><span style="color:gray;">    body = src.code::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    body = src.code::<span style="color:green;">Vector</span>{Any}</span>
-<span style="color:inherit;"> |</span>    nexpr = length(body)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # replace GotoIfNot with its condition if the branch target is unreachable
 <span style="color:red;">------ </span><span style="color:inherit;">base/tuple.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/tuple.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-28,8 +28,8</span> ============================================================
@@ -1299,26 +1308,17 @@
 <span style="color:inherit;"> |</span>getindex(t::Tuple, c::Colon) = t
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># returns new tuple; N.B.: becomes no-op if i is out-of-bounds
-<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/abstractinterpretation.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/abstractinterpretation.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-93,7 +93,7</span> ============================================================
-<span style="color:inherit;"> |</span>        valid_worlds = matches.valid_worlds
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    update_valid_age!(sv, valid_worlds)
-<span style="color:red;">-|</span></span><span style="color:gray;">    applicable = applicable::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    applicable = applicable::<span style="color:green;">Vector</span>{Any}</span>
-<span style="color:inherit;"> |</span>    napplicable = length(applicable)
-<span style="color:inherit;"> |</span>    rettype = Bottom
-<span style="color:inherit;"> |</span>    edgecycle = false
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1364,7 +1364,7</span> ============================================================
-<span style="color:inherit;"> |</span>                frame.cur_hand = Pair{Any,Any}(l, frame.cur_hand)
-<span style="color:inherit;"> |</span>                # propagate type info to exception handler
-<span style="color:inherit;"> |</span>                old = s[l]
-<span style="color:red;">-|</span></span><span style="color:gray;">                new = s[pc]::</span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>                new = s[pc]::<span style="color:green;">Vector</span>{Any}</span>
-<span style="color:inherit;"> |</span>                newstate_catch = stupdate!(old, new)
-<span style="color:inherit;"> |</span>                if newstate_catch !== false
-<span style="color:inherit;"> |</span>                    if l < frame.pc´´
+<span style="color:red;">------ </span><span style="color:inherit;">base/baseext.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/baseext.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
+<span style="color:inherit;"> |</span>Matrix{T}(::UndefInitializer, m::Integer, n::Integer) where {T} = Matrix{T}(undef, Int(m), Int(n))
+<span style="color:inherit;"> |</span>Array{T,N}(::UndefInitializer, d::Vararg{Integer,N}) where {T,N} = Array{T,N}(undef, convert(Tuple{Vararg{Int}}, d))
+<span style="color:inherit;"> |</span># type but not dimensionality specified, accepting dims as series of Integers
+<span style="color:red;">-|</span></span><span style="color:gray;">Array{T}(::UndefInitializer, m::Integer) where {T} = </span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, Int(m))</span></span>
+<span style="color:green;">+|</span></span>Array{T}(::UndefInitializer, m::Integer) where {T} = <span style="color:green;">Vector</span>{T}(undef, Int(m))</span>
+<span style="color:inherit;"> |</span>Array{T}(::UndefInitializer, m::Integer, n::Integer) where {T} = Array{T,2}(undef, Int(m), Int(n))
+<span style="color:inherit;"> |</span>Array{T}(::UndefInitializer, m::Integer, n::Integer, o::Integer) where {T} = Array{T,3}(undef, Int(m), Int(n), Int(o))
+<span style="color:inherit;"> |</span>Array{T}(::UndefInitializer, d::Integer...) where {T} = Array{T}(undef, convert(Tuple{Vararg{Int}}, d))
 <span style="color:red;">------ </span><span style="color:inherit;">base/compiler/inferencestate.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/inferencestate.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-56,7 +56,7</span> ============================================================
@@ -1454,17 +1454,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>isexpr(x, h::Symbol) = isa(x, Expr) && x.head === h
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">base/Base.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/Base.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># to start, we're going to use a very simple definition of &#96;include&#96;
-<span style="color:inherit;"> |</span># that doesn't require any function (except what we can get from the &#96;Core&#96; top-module)
-<span style="color:red;">-|</span></span><span style="color:gray;">const _included_files = </span><span style="color:red;">Array</span><span style="color:gray;">{Tuple{Module,String}</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
-<span style="color:green;">+|</span></span>const _included_files = <span style="color:green;">Vector</span>{Tuple{Module,String}}()</span>
-<span style="color:inherit;"> |</span>function include(mod::Module, path::String)
-<span style="color:inherit;"> |</span>    ccall(:jl_array_grow_end, Cvoid, (Any, UInt), _included_files, UInt(1))
-<span style="color:inherit;"> |</span>    Core.arrayset(true, _included_files, (mod, ccall(:jl_prepend_cwd, Any, (Any,), path)), arraylen(_included_files))
 <span style="color:red;">------ </span><span style="color:inherit;">base/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-20,7 +20,7</span> ============================================================
@@ -1562,6 +1551,17 @@
 <span style="color:inherit;"> |</span>    d.count += inserted[]
 <span style="color:inherit;"> |</span>    return d
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">base/Base.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/Base.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># to start, we're going to use a very simple definition of &#96;include&#96;
+<span style="color:inherit;"> |</span># that doesn't require any function (except what we can get from the &#96;Core&#96; top-module)
+<span style="color:red;">-|</span></span><span style="color:gray;">const _included_files = </span><span style="color:red;">Array</span><span style="color:gray;">{Tuple{Module,String}</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
+<span style="color:green;">+|</span></span>const _included_files = <span style="color:green;">Vector</span>{Tuple{Module,String}}()</span>
+<span style="color:inherit;"> |</span>function include(mod::Module, path::String)
+<span style="color:inherit;"> |</span>    ccall(:jl_array_grow_end, Cvoid, (Any, UInt), _included_files, UInt(1))
+<span style="color:inherit;"> |</span>    Core.arrayset(true, _included_files, (mod, ccall(:jl_prepend_cwd, Any, (Any,), path)), arraylen(_included_files))
 <span style="color:red;">------ </span><span style="color:inherit;">base/expr.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/expr.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-58,9 +58,9</span> ============================================================
@@ -1627,6 +1627,26 @@
 <span style="color:inherit;"> |</span>_maybe_reshape_parent(A::AbstractArray{<:Any,N}, ::NTuple{N, Bool}) where {N} = A
 <span style="color:inherit;"> |</span>_maybe_reshape_parent(A::AbstractArray, ::NTuple{N, Bool}) where {N} = reshape(A, Val(N))
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">base/range.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/range.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-140,7 +140,7</span> ============================================================
+<span style="color:inherit;"> |</span>Supertype for ranges with elements of type &#96;T&#96;.
+<span style="color:inherit;"> |</span>[&#96;UnitRange&#96;](@ref) and other types are subtypes of this.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">abstract type AbstractRange{T} <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">} end</span></span>
+<span style="color:green;">+|</span></span>abstract type AbstractRange{T} <: <span style="color:green;">AbstractVector</span>{T} end</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>RangeStepStyle(::Type{<:AbstractRange}) = RangeStepIrregular()
+<span style="color:inherit;"> |</span>RangeStepStyle(::Type{<:AbstractRange{<:Integer}}) = RangeStepRegular()
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1036,7 +1036,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return a
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(r::AbstractRange{T}) where {T} = vcat(r)</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">Vector</span>{T}(r::AbstractRange{T}) where {T} = vcat(r)</span>
+<span style="color:inherit;"> |</span>collect(r::AbstractRange) = vcat(r)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>_reverse(r::OrdinalRange, ::Colon) = (:)(last(r), -step(r), first(r))
 <span style="color:red;">------ </span><span style="color:inherit;">base/asyncmap.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/asyncmap.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-296,7 +296,7</span> ============================================================
@@ -1648,27 +1668,7 @@
 <span style="color:green;">+|</span></span>    function dl_phdr_info_callback(di::dl_phdr_info, size::Csize_t, dynamic_libraries::<span style="color:green;">Vector</span>{String})</span>
 <span style="color:inherit;"> |</span>        name = unsafe_string(di.name)
 <span style="color:inherit;"> |</span>        push!(dynamic_libraries, name)
-<span style="color:inherit;"> |</span>        return Cint(0)
-<span style="color:red;">------ </span><span style="color:inherit;">base/range.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/range.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-140,7 +140,7</span> ============================================================
-<span style="color:inherit;"> |</span>Supertype for ranges with elements of type &#96;T&#96;.
-<span style="color:inherit;"> |</span>[&#96;UnitRange&#96;](@ref) and other types are subtypes of this.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">abstract type AbstractRange{T} <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">} end</span></span>
-<span style="color:green;">+|</span></span>abstract type AbstractRange{T} <: <span style="color:green;">AbstractVector</span>{T} end</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>RangeStepStyle(::Type{<:AbstractRange}) = RangeStepIrregular()
-<span style="color:inherit;"> |</span>RangeStepStyle(::Type{<:AbstractRange{<:Integer}}) = RangeStepRegular()
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1036,7 +1036,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return a
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(r::AbstractRange{T}) where {T} = vcat(r)</span></span>
-<span style="color:green;">+|</span></span><span style="color:green;">Vector</span>{T}(r::AbstractRange{T}) where {T} = vcat(r)</span>
-<span style="color:inherit;"> |</span>collect(r::AbstractRange) = vcat(r)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>_reverse(r::OrdinalRange, ::Colon) = (:)(last(r), -step(r), first</div>
+<span style="color:inherit;"> |</span>        return Cin</div>
 </pre> <h3 id=use_ismissing_18_hits ><a href="#use_ismissing_18_hits">Use ismissing ➤ 18 hits</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/precompile.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/precompile.jl</span>
@@ -1711,7 +1711,7 @@
 <span style="color:inherit;"> |</span>    # The max number of methods should be the same as in inference most
 <span style="color:inherit;"> |</span>    # of the time, and should not affect correctness otherwise.
 <span style="color:inherit;"> |</span>    results = findall(atype, method_table; limit=params.MAX_METHODS)
-<span style="color:red;">-|</span></span>[0;7;2m    </span><span style="color:red;">results !== missing</span><span style="color:gray;"> && intersect!(et, results.valid_worlds)</span></span>
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">results !== missing</span><span style="color:gray;"> && intersect!(et, results.valid_worlds)</span></span>
 <span style="color:green;">+|</span></span>    <span style="color:green;">!ismissing(results)</span> && intersect!(et, results.valid_worlds)</span>
 <span style="color:inherit;"> |</span>    MethodMatchInfo(results)
 <span style="color:inherit;"> |</span>end
@@ -1760,7 +1760,7 @@
 <span style="color:inherit;"> |</span>    Iterators.filter(i -> @inbounds(itr.x[i]) !== missing, keys(itr.x))
 <span style="color:inherit;"> |</span>@propagate_inbounds function getindex(itr::SkipMissing, I...)
 <span style="color:inherit;"> |</span>    v = itr.x[I...]
-<span style="color:red;">-|</span></span>[0;7;2m    </span><span style="color:red;">v === missing</span><span style="color:gray;"> && throw(MissingException(&#34;the value at index $I is missing&#34;))</span></span>
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">v === missing</span><span style="color:gray;"> && throw(MissingException(&#34;the value at index $I is missing&#34;))</span></span>
 <span style="color:green;">+|</span></span>    <span style="color:green;">ismissing(v)</span> && throw(MissingException(&#34;the value at index $I is missing&#34;))</span>
 <span style="color:inherit;"> |</span>    v
 <span style="color:inherit;"> |</span>end
@@ -1769,7 +1769,7 @@
 <span style="color:inherit;"> |</span>    ilast = last(inds)
 <span style="color:inherit;"> |</span>    while i <= ilast
 <span style="color:inherit;"> |</span>        @inbounds ai = A[i]
-<span style="color:red;">-|</span></span>[0;7;2m        </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
 <span style="color:green;">+|</span></span>        <span style="color:green;">ismissing(ai)</span> || break</span>
 <span style="color:inherit;"> |</span>        i += 1
 <span style="color:inherit;"> |</span>    end
@@ -1778,7 +1778,7 @@
 <span style="color:inherit;"> |</span>    i += 1
 <span style="color:inherit;"> |</span>    while i <= ilast
 <span style="color:inherit;"> |</span>        @inbounds ai = A[i]
-<span style="color:red;">-|</span></span>[0;7;2m        </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
 <span style="color:green;">+|</span></span>        <span style="color:green;">ismissing(ai)</span> || break</span>
 <span style="color:inherit;"> |</span>        i += 1
 <span style="color:inherit;"> |</span>    end
@@ -1796,7 +1796,7 @@
 <span style="color:inherit;"> |</span>        i = ifirst
 <span style="color:inherit;"> |</span>        while i <= ilast
 <span style="color:inherit;"> |</span>            @inbounds ai = A[i]
-<span style="color:red;">-|</span></span>[0;7;2m            </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
+<span style="color:red;">-|</span></span>            </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
 <span style="color:green;">+|</span></span>            <span style="color:green;">ismissing(ai)</span> || break</span>
 <span style="color:inherit;"> |</span>            i += 1
 <span style="color:inherit;"> |</span>        end
@@ -1805,7 +1805,7 @@
 <span style="color:inherit;"> |</span>        i += 1
 <span style="color:inherit;"> |</span>        while i <= ilast
 <span style="color:inherit;"> |</span>            @inbounds ai = A[i]
-<span style="color:red;">-|</span></span>[0;7;2m            </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
+<span style="color:red;">-|</span></span>            </span><span style="color:red;">ai === missing</span><span style="color:gray;"> || break</span></span>
 <span style="color:green;">+|</span></span>            <span style="color:green;">ismissing(ai)</span> || break</span>
 <span style="color:inherit;"> |</span>            i += 1
 <span style="color:inherit;"> |</span>        end
@@ -1834,7 +1834,7 @@
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
 <span style="color:inherit;"> |</span>function isempty(itr)
 <span style="color:inherit;"> |</span>    d = isdone(itr)
-<span style="color:red;">-|</span></span>[0;7;2m    </span><span style="color:red;">d !== missing</span><span style="color:gray;"> && return d</span></span>
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">d !== missing</span><span style="color:gray;"> && return d</span></span>
 <span style="color:green;">+|</span></span>    <span style="color:green;">!ismissing(d)</span> && return d</span>
 <span style="color:inherit;"> |</span>    iterate(itr) === nothing
 <span style="color:inherit;"> |</span>end
@@ -1972,6 +1972,23 @@
 <span style="color:inherit;"> |</span>        return f
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    f = gen_f(1f0)
+<span style="color:red;">------ </span><span style="color:inherit;">base/toml_parser.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/toml_parser.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-401,12 +401,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>skip_ws(l::Parser) = accept_batch(l, iswhitespace)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">skip_ws_nl_no_comment(l::Parser)::Bool = accept_batch(l, </span><span style="color:red;">x -> iswhitespace(x)</span><span style="color:gray;"> || isnewline(x))</span></span>
+<span style="color:green;">+|</span></span>skip_ws_nl_no_comment(l::Parser)::Bool = accept_batch(l, <span style="color:green;">iswhitespace</span> || isnewline(x))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function skip_ws_nl(l::Parser)::Bool
+<span style="color:inherit;"> |</span>    skipped = false
+<span style="color:inherit;"> |</span>    while true
+<span style="color:red;">-|</span></span><span style="color:gray;">        skipped_ws = accept_batch(l, </span><span style="color:red;">x -> iswhitespace(x)</span><span style="color:gray;"> || isnewline(x))</span></span>
+<span style="color:green;">+|</span></span>        skipped_ws = accept_batch(l, <span style="color:green;">iswhitespace</span> || isnewline(x))</span>
+<span style="color:inherit;"> |</span>        skipped_comment = skip_comment(l)
+<span style="color:inherit;"> |</span>        if !skipped_ws && !skipped_comment
+<span style="color:inherit;"> |</span>            break
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/REPL/test/replcompletions.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/REPL/test/replcompletions.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-332,19 +332,19</span> ============================================================
@@ -1997,23 +2014,16 @@
 <span style="color:inherit;"> |</span>    @test s[r] == s[1:end-1]
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">base/toml_parser.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/toml_parser.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-401,12 +401,12</span> ============================================================
+<span style="color:red;">------ </span><span style="color:inherit;">base/show.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/show.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-2320,7 +2320,7</span> ============================================================
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>skip_ws(l::Parser) = accept_batch(l, iswhitespace)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">skip_ws_nl_no_comment(l::Parser)::Bool = accept_batch(l, </span><span style="color:red;">x -> iswhitespace(x)</span><span style="color:gray;"> || isnewline(x))</span></span>
-<span style="color:green;">+|</span></span>skip_ws_nl_no_comment(l::Parser)::Bool = accept_batch(l, <span style="color:green;">iswhitespace</span> || isnewline(x))</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function skip_ws_nl(l::Parser)::Bool
-<span style="color:inherit;"> |</span>    skipped = false
-<span style="color:inherit;"> |</span>    while true
-<span style="color:red;">-|</span></span><span style="color:gray;">        skipped_ws = accept_batch(l, </span><span style="color:red;">x -> iswhitespace(x)</span><span style="color:gray;"> || isnewline(x))</span></span>
-<span style="color:green;">+|</span></span>        skipped_ws = accept_batch(l, <span style="color:green;">iswhitespace</span> || isnewline(x))</span>
-<span style="color:inherit;"> |</span>        skipped_comment = skip_comment(l)
-<span style="color:inherit;"> |</span>        if !skipped_ws && !skipped_comment
-<span style="color:inherit;"> |</span>            break
+<span style="color:inherit;"> |</span>    const __debuginfo = Dict{Symbol, Any}(
+<span style="color:inherit;"> |</span>        # :full => src -> Base.IRShow.statementidx_lineinfo_printer(src), # and add variable slot information
+<span style="color:orange;">!|</span>        :source => <span style="color:red;">src -> </span>Base.IRShow.statementidx_lineinfo_printer<span style="color:red;">(src)</span>,
+<span style="color:inherit;"> |</span>        # :oneliner => src -> Base.IRShow.statementidx_lineinfo_printer(Base.IRShow.PartialLineInfoPrinter, src),
+<span style="color:inherit;"> |</span>        :none => src -> Base.IRShow.lineinfo_disabled,
+<span style="color:inherit;"> |</span>        )
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/Distributed/test/distributed_exec.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Distributed/test/distributed_exec.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-546,7 +546,7</span> ============================================================
@@ -2035,16 +2045,6 @@
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>    else
 <span style="color:inherit;"> |</span>        remotecall_fetch(procs, 1, pid)
-<span style="color:red;">------ </span><span style="color:inherit;">base/show.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/show.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-2320,7 +2320,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    const __debuginfo = Dict{Symbol, Any}(
-<span style="color:inherit;"> |</span>        # :full => src -> Base.IRShow.statementidx_lineinfo_printer(src), # and add variable slot information
-<span style="color:orange;">!|</span>        :source => <span style="color:red;">src -> </span>Base.IRShow.statementidx_lineinfo_printer<span style="color:red;">(src)</span>,
-<span style="color:inherit;"> |</span>        # :oneliner => src -> Base.IRShow.statementidx_lineinfo_printer(Base.IRShow.PartialLineInfoPrinter, src),
-<span style="color:inherit;"> |</span>        :none => src -> Base.IRShow.lineinfo_disabled,
-<span style="color:inherit;"> |</span>        )
 <span style="color:red;">------ </span><span style="color:inherit;">src/gen_sysimg_symtab.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/gen_sysimg_symtab.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-58,7 +58,7</span> ============================================================
@@ -2142,7 +2142,7 @@
 <span style="color:red;">-|</span></span><span style="color:gray;">    @test false &</span><span style="color:red;"> false == </span><span style="color:gray;">false</span></span>
 <span style="color:green;">+|</span></span></span>
 <span style="color:green;">+|</span></span>    @test false &<span style="color:green;"> !</span>false</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test true  &</span><span style="color:red;"> false ==</span>[0;7;2m </span><span style="color:gray;">false</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test true  &</span><span style="color:red;"> false ==</span> </span><span style="color:gray;">false</span></span>
 <span style="color:green;">+|</span></span>    @test true  & <span style="color:green;">!</span>false</span>
 <span style="color:red;">-|</span></span><span style="color:gray;">    @test false & </span><span style="color:gray;">true</span><span style="color:red;">  == false</span></span>
 <span style="color:green;">+|</span></span>    @test false & <span style="color:green;">!</span>true</span>
@@ -2155,7 +2155,7 @@
 <span style="color:orange;">!|</span>    @test false | true<span style="color:red;">  == true</span>
 <span style="color:orange;">!|</span>    @test true  | true<span style="color:red;">  == true</span>
 <span style="color:red;">-|</span></span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test false ⊻</span><span style="color:red;"> false ==</span>[0;7;2m </span><span style="color:gray;">false</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test false ⊻</span><span style="color:red;"> false ==</span> </span><span style="color:gray;">false</span></span>
 <span style="color:green;">+|</span></span></span>
 <span style="color:green;">+|</span></span>    @test false ⊻ <span style="color:green;">!</span>false</span>
 <span style="color:orange;">!|</span>    @test true  ⊻ false<span style="color:red;"> == true</span>
@@ -2239,6 +2239,16 @@
 <span style="color:inherit;"> |</span>    @test collect(c) == [0]
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/math.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/math.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-683,7 +683,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test false ^ -2 == Inf
+<span style="color:inherit;"> |</span>    @test 1 ^ -2 === (-1) ^ -2 == 1 ^ p2 === (-1) ^ p2 === 1
+<span style="color:inherit;"> |</span>    @test (-1) ^ -1 === (-1) ^ -3 == (-1) ^ p3 === -1
+<span style="color:orange;">!|</span>    @test true ^ -2 <span style="color:red;">== true </span>^ p2 === true
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;issue #13748&#34; begin
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/REPL/test/replcompletions.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/REPL/test/replcompletions.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-230,13 +230,13</span> ============================================================
@@ -2257,16 +2267,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># test latex symbol completions
-<span style="color:red;">------ </span><span style="color:inherit;">test/math.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/math.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-683,7 +683,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test false ^ -2 == Inf
-<span style="color:inherit;"> |</span>    @test 1 ^ -2 === (-1) ^ -2 == 1 ^ p2 === (-1) ^ p2 === 1
-<span style="color:inherit;"> |</span>    @test (-1) ^ -1 === (-1) ^ -3 == (-1) ^ p3 === -1
-<span style="color:orange;">!|</span>    @test true ^ -2 <span style="color:red;">== true </span>^ p2 === true
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;issue #13748&#34; begin
 <span style="color:red;">------ </span><span style="color:inherit;">base/stream.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/stream.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-837,7 +837,7</span> ============================================================
@@ -2320,7 +2320,7 @@
 <span style="color:inherit;"> |</span>function findnext(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
 <span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
 <span style="color:inherit;"> |</span>    v = pred.x
-<span style="color:red;">-|</span></span>[0;7;2m    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findnextnot(B, Int(start))</span></span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findnextnot(B, Int(start))</span></span>
 <span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findnext(B, start)</span></span>
 <span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findnextnot(B, Int(start))</span>
 <span style="color:green;">+|</span></span>    v && return findnext(B, start)</span>
@@ -2331,7 +2331,7 @@
 <span style="color:inherit;"> |</span>function findprev(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
 <span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
 <span style="color:inherit;"> |</span>    v = pred.x
-<span style="color:red;">-|</span></span>[0;7;2m    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findprevnot(B, Int(start))</span></span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findprevnot(B, Int(start))</span></span>
 <span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findprev(B, start)</span></span>
 <span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findprevnot(B, Int(start))</span>
 <span style="color:green;">+|</span></span>    v && return findprev(B, start)</span>
@@ -2365,20 +2365,7 @@
 <span style="color:inherit;"> |</span>            string(neg ? '-' : &#34;&#34;, '0', '.', '0'^(-expo-1), int, frac)
 <span style="color:inherit;"> |</span></div>
 </pre> <h3 id=omit_a_a_and_a_a_79_hits ><a href="#omit_a_a_and_a_a_79_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 79 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">stdlib/LinearAlgebra/test/bidiag.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/LinearAlgebra/test/bidiag.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-609,8 +609,8</span> ============================================================
-<span style="color:inherit;"> |</span>    @test ubd == zm
-<span style="color:inherit;"> |</span>    @test lbd == zm
-<span style="color:inherit;"> |</span>    @test ubd == lbd
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test ubd * </span><span style="color:red;">ubd == ubd</span></span>
-<span style="color:green;">+|</span></span>    @test ubd * <span style="color:green;">true</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test lbd + </span><span style="color:red;">lbd == lbd</span></span>
-<span style="color:green;">+|</span></span>    @test lbd + <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>    @test lbd' == ubd
-<span style="color:inherit;"> |</span>    @test ubd' == lbd
-<span style="color:inherit;"> |</span>    @test triu(ubd, 1) == ubd
-<span style="color:red;">------ </span><span style="color:inherit;">test/gmp.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/gmp.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/gmp.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-156,7 +156,7</span> ============================================================
 <span style="color:inherit;"> |</span>    @test a*Int16(1) == a
@@ -2398,6 +2385,19 @@
 <span style="color:inherit;"> |</span>    @test UInt16(1)*a == a
 <span style="color:inherit;"> |</span>    @test UInt32(1)*a == a
 <span style="color:inherit;"> |</span>    @test UInt64(1)*a == a
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/LinearAlgebra/test/bidiag.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/LinearAlgebra/test/bidiag.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-609,8 +609,8</span> ============================================================
+<span style="color:inherit;"> |</span>    @test ubd == zm
+<span style="color:inherit;"> |</span>    @test lbd == zm
+<span style="color:inherit;"> |</span>    @test ubd == lbd
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test ubd * </span><span style="color:red;">ubd == ubd</span></span>
+<span style="color:green;">+|</span></span>    @test ubd * <span style="color:green;">true</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test lbd + </span><span style="color:red;">lbd == lbd</span></span>
+<span style="color:green;">+|</span></span>    @test lbd + <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test lbd' == ubd
+<span style="color:inherit;"> |</span>    @test ubd' == lbd
+<span style="color:inherit;"> |</span>    @test triu(ubd, 1) == ubd
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/SparseArrays/test/sparsevector.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/SparseArrays/test/sparsevector.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1266,7 +1266,7</span> ============================================================
@@ -2529,6 +2529,59 @@
 <span style="color:inherit;"> |</span>    @test isequal(d, d)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @test Dict(missing=>1) == Dict(missing=>1)
+<span style="color:red;">------ </span><span style="color:inherit;">test/mpfr.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/mpfr.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-217,7 +217,7</span> ============================================================
+<span style="color:inherit;"> |</span>            @test a*Int16(1) == a
+<span style="color:inherit;"> |</span>            @test a*Int32(1) == a
+<span style="color:inherit;"> |</span>            @test a*Int64(1) == a
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Int8(1)* </span><span style="color:red;">a == a</span></span>
+<span style="color:green;">+|</span></span>            @test Int8(1)* <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>            @test Int16(1)*a == a
+<span style="color:inherit;"> |</span>            @test Int32(1)*a == a
+<span style="color:inherit;"> |</span>            @test Int64(1)*a == a
+<span style="color:inherit;">@|</span><span style="color:inherit;">-237,20 +237,20</span> ============================================================
+<span style="color:inherit;"> |</span>            @test a*UInt32(1) == a
+<span style="color:inherit;"> |</span>            @test a*UInt64(1) == a
+<span style="color:inherit;"> |</span>            @test true*a == a
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test UInt8(1)* </span><span style="color:red;">a == a</span></span>
+<span style="color:green;">+|</span></span>            @test UInt8(1)* <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>            @test UInt16(1)*a == a
+<span style="color:inherit;"> |</span>            @test UInt32(1)*a == a
+<span style="color:inherit;"> |</span>            @test UInt64(1)*a == a
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        @testset &#34;Float64 multiplication&#34; begin
+<span style="color:inherit;"> |</span>            @test a * 1.0f0 == a
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test 1.0f0 * </span><span style="color:red;">a == a</span></span>
+<span style="color:green;">+|</span></span>            @test 1.0f0 * <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>            @test a * 1.0 == a
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test 1.0 * </span><span style="color:red;">a == a</span></span>
+<span style="color:green;">+|</span></span>            @test 1.0 * <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        @testset &#34;BigInt multiplication&#34; begin
+<span style="color:inherit;"> |</span>            @test a * BigInt(1) == a
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test BigInt(1) * </span><span style="color:red;">a == a</span></span>
+<span style="color:green;">+|</span></span>            @test BigInt(1) * <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @testset &#34;/&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-529,11 +529,11</span> ============================================================
+<span style="color:inherit;"> |</span>    @test x <= ipl
+<span style="color:inherit;"> |</span>    @test x > imi
+<span style="color:inherit;"> |</span>    @test x >= imi
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">imi == imi</span></span>
+<span style="color:red;">-|</span></span><span style="color:red;">    @test ipl == ipl</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">    @test true</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test imi < ipl</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">z != z</span></span>
+<span style="color:green;">+|</span></span>    @test imi < ipl</span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">false</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test !(</span><span style="color:red;">z == z</span><span style="color:gray;">)</span></span>
+<span style="color:green;">+|</span></span>    @test !(<span style="color:green;">true</span>)</span>
+<span style="color:inherit;"> |</span>    @test !(z <= z)
+<span style="color:inherit;"> |</span>    @test !(z < z)
+<span style="color:inherit;"> |</span>    @test !(z >= z)
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/Test/test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Test/test/runtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
@@ -2595,59 +2648,6 @@
 <span style="color:inherit;"> |</span>            end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>            @testset &#34;loop with desc&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">test/mpfr.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/mpfr.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-217,7 +217,7</span> ============================================================
-<span style="color:inherit;"> |</span>            @test a*Int16(1) == a
-<span style="color:inherit;"> |</span>            @test a*Int32(1) == a
-<span style="color:inherit;"> |</span>            @test a*Int64(1) == a
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test Int8(1)* </span><span style="color:red;">a == a</span></span>
-<span style="color:green;">+|</span></span>            @test Int8(1)* <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>            @test Int16(1)*a == a
-<span style="color:inherit;"> |</span>            @test Int32(1)*a == a
-<span style="color:inherit;"> |</span>            @test Int64(1)*a == a
-<span style="color:inherit;">@|</span><span style="color:inherit;">-237,20 +237,20</span> ============================================================
-<span style="color:inherit;"> |</span>            @test a*UInt32(1) == a
-<span style="color:inherit;"> |</span>            @test a*UInt64(1) == a
-<span style="color:inherit;"> |</span>            @test true*a == a
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test UInt8(1)* </span><span style="color:red;">a == a</span></span>
-<span style="color:green;">+|</span></span>            @test UInt8(1)* <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>            @test UInt16(1)*a == a
-<span style="color:inherit;"> |</span>            @test UInt32(1)*a == a
-<span style="color:inherit;"> |</span>            @test UInt64(1)*a == a
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        @testset &#34;Float64 multiplication&#34; begin
-<span style="color:inherit;"> |</span>            @test a * 1.0f0 == a
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test 1.0f0 * </span><span style="color:red;">a == a</span></span>
-<span style="color:green;">+|</span></span>            @test 1.0f0 * <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>            @test a * 1.0 == a
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test 1.0 * </span><span style="color:red;">a == a</span></span>
-<span style="color:green;">+|</span></span>            @test 1.0 * <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        @testset &#34;BigInt multiplication&#34; begin
-<span style="color:inherit;"> |</span>            @test a * BigInt(1) == a
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test BigInt(1) * </span><span style="color:red;">a == a</span></span>
-<span style="color:green;">+|</span></span>            @test BigInt(1) * <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    @testset &#34;/&#34; begin
-<span style="color:inherit;">@|</span><span style="color:inherit;">-529,11 +529,11</span> ============================================================
-<span style="color:inherit;"> |</span>    @test x <= ipl
-<span style="color:inherit;"> |</span>    @test x > imi
-<span style="color:inherit;"> |</span>    @test x >= imi
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">imi == imi</span></span>
-<span style="color:red;">-|</span></span><span style="color:red;">    @test ipl == ipl</span></span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
-<span style="color:green;">+|</span></span><span style="color:green;">    @test true</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test imi < ipl</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">z != z</span></span>
-<span style="color:green;">+|</span></span>    @test imi < ipl</span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">false</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test !(</span><span style="color:red;">z == z</span><span style="color:gray;">)</span></span>
-<span style="color:green;">+|</span></span>    @test !(<span style="color:green;">true</span>)</span>
-<span style="color:inherit;"> |</span>    @test !(z <= z)
-<span style="color:inherit;"> |</span>    @test !(z < z)
-<span style="color:inherit;"> |</span>    @test !(z >= z)
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/Dates/test/periods.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Dates/test/periods.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-92,16 +92,16</span> ============================================================

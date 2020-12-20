@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/YAML.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/YAML.jl" target=_blank >JuliaData/YAML.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_2_hits ><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/YAML.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/YAML.jl" target=_blank >JuliaData/YAML.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a><li><a href="#omit_a_a_and_a_a_33_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 33 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_2_hits ><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/scanner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/scanner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1056,10 +1056,10</span> ============================================================
@@ -13,4 +13,255 @@
 <span style="color:inherit;"> |</span>        append!(chunks, breaks)
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</s</div>
+</pre> <h3 id=omit_a_a_and_a_a_33_hits ><a href="#omit_a_a_and_a_a_33_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 33 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/scanner.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/scanner.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-126,7 +126,7</span> ============================================================
+<span style="color:inherit;"> |</span>        forward!(stream.input)
+<span style="color:inherit;"> |</span>        stream.index += 1
+<span style="color:inherit;"> |</span>        if in(c, &#34;\n\u0085\u2028\u2029&#34;) ||
+<span style="color:red;">-|</span></span><span style="color:gray;">            (c == '\r' && peek(stream.input)</span><span style="color:red;"> == '\n'</span><span style="color:gray;">)</span></span>
+<span style="color:green;">+|</span></span>            (c == '\r' && peek(stream.input)<span style="color:green;">true'\n'</span>)</span>
+<span style="color:inherit;"> |</span>            stream.column = 0
+<span style="color:inherit;"> |</span>            stream.line += 1
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;">@|</span><span style="color:inherit;">-340,13 +340,13</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function check_document_start(stream::TokenStream)
+<span style="color:inherit;"> |</span>    stream.column == 0 &&
+<span style="color:red;">-|</span></span><span style="color:gray;">    prefix(stream.input, 3)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;---&#34; &&</span></span>
+<span style="color:green;">+|</span></span>    prefix(stream.input, 3)<span style="color:green;">true</span>&#34;---&#34; &&</span>
+<span style="color:inherit;"> |</span>    in(peek(stream.input, 3), whitespace)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span> function check_document_end(stream::TokenStream)
+<span style="color:inherit;"> |</span>     stream.column == 0 &&
+<span style="color:red;">-|</span></span><span style="color:gray;">     prefix(stream.input, 3)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;...&#34; &&</span></span>
+<span style="color:green;">+|</span></span>     prefix(stream.input, 3)<span style="color:green;">true</span>&#34;...&#34; &&</span>
+<span style="color:inherit;"> |</span>    (in(peek(stream.input, 3), whitespace) || peek(stream.input, 3) === nothing)
+<span style="color:inherit;"> |</span> end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-366,7 +366,7</span> ============================================================
+<span style="color:inherit;"> |</span>function check_plain(stream::TokenStream)
+<span style="color:inherit;"> |</span>    !in(peek(stream.input), &#34;\0 \t\r\n\u0085\u2028\u2029-?:,[]{}#&*!|>\'\&#34;%@&#96;&#34;) ||
+<span style="color:inherit;"> |</span>    (!in(peek(stream.input, 1), whitespace) &&
+<span style="color:red;">-|</span></span><span style="color:gray;">     (peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">-' || (stream.flow_level == 0 &&</span></span>
+<span style="color:green;">+|</span></span>     (peek(stream.input)<span style="color:green;">true'</span>-' || (stream.flow_level == 0 &&</span>
+<span style="color:inherit;"> |</span>                              in(peek(stream.input), &#34;?:&#34;))))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-738,7 +738,7</span> ============================================================
+<span style="color:inherit;"> |</span>#
+<span style="color:inherit;"> |</span>function scan_line_break(stream::TokenStream)
+<span style="color:inherit;"> |</span>    if in(peek(stream.input), &#34;\r\n\u0085&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if prefix(stream.input, 2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\r\n&#34;</span></span>
+<span style="color:green;">+|</span></span>        if prefix(stream.input, 2)<span style="color:green;">true</span>&#34;\r\n&#34;</span>
+<span style="color:inherit;"> |</span>            forwardchars!(stream, 2)
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            forwardchars!(stream)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-755,24 +755,24</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Scan past whitespace to the next token.
+<span style="color:inherit;"> |</span>function scan_to_next_token(stream::TokenStream)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if stream.index == 0 && peek(stream.input)</span><span style="color:red;"> == '\uFEFF'</span></span>
+<span style="color:green;">+|</span></span>    if stream.index == 0 && peek(stream.input)<span style="color:green;">true'\uFEFF'</span></span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    found = false
+<span style="color:inherit;"> |</span>    while !found
+<span style="color:red;">-|</span></span><span style="color:gray;">        while peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>        while peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>            forwardchars!(stream)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">#'</span></span>
+<span style="color:green;">+|</span></span>        if peek(stream.input)<span style="color:green;">true'</span>#'</span>
+<span style="color:inherit;"> |</span>            forwardchars!(stream)
+<span style="color:inherit;"> |</span>            while !in(peek(stream.input), &#34;\0\r\n\u0085\u2028\u2029&#34;)
+<span style="color:inherit;"> |</span>                forwardchars!(stream)
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        if scan_line_break(stream)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        if scan_line_break(stream)<span style="color:green;">false</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>            if stream.flow_level == 0
+<span style="color:inherit;"> |</span>                stream.allow_simple_key = true
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-838,12 +838,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function scan_yaml_directive_value(stream::TokenStream, start_mark::Mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> ' || peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">:'</span></span>
+<span style="color:green;">+|</span></span>    while peek(stream.input)<span style="color:green;">true'</span> ' || peek(stream.input)<span style="color:green;">true'</span>:'</span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    major = scan_yaml_directive_number(stream, start_mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if peek(stream.input)</span><span style="color:red;"> != '</span><span style="color:gray;">.'</span></span>
+<span style="color:green;">+|</span></span>    if peek(stream.input)<span style="color:green;">false'</span>.'</span>
+<span style="color:inherit;"> |</span>        throw(ScannerError(&#34;while scanning a directive&#34;, start_mark,
+<span style="color:inherit;"> |</span>                           &#34;expected '.' but found '$(peek(stream.input))'&#34;,
+<span style="color:inherit;"> |</span>                           get_mark(stream)))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-876,12 +876,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function scan_tag_directive_handle(stream::TokenStream, start_mark::Mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>    while peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    value = scan_tag_handle(stream, &#34;directive&#34;, start_mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if peek(stream.input)</span><span style="color:red;"> != '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>    if peek(stream.input)<span style="color:green;">false'</span> '</span>
+<span style="color:inherit;"> |</span>        throw(ScannerError(&#34;while scanning a directive&#34;, start_mark,
+<span style="color:inherit;"> |</span>                           &#34;expected ' ', but found '$(peek(stream.input))'&#34;,
+<span style="color:inherit;"> |</span>                           get_mark(stream)))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-891,7 +891,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function scan_tag_directive_prefix(stream::TokenStream, start_mark::Mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>    while peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-906,10 +906,10</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function scan_directive_ignored_line(stream::TokenStream, start_mark::Mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>    while peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    if peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">#'</span></span>
+<span style="color:green;">+|</span></span>    if peek(stream.input)<span style="color:green;">true'</span>#'</span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>        while !in(peek(stream.input), &#34;\0\r\n\u0085\u2028\u2029&#34;)
+<span style="color:inherit;"> |</span>            forwardchars!(stream)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-964,7 +964,7</span> ============================================================
+<span style="color:inherit;"> |</span>        handle = nothing
+<span style="color:inherit;"> |</span>        forwardchars!(stream, 2)
+<span style="color:inherit;"> |</span>        suffix = scan_tag_uri(stream, &#34;tag&#34;, start_mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if peek(stream.input)</span><span style="color:red;"> != '>'</span></span>
+<span style="color:green;">+|</span></span>        if peek(stream.input)<span style="color:green;">false'>'</span></span>
+<span style="color:inherit;"> |</span>            throw(ScannerError(&#34;while parsing a tag&#34;, start_mark,
+<span style="color:inherit;"> |</span>                               &#34;expected '>', but found '$(peek(stream.input))'&#34;,
+<span style="color:inherit;"> |</span>                               get_mark(stream)))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1030,9 +1030,9</span> ============================================================
+<span style="color:inherit;"> |</span>    line_break = &#34;&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Scan the inner part of the block scalar.
+<span style="color:red;">-|</span></span><span style="color:gray;">    while stream.column == indent && peek(stream.input)</span><span style="color:red;"> != '\0'</span></span>
+<span style="color:green;">+|</span></span>    while stream.column == indent && peek(stream.input)<span style="color:green;">false'\0'</span></span>
+<span style="color:inherit;"> |</span>        append!(chunks, breaks)
+<span style="color:red;">-|</span></span><span style="color:gray;">        leading_non_space = peek(stream.input)</span><span style="color:red;"> != '</span><span style="color:gray;"> ' && peek(stream.input)</span><span style="color:red;"> != '\t'</span></span>
+<span style="color:green;">+|</span></span>        leading_non_space = peek(stream.input)<span style="color:green;">false'</span> ' && peek(stream.input)<span style="color:green;">false'\t'</span></span>
+<span style="color:inherit;"> |</span>        length = 0
+<span style="color:inherit;"> |</span>        while !in(peek(stream.input, length), &#34;\0\r\n\u0085\u2028\u2029&#34;)
+<span style="color:inherit;"> |</span>            length += 1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1041,7 +1041,7</span> ============================================================
+<span style="color:inherit;"> |</span>        forwardchars!(stream, length)
+<span style="color:inherit;"> |</span>        line_break = scan_line_break(stream)
+<span style="color:inherit;"> |</span>        breaks, end_mark = scan_block_scalar_breaks(stream, indent)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if stream.column == indent && peek(stream.input)</span><span style="color:red;"> != '\0'</span></span>
+<span style="color:green;">+|</span></span>        if stream.column == indent && peek(stream.input)<span style="color:green;">false'\0'</span></span>
+<span style="color:inherit;"> |</span>            if folded && line_break == &#34;\n&#34; &&
+<span style="color:inherit;"> |</span>               leading_non_space && !in(peek(stream.input), &#34; \t&#34;)
+<span style="color:inherit;"> |</span>                if isempty(breaks)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1068,11 +1068,11</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function scan_block_scalar_ignored_line(stream::TokenStream, start_mark::Mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>    while peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">#'</span></span>
+<span style="color:green;">+|</span></span>    if peek(stream.input)<span style="color:green;">true'</span>#'</span>
+<span style="color:inherit;"> |</span>        while !in(peek(stream.input), &#34;\0\r\n\u0085\u2028\u2029&#34;)
+<span style="color:inherit;"> |</span>            forwardchars!(stream)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1136,7 +1136,7</span> ============================================================
+<span style="color:inherit;"> |</span>    max_indent = 0
+<span style="color:inherit;"> |</span>    end_mark = get_mark(stream)
+<span style="color:inherit;"> |</span>    while in(peek(stream.input), &#34; \r\n\u0085\u2028\u2029&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if peek(stream.input)</span><span style="color:red;"> != '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>        if peek(stream.input)<span style="color:green;">false'</span> '</span>
+<span style="color:inherit;"> |</span>            push!(chunks, scan_line_break(stream))
+<span style="color:inherit;"> |</span>            end_mark = get_mark(stream)
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1154,14 +1154,14</span> ============================================================
+<span style="color:inherit;"> |</span>function scan_block_scalar_breaks(stream::TokenStream, indent)
+<span style="color:inherit;"> |</span>    chunks = Any[]
+<span style="color:inherit;"> |</span>    end_mark = get_mark(stream)
+<span style="color:red;">-|</span></span><span style="color:gray;">    while stream.column < indent && peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>    while stream.column < indent && peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>        forwardchars!(stream)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    while in(peek(stream.input), &#34;\r\n\u0085\u2028\u2029&#34;)
+<span style="color:inherit;"> |</span>        push!(chunks, scan_line_break(stream))
+<span style="color:inherit;"> |</span>        end_mark = get_mark(stream)
+<span style="color:red;">-|</span></span><span style="color:gray;">        while stream.column < indent && peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>        while stream.column < indent && peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>            forwardchars!(stream)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1228,7 +1228,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        c = peek(stream.input)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if !double && c == '\'' && peek(stream.input, 1)</span><span style="color:red;"> == '\''</span></span>
+<span style="color:green;">+|</span></span>        if !double && c == '\'' && peek(stream.input, 1)<span style="color:green;">true'\''</span></span>
+<span style="color:inherit;"> |</span>            push!(chunks, '\'')
+<span style="color:inherit;"> |</span>            forwardchars!(stream, 2)
+<span style="color:inherit;"> |</span>        elseif (double && c == '\'') || (!double && in(c, &#34;\&#34;\\&#34;))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1346,7 +1346,7</span> ============================================================
+<span style="color:inherit;"> |</span>    spaces = Any[]
+<span style="color:inherit;"> |</span>    while true
+<span style="color:inherit;"> |</span>        length = 0
+<span style="color:red;">-|</span></span><span style="color:gray;">        if peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">#'</span></span>
+<span style="color:green;">+|</span></span>        if peek(stream.input)<span style="color:green;">true'</span>#'</span>
+<span style="color:inherit;"> |</span>            break
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1382,7 +1382,7</span> ============================================================
+<span style="color:inherit;"> |</span>        forwardchars!(stream, length)
+<span style="color:inherit;"> |</span>        end_mark = get_mark(stream)
+<span style="color:inherit;"> |</span>        spaces = scan_plain_spaces(stream, indent, start_mark)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if isempty(spaces) || peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">#' ||</span></span>
+<span style="color:green;">+|</span></span>        if isempty(spaces) || peek(stream.input)<span style="color:green;">true'</span>#' ||</span>
+<span style="color:inherit;"> |</span>            (stream.flow_level == 0 && stream.column < indent)
+<span style="color:inherit;"> |</span>            break
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1396,7 +1396,7</span> ============================================================
+<span style="color:inherit;"> |</span>                           start_mark::Mark)
+<span style="color:inherit;"> |</span>    chunks = Any[]
+<span style="color:inherit;"> |</span>    length = 0
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(stream.input, length)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>    while peek(stream.input, length)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>        length += 1
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1414,7 +1414,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        breaks = Any[]
+<span style="color:inherit;"> |</span>        while in(peek(stream.input), &#34; \r\n\u0085\u2028\u2029&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">            if peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;"> '</span></span>
+<span style="color:green;">+|</span></span>            if peek(stream.input)<span style="color:green;">true'</span> '</span>
+<span style="color:inherit;"> |</span>                forwardchars!(stream)
+<span style="color:inherit;"> |</span>            else
+<span style="color:inherit;"> |</span>                push!(breaks, scan_line_break(stream))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1503,7 +1503,7</span> ============================================================
+<span style="color:inherit;"> |</span>function scan_uri_escapes(stream::TokenStream, name::String, start_mark::Mark)
+<span style="color:inherit;"> |</span>    bytes = Any[]
+<span style="color:inherit;"> |</span>    mark = get_mark(stream)
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(stream.input)</span><span style="color:red;"> == '</span><span style="color:gray;">%'</span></span>
+<span style="color:green;">+|</span></span>    while peek(stream.input)<span style="color:green;">true'</span>%'</span>
+<span style="color:inherit;"> |</span>        forward!(stream.input)
+<span style="color:inherit;"> |</span>        for k in 0:1
+<span style="color:inherit;"> |</span>            if !in(peek(stream.input, k), &#34;0123456789ABCDEFabcdef&#</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

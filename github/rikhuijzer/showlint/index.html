@@ -1,1 +1,55 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>rikhuijzer/ShowLint</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/rikhuijzer/ShowLint" target=_blank >rikhuijzer/ShowLint</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>rikhuijzer/ShowLint</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/rikhuijzer/ShowLint" target=_blank >rikhuijzer/ShowLint</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_11_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 11 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_11_hits ><a href="#omit_a_a_and_a_a_11_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 11 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>    unique_and_sorted = unique(sorted)
+<span style="color:inherit;"> |</span>    @test names == unique_and_sorted
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SL.prettify_loc(1000)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;1,000&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test SL.prettify_loc(1000)<span style="color:green;">true</span>&#34;1,000&#34;</span>
+<span style="color:inherit;"> |</span>    
+<span style="color:inherit;"> |</span>    include(&#34;patterns.jl&#34;)
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/patterns.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/patterns.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-31,17 +31,17</span> ============================================================
+<span style="color:inherit;"> |</span>        return ok
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[1], &#34;AbstractArray{Int,1}&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;AbstractVector{Int}&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[1], &#34;AbstractArray{Int,1}&#34;)<span style="color:green;">true</span>&#34;AbstractVector{Int}&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[2], &#34;if x === missing&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;if ismissing(x)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[2], &#34;if x === missing&#34;)<span style="color:green;">true</span>&#34;if ismissing(x)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[2], &#34;x !== missing&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;!ismissing(x)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[2], &#34;x !== missing&#34;)<span style="color:green;">true</span>&#34;!ismissing(x)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[3], &#34;map(x -> f(x), A)&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;map(f, A)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[3], &#34;map(x -> f(x), A)&#34;)<span style="color:green;">true</span>&#34;map(f, A)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test unchanged(P[3], &#34;y = x -> f(x) ? a : b&#34;)</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test unchanged(P[3], &#34;x -> f.(x),&#34;)</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[4], &#34;x == true&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;x&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test unchanged(P[3], &#34;y = x -> f(x) ? a : b&#34;)</span>
+<span style="color:green;">+|</span></span>    @test unchanged(P[3], &#34;x -> f.(x),&#34;)</span>
+<span style="color:green;">+|</span></span>    @test apply(P[4], &#34;x == true&#34;)<span style="color:green;">true</span>&#34;x&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[4], &#34;x == false&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;!x&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[4], &#34;x == false&#34;)<span style="color:green;">true</span>&#34;!x&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[4], &#34;x != false&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;!!x&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[4], &#34;x != false&#34;)<span style="color:green;">true</span>&#34;!!x&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[5], &#34;if x == x&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;if true&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[5], &#34;if x == x&#34;)<span style="color:green;">true</span>&#34;if true&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test apply(P[5], &#34;x != x&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;false&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test apply(P[5], &#34;x != x&#34;)<span style="color:green;">true</span>&#34;false&#34;</span>
+<span style="color:inherit;"> |</span>    @test unchanged(P[5], &#34;a.x == x&#34;)
+<span style="color:inherit;"> |</span>    @test unchanged(P[5], &#34;x == x[1]&#34;)
+<span style="color:inherit;"> |</span>    @test unchanged(P[5], &#34;x == x:y&#34;)
+<span style="color:red;">------ </span><span style="color:inherit;">src/ShowLint.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/ShowLint.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
+<span style="color:inherit;"> |</span>function host_dir(repo::Repo)
+<span style="color:inherit;"> |</span>    host = repo.host
+<span style="color:inherit;"> |</span>    host_dir = startswith(host, &#34;https://&#34;) ? host[9:end] : host
+<span style="color:red;">-|</span></span><span style="color:gray;">    host_dir = lowercase(host_dir)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;github.com&#34; ? &#34;github&#34; : host_dir</span></span>
+<span style="color:green;">+|</span></span>    host_dir = lowercase(host_dir)<span style="color:green;">true</span>&#34;github.com&#34; ? &#34;github&#34; : host_dir</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function target_dir(repo::R</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

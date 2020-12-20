@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaIO/HDF5.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaIO/HDF5.jl" target=_blank >JuliaIO/HDF5.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaIO/HDF5.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaIO/HDF5.jl" target=_blank >JuliaIO/HDF5.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_63_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 63 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/compound.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/compound.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
@@ -32,4 +32,302 @@
 <span style="color:inherit;"> |</span>d = read(hfile[&#34;fixed_string&#34;], HDF5.FixedString{length(fixstring),0})
 <span style="color:inherit;"> |</span>@test d isa String
 <span style="color:inherit;"> |</span>@test d == fixst</div>
+</pre> <h3 id=omit_a_a_and_a_a_63_hits ><a href="#omit_a_a_and_a_a_63_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 63 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/extend_test.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/extend_test.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,7 +18,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test max_dims == (UInt64(100), UInt64(200))
+<span style="color:inherit;"> |</span>d[1, 1:5] = [1.1231, 1.313, 5.123, 2.231, 4.1231]
+<span style="color:inherit;"> |</span>HDF5.set_dims!(d, (1, 5))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(d)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 5)</span></span>
+<span style="color:green;">+|</span></span>@test size(d)<span style="color:green;">true</span>(1, 5)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Indexing returns correct array dimensions
+<span style="color:inherit;"> |</span>@test d[1, end] ≈ 4.1231
+<span style="color:red;">------ </span><span style="color:inherit;">test/plain.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/plain.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-201,11 +201,11</span> ============================================================
+<span style="color:inherit;"> |</span>Rr6 = read(fr, &#34;mygroup3/BloscA&#34;)
+<span style="color:inherit;"> |</span>@test Rr6 == R
+<span style="color:inherit;"> |</span>dset = fr[&#34;mygroup/CompressedA&#34;]
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.get_chunk(dset)</span><span style="color:red;"> == </span><span style="color:gray;">(5, 6)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.get_chunk(dset)<span style="color:green;">true</span>(5, 6)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.name(dset)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;/mygroup/CompressedA&#34;</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.name(dset)<span style="color:green;">true</span>&#34;/mygroup/CompressedA&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">dset2 = fr[&#34;mygroup/BloscA&#34;]</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.get_chunk(dset2)</span><span style="color:red;"> == </span><span style="color:gray;">(5, 6)</span></span>
+<span style="color:green;">+|</span></span>dset2 = fr[&#34;mygroup/BloscA&#34;]</span>
+<span style="color:green;">+|</span></span>@test HDF5.get_chunk(dset2)<span style="color:green;">true</span>(5, 6)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.name(dset2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;/mygroup/BloscA&#34;</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.name(dset2)<span style="color:green;">true</span>&#34;/mygroup/BloscA&#34;</span>
+<span style="color:inherit;"> |</span>Xslabr = read(fr, &#34;slab&#34;)
+<span style="color:inherit;"> |</span>@test Xslabr == Xslab
+<span style="color:inherit;"> |</span>Xslabr = h5read(fn, &#34;slab&#34;, (:, :, :))  # issue #87
+<span style="color:inherit;">@|</span><span style="color:inherit;">-551,10 +551,10</span> ============================================================
+<span style="color:inherit;"> |</span>@test eltype(dzeromat) == Float64
+<span style="color:inherit;"> |</span>@test eltype(dzeromat2) == Float64
+<span style="color:inherit;"> |</span># Test sizes are as expected
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(dempty)</span><span style="color:red;"> == </span><span style="color:gray;">()</span></span>
+<span style="color:green;">+|</span></span>@test size(dempty)<span style="color:green;">true</span>()</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(dzerovec)</span><span style="color:red;"> == </span><span style="color:gray;">(0,)</span></span>
+<span style="color:green;">+|</span></span>@test size(dzerovec)<span style="color:green;">true</span>(0,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(dzeromat)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 0)</span></span>
+<span style="color:green;">+|</span></span>@test size(dzeromat)<span style="color:green;">true</span>(0, 0)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(dzeromat2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 1)</span></span>
+<span style="color:green;">+|</span></span>@test size(dzeromat2)<span style="color:green;">true</span>(0, 1)</span>
+<span style="color:inherit;"> |</span>@test HDF5.isnull(dempty)
+<span style="color:inherit;"> |</span>@test !HDF5.isnull(dzerovec)
+<span style="color:inherit;"> |</span>@test !HDF5.isnull(dzeromat)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-562,7 +562,7</span> ============================================================
+<span style="color:inherit;"> |</span># Reading back must preserve emptiness
+<span style="color:inherit;"> |</span>@test read(dempty) isa HDF5.EmptyArray
+<span style="color:inherit;"> |</span># but 0-dimensional Array{T,0} are stored as HDF5 scalar
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(dzerodim)</span><span style="color:red;"> == </span><span style="color:gray;">()</span></span>
+<span style="color:green;">+|</span></span>@test size(dzerodim)<span style="color:green;">true</span>()</span>
+<span style="color:inherit;"> |</span>@test !HDF5.isnull(dzerodim)
+<span style="color:inherit;"> |</span>@test read(dzerodim) == 1.0π
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-584,10 +584,10</span> ============================================================
+<span style="color:inherit;"> |</span>@test eltype(azeromat) == Int64
+<span style="color:inherit;"> |</span>@test eltype(azeromat2) == Int64
+<span style="color:inherit;"> |</span># Test sizes are as expected
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(aempty)</span><span style="color:red;"> == </span><span style="color:gray;">()</span></span>
+<span style="color:green;">+|</span></span>@test size(aempty)<span style="color:green;">true</span>()</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(azerovec)</span><span style="color:red;"> == </span><span style="color:gray;">(0,)</span></span>
+<span style="color:green;">+|</span></span>@test size(azerovec)<span style="color:green;">true</span>(0,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(azeromat)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 0)</span></span>
+<span style="color:green;">+|</span></span>@test size(azeromat)<span style="color:green;">true</span>(0, 0)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(azeromat2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 1)</span></span>
+<span style="color:green;">+|</span></span>@test size(azeromat2)<span style="color:green;">true</span>(0, 1)</span>
+<span style="color:inherit;"> |</span>@test HDF5.isnull(aempty)
+<span style="color:inherit;"> |</span>@test !HDF5.isnull(azerovec)
+<span style="color:inherit;"> |</span>@test !HDF5.isnull(azeromat)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-595,7 +595,7</span> ============================================================
+<span style="color:inherit;"> |</span># Reading back must preserve emptiness
+<span style="color:inherit;"> |</span>@test read(aempty) isa HDF5.EmptyArray
+<span style="color:inherit;"> |</span># but 0-dimensional Array{T,0} are stored as HDF5 scalar
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(azerodim)</span><span style="color:red;"> == </span><span style="color:gray;">()</span></span>
+<span style="color:green;">+|</span></span>@test size(azerodim)<span style="color:green;">true</span>()</span>
+<span style="color:inherit;"> |</span>@test !HDF5.isnull(azerodim)
+<span style="color:inherit;"> |</span>@test read(azerodim) == 1.0ℯ
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-611,9 +611,9</span> ============================================================
+<span style="color:inherit;"> |</span># check that printing EmptyArray doesn't error
+<span style="color:inherit;"> |</span>buf = IOBuffer()
+<span style="color:inherit;"> |</span>show(buf, HDF5.EmptyArray{Int64}())
+<span style="color:red;">-|</span></span><span style="color:gray;">@test String(take!(buf))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.EmptyArray{Int64}()&#34;</span></span>
+<span style="color:green;">+|</span></span>@test String(take!(buf))<span style="color:green;">true</span>&#34;HDF5.EmptyArray{Int64}()&#34;</span>
+<span style="color:inherit;"> |</span>show(buf, MIME&#34;text/plain&#34;(), HDF5.EmptyArray{Int64}())
+<span style="color:red;">-|</span></span><span style="color:gray;">@test String(take!(buf))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.EmptyArray{Int64}()&#34;</span></span>
+<span style="color:green;">+|</span></span>@test String(take!(buf))<span style="color:green;">true</span>&#34;HDF5.EmptyArray{Int64}()&#34;</span>
+<span style="color:inherit;"> |</span>end # empty and 0-size arrays
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;generic read of native types&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-682,27 +682,27</span> ============================================================
+<span style="color:inherit;"> |</span># First create data objects and sure they print useful outputs
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>hfile = h5open(fn, &#34;w&#34;, swmr = true)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, hfile)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.File: (read-write, swmr) $fn&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, hfile)<span style="color:green;">true</span>&#34;HDF5.File: (read-write, swmr) $fn&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>group = create_group(hfile, &#34;group&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, group)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Group: /group (file: $fn)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, group)<span style="color:green;">true</span>&#34;HDF5.Group: /group (file: $fn)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>dset = create_dataset(group, &#34;dset&#34;, datatype(Int), dataspace((1,)))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dset)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataset: /group/dset (file: $fn xfer_mode: 0)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dset)<span style="color:green;">true</span>&#34;HDF5.Dataset: /group/dset (file: $fn xfer_mode: 0)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>meta = create_attribute(dset, &#34;meta&#34;, datatype(Bool), dataspace((1,)))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, meta)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Attribute: meta&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, meta)<span style="color:green;">true</span>&#34;HDF5.Attribute: meta&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>dsetattrs = attributes(dset)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dsetattrs)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Attributes of HDF5.Dataset: /group/dset (file: $fn xfer_mode: 0)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dsetattrs)<span style="color:green;">true</span>&#34;Attributes of HDF5.Dataset: /group/dset (file: $fn xfer_mode: 0)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>prop = create_property(HDF5.H5P_DATASET_CREATE)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, prop)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Properties: dataset create class&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, prop)<span style="color:green;">true</span>&#34;HDF5.Properties: dataset create class&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>dtype = HDF5.Datatype(HDF5.h5t_copy(HDF5.H5T_IEEE_F64LE))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dtype)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Datatype: H5T_IEEE_F64LE&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dtype)<span style="color:green;">true</span>&#34;HDF5.Datatype: H5T_IEEE_F64LE&#34;</span>
+<span style="color:inherit;"> |</span>commit_datatype(hfile, &#34;type&#34;, dtype)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dtype)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Datatype: /type H5T_IEEE_F64LE&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dtype)<span style="color:green;">true</span>&#34;HDF5.Datatype: /type H5T_IEEE_F64LE&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>dspace_null = HDF5.Dataspace(HDF5.h5s_create(HDF5.H5S_NULL))
+<span style="color:inherit;"> |</span>dspace_scal = HDF5.Dataspace(HDF5.h5s_create(HDF5.H5S_SCALAR))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-713,50 +713,50</span> ============================================================
+<span style="color:inherit;"> |</span>dspace_irrg = HDF5.Dataspace(HDF5.h5s_combine_select(
+<span style="color:inherit;"> |</span>        HDF5.h5s_copy(dspace_slab), HDF5.H5S_SELECT_OR,
+<span style="color:inherit;"> |</span>        HDF5.hyperslab(dataspace((100, 4)), 2, 2)))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dspace_irrg)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataspace: (100, 4) [irregular selection]&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dspace_irrg)<span style="color:green;">true</span>&#34;HDF5.Dataspace: (100, 4) [irregular selection]&#34;</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dspace_null)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataspace: H5S_NULL&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dspace_null)<span style="color:green;">true</span>&#34;HDF5.Dataspace: H5S_NULL&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dspace_scal)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataspace: H5S_SCALAR&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dspace_scal)<span style="color:green;">true</span>&#34;HDF5.Dataspace: H5S_SCALAR&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dspace_norm)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataspace: (100, 4)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dspace_norm)<span style="color:green;">true</span>&#34;HDF5.Dataspace: (100, 4)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dspace_maxd)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataspace: (100, 4) / (256, 4)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dspace_maxd)<span style="color:green;">true</span>&#34;HDF5.Dataspace: (100, 4) / (256, 4)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dspace_slab)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataspace: (1:20:81, 1:4) / (1:100, 1:4)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dspace_slab)<span style="color:green;">true</span>&#34;HDF5.Dataspace: (1:20:81, 1:4) / (1:100, 1:4)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Now test printing after closing each object
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(dspace_null)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dspace_null)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataspace: (invalid)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dspace_null)<span style="color:green;">true</span>&#34;HDF5.Dataspace: (invalid)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(dtype)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dtype)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Datatype: (invalid)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dtype)<span style="color:green;">true</span>&#34;HDF5.Datatype: (invalid)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(prop)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, prop)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Properties: (invalid)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, prop)<span style="color:green;">true</span>&#34;HDF5.Properties: (invalid)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(meta)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, meta)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Attribute: (invalid)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, meta)<span style="color:green;">true</span>&#34;HDF5.Attribute: (invalid)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(dset)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dset)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Dataset: (invalid)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dset)<span style="color:green;">true</span>&#34;HDF5.Dataset: (invalid)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, dsetattrs)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Attributes of HDF5.Dataset: (invalid)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, dsetattrs)<span style="color:green;">true</span>&#34;Attributes of HDF5.Dataset: (invalid)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(group)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, group)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.Group: (invalid)&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, group)<span style="color:green;">true</span>&#34;HDF5.Group: (invalid)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>close(hfile)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, hfile)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.File: (closed) $fn&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, hfile)<span style="color:green;">true</span>&#34;HDF5.File: (closed) $fn&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Go back and check different access modes for file printing
+<span style="color:inherit;"> |</span>hfile = h5open(fn, &#34;r+&#34;, swmr = true)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, hfile)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.File: (read-write, swmr) $fn&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, hfile)<span style="color:green;">true</span>&#34;HDF5.File: (read-write, swmr) $fn&#34;</span>
+<span style="color:inherit;"> |</span>close(hfile)
+<span style="color:inherit;"> |</span>hfile = h5open(fn, &#34;r&#34;, swmr = true)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, hfile)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.File: (read-only, swmr) $fn&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, hfile)<span style="color:green;">true</span>&#34;HDF5.File: (read-only, swmr) $fn&#34;</span>
+<span style="color:inherit;"> |</span>close(hfile)
+<span style="color:inherit;"> |</span>hfile = h5open(fn, &#34;r&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, hfile)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.File: (read-only) $fn&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, hfile)<span style="color:green;">true</span>&#34;HDF5.File: (read-only) $fn&#34;</span>
+<span style="color:inherit;"> |</span>close(hfile)
+<span style="color:inherit;"> |</span>hfile = h5open(fn, &#34;cw&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, hfile)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HDF5.File: (read-write) $fn&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, hfile)<span style="color:green;">true</span>&#34;HDF5.File: (read-write) $fn&#34;</span>
+<span style="color:inherit;"> |</span>close(hfile)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>rm(fn)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-873,13 +873,13</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;split1&#34; begin
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(&#34;/&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;/&#34;, &#34;&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(&#34;/&#34;)<span style="color:green;">true</span>(&#34;/&#34;, &#34;&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(&#34;a&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;a&#34;, &#34;&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(&#34;a&#34;)<span style="color:green;">true</span>(&#34;a&#34;, &#34;&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(&#34;/a/b/c&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;/&#34;, &#34;a/b/c&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(&#34;/a/b/c&#34;)<span style="color:green;">true</span>(&#34;/&#34;, &#34;a/b/c&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(&#34;a/b/c&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;a&#34;, &#34;b/c&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(&#34;a/b/c&#34;)<span style="color:green;">true</span>(&#34;a&#34;, &#34;b/c&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(GenericString(&#34;a&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;a&#34;, &#34;&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(GenericString(&#34;a&#34;))<span style="color:green;">true</span>(&#34;a&#34;, &#34;&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(GenericString(&#34;/a/b/c&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;/&#34;, &#34;a/b/c&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(GenericString(&#34;/a/b/c&#34;))<span style="color:green;">true</span>(&#34;/&#34;, &#34;a/b/c&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(GenericString(&#34;a/b/c&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;a&#34;, &#34;b/c&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(GenericString(&#34;a/b/c&#34;))<span style="color:green;">true</span>(&#34;a&#34;, &#34;b/c&#34;)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># The following two paths have the same graphemes but different code unit structures:
+<span style="color:inherit;"> |</span># the first one is
+<span style="color:inherit;">@|</span><span style="color:inherit;">-894,10 +894,10</span> ============================================================
+<span style="color:inherit;"> |</span>@test path1 != path2
+<span style="color:inherit;"> |</span>@test Base.Unicode.normalize(path1, :NFC) == Base.Unicode.normalize(path2, :NFC)
+<span style="color:inherit;"> |</span># Check split1 operates correctly
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(path1)</span><span style="color:red;"> == </span><span style="color:gray;">(circa, &#34;α&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(path1)<span style="color:green;">true</span>(circa, &#34;α&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(path2)</span><span style="color:red;"> == </span><span style="color:gray;">(acomb, &#34;α&#34;)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(path2)<span style="color:green;">true</span>(acomb, &#34;α&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(&#34;/&#34; * path1)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;/&#34;, path1)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(&#34;/&#34; * path1)<span style="color:green;">true</span>(&#34;/&#34;, path1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test HDF5.split1(&#34;/&#34; * path2)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;/&#34;, path2)</span></span>
+<span style="color:green;">+|</span></span>@test HDF5.split1(&#34;/&#34; * path2)<span style="color:green;">true</span>(&#34;/&#34;, path2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>end # split1 tests
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1141,13 +1141,13</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        T = HDF5.get_jl_type(c)
+<span style="color:inherit;"> |</span>        @test T <: NamedTuple
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test fieldnames(T)</span><span style="color:red;"> == </span><span style="color:gray;">(:n, :a)</span></span>
+<span style="color:green;">+|</span></span>        @test fieldnames(T)<span style="color:green;">true</span>(:n, :a)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test read(c)</span><span style="color:red;"> == </span><span style="color:gray;">(n = num, a = ref)</span></span>
+<span style="color:green;">+|</span></span>        @test read(c)<span style="color:green;">true</span>(n = num, a = ref)</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    fix = HDF5.FixedArray{Float64,(2,2),4}((1, 2, 3, 4))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(typeof(fix))</span><span style="color:red;"> == </span><span style="color:gray;">(2, 2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(typeof(fix))<span style="color:green;">true</span>(2, 2)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(fix)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(fix)<span style="color:green;">true</span>(2, 2)</span>
+<span style="color:inherit;"> |</span>    @test eltype(typeof(fix)) == Float64
+<span style="color:inherit;"> |</span>    @test eltype(fix) == Float64
+<span style="color:inherit;"> |</span>    # large fixed arrays are readable
+<span style="color:red;">------ </span><span style="color:inherit;">test/external.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/external.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-28,12 +28,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># read things from target_group via exernal link created with HDF5File argument
+<span style="color:inherit;"> |</span>group = source_file[&#34;ext_link&#34;]
+<span style="color:red;">-|</span></span><span style="color:gray;">@test read(group[&#34;abc&#34;])</span><span style="color:red;"> == </span><span style="color:gray;">&#34;abc&#34;</span></span>
+<span style="color:green;">+|</span></span>@test read(group[&#34;abc&#34;])<span style="color:green;">true</span>&#34;abc&#34;</span>
+<span style="color:inherit;"> |</span>@test read(group[&#34;1&#34;]) == 1
+<span style="color:inherit;"> |</span>@test read(group[&#34;1.1&#34;]) == 1.1
+<span style="color:inherit;"> |</span># read things from target_group via the external link created with HDF5.Group argument
+<span style="color:inherit;"> |</span>groupalt = source_file[&#34;agroup/ext_link&#34;]
+<span style="color:red;">-|</span></span><span style="color:gray;">@test read(groupalt[&#34;abc&#34;])</span><span style="color:red;"> == </span><span style="color:gray;">&#34;abc&#34;</span></span>
+<span style="color:green;">+|</span></span>@test read(groupalt[&#34;abc&#34;])<span style="color:green;">true</span>&#34;abc&#34;</span>
+<span style="color:inherit;"> |</span>@test read(groupalt[&#34;1&#34;]) == 1
+<span style="color:inherit;"> |</span>@test read(groupalt[&#34;1.1&#34;]) == 1.1
+<span style="color:inherit;"> |</span>close(source_file)
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>    repo=&#34;https://github.com/JuliaIO/HDF5.jl/blob/{commit}{path}#L{line}&#34;,
+<span style="color:inherit;"> |</span>    sitename=&#34;HDF5.jl&#34;,
+<span style="color:inherit;"> |</span>    format=Documenter.HTML(;
+<span style="color:red;">-|</span></span><span style="color:gray;">        prettyurls=get(ENV, &#34;CI&#34;, &#34;false&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;,</span></span>
+<span style="color:green;">+|</span></span>        prettyurls=get(ENV, &#34;CI&#34;, &#34;false&#34;)<span style="color:green;">true</span>&#34;true&#34;,</span>
+<span style="color:inherit;"> |</span>        canonical=&#34;https://JuliaIO.github.io/HDF5.jl&#34;,
+<span style="color:inherit;"> |</span>        assets=String[],
+<span style="color:inherit;"> |</span>    ),
+<span style="color:red;">------ </span><span style="color:inherit;">src/api.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/api.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-179,7 +179,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function h5d_get_offset(dataset_id)
+<span style="color:inherit;"> |</span>    var&#34;#status#&#34; = ccall((:H5Dget_offset, libhdf5), haddr_t, (hid_t,), dataset_id)
+<span style="color:red;">-|</span></span><span style="color:gray;">    var&#34;#status#&#34;</span><span style="color:red;"> == </span><span style="color:gray;">-1 % haddr_t && error(&#34;Error getting offset&#34;)</span></span>
+<span style="color:green;">+|</span></span>    var&#34;#status#&#34;<span style="color:green;">true</span>-1 % haddr_t && error(&#34;Error getting offset&#34;)</span>
+<span style="color:inherit;"> |</span>    return var&#34;#status#&#34;
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-826,7 +826,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function h5s_get_select_npoints(space_id)
+<span style="color:inherit;"> |</span>    var&#34;#status#&#34; = ccall((:H5Sget_select_npoints, libhdf5), hsize_t, (hid_t,), space_id)
+<span style="color:red;">-|</span></span><span style="color:gray;">    var&#34;#status#&#34;</span><span style="color:red;"> == </span><span style="color:gray;">-1 % hsize_t && error(&#34;Error getting the number of selected points&#34;)</span></span>
+<span style="color:green;">+|</span></span>    var&#34;#status#&#34;<span style="color:green;">true</span>-1 % hsize_t && error(&#34;Error getting the number of selected points&#34;)</span>
+<span style="color:inherit;"> |</span>    return var&#34;#status#&#34;
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

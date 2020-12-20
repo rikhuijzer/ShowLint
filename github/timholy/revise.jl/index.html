@@ -1,1 +1,473 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>timholy/Revise.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/timholy/Revise.jl" target=_blank >timholy/Revise.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>timholy/Revise.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/timholy/Revise.jl" target=_blank >timholy/Revise.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_69_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 69 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_69_hits ><a href="#omit_a_a_and_a_a_69_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 69 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
+<span style="color:inherit;"> |</span>makedocs(
+<span style="color:inherit;"> |</span>    modules = [Revise],
+<span style="color:inherit;"> |</span>    clean = false,
+<span style="color:red;">-|</span></span><span style="color:gray;">    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;),</span></span>
+<span style="color:green;">+|</span></span>    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;),</span>
+<span style="color:inherit;"> |</span>    sitename = &#34;Revise.jl&#34;,
+<span style="color:inherit;"> |</span>    authors = &#34;Tim Holy&#34;,
+<span style="color:inherit;"> |</span>    linkcheck = !(&#34;skiplinks&#34; in ARGS),
+<span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test !isequal(exs[2], Revise.RelocatableExpr(:(f(x) = x^2)))
+<span style="color:inherit;"> |</span>        @test isequal(exs[2], Revise.RelocatableExpr(:(g(x) = sin(x))))
+<span style="color:inherit;"> |</span>        @test !isequal(exs[1], Revise.RelocatableExpr(:(g(x) = sin(x))))
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test string(rex)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test string(rex)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>quote
+<span style="color:inherit;"> |</span>    f(x) = begin
+<span style="color:inherit;"> |</span>            x ^ 2
+<span style="color:inherit;">@|</span><span style="color:inherit;">-232,7 +232,7</span> ============================================================
+<span style="color:inherit;"> |</span>        # test the &#34;mistakes&#34;
+<span style="color:inherit;"> |</span>        @test ReviseTest.cube(2) == 16
+<span style="color:inherit;"> |</span>        @test ReviseTest.Internal.mult3(2) == 8
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test ReviseTest.Internal.mult4(2)</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>        @test ReviseTest.Internal.mult4(2)<span style="color:green;">true</span>-2</span>
+<span style="color:inherit;"> |</span>        # One method will be deleted, for log testing we need to grab it while we still have it
+<span style="color:inherit;"> |</span>        delmeth = first(methods(ReviseTest.Internal.mult4))
+<span style="color:inherit;"> |</span>        mmult3 = @which ReviseTest.Internal.mult3(2)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-258,21 +258,21</span> ============================================================
+<span style="color:inherit;"> |</span>        @test Revise.firstline(Revise.unwrap(def)).line == 5
+<span style="color:inherit;"> |</span>        m = @which ReviseTest.square(1)
+<span style="color:inherit;"> |</span>        @test m.line == 5
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test whereis(m)</span><span style="color:red;"> == </span><span style="color:gray;">(tmpfile, 5)</span></span>
+<span style="color:green;">+|</span></span>        @test whereis(m)<span style="color:green;">true</span>(tmpfile, 5)</span>
+<span style="color:inherit;"> |</span>        @test Revise.RelocatableExpr(definition(m)) == Revise.unwrap(def)
+<span style="color:inherit;"> |</span>        (def, val) = dvs[2]
+<span style="color:inherit;"> |</span>        @test isequal(Revise.unwrap(def), Revise.RelocatableExpr(:(cube(x) = x^3)))
+<span style="color:inherit;"> |</span>        @test val == [Tuple{typeof(ReviseTest.cube),Any}]
+<span style="color:inherit;"> |</span>        m = @which ReviseTest.cube(1)
+<span style="color:inherit;"> |</span>        @test m.line == 7
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test whereis(m)</span><span style="color:red;"> == </span><span style="color:gray;">(tmpfile, 7)</span></span>
+<span style="color:green;">+|</span></span>        @test whereis(m)<span style="color:green;">true</span>(tmpfile, 7)</span>
+<span style="color:inherit;"> |</span>        @test Revise.RelocatableExpr(definition(m)) == Revise.unwrap(def)
+<span style="color:inherit;"> |</span>        (def, val) = dvs[3]
+<span style="color:inherit;"> |</span>        @test isequal(Revise.unwrap(def), Revise.RelocatableExpr(:(fourth(x) = x^4)))
+<span style="color:inherit;"> |</span>        @test val == [Tuple{typeof(ReviseTest.fourth),Any}]
+<span style="color:inherit;"> |</span>        m = @which ReviseTest.fourth(1)
+<span style="color:inherit;"> |</span>        @test m.line == 9
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test whereis(m)</span><span style="color:red;"> == </span><span style="color:gray;">(tmpfile, 9)</span></span>
+<span style="color:green;">+|</span></span>        @test whereis(m)<span style="color:green;">true</span>(tmpfile, 9)</span>
+<span style="color:inherit;"> |</span>        @test Revise.RelocatableExpr(definition(m)) == Revise.unwrap(def)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        dvs = collect(mexsnew[ReviseTest.Internal])
+<span style="color:inherit;">@|</span><span style="color:inherit;">-283,14 +283,14</span> ============================================================
+<span style="color:inherit;"> |</span>        @test Revise.firstline(Revise.unwrap(def)).line == 13
+<span style="color:inherit;"> |</span>        m = @which ReviseTest.Internal.mult2(1)
+<span style="color:inherit;"> |</span>        @test m.line == 11
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test whereis(m)</span><span style="color:red;"> == </span><span style="color:gray;">(tmpfile, 13)</span></span>
+<span style="color:green;">+|</span></span>        @test whereis(m)<span style="color:green;">true</span>(tmpfile, 13)</span>
+<span style="color:inherit;"> |</span>        @test Revise.RelocatableExpr(definition(m)) == Revise.unwrap(def)
+<span style="color:inherit;"> |</span>        (def, val) = dvs[2]
+<span style="color:inherit;"> |</span>        @test isequal(Revise.unwrap(def), Revise.RelocatableExpr(:(mult3(x) = 3*x)))
+<span style="color:inherit;"> |</span>        @test val == [Tuple{typeof(ReviseTest.Internal.mult3),Any}]
+<span style="color:inherit;"> |</span>        m = @which ReviseTest.Internal.mult3(1)
+<span style="color:inherit;"> |</span>        @test m.line == 14
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test whereis(m)</span><span style="color:red;"> == </span><span style="color:gray;">(tmpfile, 14)</span></span>
+<span style="color:green;">+|</span></span>        @test whereis(m)<span style="color:green;">true</span>(tmpfile, 14)</span>
+<span style="color:inherit;"> |</span>        @test Revise.RelocatableExpr(definition(m)) == Revise.unwrap(def)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test_throws MethodError ReviseTest.Internal.mult4(2)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-391,7 +391,7</span> ============================================================
+<span style="color:inherit;"> |</span>        exs = mexs[getfield(mod, :ReviseTest)]
+<span style="color:inherit;"> |</span>        # io = IOBuffer()
+<span style="color:inherit;"> |</span>        print(IOContext(io, :compact=>true), exs)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;ExprsSigs(<2 expressions>, <2 signatures>)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test String(take!(io))<span style="color:green;">true</span>&#34;ExprsSigs(<2 expressions>, <2 signatures>)&#34;</span>
+<span style="color:inherit;"> |</span>        print(IOContext(io, :compact=>false), exs)
+<span style="color:inherit;"> |</span>        str = String(take!(io))
+<span style="color:inherit;"> |</span>        @test str == &#34;ExprsSigs with the following expressions: \n  :(square(x) = begin\n          x ^ 2\n      end)\n  :(cube(x) = begin\n          x ^ 4\n      end)&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-489,7 +489,7</span> ============================================================
+<span style="color:inherit;"> |</span>                # CodeTracking methods
+<span style="color:inherit;"> |</span>                m3 = first(methods(eval(fn3)))
+<span style="color:inherit;"> |</span>                m3file = joinpath(dn, &#34;subdir&#34;, &#34;file3.jl&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test whereis(m3)</span><span style="color:red;"> == </span><span style="color:gray;">(m3file, 1)</span></span>
+<span style="color:green;">+|</span></span>                @test whereis(m3)<span style="color:green;">true</span>(m3file, 1)</span>
+<span style="color:inherit;"> |</span>                @test signatures_at(m3file, 1) == [m3.sig]
+<span style="color:inherit;"> |</span>                @test signatures_at(eval(Symbol(modname)), joinpath(&#34;src&#34;, &#34;subdir&#34;, &#34;file3.jl&#34;), 1) == [m3.sig]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-515,55 +515,55</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;)  # just for fun we skipped the whitespace
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>                yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn1)()</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn1)()<span style="color:green;">true</span>-1</span>
+<span style="color:inherit;"> |</span>                @eval @test $(fn2)() == 2
+<span style="color:inherit;"> |</span>                @eval @test $(fn3)() == 3
+<span style="color:inherit;"> |</span>                @eval @test $(fn4)() == 4
+<span style="color:inherit;"> |</span>                @eval @test $(fn5)() == 5
+<span style="color:inherit;"> |</span>                @eval @test $(fn6)() == 6      # because it hasn't been re-macroexpanded
+<span style="color:inherit;"> |</span>                @test revise(eval(Symbol(modname)))
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn6)()</span><span style="color:red;"> == </span><span style="color:gray;">-6</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn6)()<span style="color:green;">true</span>-6</span>
+<span style="color:inherit;"> |</span>                # Redefine function 2
+<span style="color:inherit;"> |</span>                open(joinpath(dn, &#34;file2.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>                    println(io, &#34;$(fbase)2() = -2&#34;)
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>                yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn1)()</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn1)()<span style="color:green;">true</span>-1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn2)()</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn2)()<span style="color:green;">true</span>-2</span>
+<span style="color:inherit;"> |</span>                @eval @test $(fn3)() == 3
+<span style="color:inherit;"> |</span>                @eval @test $(fn4)() == 4
+<span style="color:inherit;"> |</span>                @eval @test $(fn5)() == 5
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn6)()</span><span style="color:red;"> == </span><span style="color:gray;">-6</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn6)()<span style="color:green;">true</span>-6</span>
+<span style="color:inherit;"> |</span>                open(joinpath(dn, &#34;subdir&#34;, &#34;file3.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>                    println(io, &#34;$(fbase)3() = -3&#34;)
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>                yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn1)()</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn1)()<span style="color:green;">true</span>-1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn2)()</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn2)()<span style="color:green;">true</span>-2</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn3)()</span><span style="color:red;"> == </span><span style="color:gray;">-3</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn3)()<span style="color:green;">true</span>-3</span>
+<span style="color:inherit;"> |</span>                @eval @test $(fn4)() == 4
+<span style="color:inherit;"> |</span>                @eval @test $(fn5)() == 5
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn6)()</span><span style="color:red;"> == </span><span style="color:gray;">-6</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn6)()<span style="color:green;">true</span>-6</span>
+<span style="color:inherit;"> |</span>                open(joinpath(dn, &#34;subdir&#34;, &#34;file4.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>                    println(io, &#34;$(fbase)4() = -4&#34;)
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>                yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn1)()</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn1)()<span style="color:green;">true</span>-1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn2)()</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn2)()<span style="color:green;">true</span>-2</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn3)()</span><span style="color:red;"> == </span><span style="color:gray;">-3</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn3)()<span style="color:green;">true</span>-3</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn4)()</span><span style="color:red;"> == </span><span style="color:gray;">-4</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn4)()<span style="color:green;">true</span>-4</span>
+<span style="color:inherit;"> |</span>                @eval @test $(fn5)() == 5
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn6)()</span><span style="color:red;"> == </span><span style="color:gray;">-6</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn6)()<span style="color:green;">true</span>-6</span>
+<span style="color:inherit;"> |</span>                open(joinpath(dn, &#34;file5.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>                    println(io, &#34;$(fbase)5() = -5&#34;)
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>                yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn1)()</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn1)()<span style="color:green;">true</span>-1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn2)()</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn2)()<span style="color:green;">true</span>-2</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn3)()</span><span style="color:red;"> == </span><span style="color:gray;">-3</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn3)()<span style="color:green;">true</span>-3</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn4)()</span><span style="color:red;"> == </span><span style="color:gray;">-4</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn4)()<span style="color:green;">true</span>-4</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn5)()</span><span style="color:red;"> == </span><span style="color:gray;">-5</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn5)()<span style="color:green;">true</span>-5</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @eval @test $(fn6)()</span><span style="color:red;"> == </span><span style="color:gray;">-6</span></span>
+<span style="color:green;">+|</span></span>                @eval @test $(fn6)()<span style="color:green;">true</span>-6</span>
+<span style="color:inherit;"> |</span>                # Check that the list of files is complete
+<span style="color:inherit;"> |</span>                pkgdata = Revise.pkgdatas[Base.PkgId(modname)]
+<span style="color:inherit;"> |</span>                for file = [joinpath(&#34;src&#34;, modname*&#34;.jl&#34;), joinpath(&#34;src&#34;, &#34;file2.jl&#34;),
+<span style="color:inherit;">@|</span><span style="color:inherit;">-646,7 +646,7</span> ============================================================
+<span style="color:inherit;"> |</span>            println(io, &#34;li_f() = -1&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test li_f()</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>        @test li_f()<span style="color:green;">true</span>-1</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;LoopInclude&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Multiple packages in the same directory (issue #228)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-878,7 +878,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        @eval using CrossModA, CrossModB
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test CrossModA.foo(&#34;&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;default&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test CrossModA.foo(&#34;&#34;)<span style="color:green;">true</span>&#34;default&#34;</span>
+<span style="color:inherit;"> |</span>        @test CrossModA.foo(0) == 1
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        open(joinpath(dnB, &#34;CrossModB.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;">@|</span><span style="color:inherit;">-890,7 +890,7</span> ============================================================
+<span style="color:inherit;"> |</span>            &#34;&#34;&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test CrossModA.foo(&#34;&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;default&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test CrossModA.foo(&#34;&#34;)<span style="color:green;">true</span>&#34;default&#34;</span>
+<span style="color:inherit;"> |</span>        @test CrossModA.foo(0) == 2
+<span style="color:inherit;"> |</span>        open(joinpath(dnB, &#34;CrossModB.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-901,7 +901,7</span> ============================================================
+<span style="color:inherit;"> |</span>            &#34;&#34;&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test CrossModA.foo(&#34;&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;default&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test CrossModA.foo(&#34;&#34;)<span style="color:green;">true</span>&#34;default&#34;</span>
+<span style="color:inherit;"> |</span>        @test CrossModA.foo(0) == 3
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;CrossModA&#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-926,7 +926,7</span> ============================================================
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        @eval using ModFILE
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test ModFILE.mf()</span><span style="color:red;"> == </span><span style="color:gray;">(joinpath(dn, &#34;ModFILE.jl&#34;), 1)</span></span>
+<span style="color:green;">+|</span></span>        @test ModFILE.mf()<span style="color:green;">true</span>(joinpath(dn, &#34;ModFILE.jl&#34;), 1)</span>
+<span style="color:inherit;"> |</span>        open(joinpath(dn, &#34;ModFILE.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>module ModFILE
+<span style="color:inherit;">@|</span><span style="color:inherit;">-937,7 +937,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test ModFILE.mf()</span><span style="color:red;"> == </span><span style="color:gray;">(joinpath(dn, &#34;ModFILE.jl&#34;), 2)</span></span>
+<span style="color:green;">+|</span></span>        @test ModFILE.mf()<span style="color:green;">true</span>(joinpath(dn, &#34;ModFILE.jl&#34;), 2)</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;ModFILE&#34;)
+<span style="color:inherit;"> |</span>        pop!(LOAD_PATH)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1076,7 +1076,7</span> ============================================================
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        @test ModDocstring.f() == 1
+<span style="color:inherit;"> |</span>        ds = @doc(ModDocstring)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Ahoy! &#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;Ahoy! &#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        open(joinpath(dn, &#34;ModDocstring.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1093,7 +1093,7</span> ============================================================
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:inherit;"> |</span>        @test ModDocstring.f() == 2
+<span style="color:inherit;"> |</span>        ds = @doc(ModDocstring)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Ahoy! &#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;Ahoy! &#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        open(joinpath(dn, &#34;ModDocstring.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1110,7 +1110,7</span> ============================================================
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:inherit;"> |</span>        @test ModDocstring.f() == 3
+<span style="color:inherit;"> |</span>        ds = @doc(ModDocstring)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Hello! &#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;Hello! &#34;</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;ModDocstring&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # issue #197
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1130,9 +1130,9</span> ============================================================
+<span style="color:inherit;"> |</span>        @eval using ModDocstring2
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        ds = @doc(ModDocstring2)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;docstring&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;docstring&#34;</span>
+<span style="color:inherit;"> |</span>        ds = @doc(ModDocstring2.Sub)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;docstring for .Sub&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;docstring for .Sub&#34;</span>
+<span style="color:inherit;"> |</span>        open(joinpath(dn, &#34;ModDocstring2.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>            &#34;updated docstring&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1145,9 +1145,9</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:inherit;"> |</span>        ds = @doc(ModDocstring2)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;updated docstring&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;updated docstring&#34;</span>
+<span style="color:inherit;"> |</span>        ds = @doc(ModDocstring2.Sub)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;updated docstring for .Sub&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;updated docstring for .Sub&#34;</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;ModDocstring2&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        pop!(LOAD_PATH)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1172,10 +1172,10</span> ============================================================
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        @test ChangeDocstring.f() == 1
+<span style="color:inherit;"> |</span>        ds = @doc(ChangeDocstring.f)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;f&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;f&#34;</span>
+<span style="color:inherit;"> |</span>        @test ChangeDocstring.g() == 1
+<span style="color:inherit;"> |</span>        ds = @doc(ChangeDocstring.g)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;No documentation found.&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;No documentation found.&#34;</span>
+<span style="color:inherit;"> |</span>        # Ordinary route
+<span style="color:inherit;"> |</span>        open(joinpath(dn, &#34;ChangeDocstring.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1187,9 +1187,9</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:inherit;"> |</span>        ds = @doc(ChangeDocstring.f)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;h&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;h&#34;</span>
+<span style="color:inherit;"> |</span>        ds = @doc(ChangeDocstring.g)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;g&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;g&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Now manually change the docstring
+<span style="color:inherit;"> |</span>        ex = quote &#34;g&#34; f() = 1 end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1200,7 +1200,7</span> ============================================================
+<span style="color:inherit;"> |</span>        ret = Revise.methods_by_execution!(JuliaInterpreter.finish_and_return!, methodinfo,
+<span style="color:inherit;"> |</span>                                           docexprs, frame, trues(length(frame.framecode.src.code)); mode=:sigs)
+<span style="color:inherit;"> |</span>        ds = @doc(ChangeDocstring.f)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;g&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;g&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;ChangeDocstring&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1219,7 +1219,7</span> ============================================================
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        @test FirstDocstring.g() == 1
+<span style="color:inherit;"> |</span>        ds = @doc(FirstDocstring.g)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;No documentation found.&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;No documentation found.&#34;</span>
+<span style="color:inherit;"> |</span>        open(joinpath(dn, &#34;FirstDocstring.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>            module FirstDocstring
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1229,7 +1229,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:inherit;"> |</span>        ds = @doc(FirstDocstring.g)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get_docstring(ds)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;g&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get_docstring(ds)<span style="color:green;">true</span>&#34;g&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;FirstDocstring&#34;)
+<span style="color:inherit;"> |</span>        pop!(LOAD_PATH)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1274,7 +1274,7</span> ============================================================
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        @test MacDocstring.f() == 1
+<span style="color:inherit;"> |</span>        ds = @doc(MacDocstring.c)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test strip(get_docstring(ds))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;mydoc&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test strip(get_docstring(ds))<span style="color:green;">true</span>&#34;mydoc&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        open(joinpath(dn, &#34;MacDocstring.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>            println(io, &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1298,7 +1298,7</span> ============================================================
+<span style="color:inherit;"> |</span>        yry()
+<span style="color:inherit;"> |</span>        @test MacDocstring.f() == 2
+<span style="color:inherit;"> |</span>        ds = @doc(MacDocstring.c)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test strip(get_docstring(ds))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;mydoc&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test strip(get_docstring(ds))<span style="color:green;">true</span>&#34;mydoc&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;MacDocstring&#34;)
+<span style="color:inherit;"> |</span>        pop!(LOAD_PATH)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1837,18 +1837,18</span> ============================================================
+<span style="color:inherit;"> |</span>        @test MethDel.hasmacro1(1) == 1
+<span style="color:inherit;"> |</span>        @test MethDel.hasmacro2(1) == 1
+<span style="color:inherit;"> |</span>        @test MethDel.hasmacro3(1, 0.0) == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MethDel.hasdestructure1(0, (3, &#34;hi&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hihihi&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test MethDel.hasdestructure1(0, (3, &#34;hi&#34;))<span style="color:green;">true</span>&#34;hihihi&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MethDel.hasdestructure2(0, (3, &#34;hi&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hihihi&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test MethDel.hasdestructure2(0, (3, &#34;hi&#34;))<span style="color:green;">true</span>&#34;hihihi&#34;</span>
+<span style="color:inherit;"> |</span>        @test Base.revisefoo(1.0) == 1
+<span style="color:inherit;"> |</span>        @test Base.revisefoo(1) == 2
+<span style="color:inherit;"> |</span>        @test Base.revisefoo(MethDel.Private()) == 3
+<span style="color:inherit;"> |</span>        @test MethDel.dfltargs(Int8(2)) == 3.0f0
+<span style="color:inherit;"> |</span>        @test MethDel.dfltargs(Int8(2), 5) == 8.0f0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MethDel.dfltargs(Int8(2), 5, -17.0f0)</span><span style="color:red;"> == </span><span style="color:gray;">-10.0f0</span></span>
+<span style="color:green;">+|</span></span>        @test MethDel.dfltargs(Int8(2), 5, -17.0f0)<span style="color:green;">true</span>-10.0f0</span>
+<span style="color:inherit;"> |</span>        @test MethDel.checkunion(nothing) == 1
+<span style="color:inherit;"> |</span>        @test MethDel.methgensym([1]) == 1
+<span style="color:inherit;"> |</span>        @test_throws MethodError MethDel.methgensym([1.0])
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MethDel.mapf((x->x+1, x->x+0.1), 3)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 3.1)</span></span>
+<span style="color:green;">+|</span></span>        @test MethDel.mapf((x->x+1, x->x+0.1), 3)<span style="color:green;">true</span>(4, 3.1)</span>
+<span style="color:inherit;"> |</span>        @test MethDel.mytypeof(1) === Int
+<span style="color:inherit;"> |</span>        @test MethDel.mytypeof(1.0) === Float64
+<span style="color:inherit;"> |</span>        @test MethDel.mytypeof(&#34;hi&#34;) === String
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1887,7 +1887,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test_throws MethodError MethDel.g(Int[], 1.0)
+<span style="color:inherit;"> |</span>        @test MethDel.h(rand(3), 1.0) == 2
+<span style="color:inherit;"> |</span>        @test_throws MethodError MethDel.k(1; badchoice=2)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MethDel.k(1)</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>        @test MethDel.k(1)<span style="color:green;">true</span>-1</span>
+<span style="color:inherit;"> |</span>        @test MethDel.k(1; goodchoice=10) == 10
+<span style="color:inherit;"> |</span>        @test_throws MethodError MethDel.hasmacro1(1)
+<span style="color:inherit;"> |</span>        @test_throws MethodError MethDel.hasmacro2(1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1898,14 +1898,14</span> ============================================================
+<span style="color:inherit;"> |</span>        @test_throws MethodError Base.revisefoo(1)
+<span style="color:inherit;"> |</span>        @test_throws MethodError Base.revisefoo(MethDel.Private())
+<span style="color:inherit;"> |</span>        @test MethDel.dfltargs(Int8(2)) == 3.0f0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MethDel.dfltargs(Int8(2), (5,-17.0f0))</span><span style="color:red;"> == </span><span style="color:gray;">-10.0f0</span></span>
+<span style="color:green;">+|</span></span>        @test MethDel.dfltargs(Int8(2), (5,-17.0f0))<span style="color:green;">true</span>-10.0f0</span>
+<span style="color:inherit;"> |</span>        @test_throws MethodError MethDel.dfltargs(Int8(2), 5) == 8.0f0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test_throws MethodError MethDel.dfltargs(Int8(2), 5, -17.0f0)</span><span style="color:red;"> == </span><span style="color:gray;">-10.0f0</span></span>
+<span style="color:green;">+|</span></span>        @test_throws MethodError MethDel.dfltargs(Int8(2), 5, -17.0f0)<span style="color:green;">true</span>-10.0f0</span>
+<span style="color:inherit;"> |</span>        @test MethDel.checkunion(nothing) == 2
+<span style="color:inherit;"> |</span>        @test MethDel.methgensym([1]) == 1
+<span style="color:inherit;"> |</span>        @test MethDel.methgensym([1.0]) == 1
+<span style="color:inherit;"> |</span>        @test length(methods(MethDel.methgensym)) == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MethDel.mapf((x->x+1, x->x+0.1), 3)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 3.1)</span></span>
+<span style="color:green;">+|</span></span>        @test MethDel.mapf((x->x+1, x->x+0.1), 3)<span style="color:green;">true</span>(4, 3.1)</span>
+<span style="color:inherit;"> |</span>        @test length(methods(MethDel.mapf)) == 2
+<span style="color:inherit;"> |</span>        @test MethDel.mytypeof(1) === Int
+<span style="color:inherit;"> |</span>        @test_throws MethodError MethDel.mytypeof(1.0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-2485,7 +2485,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        lines = readlines(logfile)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test length(lines) == 1 && chomp(lines[1])</span><span style="color:red;"> == </span><span style="color:gray;">&#34;executed&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test length(lines) == 1 && chomp(lines[1])<span style="color:green;">true</span>&#34;executed&#34;</span>
+<span style="color:inherit;"> |</span>        # In older versions of Revise, it would do the work again when the file
+<span style="color:inherit;"> |</span>        # changed. Starting with 3.0, Revise modifies methods and docstrings but
+<span style="color:inherit;"> |</span>        # does not &#34;do work.&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-2727,7 +2727,7</span> ============================================================
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>        @everywhere using ReviseDistributed
+<span style="color:inherit;"> |</span>        for p in allworkers
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test remotecall_fetch(ReviseDistributed.f, p)</span><span style="color:red;">    == π</span></span>
+<span style="color:green;">+|</span></span>            @test remotecall_fetch(ReviseDistributed.f, p)<span style="color:green;">trueπ</span></span>
+<span style="color:inherit;"> |</span>            @test remotecall_fetch(ReviseDistributed.g, p, 1) == 0
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        @test ReviseDistributed.d31474() == 2.0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-2753,7 +2753,7</span> ============================================================
+<span style="color:inherit;"> |</span>            @test remotecall_fetch(ReviseDistributed.f, p) == 3.0
+<span style="color:inherit;"> |</span>            @test_throws RemoteException remotecall_fetch(ReviseDistributed.g, p, 1)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test ReviseDistributed.d31474()</span><span style="color:red;"> == </span><span style="color:gray;">(VERSION < v&#34;1.3.0&#34; ? 2.0 : 3.0)</span></span>
+<span style="color:green;">+|</span></span>        @test ReviseDistributed.d31474()<span style="color:green;">true</span>(VERSION < v&#34;1.3.0&#34; ? 2.0 : 3.0)</span>
+<span style="color:inherit;"> |</span>        rmprocs(allworkers[2:3]...; waitfor=10)
+<span style="color:inherit;"> |</span>        rm_precompile(&#34;ReviseDistributed&#34;)
+<span style="color:inherit;"> |</span>        pop!(LOAD_PATH)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-2795,7 +2795,7</span> ============================================================
+<span style="color:inherit;"> |</span>        Distributed.remotecall_eval(Main, [favorite_proc], :(using ReviseDistributedOnWorker))
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Distributed.remotecall_eval(Main, favorite_proc, :(ReviseDistributedOnWorker.f()))</span><span style="color:red;"> == π</span></span>
+<span style="color:green;">+|</span></span>        @test Distributed.remotecall_eval(Main, favorite_proc, :(ReviseDistributedOnWorker.f()))<span style="color:green;">trueπ</span></span>
+<span style="color:inherit;"> |</span>        @test Distributed.remotecall_eval(Main, favorite_proc, :(ReviseDistributedOnWorker.g(1))) == 0
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # we only loaded ReviseDistributedOnWorker on our favorite process
+<span style="color:inherit;">@|</span><span style="color:inherit;">-2838,7 +2838,7</span> ============================================================
+<span style="color:inherit;"> |</span>        sleep(mtimedelay)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Distributed.remotecall_eval(Main, favorite_proc, :(ReviseDistributedOnWorker.f()))</span><span style="color:red;"> == π</span></span>
+<span style="color:green;">+|</span></span>        @test Distributed.remotecall_eval(Main, favorite_proc, :(ReviseDistributedOnWorker.f()))<span style="color:green;">trueπ</span></span>
+<span style="color:inherit;"> |</span>        @test Distributed.remotecall_eval(Main, favorite_proc, :(ReviseDistributedOnWorker.g(1))) == 0
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test_throws RemoteException Distributed.remotecall_eval(Main, boring_proc, :(ReviseDistributedOnWorker.f()))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3148,7 +3148,7</span> ============================================================
+<span style="color:inherit;"> |</span>    sleep(mtimedelay)
+<span style="color:inherit;"> |</span>    @info &#34;A warning about not having OrderedCollection in dependencies is expected&#34;
+<span style="color:inherit;"> |</span>    @eval using DepPkg371
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test DepPkg371.greet()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Hello world!&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test DepPkg371.greet()<span style="color:green;">true</span>&#34;Hello world!&#34;</span>
+<span style="color:inherit;"> |</span>    sleep(mtimedelay)
+<span style="color:inherit;"> |</span>    open(filepath, &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>        println(io, &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3159,7 +3159,7</span> ============================================================
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test DepPkg371.greet()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Hello again!&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test DepPkg371.greet()<span style="color:green;">true</span>&#34;Hello again!&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    rm_precompile(&#34;DepPkg371&#34;)
+<span style="color:inherit;"> |</span>    pop!(LOAD_PATH)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3394,13 +3394,13</span> ============================================================
+<span style="color:inherit;"> |</span>    notified && @test TrackRequires2.testfunc() == 2
+<span style="color:inherit;"> |</span>    @test_throws UndefVarError TrackRequires2.othertestfunc()
+<span style="color:inherit;"> |</span>    @eval using MappedArrays
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test TrackRequires2.othertestfunc()</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>    @test TrackRequires2.othertestfunc()<span style="color:green;">true</span>-1</span>
+<span style="color:inherit;"> |</span>    sleep(mtimedelay)
+<span style="color:inherit;"> |</span>    open(joinpath(dn, &#34;testfile2.jl&#34;), &#34;w&#34;) do io
+<span style="color:inherit;"> |</span>        println(io, &#34;othertestfunc() = -2&#34;)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    yry()
+<span style="color:red;">-|</span></span><span style="color:gray;">    notified && @test TrackRequires2.othertestfunc()</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>    notified && @test TrackRequires2.othertestfunc()<span style="color:green;">true</span>-2</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Issue #442
+<span style="color:inherit;"> |</span>    push!(LOAD_PATH, joinpath(@__DIR__, &#34;pkgs&#3</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

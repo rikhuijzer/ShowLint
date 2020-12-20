@@ -1,5 +1,20 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/OrderedCollections.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/OrderedCollections.jl" target=_blank >JuliaCollections/OrderedCollections.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_6_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 6 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_6_hits ><a href="#replace_arrayt1_with_vectort_6_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 6 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_ordered_set.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/OrderedCollections.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/OrderedCollections.jl" target=_blank >JuliaCollections/OrderedCollections.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_6_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 6 hits</a><li><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_6_hits ><a href="#replace_arrayt1_with_vectort_6_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 6 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/ordered_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/ordered_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,9 +7,9</span> ============================================================
+<span style="color:inherit;"> |</span>refers to insertion order, which allows deterministic iteration over the dictionary or set.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>mutable struct OrderedDict{K,V} <: AbstractDict{K,V}
+<span style="color:red;">-|</span></span><span style="color:gray;">    slots::</span><span style="color:red;">Array</span><span style="color:gray;">{Int32</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    slots::<span style="color:green;">Vector</span>{Int32}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    keys::</span><span style="color:red;">Array</span><span style="color:gray;">{K</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    keys::<span style="color:green;">Vector</span>{K}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    vals::</span><span style="color:red;">Array</span><span style="color:gray;">{V</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    vals::<span style="color:green;">Vector</span>{V}</span>
+<span style="color:inherit;"> |</span>    ndel::Int
+<span style="color:inherit;"> |</span>    dirty::Bool
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_ordered_set.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_ordered_set.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
 <span style="color:inherit;"> |</span>        data_in = (1, &#34;banana&#34;, ())
@@ -20,20 +35,46 @@
 <span style="color:green;">+|</span></span>            LittleDict{Int,Char,<span style="color:green;">Vector</span>{Int},<span style="color:green;">Vector</span>{Char}}</span>
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        # Different number of keys and values
-<span style="color:inherit;"> |</span>        @test_throws ArgumentError LittleDict{Int, Char, Vector{Int}, Vector{Char}}([1,2,3], ['a','b'])
-<span style="color:red;">------ </span><span style="color:inherit;">src/ordered_dict.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/ordered_dict.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-7,9 +7,9</span> ============================================================
-<span style="color:inherit;"> |</span>refers to insertion order, which allows deterministic iteration over the dictionary or set.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>mutable struct OrderedDict{K,V} <: AbstractDict{K,V}
-<span style="color:red;">-|</span></span><span style="color:gray;">    slots::</span><span style="color:red;">Array</span><span style="color:gray;">{Int32</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    slots::<span style="color:green;">Vector</span>{Int32}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    keys::</span><span style="color:red;">Array</span><span style="color:gray;">{K</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    keys::<span style="color:green;">Vector</span>{K}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    vals::</span><span style="color:red;">Array</span><span style="color:gray;">{V</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    vals::<span style="color:green;">Vector</span>{V}</span>
-<span style="color:inherit;"> |</span>    ndel::Int
-<span style="color:inherit;"> |</span>    dirty::Bool
-<span style="color:inherit;"> |</s</div>
+<span style="color:inherit;"> |</span>        @test_throws ArgumentError LittleDict{Int, Char, Vector{Int}, Vector{Char}}([1,2,3], ['a','</div>
+</pre> <h3 id=omit_a_a_and_a_a_4_hits ><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_little_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_little_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-97,7 +97,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test 'a' in keys(d)
+<span style="color:inherit;"> |</span>        @test haskey(d, 'a')
+<span style="color:inherit;"> |</span>        @test get(d, 'B', 0) == 0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test getkey(d, 'b', nothing)</span><span style="color:red;"> == 'b'</span></span>
+<span style="color:green;">+|</span></span>        @test getkey(d, 'b', nothing)<span style="color:green;">true'b'</span></span>
+<span style="color:inherit;"> |</span>        @test getkey(d, 'B', nothing) == nothing
+<span style="color:inherit;"> |</span>        @test !('B' in keys(d))
+<span style="color:inherit;"> |</span>        @test !haskey(d, 'B')
+<span style="color:inherit;">@|</span><span style="color:inherit;">-312,7 +312,7</span> ============================================================
+<span style="color:inherit;"> |</span>        bestkey(d::AbstractDict{K,V}, key) where {K<:AbstractString,V} = string(key)
+<span style="color:inherit;"> |</span>        bar(x) = bestkey(x, :y)
+<span style="color:inherit;"> |</span>        @test bar(LittleDict([(:x, [1,2,5])])) == :y
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test bar(LittleDict([(&#34;x&#34;, [1,2,5])]))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;y&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test bar(LittleDict([(&#34;x&#34;, [1,2,5])]))<span style="color:green;">true</span>&#34;y&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;isequal&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_ordered_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_ordered_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test 'a' in keys(d)
+<span style="color:inherit;"> |</span>        @test haskey(d, 'a')
+<span style="color:inherit;"> |</span>        @test get(d, 'B', 0) == 0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test getkey(d, 'b', nothing)</span><span style="color:red;"> == 'b'</span></span>
+<span style="color:green;">+|</span></span>        @test getkey(d, 'b', nothing)<span style="color:green;">true'b'</span></span>
+<span style="color:inherit;"> |</span>        @test getkey(d, 'B', nothing) == nothing
+<span style="color:inherit;"> |</span>        @test !('B' in keys(d))
+<span style="color:inherit;"> |</span>        @test !haskey(d, 'B')
+<span style="color:inherit;">@|</span><span style="color:inherit;">-245,7 +245,7</span> ============================================================
+<span style="color:inherit;"> |</span>        bestkey(d::AbstractDict{K,V}, key) where {K<:AbstractString,V} = string(key)
+<span style="color:inherit;"> |</span>        bar(x) = bestkey(x, :y)
+<span style="color:inherit;"> |</span>        @test bar(OrderedDict([(:x, [1,2,5])])) == :y
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test bar(OrderedDict([(&#34;x&#34;, [1,2,5])]))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;y&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test bar(OrderedDict([(&#34;x&#34;, [1,2,5])]))<span style="color:green;">true</span>&#34;y&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;isequal&#34; b</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

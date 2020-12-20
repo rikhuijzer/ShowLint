@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/DataStructures.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/DataStructures.jl" target=_blank >JuliaCollections/DataStructures.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_17_hits ><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/DataStructures.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/DataStructures.jl" target=_blank >JuliaCollections/DataStructures.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a><li><a href="#omit_a_a_and_a_a_61_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 61 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_17_hits ><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/robin_dict.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/robin_dict.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-28,8 +28,8</span> ============================================================
@@ -105,4 +105,442 @@
 <span style="color:inherit;"> |</span>        @test count(d) == 0
 <span style="color:inherit;"> |</span>        for i in 1:15
 <span style="color:inherit;"> |</span>            insert!(d, rand('a':'f'), rand()>0.5 ? [rand(1:10)] : rand(1:10, rand(1:</div>
+</pre> <h3 id=omit_a_a_and_a_a_61_hits ><a href="#omit_a_a_and_a_a_61_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 61 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_priority_queue.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_priority_queue.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-77,17 +77,17</span> ============================================================
+<span style="color:inherit;"> |</span>        @testset &#34;construction from pairs&#34; begin
+<span style="color:inherit;"> |</span>            @testset &#34;pq9&#34; begin
+<span style="color:inherit;"> |</span>                pq9 = PriorityQueue('a'=>1, 'b'=>2)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test peek(pq9)</span><span style="color:red;"> == </span><span style="color:gray;">('a'=>1)</span></span>
+<span style="color:green;">+|</span></span>                @test peek(pq9)<span style="color:green;">true</span>('a'=>1)</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @testset &#34;pq10&#34; begin
+<span style="color:inherit;"> |</span>                pq10 = PriorityQueue(Reverse, 'a'=>1, 'b'=>2)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test peek(pq10)</span><span style="color:red;"> == </span><span style="color:gray;">('b'=>2)</span></span>
+<span style="color:green;">+|</span></span>                @test peek(pq10)<span style="color:green;">true</span>('b'=>2)</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @testset &#34;pq11&#34; begin
+<span style="color:inherit;"> |</span>                pq11 = PriorityQueue(Pair{Char}['a'=>1,'b'=>2])
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test peek(pq11)</span><span style="color:red;"> == </span><span style="color:gray;">('a'=>1)</span></span>
+<span style="color:green;">+|</span></span>                @test peek(pq11)<span style="color:green;">true</span>('a'=>1)</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-111,14 +111,14</span> ============================================================
+<span style="color:inherit;"> |</span>        pq1 = PriorityQueue('a'=>1, 'b'=>2)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @testset &#34;peek/get/dequeue!/get!&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test peek(pq1)</span><span style="color:red;"> == </span><span style="color:gray;">('a'=>1)</span></span>
+<span style="color:green;">+|</span></span>            @test peek(pq1)<span style="color:green;">true</span>('a'=>1)</span>
+<span style="color:inherit;"> |</span>            @test get(pq1, 'a', 0) == 1
+<span style="color:inherit;"> |</span>            @test get(pq1, 'c', 0) == 0
+<span style="color:inherit;"> |</span>            @test get!(pq1, 'b', 20) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test dequeue!(pq1)</span><span style="color:red;"> == 'a'</span></span>
+<span style="color:green;">+|</span></span>            @test dequeue!(pq1)<span style="color:green;">true'a'</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test dequeue!(pq1)</span><span style="color:red;"> == 'b'</span></span>
+<span style="color:green;">+|</span></span>            @test dequeue!(pq1)<span style="color:green;">true'b'</span></span>
+<span style="color:inherit;"> |</span>            @test get!(pq1, 'c', 0) == 0
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test peek(pq1)</span><span style="color:red;"> == </span><span style="color:gray;">('c'=>0)</span></span>
+<span style="color:green;">+|</span></span>            @test peek(pq1)<span style="color:green;">true</span>('c'=>0)</span>
+<span style="color:inherit;"> |</span>            @test get!(pq1, 'c', 3) == 0
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-202,8 +202,8</span> ============================================================
+<span style="color:inherit;"> |</span>            priorities2 = Dict(zip('a':'e', 5:-1:1))
+<span style="color:inherit;"> |</span>            pq = PriorityQueue(priorities2)
+<span style="color:inherit;"> |</span>            @test_throws KeyError dequeue_pair!(pq, 'g')
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test dequeue_pair!(pq)</span><span style="color:red;"> == </span><span style="color:gray;">('e'=> 1)</span></span>
+<span style="color:green;">+|</span></span>            @test dequeue_pair!(pq)<span style="color:green;">true</span>('e'=> 1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test dequeue_pair!(pq, 'b')</span><span style="color:red;"> == </span><span style="color:gray;">('b'=>4)</span></span>
+<span style="color:green;">+|</span></span>            @test dequeue_pair!(pq, 'b')<span style="color:green;">true</span>('b'=>4)</span>
+<span style="color:inherit;"> |</span>            @test length(pq) == 3
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_dibit_vector.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_dibit_vector.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-23,7 +23,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test all(d1 .== 0)
+<span style="color:inherit;"> |</span>    @test all(d2 .== 0)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(d1) == size(d2)</span><span style="color:red;"> == </span><span style="color:gray;">(10,)</span></span>
+<span style="color:green;">+|</span></span>    @test size(d1) == size(d2)<span style="color:green;">true</span>(10,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    d3 = DiBitVector(30, 3)
+<span style="color:inherit;"> |</span>    @test all(d3 .== 3)
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_mutable_list.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_mutable_list.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,8 +41,8</span> ============================================================
+<span style="color:inherit;"> |</span>                    if i > 3
+<span style="color:inherit;"> |</span>                        l1 = MutableLinkedList{Int32}(1:i...)
+<span style="color:inherit;"> |</span>                        io = IOBuffer()
+<span style="color:red;">-|</span></span><span style="color:gray;">                        @test sprint(io -> show(io, iterate(l1)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;(1, DataStructures.ListNode{Int32}(2))&#34;</span></span>
+<span style="color:green;">+|</span></span>                        @test sprint(io -> show(io, iterate(l1)))<span style="color:green;">true</span>&#34;(1, DataStructures.ListNode{Int32}(2))&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                        @test sprint(io -> show(io, iterate(l1, l1.node.next.next)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;(2, DataStructures.ListNode{Int32}(3))&#34;</span></span>
+<span style="color:green;">+|</span></span>                        @test sprint(io -> show(io, iterate(l1, l1.node.next.next)))<span style="color:green;">true</span>&#34;(2, DataStructures.ListNode{Int32}(3))&#34;</span>
+<span style="color:inherit;"> |</span>                    end
+<span style="color:inherit;"> |</span>                    cl = collect(l)
+<span style="color:inherit;"> |</span>                    @test isa(cl, Vector{Int})
+<span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
+<span style="color:inherit;"> |</span>                for i = 1:n
+<span style="color:inherit;"> |</span>                    x = pop!(l)
+<span style="color:inherit;"> |</span>                    @test length(l) == n - i
+<span style="color:red;">-|</span></span><span style="color:gray;">                    @test isempty(l)</span><span style="color:red;"> == </span><span style="color:gray;">(i == n)</span></span>
+<span style="color:green;">+|</span></span>                    @test isempty(l)<span style="color:green;">true</span>(i == n)</span>
+<span style="color:inherit;"> |</span>                    @test x == n - i + 1
+<span style="color:inherit;"> |</span>                    cl = collect(l)
+<span style="color:inherit;"> |</span>                    @test cl == collect(1:n-i)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-81,7 +81,7</span> ============================================================
+<span style="color:inherit;"> |</span>                for i = 1:n
+<span style="color:inherit;"> |</span>                    x = popfirst!(l)
+<span style="color:inherit;"> |</span>                    @test length(l) == n - i
+<span style="color:red;">-|</span></span><span style="color:gray;">                    @test isempty(l)</span><span style="color:red;"> == </span><span style="color:gray;">(i == n)</span></span>
+<span style="color:green;">+|</span></span>                    @test isempty(l)<span style="color:green;">true</span>(i == n)</span>
+<span style="color:inherit;"> |</span>                    @test x == n - i + 1
+<span style="color:inherit;"> |</span>                    cl = collect(l)
+<span style="color:inherit;"> |</span>                    @test cl == collect(n-i:-1:1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-147,7 +147,7</span> ============================================================
+<span style="color:inherit;"> |</span>                @testset &#34;show&#34; begin
+<span style="color:inherit;"> |</span>                    l = MutableLinkedList{Int32}(1:n...)
+<span style="color:inherit;"> |</span>                    io = IOBuffer()
+<span style="color:red;">-|</span></span><span style="color:gray;">                    @test sprint(io -> show(io, l.node.next))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;$(typeof(l.node.next))($(l.node.next.data))&#34;</span></span>
+<span style="color:green;">+|</span></span>                    @test sprint(io -> show(io, l.node.next))<span style="color:green;">true</span>&#34;$(typeof(l.node.next))($(l.node.next.data))&#34;</span>
+<span style="color:inherit;"> |</span>                    io1 = IOBuffer()
+<span style="color:inherit;"> |</span>                    write(io1, &#34;MutableLinkedList{Int32}(&#34;);
+<span style="color:inherit;"> |</span>                    write(io1, join(l, &#34;, &#34;));
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_ordered_robin_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_ordered_robin_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test 'a' in keys(d)
+<span style="color:inherit;"> |</span>        @test haskey(d, 'a')
+<span style="color:inherit;"> |</span>        @test get(d, 'B', 0) == 0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test getkey(d, 'b', nothing)</span><span style="color:red;"> == 'b'</span></span>
+<span style="color:green;">+|</span></span>        @test getkey(d, 'b', nothing)<span style="color:green;">true'b'</span></span>
+<span style="color:inherit;"> |</span>        @test getkey(d, 'B', nothing) == nothing
+<span style="color:inherit;"> |</span>        @test !('B' in keys(d))
+<span style="color:inherit;"> |</span>        @test !haskey(d, 'B')
+<span style="color:inherit;">@|</span><span style="color:inherit;">-246,7 +246,7</span> ============================================================
+<span style="color:inherit;"> |</span>        bestkey(d::AbstractDict{K,V}, key) where {K<:AbstractString,V} = string(key)
+<span style="color:inherit;"> |</span>        bar(x) = bestkey(x, :y)
+<span style="color:inherit;"> |</span>        @test bar(OrderedRobinDict([(:x, [1,2,5])])) == :y
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test bar(OrderedRobinDict([(&#34;x&#34;, [1,2,5])]))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;y&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test bar(OrderedRobinDict([(&#34;x&#34;, [1,2,5])]))<span style="color:green;">true</span>&#34;y&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;isequal&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-406,11 +406,11</span> ============================================================
+<span style="color:inherit;"> |</span>            h[i] = i+1
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        for i in 10:-1:1
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test pop!(h)</span><span style="color:red;"> == </span><span style="color:gray;">(i => i+1)</span></span>
+<span style="color:green;">+|</span></span>            @test pop!(h)<span style="color:green;">true</span>(i => i+1)</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        d = OrderedRobinDict(1=>'a', 2=>'b', 3=>'c')
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test pop!(d, 4, 'e')</span><span style="color:red;"> == 'e'</span></span>
+<span style="color:green;">+|</span></span>        @test pop!(d, 4, 'e')<span style="color:green;">true'e'</span></span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;filter!&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-258,8 +258,8</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    d1 = SwissDict{Int8, Char}()
+<span style="color:inherit;"> |</span>    d1[1%Int8] = 'a'
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test get!(d1, 1, 'b')</span><span style="color:red;"> == 'a'</span></span>
+<span style="color:green;">+|</span></span>    @test get!(d1, 1, 'b')<span style="color:green;">true'a'</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test get!(d1, 2, 'c')</span><span style="color:red;"> == 'c'</span></span>
+<span style="color:green;">+|</span></span>    @test get!(d1, 2, 'c')<span style="color:green;">true'c'</span></span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;push!&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-281,7 +281,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test pop!(d, 1) == 2
+<span style="color:inherit;"> |</span>    @test_throws KeyError pop!(d, 1)
+<span style="color:inherit;"> |</span>    @test pop!(d, 1, 0) == 0
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test pop!(d)</span><span style="color:red;"> == </span><span style="color:gray;">(3=>4)</span></span>
+<span style="color:green;">+|</span></span>    @test pop!(d)<span style="color:green;">true</span>(3=>4)</span>
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError pop!(d)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_int_set.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_int_set.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,8 +17,8</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;show&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, IntSet())</span><span style="color:red;"> == </span><span style="color:gray;">&#34;IntSet([])&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show, IntSet())<span style="color:green;">true</span>&#34;IntSet([])&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, IntSet([1,2,3]))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;IntSet([1, 2, 3])&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show, IntSet([1,2,3]))<span style="color:green;">true</span>&#34;IntSet([1, 2, 3])&#34;</span>
+<span style="color:inherit;"> |</span>        @test occursin(&#34;...,&#34;, sprint(show, complement(IntSet())))
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_circ_deque.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_circ_deque.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>        print(io, Int)
+<span style="color:inherit;"> |</span>        intstr = String(take!(io))
+<span style="color:inherit;"> |</span>        print(io, D)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;CircularDeque{$intstr}([2,3,4,5])&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test String(take!(io))<span style="color:green;">true</span>&#34;CircularDeque{$intstr}([2,3,4,5])&#34;</span>
+<span style="color:inherit;"> |</span>        push!(D, 6)
+<span style="color:inherit;"> |</span>        @test first(D) === 2
+<span style="color:inherit;"> |</span>        @test last(D) === 6
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_sorted_containers.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_sorted_containers.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-494,7 +494,7</span> ============================================================
+<span style="color:inherit;"> |</span>    my_assert(haskey(m1, 71))
+<span style="color:inherit;"> |</span>    my_assert(!haskey(m1, 77))
+<span style="color:inherit;"> |</span>    my_assert(get(m1, 70, nothing) == nothing)
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(get(m1, 70, -45.2)</span><span style="color:red;"> == </span><span style="color:gray;">-45.2)</span></span>
+<span style="color:green;">+|</span></span>    my_assert(get(m1, 70, -45.2)<span style="color:green;">true</span>-45.2)</span>
+<span style="color:inherit;"> |</span>    my_assert(get(m1, 83, -45.2) == convert(Float64,83)^2)
+<span style="color:inherit;"> |</span>    h = get!(m1, 5, 27.0)
+<span style="color:inherit;"> |</span>    my_assert(h == 25.0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1611,20 +1611,20</span> ============================================================
+<span style="color:inherit;"> |</span>function testSortedDictConstructors()
+<span style="color:inherit;"> |</span>    sd1 = SortedDict(&#34;w&#34; => 64, &#34;p&#34; => 12)
+<span style="color:inherit;"> |</span>    my_assert(typeof(sd1) == SortedDict{String, Int, ForwardOrdering})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sd1) == 2 && first(sd1)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>12) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sd1) == 2 && first(sd1)<span style="color:green;">true</span>(&#34;p&#34;=>12) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        last(sd1)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        last(sd1)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>    sd2 = SortedDict(Reverse, &#34;w&#34; => 64, &#34;p&#34; => 12)
+<span style="color:inherit;"> |</span>    my_assert(typeof(sd2) == SortedDict{String, Int, ReverseOrdering{ForwardOrdering}})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sd2) == 2 && last(sd2)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>12) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sd2) == 2 && last(sd2)<span style="color:green;">true</span>(&#34;p&#34;=>12) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        first(sd2)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        first(sd2)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>    sd3 = SortedDict((&#34;w&#34;=>64, &#34;p&#34;=>12))
+<span style="color:inherit;"> |</span>    my_assert(typeof(sd3) == SortedDict{String, Int, ForwardOrdering})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sd3) == 2 && first(sd3)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>12) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sd3) == 2 && first(sd3)<span style="color:green;">true</span>(&#34;p&#34;=>12) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        last(sd3)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        last(sd3)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>    sd4 = SortedDict((&#34;w&#34;=>64, &#34;p&#34;=>12), Reverse)
+<span style="color:inherit;"> |</span>    my_assert(typeof(sd4) == SortedDict{String, Int, ReverseOrdering{ForwardOrdering}})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sd4) == 2 && last(sd4)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>12) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sd4) == 2 && last(sd4)<span style="color:green;">true</span>(&#34;p&#34;=>12) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        first(sd4)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        first(sd4)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    my_assert(typeof(SortedDict()) == SortedDict{Any,Any,ForwardOrdering})
+<span style="color:inherit;"> |</span>    my_assert(typeof(SortedDict(CaseInsensitive())) == SortedDict{Any,Any,CaseInsensitive})
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1639,20 +1639,20</span> ============================================================
+<span style="color:inherit;"> |</span>function testSortedMultiDictConstructors()
+<span style="color:inherit;"> |</span>    sm1 = SortedMultiDict(&#34;w&#34; => 64, &#34;p&#34; => 12, &#34;p&#34; => 9)
+<span style="color:inherit;"> |</span>    my_assert(typeof(sm1) == SortedMultiDict{String, Int, ForwardOrdering})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sm1) == 3 && first(sm1)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>12) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sm1) == 3 && first(sm1)<span style="color:green;">true</span>(&#34;p&#34;=>12) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        last(sm1)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        last(sm1)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>    sm2 = SortedMultiDict(Reverse, &#34;w&#34; => 64, &#34;p&#34; => 12, &#34;p&#34; => 9)
+<span style="color:inherit;"> |</span>    my_assert(typeof(sm2) == SortedMultiDict{String, Int, ReverseOrdering{ForwardOrdering}})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sm2) == 3 && last(sm2)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>9) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sm2) == 3 && last(sm2)<span style="color:green;">true</span>(&#34;p&#34;=>9) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        first(sm2)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        first(sm2)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>    sm3 = SortedMultiDict((&#34;w&#34;=>64, &#34;p&#34;=>12, &#34;p&#34;=> 9))
+<span style="color:inherit;"> |</span>    my_assert(typeof(sm3) == SortedMultiDict{String, Int, ForwardOrdering})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sm3) == 3 && first(sm3)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>12) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sm3) == 3 && first(sm3)<span style="color:green;">true</span>(&#34;p&#34;=>12) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        last(sm3)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        last(sm3)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>    sm4 = SortedMultiDict((&#34;w&#34;=> 64, &#34;p&#34;=>12, &#34;p&#34;=>9), Reverse)
+<span style="color:inherit;"> |</span>    my_assert(typeof(sm4) == SortedMultiDict{String, Int, ReverseOrdering{ForwardOrdering}})
+<span style="color:red;">-|</span></span><span style="color:gray;">    my_assert(length(sm4) == 3 && last(sm4)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;p&#34;=>9) &&</span></span>
+<span style="color:green;">+|</span></span>    my_assert(length(sm4) == 3 && last(sm4)<span style="color:green;">true</span>(&#34;p&#34;=>9) &&</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        first(sm4)</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;w&#34;=>64))</span></span>
+<span style="color:green;">+|</span></span>        first(sm4)<span style="color:green;">true</span>(&#34;w&#34;=>64))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    my_assert(typeof(SortedMultiDict()) == SortedMultiDict{Any,Any,ForwardOrdering})
+<span style="color:inherit;"> |</span>    my_assert(typeof(SortedMultiDict(CaseInsensitive())) == SortedMultiDict{Any,Any,CaseInsensitive})
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_stack.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_stack.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-35,7 +35,7</span> ============================================================
+<span style="color:inherit;"> |</span>            else
+<span style="color:inherit;"> |</span>                @test_throws ArgumentError first(s)
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test isempty(s)</span><span style="color:red;"> == </span><span style="color:gray;">(i == n)</span></span>
+<span style="color:green;">+|</span></span>            @test isempty(s)<span style="color:green;">true</span>(i == n)</span>
+<span style="color:inherit;"> |</span>            @test length(s) == n - i
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_circular_buffer.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_circular_buffer.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-24,7 +24,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @testset &#34;Appending many elements&#34; begin
+<span style="color:inherit;"> |</span>            append!(cb, 2:8)
+<span style="color:inherit;"> |</span>            @test length(cb) == capacity(cb)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test size(cb)</span><span style="color:red;"> == </span><span style="color:gray;">(length(cb),)</span></span>
+<span style="color:green;">+|</span></span>            @test size(cb)<span style="color:green;">true</span>(length(cb),)</span>
+<span style="color:inherit;"> |</span>            @test isempty(cb) == false
+<span style="color:inherit;"> |</span>            @test isfull(cb) == true
+<span style="color:inherit;"> |</span>            @test convert(Array, cb) == Int[4,5,6,7,8]
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_binheap.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_binheap.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +79,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @test length(h) == 10
+<span style="color:inherit;"> |</span>            @test !isempty(h)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test first(h)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 1)</span></span>
+<span style="color:green;">+|</span></span>            @test first(h)<span style="color:green;">true</span>(2, 1)</span>
+<span style="color:inherit;"> |</span>            @test isheap([(2, 1), (4, 2), (3, 3), (1, 4), (10, 7), (6, 9), (7, 10), (8, 14), (9, 8), (5, 16)], ordering)
+<span style="color:inherit;"> |</span>            @test sizehint!(h, 100) === h
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_multi_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_multi_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-47,7 +47,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test haskey(d, 'a')
+<span style="color:inherit;"> |</span>        @test !haskey(d, 'b')
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test getkey(d, 'a', 0)</span><span style="color:red;"> == 'a'</span></span>
+<span style="color:green;">+|</span></span>        @test getkey(d, 'a', 0)<span style="color:green;">true'a'</span></span>
+<span style="color:inherit;"> |</span>        @test getkey(d, 'b', 0) == 0
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test copy(d) == d
+<span style="color:inherit;">@|</span><span style="color:inherit;">-118,7 +118,7</span> ============================================================
+<span style="color:inherit;"> |</span>            insert!(d, rand('a':'f'), rand()>0.5 ? [rand(1:10)] : rand(1:10, rand(1:3)))
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        @test 15 <= count(d) <=45
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test size(d)</span><span style="color:red;"> == </span><span style="color:gray;">(length(d), count(d))</span></span>
+<span style="color:green;">+|</span></span>        @test size(d)<span style="color:green;">true</span>(length(d), count(d))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        #= --- broken phlavenk ----
+<span style="color:inherit;"> |</span>        allvals = [kv for kv in enumerateall(d)]
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_list.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_list.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-12,7 +12,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test length(l0) == 0
+<span style="color:inherit;"> |</span>        @test l0 == nil(Char)
+<span style="color:inherit;"> |</span>        @test l0 == nil()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show,l0)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;nil(Char)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show,l0)<span style="color:green;">true</span>&#34;nil(Char)&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;l1&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-20,7 +20,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test length(l1) == 0
+<span style="color:inherit;"> |</span>        @test l1 == nil()
+<span style="color:inherit;"> |</span>        @test l1 == nil(Int)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show,l1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;nil()&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show,l1)<span style="color:green;">true</span>&#34;nil()&#34;</span>
+<span style="color:inherit;"> |</span>        @test typeof(list()) === typeof(l1)
+<span style="color:inherit;"> |</span>        @test copy(l1) == l1
+<span style="color:inherit;"> |</span>        @test map((x) -> x*2,l1) == l1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-33,7 +33,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test head(l2) == 1
+<span style="color:inherit;"> |</span>        @test l2 == cons(1, l1)
+<span style="color:inherit;"> |</span>        @test l2 == list(1)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show,l2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;list(1)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show,l2)<span style="color:green;">true</span>&#34;list(1)&#34;</span>
+<span style="color:inherit;"> |</span>        @test cat(l2) == l2
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-46,7 +46,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test l3 == list(2,3)
+<span style="color:inherit;"> |</span>        @test collect(l3) == [2; 3]
+<span style="color:inherit;"> |</span>        @test collect(copy(l3)) == [2; 3]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show,l3)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;list(2, 3)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show,l3)<span style="color:green;">true</span>&#34;list(2, 3)&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;l4&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-58,7 +58,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test l4 == list(1, 2, 3)
+<span style="color:inherit;"> |</span>        @test collect(l4) == [1; 2; 3]
+<span style="color:inherit;"> |</span>        @test collect(copy(l4)) == [1; 2; 3]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show,l4)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;list(1, 2, 3)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show,l4)<span style="color:green;">true</span>&#34;list(1, 2, 3)&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;l5&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_queue.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_queue.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
+<span style="color:inherit;"> |</span>                @test_throws ArgumentError first(s)
+<span style="color:inherit;"> |</span>                @test_throws ArgumentError last(s)
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test isempty(s)</span><span style="color:red;"> == </span><span style="color:gray;">(i == n)</span></span>
+<span style="color:green;">+|</span></span>            @test isempty(s)<span style="color:green;">true</span>(i == n)</span>
+<span style="color:inherit;"> |</span>            @test length(s) == n - i
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-279,7 +279,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test pop!(d, 1) == 2
+<span style="color:inherit;"> |</span>    @test_throws KeyError pop!(d, 1)
+<span style="color:inherit;"> |</span>    @test pop!(d, 1, 0) == 0
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test pop!(d)</span><span style="color:red;"> == </span><span style="color:gray;">(3=>4)</span></span>
+<span style="color:green;">+|</span></span>    @test pop!(d)<span style="color:green;">true</span>(3=>4)</span>
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError pop!(d)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_deque.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_deque.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-65,7 +65,7</span> ============================================================
+<span style="color:inherit;"> |</span>                for i = 1 : n
+<span style="color:inherit;"> |</span>                    x = pop!(q)
+<span style="color:inherit;"> |</span>                    @test length(q) == n - i
+<span style="color:red;">-|</span></span><span style="color:gray;">                    @test isempty(q)</span><span style="color:red;"> == </span><span style="color:gray;">(i == n)</span></span>
+<span style="color:green;">+|</span></span>                    @test isempty(q)<span style="color:green;">true</span>(i == n)</span>
+<span style="color:inherit;"> |</span>                    @test num_blocks(q) == div(n-i-1, 3) + 1
+<span style="color:inherit;"> |</span>                    @test x == n - i + 1
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-106,7 +106,7</span> ============================================================
+<span style="color:inherit;"> |</span>                for i = 1 : n
+<span style="color:inherit;"> |</span>                    x = popfirst!(q)
+<span style="color:inherit;"> |</span>                    @test length(q) == n - i
+<span style="color:red;">-|</span></span><span style="color:gray;">                    @test isempty(q)</span><span style="color:red;"> == </span><span style="color:gray;">(i == n)</span></span>
+<span style="color:green;">+|</span></span>                    @test isempty(q)<span style="color:green;">true</span>(i == n)</span>
+<span style="color:inherit;"> |</span>                    @test num_blocks(q) == div(n-i-1, 3) + 1
+<span style="color:inherit;"> |</span>                    @test x == n - i + 1
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_mutable_binheap.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_mutable_binheap.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-114,7 +114,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test length(h) == 10
+<span style="color:inherit;"> |</span>        @test !isempty(h)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test first(h)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 1)</span></span>
+<span style="color:green;">+|</span></span>        @test first(h)<span style="color:green;">true</span>(2, 1)</span>
+<span style="color:inherit;"> |</span>        @test isequal(list_values(h), vs2)
+<span style="color:inherit;"> |</span>        @test isequal(heap_values(h), [(2, 1), (4, 2), (3, 3), (1, 4), (10, 7), (6, 9), (7, 10), (8, 14), (9, 8), (5, 16)])
+<span style="color:inherit;"> |</span>        @test sizehint!(h, 100) === h
+<span style="color:inherit;">@|</span><span style="color:inherit;">-297,7 +297,7</span> ============================================================
+<span style="color:inherit;"> |</span>                @test length(h) == 100
+<span style="color:inherit;"> |</span>                @test verify_heap(h)
+<span style="color:inherit;"> |</span>                @test isequal(list_values(h), xs)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test top_with_handle(h)</span><span style="color:red;"> == </span><span style="color:gray;">(m, i)</span></span>
+<span style="color:green;">+|</span></span>                @test top_with_handle(h)<span style="color:green;">true</span>(m, i)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                update!(h, i, -m)
+<span style="color:inherit;"> |</span>                xs[i] = -m
+<span style="color:inherit;">@|</span><span style="color:inherit;">-311,7 +311,7</span> ============================================================
+<span style="color:inherit;"> |</span>                @test length(h) == 100
+<span style="color:inherit;"> |</span>                @test verify_heap(h)
+<span style="color:inherit;"> |</span>                @test isequal(list_values(h), xs)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test top_with_handle(h)</span><span style="color:red;"> == </span><span style="color:gray;">(v, i)</span></span>
+<span style="color:green;">+|</span></span>                @test top_with_handle(h)<span style="color:green;">true</span>(v, i)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                i = rand(1:100)
+<span style="color:inherit;"> |</span>                v = rand()
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_accumulator.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_accumulator.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-257,8 +257,8</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @testset &#34;show&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test sprint(show,Accumulator(1 => 3))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Accumulator(1 => 3)&#34;</span></span>
+<span style="color:green;">+|</span></span>            @test sprint(show,Accumulator(1 => 3))<span style="color:green;">true</span>&#34;Accumulator(1 => 3)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test sprint(show,Accumulator(1 => 3, 3 => 4))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Accumulator(3 => 4, 1 => 3)&#34;</span></span>
+<span style="color:green;">+|</span></span>            @test sprint(show,Accumulator(1 => 3, 3 => 4))<span style="color:green;">true</span>&#34;Accumulator(3 => 4, 1 => 3)&#34;</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

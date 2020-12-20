@@ -1,1 +1,56 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDatabases/PostgreSQL.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDatabases/PostgreSQL.jl" target=_blank >JuliaDatabases/PostgreSQL.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDatabases/PostgreSQL.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDatabases/PostgreSQL.jl" target=_blank >JuliaDatabases/PostgreSQL.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_10_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 10 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_10_hits ><a href="#omit_a_a_and_a_a_10_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 10 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/types.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/types.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-80,7 +80,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>jldata(::Type{PostgresType{:timestamptz}}, ptr::Ptr{UInt8}) = bytestring(ptr)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">jldata(::Type{PostgresType{:bool}}, ptr::Ptr{UInt8}) = bytestring(ptr)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;f&#34;</span></span>
+<span style="color:green;">+|</span></span>jldata(::Type{PostgresType{:bool}}, ptr::Ptr{UInt8}) = bytestring(ptr)<span style="color:green;">false</span>&#34;f&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>jldata(::Type{PostgresType{:int8}}, ptr::Ptr{UInt8}) = parse(Int64, bytestring(ptr))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/connection.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/connection.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,9 +8,9</span> ============================================================
+<span style="color:inherit;"> |</span>    @test conn.status == PostgreSQL.CONNECTION_OK
+<span style="color:inherit;"> |</span>    @test errcode(conn) == PostgreSQL.CONNECTION_OK
+<span style="color:inherit;"> |</span>    @test !conn.closed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bytestring(libpq.PQdb(conn.ptr))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;julia_test&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test bytestring(libpq.PQdb(conn.ptr))<span style="color:green;">true</span>&#34;julia_test&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bytestring(libpq.PQuser(conn.ptr))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;postgres&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test bytestring(libpq.PQuser(conn.ptr))<span style="color:green;">true</span>&#34;postgres&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bytestring(libpq.PQport(conn.ptr))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;5432&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test bytestring(libpq.PQport(conn.ptr))<span style="color:green;">true</span>&#34;5432&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    disconnect(conn)
+<span style="color:inherit;"> |</span>    @test conn.closed
+<span style="color:inherit;">@|</span><span style="color:inherit;">-33,9 +33,9</span> ============================================================
+<span style="color:inherit;"> |</span>    @test conn.status == PostgreSQL.CONNECTION_OK
+<span style="color:inherit;"> |</span>    @test errcode(conn) == PostgreSQL.CONNECTION_OK
+<span style="color:inherit;"> |</span>    @test !conn.closed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bytestring(libpq.PQdb(conn.ptr))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;julia_test&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test bytestring(libpq.PQdb(conn.ptr))<span style="color:green;">true</span>&#34;julia_test&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bytestring(libpq.PQuser(conn.ptr))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;postgres&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test bytestring(libpq.PQuser(conn.ptr))<span style="color:green;">true</span>&#34;postgres&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bytestring(libpq.PQport(conn.ptr))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;5432&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test bytestring(libpq.PQport(conn.ptr))<span style="color:green;">true</span>&#34;5432&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    disconnect(conn)
+<span style="color:inherit;"> |</span>    @test conn.closed
+<span style="color:red;">------ </span><span style="color:inherit;">test/dbi_impl.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/dbi_impl.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-120,9 +120,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test escapeliteral(conn, 3) == 3
+<span style="color:inherit;"> |</span>    @test escapeliteral(conn, 3.3) == 3.3
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test escapeliteral(conn, &#34;foo&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;'foo'&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test escapeliteral(conn, &#34;foo&#34;)<span style="color:green;">true</span>&#34;'foo'&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test escapeliteral(conn, &#34;fo\u2202&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;'fo\u2202'&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test escapeliteral(conn, &#34;fo\u2202&#34;)<span style="color:green;">true</span>&#34;'fo\u2202'&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test escapeliteral(conn, SubString(&#34;myfood&#34;, 3, 5))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;'foo'&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test escapeliteral(conn, SubString(&#34;myfood&#34;, 3, 5))<span style="color:green;">true</span>&#34;'foo'&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    disconnect(conn)
+<span style="color:inherit;"> |</s</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

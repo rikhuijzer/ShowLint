@@ -1,1 +1,98 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/Tables.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/Tables.jl" target=_blank >JuliaData/Tables.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/Tables.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/Tables.jl" target=_blank >JuliaData/Tables.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_12_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 12 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_12_hits ><a href="#omit_a_a_and_a_a_12_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 12 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-72,7 +72,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test eltype(rows) == Tables.ColumnsRow{typeof(nt)}
+<span style="color:inherit;"> |</span>    @test Tables.schema(rows) == Tables.Schema((:a, :b), (Int, Int))
+<span style="color:inherit;"> |</span>    @test rows.a == [1,2,3]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test propertynames(rows) == Tables.columnnames(rows)</span><span style="color:red;"> == </span><span style="color:gray;">(:a, :b)</span></span>
+<span style="color:green;">+|</span></span>    @test propertynames(rows) == Tables.columnnames(rows)<span style="color:green;">true</span>(:a, :b)</span>
+<span style="color:inherit;"> |</span>    row = first(rows)
+<span style="color:inherit;"> |</span>    @test row.a == 1
+<span style="color:inherit;"> |</span>    @test Tables.getcolumn(row, :a) == 1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-87,7 +87,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Tables.sym(1) === 1
+<span style="color:inherit;"> |</span>    @test Tables.sym(&#34;hey&#34;) == :hey
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test propertynames(Tables.Schema((:a, :b), nothing))</span><span style="color:red;"> == </span><span style="color:gray;">(:names, :types)</span></span>
+<span style="color:green;">+|</span></span>    @test propertynames(Tables.Schema((:a, :b), nothing))<span style="color:green;">true</span>(:names, :types)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    v = Tables.EmptyVector(1)
+<span style="color:inherit;"> |</span>    @test_throws UndefRefError v[1]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-200,7 +200,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    mat = Tables.matrix(rt)
+<span style="color:inherit;"> |</span>    @test nt.a == mat[:, 1]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(mat)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(mat)<span style="color:green;">true</span>(3, 3)</span>
+<span style="color:inherit;"> |</span>    @test eltype(mat) == Any
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError Tables.rows(mat)
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError Tables.columns(mat)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-210,7 +210,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test !Tables.istable(mat2)
+<span style="color:inherit;"> |</span>    @test !Tables.istable(typeof(mat2))
+<span style="color:inherit;"> |</span>    mat3 = Tables.matrix(nt; transpose=true)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(mat3)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(mat3)<span style="color:green;">true</span>(2, 3)</span>
+<span style="color:inherit;"> |</span>    @test mat3[1, :] == nt.a
+<span style="color:inherit;"> |</span>    @test mat3[2, :] == nt.b
+<span style="color:inherit;"> |</span>    sp = Tables.table(sparse(mat[:, 1:2]))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-218,7 +218,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Tables.getcolumn(sp, 1) == [1, 2, 3]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    tbl = Tables.table(mat) |> columntable
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test keys(tbl)</span><span style="color:red;"> == </span><span style="color:gray;">(:Column1, :Column2, :Column3)</span></span>
+<span style="color:green;">+|</span></span>    @test keys(tbl)<span style="color:green;">true</span>(:Column1, :Column2, :Column3)</span>
+<span style="color:inherit;"> |</span>    @test tbl.Column1 == [1, 2, 3]
+<span style="color:inherit;"> |</span>    tbl2 = Tables.table(mat2) |> rowtable
+<span style="color:inherit;"> |</span>    @test length(tbl2) == 3
+<span style="color:inherit;">@|</span><span style="color:inherit;">-401,7 +401,7</span> ============================================================
+<span style="color:inherit;"> |</span>    Tables.rows((a=[1,2,3], b=[4.,5.,6.], c=[&#34;A&#34;, &#34;B&#34;, &#34;C&#34;]))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>let x=ColumnSource2()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test Tables.source(Tables.columns(x))</span><span style="color:red;"> == </span><span style="color:gray;">(a=[1,2,3], b=[4.,5.,6.], c=[&#34;A&#34;, &#34;B&#34;, &#34;C&#34;])</span></span>
+<span style="color:green;">+|</span></span>    @test Tables.source(Tables.columns(x))<span style="color:green;">true</span>(a=[1,2,3], b=[4.,5.,6.], c=[&#34;A&#34;, &#34;B&#34;, &#34;C&#34;])</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;TableTraits integration&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-435,7 +435,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # uninferrable case
+<span style="color:inherit;"> |</span>    mt = Tables.nondatavaluerows(ei.x |> y->QueryOperators.map(y, x->(a=x.a, c=x.c), Expr(:block)))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test (mt |> columntable)</span><span style="color:red;"> == </span><span style="color:gray;">(a = Real[1, 2.0, 3], c = [&#34;7&#34;, &#34;8&#34;, &#34;9&#34;])</span></span>
+<span style="color:green;">+|</span></span>    @test (mt |> columntable)<span style="color:green;">true</span>(a = Real[1, 2.0, 3], c = [&#34;7&#34;, &#34;8&#34;, &#34;9&#34;])</span>
+<span style="color:inherit;"> |</span>    @test length(mt |> rowtable) == 3
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    rt = (a = Missing[missing, missing], b=[1,2])
+<span style="color:inherit;">@|</span><span style="color:inherit;">-498,8 +498,8</span> ============================================================
+<span style="color:inherit;"> |</span>    @test isequal((row[:a], row[:b], row[:c]), (1, missing, &#34;hey&#34;))
+<span style="color:inherit;"> |</span>    @test isequal((row.a, row.b, row.c), (1, missing, &#34;hey&#34;))
+<span style="color:inherit;"> |</span>    @test isequal((getproperty(row, 1), getproperty(row, 2), getproperty(row, 3)), (1, missing, &#34;hey&#34;))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test propertynames(row)</span><span style="color:red;"> == </span><span style="color:gray;">(:a, :b, :c)</span></span>
+<span style="color:green;">+|</span></span>    @test propertynames(row)<span style="color:green;">true</span>(:a, :b, :c)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test keys(row)</span><span style="color:red;"> == </span><span style="color:gray;">(:a, :b, :c)</span></span>
+<span style="color:green;">+|</span></span>    @test keys(row)<span style="color:green;">true</span>(:a, :b, :c)</span>
+<span style="color:inherit;"> |</span>    @test isequal(values(row), [1, missing, &#34;hey&#34;])
+<span style="color:inherit;"> |</span>    @test haskey(row, :a)
+<span style="color:inherit;"> |</span>    @test haskey(row, 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-549,8 +549,8</span> ============================================================
+<span style="color:inherit;"> |</span>    @test isequal((col[:a], col[:b], col[:c]), ([1,2], [missing,3.14], [&#34;hey&#34;,&#34;ho&#34;]))
+<span style="color:inherit;"> |</span>    @test isequal((col.a, col.b, col.c), ([1,2], [missing,3.14], [&#34;hey&#34;,&#34;ho&#34;]))
+<span style="color:inherit;"> |</span>    @test isequal((getproperty(col, 1), getproperty(col, 2), getproperty(col, 3)), ([1,2], [missing,3.14], [&#34;hey&#34;,&#34;ho&#34;]))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test propertynames(col)</span><span style="color:red;"> == </span><span style="color:gray;">(:a, :b, :c)</span></span>
+<span style="color:green;">+|</span></span>    @test propertynames(col)<span style="color:green;">true</span>(:a, :b, :c)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test keys(col)</span><span style="color:red;"> == </span><span style="color:gray;">(:a, :b, :c)</span></span>
+<span style="color:green;">+|</span></span>    @test keys(col)<span style="color:green;">true</span>(:a, :b, :c)</span>
+<span style="color:inherit;"> |</span>    @test isequal(values(col), [[1,2], [missing,3.14], [&#34;hey&#34;,&#34;ho&#34;]])
+<span style="color:inherit;"> |</span>    @test haskey(col, :a)
+<span style="color:inherit;"> |</span>    @test haskey(col, 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-639,7 +639,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Tables.isrowtable(drt)
+<span style="color:inherit;"> |</span>    @test Tables.schema(drt) == Tables.Schema((:a, :b, :c), (Int, Float64, String))
+<span style="color:inherit;"> |</span>    row = first(drt)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test (row.a, row.b, row.c)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 4.0, &#34;7&#34;)</span></span>
+<span style="color:green;">+|</span></span>    @test (row.a, row.b, row.c)<span style="color:green;">true</span>(1, 4.0, &#34;7&#34;)</span>
+<span style="color:inherit;"> |</span>    cct = Tables.columntable(drt)
+<span style="color:inherit;"> |</span>    @test cct.a == [1, 2, 3]
+<span style="color:inherit;"> |</span>    @test cct.b == [4.0, 5.0,</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

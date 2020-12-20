@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>GiovineItalia/Compose.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/GiovineItalia/Compose.jl" target=_blank >GiovineItalia/Compose.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>GiovineItalia/Compose.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/GiovineItalia/Compose.jl" target=_blank >GiovineItalia/Compose.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_a_a_and_a_a_9_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 9 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/cairo_backends.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/cairo_backends.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
@@ -19,8 +19,48 @@
 <span style="color:inherit;"> |</span>    stroke_linecap::LineCap
 <span style="color:inherit;"> |</span>    stroke_linejoin::LineJoin
 <span style="color:inherit;"> |</span>    visible::</div>
-</pre> <h3 id=omit_a_a_and_a_a_3_hits ><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/table.jl</span>
+</pre> <h3 id=omit_a_a_and_a_a_9_hits ><a href="#omit_a_a_and_a_a_9_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 9 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-130,13 +130,13</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># PR 263
+<span style="color:inherit;"> |</span>@test ~ @isdefined Fontconfig
+<span style="color:red;">-|</span></span><span style="color:gray;">@test Compose.pango_to_svg(&#34;hello world&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
+<span style="color:green;">+|</span></span>@test Compose.pango_to_svg(&#34;hello world&#34;)<span style="color:green;">true</span>&#34;hello world&#34;</span>
+<span style="color:inherit;"> |</span>import Fontconfig
+<span style="color:red;">-|</span></span><span style="color:gray;">@test Compose.pango_to_svg(&#34;hello world&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
+<span style="color:green;">+|</span></span>@test Compose.pango_to_svg(&#34;hello world&#34;)<span style="color:green;">true</span>&#34;hello world&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;pango&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test Compose.escape_tex_chars(&#34;\\&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\\textbackslash{}&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test Compose.escape_tex_chars(&#34;\\&#34;)<span style="color:green;">true</span>&#34;\\textbackslash{}&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test Compose.pango_to_pgf(&#34;hello\\&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\\text{hello\\textbackslash{}}&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test Compose.pango_to_pgf(&#34;hello\\&#34;)<span style="color:green;">true</span>&#34;\\text{hello\\textbackslash{}}&#34;</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;pango utf-8 text_extents&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">src/misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-127,7 +127,7</span> ============================================================
+<span style="color:inherit;"> |</span>    if !isempty(point_arrays) && all([eltype(arr) <: Vec for arr in point_arrays])
+<span style="color:inherit;"> |</span>        xm, ym = type_params(eltype(point_arrays[1]))
+<span style="color:inherit;"> |</span>        for i in 2:length(point_arrays)
+<span style="color:red;">-|</span></span><span style="color:gray;">            type_params(eltype(point_arrays[i]))</span><span style="color:red;"> == </span><span style="color:gray;">(xm, ym) || return Any, Any</span></span>
+<span style="color:green;">+|</span></span>            type_params(eltype(point_arrays[i]))<span style="color:green;">true</span>(xm, ym) || return Any, Any</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        return xm, ym
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;">@|</span><span style="color:inherit;">-146,7 +146,7</span> ============================================================
+<span style="color:inherit;"> |</span>                xm, ym = type_params(eltype(point_arrays[1]))
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            for i in 2:length(point_arrays)
+<span style="color:red;">-|</span></span><span style="color:gray;">                type_params(eltype(point_arrays[i]))</span><span style="color:red;"> == </span><span style="color:gray;">(xm, ym) || Any, Any</span></span>
+<span style="color:green;">+|</span></span>                type_params(eltype(point_arrays[i]))<span style="color:green;">true</span>(xm, ym) || Any, Any</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">src/table.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/table.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-330,7 +330,7</span> ============================================================
 <span style="color:inherit;"> |</span>            idx = optimal_choice[(j-1)*m + i]

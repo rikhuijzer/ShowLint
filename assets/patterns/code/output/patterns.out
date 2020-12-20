@@ -34,7 +34,7 @@ rewrite=':[first]ismissing(:[var])'
 ~~~
 tags: *julia*
 
-From the Julia [Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
+From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
 ~~~
 <pre><code class="plaintext">match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
@@ -65,11 +65,11 @@ rewrite=':[first]:[bool]:[var]'
 ~~~ 
 <h3 id="5">5: Omit a == a and a != a</h3>
 ~~~
-tags: *generic*
+tags: *julia*
 
 SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
 ~~~
-<pre><code class="plaintext">match=':[var.] :[bool~(=|!)]= :[var.]'
+<pre><code class="plaintext">match=':[x~[\w_\[\]:\.]*] :[bool~(=|!)]= :[x~[\w_\[\]:\.]*]'
 
 rule='where
     rewrite :[bool] { "=" -> "true" },

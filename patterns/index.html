@@ -6,7 +6,7 @@ rewrite=&#x27;Vector{:[T]}&#x27;
 rule=&#x27;where rewrite :[first] { &quot;=&quot; -&gt; &quot;&quot; }&#x27;
 
 rewrite=&#x27;:[first]ismissing(:[var])&#x27;
-</code></pre> </p> <p> <h3 id=3 >3: Avoid x -> f(x)</h3> tags: <em>julia</em></p> <p>From the Julia <a href="https://docs.julialang.org/en/v1/manual/style-guide/">Style Guide</a>. <pre><code class="plaintext hljs">match=&#x27;:[[x]] -&gt; :[f~[\w_]*](:[x]):[end~(,|\n)]&#x27;
+</code></pre> </p> <p> <h3 id=3 >3: Avoid x -> f(x)</h3> tags: <em>julia</em></p> <p>From the <a href="https://docs.julialang.org/en/v1/manual/style-guide/">Julia Style Guide</a>. <pre><code class="plaintext hljs">match=&#x27;:[[x]] -&gt; :[f~[\w_]*](:[x]):[end~(,|\n)]&#x27;
 
 rewrite=&#x27;:[f]:[end]&#x27;
 </code></pre> </p> <p> <h3 id=4 >4: Omit comparison with boolean constant</h3> tags: <em>generic</em></p> <p>From <a href="https://staticcheck.io/docs/checks">staticcheck</a>. <pre><code class="plaintext hljs">match=&#x27;:[[var]] :[first~(=|!)]= :[bool~(true|false)]&#x27;
@@ -17,7 +17,7 @@ rule=&#x27;where
     rewrite :[bool] { &quot;true&quot; -&gt; &quot;&quot; }&#x27;
 
 rewrite=&#x27;:[first]:[bool]:[var]&#x27;
-</code></pre> </p> <p> <h3 id=5 >5: Omit a == a and a != a</h3> tags: <em>generic</em></p> <p>SA4000 in <a href="https://staticcheck.io/docs/checks">staticcheck</a>. <pre><code class="plaintext hljs">match=&#x27;:[var.] :[bool~(=|!)]= :[var.]&#x27;
+</code></pre> </p> <p> <h3 id=5 >5: Omit a == a and a != a</h3> tags: <em>julia</em></p> <p>SA4000 in <a href="https://staticcheck.io/docs/checks">staticcheck</a>. <pre><code class="plaintext hljs">match=&#x27;:[x~[\w_\[\]:\.]*] :[bool~(=|!)]= :[x~[\w_\[\]:\.]*]&#x27;
 
 rule=&#x27;where
     rewrite :[bool] { &quot;=&quot; -&gt; &quot;true&quot; },

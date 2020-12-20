@@ -1,4 +1,4 @@
-        2 module ShowLint
+        - module ShowLint
         - 
         - using Serialization
         - 
@@ -18,7 +18,7 @@
         - const project_root = pwd()
         - 
         - function ansi2html(text)
-        -   escape_codes = Dict(
+        0   escape_codes = Dict(
         -     "0;30" => "inherit",
         -     "0;31" => "red",
         -     "0;32" => "green",
@@ -30,21 +30,21 @@
         -     "0;43;30" => "orange",
         -     "0;2" => "gray"
         -   )
-        -   for code in keys(escape_codes)
-        -     before = "[" * code * "m"
-        -     color = escape_codes[code]
-        -     after = "<span style=\"color:$color;\">"
-        -     text = replace(text, before => after)
+        0   for code in keys(escape_codes)
+        0     before = "[" * code * "m"
+        0     color = escape_codes[code]
+        0     after = "<span style=\"color:$color;\">"
+        0     text = replace(text, before => after)
         -   end
-        -   no_color = "[0m"
-        -   text = replace(text, no_color => "</span>")
-        -   text = replace(text, r"WARNING: [^\n]*$" => "")
-        -   text = replace(text, "/repo/" => "")
-        -   text = replace(text, "" => "") 
-        -   text = replace(text, "<!" => "&#60;!")
-        -   text = text[1:end-6]
-        -   text = strip(text)
-        -   return length(text) < 6 ? 
+        0   no_color = "[0m"
+        0   text = replace(text, no_color => "</span>")
+        0   text = replace(text, r"WARNING: [^\n]*$" => "")
+        0   text = replace(text, "/repo/" => "")
+        0   text = replace(text, "" => "") 
+        0   text = replace(text, "<!" => "&#60;!")
+        0   text = text[1:end-6]
+        0   text = strip(text)
+        0   return length(text) < 6 ? 
         -         "" :
         -         """
         -         ~~~ 
@@ -58,14 +58,14 @@
         - const clones_dir = joinpath(homedir(), "clones") 
         - 
         - function host_dir(repo::Repo)
-        -     host = repo.host
-        -     host_dir = startswith(host, "https://") ? host[9:end] : host
-        -     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+       10     host = repo.host
+       10     host_dir = startswith(host, "https://") ? host[9:end] : host
+       10     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
         - end
         - 
         - function target_dir(repo::Repo)
-        -     name = repo.name
-        -     joinpath(clones_dir, host_dir(repo), name) 
+       10     name = repo.name
+       10     joinpath(clones_dir, host_dir(repo), name) 
         - end
         - 
         - function page_path(repo::Repo)
@@ -93,24 +93,24 @@
         - end
         - 
         - function create_config(pat::Pattern, dir)::String
-        -     id = pat.id
-        -     toml = pat.toml
-        -     name = "p$id"
-        -     text = """
+       10     id = pat.id
+       10     toml = pat.toml
+       10     name = "p$id"
+       10     text = """
         -         [$name] 
         - 
         -         $toml
         -         """
-        -     if isdir(dir)
-        -         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+       10     if isdir(dir)
+       46         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
         -     else
-        -         mkdir(dir)
+        1         mkdir(dir)
         -     end
-        -     file = joinpath(dir, "$name.toml")
-        -     open(file, "w") do io
+       10     file = joinpath(dir, "$name.toml")
+       10     open(file, "w") do io
         -         write(io, text)
         -     end
-        -     name
+       10     name
         - end
         - 
         - function number_of_matches(err)
@@ -129,14 +129,14 @@
         - function apply(pat::Pattern, repo::Repo; 
         -     file_extensions="jl", in_place=false)
         - 
-        -     configs_dir = "configs"
-        -     configs_path = joinpath(project_root, "configs")
-        -     repo_path = target_dir(repo)
+       20     configs_dir = "configs"
+       10     configs_path = joinpath(project_root, "configs")
+       10     repo_path = target_dir(repo)
         - 
-        -     name = create_config(pat, configs_path)
+       10     name = create_config(pat, configs_path)
         - 
         -     # Not pretty but it works.
-        -     cmd = !in_place ? 
+       20     cmd = !in_place ? 
         -         `podman run
         -         --rm
         -         --volume $configs_path:/configs
@@ -146,7 +146,8 @@
         -         -c "comby \
         -             -stats \
         -             -config /configs/$name.toml \
-        -             -directory /repo -file-extensions $file_extensions \
+        -             -directory /repo \
+        -             -file-extensions $file_extensions \
         -             2>/repo/stderr.log
         -         "
         -         ` :
@@ -161,23 +162,23 @@
         -         -in-place
         -         `
         - 
-        -     stdout = IOBuffer()
-        -     run(pipeline(cmd; stdout))
-        -     out = String(take!(stdout))
-        -     err = ""
-        -     function avoid_franklin_parse_errors(out)
-        -         out = replace(out, '`' => "&#96;")
-        -         out = replace(out, '"' => "&#34;")
-        -         out
+       10     stdout = IOBuffer()
+       10     run(pipeline(cmd; stdout))
+       10     out = String(take!(stdout))
+       10     err = ""
+       10     function avoid_franklin_parse_errors(out)
+        0         out = replace(out, '`' => "&#96;")
+        0         out = replace(out, '"' => "&#34;")
+        0         out
         -     end
-        -     if !in_place
-        -         out = avoid_franklin_parse_errors(out)
-        -         if !isnothing(out)
-        -             out = ansi2html(out)
+       10     if !in_place
+        0         out = avoid_franklin_parse_errors(out)
+        0         if !isnothing(out)
+        0             out = ansi2html(out)
         -         end
-        -         err = read(joinpath(repo_path, "stderr.log"), String) 
+        0         err = read(joinpath(repo_path, "stderr.log"), String) 
         -     end
-        -     return (out, err)
+       10     return (out, err)
         - end
         - 
         - function repo_page(repo::Repo)

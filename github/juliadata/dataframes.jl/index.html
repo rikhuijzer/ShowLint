@@ -1,5 +1,16 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/DataFrames.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/DataFrames.jl" target=_blank >JuliaData/DataFrames.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a></ol></div> <h3 id=avoid_x_-_fx_71_hits ><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/iteration.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/DataFrames.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/DataFrames.jl" target=_blank >JuliaData/DataFrames.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a><li><a href="#omit_a_a_and_a_a_22_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 22 hits</a></ol></div> <h3 id=avoid_x_-_fx_71_hits ><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-124,7 +124,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#96;&#96;&#96;
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function stack(df::AbstractDataFrame,
+<span style="color:red;">-|</span></span><span style="color:gray;">               measure_vars = findall(</span><span style="color:red;">col -> eltype(col)</span><span style="color:gray;"> <: Union{AbstractFloat, Missing},</span></span>
+<span style="color:green;">+|</span></span>               measure_vars = findall(<span style="color:green;">eltype</span> <: Union{AbstractFloat, Missing},</span>
+<span style="color:inherit;"> |</span>                                      eachcol(df)),
+<span style="color:inherit;"> |</span>               id_vars = Not(measure_vars);
+<span style="color:inherit;"> |</span>               variable_name::SymbolOrString=:variable,
+<span style="color:red;">------ </span><span style="color:inherit;">test/iteration.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/iteration.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-171,23 +171,23</span> ============================================================
 <span style="color:inherit;"> |</span>    @test findall(row -> row.a == 1, rows) == [1, 3]
@@ -42,17 +53,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>end # module
-<span style="color:red;">------ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-124,7 +124,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#96;&#96;&#96;
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function stack(df::AbstractDataFrame,
-<span style="color:red;">-|</span></span><span style="color:gray;">               measure_vars = findall(</span><span style="color:red;">col -> eltype(col)</span><span style="color:gray;"> <: Union{AbstractFloat, Missing},</span></span>
-<span style="color:green;">+|</span></span>               measure_vars = findall(<span style="color:green;">eltype</span> <: Union{AbstractFloat, Missing},</span>
-<span style="color:inherit;"> |</span>                                      eachcol(df)),
-<span style="color:inherit;"> |</span>               id_vars = Not(measure_vars);
-<span style="color:inherit;"> |</span>               variable_name::SymbolOrString=:variable,
 <span style="color:red;">------ </span><span style="color:inherit;">src/abstractdataframe/abstractdataframe.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/abstractdataframe/abstractdataframe.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1029,7 +1029,7</span> ============================================================
@@ -423,4 +423,167 @@
 <span style="color:inherit;"> |</span>                  sort ||
 <span style="color:inherit;"> |</span>                  anydups ? cols : refs
 <span style="color:inherit;"> |</span>        return invoke(row_group_sl</div>
+</pre> <h3 id=omit_a_a_and_a_a_22_hits ><a href="#omit_a_a_and_a_a_22_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 22 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/data.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/data.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-171,7 +171,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test dropmissing!(df) === df
+<span style="color:inherit;"> |</span>    @test a === df.a
+<span style="color:inherit;"> |</span>    dfx = dropmissing(df)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">df == df</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test dfx !== df
+<span style="color:inherit;"> |</span>    @test dfx.a !== df.a
+<span style="color:inherit;"> |</span>    @test a === df.a # we did not touch df
+<span style="color:red;">------ </span><span style="color:inherit;">test/select.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/select.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-710,7 +710,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test x1 === df.x4
+<span style="color:inherit;"> |</span>    @test df.r1 == x1 .^ 2
+<span style="color:inherit;"> |</span>    @test df.r1 == df.r2
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">x1 == x1</span><span style="color:gray;"> + x2</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span> + x2</span>
+<span style="color:inherit;"> |</span>    @test df.x3 == x1 ./ x2
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1299,8 +1299,8</span> ============================================================
+<span style="color:inherit;"> |</span>    y = df.y
+<span style="color:inherit;"> |</span>    transform!(df, :x => first)
+<span style="color:inherit;"> |</span>    @test df == DataFrame(x=x, y=y, x_first=fill(1, 3))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">x == x</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">y == y</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(x=1:3, y=4:6)
+<span style="color:inherit;"> |</span>    transform!(df, names(df) .=> first .=> names(df))
+<span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-46,7 +46,7</span> ============================================================
+<span style="color:inherit;"> |</span>    g = sort!(unique(gd.groups))
+<span style="color:inherit;"> |</span>    if length(gd) > 0
+<span style="color:inherit;"> |</span>        @assert 0 <= g[1] <= 1
+<span style="color:red;">-|</span></span><span style="color:gray;">        @assert </span><span style="color:red;">g == g</span><span style="color:gray;">[1]:g[end]</span></span>
+<span style="color:green;">+|</span></span>        @assert <span style="color:green;">true</span>[1]:g[end]</span>
+<span style="color:inherit;"> |</span>        @assert length(gd.starts) == length(gd.ends) == g[end]
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        @assert length(gd.starts) == length(gd.ends) == 0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1155,11 +1155,11</span> ============================================================
+<span style="color:inherit;"> |</span>                    b = [1:7;missing])
+<span style="color:inherit;"> |</span>    gd1 = groupby_checked(df1, :a)
+<span style="color:inherit;"> |</span>    gd2 = groupby_checked(df2, :a)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">gd1 == gd1</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test isequal(gd1, gd1)
+<span style="color:inherit;"> |</span>    @test ismissing(gd1 == gd2)
+<span style="color:inherit;"> |</span>    @test !isequal(gd1, gd2)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test ismissing(</span><span style="color:red;">gd2 == gd2</span><span style="color:gray;">)</span></span>
+<span style="color:green;">+|</span></span>    @test ismissing(<span style="color:green;">true</span>)</span>
+<span style="color:inherit;"> |</span>    @test isequal(gd2, gd2)
+<span style="color:inherit;"> |</span>    df1.c = df1.a
+<span style="color:inherit;"> |</span>    df2.c = df2.a
+<span style="color:red;">------ </span><span style="color:inherit;">test/broadcasting.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/broadcasting.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1385,26 +1385,26</span> ============================================================
+<span style="color:inherit;"> |</span>    v1′ = df[:, 1]
+<span style="color:inherit;"> |</span>    df[!, 1] .= 100.0
+<span style="color:inherit;"> |</span>    @test df.x1 == [100.0, 100.0, 100.0]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">v1 == v1′</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true′</span></span>
+<span style="color:inherit;"> |</span>    df[!, 1] .= 'd'
+<span style="color:inherit;"> |</span>    @test df.x1 == ['d', 'd', 'd']
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">v1 == v1′</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true′</span></span>
+<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch df[!, 1] .= [1 2 3]
+<span style="color:inherit;"> |</span>    @test df.x1 == ['d', 'd', 'd']
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">v1 == v1′</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true′</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    df = copy(refdf)
+<span style="color:inherit;"> |</span>    v1 = df[!, 1]
+<span style="color:inherit;"> |</span>    v1′ = df[:, 1]
+<span style="color:inherit;"> |</span>    df[!, :x1] .= 100.0
+<span style="color:inherit;"> |</span>    @test df.x1 == [100.0, 100.0, 100.0]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">v1 == v1′</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true′</span></span>
+<span style="color:inherit;"> |</span>    df[!, :x1] .= 'd'
+<span style="color:inherit;"> |</span>    @test df.x1 == ['d', 'd', 'd']
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">v1 == v1′</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true′</span></span>
+<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch df[!, :x1] .= [1 2 3]
+<span style="color:inherit;"> |</span>    @test df.x1 == ['d', 'd', 'd']
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">v1 == v1′</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true′</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    df = copy(refdf)
+<span style="color:inherit;"> |</span>    df[!, :newcol] .= 100.0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1810,7 +1810,7</span> ============================================================
+<span style="color:inherit;"> |</span>    df = DataFrame(ones(3, 4), :auto)
+<span style="color:inherit;"> |</span>    z = [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;]
+<span style="color:inherit;"> |</span>    df[:, :z] .= z
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">z == z</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test df.z !== z
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError df[:, 6] .= z
+<span style="color:inherit;"> |</span>    @test_throws MethodError df[:, 1] .= z
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1829,7 +1829,7</span> ============================================================
+<span style="color:inherit;"> |</span>    df = DataFrame(ones(3, 4), :auto)
+<span style="color:inherit;"> |</span>    z = [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;]
+<span style="color:inherit;"> |</span>    df[:, &#34;z&#34;] .= z
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">z == z</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test df.z !== z
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(ones(3, 4), :auto)
+<span style="color:red;">------ </span><span style="color:inherit;">test/indexing.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/indexing.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1046,7 +1046,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    y = [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;]
+<span style="color:inherit;"> |</span>    df[:, :y] = y
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">y == y</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test df.y !== y
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(a=1:3, b=4:6, c=7:9)
+<span style="color:red;">------ </span><span style="color:inherit;">test/constructors.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/constructors.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-94,15 +94,15</span> ============================================================
+<span style="color:inherit;"> |</span>    df = DataFrame(x=x, y=y)
+<span style="color:inherit;"> |</span>    @test size(df) == (3, 2)
+<span style="color:inherit;"> |</span>    @test propertynames(df) == [:x, :y]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">x == x</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">y == y</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test df.x !== x
+<span style="color:inherit;"> |</span>    @test df.y !== y
+<span style="color:inherit;"> |</span>    df = DataFrame(x=x, y=y, copycols=true)
+<span style="color:inherit;"> |</span>    @test size(df) == (3, 2)
+<span style="color:inherit;"> |</span>    @test propertynames(df) == [:x, :y]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">x == x</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">y == y</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test df.x !== x
+<span style="color:inherit;"> |</span>    @test df.y !== y
+<span style="color:inherit;"> |</span>    df = DataFrame(x=x, y=y, copycols=false)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-171,7 +171,7</span> ============================================================
+<span style="color:inherit;"> |</span>    a=[1, 2, 3]
+<span style="color:inherit;"> |</span>    df = DataFrame(:a=>a, :b=>1, :c=>1:3)
+<span style="color:inherit;"> |</span>    @test propertynames(df) == [:a, :b, :c]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">a == a</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test df.a !== a
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(:a=>a, :b=>1, :c=>1:3, copycols=false)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-209,7 +209,7</span> ============================================================
+<span style="color:inherit;"> |</span>    a=[1, 2, 3]
+<span style="color:inherit;"> |</span>    df = DataFrame(Dict(:a=>a, :b=>1, :c=>1:3))
+<span style="color:inherit;"> |</span>    @test propertynames(df) == [:a, :b, :c]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test df.</span><span style="color:red;">a == a</span></span>
+<span style="color:green;">+|</span></span>    @test df.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test df.a !== a
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(Dict(:a=>a, :b=>1, :c=>1:3), copycols=fa</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -61,3 +61,21 @@ rewrite=':[first]:[bool]:[var]'
 </code></pre>
 ~~~
 
+
+~~~ 
+<h3 id="5">5: Omit a == a and a != a</h3>
+~~~
+tags: *generic*
+
+SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
+~~~
+<pre><code class="plaintext">match=':[[var]] :[bool~(=|!)]= :[[var]]'
+
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
+
+rewrite=':[bool]'
+</code></pre>
+~~~
+

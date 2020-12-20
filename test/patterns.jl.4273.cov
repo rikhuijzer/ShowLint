@@ -4,20 +4,20 @@
         -     @test SL.patterns_have_valid_indexes()
         - 
         -     function apply(pat::Pattern, code::String; file_extension="jl")
-       16         test_dir = joinpath(SL.clones_dir, "test", "test")
-        8         rm(test_dir; recursive=true, force=true)
-        8         mkpath(test_dir)
+       20         test_dir = joinpath(SL.clones_dir, "test", "test")
+       10         rm(test_dir; recursive=true, force=true)
+       10         mkpath(test_dir)
         - 
-        8         code_file = joinpath(test_dir, "code.$file_extension")
-        8         open(code_file, "w") do io
+       10         code_file = joinpath(test_dir, "code.$file_extension")
+       10         open(code_file, "w") do io
         -             write(io, code)
         -         end
         -         
-       16         repo = Repo("test", "test", [SL.default])
+       20         repo = Repo("test", "test", [SL.default])
         - 
-        8         SL.apply(pat, repo; in_place=true)
+       10         SL.apply(pat, repo; in_place=true)
         - 
-        8         read(code_file, String)
+       10         read(code_file, String)
         -     end
         - 
         -     P = SL.patterns
@@ -30,4 +30,6 @@
         -     @test apply(P[4], "x == true") == "x"
         -     @test apply(P[4], "x == false") == "!x"
         -     @test apply(P[4], "x != false") == "!!x"
+        -     @test apply(P[5], "if x == x") == "if true"
+        -     @test apply(P[5], "x != x") == "false"
         - end

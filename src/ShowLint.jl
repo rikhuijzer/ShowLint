@@ -146,7 +146,8 @@ function apply(pat::Pattern, repo::Repo;
         -c "comby \
             -stats \
             -config /configs/$name.toml \
-            -directory /repo -file-extensions $file_extensions \
+            -directory /repo \
+            -file-extensions $file_extensions \
             2>/repo/stderr.log
         "
         ` :

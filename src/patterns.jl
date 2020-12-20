@@ -45,6 +45,18 @@ patterns = [
 
         rewrite=':[first]:[bool]:[var]'
         """
+    ),
+    Pattern(5, "Omit a == a and a != a", ["generic"],
+        "SA4000 in [staticcheck](https://staticcheck.io/docs/checks).",
+        """
+        match=':[[var]] :[bool~(=|!)]= :[[var]]'
+
+        rule='where
+            rewrite :[bool] { "=" -> "true" },
+            rewrite :[bool] { "!" -> "false" }'
+
+        rewrite=':[bool]'
+        """
     )
 ]
 

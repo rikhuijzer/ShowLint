@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Pkg.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Pkg.jl" target=_blank >JuliaLang/Pkg.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a></ol></div> <h3 id=avoid_x_-_fx_1_hit ><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Pkg.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Pkg.jl" target=_blank >JuliaLang/Pkg.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a><li><a href="#omit_a_a_and_a_a_15_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 15 hits</a></ol></div> <h3 id=avoid_x_-_fx_1_hit ><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Types.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Types.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-752,7 +752,7</span> ============================================================
@@ -105,4 +105,130 @@
 <span style="color:inherit;"> |</span>            rethrow(e)
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>        Registry.update(; io=ctx.io, force=fa</div>
+</pre> <h3 id=omit_a_a_and_a_a_15_hits ><a href="#omit_a_a_and_a_a_15_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 15 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/resolve.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/resolve.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-428,7 +428,7</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;Resolving for another version of Julia&#34; begin
+<span style="color:inherit;"> |</span>    temp_pkg_dir() do dir
+<span style="color:inherit;"> |</span>        function find_by_name(versions, name)
+<span style="color:red;">-|</span></span><span style="color:gray;">            idx = findfirst(p -> p.</span><span style="color:red;">name == name</span><span style="color:gray;">, versions)</span></span>
+<span style="color:green;">+|</span></span>            idx = findfirst(p -> p.<span style="color:green;">true</span>, versions)</span>
+<span style="color:inherit;"> |</span>            if idx === nothing
+<span style="color:inherit;"> |</span>                return nothing
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
+<span style="color:inherit;"> |</span>using Test
+<span style="color:inherit;"> |</span>import BasicSandbox
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test </span><span style="color:red;">2 == 2</span></span>
+<span style="color:green;">+|</span></span>@test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>BasicSandbox.greet()
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_packages/BasicSandbox/deps/build.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_packages/BasicSandbox/deps/build.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
+<span style="color:inherit;"> |</span>using Test
+<span style="color:inherit;"> |</span>import BasicSandbox
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test </span><span style="color:red;">2 == 2</span></span>
+<span style="color:green;">+|</span></span>@test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>BasicSandbox.greet()
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
+<span style="color:inherit;"> |</span>                          preserve::PreserveLevel=PRESERVE_DIRECT)
+<span style="color:inherit;"> |</span>    pkgs = copy(pkgs)
+<span style="color:inherit;"> |</span>    for (name::String, uuid::UUID) in env.project.deps
+<span style="color:red;">-|</span></span><span style="color:gray;">        findfirst(pkg -> pkg.</span><span style="color:red;">uuid == uuid</span><span style="color:gray;">, pkgs) === nothing || continue # do not duplicate packages</span></span>
+<span style="color:green;">+|</span></span>        findfirst(pkg -> pkg.<span style="color:green;">true</span>, pkgs) === nothing || continue # do not duplicate packages</span>
+<span style="color:inherit;"> |</span>        entry = manifest_info(env.manifest, uuid)
+<span style="color:inherit;"> |</span>        push!(pkgs, entry === nothing ?
+<span style="color:inherit;"> |</span>              PackageSpec(;uuid=uuid, name=name) :
+<span style="color:inherit;">@|</span><span style="color:inherit;">-87,7 +87,7</span> ============================================================
+<span style="color:inherit;"> |</span>                            preserve::PreserveLevel=PRESERVE_ALL)
+<span style="color:inherit;"> |</span>    pkgs = copy(pkgs)
+<span style="color:inherit;"> |</span>    for (uuid, entry) in manifest
+<span style="color:red;">-|</span></span><span style="color:gray;">        findfirst(pkg -> pkg.</span><span style="color:red;">uuid == uuid</span><span style="color:gray;">, pkgs) === nothing || continue # do not duplicate packages</span></span>
+<span style="color:green;">+|</span></span>        findfirst(pkg -> pkg.<span style="color:green;">true</span>, pkgs) === nothing || continue # do not duplicate packages</span>
+<span style="color:inherit;"> |</span>        push!(pkgs, PackageSpec(
+<span style="color:inherit;"> |</span>            uuid      = uuid,
+<span style="color:inherit;"> |</span>            name      = entry.name,
+<span style="color:inherit;">@|</span><span style="color:inherit;">-169,7 +169,7</span> ============================================================
+<span style="color:inherit;"> |</span>        version_info === nothing && continue
+<span style="color:inherit;"> |</span>        hash′ = version_info.git_tree_sha1
+<span style="color:inherit;"> |</span>        if hash !== nothing
+<span style="color:red;">-|</span></span>[0;7;2m            </span><span style="color:red;">hash == hash′</span><span style="color:gray;"> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span></span>
+<span style="color:green;">+|</span></span>            <span style="color:green;">true′</span> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        hash = hash′
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-264,7 +264,7</span> ============================================================
+<span style="color:inherit;"> |</span>        if Types.is_project_uuid(env, uuid)
+<span style="color:inherit;"> |</span>            fix_pkg = env.pkg
+<span style="color:inherit;"> |</span>        else
+<span style="color:red;">-|</span></span><span style="color:gray;">            idx = findfirst(pkg -> pkg.</span><span style="color:red;">uuid == uuid</span><span style="color:gray;">, pkgs)</span></span>
+<span style="color:green;">+|</span></span>            idx = findfirst(pkg -> pkg.<span style="color:green;">true</span>, pkgs)</span>
+<span style="color:inherit;"> |</span>            fix_pkg = pkgs[idx]
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        fixed[uuid] = Resolve.Fixed(fix_pkg.version, q)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-331,7 +331,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # update vector of package versions
+<span style="color:inherit;"> |</span>    for (uuid, ver) in vers
+<span style="color:red;">-|</span></span><span style="color:gray;">        idx = findfirst(p -> p.</span><span style="color:red;">uuid == uuid</span><span style="color:gray;">, pkgs)</span></span>
+<span style="color:green;">+|</span></span>        idx = findfirst(p -> p.<span style="color:green;">true</span>, pkgs)</span>
+<span style="color:inherit;"> |</span>        if idx !== nothing
+<span style="color:inherit;"> |</span>            pkg = pkgs[idx]
+<span style="color:inherit;"> |</span>            # Fixed packages are not returned by resolve (they already have their version set)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-986,10 +986,10</span> ============================================================
+<span style="color:inherit;"> |</span>        pkg.mode == PKGMODE_PROJECT || continue
+<span style="color:inherit;"> |</span>        found = false
+<span style="color:inherit;"> |</span>        for (name::String, uuid::UUID) in ctx.env.project.deps
+<span style="color:red;">-|</span></span><span style="color:gray;">            pkg.</span><span style="color:red;">name == name</span><span style="color:gray;"> || pkg.</span><span style="color:red;">uuid == uuid</span><span style="color:gray;"> || continue</span></span>
+<span style="color:green;">+|</span></span>            pkg.<span style="color:green;">true</span> || pkg.<span style="color:green;">true</span> || continue</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            pkg.</span><span style="color:red;">name == name</span><span style="color:gray;"> ||</span></span>
+<span style="color:green;">+|</span></span>            pkg.<span style="color:green;">true</span> ||</span>
+<span style="color:inherit;"> |</span>                error(&#34;project file name mismatch for &#96;$uuid&#96;: $(pkg.name) ≠ $name&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">            pkg.</span><span style="color:red;">uuid == uuid</span><span style="color:gray;"> ||</span></span>
+<span style="color:green;">+|</span></span>            pkg.<span style="color:green;">true</span> ||</span>
+<span style="color:inherit;"> |</span>                error(&#34;project file UUID mismatch for &#96;$name&#96;: $(pkg.uuid) ≠ $uuid&#34;)
+<span style="color:inherit;"> |</span>            uuid in drop || push!(drop, uuid)
+<span style="color:inherit;"> |</span>            found = true
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1645,7 +1645,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function diff_array(old_ctx::Union{Context,Nothing}, new_ctx::Context; manifest=true)
+<span style="color:inherit;"> |</span>    function index_pkgs(pkgs, uuid)
+<span style="color:red;">-|</span></span><span style="color:gray;">        idx = findfirst(pkg -> pkg.</span><span style="color:red;">uuid == uuid</span><span style="color:gray;">, pkgs)</span></span>
+<span style="color:green;">+|</span></span>        idx = findfirst(pkg -> pkg.<span style="color:green;">true</span>, pkgs)</span>
+<span style="color:inherit;"> |</span>        return idx === nothing ? nothing : pkgs[idx]
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    # load deps
+<span style="color:red;">------ </span><span style="color:inherit;">src/manifest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/manifest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-120,7 +120,7</span> ============================================================
+<span style="color:inherit;"> |</span>            pkgerror(&#34;&#96;$(entry.name)=$(entry_uuid)&#96; depends on &#96;$name=$uuid&#96;, &#34;,
+<span style="color:inherit;"> |</span>                     &#34;but no such entry exists in the manifest.&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        if dep_entry.</span><span style="color:red;">name != name</span></span>
+<span style="color:green;">+|</span></span>        if dep_entry.<span style="color:green;">false</span></span>
+<span style="color:inherit;"> |</span>            pkgerror(&#34;&#96;$(entry.name)=$(entry_uuid)&#96; depends on &#96;$name=$uuid&#96;, &#34;,
+<span style="color:inherit;"> |</span>                     &#34;but entry with UUID &#96;$uuid&#96; has name &#96;$(dep_entry.name)&#96;.&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">------ </span><span style="color:inherit;">src/Types.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Types.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-333,7 +333,7</span> ============================================================
+<span style="color:inherit;"> |</span>    is_project_name(env, pkg.name) || is_project_uuid(env, pkg.uuid)
+<span style="color:inherit;"> |</span>is_project(env::EnvCache, pkg::PackageSpec) = is_project_uuid(env, pkg.uuid)
+<span style="color:inherit;"> |</span>is_project_name(env::EnvCache, name::String) =
+<span style="color:red;">-|</span></span><span style="color:gray;">    env.pkg !== nothing && env.pkg.</span><span style="color:red;">name == name</span></span>
+<span style="color:green;">+|</span></span>    env.pkg !== nothing && env.pkg.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>is_project_name(env::EnvCache, name::Nothing) = false
+<span style="color:inherit;"> |</span>is_project_uuid(env::EnvCache, uuid::UUID) = project_uuid(env) == uuid
+<span style="color:inherit;"> |</s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -7,8 +7,7 @@ end
 any_tag(tags) = true
 default(tags) = !any(tag -> tag == "test", tags)
 
-debug = false
-# debug = !haskey(ENV, "CI")
+debug = !haskey(ENV, "CI")
 
 repositories = debug ?
     [
@@ -66,6 +65,7 @@ repositories = debug ?
         Repo("https://github.com", "odow/SDDP.jl", [default]),
         Repo("https://github.com", "queryverse/Query.jl", [default]),
         Repo("https://github.com", "rikhuijzer/Codex.jl", [default]),
+        Repo("https://github.com", "rikhuijzer/ShowLint", [default]),
         Repo("https://github.com", "timholy/ProfileView.jl", [default]),
         Repo("https://github.com", "timholy/ProgressMeter.jl", [default]),
         Repo("https://github.com", "timholy/Rebugger.jl", [default]),

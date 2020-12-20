@@ -1,5 +1,6 @@
 module ShowLint
 
+using Formatting
 using Serialization
 
 export 
@@ -42,6 +43,7 @@ function ansi2html(text)
   text = replace(text, "/repo/" => "")
   text = replace(text, "" => "") 
   text = replace(text, "<!" => "&#60;!")
+  text = replace(text, "[0;7;2m" => "")
   text = text[1:end-6]
   text = strip(text)
   return length(text) < 6 ? 
@@ -275,33 +277,36 @@ function create_repo_pages()
     pages_headers
 end
 
+function count_without_comments(path)::Int
+    content = read(path, String)
+    lines = split(content, '\n')
+    is_comment_line(line) = startswith(lstrip(line), '#')
+    non_comment_lines = filter(!is_comment_line, lines)
+    length(non_comment_lines)
+end
+
 """
     cloned_loc(dir=clones_dir, extension=".jl")
 
 Counts the number of lines of codes in files with `extension` in
 `dir`.
-This count includes comments.
 """
-function cloned_loc(extension=".jl")
+function cloned_loc(; extension=".jl")::Int
     counts = []
     
-    function count_file(path)::Int
-        open(path, "r") do io
-            return countlines(io)
-        end
-    end
-
     for (root, dirs, files) in walkdir(clones_dir)
         for file in files
             ext = last(splitext(file))
             if ext == extension 
                 path = joinpath(root, file)
-                count = count_file(path)
+                count = count_without_comments(path)
                 push!(counts, count)
             end
         end
     end
     sum(counts)
 end
+
+prettify_loc(n)::String = replace(format(n, commas=true), ',' => ' ')
 
 end # module

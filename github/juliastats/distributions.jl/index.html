@@ -22,7 +22,17 @@
 <span style="color:inherit;"> |</span>    # evaluation of logpdf and pdf
 <span style="color:inherit;"> |</span>    for i = 1:min(100, n_tsamp</div>
 </pre> <h3 id=avoid_x_-_fx_6_hits ><a href="#avoid_x_-_fx_6_hits">Avoid x -&gt; f&#40;x&#41; ➤ 6 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/univariate/continuous/chernoff.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-14,7 +14,7</span> ============================================================
+<span style="color:inherit;"> |</span>isunitvec(v::AbstractVector) = (norm(v) - 1.0) < 1.0e-12
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>isprobvec(p::AbstractVector{<:Real}) =
+<span style="color:orange;">!|</span>    all(x <span style="color:red;">-> x </span>≥ zero<span style="color:red;">(x)</span>, p) && isapprox(sum(p), one(eltype(p)))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>pnormalize!(v::AbstractVector{<:Real}) = (v ./= sum(v); v)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/univariate/continuous/chernoff.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/univariate/continuous/chernoff.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-204,13 +204,13</span> ============================================================
 <span style="color:inherit;"> |</span>    stdapprox = 0.52
@@ -38,16 +48,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>minimum(d::Chernoff) = -Inf
-<span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-14,7 +14,7</span> ============================================================
-<span style="color:inherit;"> |</span>isunitvec(v::AbstractVector) = (norm(v) - 1.0) < 1.0e-12
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>isprobvec(p::AbstractVector{<:Real}) =
-<span style="color:orange;">!|</span>    all(x <span style="color:red;">-> x </span>≥ zero<span style="color:red;">(x)</span>, p) && isapprox(sum(p), one(eltype(p)))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>pnormalize!(v::AbstractVector{<:Real}) = (v ./= sum(v); v)
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">src/functionals.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/functionals.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,14 +8,14</span> ============================================================

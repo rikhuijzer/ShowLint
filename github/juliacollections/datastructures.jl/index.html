@@ -1,0 +1,108 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/DataStructures.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/DataStructures.jl" target=_blank >JuliaCollections/DataStructures.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_17_hits ><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/robin_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/robin_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-28,8 +28,8</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>mutable struct RobinDict{K,V} <: AbstractDict{K,V}
+<span style="color:inherit;"> |</span>    hashes::Vector{UInt32}
+<span style="color:red;">-|</span></span><span style="color:gray;">    keys::</span><span style="color:red;">Array</span><span style="color:gray;">{K</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    keys::<span style="color:green;">Vector</span>{K}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    vals::</span><span style="color:red;">Array</span><span style="color:gray;">{V</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    vals::<span style="color:green;">Vector</span>{V}</span>
+<span style="color:inherit;"> |</span>    count::Int
+<span style="color:inherit;"> |</span>    idxfloor::Int
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">src/balanced_tree.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/balanced_tree.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-72,13 +72,13</span> ============================================================
+<span style="color:inherit;"> |</span>## marker whose index is 1 and the after-end marker whose index is 2.
+<span style="color:inherit;"> |</span>## These two markers live in dummy data nodes.
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function initializeTree!(tree::</span><span style="color:red;">Array</span><span style="color:gray;">{TreeNode{K}</span><span style="color:red;">,1</span><span style="color:gray;">}) where K</span></span>
+<span style="color:green;">+|</span></span>function initializeTree!(tree::<span style="color:green;">Vector</span>{TreeNode{K}}) where K</span>
+<span style="color:inherit;"> |</span>    resize!(tree,1)
+<span style="color:inherit;"> |</span>    tree[1] = TreeNode{K}(K, 1, 2, 0, 0)
+<span style="color:inherit;"> |</span>    return nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function initializeData!(data::</span><span style="color:red;">Array</span><span style="color:gray;">{KDRec{K,D}</span><span style="color:red;">,1</span><span style="color:gray;">}) where {K,D}</span></span>
+<span style="color:green;">+|</span></span>function initializeData!(data::<span style="color:green;">Vector</span>{KDRec{K,D}}) where {K,D}</span>
+<span style="color:inherit;"> |</span>    resize!(data, 2)
+<span style="color:inherit;"> |</span>    data[1] = KDRec{K,D}(1)
+<span style="color:inherit;"> |</span>    data[2] = KDRec{K,D}(1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-124,13 +124,13</span> ============================================================
+<span style="color:inherit;"> |</span>    tree::Array{TreeNode{K}, 1}
+<span style="color:inherit;"> |</span>    rootloc::Int
+<span style="color:inherit;"> |</span>    depth::Int
+<span style="color:red;">-|</span></span><span style="color:gray;">    freetreeinds::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    freetreeinds::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    freedatainds::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    freedatainds::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:inherit;"> |</span>    useddatacells::BitSet
+<span style="color:inherit;"> |</span>    # The next two arrays are used as a workspace by the delete!
+<span style="color:inherit;"> |</span>    # function.
+<span style="color:red;">-|</span></span><span style="color:gray;">    deletionchild::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    deletionchild::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    deletionleftkey::</span><span style="color:red;">Array</span><span style="color:gray;">{K</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    deletionleftkey::<span style="color:green;">Vector</span>{K}</span>
+<span style="color:inherit;"> |</span>    function BalancedTree23{K,D,Ord}(ord1::Ord) where {K,D,Ord<:Ordering}
+<span style="color:inherit;"> |</span>        tree1 = Vector{TreeNode{K}}(undef, 1)
+<span style="color:inherit;"> |</span>        initializeTree!(tree1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-313,12 +313,12</span> ============================================================
+<span style="color:inherit;"> |</span>## They replace the 'parent' field of either an internal tree node or
+<span style="color:inherit;"> |</span>## a data node at the bottom tree level.
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function replaceparent!(data::</span><span style="color:red;">Array</span><span style="color:gray;">{KDRec{K,D}</span><span style="color:red;">,1</span><span style="color:gray;">}, whichind::Int, newparent::Int) where {K,D}</span></span>
+<span style="color:green;">+|</span></span>function replaceparent!(data::<span style="color:green;">Vector</span>{KDRec{K,D}}, whichind::Int, newparent::Int) where {K,D}</span>
+<span style="color:inherit;"> |</span>    data[whichind] = KDRec{K,D}(newparent, data[whichind].k, data[whichind].d)
+<span style="color:inherit;"> |</span>    return nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function replaceparent!(tree::</span><span style="color:red;">Array</span><span style="color:gray;">{TreeNode{K}</span><span style="color:red;">,1</span><span style="color:gray;">}, whichind::Int, newparent::Int) where K</span></span>
+<span style="color:green;">+|</span></span>function replaceparent!(tree::<span style="color:green;">Vector</span>{TreeNode{K}}, whichind::Int, newparent::Int) where K</span>
+<span style="color:inherit;"> |</span>    tree[whichind] = TreeNode{K}(tree[whichind].child1, tree[whichind].child2,
+<span style="color:inherit;"> |</span>                                 tree[whichind].child3, newparent,
+<span style="color:inherit;"> |</span>                                 tree[whichind].splitkey1,
+<span style="color:inherit;">@|</span><span style="color:inherit;">-332,7 +332,7</span> ============================================================
+<span style="color:inherit;"> |</span>## location and marking it as used.  The return value is the
+<span style="color:inherit;"> |</span>## index of the data just inserted into the vector.
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function push_or_reuse!(a::Vector, freelocs::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}, item)</span></span>
+<span style="color:green;">+|</span></span>function push_or_reuse!(a::Vector, freelocs::<span style="color:green;">Vector</span>{Int}, item)</span>
+<span style="color:inherit;"> |</span>    if isempty(freelocs)
+<span style="color:inherit;"> |</span>        push!(a, item)
+<span style="color:inherit;"> |</span>        return length(a)
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_multi_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_multi_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-12,9 +12,9</span> ============================================================
+<span style="color:inherit;"> |</span>        PVS = 1 => [1.0]
+<span style="color:inherit;"> |</span>        PV = 1 => 1.0
+<span style="color:inherit;"> |</span>        @test eltype(MultiDict{Char,Int}()) === Pair{Char,Vector{Int}}
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test isa(MultiDict(PVS), MultiDict{Int,</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}})</span></span>
+<span style="color:green;">+|</span></span>        @test isa(MultiDict(PVS), MultiDict{Int,<span style="color:green;">Vector</span>{Float64}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test isa(MultiDict(PVS, PVS), MultiDict{Int,</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}})</span></span>
+<span style="color:green;">+|</span></span>        @test isa(MultiDict(PVS, PVS), MultiDict{Int,<span style="color:green;">Vector</span>{Float64}})</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test isa(MultiDict([PVS, PVS]), MultiDict{Int,</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}})</span></span>
+<span style="color:green;">+|</span></span>        @test isa(MultiDict([PVS, PVS]), MultiDict{Int,<span style="color:green;">Vector</span>{Float64}})</span>
+<span style="color:inherit;"> |</span>        @test isa(MultiDict(PV), MultiDict{Int,Float64})
+<span style="color:inherit;"> |</span>        @test isa(MultiDict(PV, PV), MultiDict{Int,Float64})
+<span style="color:inherit;"> |</span>        @test isa(MultiDict([PV, PV]), MultiDict{Int,Float64})
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # order changed from v0.4 to v0.5
+<span style="color:inherit;"> |</span>        @test collect(keys(d)) == ['c', 'a'] || collect(keys(d)) == ['a', 'c']
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect(values(d)) == </span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}[[1],[1,2,3]] || collect(values(d)) == </span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}[[1,2,3], [1]]</span></span>
+<span style="color:green;">+|</span></span>        @test collect(values(d)) == <span style="color:green;">Vector</span>{Int}[[1],[1,2,3]] || collect(values(d)) == <span style="color:green;">Vector</span>{Int}[[1,2,3], [1]]</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test get(d, 'a', 0) == [1,2,3]
+<span style="color:inherit;"> |</span>        @test get(d, 'b', 0) == 0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-112,7 +112,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;special functions: count, enumerateall&#34; begin
+<span style="color:inherit;"> |</span>        #not appending arrays to one array, using array of arrays
+<span style="color:red;">-|</span></span><span style="color:gray;">        d = MultiDict{Char,</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}}()</span></span>
+<span style="color:green;">+|</span></span>        d = MultiDict{Char,<span style="color:green;">Vector</span>{Int}}()</span>
+<span style="color:inherit;"> |</span>        @test count(d) == 0
+<span style="color:inherit;"> |</span>        for i in 1:15
+<span style="color:inherit;"> |</span>            insert!(d, rand('a':'f'), rand()>0.5 ? [rand(1:10)] : rand(1:10, rand(1:</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

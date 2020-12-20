@@ -1,0 +1,25 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/Feather.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/Feather.jl" target=_blank >JuliaData/Feather.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/arrow/dictencoding.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/arrow/dictencoding.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-124,7 +124,7</span> ============================================================
+<span style="color:inherit;"> |</span># for now this always transfers the entire pool
+<span style="color:inherit;"> |</span>function CategoricalArrays.categorical(d::DictEncoding{J,R}, idx::AbstractVector{<:Integer}
+<span style="color:inherit;"> |</span>                    ) where {J,K,R<:ReferenceType{K}}
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">CategoricalArray</span><span style="color:gray;">{J</span><span style="color:red;">,1</span><span style="color:gray;">}(_getrefsvec(d, idx), pool(d))</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">CategoricalVector</span>{J}(_getrefsvec(d, idx), pool(d))</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>CategoricalArrays.categorical(d::DictEncoding) = categorical(d, 1:length(d))
+<span style="color:inherit;"> |</s</div>
+</pre> <h3 id=avoid_x_-_fx_1_hit ><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/arrow/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/arrow/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-81,7 +81,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function encode(::Type{C}, v::AbstractVector{Union{J, Missing}}) where {C, J <: AbstractString}
+<span style="color:red;">-|</span></span><span style="color:gray;">    N   = mapreduce(</span><span style="color:red;">x -> ismissing(x)</span><span style="color:gray;"> ? 0 : length(codeunits(x)) , +, v)</span></span>
+<span style="color:green;">+|</span></span>    N   = mapreduce(<span style="color:green;">ismissing</span> ? 0 : length(codeunits(x)) , +, v)</span>
+<span style="color:inherit;"> |</span>    enc = Vector{C}(undef, N)
+<span style="color:inherit;"> |</span>    i   = 0
+<span style="color:inherit;"> |</span>    for val</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

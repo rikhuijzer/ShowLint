@@ -307,6 +307,6 @@
         -     sum(counts)
         - end
         - 
-        1 prettify_loc(n)::String = replace(format(n, commas=true), ',' => ' ')
+        1 prettify_loc(n)::String = format(n, commas=true)
         - 
         - end # module

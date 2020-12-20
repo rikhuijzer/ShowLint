@@ -32,16 +32,6 @@
 <span style="color:inherit;"> |</span>            max_length = 2
 <span style="color:inherit;"> |</span>        else
 <span style="color:inherit;"> |</span>            max_length = 20
-<span style="color:red;">------ </span><span style="color:inherit;">test/general.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/general.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-121,7 +121,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function is_solved(com::CS.CoM)
-<span style="color:inherit;"> |</span>    variables = com.search_space
-<span style="color:orange;">!|</span>    all_fixed = all(<span style="color:red;">v -> </span>CS.isfixed<span style="color:red;">(v)</span>, variables)
-<span style="color:inherit;"> |</span>    if !all_fixed
-<span style="color:inherit;"> |</span>        @error &#34;Not all variables are fixed&#34;
-<span style="color:inherit;"> |</span>        return false
 <span style="color:red;">------ </span><span style="color:inherit;">src/ConstraintSolver.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/ConstraintSolver.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-725,7 +725,7</span> ============================================================
@@ -62,6 +52,16 @@
 <span style="color:inherit;"> |</span>        com.best_sol = com.best_bound
 <span style="color:inherit;"> |</span>        com.solve_time = time() - com.start_time
 <span style="color:inherit;"> |</span>        new_sol_obj = Solution(com.best_sol, CS.value.(com.search_space), 1)
+<span style="color:red;">------ </span><span style="color:inherit;">test/general.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/general.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-121,7 +121,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function is_solved(com::CS.CoM)
+<span style="color:inherit;"> |</span>    variables = com.search_space
+<span style="color:orange;">!|</span>    all_fixed = all(<span style="color:red;">v -> </span>CS.isfixed<span style="color:red;">(v)</span>, variables)
+<span style="color:inherit;"> |</span>    if !all_fixed
+<span style="color:inherit;"> |</span>        @error &#34;Not all variables are fixed&#34;
+<span style="color:inherit;"> |</span>        return false
 <span style="color:red;">------ </span><span style="color:inherit;">src/constraints/not_equal.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/constraints/not_equal.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-14,7 +14,7</span> ============================================================

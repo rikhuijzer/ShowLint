@@ -60,7 +60,18 @@
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</s</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_5_hits ><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/utils/misc.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/eval/run.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/eval/run.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-50,7 +50,7</span> ============================================================
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    r = F.run_code(mod, c, junk)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:gray;">r</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">!</span>r</span>
+<span style="color:inherit;"> |</span>    @test read(junk, String) == &#34;hello\n&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # code with show
+<span style="color:red;">------ </span><span style="color:inherit;">test/utils/misc.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/utils/misc.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-30,13 +30,13</span> ============================================================
 <span style="color:inherit;"> |</span>@testset &#34;isexactly&#34; begin
@@ -92,16 +103,5 @@
 <span style="color:green;">+|</span></span>    @test <span style="color:green;">!</span>b</span>
 <span style="color:inherit;"> |</span>    @test λ('c') == true
 <span style="color:inherit;"> |</span>    @test λ('[') == false
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/eval/run.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/eval/run.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-50,7 +50,7</span> ============================================================
-<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    r = F.run_code(mod, c, junk)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:gray;">r</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">!</span>r</span>
-<span style="color:inherit;"> |</span>    @test read(junk, String) == &#34;hello\n&#34;
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # code with</div>
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -24,11 +24,14 @@ rule=&#x27;where
     rewrite :[bool] { &quot;!&quot; -&gt; &quot;false&quot; }&#x27;
 
 rewrite=&#x27;:[bool]&#x27;
-</code></pre> </p> <p> <h3 id=6 >6: Avoid findfirst in conditional</h3> tags: <em>julia</em></p> <p>For example, instead of <code>findfirst&#40;&#39;a&#39;, &quot;ab&quot;&#41; &#61;&#61;&#61; nothing</code>, use <code>occursin&#40;&#39;a&#39;, &quot;ab&quot;&#41;</code> or <code>contains</code> &#40;Julia ≥1.5&#41;.</p> <p> <pre><code class="plaintext hljs">match=&#x27;findfirst(:[a], :[b]) :[bool~(=|!)]== nothing&#x27;
+</code></pre> </p> <p> <h3 id=6 >6: Avoid findfirst in conditional</h3> tags: <em>julia</em></p> <p>For example, instead of <code>findfirst&#40;&#39;a&#39;, &quot;ab&quot;&#41; &#61;&#61;&#61; nothing</code>, use <code>occursin&#40;&#39;a&#39;, &quot;ab&quot;&#41;</code> or <code>contains</code> &#40;Julia ≥1.5&#41;.</p> <pre><code class="plaintext hljs">match=&#x27;findfirst(:[a], :[b]) :[bool~(=|!)]== nothing&#x27;
 
 rule=&#x27;where
     rewrite :[bool] { &quot;!&quot; -&gt; &quot;&quot; },
     rewrite :[bool] { &quot;=&quot; -&gt; &quot;!&quot; }&#x27;
 
 rewrite=&#x27;:[bool]occursin(:[a], :[b])&#x27;
+</code></pre> <p> <h3 id=7 >7: Avoid findall(x -> x == false, Y)</h3> tags: <em>julia</em></p> <p>Instead, use <code>findall&#40;.&#33;Y&#41;</code>.</p> <p> <pre><code class="plaintext hljs">match=&#x27;findall(:[x] -&gt; :[x] == false, :[Y])&#x27;
+
+rewrite=&#x27;findall(.!:[Y])&#x27;
 </code></pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -64,18 +64,7 @@
 <span style="color:inherit;"> |</span>        m.nlp_data.largest_user_input_dimension =
 <span style="color:inherit;"> |</span>            max(m.nlp_data.largest_user_input_dimension, dimens</div>
 </pre> <h3 id=omit_a_a_and_a_a_5_hits ><a href="#omit_a_a_and_a_a_5_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 5 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/constraint.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/constraint.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-766,7 +766,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 1.0
-<span style="color:inherit;"> |</span>    JuMP.set_normalized_rhs(con_ref, 2.0)
-<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 2.0
-<span style="color:red;">-|</span></span><span style="color:gray;">    con_ref = @constraint(model, 2 * x - </span><span style="color:red;">1 == 1</span><span style="color:gray;">)</span></span>
-<span style="color:green;">+|</span></span>    con_ref = @constraint(model, 2 * x - <span style="color:green;">true</span>)</span>
-<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 2.0
-<span style="color:inherit;"> |</span>    JuMP.set_normalized_rhs(con_ref, 3)
-<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 3.0
-<span style="color:red;">------ </span><span style="color:inherit;">test/macros.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/macros.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/macros.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-568,7 +568,7</span> ============================================================
 <span style="color:inherit;"> |</span>        foo() = 2
@@ -86,6 +75,17 @@
 <span style="color:inherit;"> |</span>        )
 <span style="color:inherit;"> |</span>        con3 = @build_constraint(sum(x for i in 1:3)^(foo()) == 0)
 <span style="color:inherit;"> |</span>        con4 = @build_constraint(sum(x for i in 1:3)^(foo() - 1) == 0)
+<span style="color:red;">------ </span><span style="color:inherit;">test/constraint.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/constraint.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-766,7 +766,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 1.0
+<span style="color:inherit;"> |</span>    JuMP.set_normalized_rhs(con_ref, 2.0)
+<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 2.0
+<span style="color:red;">-|</span></span><span style="color:gray;">    con_ref = @constraint(model, 2 * x - </span><span style="color:red;">1 == 1</span><span style="color:gray;">)</span></span>
+<span style="color:green;">+|</span></span>    con_ref = @constraint(model, 2 * x - <span style="color:green;">true</span>)</span>
+<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 2.0
+<span style="color:inherit;"> |</span>    JuMP.set_normalized_rhs(con_ref, 3)
+<span style="color:inherit;"> |</span>    @test JuMP.normalized_rhs(con_ref) == 3.0
 <span style="color:red;">------ </span><span style="color:inherit;">test/nlp.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/nlp.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-491,8 +491,8</span> ============================================================

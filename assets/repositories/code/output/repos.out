@@ -340,6 +340,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 18 hits](/github/juliadynamics/agents.jl/#replace_arrayt1_with_vectort_18_hits)
 - [Omit comparison with boolean constant ➤ 15 hits](/github/juliadynamics/agents.jl/#omit_comparison_with_boolean_constant_15_hits)
+- [Avoid findall(x -> x == false, Y) ➤ 2 hits](/github/juliadynamics/agents.jl/#avoid_findallx_-_x_false_y_2_hits)
 ~~~
 </div>
 ~~~

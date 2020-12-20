@@ -1,52 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGraphs/LightGraphs.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGraphs/LightGraphs.jl" target=_blank >JuliaGraphs/LightGraphs.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_14_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 14 hits</a><li><a href="#avoid_x_-_fx_2_hits">Avoid x -&gt; f&#40;x&#41; ➤ 2 hits</a><li><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_14_hits ><a href="#replace_arrayt1_with_vectort_14_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 14 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/Cycles/basis.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/Cycles/basis.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # No Edges
-<span style="color:inherit;"> |</span>    ex = SimpleGraph(1)
-<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[]</span></span>
-<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[]</span>
-<span style="color:inherit;"> |</span>    @testset &#34;no edges $g&#34; for g in testgraphs(ex)
-<span style="color:inherit;"> |</span>        ex_cyclebasis = @inferred LCY.cycle_basis(g)
-<span style="color:inherit;"> |</span>        @test isempty(ex_cyclebasis)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # Only one self-edge
-<span style="color:inherit;"> |</span>    elist = [(1,1)]
-<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
-<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[[1]]</span></span>
-<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[[1]]</span>
-<span style="color:inherit;"> |</span>    @testset &#34;one self-edge $g&#34; for g in testgraphs(ex)
-<span style="color:inherit;"> |</span>        ex_cyclebasis = LCY.cycle_basis(g)
-<span style="color:inherit;"> |</span>        evaluate(ex_cyclebasis, expected_cyclebasis)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # SimpleGraph with one cycle
-<span style="color:inherit;"> |</span>    elist = [(1,2),(2,3),(3,4),(4,1),(1,5)]
-<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
-<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[</span></span>
-<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[</span>
-<span style="color:inherit;"> |</span>        [1,2,3,4] ]
-<span style="color:inherit;"> |</span>    @testset &#34;one cycle $g&#34; for g in testgraphs(ex)
-<span style="color:inherit;"> |</span>        ex_cyclebasis = LCY.cycle_basis(g)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-36,7 +36,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # SimpleGraph with 2 of 3 cycles forming a basis
-<span style="color:inherit;"> |</span>    elist = [(1,2),(1,3),(2,3),(2,4),(3,4)]
-<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
-<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[</span></span>
-<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[</span>
-<span style="color:inherit;"> |</span>        [2,3,4],
-<span style="color:inherit;"> |</span>        [2,1,3] ]
-<span style="color:inherit;"> |</span>    @testset &#34;2 of 3 cycles w/ basis $g&#34; for g in testgraphs(ex)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-47,7 +47,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # Testing root argument
-<span style="color:inherit;"> |</span>    elist = [(1,2),(1,3),(2,3),(2,4),(3,4),(1,5),(5,6),(6,4)]
-<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
-<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[</span></span>
-<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[</span>
-<span style="color:inherit;"> |</span>        [2, 4, 3],
-<span style="color:inherit;"> |</span>        [1, 5, 6, 4, 3],
-<span style="color:inherit;"> |</span>        [1, 2, 3] ]
-<span style="color:red;">------ </span><span style="color:inherit;">test/deprecations13/cycles13/basis.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/deprecations13/cycles13/basis.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/deprecations13/cycles13/basis.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -88,6 +41,53 @@
 <span style="color:inherit;"> |</span>    # Testing root argument
 <span style="color:inherit;"> |</span>    elist = [(1,2),(1,3),(2,3),(2,4),(3,4),(1,5),(5,6),(6,4)]
 <span style="color:inherit;"> |</span>    ex = Graph(SimpleEdge.(elist))
+<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[</span></span>
+<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[</span>
+<span style="color:inherit;"> |</span>        [2, 4, 3],
+<span style="color:inherit;"> |</span>        [1, 5, 6, 4, 3],
+<span style="color:inherit;"> |</span>        [1, 2, 3] ]
+<span style="color:red;">------ </span><span style="color:inherit;">test/Cycles/basis.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/Cycles/basis.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # No Edges
+<span style="color:inherit;"> |</span>    ex = SimpleGraph(1)
+<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[]</span></span>
+<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[]</span>
+<span style="color:inherit;"> |</span>    @testset &#34;no edges $g&#34; for g in testgraphs(ex)
+<span style="color:inherit;"> |</span>        ex_cyclebasis = @inferred LCY.cycle_basis(g)
+<span style="color:inherit;"> |</span>        @test isempty(ex_cyclebasis)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # Only one self-edge
+<span style="color:inherit;"> |</span>    elist = [(1,1)]
+<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
+<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[[1]]</span></span>
+<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[[1]]</span>
+<span style="color:inherit;"> |</span>    @testset &#34;one self-edge $g&#34; for g in testgraphs(ex)
+<span style="color:inherit;"> |</span>        ex_cyclebasis = LCY.cycle_basis(g)
+<span style="color:inherit;"> |</span>        evaluate(ex_cyclebasis, expected_cyclebasis)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # SimpleGraph with one cycle
+<span style="color:inherit;"> |</span>    elist = [(1,2),(2,3),(3,4),(4,1),(1,5)]
+<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
+<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[</span></span>
+<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[</span>
+<span style="color:inherit;"> |</span>        [1,2,3,4] ]
+<span style="color:inherit;"> |</span>    @testset &#34;one cycle $g&#34; for g in testgraphs(ex)
+<span style="color:inherit;"> |</span>        ex_cyclebasis = LCY.cycle_basis(g)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-36,7 +36,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # SimpleGraph with 2 of 3 cycles forming a basis
+<span style="color:inherit;"> |</span>    elist = [(1,2),(1,3),(2,3),(2,4),(3,4)]
+<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
+<span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[</span></span>
+<span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[</span>
+<span style="color:inherit;"> |</span>        [2,3,4],
+<span style="color:inherit;"> |</span>        [2,1,3] ]
+<span style="color:inherit;"> |</span>    @testset &#34;2 of 3 cycles w/ basis $g&#34; for g in testgraphs(ex)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-47,7 +47,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # Testing root argument
+<span style="color:inherit;"> |</span>    elist = [(1,2),(1,3),(2,3),(2,4),(3,4),(1,5),(5,6),(6,4)]
+<span style="color:inherit;"> |</span>    ex = SimpleGraph(SimpleEdge.(elist))
 <span style="color:red;">-|</span></span><span style="color:gray;">    expected_cyclebasis = </span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}[</span></span>
 <span style="color:green;">+|</span></span>    expected_cyclebasis = <span style="color:green;">Vector</span>{Int64}[</span>
 <span style="color:inherit;"> |</span>        [2, 4, 3],

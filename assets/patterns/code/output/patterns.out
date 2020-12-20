@@ -99,3 +99,18 @@ rewrite=':[bool]occursin(:[a], :[b])'
 </code></pre>
 ~~~
 
+
+~~~ 
+<h3 id="7">7: Avoid findall(x -> x == false, Y)</h3>
+~~~
+tags: *julia*
+
+Instead, use `findall(.!Y)`.
+
+~~~
+<pre><code class="plaintext">match='findall(:[x] -> :[x] == false, :[Y])'
+
+rewrite='findall(.!:[Y])'
+</code></pre>
+~~~
+

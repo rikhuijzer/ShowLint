@@ -4,20 +4,20 @@
         -     @test SL.patterns_have_valid_indexes()
         - 
         -     function apply(pat::Pattern, code::String; file_extension="jl")
-       38         test_dir = joinpath(SL.clones_dir, "test", "test")
-       19         rm(test_dir; recursive=true, force=true)
-       19         mkpath(test_dir)
+       40         test_dir = joinpath(SL.clones_dir, "test", "test")
+       20         rm(test_dir; recursive=true, force=true)
+       20         mkpath(test_dir)
         - 
-       19         code_file = joinpath(test_dir, "code.$file_extension")
-       19         open(code_file, "w") do io
+       20         code_file = joinpath(test_dir, "code.$file_extension")
+       20         open(code_file, "w") do io
         -             write(io, code)
         -         end
         -         
-       38         repo = Repo("test", "test", [SL.default])
+       40         repo = Repo("test", "test", [SL.default])
         - 
-       19         SL.apply(pat, repo; in_place=true)
+       20         SL.apply(pat, repo; in_place=true)
         - 
-       19         read(code_file, String)
+       20         read(code_file, String)
         -     end
         - 
         -     P = SL.patterns
@@ -52,4 +52,5 @@
         -     # @test unchanged(P[5], "1 * x == x)")
         -     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
         -     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
+        -     @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"
         - end

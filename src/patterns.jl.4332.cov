@@ -1,5 +1,5 @@
         - struct Pattern
-        6     id::Int
+        7     id::Int
         -     title::String
         -     tags::Vector{String}
         -     description::String
@@ -74,6 +74,16 @@
         -             rewrite :[bool] { "=" -> "!" }'
         - 
         -         rewrite=':[bool]occursin(:[a], :[b])'
+        -         """
+        -     ),
+        -     Pattern(7, "Avoid findall(x -> x == false, Y)", ["julia"],
+        -         """
+        -         Instead, use `findall(.!Y)`.
+        -         """,
+        -         """
+        -         match='findall(:[x] -> :[x] == false, :[Y])'
+        - 
+        -         rewrite='findall(.!:[Y])'
         -         """
         -     )
         - ]

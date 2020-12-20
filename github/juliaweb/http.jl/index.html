@@ -43,18 +43,7 @@
 <span style="color:inherit;"> |</span>                if prev > start
 <span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, pre</div>
 </pre> <h3 id=avoid_findfirst_in_conditional_2_hits ><a href="#avoid_findfirst_in_conditional_2_hits">Avoid findfirst in conditional ➤ 2 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Pairs.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Pairs.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function defaultbyfirst(c, item, eq = ==)
-<span style="color:inherit;"> |</span>    k = first(item)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">findfirst</span><span style="color:gray;">(x->eq(first(x), k), c)</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">!occursin</span>(x->eq(first(x), k), c)</span>
-<span style="color:inherit;"> |</span>        push!(c, item)
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    return
-<span style="color:red;">------ </span><span style="color:inherit;">test/multipart.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/multipart.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/multipart.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-35,7 +35,7</span> ============================================================
 <span style="color:inherit;"> |</span>    @testset &#34;HTTP.Multipart ensure show() works correctly&#34; begin
@@ -64,5 +53,16 @@
 <span style="color:green;">+|</span></span>        @test <span style="color:green;">occursin</span>(&#34;contenttype=\&#34;plain/text\&#34;&#34;, str)</span>
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    @testset &#34;HTTP.Multipart test constructor&#34; begin
-<span style="color:inherit;"> |</span>        @test_nowarn HTTP.Multipart(nothing, IOBuffer(&#34;some data&#34;), &#34;plain/text&#34;, &#34;&#34;, &#34;testname&#</div>
+<span style="color:inherit;"> |</span>        @test_nowarn HTTP.Multipart(nothing, IOBuffer(&#34;some data&#34;), &#34;plain/text&#34;, &#34;&#34;, &#34;testname&#34;)
+<span style="color:red;">------ </span><span style="color:inherit;">src/Pairs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Pairs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function defaultbyfirst(c, item, eq = ==)
+<span style="color:inherit;"> |</span>    k = first(item)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">findfirst</span><span style="color:gray;">(x->eq(first(x), k), c)</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!occursin</span>(x->eq(first(x), k), c)</span>
+<span style="color:inherit;"> |</span>        push!(c, item)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    re</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

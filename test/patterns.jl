@@ -52,4 +52,5 @@ import JSON
     # @test unchanged(P[5], "1 * x == x)")
     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
+    @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"
 end

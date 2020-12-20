@@ -35,7 +35,7 @@
  Any["Replace Array{T,1} with Vector{T} ➤ 69 hits", "Omit a == a and a != a ➤ 12 hits"]
  Any[]
  Any["Omit comparison with boolean constant ➤ 2 hits"]
- Any["Replace Array{T,1} with Vector{T} ➤ 18 hits", "Omit comparison with boolean constant ➤ 15 hits"]
+ Any["Replace Array{T,1} with Vector{T} ➤ 18 hits", "Omit comparison with boolean constant ➤ 15 hits", "Avoid findall(x -> x == false, Y) ➤ 2 hits"]
  Any[]
  Any[]
  Any["Avoid x -> f(x) ➤ 1 hit", "Omit comparison with boolean constant ➤ 2 hits"]

@@ -30,24 +30,6 @@
 <span style="color:green;">+|</span></span>        @test optimize(MVP.objective(prob), prob.initial_x, optimizer(alphaguess = LineSearches.InitialPrevious(), linesearch = hz)).<span style="color:green;">!</span>ls_success</span>
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/multivariate/solvers/first_order/ngmres.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/multivariate/solvers/first_order/ngmres.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
-<span style="color:inherit;"> |</span>                            prob.initial_x)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test solver.nlpreconopts.iterations == 1
-<span style="color:orange;">!|</span>    @test solver.nlpreconopts.allow_f_increases<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    defopts = Optim.default_options(solver)
-<span style="color:inherit;"> |</span>    @test defopts == Dict(:allow_f_increases => true)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-93,7 +93,7</span> ============================================================
-<span style="color:inherit;"> |</span>                            MVP.gradient(prob),
-<span style="color:inherit;"> |</span>                            prob.initial_x)
-<span style="color:inherit;"> |</span>    @test solver.nlpreconopts.iterations == 1
-<span style="color:orange;">!|</span>    @test solver.nlpreconopts.allow_f_increases<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    defopts = Optim.default_options(solver)
-<span style="color:inherit;"> |</span>    @test defopts == Dict(:allow_f_increases => true)
 <span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/l_bfgs.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/l_bfgs.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-39,7 +39,7</span> ============================================================
@@ -89,6 +71,24 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::AcceleratedGradientDescent, options, curr_time=time())
+<span style="color:red;">------ </span><span style="color:inherit;">test/multivariate/solvers/first_order/ngmres.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/multivariate/solvers/first_order/ngmres.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>                            prob.initial_x)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test solver.nlpreconopts.iterations == 1
+<span style="color:orange;">!|</span>    @test solver.nlpreconopts.allow_f_increases<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    defopts = Optim.default_options(solver)
+<span style="color:inherit;"> |</span>    @test defopts == Dict(:allow_f_increases => true)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-93,7 +93,7</span> ============================================================
+<span style="color:inherit;"> |</span>                            MVP.gradient(prob),
+<span style="color:inherit;"> |</span>                            prob.initial_x)
+<span style="color:inherit;"> |</span>    @test solver.nlpreconopts.iterations == 1
+<span style="color:orange;">!|</span>    @test solver.nlpreconopts.allow_f_increases<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    defopts = Optim.default_options(solver)
+<span style="color:inherit;"> |</span>    @test defopts == Dict(:allow_f_increases => true)
 <span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================

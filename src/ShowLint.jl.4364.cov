@@ -60,14 +60,14 @@
         - const clones_dir = joinpath(homedir(), "clones") 
         - 
         - function host_dir(repo::Repo)
-       18     host = repo.host
-       18     host_dir = startswith(host, "https://") ? host[9:end] : host
-       18     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+       19     host = repo.host
+       19     host_dir = startswith(host, "https://") ? host[9:end] : host
+       19     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
         - end
         - 
         - function target_dir(repo::Repo)
-       18     name = repo.name
-       18     joinpath(clones_dir, host_dir(repo), name) 
+       19     name = repo.name
+       19     joinpath(clones_dir, host_dir(repo), name) 
         - end
         - 
         - function page_path(repo::Repo)
@@ -95,24 +95,24 @@
         - end
         - 
         - function create_config(pat::Pattern, dir)::String
-       18     id = pat.id
-       18     toml = pat.toml
-       18     name = "p$id"
-       18     text = """
+       19     id = pat.id
+       19     toml = pat.toml
+       19     name = "p$id"
+       19     text = """
         -         [$name] 
         - 
         -         $toml
         -         """
-       18     if isdir(dir)
-      101         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+       19     if isdir(dir)
+      108         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
         -     else
         1         mkdir(dir)
         -     end
-       18     file = joinpath(dir, "$name.toml")
-       18     open(file, "w") do io
+       19     file = joinpath(dir, "$name.toml")
+       19     open(file, "w") do io
         -         write(io, text)
         -     end
-       18     name
+       19     name
         - end
         - 
         - function number_of_matches(err)
@@ -131,14 +131,14 @@
         - function apply(pat::Pattern, repo::Repo; 
         -     file_extensions="jl", in_place=false)
         - 
-       36     configs_dir = "configs"
-       18     configs_path = joinpath(project_root, "configs")
-       18     repo_path = target_dir(repo)
+       38     configs_dir = "configs"
+       19     configs_path = joinpath(project_root, "configs")
+       19     repo_path = target_dir(repo)
         - 
-       18     name = create_config(pat, configs_path)
+       19     name = create_config(pat, configs_path)
         - 
         -     # Not pretty but it works.
-       36     cmd = !in_place ? 
+       38     cmd = !in_place ? 
         -         `podman run
         -         --rm
         -         --volume $configs_path:/configs
@@ -164,23 +164,23 @@
         -         -in-place
         -         `
         - 
-       18     stdout = IOBuffer()
-       18     run(pipeline(cmd; stdout))
-       18     out = String(take!(stdout))
-       18     err = ""
-       18     function avoid_franklin_parse_errors(out)
+       19     stdout = IOBuffer()
+       19     run(pipeline(cmd; stdout))
+       19     out = String(take!(stdout))
+       19     err = ""
+       19     function avoid_franklin_parse_errors(out)
         0         out = replace(out, '`' => "&#96;")
         0         out = replace(out, '"' => "&#34;")
         0         out
         -     end
-       18     if !in_place
+       19     if !in_place
         0         out = avoid_franklin_parse_errors(out)
         0         if !isnothing(out)
         0             out = ansi2html(out)
         -         end
         0         err = read(joinpath(repo_path, "stderr.log"), String) 
         -     end
-       18     return (out, err)
+       19     return (out, err)
         - end
         - 
         - function repo_page(repo::Repo)

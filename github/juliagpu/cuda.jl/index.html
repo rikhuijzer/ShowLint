@@ -10,21 +10,6 @@
 <span style="color:inherit;"> |</span>const AbstractCuSparseMatrix{Tv} = AbstractCuSparseArray{Tv,2}
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>Base.convert(T::Type{<:AbstractCuSparseArray}, m::AbstractArray) = m isa T ? m : T(m)
-<span style="color:red;">------ </span><span style="color:inherit;">test/array.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/array.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-27,9 +27,9</span> ============================================================
-<span style="color:inherit;"> |</span>  ## compare structs without using mapreduce
-<span style="color:inherit;"> |</span>  structeq(a,b) = false
-<span style="color:inherit;"> |</span>  structeq(a::T,b::T) where T = all(field->getfield(a,field) == getfield(b,field), fieldnames(T))
-<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
-<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
-<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(</span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}, CU_NULL, 2),     </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
-<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(<span style="color:green;">CuVector</span>{Nothing}, CU_NULL, 2),     <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
-<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, (1,2)),            CuArray{Nothing,2}(CU_NULL, (1,2)))
-<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, (1,2)),   CuArray{Nothing,2}(CU_NULL, (1,2)))
-<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing,2}, CU_NULL, (1,2)), CuArray{Nothing,2}(CU_NULL, (1,2)))
 <span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-65,7 +65,7</span> ============================================================
@@ -81,6 +66,21 @@
 <span style="color:inherit;"> |</span>AnyCuMatrix{T} = AnyCuArray{T,2}
 <span style="color:inherit;"> |</span>AnyCuVecOrMat{T} = Union{AnyCuVector{T}, AnyCuMatrix{T}}
 <span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-27,9 +27,9</span> ============================================================
+<span style="color:inherit;"> |</span>  ## compare structs without using mapreduce
+<span style="color:inherit;"> |</span>  structeq(a,b) = false
+<span style="color:inherit;"> |</span>  structeq(a::T,b::T) where T = all(field->getfield(a,field) == getfield(b,field), fieldnames(T))
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(</span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}, CU_NULL, 2),     </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(<span style="color:green;">CuVector</span>{Nothing}, CU_NULL, 2),     <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, (1,2)),            CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, (1,2)),   CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing,2}, CU_NULL, (1,2)), CuArray{Nothing,2}(CU_NULL, (1,2)))
 <span style="color:red;">------ </span><span style="color:inherit;">src/texture.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/texture.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-103,7 +103,7</span> ============================================================

@@ -6,7 +6,7 @@ struct Pattern
     toml::String
 end
 
-const val_rx = raw"[\w_\[\]:\.]+"
+const val_rx = raw"[\w_\[\]:\.*+-]+"
 const fn_rx = raw"[\w_\.]+"
 
 patterns = [

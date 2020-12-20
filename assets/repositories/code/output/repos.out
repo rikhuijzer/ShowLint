@@ -255,7 +255,7 @@
 <h3><a href="https://github.com/JuliaDiff/ChainRulesCore.jl" target="_blank">JuliaDiff/ChainRulesCore.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Omit a == a and a != a ➤ 10 hits](/github/juliadiff/chainrulescore.jl/#omit_a_a_and_a_a_10_hits)
+- [Omit a == a and a != a ➤ 9 hits](/github/juliadiff/chainrulescore.jl/#omit_a_a_and_a_a_9_hits)
 ~~~
 </div>
 ~~~
@@ -311,7 +311,7 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 69 hits](/github/juliadiff/taylorseries.jl/#replace_arrayt1_with_vectort_69_hits)
-- [Omit a == a and a != a ➤ 20 hits](/github/juliadiff/taylorseries.jl/#omit_a_a_and_a_a_20_hits)
+- [Omit a == a and a != a ➤ 12 hits](/github/juliadiff/taylorseries.jl/#omit_a_a_and_a_a_12_hits)
 ~~~
 </div>
 ~~~
@@ -697,7 +697,7 @@
 - [Use ismissing ➤ 18 hits](/github/julialang/julia/#use_ismissing_18_hits)
 - [Avoid x -> f(x) ➤ 3 hits](/github/julialang/julia/#avoid_x_-_fx_3_hits)
 - [Omit comparison with boolean constant ➤ 47 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_47_hits)
-- [Omit a == a and a != a ➤ 133 hits](/github/julialang/julia/#omit_a_a_and_a_a_133_hits)
+- [Omit a == a and a != a ➤ 110 hits](/github/julialang/julia/#omit_a_a_and_a_a_110_hits)
 - [Avoid findfirst in conditional ➤ 13 hits](/github/julialang/julia/#avoid_findfirst_in_conditional_13_hits)
 ~~~
 </div>
@@ -875,7 +875,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliastats/statsmodels.jl/#replace_arrayt1_with_vectort_1_hit)
-- [Omit a == a and a != a ➤ 2 hits](/github/juliastats/statsmodels.jl/#omit_a_a_and_a_a_2_hits)
 ~~~
 </div>
 ~~~

@@ -15,18 +15,7 @@
 <span style="color:inherit;"> |</span>    @test !occursin(&#34;redirect_stdout&#34;, F.trim_stacktrace(stacktrace))
 <span style="color:inherit;"> |</s</div>
 </pre> <h3 id=avoid_x_-_fx_5_hits ><a href="#avoid_x_-_fx_5_hits">Avoid x -&gt; f&#40;x&#41; ➤ 5 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-5,8 +5,8</span> ============================================================
-<span style="color:inherit;"> |</span># And checks the behaviour is as expected.
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>F.def_GLOBAL_LXDEFS!()
-<span style="color:orange;">!|</span>cmd   = <span style="color:red;">st -> </span>F.convert_md<span style="color:red;">(st)</span>
-<span style="color:orange;">!|</span>chtml = <span style="color:red;">t -> </span>F.convert_html<span style="color:red;">(t)</span>
-<span style="color:inherit;"> |</span>conv  = st -> st |> cmd |> chtml
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>set_curpath(path) =
-<span style="color:red;">------ </span><span style="color:inherit;">src/eval/io.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/eval/io.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/eval/io.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-164,7 +164,7</span> ============================================================
 <span style="color:inherit;"> |</span>                &#34;resolve an input request with relative path: &#96;$rpath&#96;.&#34;))
@@ -37,6 +26,17 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # if nothing is found, error
 <span style="color:inherit;"> |</span>    if isnothing(k)
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-5,8 +5,8</span> ============================================================
+<span style="color:inherit;"> |</span># And checks the behaviour is as expected.
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>F.def_GLOBAL_LXDEFS!()
+<span style="color:orange;">!|</span>cmd   = <span style="color:red;">st -> </span>F.convert_md<span style="color:red;">(st)</span>
+<span style="color:orange;">!|</span>chtml = <span style="color:red;">t -> </span>F.convert_html<span style="color:red;">(t)</span>
+<span style="color:inherit;"> |</span>conv  = st -> st |> cmd |> chtml
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>set_curpath(path) =
 <span style="color:red;">------ </span><span style="color:inherit;">src/manager/dir_utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/manager/dir_utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-80,7 +80,7</span> ============================================================

@@ -199,6 +199,64 @@
 ~~~
 
 ~~~
+<h3><a href="https://github.com/JuliaStats/GLM.jl" target="_blank">JuliaStats/GLM.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliastats/glm.jl/#replace_arrayt1_with_vectort_1_hit)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaStats/HypothesisTests.jl" target="_blank">JuliaStats/HypothesisTests.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 1 hit](/github/juliastats/hypothesistests.jl/#avoid_x_-_fx_1_hit)
+- [Omit a == a and a != a ➤ 1 hit](/github/juliastats/hypothesistests.jl/#omit_a_a_and_a_a_1_hit)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaStats/Lasso.jl" target="_blank">JuliaStats/Lasso.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaStats/MixedModels.jl" target="_blank">JuliaStats/MixedModels.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Use ismissing ➤ 1 hit](/github/juliastats/mixedmodels.jl/#use_ismissing_1_hit)
+- [Omit a == a and a != a ➤ 2 hits](/github/juliastats/mixedmodels.jl/#omit_a_a_and_a_a_2_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaStats/StatsBase.jl" target="_blank">JuliaStats/StatsBase.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/juliastats/statsbase.jl/#replace_arrayt1_with_vectort_3_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaStats/StatsModels.jl" target="_blank">JuliaStats/StatsModels.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliastats/statsmodels.jl/#replace_arrayt1_with_vectort_1_hit)
+- [Avoid x -> f(x) ➤ 2 hits](/github/juliastats/statsmodels.jl/#avoid_x_-_fx_2_hits)
+- [Omit a == a and a != a ➤ 4 hits](/github/juliastats/statsmodels.jl/#omit_a_a_and_a_a_4_hits)
+~~~
+</div>
+~~~
+
+~~~
 <h3><a href="https://github.com/JuliaWeb/HTTP.jl" target="_blank">JuliaWeb/HTTP.jl</a></h3>
 <div class="repo-nav">
 ~~~
@@ -224,6 +282,45 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 2 hits](/github/sciml/differentialequations.jl/#omit_comparison_with_boolean_constant_2_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/TuringLang/AdvancedHMC.jl" target="_blank">TuringLang/AdvancedHMC.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 2 hits](/github/turinglang/advancedhmc.jl/#avoid_x_-_fx_2_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/TuringLang/Bijectors.jl" target="_blank">TuringLang/Bijectors.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 3 hits](/github/turinglang/bijectors.jl/#avoid_x_-_fx_3_hits)
+- [Omit a == a and a != a ➤ 4 hits](/github/turinglang/bijectors.jl/#omit_a_a_and_a_a_4_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/TuringLang/MCMCChains.jl" target="_blank">TuringLang/MCMCChains.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/turinglang/mcmcchains.jl/#replace_arrayt1_with_vectort_1_hit)
+- [Use ismissing ➤ 1 hit](/github/turinglang/mcmcchains.jl/#use_ismissing_1_hit)
+- [Avoid x -> f(x) ➤ 9 hits](/github/turinglang/mcmcchains.jl/#avoid_x_-_fx_9_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/TuringLang/Turing.jl" target="_blank">TuringLang/Turing.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 2 hits](/github/turinglang/turing.jl/#avoid_x_-_fx_2_hits)
 ~~~
 </div>
 ~~~
@@ -266,6 +363,24 @@
 - [Avoid x -> f(x) ➤ 1 hit](/github/fonsp/pluto.jl/#avoid_x_-_fx_1_hit)
 - [Omit comparison with boolean constant ➤ 137 hits](/github/fonsp/pluto.jl/#omit_comparison_with_boolean_constant_137_hits)
 - [Omit a == a and a != a ➤ 1 hit](/github/fonsp/pluto.jl/#omit_a_a_and_a_a_1_hit)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/fonsp/PlutoUI.jl" target="_blank">fonsp/PlutoUI.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Use ismissing ➤ 1 hit](/github/fonsp/plutoui.jl/#use_ismissing_1_hit)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/fonsp/PlutoUtils.jl" target="_blank">fonsp/PlutoUtils.jl</a></h3>
+<div class="repo-nav">
+~~~
+
 ~~~
 </div>
 ~~~

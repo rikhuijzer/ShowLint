@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/statsbase.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/odow/sddp.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -9,6 +15,24 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliadata/dataframesmeta.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/lasso.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/turinglang/mcmcchains.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/turinglang/bijectors.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -80,6 +104,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/fonsp/plutoui.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliadebug/debugger.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -146,7 +176,25 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/turinglang/advancedhmc.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliadata/dataframes.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/statsmodels.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/mixedmodels.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -194,7 +242,25 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/turinglang/turing.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/tlienart/franklintemplates.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/fonsp/plutoutils.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/glm.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -225,6 +291,12 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/patterns/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/hypothesistests.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

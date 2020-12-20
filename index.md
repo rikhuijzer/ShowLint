@@ -19,7 +19,7 @@ This website shows linting results for
 # hideall
 using ShowLint; SL = ShowLint
 n_patterns = length(SL.patterns)
-n_repositories = length(SL.repositories)
+n_repositories = length(SL.repositories())
 n_loc = SL.cloned_loc()
 pretty_n_loc = SL.prettify_loc(n_loc)
 n_loc_text = "(about $pretty_n_loc lines of code)"

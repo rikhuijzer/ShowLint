@@ -7,14 +7,15 @@ end
 any_tag(tags) = true
 default(tags) = !any(tag -> tag == "test", tags)
 
-debug = !haskey(ENV, "CI")
+const DEBUG = !haskey(ENV, "CI")
 
-repositories = debug ?
+repositories(; debug=DEBUG) = debug ?
     [
         Repo("https://github.com", "fonsp/Pluto.jl", [default]),
         Repo("https://github.com", "rikhuijzer/Codex.jl", [default])
     ] : 
     [
+        Repo("https://github.com", "FRBNY-DSGE/SMC.jl", [default]),
         Repo("https://github.com", "FluxML/MacroTools.jl", [default]),
         Repo("https://github.com", "FluxML/Metalhead.jl", [default]),
         Repo("https://github.com", "FluxML/Zygote.jl", [default]),
@@ -39,6 +40,23 @@ repositories = debug ?
         Repo("https://github.com", "JuliaDatabases/SQLite.jl", [default]),
         Repo("https://github.com", "JuliaDebug/Debugger.jl", [default]),
         Repo("https://github.com", "JuliaDebug/JuliaInterpreter.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/ChainRules.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/ChainRulesCore.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/FiniteDiff.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/FiniteDifferences.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/ForwardDiff.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/ReverseDiff.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/SparseDiffTools.jl", [default]),
+        Repo("https://github.com", "JuliaDiff/TaylorSeries.jl", [default]),
+        Repo("https://github.com", "JuliaDynamics/Agents.jl", [default]),
+        Repo("https://github.com", "JuliaDynamics/ChaosTools.jl", [default]),
+        Repo("https://github.com", "JuliaDynamics/DrWatson.jl", [default]),
+        Repo("https://github.com", "JuliaDynamics/DynamicalBilliards.jl", [default]),
+        Repo("https://github.com", "JuliaDynamics/DynamicalSystems.jl", [default]),
+        Repo("https://github.com", "JuliaDynamics/DynamicalSystemsBase.jl", [default]),
+        Repo("https://github.com", "JuliaDynamics/Entropies.jl", [default]),
+        Repo("https://github.com", "JuliaGaussianProcesses/AbstractGPs.jl", [default]),
+        Repo("https://github.com", "JuliaGaussianProcesses/KernelFunctions.jl", [default]),
         Repo("https://github.com", "JuliaIO/EzXML.jl", [default]),
         Repo("https://github.com", "JuliaIO/Formatting.jl", [default]),
         Repo("https://github.com", "JuliaIO/HDF5.jl", [default]),
@@ -95,3 +113,21 @@ repositories = debug ?
         Repo("https://github.com", "tlienart/Franklin.jl", [default]),
         Repo("https://github.com", "tlienart/FranklinTemplates.jl", [default]),
     ]
+
+function repository_names_valid()::Bool
+    names = [r.name for r in repositories(; debug=false)]
+    sorted = Base.sort(names)
+    unique_and_sorted = unique(sorted)
+    ok = names == unique_and_sorted
+    if !ok
+        if length(names) != length(unique_and_sorted)
+            error("repositories contains at least one duplicate")
+        end
+        for (actual, expected) in zip(names, unique_and_sorted)
+            if actual != expected
+                error("Repositories not ordered, expected: $expected, got: $actual")
+            end
+        end
+    end
+    ok
+end

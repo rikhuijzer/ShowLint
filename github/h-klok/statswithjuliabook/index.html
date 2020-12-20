@@ -1,0 +1,91 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>h-Klok/StatsWithJuliaBook</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/h-Klok/StatsWithJuliaBook" target=_blank >h-Klok/StatsWithJuliaBook</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a><li><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_7_hits ><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">9_chapter/ridgeRegressionCross.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">9_chapter/ridgeRegressionCross.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-19,8 +19,8</span> ============================================================
+<span style="color:inherit;"> |</span>xTrain(k) = convert(Array{Float64,2},df[trainSet(k),[:Cach, :ChMin]])
+<span style="color:inherit;"> |</span>xDev(k) = convert(Array{Float64,2},df[devSet(k),[ :Cach, :ChMin]])
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">yTrain(k) = convert(</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">},df[trainSet(k),:Perf])</span></span>
+<span style="color:green;">+|</span></span>yTrain(k) = convert(<span style="color:green;">Vector</span>{Float64},df[trainSet(k),:Perf])</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">yDev(k) = convert(</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">},df[devSet(k),:Perf])</span></span>
+<span style="color:green;">+|</span></span>yDev(k) = convert(<span style="color:green;">Vector</span>{Float64},df[devSet(k),:Perf])</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>errVals = zeros(length(lamGrid))
+<span style="color:inherit;"> |</span>for (i,lam) in enumerate(lamGrid)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-36,7 +36,7</span> ============================================================
+<span style="color:inherit;"> |</span>bestLambda = lamGrid[i]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>betaFinal = ridge(convert(Array{Float64,2},df[:,[:Cach, :ChMin]]),
+<span style="color:red;">-|</span></span><span style="color:gray;">                  convert(</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">},df[:,:Perf]),bestLambda)</span></span>
+<span style="color:green;">+|</span></span>                  convert(<span style="color:green;">Vector</span>{Float64},df[:,:Perf]),bestLambda)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>macro RR(x) return:(round.($x,digits = 3)) end
+<span style="color:inherit;"> |</span>println(&#34;Found best lambda for regularization: &#34;, bestLambda)
+<span style="color:red;">------ </span><span style="color:inherit;">9_chapter/hClustering.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">9_chapter/hClustering.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>df = dataset(&#34;cluster&#34;, &#34;xclara&#34;)
+<span style="color:inherit;"> |</span>n,_ = size(df)
+<span style="color:red;">-|</span></span><span style="color:gray;">dataPoints = [convert(</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">},df[i,:]) for i in 1:n]</span></span>
+<span style="color:green;">+|</span></span>dataPoints = [convert(<span style="color:green;">Vector</span>{Float64},df[i,:]) for i in 1:n]</span>
+<span style="color:inherit;"> |</span>shuffle!(dataPoints)
+<span style="color:inherit;"> |</span>D = [norm(pt1 - pt2) for pt1 in dataPoints, pt2 in dataPoints]
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    waitingRoom = Queue{Float64}()
+<span style="color:inherit;"> |</span>    serverBusy = false
+<span style="color:red;">-|</span></span><span style="color:gray;">    waitTimes = </span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
+<span style="color:green;">+|</span></span>    waitTimes = <span style="color:green;">Vector</span>{Float64}()</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    while t<T
+<span style="color:inherit;"> |</span>        if t == tNextArr
+<span style="color:red;">------ </span><span style="color:inherit;">9_chapter/kMeansManual.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">9_chapter/kMeansManual.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
+<span style="color:inherit;"> |</span>K = 3
+<span style="color:inherit;"> |</span>df = dataset(&#34;cluster&#34;, &#34;xclara&#34;)
+<span style="color:inherit;"> |</span>n,_ = size(df)
+<span style="color:red;">-|</span></span><span style="color:gray;">dataPoints = [convert(</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">},df[i,:]) for i in 1:n]</span></span>
+<span style="color:green;">+|</span></span>dataPoints = [convert(<span style="color:green;">Vector</span>{Float64},df[i,:]) for i in 1:n]</span>
+<span style="color:inherit;"> |</span>shuffle!(dataPoints)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>xMin,xMax = minimum(first.(dataPoints)),maximum(first.(dataPoints))
+<span style="color:red;">------ </span><span style="color:inherit;">1_chapter/lcg.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">1_chapter/lcg.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
+<span style="color:inherit;"> |</span>next(z) = (a*z + c) % m
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>N = 10^6
+<span style="color:red;">-|</span></span><span style="color:gray;">data = </span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, N)</span></span>
+<span style="color:green;">+|</span></span>data = <span style="color:green;">Vector</span>{Float64}(undef, N)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>x = 808
+<span style="color:inherit;"> |</span>for i in</div>
+</pre> <h3 id=omit_comparison_with_boolean_constant_2_hits ><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">2_chapter/fishing.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">2_chapter/fishing.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
+<span style="color:inherit;"> |</span>        for fish in 1:n
+<span style="color:inherit;"> |</span>            fished = rand(fishInPond)
+<span style="color:inherit;"> |</span>            push!(fishCaught,fished)
+<span style="color:red;">-|</span></span><span style="color:gray;">            if </span><span style="color:gray;">withReplacement</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>            if <span style="color:green;">!</span>withReplacement</span>
+<span style="color:inherit;"> |</span>                deleteat!(fishInPond, findfirst(x->x==fished, fishInPond))
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">------ </span><span style="color:inherit;">9_chapter/pretrainedMNIST.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">9_chapter/pretrainedMNIST.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>for i in 1:nTest
+<span style="color:inherit;"> |</span>    prediction = predictor(testImages[i])
+<span style="color:inherit;"> |</span>    trueLabel = testLabels[i]
+<span style="color:red;">-|</span></span><span style="color:gray;">    predictionIsCorrect = (</span><span style="color:red;">prediction == trueLabel</span><span style="color:gray;">)</span></span>
+<span style="color:green;">+|</span></span>    predictionIsCorrect = (<span style="color:green;">predictionLabel</span>)</span>
+<span style="color:inherit;"> |</span>    global nCorrect += predictionIsCorrect
+<span style="color:inherit;"> |</span>    global iC; global iR
+<span style="color:inherit;"> |</span>    if predictionIsCorrect && trueLabel =</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

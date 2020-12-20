@@ -1,0 +1,200 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGPU/AMDGPU.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGPU/AMDGPU.jl" target=_blank >JuliaGPU/AMDGPU.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_29_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 29 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_29_hits ><a href="#replace_arrayt1_with_vectort_29_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 29 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>## aliases
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">const ROCVector{T} = </span><span style="color:red;">ROCArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>const ROCVector{T} = <span style="color:green;">ROCVector</span>{T}</span>
+<span style="color:inherit;"> |</span>const ROCMatrix{T} = ROCArray{T,2}
+<span style="color:inherit;"> |</span>const ROCVecOrMat{T} = Union{ROCVector{T},ROCMatrix{T}}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-114,7 +114,7</span> ============================================================
+<span style="color:inherit;"> |</span>#ROCArray(::Type{T}, dims::Dims{N}) where {T,N} = ROCArray{T,N}(undef, dims)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># empty vector constructor
+<span style="color:red;">-|</span></span><span style="color:red;">ROCArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}() where {T} = </span><span style="color:red;">ROCArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, 0)</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">ROCVector</span>{T}() where {T} = <span style="color:green;">ROCVector</span>{T}(undef, 0)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Base.similar(a::ROCArray{T,N}) where {T,N} = ROCArray{T,N}(undef, size(a))
+<span style="color:inherit;"> |</span>Base.similar(a::ROCArray{T}, dims::Base.Dims{N}) where {T,N} = ROCArray{T,N}(undef, dims)
+<span style="color:red;">------ </span><span style="color:inherit;">src/fft/fft.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/fft/fft.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-20,7 +20,7</span> ============================================================
+<span style="color:inherit;"> |</span># K is flag for forward/inverse
+<span style="color:inherit;"> |</span>mutable struct cROCFFTPlan{T,K,inplace,N} <: ROCFFTPlan{T,K,inplace}
+<span style="color:inherit;"> |</span>    handle::rocfft_plan
+<span style="color:red;">-|</span></span><span style="color:gray;">    workarea::</span><span style="color:red;">ROCArray</span><span style="color:gray;">{Int8</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    workarea::<span style="color:green;">ROCVector</span>{Int8}</span>
+<span style="color:inherit;"> |</span>    execution_info::rocfft_execution_info
+<span style="color:inherit;"> |</span>    sz::NTuple{N,Int} # Julia size of input array
+<span style="color:inherit;"> |</span>    osz::NTuple{N,Int} # Julia size of output array
+<span style="color:inherit;">@|</span><span style="color:inherit;">-28,7 +28,7</span> ============================================================
+<span style="color:inherit;"> |</span>    region
+<span style="color:inherit;"> |</span>    pinv::ScaledPlan # required by AbstractFFTs API
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    function cROCFFTPlan{T,K,inplace,N}(handle::rocfft_plan, workarea::</span><span style="color:red;">ROCArray</span><span style="color:gray;">{Int8</span><span style="color:red;">,1</span><span style="color:gray;">}, X::ROCArray{T,N}, sizey::Tuple,</span></span>
+<span style="color:green;">+|</span></span>    function cROCFFTPlan{T,K,inplace,N}(handle::rocfft_plan, workarea::<span style="color:green;">ROCVector</span>{Int8}, X::ROCArray{T,N}, sizey::Tuple,</span>
+<span style="color:inherit;"> |</span>                                      xtype::rocfft_transform_type, region) where {T,inplace,N,K}
+<span style="color:inherit;"> |</span>        info_ref = Ref{rocfft_execution_info}()
+<span style="color:inherit;"> |</span>        rocfft_execution_info_create(info_ref)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-42,7 +42,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>mutable struct rROCFFTPlan{T,K,inplace,N} <: ROCFFTPlan{T,K,inplace}
+<span style="color:inherit;"> |</span>    handle::rocfft_plan
+<span style="color:red;">-|</span></span><span style="color:gray;">    workarea::</span><span style="color:red;">ROCArray</span><span style="color:gray;">{Int8</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    workarea::<span style="color:green;">ROCVector</span>{Int8}</span>
+<span style="color:inherit;"> |</span>    execution_info::rocfft_execution_info
+<span style="color:inherit;"> |</span>    sz::NTuple{N,Int} # Julia size of input array
+<span style="color:inherit;"> |</span>    osz::NTuple{N,Int} # Julia size of output array
+<span style="color:inherit;">@|</span><span style="color:inherit;">-50,7 +50,7</span> ============================================================
+<span style="color:inherit;"> |</span>    region
+<span style="color:inherit;"> |</span>    pinv::ScaledPlan # required by AbstractFFTs API
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    function rROCFFTPlan{T,K,inplace,N}(handle::rocfft_plan, workarea::</span><span style="color:red;">ROCArray</span><span style="color:gray;">{Int8</span><span style="color:red;">,1</span><span style="color:gray;">}, X::ROCArray{T,N}, sizey::Tuple,</span></span>
+<span style="color:green;">+|</span></span>    function rROCFFTPlan{T,K,inplace,N}(handle::rocfft_plan, workarea::<span style="color:green;">ROCVector</span>{Int8}, X::ROCArray{T,N}, sizey::Tuple,</span>
+<span style="color:inherit;"> |</span>                                      xtype::rocfft_transform_type, region) where {T,inplace,N,K}
+<span style="color:inherit;"> |</span>        info_ref = Ref{rocfft_execution_info}()
+<span style="color:inherit;"> |</span>        rocfft_execution_info_create(info_ref)
+<span style="color:red;">------ </span><span style="color:inherit;">src/blas/wrappers.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/blas/wrappers.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-939,10 +939,10</span> ============================================================
+<span style="color:inherit;"> |</span>        function gemm_batched!(transA::Char,
+<span style="color:inherit;"> |</span>                               transB::Char,
+<span style="color:inherit;"> |</span>                               alpha::($elty),
+<span style="color:red;">-|</span></span><span style="color:gray;">                               A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                               A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                               B::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                               B::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:inherit;"> |</span>                               beta::($elty),
+<span style="color:red;">-|</span></span><span style="color:gray;">                               C::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>                               C::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            if( length(A) != length(B) || length(A) != length(C) )
+<span style="color:inherit;"> |</span>                throw(DimensionMismatch(&#34;&#34;))
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-978,15 +978,15</span> ============================================================
+<span style="color:inherit;"> |</span>        function gemm_batched(transA::Char,
+<span style="color:inherit;"> |</span>                      transB::Char,
+<span style="color:inherit;"> |</span>                      alpha::($elty),
+<span style="color:red;">-|</span></span><span style="color:gray;">                      A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                      A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                      B::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>                      B::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            C = ROCMatrix{$elty}[similar( B[1], $elty, (size(A[1], transA == 'N' ? 1 : 2),size(B[1], transB == 'N' ? 2 : 1))) for i in 1:length(A)]
+<span style="color:inherit;"> |</span>            gemm_batched!(transA, transB, alpha, A, B, zero($elty), C )
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        function gemm_batched(transA::Char,
+<span style="color:inherit;"> |</span>                      transB::Char,
+<span style="color:red;">-|</span></span><span style="color:gray;">                      A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                      A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                      B::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>                      B::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            gemm_batched(transA, transB, one($elty), A, B)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1506,8 +1506,8</span> ============================================================
+<span style="color:inherit;"> |</span>                               transa::Char,
+<span style="color:inherit;"> |</span>                               diag::Char,
+<span style="color:inherit;"> |</span>                               alpha::($elty),
+<span style="color:red;">-|</span></span><span style="color:gray;">                               A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                               A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                               B::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>                               B::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            rocside = rocblasside(side)
+<span style="color:inherit;"> |</span>            rocuplo = rocblasfill(uplo)
+<span style="color:inherit;"> |</span>            roctransa = rocblasop(transa)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1541,8 +1541,8</span> ============================================================
+<span style="color:inherit;"> |</span>                              transa::Char,
+<span style="color:inherit;"> |</span>                              diag::Char,
+<span style="color:inherit;"> |</span>                              alpha::($elty),
+<span style="color:red;">-|</span></span><span style="color:gray;">                              A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                              A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                              B::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>                              B::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            trsm_batched!(side, uplo, transa, diag, alpha, A, copy(B) )
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1622,7 +1622,7</span> ============================================================
+<span style="color:inherit;"> |</span>        #   rocblas_handle handle, int n, double **A,
+<span style="color:inherit;"> |</span>        #   int lda, int *PivotArray, int *infoArray,
+<span style="color:inherit;"> |</span>        #   int batchSize)
+<span style="color:red;">-|</span></span><span style="color:gray;">        function getrf_batched!(A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>        function getrf_batched!(A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:inherit;"> |</span>                               Pivot::Bool)
+<span style="color:inherit;"> |</span>            for As in A
+<span style="color:inherit;"> |</span>                m,n = size(As)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1644,7 +1644,7</span> ============================================================
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            pivotArray, info, A
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        function getrf_batched(A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>        function getrf_batched(A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:inherit;"> |</span>                               Pivot::Bool)
+<span style="color:inherit;"> |</span>            newA = copy(A)
+<span style="color:inherit;"> |</span>            pivotarray, info = getrf_batched!(newA, Pivot)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1665,7 +1665,7</span> ============================================================
+<span style="color:inherit;"> |</span>        #   rocblas_handle handle, int n, double **A,
+<span style="color:inherit;"> |</span>        #   int lda, int *PivotArray, double **C,
+<span style="color:inherit;"> |</span>        #   int ldc, int *info, int batchSize)
+<span style="color:red;">-|</span></span><span style="color:gray;">        function getri_batched(A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>        function getri_batched(A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:inherit;"> |</span>                              pivotArray::ROCMatrix{Cint})
+<span style="color:inherit;"> |</span>            for As in A
+<span style="color:inherit;"> |</span>                m,n = size(As)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1702,7 +1702,7</span> ============================================================
+<span style="color:inherit;"> |</span>        #   rocblas_handle handle, int n, double **A,
+<span style="color:inherit;"> |</span>        #   int lda, double **C, int ldc,
+<span style="color:inherit;"> |</span>        #   int *info, int batchSize)
+<span style="color:red;">-|</span></span><span style="color:gray;">        function matinv_batched(A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>        function matinv_batched(A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            for As in A
+<span style="color:inherit;"> |</span>                m,n = size(As)
+<span style="color:inherit;"> |</span>                if m != n
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1741,12 +1741,12</span> ============================================================
+<span style="color:inherit;"> |</span>        #   rocblas_handle handle, int n, int m,
+<span style="color:inherit;"> |</span>        #   double **A, int lda, double **TauArray,
+<span style="color:inherit;"> |</span>        #   int *infoArray, int batchSize)
+<span style="color:red;">-|</span></span><span style="color:gray;">        function geqrf_batched!(A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>        function geqrf_batched!(A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            m,n = size(A[1])
+<span style="color:inherit;"> |</span>            lda = max(1,stride(A[1],2))
+<span style="color:inherit;"> |</span>            Aptrs = device_batch(A)
+<span style="color:inherit;"> |</span>            hTauArray = [zeros($elty, min(m,n)) for i in 1:length(A)]
+<span style="color:red;">-|</span></span><span style="color:gray;">            TauArray = </span><span style="color:red;">ROCArray</span><span style="color:gray;">{$elty</span><span style="color:red;">,1</span><span style="color:gray;">}[]</span></span>
+<span style="color:green;">+|</span></span>            TauArray = <span style="color:green;">ROCVector</span>{$elty}[]</span>
+<span style="color:inherit;"> |</span>            for i in 1:length(A)
+<span style="color:inherit;"> |</span>                push!(TauArray,ROCArray(hTauArray[i]))
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1762,7 +1762,7</span> ============================================================
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            TauArray, A
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        function geqrf_batched(A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>        function geqrf_batched(A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            geqrf_batched!(copy(A))
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1782,8 +1782,8</span> ============================================================
+<span style="color:inherit;"> |</span>        #   double **C, int ldc, int *infoArray,
+<span style="color:inherit;"> |</span>        #   int *devInfoArray, int batchSize)
+<span style="color:inherit;"> |</span>        function gels_batched!(trans::Char,
+<span style="color:red;">-|</span></span><span style="color:gray;">                              A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                              A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                              C::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>                              C::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            roctrans = rocblasop(trans)
+<span style="color:inherit;"> |</span>            if( length(A) != length(C) )
+<span style="color:inherit;"> |</span>                throw(DimensionMismatch(&#34;&#34;))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1818,8 +1818,8</span> ============================================================
+<span style="color:inherit;"> |</span>            A, C, infoarray
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        function gels_batched(trans::Char,
+<span style="color:red;">-|</span></span><span style="color:gray;">                             A::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>                             A::<span style="color:green;">Vector</span>{ROCMatrix{$elty}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                             C::</span><span style="color:red;">Array</span><span style="color:gray;">{ROCMatrix{$elty}</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>                             C::<span style="color:green;">Vector</span>{ROCMatrix{$elty}})</span>
+<span style="color:inherit;"> |</span>            gels_batched!(trans, copy(A), copy(C))
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span></div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,0 +1,214 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGPU/CUDA.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGPU/CUDA.jl" target=_blank >JuliaGPU/CUDA.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_20_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 20 hits</a><li><a href="#avoid_x_-_fx_7_hits">Avoid x -&gt; f&#40;x&#41; ➤ 7 hits</a><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_20_hits ><a href="#replace_arrayt1_with_vectort_20_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 20 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">lib/cusparse/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">lib/cusparse/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>using SparseArrays: nonzeroinds, dimlub
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>abstract type AbstractCuSparseArray{Tv, N} <: AbstractSparseArray{Tv, Cint, N} end
+<span style="color:red;">-|</span></span><span style="color:gray;">const AbstractCuSparseVector{Tv} = </span><span style="color:red;">AbstractCuSparseArray</span><span style="color:gray;">{Tv</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>const AbstractCuSparseVector{Tv} = <span style="color:green;">AbstractCuSparseVector</span>{Tv}</span>
+<span style="color:inherit;"> |</span>const AbstractCuSparseMatrix{Tv} = AbstractCuSparseArray{Tv,2}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Base.convert(T::Type{<:AbstractCuSparseArray}, m::AbstractArray) = m isa T ? m : T(m)
+<span style="color:red;">------ </span><span style="color:inherit;">test/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-27,9 +27,9</span> ============================================================
+<span style="color:inherit;"> |</span>  ## compare structs without using mapreduce
+<span style="color:inherit;"> |</span>  structeq(a,b) = false
+<span style="color:inherit;"> |</span>  structeq(a::T,b::T) where T = all(field->getfield(a,field) == getfield(b,field), fieldnames(T))
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(</span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}, CU_NULL, 2),     </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(<span style="color:green;">CuVector</span>{Nothing}, CU_NULL, 2),     <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, (1,2)),            CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, (1,2)),   CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing,2}, CU_NULL, (1,2)), CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-65,7 +65,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>## convenience constructors
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">CuVector{T} = </span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>CuVector{T} = <span style="color:green;">CuVector</span>{T}</span>
+<span style="color:inherit;"> |</span>CuMatrix{T} = CuArray{T,2}
+<span style="color:inherit;"> |</span>CuVecOrMat{T} = Union{CuVector{T},CuMatrix{T}}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-78,7 +78,7</span> ============================================================
+<span style="color:inherit;"> |</span>  CuArray{T}(undef, convert(Tuple{Vararg{Int}}, dims))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># empty vector constructor
+<span style="color:red;">-|</span></span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}() where {T} = </span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, 0)</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">CuVector</span>{T}() where {T} = <span style="color:green;">CuVector</span>{T}(undef, 0)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># do-block constructors
+<span style="color:inherit;"> |</span>for (ctor, tvars) in (:CuArray => (), :(CuArray{T}) => (:T,), :(CuArray{T,N}) => (:T, :N))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-128,7 +128,7</span> ============================================================
+<span style="color:inherit;"> |</span>  return xs
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function Base.unsafe_wrap(Atype::Union{Type{CuArray},Type{CuArray{T}},Type{</span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}}},</span></span>
+<span style="color:green;">+|</span></span>function Base.unsafe_wrap(Atype::Union{Type{CuArray},Type{CuArray{T}},Type{<span style="color:green;">CuVector</span>{T}}},</span>
+<span style="color:inherit;"> |</span>                          p::CuPtr{T}, dim::Integer;
+<span style="color:inherit;"> |</span>                          own::Bool=false, ctx::CuContext=context()) where {T}
+<span style="color:inherit;"> |</span>  unsafe_wrap(Atype, p, (dim,); own=own, ctx=ctx)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-159,7 +159,7</span> ============================================================
+<span style="color:inherit;"> |</span># CUDA.jl 2.0 experimented with using ReshapedArray/ReinterpretArray/SubArray,
+<span style="color:inherit;"> |</span># but that proved much too costly. TODO: revisit when we have better Base support.
+<span style="color:inherit;"> |</span>DenseCuArray{T,N} = CuArray{T,N}
+<span style="color:red;">-|</span></span><span style="color:gray;">DenseCuVector{T} = </span><span style="color:red;">DenseCuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>DenseCuVector{T} = <span style="color:green;">DenseCuVector</span>{T}</span>
+<span style="color:inherit;"> |</span>DenseCuMatrix{T} = DenseCuArray{T,2}
+<span style="color:inherit;"> |</span>DenseCuVecOrMat{T} = Union{DenseCuVector{T}, DenseCuMatrix{T}}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-168,7 +168,7</span> ============================================================
+<span style="color:inherit;"> |</span>                                            Base.AbstractCartesianIndex}}}} =
+<span style="color:inherit;"> |</span>  SubArray{T,N,<:CuArray,I}
+<span style="color:inherit;"> |</span>StridedCuArray{T,N} = Union{CuArray{T,N}, StridedSubCuArray{T,N}}
+<span style="color:red;">-|</span></span><span style="color:gray;">StridedCuVector{T} = </span><span style="color:red;">StridedCuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>StridedCuVector{T} = <span style="color:green;">StridedCuVector</span>{T}</span>
+<span style="color:inherit;"> |</span>StridedCuMatrix{T} = StridedCuArray{T,2}
+<span style="color:inherit;"> |</span>StridedCuVecOrMat{T} = Union{StridedCuVector{T}, StridedCuMatrix{T}}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-179,7 +179,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># anything that's (secretly) backed by a CuArray
+<span style="color:inherit;"> |</span>AnyCuArray{T,N} = Union{CuArray{T,N}, WrappedArray{T,N,CuArray,CuArray{T,N}}}
+<span style="color:red;">-|</span></span><span style="color:gray;">AnyCuVector{T} = </span><span style="color:red;">AnyCuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>AnyCuVector{T} = <span style="color:green;">AnyCuVector</span>{T}</span>
+<span style="color:inherit;"> |</span>AnyCuMatrix{T} = AnyCuArray{T,2}
+<span style="color:inherit;"> |</span>AnyCuVecOrMat{T} = Union{AnyCuVector{T}, AnyCuMatrix{T}}
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/texture.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/texture.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-103,7 +103,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>## memory operations
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function Base.copyto!(dst::</span><span style="color:red;">CuTextureArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, src::Union{</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, </span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}}) where {T}</span></span>
+<span style="color:green;">+|</span></span>function Base.copyto!(dst::<span style="color:green;">CuTextureVector</span>{T}, src::Union{<span style="color:green;">Vector</span>{T}, <span style="color:green;">CuVector</span>{T}}) where {T}</span>
+<span style="color:inherit;"> |</span>    size(dst) == size(src) || throw(DimensionMismatch(&#34;source and destination sizes must match&#34;))
+<span style="color:inherit;"> |</span>    Base.unsafe_copyto!(pointer(dst), pointer(src), length(dst))
+<span style="color:inherit;"> |</span>    return dst
+<span style="color:red;">------ </span><span style="color:inherit;">test/texture.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/texture.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
+<span style="color:inherit;"> |</span>    i = (blockIdx - 1) * blockDim + threadIdx
+<span style="color:inherit;"> |</span>    return i, Float32(i)
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">-|</span></span><span style="color:gray;">function kernel_texture_warp_native(dst::</span><span style="color:red;">CuDeviceArray</span><span style="color:gray;">{<:Any</span><span style="color:red;">,1</span><span style="color:gray;">}, texture::CuDeviceTexture{<:Any,1})</span></span>
+<span style="color:green;">+|</span></span>function kernel_texture_warp_native(dst::<span style="color:green;">CuDeviceVector</span>{<:Any}, texture::CuDeviceTexture{<:Any,1})</span>
+<span style="color:inherit;"> |</span>    i, u = calcpoint(blockIdx().x, blockDim().x, threadIdx().x, size(dst)[1])
+<span style="color:inherit;"> |</span>    @inbounds dst[i] = texture[u]
+<span style="color:inherit;"> |</span>    return nothing
+<span style="color:red;">------ </span><span style="color:inherit;">test/device/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/device/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,9 +21,9</span> ============================================================
+<span style="color:inherit;"> |</span>        CuDeviceArray{I}(b, dp)
+<span style="color:inherit;"> |</span>        CuDeviceArray{I}((b,), dp)
+<span style="color:inherit;"> |</span>        CuDeviceArray{I}((a,b), dp)
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">CuDeviceArray</span><span style="color:gray;">{I</span><span style="color:red;">,1</span><span style="color:gray;">}(b, dp)</span></span>
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">CuDeviceArray</span><span style="color:gray;">{I</span><span style="color:red;">,1</span><span style="color:gray;">}((b,), dp)</span></span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">CuDeviceVector</span>{I}(b, dp)</span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">CuDeviceVector</span>{I}((b,), dp)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test_throws MethodError </span><span style="color:red;">CuDeviceArray</span><span style="color:gray;">{I</span><span style="color:red;">,1</span><span style="color:gray;">}((a,b), dp)</span></span>
+<span style="color:green;">+|</span></span>        @test_throws MethodError <span style="color:green;">CuDeviceVector</span>{I}((a,b), dp)</span>
+<span style="color:inherit;"> |</span>        @test_throws MethodError CuDeviceArray{I,2}(b, dp)
+<span style="color:inherit;"> |</span>        @test_throws MethodError CuDeviceArray{I,2}((b,), dp)
+<span style="color:inherit;"> |</span>        CuDeviceArray{I,2}((a,b), dp)
+<span style="color:red;">------ </span><span style="color:inherit;">lib/cublas/wrappers.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">lib/cublas/wrappers.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1537,7 +1537,7</span> ============================================================
+<span style="color:inherit;"> |</span>            lda = max(1,stride(A[1],2))
+<span style="color:inherit;"> |</span>            Aptrs = unsafe_batch(A)
+<span style="color:inherit;"> |</span>            hTauArray = [zeros($elty, min(m,n)) for i in 1:length(A)]
+<span style="color:red;">-|</span></span><span style="color:gray;">            TauArray = </span><span style="color:red;">CuArray</span><span style="color:gray;">{$elty</span><span style="color:red;">,1</span><span style="color:gray;">}[]</span></span>
+<span style="color:green;">+|</span></span>            TauArray = <span style="color:green;">CuVector</span>{$elty}[]</span>
+<span style="color:inherit;"> |</span>            for i in 1:length(A)
+<span style="color:inherit;"> |</span>                push!(TauArray, CuArray(hTauArray[i]))
+<span style="color:inherit;"> |</span></div>
+</pre> <h3 id=avoid_x_-_fx_7_hits ><a href="#avoid_x_-_fx_7_hits">Avoid x -&gt; f&#40;x&#41; ➤ 7 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/compiler/execution.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/compiler/execution.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-167,7 +167,7</span> ============================================================
+<span style="color:inherit;"> |</span>    predicate = if VERSION >= v&#34;1.5.0-DEV.581&#34;
+<span style="color:inherit;"> |</span>        dt -> isghosttype(dt) || Core.Compiler.isconstType(dt)
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">dt -> isghosttype(dt)</span></span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">isghosttype</span></span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    to_pass = map(!predicate, sig.parameters)
+<span style="color:inherit;"> |</span>    call_t =                  Type[x[1] for x in zip(sig.parameters,  to_pass) if x[2]]
+<span style="color:red;">------ </span><span style="color:inherit;">test/device/wmma.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/device/wmma.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-172,9 +172,9</span> ============================================================
+<span style="color:inherit;"> |</span>        @test WMMA.flatten(5.0)                                                                == (5.0,)
+<span style="color:inherit;"> |</span>        @test WMMA.flatten(VecElement{Float16}(5))                                             == (Float16(5),)
+<span style="color:inherit;"> |</span>        @test WMMA.flatten(ntuple(i -> i, 8))                                                  == ntuple(i -> i, 8)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test WMMA.flatten(ntuple(i -> VecElement{Float16}(i), 8))                             == ntuple(</span><span style="color:red;">i -> Float16(i)</span><span style="color:gray;">, 8)</span></span>
+<span style="color:green;">+|</span></span>        @test WMMA.flatten(ntuple(i -> VecElement{Float16}(i), 8))                             == ntuple(<span style="color:green;">Float16</span>, 8)</span>
+<span style="color:inherit;"> |</span>        @test WMMA.flatten(ntuple(i -> ntuple(j -> (i-1) * 2 + j, 2), 8))                      == ntuple(i -> i, 2 * 8)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test WMMA.flatten(ntuple(i -> ntuple(j -> VecElement{Float16}((i-1) * 2 + j), 2), 8)) == ntuple(</span><span style="color:red;">i -> Float16(i)</span><span style="color:gray;">, 2 * 8)</span></span>
+<span style="color:green;">+|</span></span>        @test WMMA.flatten(ntuple(i -> ntuple(j -> VecElement{Float16}((i-1) * 2 + j), 2), 8)) == ntuple(<span style="color:green;">Float16</span>, 2 * 8)</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Unflattening&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-182,9 +182,9</span> ============================================================
+<span style="color:inherit;"> |</span>        @test WMMA.unflatten(Float64, (5.0,))                                                           == 5.0
+<span style="color:inherit;"> |</span>        @test WMMA.unflatten(VecElement{Float16}, (Float16(5),))                                        == VecElement{Float16}(5)
+<span style="color:inherit;"> |</span>        @test WMMA.unflatten(NTuple{8, Int64}, ntuple(i -> i, 8))                                       == ntuple(i -> i, 8)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test WMMA.unflatten(NTuple{8, VecElement{Float16}}, ntuple(</span><span style="color:red;">i -> Float16(i)</span><span style="color:gray;">, 8))                == ntuple(i -> VecElement{Float16}(i), 8)</span></span>
+<span style="color:green;">+|</span></span>        @test WMMA.unflatten(NTuple{8, VecElement{Float16}}, ntuple(<span style="color:green;">Float16</span>, 8))                == ntuple(i -> VecElement{Float16}(i), 8)</span>
+<span style="color:inherit;"> |</span>        @test WMMA.unflatten(NTuple{8, NTuple{2, Int64}}, ntuple(i -> i, 2 * 8))                        == ntuple(i -> ntuple(j -> (i-1) * 2 + j, 2), 8)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test WMMA.unflatten(NTuple{8, NTuple{2, VecElement{Float16}}}, ntuple(</span><span style="color:red;">i -> Float16(i)</span><span style="color:gray;">, 2 * 8)) == ntuple(i -> ntuple(j -> VecElement{Float16}((i-1) * 2 + j), 2), 8)</span></span>
+<span style="color:green;">+|</span></span>        @test WMMA.unflatten(NTuple{8, NTuple{2, VecElement{Float16}}}, ntuple(<span style="color:green;">Float16</span>, 2 * 8)) == ntuple(i -> ntuple(j -> VecElement{Float16}((i-1) * 2 + j), 2), 8)</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-192,8 +192,8</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Broadcasting over fragments: size=$sz, type=$ty&#34; for sz = [1, 2, 5],
+<span style="color:inherit;"> |</span>        ty = [Float16, Float32]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test ty(5) .* Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(</span><span style="color:red;">i -> ty(i)</span><span style="color:gray;">, sz)) == Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(i -> ty(5 * i), sz))</span></span>
+<span style="color:green;">+|</span></span>        @test ty(5) .* Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(<span style="color:green;">ty</span>, sz)) == Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(i -> ty(5 * i), sz))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test ty(5) .+ Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(</span><span style="color:red;">i -> ty(i)</span><span style="color:gray;">, sz)) == Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(i -> ty(5 + i), sz))</span></span>
+<span style="color:green;">+|</span></span>        @test ty(5) .+ Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(<span style="color:green;">ty</span>, sz)) == Fragment{16, 16, 16, sz, ty, RowMajor, MatrixA}(ntuple(i -> ty(5 + i), sz))</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>############################################################################</div>
+</pre> <h3 id=omit_comparison_with_boolean_constant_1_hit ><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/setup.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/setup.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-90,7 +90,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        passes,fails,error,broken,c_passes,c_fails,c_errors,c_broken =
+<span style="color:inherit;"> |</span>            Test.get_test_counts(data[1])
+<span style="color:red;">-|</span></span><span style="color:gray;">        if data[1].</span><span style="color:gray;">anynonpass</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>        if data[1].<span style="color:green;">!</span>anynonpass</span>
+<span style="color:inherit;"> |</span>            data = ((passes+c_passes,broken+c_broken),
+<span style="color:inherit;"> |</span>                    data[2],
+<span style="color:inherit;"> |</span>                    data</div>
+</pre> <h3 id=omit_a_a_and_a_a_2_hits ><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/cudadrv/module.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/cudadrv/module.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
+<span style="color:inherit;"> |</span>let
+<span style="color:inherit;"> |</span>    md = CuModuleFile(joinpath(@__DIR__, &#34;ptx/vectorops.ptx&#34;))
+<span style="color:inherit;"> |</span>    vadd = CuFunction(md, &#34;vadd&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">vadd == vadd</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test vadd != CuFunction(md, &#34;vdiv&#34;)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-43,7 +43,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;linker&#34; begin
+<span style="color:inherit;"> |</span>    link = CuLink()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">link == link</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test link != CuLink()
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # PTX</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

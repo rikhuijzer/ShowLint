@@ -31,7 +31,6 @@ println("""
 ```
 \textoutput{insert-numbers}
 
-If the linter shows useful rewrites, then use Comby to create a pull request or make the changes manually.
 If the linter shows useful rewrites, then consider making a pull request.
 For many changes, use Comby.
 All the required information to apply Comby available on this website and in Comby's documentation.

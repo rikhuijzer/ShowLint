@@ -15,6 +15,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "rikhuijzer/Codex.jl", [default])
     ] : 
     [
+        Repo("https://github.com", "Evizero/UnicodePlots.jl", [default]),
         Repo("https://github.com", "FRBNY-DSGE/SMC.jl", [default]),
         Repo("https://github.com", "FluxML/MacroTools.jl", [default]),
         Repo("https://github.com", "FluxML/Metalhead.jl", [default]),
@@ -48,6 +49,8 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaDiff/ReverseDiff.jl", [default]),
         Repo("https://github.com", "JuliaDiff/SparseDiffTools.jl", [default]),
         Repo("https://github.com", "JuliaDiff/TaylorSeries.jl", [default]),
+        Repo("https://github.com", "JuliaDocs/DocStringExtensions.jl", [default]),
+        Repo("https://github.com", "JuliaDocs/Documenter.jl", [default]),
         Repo("https://github.com", "JuliaDynamics/Agents.jl", [default]),
         Repo("https://github.com", "JuliaDynamics/ChaosTools.jl", [default]),
         Repo("https://github.com", "JuliaDynamics/DrWatson.jl", [default]),
@@ -55,8 +58,14 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaDynamics/DynamicalSystems.jl", [default]),
         Repo("https://github.com", "JuliaDynamics/DynamicalSystemsBase.jl", [default]),
         Repo("https://github.com", "JuliaDynamics/Entropies.jl", [default]),
+        Repo("https://github.com", "JuliaGPU/AMDGPU.jl", [default]),
+        Repo("https://github.com", "JuliaGPU/ArrayFire.jl", [default]),
+        Repo("https://github.com", "JuliaGPU/CUDA.jl", [default]),
+        Repo("https://github.com", "JuliaGPU/OpenCL.jl", [default]),
         Repo("https://github.com", "JuliaGaussianProcesses/AbstractGPs.jl", [default]),
         Repo("https://github.com", "JuliaGaussianProcesses/KernelFunctions.jl", [default]),
+        Repo("https://github.com", "JuliaGraphs/GraphPlot.jl", [default]),
+        Repo("https://github.com", "JuliaGraphs/LightGraphs.jl", [default]),
         Repo("https://github.com", "JuliaIO/EzXML.jl", [default]),
         Repo("https://github.com", "JuliaIO/Formatting.jl", [default]),
         Repo("https://github.com", "JuliaIO/HDF5.jl", [default]),
@@ -81,6 +90,13 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaLang/TOML.jl", [default]),
         Repo("https://github.com", "JuliaLang/Tokenize.jl", [default]),
         Repo("https://github.com", "JuliaLang/julia", [default]),
+        Repo("https://github.com", "JuliaML/LossFunctions.jl", [default]),
+        Repo("https://github.com", "JuliaML/MLDataUtils.jl", [default]),
+        Repo("https://github.com", "JuliaML/MLLabelUtils.jl", [default]),
+        Repo("https://github.com", "JuliaML/Reinforce.jl", [default]),
+        Repo("https://github.com", "JuliaNLSolvers/LsqFit.jl", [default]),
+        Repo("https://github.com", "JuliaNLSolvers/NLsolve.jl", [default]),
+        Repo("https://github.com", "JuliaNLSolvers/Optim.jl", [default]),
         Repo("https://github.com", "JuliaPlots/Makie.jl", [default]),
         Repo("https://github.com", "JuliaPlots/Plots.jl", [default]),
         Repo("https://github.com", "JuliaPy/Pandas.jl", [default]),
@@ -95,6 +111,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaStats/StatsModels.jl", [default]),
         Repo("https://github.com", "JuliaWeb/HTTP.jl", [default]),
         Repo("https://github.com", "JuliaWeb/WebSockets.jl", [default]),
+        Repo("https://github.com", "JunoLab/Weave.jl", [default]),
         Repo("https://github.com", "SciML/DifferentialEquations.jl", [default]),
         Repo("https://github.com", "TuringLang/AdvancedHMC.jl", [default]),
         Repo("https://github.com", "TuringLang/Bijectors.jl", [default]),
@@ -106,9 +123,13 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "alan-turing-institute/MLJBase.jl", [default]),
         Repo("https://github.com", "alan-turing-institute/MLJModels.jl", [default]),
         Repo("https://github.com", "alan-turing-institute/MLJTuning.jl", [default]),
+        Repo("https://github.com", "cstjean/ScikitLearn.jl", [default]),
+        Repo("https://github.com", "denizyuret/AutoGrad.jl", [default]),
         Repo("https://github.com", "fonsp/Pluto.jl", [default]),
         Repo("https://github.com", "fonsp/PlutoUI.jl", [default]),
         Repo("https://github.com", "fonsp/PlutoUtils.jl", [default]),
+        Repo("https://github.com", "h-Klok/StatsWithJuliaBook", [default]),
+        Repo("https://github.com", "joshday/OnlineStats.jl", [default]),
         Repo("https://github.com", "jrevels/Cassette.jl", [default]),
         Repo("https://github.com", "jump-dev/JuMP.jl", [default]),
         Repo("https://github.com", "odow/SDDP.jl", [default]),
@@ -124,7 +145,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "tlienart/FranklinTemplates.jl", [default]),
     ]
 
-function repository_names_valid()::Bool
+function valid_repository_names()::Bool
     names = [r.name for r in repositories(; debug=false)]
     sorted = Base.sort(names)
     unique_and_sorted = unique(sorted)

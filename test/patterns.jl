@@ -30,4 +30,6 @@ import JSON
     @test apply(P[4], "x == true") == "x"
     @test apply(P[4], "x == false") == "!x"
     @test apply(P[4], "x != false") == "!!x"
+    @test apply(P[5], "if x == x") == "if true"
+    @test apply(P[5], "x != x") == "false"
 end

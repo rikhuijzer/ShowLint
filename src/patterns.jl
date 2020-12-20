@@ -75,6 +75,16 @@ patterns = [
 
         rewrite=':[bool]occursin(:[a], :[b])'
         """
+    ),
+    Pattern(7, "Avoid findall(x -> x == false, Y)", ["julia"],
+        """
+        Instead, use `findall(.!Y)`.
+        """,
+        """
+        match='findall(:[x] -> :[x] == false, :[Y])'
+
+        rewrite='findall(.!:[Y])'
+        """
     )
 ]
 

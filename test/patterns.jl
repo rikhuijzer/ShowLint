@@ -22,6 +22,15 @@ import JSON
 
     P = SL.patterns
 
+    function unchanged(pat::Pattern, code::String)
+        result = apply(pat, code)
+        ok = result == code
+        if !ok
+            error("\"$result\" != \"$code\"")
+        end
+        return ok
+    end
+
     @test apply(P[1], "AbstractArray{Int,1}") == "AbstractVector{Int}"
     @test apply(P[2], "if x === missing") == "if ismissing(x)"
     @test apply(P[2], "x !== missing") == "!ismissing(x)"
@@ -32,4 +41,5 @@ import JSON
     @test apply(P[4], "x != false") == "!!x"
     @test apply(P[5], "if x == x") == "if true"
     @test apply(P[5], "x != x") == "false"
+    @test unchanged(P[5], "a.x == x")
 end

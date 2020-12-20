@@ -23,6 +23,9 @@ The tags below can be used to filter out patterns.
 For example, suppose a repository wants to be compatible with Julia `≥1.0`.
 Then, rewrite suggestions which only hold for Julia `≥1.2` should be hidden.
 
+Some of these patterns could be simplified by improving Comby's language definition for Julia.
+For now, I have sticked to the existing language defintion.
+
 ```julia:patterns
 # hideall
 using ShowLint

@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Pkg.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Pkg.jl" target=_blank >JuliaLang/Pkg.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a><li><a href="#omit_a_a_and_a_a_47_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 47 hits</a><li><a href="#avoid_findfirst_in_conditional_2_hits">Avoid findfirst in conditional ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_11_hits ><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Pkg.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Pkg.jl" target=_blank >JuliaLang/Pkg.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a><li><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a><li><a href="#avoid_findfirst_in_conditional_2_hits">Avoid findfirst in conditional ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_11_hits ><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/platformengines.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/platformengines.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-57,7 +57,7</span> ============================================================
@@ -94,139 +94,8 @@
 <span style="color:inherit;"> |</span>            rethrow(e)
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>        Registry.update(; io=ctx.io, force=fa</div>
-</pre> <h3 id=omit_a_a_and_a_a_47_hits ><a href="#omit_a_a_and_a_a_47_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 47 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Resolve/graphtype.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Resolve/graphtype.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-492,7 +492,7</span> ============================================================
-<span style="color:inherit;"> |</span>            @assert p1 ≠ p0
-<span style="color:inherit;"> |</span>            @assert adjdict[p1][p0] == j0
-<span style="color:inherit;"> |</span>            spp1 = spp[p1]
-<span style="color:red;">-|</span></span><span style="color:gray;">            @assert size(gmsk0[j0])</span><span style="color:red;"> == </span><span style="color:gray;">(spp1,spp0)</span></span>
-<span style="color:green;">+|</span></span>            @assert size(gmsk0[j0])<span style="color:green;">true</span>(spp1,spp0)</span>
-<span style="color:inherit;"> |</span>            j1 = adjdict0[p1]
-<span style="color:inherit;"> |</span>            gmsk1 = gmsk[p1]
-<span style="color:inherit;"> |</span>            # This assert is a bit too expensive
-<span style="color:red;">------ </span><span style="color:inherit;">test/binaryplatforms.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/binaryplatforms.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-73,15 +73,15</span> ============================================================
-<span style="color:inherit;"> |</span>        @test call_abi(Linux(:armv7l; call_abi=:eabihf)) == :eabihf
-<span style="color:inherit;"> |</span>        @test call_abi(UnknownPlatform(;call_abi=:eabihf)) === nothing
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(Windows(:i686))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;i686-w64-mingw32&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(Windows(:i686))<span style="color:green;">true</span>&#34;i686-w64-mingw32&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(Linux(:x86_64; libc=:musl))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;x86_64-linux-musl&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(Linux(:x86_64; libc=:musl))<span style="color:green;">true</span>&#34;x86_64-linux-musl&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(Linux(:armv7l; libc=:musl))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;armv7l-linux-musleabihf&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(Linux(:armv7l; libc=:musl))<span style="color:green;">true</span>&#34;armv7l-linux-musleabihf&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(Linux(:armv6l; libc=:musl, call_abi=:eabihf))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;armv6l-linux-musleabihf&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(Linux(:armv6l; libc=:musl, call_abi=:eabihf))<span style="color:green;">true</span>&#34;armv6l-linux-musleabihf&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(Linux(:x86_64))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;x86_64-linux-gnu&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(Linux(:x86_64))<span style="color:green;">true</span>&#34;x86_64-linux-gnu&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(Linux(:armv6l))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;armv6l-linux-gnueabihf&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(Linux(:armv6l))<span style="color:green;">true</span>&#34;armv6l-linux-gnueabihf&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(MacOS())</span><span style="color:red;"> == </span><span style="color:gray;">&#34;x86_64-apple-darwin14&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(MacOS())<span style="color:green;">true</span>&#34;x86_64-apple-darwin14&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(FreeBSD(:x86_64))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;x86_64-unknown-freebsd11.1&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(FreeBSD(:x86_64))<span style="color:green;">true</span>&#34;x86_64-unknown-freebsd11.1&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test triplet(FreeBSD(:i686))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;i686-unknown-freebsd11.1&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test triplet(FreeBSD(:i686))<span style="color:green;">true</span>&#34;i686-unknown-freebsd11.1&#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;Valid DL paths&#34; begin
-<span style="color:inherit;">@|</span><span style="color:inherit;">-168,18 +168,18</span> ============================================================
-<span style="color:inherit;"> |</span>        Windows(:x86_64, compiler_abi=CompilerABI(cxxstring_abi=:cxx11)) => &#34;win&#34;,
-<span style="color:inherit;"> |</span>    )
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test select_platform(platforms, Linux(:x86_64))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;linux8&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test select_platform(platforms, Linux(:x86_64))<span style="color:green;">true</span>&#34;linux8&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test select_platform(platforms, Linux(:x86_64, compiler_abi=CompilerABI(libgfortran_version=v&#34;4&#34;)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;linux7&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test select_platform(platforms, Linux(:x86_64, compiler_abi=CompilerABI(libgfortran_version=v&#34;4&#34;)))<span style="color:green;">true</span>&#34;linux7&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # Ambiguity test
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test select_platform(platforms, Linux(:aarch64))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;linux5&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test select_platform(platforms, Linux(:aarch64))<span style="color:green;">true</span>&#34;linux5&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test select_platform(platforms, Linux(:aarch64; compiler_abi=CompilerABI(libgfortran_version=v&#34;3&#34;)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;linux5&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test select_platform(platforms, Linux(:aarch64; compiler_abi=CompilerABI(libgfortran_version=v&#34;3&#34;)))<span style="color:green;">true</span>&#34;linux5&#34;</span>
-<span style="color:inherit;"> |</span>    @test select_platform(platforms, Linux(:aarch64; compiler_abi=CompilerABI(libgfortran_version=v&#34;4&#34;))) == nothing
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test select_platform(platforms, MacOS(:x86_64))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;mac4&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test select_platform(platforms, MacOS(:x86_64))<span style="color:green;">true</span>&#34;mac4&#34;</span>
-<span style="color:inherit;"> |</span>    @test select_platform(platforms, MacOS(:x86_64, compiler_abi=CompilerABI(libgfortran_version=v&#34;4&#34;))) == nothing
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test select_platform(platforms, Windows(:x86_64, compiler_abi=CompilerABI(cxxstring_abi=:cxx11)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;win&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test select_platform(platforms, Windows(:x86_64, compiler_abi=CompilerABI(cxxstring_abi=:cxx11)))<span style="color:green;">true</span>&#34;win&#34;</span>
-<span style="color:inherit;"> |</span>    @test select_platform(platforms, Windows(:x86_64, compiler_abi=CompilerABI(cxxstring_abi=:cxx03))) == nothing
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # Poor little guy
-<span style="color:red;">------ </span><span style="color:inherit;">src/REPLMode/completions.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/REPLMode/completions.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
-<span style="color:inherit;"> |</span>    shared = get(options, :shared, false)
-<span style="color:inherit;"> |</span>    if shared
-<span style="color:inherit;"> |</span>        return _shared_envs()
-<span style="color:red;">-|</span></span><span style="color:gray;">    elseif !isempty(partial) && first(partial)</span><span style="color:red;"> == '</span><span style="color:gray;">@'</span></span>
-<span style="color:green;">+|</span></span>    elseif !isempty(partial) && first(partial)<span style="color:green;">true'</span>@'</span>
-<span style="color:inherit;"> |</span>        return &#34;@&#34; .* _shared_envs()
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        return complete_local_dir(partial, i1, i2)
-<span style="color:red;">------ </span><span style="color:inherit;">test/api.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/api.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
-<span style="color:inherit;"> |</span>            close(output.in)
-<span style="color:inherit;"> |</span>            close(err.in)
-<span style="color:inherit;"> |</span>        end
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test read(err.out, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test read(err.out, String)<span style="color:green;">true</span>&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        #display(read(output.out, String))
-<span style="color:inherit;"> |</span>        Base.wait(t)
-<span style="color:inherit;"> |</span>        nothing
-<span style="color:red;">------ </span><span style="color:inherit;">src/REPLMode/argument_parsers.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/REPLMode/argument_parsers.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-64,9 +64,9</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>PackageToken(word::String)::PackageToken =
-<span style="color:red;">-|</span></span><span style="color:gray;">    first(word)</span><span style="color:red;"> == '</span><span style="color:gray;">@' ? VersionRange(word[2:end]) :</span></span>
-<span style="color:green;">+|</span></span>    first(word)<span style="color:green;">true'</span>@' ? VersionRange(word[2:end]) :</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    first(word)</span><span style="color:red;"> == '</span><span style="color:gray;">#' ? Rev(word[2:end]) :</span></span>
-<span style="color:green;">+|</span></span>    first(word)<span style="color:green;">true'</span>#' ? Rev(word[2:end]) :</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    first(word)</span><span style="color:red;"> == '</span><span style="color:gray;">:' ? Subdir(word[2:end]) :</span></span>
-<span style="color:green;">+|</span></span>    first(word)<span style="color:green;">true'</span>:' ? Subdir(word[2:end]) :</span>
-<span style="color:inherit;"> |</span>    String(word)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function parse_package_args(args::Vector{PackageToken}; add_or_dev=false)::Vector{PackageSpec}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-184,7 +184,7</span> ============================================================
-<span style="color:inherit;"> |</span>            return [x.raw]
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        x = x.raw
-<span style="color:red;">-|</span></span><span style="color:gray;">        if first(x)</span><span style="color:red;"> == '</span><span style="color:gray;">@'</span></span>
-<span style="color:green;">+|</span></span>        if first(x)<span style="color:green;">true'</span>@'</span>
-<span style="color:inherit;"> |</span>            options[:shared] = true
-<span style="color:inherit;"> |</span>            return [x[2:end]]
-<span style="color:inherit;"> |</span>        else
-<span style="color:red;">------ </span><span style="color:inherit;">src/REPLMode/REPLMode.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/REPLMode/REPLMode.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-143,7 +143,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>Base.show(io::IO, opt::Option) = print(io, &#34;--$(opt.val)&#34;, opt.argument === nothing ? &#34;&#34; : &#34;=$(opt.argument)&#34;)
-<span style="color:inherit;"> |</span>wrap_option(option::String)  = length(option) == 1 ? &#34;-$option&#34; : &#34;--$option&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">is_opt(word::AbstractString) = first(word)</span><span style="color:red;"> == '</span><span style="color:gray;">-' && word != &#34;-&#34;</span></span>
-<span style="color:green;">+|</span></span>is_opt(word::AbstractString) = first(word)<span style="color:green;">true'</span>-' && word != &#34;-&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function parse_option(word::AbstractString)::Option
-<span style="color:inherit;"> |</span>    m = match(r&#34;^(?: -([a-z]) | --([a-z]{2,})(?:\s*=\s*(\S*))? )$&#34;ix, word)
-<span style="color:red;">------ </span><span style="color:inherit;">test/artifacts.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/artifacts.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-105,7 +105,7</span> ============================================================
-<span style="color:inherit;"> |</span>        @test all(hash.bytes .== hex2bytes(known_hash))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # Test that we can look it up and that it sits in the right place
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test basename(dirname(artifact_path(hash)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;artifacts&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test basename(dirname(artifact_path(hash)))<span style="color:green;">true</span>&#34;artifacts&#34;</span>
-<span style="color:inherit;"> |</span>        @test basename(artifact_path(hash)) == known_hash
-<span style="color:inherit;"> |</span>        @test artifact_exists(hash)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/API.jl</span>
+</pre> <h3 id=omit_a_a_and_a_a_4_hits ><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/API.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/API.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-41,7 +41,7</span> ============================================================
 <span style="color:inherit;"> |</span>    return a.name == b.name && a.version == b.version && a.tree_hash == b.tree_hash &&
@@ -237,114 +106,6 @@
 <span style="color:inherit;"> |</span>        a.is_tracking_registry == b.is_tracking_registry &&
 <span style="color:inherit;"> |</span>        a.git_revision == b.git_revision && a.git_source == b.git_source &&
 <span style="color:inherit;"> |</span>        a.source == b.source && a.dependencies == b.dependencies
-<span style="color:red;">------ </span><span style="color:inherit;">test/pkg.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/pkg.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-152,7 +152,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># TODO: Should rewrite these tests not to rely on internals like field names
-<span style="color:inherit;"> |</span>@testset &#34;union, isjoinable&#34; begin
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(print, VersionRange(&#34;0-0.3.2&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;0-0.3.2&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(print, VersionRange(&#34;0-0.3.2&#34;))<span style="color:green;">true</span>&#34;0-0.3.2&#34;</span>
-<span style="color:inherit;"> |</span>    # test missing paths on union! and isjoinable
-<span style="color:inherit;"> |</span>    # there's no == for VersionBound or VersionRange
-<span style="color:inherit;"> |</span>    unified_vr = union!([VersionRange(&#34;1.5-2.8&#34;), VersionRange(&#34;2.5-3&#34;)])[1]
-<span style="color:inherit;">@|</span><span style="color:inherit;">-523,7 +523,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;printing of stdlib paths, issue #605&#34; begin
-<span style="color:inherit;"> |</span>    path = Pkg.Types.stdlib_path(&#34;Test&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test Pkg.pathrepr(path)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#96;@stdlib/Test&#96;&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test Pkg.pathrepr(path)<span style="color:green;">true</span>&#34;&#96;@stdlib/Test&#96;&#34;</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;stdlib_resolve!&#34; begin
-<span style="color:inherit;">@|</span><span style="color:inherit;">-607,7 +607,7</span> ============================================================
-<span style="color:inherit;"> |</span>@testset &#34;PkgError printing&#34; begin
-<span style="color:inherit;"> |</span>    err = PkgError(&#34;foobar&#34;)
-<span style="color:inherit;"> |</span>    @test occursin(&#34;PkgError(\&#34;foobar\&#34;)&#34;, sprint(show, err))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(showerror, err)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;foobar&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(showerror, err)<span style="color:green;">true</span>&#34;foobar&#34;</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;issue #1066: package with colliding name/uuid exists in project&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-169,7 +169,7</span> ============================================================
-<span style="color:inherit;"> |</span>        version_info === nothing && continue
-<span style="color:inherit;"> |</span>        hash′ = version_info.git_tree_sha1
-<span style="color:inherit;"> |</span>        if hash !== nothing
-<span style="color:red;">-|</span></span>            </span><span style="color:red;">hash == hash′</span><span style="color:gray;"> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span></span>
-<span style="color:green;">+|</span></span>            <span style="color:green;">true′</span> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        hash = hash′
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">test/repl.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/repl.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-333,8 +333,8</span> ============================================================
-<span style="color:inherit;"> |</span>        @test &#34;--manifest&#34; in c
-<span style="color:inherit;"> |</span>        c, r = test_complete(&#34;rem&#34;)
-<span style="color:inherit;"> |</span>        @test &#34;remove&#34; in c
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test apply_completion(&#34;rm E&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;rm Example&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test apply_completion(&#34;rm E&#34;)<span style="color:green;">true</span>&#34;rm Example&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test apply_completion(&#34;add Exampl&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;add Example&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test apply_completion(&#34;add Exampl&#34;)<span style="color:green;">true</span>&#34;add Example&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # stdlibs
-<span style="color:inherit;"> |</span>        c, r = test_complete(&#34;add Stat&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-352,15 +352,15</span> ============================================================
-<span style="color:inherit;"> |</span>        mkpath(&#34;testdir/foo/bar&#34;)
-<span style="color:inherit;"> |</span>        c, r = test_complete(&#34;add &#34;)
-<span style="color:inherit;"> |</span>        @test Sys.iswindows() ? (&#34;testdir\\\\&#34; in c) : (&#34;testdir/&#34; in c)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test apply_completion(&#34;add tes&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">(Sys.iswindows() ? &#34;add testdir\\\\&#34; : &#34;add testdir/&#34;)</span></span>
-<span style="color:green;">+|</span></span>        @test apply_completion(&#34;add tes&#34;)<span style="color:green;">true</span>(Sys.iswindows() ? &#34;add testdir\\\\&#34; : &#34;add testdir/&#34;)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test apply_completion(&#34;add ./tes&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">(Sys.iswindows() ? &#34;add ./testdir\\\\&#34; : &#34;add ./testdir/&#34;)</span></span>
-<span style="color:green;">+|</span></span>        @test apply_completion(&#34;add ./tes&#34;)<span style="color:green;">true</span>(Sys.iswindows() ? &#34;add ./testdir\\\\&#34; : &#34;add ./testdir/&#34;)</span>
-<span style="color:inherit;"> |</span>        c, r = test_complete(&#34;dev ./&#34;)
-<span style="color:inherit;"> |</span>        @test (Sys.iswindows() ? (&#34;testdir\\\\&#34; in c) : (&#34;testdir/&#34; in c))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # complete subdirs
-<span style="color:inherit;"> |</span>        c, r = test_complete(&#34;add testdir/f&#34;)
-<span style="color:inherit;"> |</span>        @test Sys.iswindows() ? (&#34;foo\\\\&#34; in c) : (&#34;foo/&#34; in c)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test apply_completion(&#34;add testdir/f&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">(Sys.iswindows() ? &#34;add testdir/foo\\\\&#34; : &#34;add testdir/foo/&#34;)</span></span>
-<span style="color:green;">+|</span></span>        @test apply_completion(&#34;add testdir/f&#34;)<span style="color:green;">true</span>(Sys.iswindows() ? &#34;add testdir/foo\\\\&#34; : &#34;add testdir/foo/&#34;)</span>
-<span style="color:inherit;"> |</span>        # dont complete files
-<span style="color:inherit;"> |</span>        touch(&#34;README.md&#34;)
-<span style="color:inherit;"> |</span>        c, r = test_complete(&#34;add RE&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-559,28 +559,28</span> ============================================================
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    with_temp_env(&#34;SomeEnv&#34;) do
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test Pkg.REPLMode.promptf()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;(SomeEnv) pkg> &#34;</span></span>
-<span style="color:green;">+|</span></span>        @test Pkg.REPLMode.promptf()<span style="color:green;">true</span>&#34;(SomeEnv) pkg> &#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    env_name = &#34;Test2&#34;
-<span style="color:inherit;"> |</span>    with_temp_env(env_name) do env_path
-<span style="color:inherit;"> |</span>        projfile_path = joinpath(env_path, &#34;Project.toml&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test Pkg.REPLMode.promptf()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;($env_name) pkg> &#34;</span></span>
-<span style="color:green;">+|</span></span>        @test Pkg.REPLMode.promptf()<span style="color:green;">true</span>&#34;($env_name) pkg> &#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        newname = &#34;NewName&#34;
-<span style="color:inherit;"> |</span>        set_name(projfile_path, newname)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test Pkg.REPLMode.promptf()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;($newname) pkg> &#34;</span></span>
-<span style="color:green;">+|</span></span>        @test Pkg.REPLMode.promptf()<span style="color:green;">true</span>&#34;($newname) pkg> &#34;</span>
-<span style="color:inherit;"> |</span>        cd(env_path) do
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test Pkg.REPLMode.promptf()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;($newname) pkg> &#34;</span></span>
-<span style="color:green;">+|</span></span>            @test Pkg.REPLMode.promptf()<span style="color:green;">true</span>&#34;($newname) pkg> &#34;</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test Pkg.REPLMode.promptf()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;($newname) pkg> &#34;</span></span>
-<span style="color:green;">+|</span></span>        @test Pkg.REPLMode.promptf()<span style="color:green;">true</span>&#34;($newname) pkg> &#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        newname = &#34;NewNameII&#34;
-<span style="color:inherit;"> |</span>        set_name(projfile_path, newname)
-<span style="color:inherit;"> |</span>        cd(env_path) do
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test Pkg.REPLMode.promptf()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;($newname) pkg> &#34;</span></span>
-<span style="color:green;">+|</span></span>            @test Pkg.REPLMode.promptf()<span style="color:green;">true</span>&#34;($newname) pkg> &#34;</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test Pkg.REPLMode.promptf()</span><span style="color:red;"> == </span><span style="color:gray;">&#34;($newname) pkg> &#34;</span></span>
-<span style="color:green;">+|</span></span>        @test Pkg.REPLMode.promptf()<span style="color:green;">true</span>&#34;($newname) pkg> &#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
@@ -367,49 +128,18 @@
 <span style="color:inherit;"> |</span>BasicSandbox.greet()
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/Versions.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Versions.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-95,7 +95,7</span> ============================================================
-<span style="color:inherit;"> |</span>function VersionBound(s::AbstractString)
-<span style="color:inherit;"> |</span>    s = strip(s)
-<span style="color:inherit;"> |</span>    s == &#34;*&#34; && return VersionBound()
-<span style="color:red;">-|</span></span><span style="color:gray;">    first(s)</span><span style="color:red;"> == 'v'</span><span style="color:gray;"> && (s = SubString(s, 2))</span></span>
-<span style="color:green;">+|</span></span>    first(s)<span style="color:green;">true'v'</span> && (s = SubString(s, 2))</span>
-<span style="color:inherit;"> |</span>    l = lastindex(s)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    p = findnext('.', s, 1)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-161,7 +161,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function Base.print(io::IO, r::VersionRange)
-<span style="color:inherit;"> |</span>    m, n = r.lower.n, r.upper.n
-<span style="color:red;">-|</span></span><span style="color:gray;">    if (m, n)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 0)</span></span>
-<span style="color:green;">+|</span></span>    if (m, n)<span style="color:green;">true</span>(0, 0)</span>
-<span style="color:inherit;"> |</span>        print(io, '*')
-<span style="color:inherit;"> |</span>    elseif m == 0
-<span style="color:inherit;"> |</span>        print(io, &#34;0-&#34;)
-<span style="color:red;">------ </span><span style="color:inherit;">src/Pkg.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Pkg.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-34,7 +34,7</span> ============================================================
-<span style="color:inherit;"> |</span>const OFFLINE_MODE = Ref(false)
-<span style="color:inherit;"> |</span>const DEFAULT_IO = Ref{IO}()
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">can_fancyprint(io::IO) = (io isa Base.TTY) && (get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;true&#34;)</span></span>
-<span style="color:green;">+|</span></span>can_fancyprint(io::IO) = (io isa Base.TTY) && (get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">false</span>&#34;true&#34;)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>include(&#34;../ext/LazilyInitializedFields/LazilyInitializedFields.jl&#34;)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>const formats = Any[
-<span style="color:inherit;"> |</span>    Documenter.HTML(
-<span style="color:red;">-|</span></span><span style="color:gray;">        prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;,</span></span>
-<span style="color:green;">+|</span></span>        prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;,</span>
-<span style="color:inherit;"> |</span>        canonical = &#34;https://julialang.github.io/Pkg.jl/v1/&#34;,
-<span style="color:inherit;"> |</span>        assets = [&#34;assets/custom.css&#34;],
+<span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-169,7 +169,7</span> ============================================================
+<span style="color:inherit;"> |</span>        version_info === nothing && continue
+<span style="color:inherit;"> |</span>        hash′ = version_info.git_tree_sha1
+<span style="color:inherit;"> |</span>        if hash !== nothing
+<span style="color:red;">-|</span></span>            </span><span style="color:red;">hash == hash′</span><span style="color:gray;"> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span></span>
+<span style="color:green;">+|</span></span>            <span style="color:green;">true′</span> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        hash = hash′
 <span style="color:inherit;"> |</span></div>
-</pre> <h3 id=avoid_findfirst_in_conditional_2_hits ><a href="#avoid_findfirst_in_conditional_2_hits">Avoid findfirst in conditional ➤ 2 hits</a></h3> <p><a href="/patterns/#7">Pattern #7</a></p> <pre>
+</pre> <h3 id=avoid_findfirst_in_conditional_2_hits ><a href="#avoid_findfirst_in_conditional_2_hits">Avoid findfirst in conditional ➤ 2 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================

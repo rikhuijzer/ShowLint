@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDiff/ForwardDiff.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDiff/ForwardDiff.jl" target=_blank >JuliaDiff/ForwardDiff.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_14_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 14 hits</a></ol></div> <h3 id=avoid_x_-_fx_1_hit ><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDiff/ForwardDiff.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDiff/ForwardDiff.jl" target=_blank >JuliaDiff/ForwardDiff.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></ol></div> <h3 id=avoid_x_-_fx_1_hit ><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/ConfusionTest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/ConfusionTest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
@@ -10,26 +10,9 @@
 <span style="color:inherit;"> |</span>    @test ForwardDiff.hessian(h, [1.]) == zeros(1, 1)
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</s</div>
-</pre> <h3 id=omit_a_a_and_a_a_14_hits ><a href="#omit_a_a_and_a_a_14_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 14 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+</pre> <h3 id=omit_a_a_and_a_a_1_hit ><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/PartialsTest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/PartialsTest.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-54,13 +54,13</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test rand(samerng(), PARTIALS) == rand(samerng(), typeof(PARTIALS))
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test ForwardDiff.iszero(PARTIALS)</span><span style="color:red;"> == </span><span style="color:gray;">(N == 0)</span></span>
-<span style="color:green;">+|</span></span>    @test ForwardDiff.iszero(PARTIALS)<span style="color:green;">true</span>(N == 0)</span>
-<span style="color:inherit;"> |</span>    @test ForwardDiff.iszero(zero(PARTIALS))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test PARTIALS == copy(PARTIALS)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test (PARTIALS == PARTIALS2)</span><span style="color:red;"> == </span><span style="color:gray;">(N == 0)</span></span>
-<span style="color:green;">+|</span></span>    @test (PARTIALS == PARTIALS2)<span style="color:green;">true</span>(N == 0)</span>
-<span style="color:inherit;"> |</span>    @test isequal(PARTIALS, copy(PARTIALS))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test isequal(PARTIALS, PARTIALS2)</span><span style="color:red;"> == </span><span style="color:gray;">(N == 0)</span></span>
-<span style="color:green;">+|</span></span>    @test isequal(PARTIALS, PARTIALS2)<span style="color:green;">true</span>(N == 0)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test hash(PARTIALS) == hash(VALUES, ForwardDiff.PARTIALS_HASH)
-<span style="color:inherit;"> |</span>    @test hash(PARTIALS) == hash(copy(PARTIALS))
 <span style="color:inherit;">@|</span><span style="color:inherit;">-108,7 +108,7</span> ============================================================
 <span style="color:inherit;"> |</span>    X = rand()
 <span style="color:inherit;"> |</span>    Y = rand()
@@ -38,74 +21,5 @@
 <span style="color:green;">+|</span></span>    @test X * <span style="color:green;">true</span> * X</span>
 <span style="color:inherit;"> |</span>    @test (X * PARTIALS).values == map(v -> X * v, VALUES)
 <span style="color:inherit;"> |</span>    @test (PARTIALS / X).values == map(v -> v / X, VALUES)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">test/DualTest.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/DualTest.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-189,11 +189,11</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test ForwardDiff.isconstant(zero(FDNUM))
-<span style="color:inherit;"> |</span>    @test ForwardDiff.isconstant(one(FDNUM))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test ForwardDiff.isconstant(FDNUM)</span><span style="color:red;"> == </span><span style="color:gray;">(N == 0)</span></span>
-<span style="color:green;">+|</span></span>    @test ForwardDiff.isconstant(FDNUM)<span style="color:green;">true</span>(N == 0)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test ForwardDiff.isconstant(zero(NESTED_FDNUM))
-<span style="color:inherit;"> |</span>    @test ForwardDiff.isconstant(one(NESTED_FDNUM))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test ForwardDiff.isconstant(NESTED_FDNUM)</span><span style="color:red;"> == </span><span style="color:gray;">(N == 0)</span></span>
-<span style="color:green;">+|</span></span>    @test ForwardDiff.isconstant(NESTED_FDNUM)<span style="color:green;">true</span>(N == 0)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test isequal(FDNUM, Dual{TestTag()}(PRIMAL, PARTIALS2))
-<span style="color:inherit;"> |</span>    @test isequal(PRIMAL, PRIMAL2) == isequal(FDNUM, FDNUM2)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-202,8 +202,8</span> ============================================================
-<span style="color:inherit;"> |</span>    @test isequal(PRIMAL, PRIMAL2) == isequal(NESTED_FDNUM, NESTED_FDNUM2)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test FDNUM == Dual{TestTag()}(PRIMAL, PARTIALS2)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test (PRIMAL == PRIMAL2)</span><span style="color:red;"> == </span><span style="color:gray;">(FDNUM == FDNUM2)</span></span>
-<span style="color:green;">+|</span></span>    @test (PRIMAL == PRIMAL2)<span style="color:green;">true</span>(FDNUM == FDNUM2)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test (PRIMAL == PRIMAL2)</span><span style="color:red;"> == </span><span style="color:gray;">(NESTED_FDNUM == NESTED_FDNUM2)</span></span>
-<span style="color:green;">+|</span></span>    @test (PRIMAL == PRIMAL2)<span style="color:green;">true</span>(NESTED_FDNUM == NESTED_FDNUM2)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test isless(Dual{TestTag()}(1, PARTIALS), Dual{TestTag()}(2, PARTIALS2))
-<span style="color:inherit;"> |</span>    @test !(isless(Dual{TestTag()}(1, PARTIALS), Dual{TestTag()}(1, PARTIALS2)))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-267,10 +267,10</span> ============================================================
-<span style="color:inherit;"> |</span>    @test isreal(NESTED_FDNUM)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test isinteger(Dual{TestTag()}(1.0, PARTIALS))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test isinteger(FDNUM)</span><span style="color:red;"> == </span><span style="color:gray;">(V == Int)</span></span>
-<span style="color:green;">+|</span></span>    @test isinteger(FDNUM)<span style="color:green;">true</span>(V == Int)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test isinteger(Dual{TestTag()}(Dual{TestTag()}(1.0, M_PARTIALS), NESTED_PARTIALS))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test isinteger(NESTED_FDNUM)</span><span style="color:red;"> == </span><span style="color:gray;">(V == Int)</span></span>
-<span style="color:green;">+|</span></span>    @test isinteger(NESTED_FDNUM)<span style="color:green;">true</span>(V == Int)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test iseven(Dual{TestTag()}(2))
-<span style="color:inherit;"> |</span>    @test !(iseven(Dual{TestTag()}(1)))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-386,7 +386,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test dual_isapprox(NESTED_FDNUM^PRIMAL, exp(PRIMAL * log(NESTED_FDNUM)))
-<span style="color:inherit;"> |</span>    @test dual_isapprox(PRIMAL^NESTED_FDNUM, exp(NESTED_FDNUM * log(PRIMAL)))
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test partials(NaNMath.pow(Dual{TestTag()}(-2.0, 1.0), Dual{TestTag()}(2.0, 0.0)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">-4.0</span></span>
-<span style="color:green;">+|</span></span>    @test partials(NaNMath.pow(Dual{TestTag()}(-2.0, 1.0), Dual{TestTag()}(2.0, 0.0)), 1)<span style="color:green;">true</span>-4.0</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    ###################################
-<span style="color:inherit;"> |</span>    # General Mathematical Operations #
-<span style="color:inherit;">@|</span><span style="color:inherit;">-413,8 +413,8</span> ============================================================
-<span style="color:inherit;"> |</span>                @eval begin
-<span style="color:inherit;"> |</span>                    x = rand() + $modifier
-<span style="color:inherit;"> |</span>                    dx = $M.$f(Dual{TestTag()}(x, one(x)))
-<span style="color:red;">-|</span></span><span style="color:gray;">                    @test value(dx)</span><span style="color:red;"> == </span><span style="color:gray;">$M.$f(x)</span></span>
-<span style="color:green;">+|</span></span>                    @test value(dx)<span style="color:green;">true</span>$M.$f(x)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">                    @test partials(dx, 1)</span><span style="color:red;"> == </span><span style="color:gray;">$deriv</span></span>
-<span style="color:green;">+|</span></span>                    @test partials(dx, 1)<span style="color:green;">true</span>$deriv</span>
-<span style="color:inherit;"> |</span>                end
-<span style="color:inherit;"> |</span>            elseif arity == 2
-<span style="color:inherit;"> |</span>                derivs = DiffRules.diffrule(M, f, :x, :y)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-424,7 +424,7</span> ============================================================
-<span style="color:inherit;"> |</span>                    dy = $M.$f(x, Dual{TestTag()}(y, one(y)))
-<span style="color:inherit;"> |</span>                    actualdx = $(derivs[1])
-<span style="color:inherit;"> |</span>                    actualdy = $(derivs[2])
-<span style="color:red;">-|</span></span><span style="color:gray;">                    @test value(dx)</span><span style="color:red;"> == </span><span style="color:gray;">$M.$f(x, y)</span></span>
-<span style="color:green;">+|</span></span>                    @test value(dx)<span style="color:green;">true</span>$M.$f(x, y)</span>
-<span style="color:inherit;"> |</span>                    @test value(dy) == value(dx)
-<span style="color:inherit;"> |</span>                    if isnan(actualdx)
-<span style="color:inherit;"> |</span>                        @test isnan(partials(dx,</div>
+<span style="color:inherit;"> |</s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

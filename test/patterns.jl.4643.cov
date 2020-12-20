@@ -4,20 +4,20 @@
         -     @test SL.patterns_have_valid_indexes()
         - 
         -     function apply(pat::Pattern, code::String; file_extension="jl")
-       42         test_dir = joinpath(SL.clones_dir, "test", "test")
-       21         rm(test_dir; recursive=true, force=true)
-       21         mkpath(test_dir)
+       36         test_dir = joinpath(SL.clones_dir, "test", "test")
+       18         rm(test_dir; recursive=true, force=true)
+       18         mkpath(test_dir)
         - 
-       21         code_file = joinpath(test_dir, "code.$file_extension")
-       21         open(code_file, "w") do io
+       18         code_file = joinpath(test_dir, "code.$file_extension")
+       18         open(code_file, "w") do io
         -             write(io, code)
         -         end
         -         
-       42         repo = Repo("test", "test", [SL.default])
+       36         repo = Repo("test", "test", [SL.default])
         - 
-       21         SL.apply(pat, repo; in_place=true)
+       18         SL.apply(pat, repo; in_place=true)
         - 
-       21         read(code_file, String)
+       18         read(code_file, String)
         -     end
         - 
         -     P = SL.patterns
@@ -47,9 +47,6 @@
         -     @test unchanged(P[5], "x == x:y")
         -     @test unchanged(P[5], "f(x) == x")
         -     @test unchanged(P[5], "f(a, x) == x)")
-        -     @test apply(P[6], "f(x) == f(x)") == "true"
-        -     @test apply(P[6], "f(x) != f(x)") == "false"
-        -     @test apply(P[6], "f(x, y) != f(x, y)") == "false"
-        -     @test apply(P[7], "findfirst(a, b) === nothing") == "!occursin(a, b)"
-        -     @test apply(P[7], "findfirst(a, b) !== nothing") == "occursin(a, b)"
+        -     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
+        -     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
         - end

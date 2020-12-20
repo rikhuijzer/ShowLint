@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaInterop/ZMQ.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaInterop/ZMQ.jl" target=_blank >JuliaInterop/ZMQ.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a><li><a href="#omit_a_a_and_a_a_12_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 12 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaInterop/ZMQ.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaInterop/ZMQ.jl" target=_blank >JuliaInterop/ZMQ.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/message.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/message.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-24,7 +24,7</span> ============================================================
@@ -29,82 +29,4 @@
 <span style="color:inherit;"> |</span>	ZMQ.send(s1, &#34;another test response&#34;)
 <span style="color:inherit;"> |</span>	wait(c)
 <span style="color:inherit;"> |</s</div>
-</pre> <h3 id=omit_a_a_and_a_a_12_hits ><a href="#omit_a_a_and_a_a_12_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 12 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-42,14 +42,14</span> ============================================================
-<span style="color:inherit;"> |</span>	@test similar(msg, UInt8, 12) isa Vector{UInt8}
-<span style="color:inherit;"> |</span>	@test copy(msg) == codeunits(&#34;test request&#34;)
-<span style="color:inherit;"> |</span>	ZMQ.send(s2, msg)
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test unsafe_string(ZMQ.recv(s1))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;test request&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test unsafe_string(ZMQ.recv(s1))<span style="color:green;">true</span>&#34;test request&#34;</span>
-<span style="color:inherit;"> |</span>	ZMQ.send(s1, Message(&#34;test response&#34;))
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test unsafe_string(ZMQ.recv(s2))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;test response&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test unsafe_string(ZMQ.recv(s2))<span style="color:green;">true</span>&#34;test response&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	ZMQ.send(s2, &#34;test request 2&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test ZMQ.recv(s1, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;test request 2&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test ZMQ.recv(s1, String)<span style="color:green;">true</span>&#34;test request 2&#34;</span>
-<span style="color:inherit;"> |</span>	ZMQ.send(s1, Vector(codeunits(&#34;test response 2&#34;)))
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test String(ZMQ.recv(s2, Vector{UInt8}))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;test response 2&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test String(ZMQ.recv(s2, Vector{UInt8}))<span style="color:green;">true</span>&#34;test response 2&#34;</span>
-<span style="color:inherit;"> |</span>	ZMQ.send(s2, 3.14159)
-<span style="color:inherit;"> |</span>	@test ZMQ.recv(s1, Float64) === 3.14159
-<span style="color:inherit;"> |</span>	ZMQ.send(s1, [314159, 12345])
-<span style="color:inherit;">@|</span><span style="color:inherit;">-63,13 +63,13</span> ============================================================
-<span style="color:inherit;"> |</span>		sleep(0.5)
-<span style="color:inherit;"> |</span>		msg_sent = true
-<span style="color:inherit;"> |</span>		ZMQ.send(s2, Message(&#34;test request&#34;))
-<span style="color:red;">-|</span></span><span style="color:gray;">		@test (unsafe_string(ZMQ.recv(s2))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;test response&#34;)</span></span>
-<span style="color:green;">+|</span></span>		@test (unsafe_string(ZMQ.recv(s2))<span style="color:green;">true</span>&#34;test response&#34;)</span>
-<span style="color:inherit;"> |</span>		notify(c)
-<span style="color:inherit;"> |</span>	end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	# This will hang forver if ZMQ blocks the entire process since
-<span style="color:inherit;"> |</span>	# we'll never switch to the other task
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test unsafe_string(ZMQ.recv(s1))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;test request&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test unsafe_string(ZMQ.recv(s1))<span style="color:green;">true</span>&#34;test request&#34;</span>
-<span style="color:inherit;"> |</span>	@test msg_sent == true
-<span style="color:inherit;"> |</span>	ZMQ.send(s1, Message(&#34;test response&#34;))
-<span style="color:inherit;"> |</span>	wait(c)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-82,10 +82,10</span> ============================================================
-<span style="color:inherit;"> |</span>		sleep(0.5)
-<span style="color:inherit;"> |</span>		msg_sent = true
-<span style="color:inherit;"> |</span>		ZMQ.send(s2, &#34;another test request&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">		@test ZMQ.recv(s2, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;another test response&#34;</span></span>
-<span style="color:green;">+|</span></span>		@test ZMQ.recv(s2, String)<span style="color:green;">true</span>&#34;another test response&#34;</span>
-<span style="color:inherit;"> |</span>		notify(c)
-<span style="color:inherit;"> |</span>	end
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test ZMQ.recv(s1, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;another test request&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test ZMQ.recv(s1, String)<span style="color:green;">true</span>&#34;another test request&#34;</span>
-<span style="color:inherit;"> |</span>	@test msg_sent == true
-<span style="color:inherit;"> |</span>	ZMQ.send(s1, &#34;another test response&#34;)
-<span style="color:inherit;"> |</span>	wait(c)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-94,12 +94,12</span> ============================================================
-<span style="color:inherit;"> |</span>	msg = ZMQ.recv(s1)
-<span style="color:inherit;"> |</span>	o=convert(IOStream, msg)
-<span style="color:inherit;"> |</span>	seek(o, 0)
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test String(take!(o))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;another test request&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test String(take!(o))<span style="color:green;">true</span>&#34;another test request&#34;</span>
-<span style="color:inherit;"> |</span>	ZMQ.send(s1) do io
-<span style="color:inherit;"> |</span>		print(io, &#34;buffer &#34;)
-<span style="color:inherit;"> |</span>		print(io, &#34;this&#34;)
-<span style="color:inherit;"> |</span>	end
-<span style="color:red;">-|</span></span><span style="color:gray;">	@test String(take!(ZMQ.recv(s2, IOBuffer)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;buffer this&#34;</span></span>
-<span style="color:green;">+|</span></span>	@test String(take!(ZMQ.recv(s2, IOBuffer)))<span style="color:green;">true</span>&#34;buffer this&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	@testset &#34;Message AbstractVector interface&#34; begin
-<span style="color:inherit;"> |</span>		m = Message(&#34;1&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-125,9 +125,9</span> ============================================================
-<span style="color:inherit;"> |</span>	    ZMQ.connect(req_socket, &#34;inproc://tester&#34;)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	    ZMQ.send(req_socket, &#34;Mr. Watson, come here, I want to see you.&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">	    @test unsafe_string(ZMQ.recv(rep_socket))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Mr. Watson, come here, I want to see you.&#34;</span></span>
-<span style="color:green;">+|</span></span>	    @test unsafe_string(ZMQ.recv(rep_socket))<span style="color:green;">true</span>&#34;Mr. Watson, come here, I want to see you.&#34;</span>
-<span style="color:inherit;"> |</span>	    ZMQ.send(rep_socket, &#34;Coming, Mr. Bell.&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">	    @test unsafe_string(ZMQ.recv(req_socket))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Coming, Mr. Bell.&#34;</span></span>
-<span style="color:green;">+|</span></span>	    @test unsafe_string(ZMQ.recv(req_socket))<span style="color:green;">true</span>&#34;Coming, Mr. Bell.&#34;</span>
-<span style="color:inherit;"> |</span>	end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	@test !ZMQ.isopen(leaked_rep_soc</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

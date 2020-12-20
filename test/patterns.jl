@@ -47,9 +47,6 @@ import JSON
     @test unchanged(P[5], "x == x:y")
     @test unchanged(P[5], "f(x) == x")
     @test unchanged(P[5], "f(a, x) == x)")
-    @test apply(P[6], "f(x) == f(x)") == "true"
-    @test apply(P[6], "f(x) != f(x)") == "false"
-    @test apply(P[6], "f(x, y) != f(x, y)") == "false"
-    @test apply(P[7], "findfirst(a, b) === nothing") == "!occursin(a, b)"
-    @test apply(P[7], "findfirst(a, b) !== nothing") == "occursin(a, b)"
+    @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
+    @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
 end

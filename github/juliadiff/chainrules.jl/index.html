@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDiff/ChainRules.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDiff/ChainRules.jl" target=_blank >JuliaDiff/ChainRules.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a><li><a href="#omit_a_a_and_a_a_7_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 7 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDiff/ChainRules.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDiff/ChainRules.jl" target=_blank >JuliaDiff/ChainRules.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/rulesets/Base/nondiff.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/rulesets/Base/nondiff.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-135,7 +135,7</span> ============================================================
@@ -28,55 +28,4 @@
 <span style="color:inherit;"> |</span>@non_differentiable success(::Base.Process)
 <span style="color:inherit;"> |</span>@non_differentiable success(::Base.ProcessChain)
 <span style="color:inherit;"> |</span>@non_differentiable supertype(::</div>
-</pre> <h3 id=omit_a_a_and_a_a_7_hits ><a href="#omit_a_a_and_a_a_7_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 7 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/rulesets/LinearAlgebra/structured.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/rulesets/LinearAlgebra/structured.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-29,9 +29,9</span> ============================================================
-<span style="color:inherit;"> |</span>        # TODO: replace this with a &#96;rrule_test&#96; once we have that working
-<span style="color:inherit;"> |</span>        # see https://github.com/JuliaDiff/ChainRulesTestUtils.jl/issues/24
-<span style="color:inherit;"> |</span>        res, pb = rrule(Diagonal, [1, 4])
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test pb(10*res)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, [10, 40])</span></span>
-<span style="color:green;">+|</span></span>        @test pb(10*res)<span style="color:green;">true</span>(NO_FIELDS, [10, 40])</span>
-<span style="color:inherit;"> |</span>        comp = Composite{typeof(res)}(; diag=10*res.diag)  # this is the structure of Diagonal
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test pb(comp)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, [10, 40])</span></span>
-<span style="color:green;">+|</span></span>        @test pb(comp)<span style="color:green;">true</span>(NO_FIELDS, [10, 40])</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    @testset &#34;dot(x, ::Diagonal, y)&#34; begin
-<span style="color:inherit;"> |</span>        N = 4
-<span style="color:red;">------ </span><span style="color:inherit;">test/rulesets/Base/fastmath_able.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/rulesets/Base/fastmath_able.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-22,9 +22,9</span> ============================================================
-<span style="color:inherit;"> |</span>    v = float([real(z)
-<span style="color:inherit;"> |</span>               imag(z)])
-<span style="color:inherit;"> |</span>    j = jacobian(central_fdm(5,1), fR2, v)[1]
-<span style="color:red;">-|</span></span><span style="color:gray;">    if size(j)</span><span style="color:red;"> == </span><span style="color:gray;">(2,2)</span></span>
-<span style="color:green;">+|</span></span>    if size(j)<span style="color:green;">true</span>(2,2)</span>
-<span style="color:inherit;"> |</span>        j
-<span style="color:red;">-|</span></span><span style="color:gray;">    elseif size(j)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 2)</span></span>
-<span style="color:green;">+|</span></span>    elseif size(j)<span style="color:green;">true</span>(1, 2)</span>
-<span style="color:inherit;"> |</span>        [j
-<span style="color:inherit;"> |</span>         false false]
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">------ </span><span style="color:inherit;">test/rulesets/LinearAlgebra/norm.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/rulesets/LinearAlgebra/norm.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-122,7 +122,7</span> ============================================================
-<span style="color:inherit;"> |</span>            frule_test(norm, (x, ẋ), (p, ṗ))
-<span style="color:inherit;"> |</span>            rrule_test(norm, ȳ, (x, x̄), (p, p̄))
-<span style="color:inherit;"> |</span>            _, back = rrule(norm, x, p)
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test back(Zero())</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, Zero(), Zero())</span></span>
-<span style="color:green;">+|</span></span>            @test back(Zero())<span style="color:green;">true</span>(NO_FIELDS, Zero(), Zero())</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        @testset &#34;p = 0&#34; begin
-<span style="color:inherit;"> |</span>            p = 0.0
-<span style="color:inherit;">@|</span><span style="color:inherit;">-135,8 +135,8</span> ============================================================
-<span style="color:inherit;"> |</span>            @test iszero(ẏ)
-<span style="color:inherit;"> |</span>            y_rev, back = rrule(norm, x, p)
-<span style="color:inherit;"> |</span>            @test y_rev == y
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test back(ȳ)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, zero(x), Zero())</span></span>
-<span style="color:green;">+|</span></span>            @test back(ȳ)<span style="color:green;">true</span>(NO_FIELDS, zero(x), Zero())</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test back(Zero())</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, Zero(), Zero())</span></span>
-<span style="color:green;">+|</span></span>            @test back(Zero())<span style="color:green;">true</span>(NO_FIELDS, Zero(), Zero())</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

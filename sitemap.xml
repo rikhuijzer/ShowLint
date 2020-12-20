@@ -86,6 +86,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaio/hdf5.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/timholy/revise.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -99,6 +105,12 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/distributions.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaio/jld.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -200,6 +212,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaio/videoio.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/repositories/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -260,6 +278,18 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaio/mat.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaio/ezxml.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/glm.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -297,6 +327,12 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliastats/hypothesistests.jl/index.html</loc>
+    <lastmod>2020-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaio/formatting.jl/index.html</loc>
     <lastmod>2020-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

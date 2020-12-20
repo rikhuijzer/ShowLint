@@ -1,27 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>rikhuijzer/Codex.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/rikhuijzer/Codex.jl" target=_blank >rikhuijzer/Codex.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_12_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 12 hits</a><li><a href="#use_ismissing_3_hits">Use ismissing ➤ 3 hits</a><li><a href="#avoid_x_-_fx_3_hits">Avoid x -&gt; f&#40;x&#41; ➤ 3 hits</a><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_12_hits ><a href="#replace_arrayt1_with_vectort_12_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 12 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
-<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
-<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
-<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
-<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
-<span style="color:red;">------ </span><span style="color:inherit;">src/df-transformations.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/df-transformations.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
-<span style="color:inherit;"> |</span>Let &#96;o&#96; be an &#96;ordering::Ordering&#96;.
-<span style="color:inherit;"> |</span>Enforces that the columns &#96;o.col&#96; of &#96;df&#96; are ordered according to &#96;o.newlevels&#96; if &#96;o.newlevels&#96; is not &#96;missing&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function order_with(df::DataFrame, orderings::</span><span style="color:red;">Array</span><span style="color:gray;">{Ordering</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
-<span style="color:green;">+|</span></span>function order_with(df::DataFrame, orderings::<span style="color:green;">Vector</span>{Ordering})::DataFrame</span>
-<span style="color:inherit;"> |</span>    df = DataFrame(df)
-<span style="color:inherit;"> |</span>    for o in orderings
-<span style="color:inherit;"> |</span>        if o.newlevels != nothing
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-15,19 +15,19</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -70,7 +48,29 @@
 <span style="color:green;">+|</span></span>function join_questionnaires(raw_dir::String, questionnaires::<span style="color:green;">Vector</span>{String}, groups::<span style="color:green;">Vector</span>{String})::DataFrame</span>
 <span style="color:inherit;"> |</span>    function prepare_responses(q::String)::DataFrame
 <span style="color:inherit;"> |</span>        df = first_measurement(raw_dir, q)
-<span style="color:inherit;"> |</span>        filter!(:group => x -> x in groups,</div>
+<span style="color:inherit;"> |</span>        filter!(:group => x -> x in groups, df)
+<span style="color:red;">------ </span><span style="color:inherit;">src/df-transformations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/df-transformations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
+<span style="color:inherit;"> |</span>Let &#96;o&#96; be an &#96;ordering::Ordering&#96;.
+<span style="color:inherit;"> |</span>Enforces that the columns &#96;o.col&#96; of &#96;df&#96; are ordered according to &#96;o.newlevels&#96; if &#96;o.newlevels&#96; is not &#96;missing&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function order_with(df::DataFrame, orderings::</span><span style="color:red;">Array</span><span style="color:gray;">{Ordering</span><span style="color:red;">,1</span><span style="color:gray;">})::DataFrame</span></span>
+<span style="color:green;">+|</span></span>function order_with(df::DataFrame, orderings::<span style="color:green;">Vector</span>{Ordering})::DataFrame</span>
+<span style="color:inherit;"> |</span>    df = DataFrame(df)
+<span style="color:inherit;"> |</span>    for o in orderings
+<span style="color:inherit;"> |</span>        if o.newlevels != nothing
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
+<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
+<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
+<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
+<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(doma</div>
 </pre> <h3 id=use_ismissing_3_hits ><a href="#use_ismissing_3_hits">Use ismissing ➤ 3 hits</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
@@ -104,17 +104,7 @@
 <span style="color:inherit;"> |</span>        else  
 <span style="color:inherit;"> |</span>            contains(value, _description_regex</div>
 </pre> <h3 id=avoid_x_-_fx_3_hits ><a href="#avoid_x_-_fx_3_hits">Avoid x -&gt; f&#40;x&#41; ➤ 3 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:orange;">!|</span>categorical2simple(A) = map(x <span style="color:red;">-> x </span>=== missing ? missing : get<span style="color:red;">(x)</span>, A)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    dirparent(path)::String
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-131,8 +131,8</span> ============================================================
 <span style="color:inherit;"> |</span>	answers(row::Number, facet::String) = map(question -> answer(lima_digits, row, question), facets[facet])
@@ -126,7 +116,17 @@
 <span style="color:green;">+|</span></span>	get_facets(domain::Char)::Array{String,1} = filter(<span style="color:green;">string</span>[1] == domain, collect(keys(facets)))</span>
 <span style="color:inherit;"> |</span>	
 <span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
-<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(doma</div>
+<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
+<span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:orange;">!|</span>categorical2simple(A) = map(x <span style="color:red;">-> x </span>=== missing ? missing : get<span style="color:red;">(x)</span>, A)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    dirparent(path)::St</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_1_hit ><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/gitlab.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/gitlab.jl</span>

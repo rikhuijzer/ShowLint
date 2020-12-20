@@ -11,17 +11,7 @@
 <span style="color:inherit;"> |</span>})
 <span style="color:inherit;"> |</span>@test !hasmetadata(result,</div>
 </pre> <h3 id=avoid_x_-_fx_4_hits ><a href="#avoid_x_-_fx_4_hits">Avoid x -&gt; f&#40;x&#41; ➤ 4 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/misctests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/misctests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-220,7 +220,7</span> ============================================================
-<span style="color:inherit;"> |</span>x = rand(30)
-<span style="color:inherit;"> |</span>sin_kernel(i) = i > 0.5 ? sin(i) : i
-<span style="color:inherit;"> |</span>y = @inferred(overdub(PassFallbackCtx(pass=fallbackpass), sum, sin_kernel, x))
-<span style="color:orange;">!|</span>@test sum(i <span style="color:red;">-> i </span>> 0.5 ? cos<span style="color:red;">(i)</span> : i, x) === y
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>println(&#34;done (took &#34;, time() - before_time, &#34; seconds)&#34;)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/overdub.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/overdub.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/overdub.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-61,7 +61,7</span> ============================================================
 <span style="color:inherit;"> |</span>    # assumption holds true for essentially all other kinds of values. I haven't counted in
@@ -31,6 +21,16 @@
 <span style="color:inherit;"> |</span>    (S.parameters[1]::DataType).name.module === Core.Compiler && return nothing
 <span style="color:inherit;"> |</span>    _methods = Base._methods_by_ftype(S, -1, world)
 <span style="color:inherit;"> |</span>    method_index = 0
+<span style="color:red;">------ </span><span style="color:inherit;">test/misctests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/misctests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-220,7 +220,7</span> ============================================================
+<span style="color:inherit;"> |</span>x = rand(30)
+<span style="color:inherit;"> |</span>sin_kernel(i) = i > 0.5 ? sin(i) : i
+<span style="color:inherit;"> |</span>y = @inferred(overdub(PassFallbackCtx(pass=fallbackpass), sum, sin_kernel, x))
+<span style="color:orange;">!|</span>@test sum(i <span style="color:red;">-> i </span>> 0.5 ? cos<span style="color:red;">(i)</span> : i, x) === y
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>println(&#34;done (took &#34;, time() - before_time, &#34; seconds)&#34;)
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-464,11 +464,11</span> ============================================================

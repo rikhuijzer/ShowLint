@@ -7,7 +7,8 @@ end
 any_tag(tags) = true
 default(tags) = !any(tag -> tag == "test", tags)
 
-debug = !haskey(ENV, "CI")
+debug = false
+# debug = !haskey(ENV, "CI")
 
 repositories = debug ?
     [
@@ -26,6 +27,12 @@ repositories = debug ?
         Repo("https://github.com", "JuliaData/YAML.jl", [default]),
         Repo("https://github.com", "JuliaDatabases/Redis.jl", [default]),
         Repo("https://github.com", "JuliaDebug/Debugger.jl", [default]),
+        Repo("https://github.com", "JuliaIO/EzXML.jl", [default]),
+        Repo("https://github.com", "JuliaIO/Formatting.jl", [default]),
+        Repo("https://github.com", "JuliaIO/HDF5.jl", [default]),
+        Repo("https://github.com", "JuliaIO/JLD.jl", [default]),
+        Repo("https://github.com", "JuliaIO/MAT.jl", [default]),
+        Repo("https://github.com", "JuliaIO/VideoIO.jl", [default]),
         Repo("https://github.com", "JuliaImages/Images.jl", [default]),
         Repo("https://github.com", "JuliaLang/IJulia.jl", [default]),
         Repo("https://github.com", "JuliaLang/PackageCompiler.jl", [default]),

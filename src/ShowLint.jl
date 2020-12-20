@@ -276,14 +276,32 @@ function create_repo_pages()
 end
 
 """
-    toc(repo::Repo)
+    cloned_loc(dir=clones_dir, extension=".jl")
 
-Copy the table of contents from the generated repo page.
-This is a bit of a hacky way to pass the number of matches
-per pattern per repository. 
+Counts the number of lines of codes in files with `extension` in
+`dir`.
+This count includes comments.
 """
-function toc(repo::Repo)
-    pages_headers = 1
+function cloned_loc(extension=".jl")
+    counts = []
+    
+    function count_file(path)::Int
+        open(path, "r") do io
+            return countlines(io)
+        end
+    end
+
+    for (root, dirs, files) in walkdir(clones_dir)
+        for file in files
+            ext = last(splitext(file))
+            if ext == extension 
+                path = joinpath(root, file)
+                count = count_file(path)
+                push!(counts, count)
+            end
+        end
+    end
+    sum(counts)
 end
 
 end # module

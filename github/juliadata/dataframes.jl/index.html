@@ -1,16 +1,5 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/DataFrames.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=juliadatadataframesjl ><a href="#juliadatadataframesjl">JuliaData/DataFrames.jl</a></h1> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a></ol></div> <h3 id=avoid_x_-_fx_71_hits ><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-124,7 +124,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#96;&#96;&#96;
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function stack(df::AbstractDataFrame,
-<span style="color:red;">-|</span></span><span style="color:gray;">               measure_vars = findall(</span><span style="color:red;">col -> eltype(col)</span><span style="color:gray;"> <: Union{AbstractFloat, Missing},</span></span>
-<span style="color:green;">+|</span></span>               measure_vars = findall(<span style="color:green;">eltype</span> <: Union{AbstractFloat, Missing},</span>
-<span style="color:inherit;"> |</span>                                      eachcol(df)),
-<span style="color:inherit;"> |</span>               id_vars = Not(measure_vars);
-<span style="color:inherit;"> |</span>               variable_name::SymbolOrString=:variable,
-<span style="color:red;">------ </span><span style="color:inherit;">test/iteration.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaData/DataFrames.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaData/DataFrames.jl" target=_blank >JuliaData/DataFrames.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a></ol></div> <h3 id=avoid_x_-_fx_71_hits ><a href="#avoid_x_-_fx_71_hits">Avoid x -&gt; f&#40;x&#41; ➤ 71 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/iteration.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/iteration.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-171,23 +171,23</span> ============================================================
 <span style="color:inherit;"> |</span>    @test findall(row -> row.a == 1, rows) == [1, 3]
@@ -53,6 +42,17 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>end # module
+<span style="color:red;">------ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/abstractdataframe/reshape.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-124,7 +124,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#96;&#96;&#96;
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function stack(df::AbstractDataFrame,
+<span style="color:red;">-|</span></span><span style="color:gray;">               measure_vars = findall(</span><span style="color:red;">col -> eltype(col)</span><span style="color:gray;"> <: Union{AbstractFloat, Missing},</span></span>
+<span style="color:green;">+|</span></span>               measure_vars = findall(<span style="color:green;">eltype</span> <: Union{AbstractFloat, Missing},</span>
+<span style="color:inherit;"> |</span>                                      eachcol(df)),
+<span style="color:inherit;"> |</span>               id_vars = Not(measure_vars);
+<span style="color:inherit;"> |</span>               variable_name::SymbolOrString=:variable,
 <span style="color:red;">------ </span><span style="color:inherit;">src/abstractdataframe/abstractdataframe.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/abstractdataframe/abstractdataframe.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1029,7 +1029,7</span> ============================================================
@@ -84,27 +84,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @test_throws ArgumentError combine(dfv, AsTable(:) => identity)
 <span style="color:inherit;"> |</span>    @test combine(dfv, AsTable(:) => identity => AsTable) == dfv
-<span style="color:red;">------ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-37,8 +37,8</span> ============================================================
-<span style="color:inherit;"> |</span>            push!(cs_vec, p)
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:orange;">!|</span>    if any(x <span style="color:red;">-> x </span>isa Pair && first<span style="color:red;">(x)</span> isa Tuple, cs_vec)
-<span style="color:red;">-|</span></span><span style="color:gray;">        x = cs_vec[findfirst(</span><span style="color:red;">x -> first(x)</span><span style="color:gray;"> isa Tuple, cs_vec)]</span></span>
-<span style="color:green;">+|</span></span>        x = cs_vec[findfirst(<span style="color:green;">first</span> isa Tuple, cs_vec)]</span>
-<span style="color:inherit;"> |</span>        # an explicit error is thrown as this was allowed in the past
-<span style="color:inherit;"> |</span>        throw(ArgumentError(&#34;passing a Tuple $(first(x)) as column selector is not &#34; *
-<span style="color:inherit;"> |</span>                            &#34;supported, use a vector $(collect(first(x))) instead&#34;))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-615,7 +615,7</span> ============================================================
-<span style="color:inherit;"> |</span>    nms = Symbol[x.name for x in trans_res]
-<span style="color:inherit;"> |</span>    # this check is redundant given we check idx above
-<span style="color:inherit;"> |</span>    # but it is safer to double check and it is cheap
-<span style="color:red;">-|</span></span><span style="color:gray;">    @assert all(</span><span style="color:red;">x -> length(x)</span><span style="color:gray;"> == length(outcols[1]), outcols)</span></span>
-<span style="color:green;">+|</span></span>    @assert all(<span style="color:green;">length</span> == length(outcols[1]), outcols)</span>
-<span style="color:inherit;"> |</span>    return idx, DataFrame(outcols, nms, copycols=false)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-765,7 +765,7</span> ============================================================
@@ -403,6 +382,27 @@
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/groupeddataframe/splitapplycombine.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-37,8 +37,8</span> ============================================================
+<span style="color:inherit;"> |</span>            push!(cs_vec, p)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:orange;">!|</span>    if any(x <span style="color:red;">-> x </span>isa Pair && first<span style="color:red;">(x)</span> isa Tuple, cs_vec)
+<span style="color:red;">-|</span></span><span style="color:gray;">        x = cs_vec[findfirst(</span><span style="color:red;">x -> first(x)</span><span style="color:gray;"> isa Tuple, cs_vec)]</span></span>
+<span style="color:green;">+|</span></span>        x = cs_vec[findfirst(<span style="color:green;">first</span> isa Tuple, cs_vec)]</span>
+<span style="color:inherit;"> |</span>        # an explicit error is thrown as this was allowed in the past
+<span style="color:inherit;"> |</span>        throw(ArgumentError(&#34;passing a Tuple $(first(x)) as column selector is not &#34; *
+<span style="color:inherit;"> |</span>                            &#34;supported, use a vector $(collect(first(x))) instead&#34;))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-615,7 +615,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nms = Symbol[x.name for x in trans_res]
+<span style="color:inherit;"> |</span>    # this check is redundant given we check idx above
+<span style="color:inherit;"> |</span>    # but it is safer to double check and it is cheap
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert all(</span><span style="color:red;">x -> length(x)</span><span style="color:gray;"> == length(outcols[1]), outcols)</span></span>
+<span style="color:green;">+|</span></span>    @assert all(<span style="color:green;">length</span> == length(outcols[1]), outcols)</span>
+<span style="color:inherit;"> |</span>    return idx, DataFrame(outcols, nms, copycols=false)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">src/dataframerow/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/dataframerow/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-168,7 +168,7</span> ============================================================

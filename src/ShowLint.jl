@@ -183,8 +183,11 @@ end
 function repo_page(repo::Repo)
     predicates_str = join(repo.tags_predicates, " && ")
     headers = []
+    repo_url = joinpath(repo.host, repo.name)
     head = """
-        # $(repo.name)
+        ~~~
+        <h1><a href="$repo_url" target="_blank">$(repo.name)</a></h1>
+        ~~~
 
         Showing patterns for which the `tags` satisfy:
         *$predicates_str*, and the pattern resulted in at least one match.

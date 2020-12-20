@@ -18,7 +18,6 @@ repositories = debug ?
         Repo("https://github.com", "FluxML/MacroTools.jl", [default]),
         Repo("https://github.com", "FluxML/Metalhead.jl", [default]),
         Repo("https://github.com", "FluxML/Zygote.jl", [default]),
-        Repo("https://github.com", "FluxML/model-zoo.jl", [default]),
         Repo("https://github.com", "GiovineItalia/Compose.jl", [default]),
         Repo("https://github.com", "GiovineItalia/Gadfly.jl", [default]),
         Repo("https://github.com", "JuliaCollections/AbstractTrees.jl", [default]),

@@ -3,7 +3,7 @@
 using ShowLint
 SL = ShowLint
 
-for (repo, headers) in zip(repositories, pages_headers)
+for (repo, headers) in zip(repositories(), pages_headers)
   path = SL.page_path(repo)
   url = "/" * first(splitext(path))
   link_text = repo.name

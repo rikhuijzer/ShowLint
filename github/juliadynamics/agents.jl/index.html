@@ -10,6 +10,19 @@
 <span style="color:inherit;"> |</span>    for (ind, peak) in enumerate(sugar_peaks)
 <span style="color:inherit;"> |</span>        d = round(Int, sqrt(sum((pos .- peak) .^ 2)))
 <span style="color:inherit;"> |</span>        all_dists[ind] = d
+<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,8 +21,8</span> ============================================================
+<span style="color:inherit;"> |</span>    id::Int
+<span style="color:inherit;"> |</span>    pos::Tuple{Int,Int}
+<span style="color:inherit;"> |</span>    stabilized::Bool
+<span style="color:red;">-|</span></span><span style="color:gray;">    opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    opinion::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    prev_opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    prev_opinion::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function create_model(; dims = (10, 10), nopinions = 3, levels_per_opinion = 4)
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,8 +4,8</span> ============================================================
@@ -104,19 +117,6 @@
 <span style="color:inherit;"> |</span>        @test d.metric == :euclidean
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-21,8 +21,8</span> ============================================================
-<span style="color:inherit;"> |</span>    id::Int
-<span style="color:inherit;"> |</span>    pos::Tuple{Int,Int}
-<span style="color:inherit;"> |</span>    stabilized::Bool
-<span style="color:red;">-|</span></span><span style="color:gray;">    opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    opinion::<span style="color:green;">Vector</span>{Int}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    prev_opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    prev_opinion::<span style="color:green;">Vector</span>{Int}</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function create_model(; dims = (10, 10), nopinions = 3, levels_per_opinion = 4)
 <span style="color:red;">------ </span><span style="color:inherit;">examples/sugarscape.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">examples/sugarscape.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
@@ -139,6 +139,16 @@
 <span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
 <span style="color:inherit;"> |</span>    for neighbor in nearby_agents(agent, model)
 <span style="color:inherit;"> |</span>        if agent.group == neighbor.group
+<span style="color:red;">------ </span><span style="color:inherit;">src/spaces/grid.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/spaces/grid.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
+<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
+<span style="color:inherit;"> |</span>    if moore ≠ nothing
+<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
+<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    for i in eachindex(s)
+<span style="color:inherit;"> |</span>        s[i] = Int[]
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
@@ -150,16 +160,6 @@
 <span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/spaces/grid.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/spaces/grid.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
-<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
-<span style="color:inherit;"> |</span>    if moore ≠ nothing
-<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
-<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    for i in eachindex(s)
-<span style="color:inherit;"> |</span>        s[i] = Int[]
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================

@@ -11,19 +11,7 @@
 <span style="color:inherit;"> |</span>bodylength(body::Vector{IOBuffer}) = sum(bytesavailable, body)
 <span style="color:inherit;"> |</s</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_5_hits ><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/loopback.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/loopback.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-280,8 +280,8</span> ============================================================
-<span style="color:inherit;"> |</span>                end
-<span style="color:inherit;"> |</span>            end
-<span style="color:inherit;"> |</span>        end
-<span style="color:orange;">!|</span>        @test body_aborted<span style="color:red;"> == true</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:gray;">body_sent</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test <span style="color:green;">!</span>body_sent</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;libreq - Sleep&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">src/parsemultipart.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/parsemultipart.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/parsemultipart.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-119,14 +119,14</span> ============================================================
 <span style="color:inherit;"> |</span>    escaped = false
@@ -41,7 +29,19 @@
 <span style="color:green;">+|</span></span>            elseif <span style="color:green;">!</span>quotes && (str[offset] == ';' || str[offset] == '=')</span>
 <span style="color:inherit;"> |</span>                prev = prevind(str, offset)
 <span style="color:inherit;"> |</span>                if prev > start
-<span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, pre</div>
+<span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, prev)))
+<span style="color:red;">------ </span><span style="color:inherit;">test/loopback.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/loopback.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-280,8 +280,8</span> ============================================================
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:orange;">!|</span>        @test body_aborted<span style="color:red;"> == true</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:gray;">body_sent</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>        @test <span style="color:green;">!</span>body_sent</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;libreq - Sleep&#34; b</div>
 </pre> <h3 id=omit_a_a_and_a_a_1_hit ><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/types.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/types.jl</span>

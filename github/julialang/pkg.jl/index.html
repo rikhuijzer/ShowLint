@@ -106,6 +106,17 @@
 <span style="color:inherit;"> |</span>        a.is_tracking_registry == b.is_tracking_registry &&
 <span style="color:inherit;"> |</span>        a.git_revision == b.git_revision && a.git_source == b.git_source &&
 <span style="color:inherit;"> |</span>        a.source == b.source && a.dependencies == b.dependencies
+<span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-169,7 +169,7</span> ============================================================
+<span style="color:inherit;"> |</span>        version_info === nothing && continue
+<span style="color:inherit;"> |</span>        hash′ = version_info.git_tree_sha1
+<span style="color:inherit;"> |</span>        if hash !== nothing
+<span style="color:red;">-|</span></span>            </span><span style="color:red;">hash == hash′</span><span style="color:gray;"> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span></span>
+<span style="color:green;">+|</span></span>            <span style="color:green;">true′</span> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        hash = hash′
+<span style="color:inherit;"> |</span>    end
 <span style="color:red;">------ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
@@ -127,16 +138,5 @@
 <span style="color:green;">+|</span></span>@test <span style="color:green;">true</span></span>
 <span style="color:inherit;"> |</span>BasicSandbox.greet()
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-169,7 +169,7</span> ============================================================
-<span style="color:inherit;"> |</span>        version_info === nothing && continue
-<span style="color:inherit;"> |</span>        hash′ = version_info.git_tree_sha1
-<span style="color:inherit;"> |</span>        if hash !== nothing
-<span style="color:red;">-|</span></span>            </span><span style="color:red;">hash == hash′</span><span style="color:gray;"> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span></span>
-<span style="color:green;">+|</span></span>            <span style="color:green;">true′</span> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        hash = hash′
-<span style="color:inherit;"> |</span></div>
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

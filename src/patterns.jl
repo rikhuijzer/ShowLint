@@ -6,6 +6,8 @@ struct Pattern
     toml::String
 end
 
+const var = raw"[\w_\[\]:\.]*"
+
 patterns = [
     Pattern(1, "Replace Array{T,1} with Vector{T}", ["julia"], 
         "Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.",
@@ -26,7 +28,7 @@ patterns = [
         """
     ),
     Pattern(3, "Avoid x -> f(x)", ["julia"], 
-        "From the Julia [Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).",
+        "From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).",
         raw"""
         match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
@@ -46,10 +48,10 @@ patterns = [
         rewrite=':[first]:[bool]:[var]'
         """
     ),
-    Pattern(5, "Omit a == a and a != a", ["generic"],
+    Pattern(5, "Omit a == a and a != a", ["julia"],
         "SA4000 in [staticcheck](https://staticcheck.io/docs/checks).",
         """
-        match=':[var.] :[bool~(=|!)]= :[var.]'
+        match=':[x~$var] :[bool~(=|!)]= :[x~$var]'
 
         rule='where
             rewrite :[bool] { "=" -> "true" },

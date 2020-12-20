@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Wikunia/ConstraintSolver.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/Wikunia/ConstraintSolver.jl" target=_blank >Wikunia/ConstraintSolver.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_4_hits">Avoid x -&gt; f&#40;x&#41; ➤ 4 hits</a><li><a href="#avoid_findfirst_in_conditional_1_hit">Avoid findfirst in conditional ➤ 1 hit</a></ol></div> <h3 id=avoid_x_-_fx_4_hits ><a href="#avoid_x_-_fx_4_hits">Avoid x -&gt; f&#40;x&#41; ➤ 4 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Wikunia/ConstraintSolver.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/Wikunia/ConstraintSolver.jl" target=_blank >Wikunia/ConstraintSolver.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_4_hits">Avoid x -&gt; f&#40;x&#41; ➤ 4 hits</a><li><a href="#omit_a_a_and_a_a_22_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 22 hits</a><li><a href="#avoid_findfirst_in_conditional_1_hit">Avoid findfirst in conditional ➤ 1 hit</a></ol></div> <h3 id=avoid_x_-_fx_4_hits ><a href="#avoid_x_-_fx_4_hits">Avoid x -&gt; f&#40;x&#41; ➤ 4 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/ConstraintSolver.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/ConstraintSolver.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-725,7 +725,7</span> ============================================================
@@ -39,7 +39,176 @@
 <span style="color:inherit;"> |</span>    if nfixed >= length(indices) - 1
 <span style="color:inherit;"> |</span>        search_space = com.search_space
 <span style="color:inherit;"> |</span>        sum = -set.value + fct.cons</div>
-</pre> <h3 id=avoid_findfirst_in_conditional_1_hit ><a href="#avoid_findfirst_in_conditional_1_hit">Avoid findfirst in conditional ➤ 1 hit</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+</pre> <h3 id=omit_a_a_and_a_a_22_hits ><a href="#omit_a_a_and_a_a_22_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 22 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/killer_sudoku.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/killer_sudoku.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-110,7 +110,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        for s in sums
+<span style="color:red;">-|</span></span><span style="color:gray;">            @constraint(m, sum([com_grid[ind...] for ind in s.indices])</span><span style="color:red;"> == </span><span style="color:gray;">-s.result)</span></span>
+<span style="color:green;">+|</span></span>            @constraint(m, sum([com_grid[ind...] for ind in s.indices])<span style="color:green;">true</span>-s.result)</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        jump_add_sudoku_constr!(m, com_grid)
+<span style="color:red;">------ </span><span style="color:inherit;">src/constraints/reified.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/constraints/reified.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-134,7 +134,7</span> ============================================================
+<span style="color:inherit;"> |</span>        inner_constraint.fct,
+<span style="color:inherit;"> |</span>        inner_constraint.set,
+<span style="color:inherit;"> |</span>        values[2:end],
+<span style="color:red;">-|</span></span><span style="color:gray;">    )</span><span style="color:red;"> == </span><span style="color:gray;">(values[1] == activate_on)</span></span>
+<span style="color:green;">+|</span></span>    )<span style="color:green;">true</span>(values[1] == activate_on)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">test/unit/constraints/geqset.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/unit/constraints/geqset.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-68,7 +68,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # feasible and no changes
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:inherit;"> |</span>    for ind in constr_indices
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sort(CS.values(com.search_space[ind]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:5</span></span>
+<span style="color:green;">+|</span></span>        @test sort(CS.values(com.search_space[ind]))<span style="color:green;">true</span>-5:5</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @test CS.fix!(com, com.search_space[constr_indices[2]], 5)
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-92,7 +92,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test CS.rm!(com, com.search_space[constr_indices[1]], 5)
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sort(CS.values(com.search_space[constr_indices[2]]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:4</span></span>
+<span style="color:green;">+|</span></span>    @test sort(CS.values(com.search_space[constr_indices[2]]))<span style="color:green;">true</span>-5:4</span>
+<span style="color:inherit;"> |</span>    @test sort(CS.values(com.search_space[constr_indices[3]])) == 4:4
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/unit/constraints/equal.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/unit/constraints/equal.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # feasible and no changes
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:inherit;"> |</span>    for ind in constr_indices
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sort(CS.values(com.search_space[ind]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:5</span></span>
+<span style="color:green;">+|</span></span>        @test sort(CS.values(com.search_space[ind]))<span style="color:green;">true</span>-5:5</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @test CS.fix!(com, com.search_space[constr_indices[2]], 5)
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:red;">------ </span><span style="color:inherit;">test/unit/constraints/less_than.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/unit/constraints/less_than.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-67,15 +67,15</span> ============================================================
+<span style="color:inherit;"> |</span>    constr_indices = constraint.indices
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sort(CS.values(com.search_space[1]))</span><span style="color:red;"> == </span><span style="color:gray;">-1:5</span></span>
+<span style="color:green;">+|</span></span>    @test sort(CS.values(com.search_space[1]))<span style="color:green;">true</span>-1:5</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sort(CS.values(com.search_space[2]))</span><span style="color:red;"> == </span><span style="color:gray;">-1:5</span></span>
+<span style="color:green;">+|</span></span>    @test sort(CS.values(com.search_space[2]))<span style="color:green;">true</span>-1:5</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sort(CS.values(com.search_space[3]))</span><span style="color:red;"> == </span><span style="color:gray;">-4:5</span></span>
+<span style="color:green;">+|</span></span>    @test sort(CS.values(com.search_space[3]))<span style="color:green;">true</span>-4:5</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test CS.fix!(com, com.search_space[constr_indices[3]], -4)
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test CS.value(com.search_space[1])</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>    @test CS.value(com.search_space[1])<span style="color:green;">true</span>-1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test CS.value(com.search_space[2])</span><span style="color:red;"> == </span><span style="color:gray;">-1</span></span>
+<span style="color:green;">+|</span></span>    @test CS.value(com.search_space[2])<span style="color:green;">true</span>-1</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test CS.value(com.search_space[3])</span><span style="color:red;"> == </span><span style="color:gray;">-4</span></span>
+<span style="color:green;">+|</span></span>    @test CS.value(com.search_space[3])<span style="color:green;">true</span>-4</span>
+<span style="color:inherit;"> |</span>    @test CS.isfixed(com.search_space[1])
+<span style="color:inherit;"> |</span>    @test CS.isfixed(com.search_space[2])
+<span style="color:inherit;"> |</span>    @test CS.isfixed(com.search_space[3])
+<span style="color:red;">------ </span><span style="color:inherit;">test/moi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/moi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,7 +1,7</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;MOI Tests&#34; begin
+<span style="color:inherit;"> |</span>    @testset &#34;Supports and SolverName&#34; begin
+<span style="color:inherit;"> |</span>        optimizer = CSTestOptimizer(;branch_strategy=:ABS)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test MOI.get(optimizer, MOI.SolverName())</span><span style="color:red;"> == </span><span style="color:gray;">&#34;ConstraintSolver&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test MOI.get(optimizer, MOI.SolverName())<span style="color:green;">true</span>&#34;ConstraintSolver&#34;</span>
+<span style="color:inherit;"> |</span>        @test MOI.supports_constraint(
+<span style="color:inherit;"> |</span>            optimizer,
+<span style="color:inherit;"> |</span>            MOI.VectorOfVariables,
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>makedocs(
+<span style="color:inherit;"> |</span>    # See https://github.com/JuliaDocs/Documenter.jl/issues/868
+<span style="color:red;">-|</span></span><span style="color:gray;">    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;),</span></span>
+<span style="color:green;">+|</span></span>    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;),</span>
+<span style="color:inherit;"> |</span>    strict = true,
+<span style="color:inherit;"> |</span>    sitename = &#34;ConstraintSolver&#34;,
+<span style="color:inherit;"> |</span>    pages = [
+<span style="color:red;">------ </span><span style="color:inherit;">test/unit/constraints/alldifferent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/unit/constraints/alldifferent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,13 +13,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    sorted_min = [1, 1, 2, 2, 3]
+<span style="color:inherit;"> |</span>    sorted_max = [5, 5, 4, 4, 2]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test CS.get_alldifferent_extrema(sorted_min, sorted_max, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(1 + 2 + 3, 5 + 4 + 3)</span></span>
+<span style="color:green;">+|</span></span>    @test CS.get_alldifferent_extrema(sorted_min, sorted_max, 3)<span style="color:green;">true</span>(1 + 2 + 3, 5 + 4 + 3)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    sorted_min = [1, 3, 3, 3, 4]
+<span style="color:inherit;"> |</span>    sorted_max = [9, 7, 7, 7, 5]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test CS.get_alldifferent_extrema(sorted_min, sorted_max, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(1 + 3 + 4, 9 + 7 + 6)</span></span>
+<span style="color:green;">+|</span></span>    @test CS.get_alldifferent_extrema(sorted_min, sorted_max, 3)<span style="color:green;">true</span>(1 + 3 + 4, 9 + 7 + 6)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test CS.get_alldifferent_extrema(sorted_min, sorted_max, 5)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m          </span><span style="color:gray;">(1 + 3 + 4 + 5 + 6, 9 + 7 + 6 + 5 + 4)</span></span>
+<span style="color:green;">+|</span></span>    @test CS.get_alldifferent_extrema(sorted_min, sorted_max, 5)<span style="color:green;">true</span>(1 + 3 + 4 + 5 + 6, 9 + 7 + 6 + 5 + 4)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    constr_indices = constraint.indices
+<span style="color:inherit;"> |</span>    @test CS.still_feasible(
+<span style="color:inherit;">@|</span><span style="color:inherit;">-60,13 +59,13</span> ============================================================
+<span style="color:inherit;"> |</span>    # feasible and no changes
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:inherit;"> |</span>    for ind in constr_indices
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sort(CS.values(com.search_space[ind]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:5</span></span>
+<span style="color:green;">+|</span></span>        @test sort(CS.values(com.search_space[ind]))<span style="color:green;">true</span>-5:5</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @test CS.fix!(com, com.search_space[constr_indices[2]], 5)
+<span style="color:inherit;"> |</span>    @test CS.rm!(com, com.search_space[constr_indices[1]], 1)
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:inherit;"> |</span>    for ind in constr_indices[3:end]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sort(CS.values(com.search_space[ind]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:4</span></span>
+<span style="color:green;">+|</span></span>        @test sort(CS.values(com.search_space[ind]))<span style="color:green;">true</span>-5:4</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @test sort(CS.values(com.search_space[1])) == [-5, -4, -3, -2, -1, 0, 2, 3, 4]
+<span style="color:inherit;"> |</span>    @test sort(CS.values(com.search_space[2])) == [5]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +78,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test sort(CS.values(com.search_space[ind])) == 3:4
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    for ind in constr_indices[5:end]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sort(CS.values(com.search_space[ind]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:2</span></span>
+<span style="color:green;">+|</span></span>        @test sort(CS.values(com.search_space[ind]))<span style="color:green;">true</span>-5:2</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @test sort(CS.values(com.search_space[1])) == [-5, -4, -3, -2, -1, 0, 2]
+<span style="color:inherit;"> |</span>    @test sort(CS.values(com.search_space[2])) == [5]
+<span style="color:red;">------ </span><span style="color:inherit;">test/unit/constraints/svc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/unit/constraints/svc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-68,11 +68,11</span> ============================================================
+<span style="color:inherit;"> |</span>    # feasible and no changes
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:inherit;"> |</span>    for ind in constr_indices
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sort(CS.values(com.search_space[ind]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:5</span></span>
+<span style="color:green;">+|</span></span>        @test sort(CS.values(com.search_space[ind]))<span style="color:green;">true</span>-5:5</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @test CS.fix!(com, com.search_space[constr_indices[2]], 4)
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sort(CS.values(com.search_space[1]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:4</span></span>
+<span style="color:green;">+|</span></span>    @test sort(CS.values(com.search_space[1]))<span style="color:green;">true</span>-5:4</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    m = Model(optimizer_with_attributes(CS.Optimizer, &#34;no_prune&#34; => true, &#34;logging&#34; => []))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-87,7 +87,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test CS.remove_above!(com, com.search_space[constr_indices[2]], 1)
+<span style="color:inherit;"> |</span>    @test CS.prune_constraint!(com, constraint, constraint.fct, constraint.set)
+<span style="color:inherit;"> |</span>    for ind in constr_indices
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sort(CS.values(com.search_space[ind]))</span><span style="color:red;"> == </span><span style="color:gray;">-5:1</span></span>
+<span style="color:green;">+|</span></span>        @test sort(CS.values(com.search_space[ind]))<span style="color:green;">true</span>-5:1</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</s</div>
+</pre> <h3 id=avoid_findfirst_in_conditional_1_hit ><a href="#avoid_findfirst_in_conditional_1_hit">Avoid findfirst in conditional ➤ 1 hit</a></h3> <p><a href="/patterns/#7">Pattern #7</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/constraints/table.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/constraints/table.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-548,7 +548,7</span> ============================================================

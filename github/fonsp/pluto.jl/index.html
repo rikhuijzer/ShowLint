@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/fonsp/Pluto.jl" target=_blank >fonsp/Pluto.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a><li><a href="#use_ismissing_3_hits">Use ismissing ➤ 3 hits</a><li><a href="#omit_comparison_with_boolean_constant_137_hits">Omit comparison with boolean constant ➤ 137 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_21_hits ><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/fonsp/Pluto.jl" target=_blank >fonsp/Pluto.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a><li><a href="#use_ismissing_3_hits">Use ismissing ➤ 3 hits</a><li><a href="#omit_comparison_with_boolean_constant_137_hits">Omit comparison with boolean constant ➤ 137 hits</a><li><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_21_hits ><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-177,7 +177,7</span> ============================================================
@@ -222,17 +222,7 @@
 <span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[3])
 <span style="color:inherit;"> |</span>        @test notebook.cells[3].errored == f</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_137_hits ><a href="#omit_comparison_with_boolean_constant_137_hits">Omit comparison with boolean constant ➤ 137 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
-<span style="color:inherit;"> |</span>    elseif header.opcode == WebSockets.WS_CONTINUATION
-<span style="color:inherit;"> |</span>        error(&#34;WS continuation gone wrong&#34;)
-<span style="color:inherit;"> |</span>    else
-<span style="color:orange;">!|</span>        if header.final<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            return view(ws.rxpayload, 1:l)
-<span style="color:inherit;"> |</span>        else
-<span style="color:inherit;"> |</span>            multi_message_data = UInt8[]
-<span style="color:red;">------ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-30,7 +30,7</span> ============================================================
 <span style="color:inherit;"> |</span>        update_save_run!(🍭, notebookA, notebookA.cells[1])
@@ -242,6 +232,16 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookA))
 <span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookB))
+<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
+<span style="color:inherit;"> |</span>    elseif header.opcode == WebSockets.WS_CONTINUATION
+<span style="color:inherit;"> |</span>        error(&#34;WS continuation gone wrong&#34;)
+<span style="color:inherit;"> |</span>    else
+<span style="color:orange;">!|</span>        if header.final<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>            return view(ws.rxpayload, 1:l)
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            multi_message_data = UInt8[]
 <span style="color:red;">------ </span><span style="color:inherit;">test/React.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/React.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-42,12 +42,12</span> ============================================================
@@ -827,4 +827,16 @@
 <span style="color:inherit;"> |</span>            @test notebook.cells[9].output_repr == &#34;&#34;
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>            @test occursinerror(&#34;syntax: extra token after&#34;, notebook.cells[</div>
+</pre> <h3 id=omit_a_a_and_a_a_2_hits ><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/MethodSignatures.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/MethodSignatures.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-85,7 +85,7</span> ============================================================
+<span style="color:inherit;"> |</span>    )
+<span style="color:inherit;"> |</span>    # function using built in type synonyms
+<span style="color:inherit;"> |</span>    # like Int and Int64
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert string(Int)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Int64&#34; || string(Int)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Int32&#34;</span></span>
+<span style="color:green;">+|</span></span>    @assert string(Int)<span style="color:green;">true</span>&#34;Int64&#34; || string(Int)<span style="color:green;">true</span>&#34;Int32&#34;</span>
+<span style="color:inherit;"> |</span>    @test_broken !methods_can_coexist(
+<span style="color:inherit;"> |</span>        :(f(x::Int) = 3),
+<span style="color:inherit;"> |</span>        Meta.parse(&#34;f(x::$(string(Int))) = 4&#3</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,29 +1,79 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>TuringLang/AdvancedHMC.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/TuringLang/AdvancedHMC.jl" target=_blank >TuringLang/AdvancedHMC.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_3_hits ><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>TuringLang/AdvancedHMC.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/TuringLang/AdvancedHMC.jl" target=_blank >TuringLang/AdvancedHMC.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_12_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 12 hits</a><li><a href="#omit_fx_fx_and_fx_fx_1_hit">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 1 hit</a></ol></div> <h3 id=omit_a_a_and_a_a_12_hits ><a href="#omit_a_a_and_a_a_12_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 12 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/integrator.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/integrator.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-41,7 +41,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,28 +41,28</span> ============================================================
 <span style="color:inherit;"> |</span>    @testset &#34;Leapfrog&#34; begin
 <span style="color:inherit;"> |</span>        ϵ0 = 0.1
 <span style="color:inherit;"> |</span>        lf = Leapfrog(ϵ0)
 <span style="color:red;">-|</span></span><span style="color:gray;">        @test lf.</span><span style="color:red;">ϵ == ϵ0</span></span>
 <span style="color:green;">+|</span></span>        @test lf.<span style="color:green;">ϵtrueϵ0</span></span>
-<span style="color:inherit;"> |</span>        @test AdvancedHMC.nom_step_size(lf) == ϵ0
-<span style="color:inherit;"> |</span>        @test AdvancedHMC.step_size(lf) == ϵ0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.nom_step_size(lf)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.nom_step_size(lf)<span style="color:green;">trueϵ0</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.step_size(lf)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.step_size(lf)<span style="color:green;">trueϵ0</span></span>
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-56,13 +56,13</span> ============================================================
+<span style="color:inherit;"> |</span>        lf2 = AdvancedHMC.jitter(Random.GLOBAL_RNG, lf)
+<span style="color:inherit;"> |</span>        @test lf2 === lf
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.nom_step_size(lf2)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.nom_step_size(lf2)<span style="color:green;">trueϵ0</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.step_size(lf2)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.step_size(lf2)<span style="color:green;">trueϵ0</span></span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;JitteredLeapfrog&#34; begin
+<span style="color:inherit;"> |</span>        ϵ0 = 0.1
 <span style="color:inherit;"> |</span>        lf = JitteredLeapfrog(ϵ0, 0.5)
 <span style="color:inherit;"> |</span>        @test lf.ϵ0 == ϵ0
-<span style="color:inherit;"> |</span>        @test AdvancedHMC.nom_step_size(lf) == ϵ0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.nom_step_size(lf)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.nom_step_size(lf)<span style="color:green;">trueϵ0</span></span>
 <span style="color:red;">-|</span></span><span style="color:gray;">        @test lf.</span><span style="color:red;">ϵ == ϵ0</span></span>
 <span style="color:green;">+|</span></span>        @test lf.<span style="color:green;">ϵtrueϵ0</span></span>
 <span style="color:inherit;"> |</span>        @test AdvancedHMC.step_size(lf) == lf.ϵ
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        lf2 = AdvancedHMC.jitter(Random.GLOBAL_RNG, lf)
 <span style="color:inherit;"> |</span>        @test lf2.ϵ0 == ϵ0
-<span style="color:inherit;"> |</span>        @test AdvancedHMC.nom_step_size(lf2) == ϵ0
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.nom_step_size(lf2)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.nom_step_size(lf2)<span style="color:green;">trueϵ0</span></span>
 <span style="color:red;">-|</span></span><span style="color:gray;">        @test lf2.</span><span style="color:red;">ϵ != ϵ0</span></span>
 <span style="color:green;">+|</span></span>        @test lf2.<span style="color:green;">ϵfalseϵ0</span></span>
 <span style="color:inherit;"> |</span>        @test AdvancedHMC.step_size(lf2) == lf2.ϵ
 <span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span</div>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-71,7 +71,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @testset &#34;Leapfrog&#34; begin
+<span style="color:inherit;"> |</span>        ϵ0 = 0.1
+<span style="color:inherit;"> |</span>        lf = Leapfrog(ϵ0)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.nom_step_size(lf)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.nom_step_size(lf)<span style="color:green;">trueϵ0</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        lf2 = AdvancedHMC.update_nom_step_size(lf, 0.5)
+<span style="color:inherit;"> |</span>        @test lf2 !== lf
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,13 +82,13</span> ============================================================
+<span style="color:inherit;"> |</span>    @testset &#34;JitteredLeapfrog&#34; begin
+<span style="color:inherit;"> |</span>        ϵ0 = 0.1
+<span style="color:inherit;"> |</span>        lf = JitteredLeapfrog(ϵ0, 0.5)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.nom_step_size(lf)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.nom_step_size(lf)<span style="color:green;">trueϵ0</span></span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        lf2 = AdvancedHMC.update_nom_step_size(lf, 0.2)
+<span style="color:inherit;"> |</span>        @test lf2 !== lf
+<span style="color:inherit;"> |</span>        @test AdvancedHMC.nom_step_size(lf2) == 0.2
+<span style="color:inherit;"> |</span>        # check that we've only updated nominal step size
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test AdvancedHMC.step_size(lf2)</span><span style="color:red;"> == ϵ0</span></span>
+<span style="color:green;">+|</span></span>        @test AdvancedHMC.step_size(lf2)<span style="color:green;">trueϵ0</span></span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</s</div>
+</pre> <h3 id=omit_fx_fx_and_fx_fx_1_hit ><a href="#omit_fx_fx_and_fx_fx_1_hit">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/hamiltonian.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/hamiltonian.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-42,7 +42,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ℓπ::V # Cached neg potential energy for the current θ.
+<span style="color:inherit;"> |</span>    ℓκ::V # Cached neg kinect energy for the current r.
+<span style="color:inherit;"> |</span>    function PhasePoint(θ::T, r::T, ℓπ::V, ℓκ::V) where {T, V}
+<span style="color:red;">-|</span></span><span style="color:gray;">        @argcheck length(θ) == length(r) == </span><span style="color:red;">length(ℓπ.gradient) == length(ℓπ.gradient)</span></span>
+<span style="color:green;">+|</span></span>        @argcheck length(θ) == length(r) == <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>        if any(isfinite.((θ, r, ℓπ, ℓκ)) .== false)
+<span style="color:inherit;"> |</span>            @warn &#34;The current proposal will be rejected due to numerical error(s).&#34; isfinite.((θ, r, ℓπ, ℓκ))
+<span style="color:inherit;"> |</span>            ℓπ = DualValue(map(v -> isfinite(v) ? v : -Inf, ℓπ.value), ℓπ.gradi</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

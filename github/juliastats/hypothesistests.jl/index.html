@@ -1,1 +1,164 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaStats/HypothesisTests.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaStats/HypothesisTests.jl" target=_blank >JuliaStats/HypothesisTests.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaStats/HypothesisTests.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaStats/HypothesisTests.jl" target=_blank >JuliaStats/HypothesisTests.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_18_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 18 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_18_hits ><a href="#omit_a_a_and_a_a_18_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 18 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/var_equality.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/var_equality.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-14,7 +14,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ]
+<span style="color:inherit;"> |</span>    t = OneWayANOVATest(groups...)
+<span style="color:inherit;"> |</span>    @test nobs(t) == fill(6, 3)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(t)</span><span style="color:red;"> == </span><span style="color:gray;">(2,15)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(t)<span style="color:green;">true</span>(2,15)</span>
+<span style="color:inherit;"> |</span>    @test pvalue(t) ≈ 0.002 atol=1e-3
+<span style="color:inherit;"> |</span>    @test occursin(&#34;reject h_0&#34;, sprint(show, t))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-30,7 +30,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ]
+<span style="color:inherit;"> |</span>    t = OneWayANOVATest(groups...)
+<span style="color:inherit;"> |</span>    @test nobs(t) == [7, 8, 8, 6]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(t)</span><span style="color:red;"> == </span><span style="color:gray;">(3,25)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(t)<span style="color:green;">true</span>(3,25)</span>
+<span style="color:inherit;"> |</span>    @test pvalue(t) ≈ 0.072 atol=1e-3
+<span style="color:inherit;"> |</span>    @test occursin(&#34;reject h_0&#34;, sprint(show, t))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-44,7 +44,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # with means
+<span style="color:inherit;"> |</span>    l = LeveneTest(groups...; statistic=mean)
+<span style="color:inherit;"> |</span>    @test nobs(l) == fill(8, 4)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(l)</span><span style="color:red;"> == </span><span style="color:gray;">(3,28)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(l)<span style="color:green;">true</span>(3,28)</span>
+<span style="color:inherit;"> |</span>    @test pvalue(l) ≈ 0.90357 atol=1e-4
+<span style="color:inherit;"> |</span>    # with medians
+<span style="color:inherit;"> |</span>    l = LeveneTest(groups...; statistic=median)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-71,7 +71,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # Brown-Forsythe Test
+<span style="color:inherit;"> |</span>    l = BrownForsytheTest(groups2...)
+<span style="color:inherit;"> |</span>    @test nobs(l) == fill(10, 10)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(l)</span><span style="color:red;"> == </span><span style="color:gray;">(9,90)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(l)<span style="color:green;">true</span>(9,90)</span>
+<span style="color:inherit;"> |</span>    @test HypothesisTests.teststatistic(l) ≈ 1.705910 atol=1e-5
+<span style="color:inherit;"> |</span>    @test pvalue(l) ≈ 0.0991 atol=1e-4
+<span style="color:inherit;"> |</span>    @test occursin(&#34;reject h_0&#34;, sprint(show, l))
+<span style="color:red;">------ </span><span style="color:inherit;">test/hotelling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/hotelling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-5,7 +5,7</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;Hotelling utility functions&#34; begin
+<span style="color:inherit;"> |</span>    HT = HypothesisTests
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test HT.checkdims(rand(3, 2), rand(4, 2))</span><span style="color:red;"> == </span><span style="color:gray;">(2, 3, 4)</span></span>
+<span style="color:green;">+|</span></span>    @test HT.checkdims(rand(3, 2), rand(4, 2))<span style="color:green;">true</span>(2, 3, 4)</span>
+<span style="color:inherit;"> |</span>    # Mismatched number of variables
+<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch HT.checkdims(rand(4, 3), rand(4, 6))
+<span style="color:inherit;"> |</span>    # Empty observations
+<span style="color:inherit;">@|</span><span style="color:inherit;">-42,7 +42,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    t = OneSampleHotellingT2Test(nutrient, [1000, 15, 60, 800, 75])
+<span style="color:inherit;"> |</span>    @test nobs(t) == 737
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(t)</span><span style="color:red;"> == </span><span style="color:gray;">(5, 732)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(t)<span style="color:green;">true</span>(5, 732)</span>
+<span style="color:inherit;"> |</span>    @test pvalue(t) ≈ 0.0 atol=eps()
+<span style="color:inherit;"> |</span>    @test t.T² ≈ 1758.5413137 atol=1e-6
+<span style="color:inherit;"> |</span>    @test t.F ≈ 349.7968048 atol=1e-6
+<span style="color:inherit;">@|</span><span style="color:inherit;">-56,7 +56,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # Paired
+<span style="color:inherit;"> |</span>    p = OneSampleHotellingT2Test(spouse[:,1:4], spouse[:,5:end])
+<span style="color:inherit;"> |</span>    @test nobs(p) == 30
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(p)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 26)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(p)<span style="color:green;">true</span>(4, 26)</span>
+<span style="color:inherit;"> |</span>    @test pvalue(p) ≈ 0.039369144 atol=1e-6
+<span style="color:inherit;"> |</span>    @test p.T² ≈ 13.127840261 atol=1e-6
+<span style="color:inherit;"> |</span>    @test p.F ≈ 2.942446955 atol=1e-6
+<span style="color:inherit;">@|</span><span style="color:inherit;">-72,16 +72,16</span> ============================================================
+<span style="color:inherit;"> |</span>    counterfeit = convert(Matrix{Float64}, swiss[view(swiss, :, 1) .== &#34;fake&#34;, 2:end])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    eq = EqualCovHotellingT2Test(genuine, counterfeit)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test nobs(eq)</span><span style="color:red;"> == </span><span style="color:gray;">(100, 100)</span></span>
+<span style="color:green;">+|</span></span>    @test nobs(eq)<span style="color:green;">true</span>(100, 100)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(eq)</span><span style="color:red;"> == </span><span style="color:gray;">(6, 193)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(eq)<span style="color:green;">true</span>(6, 193)</span>
+<span style="color:inherit;"> |</span>    @test pvalue(eq) ≈ 0.0 atol=eps()
+<span style="color:inherit;"> |</span>    @test eq.T² ≈ 2412.4506855 atol=1e-6
+<span style="color:inherit;"> |</span>    @test eq.F ≈ 391.9217023 atol=1e-6
+<span style="color:inherit;"> |</span>    @test occursin(&#34;reject h_0&#34;, sprint(show, eq))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    un = UnequalCovHotellingT2Test(genuine, counterfeit)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test nobs(un)</span><span style="color:red;"> == </span><span style="color:gray;">(100, 100)</span></span>
+<span style="color:green;">+|</span></span>    @test nobs(un)<span style="color:green;">true</span>(100, 100)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test dof(un)</span><span style="color:red;"> == </span><span style="color:gray;">(6, 193)</span></span>
+<span style="color:green;">+|</span></span>    @test dof(un)<span style="color:green;">true</span>(6, 193)</span>
+<span style="color:inherit;"> |</span>    @test pvalue(un) ≈ 0.0 atol=eps()
+<span style="color:inherit;"> |</span>    @test un.T² ≈ 2412.4506855 atol=1e-6
+<span style="color:inherit;"> |</span>    @test un.F ≈ 391.9217023 atol=1e-6
+<span style="color:red;">------ </span><span style="color:inherit;">test/correlation.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/correlation.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
+<span style="color:inherit;"> |</span>         20 4 1]
+<span style="color:inherit;"> |</span>    x = CorrelationTest(view(X,:,1), view(X,:,2), view(X,:,3))
+<span style="color:inherit;"> |</span>    @test occursin(&#34;fail to reject&#34;, sprint(show, x))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test confint(x)</span><span style="color:red;"> == </span><span style="color:gray;">(-1.0, 1.0)</span></span>
+<span style="color:green;">+|</span></span>    @test confint(x)<span style="color:green;">true</span>(-1.0, 1.0)</span>
+<span style="color:inherit;"> |</span>    @test nobs(x) == 4
+<span style="color:inherit;"> |</span>    @test dof(x) == 1
+<span style="color:inherit;"> |</span>    @test pvalue(x) ≈ 0.25776212 atol=1e-6
+<span style="color:red;">------ </span><span style="color:inherit;">test/show.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/show.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,8 +6,7</span> ============================================================
+<span style="color:inherit;"> |</span>m = PowerDivergenceTest(d)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>if VERSION < v&#34;1.4&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, m, context=:compact => true)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, m, context=:compact => true)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    Pearson's Chi-square Test
+<span style="color:inherit;"> |</span>    -------------------------
+<span style="color:inherit;"> |</span>    Population details:
+<span style="color:inherit;">@|</span><span style="color:inherit;">-31,8 +30,7</span> ============================================================
+<span style="color:inherit;"> |</span>    d = [ 20, 15, 25 ]
+<span style="color:inherit;"> |</span>    m = PowerDivergenceTest(d)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, m, context=:compact => true)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, m, context=:compact => true)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    Pearson's Chi-square Test
+<span style="color:inherit;"> |</span>    -------------------------
+<span style="color:inherit;"> |</span>    Population details:
+<span style="color:inherit;">@|</span><span style="color:inherit;">-53,8 +51,7</span> ============================================================
+<span style="color:inherit;"> |</span>        std. residuals:     [0.0, -1.36931, 1.36931]
+<span style="color:inherit;"> |</span>    &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>else
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, m, context=:compact => true)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, m, context=:compact => true)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    Pearson's Chi-square Test
+<span style="color:inherit;"> |</span>    -------------------------
+<span style="color:inherit;"> |</span>    Population details:
+<span style="color:inherit;">@|</span><span style="color:inherit;">-78,8 +75,7</span> ============================================================
+<span style="color:inherit;"> |</span>    d = [ 20, 15, 25 ]
+<span style="color:inherit;"> |</span>    m = PowerDivergenceTest(d)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, m, context=:compact => true)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, m, context=:compact => true)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    Pearson's Chi-square Test
+<span style="color:inherit;"> |</span>    -------------------------
+<span style="color:inherit;"> |</span>    Population details:
+<span style="color:inherit;">@|</span><span style="color:inherit;">-104,8 +100,7</span> ============================================================
+<span style="color:inherit;"> |</span># based on t.jl tests
+<span style="color:inherit;"> |</span>tst = OneSampleTTest(-5:10)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, tst)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, tst)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    One sample t-test
+<span style="color:inherit;"> |</span>    -----------------
+<span style="color:inherit;"> |</span>    Population details:
+<span style="color:red;">------ </span><span style="color:inherit;">test/bartlett.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/bartlett.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
+<span style="color:inherit;"> |</span>    counterfeit = convert(Matrix{Float64}, swiss[view(swiss, :, 1) .== &#34;fake&#34;, 2:end])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    b = BartlettTest(genuine, counterfeit)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test nobs(b)</span><span style="color:red;"> == </span><span style="color:gray;">(100, 100)</span></span>
+<span style="color:green;">+|</span></span>    @test nobs(b)<span style="color:green;">true</span>(100, 100)</span>
+<span style="color:inherit;"> |</span>    @test dof(b) == 21
+<span style="color:inherit;"> |</span>    @test pvalue(b) ≈ 0.0 atol=1e-10
+<span style="color:inherit;"> |</span>    @test b.L′ ≈ 121.8991235 atol=</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

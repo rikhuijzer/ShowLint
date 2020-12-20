@@ -1,1 +1,142 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>timholy/Rebugger.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/timholy/Rebugger.jl" target=_blank >timholy/Rebugger.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>timholy/Rebugger.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/timholy/Rebugger.jl" target=_blank >timholy/Rebugger.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_19_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 19 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_19_hits ><a href="#omit_a_a_and_a_a_19_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 19 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
+<span style="color:inherit;"> |</span>makedocs(
+<span style="color:inherit;"> |</span>    modules = [Rebugger],
+<span style="color:inherit;"> |</span>    clean = false,
+<span style="color:red;">-|</span></span><span style="color:gray;">    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;),</span></span>
+<span style="color:green;">+|</span></span>    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;),</span>
+<span style="color:inherit;"> |</span>    sitename = &#34;Rebugger.jl&#34;,
+<span style="color:inherit;"> |</span>    authors = &#34;Tim Holy&#34;,
+<span style="color:inherit;"> |</span>    linkcheck = !(&#34;skiplinks&#34; in ARGS),
+<span style="color:red;">------ </span><span style="color:inherit;">test/edit.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/edit.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,18 +26,17</span> ============================================================
+<span style="color:inherit;"> |</span>            @test argc == args
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        @testset &#34;Signatures&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.signature_names!(:(f(x::Int, @nospecialize(y::String))))</span><span style="color:red;"> == </span><span style="color:gray;">(:f, (:x, :y), (), ())</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.signature_names!(:(f(x::Int, @nospecialize(y::String))))<span style="color:green;">true</span>(:f, (:x, :y), (), ())</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.signature_names!(:(f(x::Int, $(Expr(:meta, :nospecialize, :(y::String))))))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m                </span><span style="color:gray;">(:f, (:x, :y), (), ())</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.signature_names!(:(f(x::Int, $(Expr(:meta, :nospecialize, :(y::String))))))<span style="color:green;">true</span>(:f, (:x, :y), (), ())</span>
+<span style="color:inherit;"> |</span>            ex = :(f(::Type{T}, ::IndexStyle, x::Int, ::IndexStyle) where T)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.signature_names!(ex)</span><span style="color:red;"> == </span><span style="color:gray;">(:f, (:T, :__IndexStyle_1, :x, :__IndexStyle_2), (), ())</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.signature_names!(ex)<span style="color:green;">true</span>(:f, (:T, :__IndexStyle_1, :x, :__IndexStyle_2), (), ())</span>
+<span style="color:inherit;"> |</span>            @test ex == :(f(::Type{T}, __IndexStyle_1::IndexStyle, x::Int, __IndexStyle_2::IndexStyle) where T)
+<span style="color:inherit;"> |</span>            ex = :(f(Tuseless::Type{T}, ::IndexStyle, x::Int) where T)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.signature_names!(ex)</span><span style="color:red;"> == </span><span style="color:gray;">(:f, (:Tuseless, :__IndexStyle_1, :x), (), (:T,))</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.signature_names!(ex)<span style="color:green;">true</span>(:f, (:Tuseless, :__IndexStyle_1, :x), (), (:T,))</span>
+<span style="color:inherit;"> |</span>            @test ex == :(f(Tuseless::Type{T}, __IndexStyle_1::IndexStyle, x::Int) where T)
+<span style="color:inherit;"> |</span>            # issue #34
+<span style="color:inherit;"> |</span>            ex = :(_mapreduce_dim(f, op, ::NamedTuple{()}, A::AbstractArray, ::Colon))
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.signature_names!(ex)</span><span style="color:red;"> == </span><span style="color:gray;">(:_mapreduce_dim, (:f, :op, :__NamedTuple_1, :A, :__Colon_1), (), ())</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.signature_names!(ex)<span style="color:green;">true</span>(:_mapreduce_dim, (:f, :op, :__NamedTuple_1, :A, :__Colon_1), (), ())</span>
+<span style="color:inherit;"> |</span>            @test ex == :(_mapreduce_dim(f, op, __NamedTuple_1::NamedTuple{()}, A::AbstractArray, __Colon_1::Colon))
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        @testset &#34;Caller buffer capture and insertion&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-136,7 +135,7</span> ============================================================
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            f = Core.eval(RebuggerTesting, def)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test f([8,9])</span><span style="color:red;"> == </span><span style="color:gray;">([9,10], 1.0, 7)</span></span>
+<span style="color:green;">+|</span></span>            @test f([8,9])<span style="color:green;">true</span>([9,10], 1.0, 7)</span>
+<span style="color:inherit;"> |</span>            m = collect(methods(f))[end]
+<span style="color:inherit;"> |</span>            uuid = Rebugger.method_capture_from_callee(m, def)
+<span style="color:inherit;"> |</span>            @test  Rebugger.method_capture_from_callee(m, def) == uuid  # calling twice returns the previously-defined objects
+<span style="color:inherit;">@|</span><span style="color:inherit;">-151,7 +150,7</span> ============================================================
+<span style="color:inherit;"> |</span>            uuid2 = Rebugger.method_capture_from_callee(m, def; overwrite=true)
+<span style="color:inherit;"> |</span>            @test uuid2 != uuid
+<span style="color:inherit;"> |</span>            # note overwriting methods are not stored in storefunc, but our old &#96;f&#96; will call the new method
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test f([8,9], 2, &#34;13&#34;; kw1=Int, kw2=0)</span><span style="color:red;"> == </span><span style="color:gray;">([10,11], 13, 0)</span></span>
+<span style="color:green;">+|</span></span>            @test f([8,9], 2, &#34;13&#34;; kw1=Int, kw2=0)<span style="color:green;">true</span>([10,11], 13, 0)</span>
+<span style="color:inherit;"> |</span>            Core.eval(RebuggerTesting, def)
+<span style="color:inherit;"> |</span>            @test Rebugger.stored[uuid2].varnames == (:x, :y, :str, :kw1, :kw2, :kwargs, :A, :T)
+<span style="color:inherit;"> |</span>            @test Rebugger.stored[uuid2].varvals  == ([8,9], 2, &#34;13&#34;, Int, 0, empty_kwvarargs, Vector{Int}, Int)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-173,7 +172,7</span> ============================================================
+<span style="color:inherit;"> |</span>            uuid = Rebugger.method_capture_from_callee(m)
+<span style="color:inherit;"> |</span>            fc = Rebugger.storefunc[uuid]
+<span style="color:inherit;"> |</span>            @test_throws StopException fc()
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.stored[uuid].varnames == Rebugger.stored[uuid].</span><span style="color:red;">varvals == </span><span style="color:gray;">()</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.stored[uuid].varnames == Rebugger.stored[uuid].<span style="color:green;">varvalstrue</span>()</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @testset &#34;Step in&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-212,9 +211,9</span> ============================================================
+<span style="color:inherit;"> |</span>                snoop3(word1, word2, &#34;arguments&#34;)
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            end&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid1))</span><span style="color:red;"> == </span><span style="color:gray;">()</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid1))<span style="color:green;">true</span>()</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid2))</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;Spy&#34;,)</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid2))<span style="color:green;">true</span>(&#34;Spy&#34;,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid3))</span><span style="color:red;"> == </span><span style="color:gray;">(&#34;Spy&#34;, &#34;on&#34;)</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid3))<span style="color:green;">true</span>(&#34;Spy&#34;, &#34;on&#34;)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            str = &#34;RebuggerTesting.kwvarargs(1)&#34;
+<span style="color:inherit;"> |</span>            _, cmd = run_stepin(str, str)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-225,7 +224,7</span> ============================================================
+<span style="color:inherit;"> |</span>                kwvarargs2(x; kw1$(SPACE)=$(SPACE)kw1, kwargs...)
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            end&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid))</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1, empty_kwvarargs)</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid))<span style="color:green;">true</span>(1, 1, empty_kwvarargs)</span>
+<span style="color:inherit;"> |</span>            cmd = run_stepin(cmd, &#34;kwvarargs2&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            str = &#34;RebuggerTesting.kwvarargs(1; passthrough=false)&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-237,7 +236,7</span> ============================================================
+<span style="color:inherit;"> |</span>                kwvarargs2(x; kw1$(SPACE)=$(SPACE)kw1, kwargs...)
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            end&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid))</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1, pairs((passthrough=false,)))</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid))<span style="color:green;">true</span>(1, 1, pairs((passthrough=false,)))</span>
+<span style="color:inherit;"> |</span>            _, cmd = run_stepin(cmd, &#34;kwvarargs2&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            # Step in to call-overloading methods
+<span style="color:inherit;">@|</span><span style="color:inherit;">-250,7 +249,7</span> ============================================================
+<span style="color:inherit;"> |</span>                hv.x
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            end&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid))</span><span style="color:red;"> == </span><span style="color:gray;">(RebuggerTesting.hv_test, &#34;hi&#34;)</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid))<span style="color:green;">true</span>(RebuggerTesting.hv_test, &#34;hi&#34;)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            # Step in to methods that do tuple-destructuring of arguments
+<span style="color:inherit;"> |</span>            str = &#34;RebuggerTesting.destruct(1, (2,3), 4)&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-263,7 +262,7</span> ============================================================
+<span style="color:inherit;"> |</span>                a
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            end&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid))</span><span style="color:red;"> == </span><span style="color:gray;">(1, (2,3), 4)</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid))<span style="color:green;">true</span>(1, (2,3), 4)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            # Step in to a broadcast call
+<span style="color:inherit;"> |</span>            str = &#34;sum.([[1,2], (3,5)])&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-276,7 +275,7</span> ============================================================
+<span style="color:inherit;"> |</span>                materialize(broadcasted(f, As...))
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            end&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid))</span><span style="color:red;"> == </span><span style="color:gray;">(sum, (Any[[1,2], (3,5)],), typeof(sum))</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid))<span style="color:green;">true</span>(sum, (Any[[1,2], (3,5)],), typeof(sum))</span>
+<span style="color:inherit;"> |</span>            Core.eval(Main, Meta.parse(cmd)) == [3,8]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            str = &#34;max.([1,5], [2,-3])&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-289,7 +288,7</span> ============================================================
+<span style="color:inherit;"> |</span>                materialize(broadcasted(f, As...))
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>            end&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Rebugger.getstored(string(uuid))</span><span style="color:red;"> == </span><span style="color:gray;">(max, ([1,5], [2,-3]), typeof(max))</span></span>
+<span style="color:green;">+|</span></span>            @test Rebugger.getstored(string(uuid))<span style="color:green;">true</span>(max, ([1,5], [2,-3]), typeof(max))</span>
+<span style="color:inherit;"> |</span>            Core.eval(Main, Meta.parse(cmd)) == [2,5]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            # Step in to a do block
+<span style="color:inherit;">@|</span><span style="color:inherit;">-431,7 +430,7</span> ============================================================
+<span style="color:inherit;"> |</span>                    Rebugger.stepin(s)
+<span style="color:inherit;"> |</span>                    histdel += 1
+<span style="color:inherit;"> |</span>                    uuid = header.uuid
+<span style="color:red;">-|</span></span><span style="color:gray;">                    @test Rebugger.getstored(string(uuid))</span><span style="color:red;"> == </span><span style="color:gray;">([1,2,4],)</span></span>
+<span style="color:green;">+|</span></span>                    @test Rebugger.getstored(string(uuid))<span style="color:green;">true</span>([1,2,4],)</span>
+<span style="color:inherit;"> |</span>                    cmd2 = LineEdit.content(s)
+<span style="color:inherit;"> |</span>                    s = prepare_step_command(cmd2, &#34;show(stdout::IO, x)&#34;)
+<span style="color:inherit;"> |</span>                    Rebugger.stepi</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

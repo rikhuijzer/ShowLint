@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>queryverse/Query.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/queryverse/Query.jl" target=_blank >queryverse/Query.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_1_hit ><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>queryverse/Query.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/queryverse/Query.jl" target=_blank >queryverse/Query.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_7_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 7 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_1_hit ><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/table_query_macros.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/table_query_macros.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-86,7 +86,7</span> ============================================================
@@ -10,4 +10,76 @@
 <span style="color:inherit;"> |</span>                    if m_pred[1] == &#34;startswith&#34;
 <span style="color:inherit;"> |</span>                        sel = :( QueryOperators.NamedTupleUtilities.startswith(_, Val($(QuoteNode(Symbol(m_pred[2]))))) )
 <span style="color:inherit;"> |</span>                    elseif m_pred[1] == &#34;endswith&</div>
+</pre> <h3 id=omit_a_a_and_a_a_7_hits ><a href="#omit_a_a_and_a_a_7_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 7 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_dplyr-syntax.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_dplyr-syntax.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,7 +18,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test x isa DataFrame
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(x)</span><span style="color:red;"> == </span><span style="color:gray;">(2,4)</span></span>
+<span style="color:green;">+|</span></span>    @test size(x)<span style="color:green;">true</span>(2,4)</span>
+<span style="color:inherit;"> |</span>    @test x[1,:mage] == 20
+<span style="color:inherit;"> |</span>    @test x[2,:mage] == 23
+<span style="color:inherit;"> |</span>    @test x[1,:oldest] == 30
+<span style="color:red;">------ </span><span style="color:inherit;">src/table_query_macros.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/table_query_macros.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>macro select(args...)
+<span style="color:inherit;"> |</span>    prev = NamedTuple()
+<span style="color:inherit;"> |</span>    for arg in args
+<span style="color:red;">-|</span></span><span style="color:gray;">        if typeof(arg) == Expr && (string(arg)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;everything()&#34;)</span></span>
+<span style="color:green;">+|</span></span>        if typeof(arg) == Expr && (string(arg)<span style="color:green;">true</span>&#34;everything()&#34;)</span>
+<span style="color:inherit;"> |</span>            # select everything
+<span style="color:inherit;"> |</span>            prev = :_
+<span style="color:inherit;"> |</span>        elseif typeof(arg) == Int
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_standalone.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_standalone.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
+<span style="color:inherit;"> |</span>    df2 = df |> @take(2) |> DataFrame
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test df2 isa DataFrame
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(2,3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(2,3)</span>
+<span style="color:inherit;"> |</span>    @test df2[:a] == [1,2]
+<span style="color:inherit;"> |</span>    @test df2[:b] == [3.,2.]
+<span style="color:inherit;"> |</span>    @test df2[:c] == [&#34;a&#34;, &#34;b&#34;]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,7 +18,7</span> ============================================================
+<span style="color:inherit;"> |</span>    df2 = DataFrame(@take(df, 2))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test df2 isa DataFrame
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(2,3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(2,3)</span>
+<span style="color:inherit;"> |</span>    @test df2[:a] == [1,2]
+<span style="color:inherit;"> |</span>    @test df2[:b] == [3.,2.]
+<span style="color:inherit;"> |</span>    @test df2[:c] == [&#34;a&#34;, &#34;b&#34;]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-30,7 +30,7</span> ============================================================
+<span style="color:inherit;"> |</span>    df2 = df |> @drop(1) |> DataFrame
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test df2 isa DataFrame
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(2,3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(2,3)</span>
+<span style="color:inherit;"> |</span>    @test df2[:a] == [2,3]
+<span style="color:inherit;"> |</span>    @test df2[:b] == [2.,1.]
+<span style="color:inherit;"> |</span>    @test df2[:c] == [&#34;b&#34;,&#34;c&#34;]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
+<span style="color:inherit;"> |</span>    df2 = DataFrame(@drop(df, 1))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test df2 isa DataFrame
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(2,3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(2,3)</span>
+<span style="color:inherit;"> |</span>    @test df2[:a] == [2,3]
+<span style="color:inherit;"> |</span>    @test df2[:b] == [2.,1.]
+<span style="color:inherit;"> |</span>    @test df2[:c] == [&#34;b&#34;,&#34;c&#34;]
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_pipesyntax.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_pipesyntax.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-12,7 +12,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end) |> DataFrame
+<span style="color:inherit;"> |</span>    
+<span style="color:inherit;"> |</span>    @test df2 isa DataFrame
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(1,2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(1,2)</span>
+<span style="color:inherit;"> |</span>    @test df2[1,:c] == &#34;c&#34;
+<span style="color:inherit;"> |</span>    @test df2[1,:b] == 1.
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

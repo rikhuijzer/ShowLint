@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaStats/GLM.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaStats/GLM.jl" target=_blank >JuliaStats/GLM.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaStats/GLM.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaStats/GLM.jl" target=_blank >JuliaStats/GLM.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a><li><a href="#omit_fx_fx_and_fx_fx_3_hits">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 3 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/GLM.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/GLM.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-61,7 +61,7</span> ============================================================
@@ -13,14 +13,51 @@
 </pre> <h3 id=omit_a_a_and_a_a_4_hits ><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-696,15 +696,15</span> ============================================================
-<span style="color:inherit;"> |</span>end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-525,7 +525,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ft1a = ftest(mod, nullmod)
+<span style="color:inherit;"> |</span>    @test isnan(ft1a.pval[1])
+<span style="color:inherit;"> |</span>    @test ft1a.pval[2] ≈ 2.481215056713184e-8
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft1a)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, ft1a)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        F-test: 2 models fitted on 12 observations
+<span style="color:inherit;"> |</span>        ─────────────────────────────────────────────────────────────────
+<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR    ΔSSR       R²      ΔR²        F*  p(>F)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-537,7 +537,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ft1b = ftest(nullmod, mod)
+<span style="color:inherit;"> |</span>    @test isnan(ft1b.pval[1])
+<span style="color:inherit;"> |</span>    @test ft1b.pval[2] ≈ 2.481215056713184e-8
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft1b)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, ft1b)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        F-test: 2 models fitted on 12 observations
+<span style="color:inherit;"> |</span>        ─────────────────────────────────────────────────────────────────
+<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR     ΔSSR       R²     ΔR²        F*  p(>F)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-551,7 +551,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test isnan(ft2a.pval[1])
+<span style="color:inherit;"> |</span>    @test ft2a.pval[2] ≈ 2.481215056713184e-8
+<span style="color:inherit;"> |</span>    @test ft2a.pval[3] ≈ 0.3949973540194818
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft2a)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, ft2a)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        F-test: 3 models fitted on 12 observations
+<span style="color:inherit;"> |</span>        ──────────────────────────────────────────────────────────────────
+<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR     ΔSSR       R²     ΔR²        F*   p(>F)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-565,7 +565,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test isnan(ft2b.pval[1])
+<span style="color:inherit;"> |</span>    @test ft2b.pval[2] ≈ 0.3949973540194818
+<span style="color:inherit;"> |</span>    @test ft2b.pval[3] ≈ 2.481215056713184e-8
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft2b)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, ft2b)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        F-test: 3 models fitted on 12 observations
+<span style="color:inherit;"> |</span>        ──────────────────────────────────────────────────────────────────
+<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR    ΔSSR       R²      ΔR²        F*   p</div>
+</pre> <h3 id=omit_fx_fx_and_fx_fx_3_hits ><a href="#omit_fx_fx_and_fx_fx_3_hits">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 3 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-697,14 +697,14</span> ============================================================
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@testset &#34;Issue #376 (== and isequal for links)&#34; begin
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">GLM.LogitLink() == GLM.LogitLink()</span></span>
-<span style="color:red;">-|</span></span><span style="color:red;">    @test NegativeBinomialLink(0.3) == NegativeBinomialLink(0.3)</span></span>
+<span style="color:inherit;"> |</span>    @test GLM.LogitLink() == GLM.LogitLink()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">NegativeBinomialLink(0.3) == NegativeBinomialLink(0.3)</span></span>
 <span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
-<span style="color:green;">+|</span></span><span style="color:green;">    @test true</span></span>
 <span style="color:inherit;"> |</span>    @test NegativeBinomialLink(0.31) != NegativeBinomialLink(0.3)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @test isequal(GLM.LogitLink(), GLM.LogitLink())

@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDiff/ChainRulesCore.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDiff/ChainRulesCore.jl" target=_blank >JuliaDiff/ChainRulesCore.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_14_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 14 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_14_hits ><a href="#omit_a_a_and_a_a_14_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 14 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDiff/ChainRulesCore.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDiff/ChainRulesCore.jl" target=_blank >JuliaDiff/ChainRulesCore.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_58_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 58 hits</a><li><a href="#omit_fx_fx_and_fx_fx_3_hits">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 3 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_58_hits ><a href="#omit_a_a_and_a_a_58_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 58 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/differentials/one.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/differentials/one.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,8 +4,8</span> ============================================================
@@ -14,33 +14,80 @@
 <span style="color:inherit;"> |</span>    @test dot(o, 2 + im) == 2 + im
 <span style="color:red;">------ </span><span style="color:inherit;">test/differentials/composite.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/differentials/composite.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-185,7 +185,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-24,8 +24,8</span> ============================================================
+<span style="color:inherit;"> |</span>        @test typeof(Composite{Tuple{}}()) == Composite{Tuple{}, Tuple{}}
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @testset &#34;convert&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test convert(NamedTuple, Composite{Foo}(x=2.5))</span><span style="color:red;"> == </span><span style="color:gray;">(; x=2.5)</span></span>
+<span style="color:green;">+|</span></span>        @test convert(NamedTuple, Composite{Foo}(x=2.5))<span style="color:green;">true</span>(; x=2.5)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test convert(Tuple, Composite{Tuple{Float64,}}(2.0))</span><span style="color:red;"> == </span><span style="color:gray;">(2.0,)</span></span>
+<span style="color:green;">+|</span></span>        @test convert(Tuple, Composite{Tuple{Float64,}}(2.0))<span style="color:green;">true</span>(2.0,)</span>
+<span style="color:inherit;"> |</span>        @test convert(Dict, Composite{Dict}(Dict(4 => 3))) == Dict(4 => 3)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-50,8 +50,8</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;indexing, iterating, and properties&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test keys(Composite{Foo}(x=2.5))</span><span style="color:red;"> == </span><span style="color:gray;">(:x,)</span></span>
+<span style="color:green;">+|</span></span>        @test keys(Composite{Foo}(x=2.5))<span style="color:green;">true</span>(:x,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test propertynames(Composite{Foo}(x=2.5))</span><span style="color:red;"> == </span><span style="color:gray;">(:x,)</span></span>
+<span style="color:green;">+|</span></span>        @test propertynames(Composite{Foo}(x=2.5))<span style="color:green;">true</span>(:x,)</span>
+<span style="color:inherit;"> |</span>        @test haskey(Composite{Foo}(x=2.5), :x) == true
+<span style="color:inherit;"> |</span>        if isdefined(Base, :hasproperty)
+<span style="color:inherit;"> |</span>            @test hasproperty(Composite{Foo}(x=2.5), :y) == false
+<span style="color:inherit;">@|</span><span style="color:inherit;">-59,7 +59,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test Composite{Foo}(x=2.5).x == 2.5
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test keys(Composite{Tuple{Float64,}}(2.0)) == Base.OneTo(1)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test propertynames(Composite{Tuple{Float64,}}(2.0))</span><span style="color:red;"> == </span><span style="color:gray;">(1,)</span></span>
+<span style="color:green;">+|</span></span>        @test propertynames(Composite{Tuple{Float64,}}(2.0))<span style="color:green;">true</span>(1,)</span>
+<span style="color:inherit;"> |</span>        @test getproperty(Composite{Tuple{Float64,}}(2.0), 1) == 2.0
+<span style="color:inherit;"> |</span>        @test getproperty(Composite{Tuple{Float64,}}(@thunk 2.0^2), 1) == 4.0
+<span style="color:inherit;"> |</span>        @test getproperty(Composite{Tuple{Float64,}}(a=(@thunk 2.0^2),), :a) == 4.0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-109,13 +109,13</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;extern&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test extern(Composite{Foo}(x=2.0))</span><span style="color:red;"> == </span><span style="color:gray;">(;x=2.0)</span></span>
+<span style="color:green;">+|</span></span>        @test extern(Composite{Foo}(x=2.0))<span style="color:green;">true</span>(;x=2.0)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test extern(Composite{Tuple{Float64,}}(2.0))</span><span style="color:red;"> == </span><span style="color:gray;">(2.0,)</span></span>
+<span style="color:green;">+|</span></span>        @test extern(Composite{Tuple{Float64,}}(2.0))<span style="color:green;">true</span>(2.0,)</span>
+<span style="color:inherit;"> |</span>        @test extern(Composite{Dict}(Dict(4 => 3))) == Dict(4 => 3)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # with differentials on the inside
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test extern(Composite{Foo}(x=@thunk(0+2.0)))</span><span style="color:red;"> == </span><span style="color:gray;">(;x=2.0)</span></span>
+<span style="color:green;">+|</span></span>        @test extern(Composite{Foo}(x=@thunk(0+2.0)))<span style="color:green;">true</span>(;x=2.0)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test extern(Composite{Tuple{Float64,}}(@thunk(0+2.0)))</span><span style="color:red;"> == </span><span style="color:gray;">(2.0,)</span></span>
+<span style="color:green;">+|</span></span>        @test extern(Composite{Tuple{Float64,}}(@thunk(0+2.0)))<span style="color:green;">true</span>(2.0,)</span>
+<span style="color:inherit;"> |</span>        @test extern(Composite{Dict}(Dict(4 => @thunk(3)))) == Dict(4 => 3)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-185,9 +185,9</span> ============================================================
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        @testset &#34;Tuples&#34; begin
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test Composite{Tuple{}}() + </span><span style="color:red;">() == ()</span></span>
-<span style="color:green;">+|</span></span>            @test Composite{Tuple{}}() + <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>            @test ((1.0, 2.0) + Composite{Tuple{Float64, Float64}}(1.0, 1.0)) == (2.0, 3.0)
-<span style="color:inherit;"> |</span>            @test (Composite{Tuple{Float64, Float64}}(1.0, 1.0)) + (1.0, 2.0) == (2.0, 3.0)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Composite{Tuple{}}() + ()</span><span style="color:red;"> == </span><span style="color:gray;">()</span></span>
+<span style="color:green;">+|</span></span>            @test Composite{Tuple{}}() + ()<span style="color:green;">true</span>()</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test ((1.0, 2.0) + Composite{Tuple{Float64, Float64}}(1.0, 1.0))</span><span style="color:red;"> == </span><span style="color:gray;">(2.0, 3.0)</span></span>
+<span style="color:green;">+|</span></span>            @test ((1.0, 2.0) + Composite{Tuple{Float64, Float64}}(1.0, 1.0))<span style="color:green;">true</span>(2.0, 3.0)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test (Composite{Tuple{Float64, Float64}}(1.0, 1.0)) + (1.0, 2.0)</span><span style="color:red;"> == </span><span style="color:gray;">(2.0, 3.0)</span></span>
+<span style="color:green;">+|</span></span>            @test (Composite{Tuple{Float64, Float64}}(1.0, 1.0)) + (1.0, 2.0)<span style="color:green;">true</span>(2.0, 3.0)</span>
 <span style="color:inherit;"> |</span>        end
-<span style="color:inherit;">@|</span><span style="color:inherit;">-235,12 +235,12</span> ============================================================
-<span style="color:inherit;"> |</span>        c = Composite{Foo}(y=1.5, x=2.5)
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        @test DoesNotExist() * c == DoesNotExist()
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test c * </span><span style="color:red;">DoesNotExist() == DoesNotExist()</span></span>
-<span style="color:green;">+|</span></span>        @test c * <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>        @test dot(DoesNotExist(), c) == DoesNotExist()
-<span style="color:inherit;"> |</span>        @test dot(c, DoesNotExist()) == DoesNotExist()
+<span style="color:inherit;"> |</span>        @testset &#34;NamedTuple&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-269,7 +269,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        @test Zero() * c == Zero()
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test c * </span><span style="color:red;">Zero() == Zero()</span></span>
-<span style="color:green;">+|</span></span>        @test c * <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>        @test dot(Zero(), c) == Zero()
-<span style="color:inherit;"> |</span>        @test dot(c, Zero()) == Zero()
-<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;show&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(Composite{Foo}(x=1,))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Composite{Foo}(x = 1,)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(Composite{Foo}(x=1,))<span style="color:green;">true</span>&#34;Composite{Foo}(x = 1,)&#34;</span>
+<span style="color:inherit;"> |</span>        # check for exact regex match not occurence( &#96;^...$&#96;)
+<span style="color:inherit;"> |</span>        # and allowing optional whitespace (&#96;\s?&#96;)
+<span style="color:inherit;"> |</span>        @test occursin(
 <span style="color:red;">------ </span><span style="color:inherit;">test/differentials/abstract_zero.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/differentials/abstract_zero.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-67,27 +67,27</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-67,23 +67,23</span> ============================================================
 <span style="color:inherit;"> |</span>    @testset &#34;DoesNotExist&#34; begin
 <span style="color:inherit;"> |</span>        dne = DoesNotExist()
 <span style="color:inherit;"> |</span>        @test_throws Exception extern(dne)
@@ -69,6 +116,260 @@
 <span style="color:inherit;"> |</span>        @test dne + Zero() == dne
 <span style="color:red;">-|</span></span><span style="color:gray;">        @test Zero() - </span><span style="color:red;">dne == dne</span></span>
 <span style="color:green;">+|</span></span>        @test Zero() - <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>        @test dne - Zero() == dne
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test Zero() * dne == Zero()
+<span style="color:red;">------ </span><span style="color:inherit;">test/rule_definition_tools.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/rule_definition_tools.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-35,16 +35,16</span> ============================================================
+<span style="color:inherit;"> |</span>        @testset &#34;two input one output function&#34; begin
+<span style="color:inherit;"> |</span>            nondiff_2_1(x, y) = fill(7.5, 100)[x + y]
+<span style="color:inherit;"> |</span>            @non_differentiable nondiff_2_1(::Any, ::Any)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test frule((Zero(), 1.2, 2.3), nondiff_2_1, 3, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(7.5, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test frule((Zero(), 1.2, 2.3), nondiff_2_1, 3, 2)<span style="color:green;">true</span>(7.5, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            res, pullback = rrule(nondiff_2_1, 3, 2)
+<span style="color:inherit;"> |</span>            @test res == 7.5
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test pullback(4.5)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, DoesNotExist(), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test pullback(4.5)<span style="color:green;">true</span>(NO_FIELDS, DoesNotExist(), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @testset &#34;one input, 2-tuple output function&#34; begin
+<span style="color:inherit;"> |</span>            nondiff_1_2(x) = (5.0, 3.0)
+<span style="color:inherit;"> |</span>            @non_differentiable nondiff_1_2(::Any)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test frule((Zero(), 1.2), nondiff_1_2, 3.1)</span><span style="color:red;"> == </span><span style="color:gray;">((5.0, 3.0), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test frule((Zero(), 1.2), nondiff_1_2, 3.1)<span style="color:green;">true</span>((5.0, 3.0), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            res, pullback = rrule(nondiff_1_2, 3.1)
+<span style="color:inherit;"> |</span>            @test res == (5.0, 3.0)
+<span style="color:inherit;"> |</span>            @test isequal(
+<span style="color:inherit;">@|</span><span style="color:inherit;">-57,12 +57,12</span> ============================================================
+<span style="color:inherit;"> |</span>            nonembed_identity(x) = x
+<span style="color:inherit;"> |</span>            @non_differentiable nonembed_identity(::Integer)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test frule((Zero(), 1.2), nonembed_identity, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(2, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test frule((Zero(), 1.2), nonembed_identity, 2)<span style="color:green;">true</span>(2, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            @test frule((Zero(), 1.2), nonembed_identity, 2.0) == nothing
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            res, pullback = rrule(nonembed_identity, 2)
+<span style="color:inherit;"> |</span>            @test res == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test pullback(1.2)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test pullback(1.2)<span style="color:green;">true</span>(NO_FIELDS, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @test rrule(nonembed_identity, 2.0) == nothing
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-71,12 +71,12</span> ============================================================
+<span style="color:inherit;"> |</span>            pointy_identity(x) = x
+<span style="color:inherit;"> |</span>            @non_differentiable pointy_identity(::Vector{<:AbstractString})
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test frule((Zero(), 1.2), pointy_identity, [&#34;2&#34;])</span><span style="color:red;"> == </span><span style="color:gray;">([&#34;2&#34;], DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test frule((Zero(), 1.2), pointy_identity, [&#34;2&#34;])<span style="color:green;">true</span>([&#34;2&#34;], DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            @test frule((Zero(), 1.2), pointy_identity, 2.0) == nothing
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            res, pullback = rrule(pointy_identity, [&#34;2&#34;])
+<span style="color:inherit;"> |</span>            @test res == [&#34;2&#34;]
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test pullback(1.2)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test pullback(1.2)<span style="color:green;">true</span>(NO_FIELDS, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @test rrule(pointy_identity, 2.0) == nothing
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-90,9 +90,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                res, pullback = rrule(kw_demo, 1.5)
+<span style="color:inherit;"> |</span>                @test res == 3.5
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pullback(4.1)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pullback(4.1)<span style="color:green;">true</span>(NO_FIELDS, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test frule((Zero(), 11.1), kw_demo, 1.5)</span><span style="color:red;"> == </span><span style="color:gray;">(3.5, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test frule((Zero(), 11.1), kw_demo, 1.5)<span style="color:green;">true</span>(3.5, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @testset &#34;setting kw&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-100,9 +100,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                res, pullback = rrule(kw_demo, 1.5; kw=3.0)
+<span style="color:inherit;"> |</span>                @test res == 4.5
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pullback(1.1)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pullback(1.1)<span style="color:green;">true</span>(NO_FIELDS, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test frule((Zero(), 11.1), kw_demo, 1.5; kw=3.0)</span><span style="color:red;"> == </span><span style="color:gray;">(4.5, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test frule((Zero(), 11.1), kw_demo, 1.5; kw=3.0)<span style="color:green;">true</span>(4.5, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-116,7 +116,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            res, pullback = rrule(NonDiffExample, 2.0)
+<span style="color:inherit;"> |</span>            @test res == NonDiffExample(2.0)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test pullback(1.2)</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>            @test pullback(1.2)<span style="color:green;">true</span>(NO_FIELDS, DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            # https://github.com/JuliaDiff/ChainRulesCore.jl/issues/213
+<span style="color:inherit;"> |</span>            # problem was that &#96;@nondiff Foo(x)&#96; was also defining rules for other types.
+<span style="color:inherit;">@|</span><span style="color:inherit;">-132,13 +132,13</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                y, pb = rrule(fvarargs, 1)
+<span style="color:inherit;"> |</span>                @test y == fvarargs(1)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pb(1)</span><span style="color:red;"> == </span><span style="color:gray;">(Zero(), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pb(1)<span style="color:green;">true</span>(Zero(), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                y, pb = rrule(fvarargs, 1, 2.0, 3.0)
+<span style="color:inherit;"> |</span>                @test y == fvarargs(1, 2.0, 3.0)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pb(1)</span><span style="color:red;"> == </span><span style="color:gray;">(Zero(), DoesNotExist(), DoesNotExist(), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pb(1)<span style="color:green;">true</span>(Zero(), DoesNotExist(), DoesNotExist(), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test frule((1, 1), fvarargs, 1, 2.0)</span><span style="color:red;"> == </span><span style="color:gray;">(fvarargs(1, 2.0), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test frule((1, 1), fvarargs, 1, 2.0)<span style="color:green;">true</span>(fvarargs(1, 2.0), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                @test frule((1, 1), fvarargs, 1, 2) == nothing
+<span style="color:inherit;"> |</span>                    @test rrule(fvarargs, 1, 2) == nothing
+<span style="color:inherit;">@|</span><span style="color:inherit;">-149,9 +149,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                y, pb = rrule(fvarargs, 1, 2.0, 3.0)
+<span style="color:inherit;"> |</span>                @test y == fvarargs(1, 2.0, 3.0)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pb(1)</span><span style="color:red;"> == </span><span style="color:gray;">(Zero(), DoesNotExist(), DoesNotExist(), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pb(1)<span style="color:green;">true</span>(Zero(), DoesNotExist(), DoesNotExist(), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test frule((1, 1), fvarargs, 1, 2.0)</span><span style="color:red;"> == </span><span style="color:gray;">(fvarargs(1, 2.0), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test frule((1, 1), fvarargs, 1, 2.0)<span style="color:green;">true</span>(fvarargs(1, 2.0), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @testset &#34;::Vararg{Float64}&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-159,27 +159,27</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                y, pb = rrule(fvarargs, 1, 2.0, 3.0)
+<span style="color:inherit;"> |</span>                @test y == fvarargs(1, 2.0, 3.0)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pb(1)</span><span style="color:red;"> == </span><span style="color:gray;">(Zero(), DoesNotExist(), DoesNotExist(), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pb(1)<span style="color:green;">true</span>(Zero(), DoesNotExist(), DoesNotExist(), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test frule((1, 1), fvarargs, 1, 2.0)</span><span style="color:red;"> == </span><span style="color:gray;">(fvarargs(1, 2.0), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test frule((1, 1), fvarargs, 1, 2.0)<span style="color:green;">true</span>(fvarargs(1, 2.0), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @testset &#34;::Vararg&#34; begin
+<span style="color:inherit;"> |</span>                @non_differentiable fvarargs(a, ::Vararg)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test frule((1, 1), fvarargs, 1, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(fvarargs(1, 2), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test frule((1, 1), fvarargs, 1, 2)<span style="color:green;">true</span>(fvarargs(1, 2), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                y, pb = rrule(fvarargs, 1, 1)
+<span style="color:inherit;"> |</span>                @test y == fvarargs(1, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pb(1)</span><span style="color:red;"> == </span><span style="color:gray;">(Zero(), DoesNotExist(), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pb(1)<span style="color:green;">true</span>(Zero(), DoesNotExist(), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @testset &#34;xs...&#34; begin
+<span style="color:inherit;"> |</span>                @non_differentiable fvarargs(a, xs...)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test frule((1, 1), fvarargs, 1, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(fvarargs(1, 2), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test frule((1, 1), fvarargs, 1, 2)<span style="color:green;">true</span>(fvarargs(1, 2), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                y, pb = rrule(fvarargs, 1, 1)
+<span style="color:inherit;"> |</span>                @test y == fvarargs(1, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">                @test pb(1)</span><span style="color:red;"> == </span><span style="color:gray;">(Zero(), DoesNotExist(), DoesNotExist())</span></span>
+<span style="color:green;">+|</span></span>                @test pb(1)<span style="color:green;">true</span>(Zero(), DoesNotExist(), DoesNotExist())</span>
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-199,7 +199,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            y, simo_pb = rrule(simo, π)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test simo_pb((10f0, 20f0))</span><span style="color:red;"> == </span><span style="color:gray;">(NO_FIELDS, 50f0)</span></span>
+<span style="color:green;">+|</span></span>            @test simo_pb((10f0, 20f0))<span style="color:green;">true</span>(NO_FIELDS, 50f0)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            y, ẏ = frule((NO_FIELDS, 50f0), simo, π)
+<span style="color:inherit;"> |</span>            @test y == (π, 2π)
+<span style="color:red;">------ </span><span style="color:inherit;">test/rules.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/rules.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-96,17 +96,17</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Test that these run. Do not care about numerical correctness.
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frule((nothing, 1.0, 1.0, 1.0), varargs_function, 0.5, 0.5, 0.5)</span><span style="color:red;"> == </span><span style="color:gray;">(1.5, 3.0)</span></span>
+<span style="color:green;">+|</span></span>    @test frule((nothing, 1.0, 1.0, 1.0), varargs_function, 0.5, 0.5, 0.5)<span style="color:green;">true</span>(1.5, 3.0)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frule((nothing, 1.0, 2.0, 3.0, 4.0), mixed_vararg, 1.0, 2.0, 3.0, 4.0)</span><span style="color:red;"> == </span><span style="color:gray;">(10.0, 10.0)</span></span>
+<span style="color:green;">+|</span></span>    @test frule((nothing, 1.0, 2.0, 3.0, 4.0), mixed_vararg, 1.0, 2.0, 3.0, 4.0)<span style="color:green;">true</span>(10.0, 10.0)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frule((nothing, 3, 2.0), type_constraints, 5, 4.0)</span><span style="color:red;"> == </span><span style="color:gray;">(9.0, 5.0)</span></span>
+<span style="color:green;">+|</span></span>    @test frule((nothing, 3, 2.0), type_constraints, 5, 4.0)<span style="color:green;">true</span>(9.0, 5.0)</span>
+<span style="color:inherit;"> |</span>    @test frule((nothing, 3.0, 2.0im), type_constraints, 5, 4.0) == nothing
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test(frule(
+<span style="color:inherit;"> |</span>        (nothing, 3.0, 2.0, 1.0, 0.0),
+<span style="color:inherit;"> |</span>        mixed_vararg_type_constaint, 3.0, 2.0, 1.0, 0.0,
+<span style="color:red;">-|</span></span><span style="color:gray;">    )</span><span style="color:red;"> == </span><span style="color:gray;">(6.0, 6.0))</span></span>
+<span style="color:green;">+|</span></span>    )<span style="color:green;">true</span>(6.0, 6.0))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # violates type constraints, thus an frule should not be found.
+<span style="color:inherit;"> |</span>    @test frule(
+<span style="color:inherit;">@|</span><span style="color:inherit;">-114,7 +114,7</span> ============================================================
+<span style="color:inherit;"> |</span>        mixed_vararg_type_constaint, 3, 2.0, 1.0, 0,
+<span style="color:inherit;"> |</span>    ) == nothing
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test frule((nothing, nothing, 5.0), Core._apply, dummy_identity, 4.0)</span><span style="color:red;"> == </span><span style="color:gray;">(4.0, 5.0)</span></span>
+<span style="color:green;">+|</span></span>    @test frule((nothing, nothing, 5.0), Core._apply, dummy_identity, 4.0)<span style="color:green;">true</span>(4.0, 5.0)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;broadcasting One&#34; begin
+<span style="color:inherit;"> |</span>        sx = @SVector [1, 2]
+<span style="color:red;">------ </span><span style="color:inherit;">test/demos/reversediffzero.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/demos/reversediffzero.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-121,21 +121,21</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;ReversedDiffZero&#34; begin
+<span style="color:inherit;"> |</span>    foo(x) = x + x
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test derv(foo, 1.6)</span><span style="color:red;"> == </span><span style="color:gray;">(2.0,)</span></span>
+<span style="color:green;">+|</span></span>    @test derv(foo, 1.6)<span style="color:green;">true</span>(2.0,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    bar(x) = x + 2.1 * x
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test derv(bar, 1.2)</span><span style="color:red;"> == </span><span style="color:gray;">(3.1,)</span></span>
+<span style="color:green;">+|</span></span>    @test derv(bar, 1.2)<span style="color:green;">true</span>(3.1,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    baz(x) = 2.0 * x^2 + 3.0*x + 1.2
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test derv(baz, 1.7)</span><span style="color:red;"> == </span><span style="color:gray;">(2 * 2.0 * 1.7 + 3.0,)</span></span>
+<span style="color:green;">+|</span></span>    @test derv(baz, 1.7)<span style="color:green;">true</span>(2 * 2.0 * 1.7 + 3.0,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    qux(x) = foo(x) + bar(x) + baz(x)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test derv(qux, 1.7)</span><span style="color:red;"> == </span><span style="color:gray;">((2 * 2.0 * 1.7 + 3.0) + 3.1 + 2,)</span></span>
+<span style="color:green;">+|</span></span>    @test derv(qux, 1.7)<span style="color:green;">true</span>((2 * 2.0 * 1.7 + 3.0) + 3.1 + 2,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function quux(x)
+<span style="color:inherit;"> |</span>        y = 2.0*x + 3.0*x
+<span style="color:inherit;"> |</span>        return 4.0*y + 5.0*y
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test derv(quux, 11.1)</span><span style="color:red;"> == </span><span style="color:gray;">(4*(2+3) + 5*(2+3),)</span></span>
+<span style="color:green;">+|</span></span>    @test derv(quux, 11.1)<span style="color:green;">true</span>(4*(2+3) + 5*(2+3),)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>end  # module
+<span style="color:red;">------ </span><span style="color:inherit;">test/demos/forwarddiffzero.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/demos/forwarddiffzero.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +79,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test derv(baz, 1.7) == 2*2.0*1.7 + 3.0
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    qux(x) = foo(x) + bar(x) + baz(x)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test derv(qux, 1.7)</span><span style="color:red;"> == </span><span style="color:gray;">(2*2.0*1.7 + 3.0) + 3.1 + 2</span></span>
+<span style="color:green;">+|</span></span>    @test derv(qux, 1.7)<span style="color:green;">true</span>(2*2.0*1.7 + 3.0) + 3.1 + 2</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function quux(x)
+<span style="color:inherit;"> |</span>        y = 2.0*x + 3</div>
+</pre> <h3 id=omit_fx_fx_and_fx_fx_3_hits ><a href="#omit_fx_fx_and_fx_fx_3_hits">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 3 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/differentials/composite.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/differentials/composite.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-235,12 +235,12</span> ============================================================
+<span style="color:inherit;"> |</span>        c = Composite{Foo}(y=1.5, x=2.5)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test DoesNotExist() * c == DoesNotExist()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test c * </span><span style="color:red;">DoesNotExist() == DoesNotExist()</span></span>
+<span style="color:green;">+|</span></span>        @test c * <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>        @test dot(DoesNotExist(), c) == DoesNotExist()
+<span style="color:inherit;"> |</span>        @test dot(c, DoesNotExist()) == DoesNotExist()
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test Zero() * c == Zero()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test c * </span><span style="color:red;">Zero() == Zero()</span></span>
+<span style="color:green;">+|</span></span>        @test c * <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>        @test dot(Zero(), c) == Zero()
+<span style="color:inherit;"> |</span>        @test dot(c, Zero()) == Zero()
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/differentials/abstract_zero.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/differentials/abstract_zero.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-87,7 +87,7</span> ============================================================
 <span style="color:inherit;"> |</span>        @test dne - Zero() == dne
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        @test Zero() * dne == Zero()

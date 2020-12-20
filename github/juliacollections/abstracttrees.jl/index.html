@@ -1,1 +1,53 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/AbstractTrees.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/AbstractTrees.jl" target=_blank >JuliaCollections/AbstractTrees.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/AbstractTrees.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/AbstractTrees.jl" target=_blank >JuliaCollections/AbstractTrees.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_5_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 5 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_5_hits ><a href="#omit_a_a_and_a_a_5_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 5 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/builtins.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/builtins.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>    tree = Any[1,Any[2,3]]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    T = Vector{Any}  # This is printed as &#34;Array{Any,1}&#34; in older versions of Julia
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr_tree(tree)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;$T\n├─ 1\n└─ $T\n   ├─ 2\n   └─ 3\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr_tree(tree)<span style="color:green;">true</span>&#34;$T\n├─ 1\n└─ $T\n   ├─ 2\n   └─ 3\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test collect(Leaves(tree)) == [1,2,3]
+<span style="color:inherit;"> |</span>    @test collect(Leaves(tree)) isa Vector{Int}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-24,7 +24,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test children(expr) == expr.args
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr_tree(expr)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Expr(:call)\n├─ :foo\n└─ Expr(:call)\n   ├─ :+\n   ├─ Expr(:call)\n   │  ├─ :^\n   │  ├─ :x\n   │  └─ 2\n   └─ 3\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr_tree(expr)<span style="color:green;">true</span>&#34;Expr(:call)\n├─ :foo\n└─ Expr(:call)\n   ├─ :+\n   ├─ Expr(:call)\n   │  ├─ :^\n   │  ├─ :x\n   │  └─ 2\n   └─ 3\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test collect(Leaves(expr)) == [:foo, :+, :^, :x, 2, 3]
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
+<span style="color:inherit;"> |</span>    modules = [AbstractTrees],
+<span style="color:inherit;"> |</span>    sitename = &#34;AbstractTrees.jl&#34;,
+<span style="color:inherit;"> |</span>    authors = &#34;Keno Fischer&#34;,
+<span style="color:red;">-|</span></span><span style="color:gray;">    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;),</span></span>
+<span style="color:green;">+|</span></span>    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;),</span>
+<span style="color:inherit;"> |</span>    pages = [
+<span style="color:inherit;"> |</span>        &#34;index.md&#34;,
+<span style="color:inherit;"> |</span>        &#34;api.md&#34;,
+<span style="color:red;">------ </span><span style="color:inherit;">test/trees.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/trees.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-19,7 +19,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;OneTree&#34; begin
+<span style="color:inherit;"> |</span>    ot = OneTree([2,3,4,0])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr_tree(ot)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;2\n└─ 3\n   └─ 4\n      └─ 0\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr_tree(ot)<span style="color:green;">true</span>&#34;2\n└─ 3\n   └─ 4\n      └─ 0\n&#34;</span>
+<span style="color:inherit;"> |</span>    @test @inferred(collect(Leaves(ot))) == [0]
+<span style="color:inherit;"> |</span>    @test eltype(collect(Leaves(ot))) === Int
+<span style="color:inherit;"> |</span>    @test collect(PreOrderDFS(ot)) == [2,3,4,0]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-51,7 +51,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ot = OneTree([2,3,4,0])
+<span style="color:inherit;"> |</span>    pt = ParentTree(ot,[0,1,2,3])
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr_tree(pt)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;2\n└─ 3\n   └─ 4\n      └─ 0\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr_tree(pt)<span style="color:green;">true</span>&#34;2\n└─ 3\n   └─ 4\n      └─ 0\n&#34;</span>
+<span style="color:inherit;"> |</span>    @test collect(Leaves(pt)) == [0]
+<span style="color:inherit;"> |</span>    @test collect(PreOrderDFS(pt)) == [2,3,4,0]
+<span style="color:inherit;"> |</span>    @test collect(PostOrderDFS(pt)) == [0,4,</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

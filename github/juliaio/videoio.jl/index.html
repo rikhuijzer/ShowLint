@@ -1,1 +1,35 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaIO/VideoIO.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaIO/VideoIO.jl" target=_blank >JuliaIO/VideoIO.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaIO/VideoIO.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaIO/VideoIO.jl" target=_blank >JuliaIO/VideoIO.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_3_hits ><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/avio.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/avio.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-192,7 +192,7</span> ============================================================
+<span style="color:inherit;"> |</span>        file = joinpath(videodir, &#34;annie_oakley.ogg&#34;)
+<span style="color:inherit;"> |</span>        @test VideoIO.get_duration(file) == 24224200/1e6
+<span style="color:inherit;"> |</span>        @test VideoIO.get_start_time(file) == DateTime(1970, 1, 1)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test VideoIO.get_time_duration(file)</span><span style="color:red;"> == </span><span style="color:gray;">(DateTime(1970, 1, 1), 24224200/1e6)</span></span>
+<span style="color:green;">+|</span></span>        @test VideoIO.get_time_duration(file)<span style="color:green;">true</span>(DateTime(1970, 1, 1), 24224200/1e6)</span>
+<span style="color:inherit;"> |</span>        @test VideoIO.get_number_frames(file) === nothing
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @testset &#34;Reading the number of frames from container&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">util/archive/wrap_avbin.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">util/archive/wrap_avbin.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>get_header_outfile(hpath) = &#34;avbin.jl&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">check_use_header(top_h, hpath) = basename(top_h)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;avbin.h&#34;</span></span>
+<span style="color:green;">+|</span></span>check_use_header(top_h, hpath) = basename(top_h)<span style="color:green;">true</span>&#34;avbin.h&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function rewrite_fn(e::Expr)
+<span style="color:inherit;"> |</span>    (head, call, body) = @match e Expr(head, [call, body], _) => (head, call, body)
+<span style="color:red;">------ </span><span style="color:inherit;">src/avio.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/avio.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-705,7 +705,7</span> ============================================================
+<span style="color:inherit;"> |</span>function eof(avin::AVInput)
+<span style="color:inherit;"> |</span>    !isopen(avin) && return true
+<span style="color:inherit;"> |</span>    have_frame(avin) && return false
+<span style="color:red;">-|</span></span><span style="color:gray;">    got_frame = (pump(avin)</span><span style="color:red;"> != </span><span style="color:gray;">-1)</span></span>
+<span style="color:green;">+|</span></span>    got_frame = (pump(avin)<span style="color:green;">false</span>-1)</span>
+<span style="color:inherit;"> |</span>    return !got_frame
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</s</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

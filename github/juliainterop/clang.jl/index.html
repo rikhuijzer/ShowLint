@@ -1,1 +1,170 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaInterop/Clang.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaInterop/Clang.jl" target=_blank >JuliaInterop/Clang.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaInterop/Clang.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaInterop/Clang.jl" target=_blank >JuliaInterop/Clang.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_27_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 27 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_27_hits ><a href="#omit_a_a_and_a_a_27_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 27 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/enum.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/enum.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,5 +10,5</span> ============================================================
+<span style="color:inherit;"> |</span>    wrap!(ctx, cursors[1])
+<span style="color:inherit;"> |</span>    io = IOBuffer()
+<span style="color:inherit;"> |</span>    print_buffer(io, dump_to_buffer(ctx.common_buffer))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\n@cenum(_foo{Int32},\n    BAR = 0,\n    BAZ = -9,\n)\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test String(take!(io))<span style="color:green;">true</span>&#34;\n@cenum(_foo{Int32},\n    BAR = 0,\n    BAZ = -9,\n)\n&#34;</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/macro.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/macro.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-19,7 +19,7</span> ============================================================
+<span style="color:inherit;"> |</span>    body = children(func)[1]
+<span style="color:inherit;"> |</span>    op = children(body)[3]
+<span style="color:inherit;"> |</span>    subop = children(op)[2]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test mapreduce(x->x.text, *, tokenize(subop))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;FOO(foo,1,x)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test mapreduce(x->x.text, *, tokenize(subop))<span style="color:green;">true</span>&#34;FOO(foo,1,x)&#34;</span>
+<span style="color:inherit;"> |</span>    wrap!(ctx, func)
+<span style="color:inherit;"> |</span>    @test !isempty(ctx.api_buffer)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/struct.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/struct.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,10 +10,10</span> ============================================================
+<span style="color:inherit;"> |</span>        cursors = children(root_cursor)
+<span style="color:inherit;"> |</span>        # enum
+<span style="color:inherit;"> |</span>        enum_cursor = cursors[1]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test name(enum_cursor)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Fruit&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test name(enum_cursor)<span style="color:green;">true</span>&#34;Fruit&#34;</span>
+<span style="color:inherit;"> |</span>        # struct
+<span style="color:inherit;"> |</span>        struct_cursor = cursors[2]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test name(struct_cursor)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Foo&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test name(struct_cursor)<span style="color:green;">true</span>&#34;Foo&#34;</span>
+<span style="color:inherit;"> |</span>        # field
+<span style="color:inherit;"> |</span>        struct_fields = children(struct_cursor)
+<span style="color:inherit;"> |</span>        enum_field_cursor = struct_fields[1]
+<span style="color:red;">------ </span><span style="color:inherit;">test/cbasic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/cbasic.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-12,13 +12,13</span> ============================================================
+<span style="color:inherit;"> |</span>    # get root cursor
+<span style="color:inherit;"> |</span>    root_cursor = getcursor(trans_unit)
+<span style="color:inherit;"> |</span>    # search the first macro defination &#34;#define CONST 1&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">    cursorCONST = search(root_cursor, x->kind(x)==CXCursor_MacroDefinition && name(x)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;CONST&#34;)</span></span>
+<span style="color:green;">+|</span></span>    cursorCONST = search(root_cursor, x->kind(x)==CXCursor_MacroDefinition && name(x)<span style="color:green;">true</span>&#34;CONST&#34;)</span>
+<span style="color:inherit;"> |</span>    toksCONST = tokenize(cursorCONST[1])
+<span style="color:inherit;"> |</span>    @test kind(toksCONST[1]) == CXToken_Identifier
+<span style="color:inherit;"> |</span>    @test kind(toksCONST[2]) == CXToken_Literal
+<span style="color:inherit;"> |</span>    @test toksCONST[2].text == &#34;1&#34;
+<span style="color:inherit;"> |</span>    # search the second macro defination &#34;#define CONSTADD CONST + 2&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">    cursorCONSTADD = search(root_cursor, x->kind(x)==CXCursor_MacroDefinition && name(x)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;CONSTADD&#34;)</span></span>
+<span style="color:green;">+|</span></span>    cursorCONSTADD = search(root_cursor, x->kind(x)==CXCursor_MacroDefinition && name(x)<span style="color:green;">true</span>&#34;CONSTADD&#34;)</span>
+<span style="color:inherit;"> |</span>    toksCONSTADD = tokenize(cursorCONSTADD[1])
+<span style="color:inherit;"> |</span>    @test toksCONSTADD[1].text == &#34;CONSTADD&#34;
+<span style="color:inherit;"> |</span>    @test toksCONSTADD[2].text == &#34;CONST&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">test/typedef.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/typedef.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-14,17 +14,17</span> ============================================================
+<span style="color:inherit;"> |</span>    volatile_array = cursors[1]
+<span style="color:inherit;"> |</span>    volatile_type = underlying_type(volatile_array)
+<span style="color:inherit;"> |</span>    @test kind(volatile_type) != CXType_Unexposed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spelling(volatile_array)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;foo&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spelling(volatile_array)<span style="color:green;">true</span>&#34;foo&#34;</span>
+<span style="color:inherit;"> |</span>    # case 2
+<span style="color:inherit;"> |</span>    char_array = cursors[2]
+<span style="color:inherit;"> |</span>    char_array_type = underlying_type(char_array)
+<span style="color:inherit;"> |</span>    @test kind(char_array_type) != CXType_Unexposed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spelling(char_array)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;arrayType&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spelling(char_array)<span style="color:green;">true</span>&#34;arrayType&#34;</span>
+<span style="color:inherit;"> |</span>    # case 3
+<span style="color:inherit;"> |</span>    struct_alias = cursors[4]
+<span style="color:inherit;"> |</span>    struct_alias_type = underlying_type(struct_alias)
+<span style="color:inherit;"> |</span>    @test kind(struct_alias_type) != CXType_Unexposed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spelling(struct_alias)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;alias&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spelling(struct_alias)<span style="color:green;">true</span>&#34;alias&#34;</span>
+<span style="color:inherit;"> |</span>    # case 4
+<span style="color:inherit;"> |</span>    node = cursors[5]
+<span style="color:inherit;"> |</span>    node_type = type(node)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,7 +41,7</span> ============================================================
+<span style="color:inherit;"> |</span>    node_typedef = cursors[6]
+<span style="color:inherit;"> |</span>    node_typedef_type = underlying_type(node_typedef)
+<span style="color:inherit;"> |</span>    @test kind(node_typedef_type) != CXType_Unexposed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spelling(node_typedef)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Node&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spelling(node_typedef)<span style="color:green;">true</span>&#34;Node&#34;</span>
+<span style="color:inherit;"> |</span>    # issue #213
+<span style="color:inherit;"> |</span>    wrap!(ctx, cursors[9])
+<span style="color:inherit;"> |</span>    expr = :(const bar = _bar)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-69,42 +69,42</span> ============================================================
+<span style="color:inherit;"> |</span>    cursors = children(root_cursor)
+<span style="color:inherit;"> |</span>    # case 1
+<span style="color:inherit;"> |</span>    anonymous_typedef_enum = cursors[1]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(anonymous_typedef_enum)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(anonymous_typedef_enum)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    next_cursor = cursors[2]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(next_cursor)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Fruit&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(next_cursor)<span style="color:green;">true</span>&#34;Fruit&#34;</span>
+<span style="color:inherit;"> |</span>    @test kind(next_cursor) == CXCursor_TypedefDecl
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(children(next_cursor)[1])</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(children(next_cursor)[1])<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    @test is_typedef_anon(anonymous_typedef_enum, next_cursor) == true
+<span style="color:inherit;"> |</span>    # case 2
+<span style="color:inherit;"> |</span>    common_enum = cursors[3]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(common_enum)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Banana&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(common_enum)<span style="color:green;">true</span>&#34;Banana&#34;</span>
+<span style="color:inherit;"> |</span>    next_cursor = cursors[4]
+<span style="color:inherit;"> |</span>    @test kind(next_cursor) == CXCursor_TypedefDecl
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(children(next_cursor)[1])</span><span style="color:red;"> != </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(children(next_cursor)[1])<span style="color:green;">false</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    @test is_typedef_anon(common_enum, next_cursor) == false
+<span style="color:inherit;"> |</span>    # case 3
+<span style="color:inherit;"> |</span>    anonymous_typedef_struct = cursors[5]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(anonymous_typedef_struct)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(anonymous_typedef_struct)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    next_cursor = cursors[6]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(next_cursor)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Foo&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(next_cursor)<span style="color:green;">true</span>&#34;Foo&#34;</span>
+<span style="color:inherit;"> |</span>    @test kind(next_cursor) == CXCursor_TypedefDecl
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(children(next_cursor)[1])</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(children(next_cursor)[1])<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    @test is_typedef_anon(anonymous_typedef_struct, next_cursor) == true
+<span style="color:inherit;"> |</span>    # case 4
+<span style="color:inherit;"> |</span>    attribute_struct = cursors[7]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(attribute_struct)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(attribute_struct)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    next_cursor = cursors[8]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(next_cursor)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;char2&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(next_cursor)<span style="color:green;">true</span>&#34;char2&#34;</span>
+<span style="color:inherit;"> |</span>    @test kind(next_cursor) == CXCursor_TypedefDecl
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(children(next_cursor)[1])</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(children(next_cursor)[1])<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    @test is_typedef_anon(attribute_struct, next_cursor) == true
+<span style="color:inherit;"> |</span>    # case 5
+<span style="color:inherit;"> |</span>    anonymous_typedef_union = cursors[9]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(anonymous_typedef_union)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(anonymous_typedef_union)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    next_cursor = cursors[10]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(next_cursor)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;handle&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(next_cursor)<span style="color:green;">true</span>&#34;handle&#34;</span>
+<span style="color:inherit;"> |</span>    @test kind(next_cursor) == CXCursor_TypedefDecl
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test name(children(next_cursor)[1])</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test name(children(next_cursor)[1])<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    @test is_typedef_anon(anonymous_typedef_union, next_cursor) == true
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    ctx.children = cursors
+<span style="color:inherit;">@|</span><span style="color:inherit;">-129,12 +129,12</span> ============================================================
+<span style="color:inherit;"> |</span>    int_pointer = cursors[1]
+<span style="color:inherit;"> |</span>    int_pointer_type = underlying_type(int_pointer)
+<span style="color:inherit;"> |</span>    @test kind(int_pointer_type) != CXType_Unexposed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spelling(int_pointer)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;intptr&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spelling(int_pointer)<span style="color:green;">true</span>&#34;intptr&#34;</span>
+<span style="color:inherit;"> |</span>    # case 2
+<span style="color:inherit;"> |</span>    function_pointer = cursors[2]
+<span style="color:inherit;"> |</span>    function_pointer_type = underlying_type(function_pointer)
+<span style="color:inherit;"> |</span>    @test kind(function_pointer_type) != CXType_Unexposed
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spelling(function_pointer)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;funcptr&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spelling(function_pointer)<span style="color:green;">true</span>&#34;funcptr&#34;</span>
+<span style="color:inherit;"> |</span>    # case 3
+<span style="color:inherit;"> |</span>    FOO = cursors[4]
+<span style="color:inherit;"> |</span>    @test clang2julia(underlying_type(FOO)) == :FOO
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
+<span style="color:inherit;"> |</span>    repo=&#34;https://github.com/JuliaInterop/Clang.jl/blob/{commit}{path}#L{line}&#34;,
+<span style="color:inherit;"> |</span>    sitename=&#34;Clang.jl&#34;,
+<span style="color:inherit;"> |</span>    format=Documenter.HTML(;
+<span style="color:red;">-|</span></span><span style="color:gray;">        prettyurls=get(ENV, &#34;CI&#34;, &#34;false&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;,</span></span>
+<span style="color:green;">+|</span></span>        prettyurls=get(ENV, &#34;CI&#34;, &#34;false&#34;)<span style="color:green;">true</span>&#34;true&#34;,</span>
+<span style="color:inherit;"> |</span>        canonical=&#34;https://JuliaInterop.github.io/Clang.jl&#34;,
+<span style="color:inherit;"> |</span>        assets=String[],
+<span style="color:inherit;"> |</span></div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>FluxML/Zygote.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/FluxML/Zygote.jl" target=_blank >FluxML/Zygote.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a><li><a href="#avoid_x_-_fx_6_hits">Avoid x -&gt; f&#40;x&#41; ➤ 6 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_7_hits ><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>FluxML/Zygote.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/FluxML/Zygote.jl" target=_blank >FluxML/Zygote.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a><li><a href="#avoid_x_-_fx_6_hits">Avoid x -&gt; f&#40;x&#41; ➤ 6 hits</a><li><a href="#omit_a_a_and_a_a_110_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 110 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_7_hits ><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">examples/profiler.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">examples/profiler.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
@@ -79,4 +79,537 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@test gradient(gglobal, 2) == (5,)
 <span style="color:inherit;"> |</s</div>
+</pre> <h3 id=omit_a_a_and_a_a_110_hits ><a href="#omit_a_a_and_a_a_110_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 110 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/profiler/Profile.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/profiler/Profile.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-56,7 +56,7</span> ============================================================
+<span style="color:inherit;"> |</span>  ds = []
+<span style="color:inherit;"> |</span>  for c in cs
+<span style="color:inherit;"> |</span>    c.size == 0 && continue
+<span style="color:red;">-|</span></span><span style="color:gray;">    i = findfirst(x -> (x.func, x.file, x.line)</span><span style="color:red;"> == </span><span style="color:gray;">(c.func, c.file, c.line), ds)</span></span>
+<span style="color:green;">+|</span></span>    i = findfirst(x -> (x.func, x.file, x.line)<span style="color:green;">true</span>(c.func, c.file, c.line), ds)</span>
+<span style="color:inherit;"> |</span>    i === nothing ? push!(ds, c) : (ds[i] = merge(ds[i], c))
+<span style="color:inherit;"> |</span>  end
+<span style="color:inherit;"> |</span>  return ds
+<span style="color:red;">------ </span><span style="color:inherit;">test/gradcheck.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/gradcheck.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-70,17 +70,17</span> ============================================================
+<span style="color:inherit;"> |</span>@test gradient(//, 2, 3) === (1//3, -2//9)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;power&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> x^2, -2)</span><span style="color:red;"> == </span><span style="color:gray;">(-4,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> x^2, -2)<span style="color:green;">true</span>(-4,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> x^10, -1.0)</span><span style="color:red;"> == </span><span style="color:gray;">(-10,) # literal_pow</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> x^10, -1.0)<span style="color:green;">true</span>(-10,) # literal_pow</span>
+<span style="color:inherit;"> |</span>  pow = 10
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> x^pow, -1.0)</span><span style="color:red;"> == </span><span style="color:gray;">(-pow,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> x^pow, -1.0)<span style="color:green;">true</span>(-pow,)</span>
+<span style="color:inherit;"> |</span>  @test gradient(p -> real(2^p), 2)[1] ≈ 4*log(2)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(xs ->sum(xs .^ 2), [2, -1])</span><span style="color:red;"> == </span><span style="color:gray;">([4, -2],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(xs ->sum(xs .^ 2), [2, -1])<span style="color:green;">true</span>([4, -2],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(xs ->sum(xs .^ 10), [3, -1])</span><span style="color:red;"> == </span><span style="color:gray;">([10*3^9, -10],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(xs ->sum(xs .^ 10), [3, -1])<span style="color:green;">true</span>([10*3^9, -10],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(xs ->sum(xs .^ pow), [4, -1])</span><span style="color:red;"> == </span><span style="color:gray;">([pow*4^9, -10],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(xs ->sum(xs .^ pow), [4, -1])<span style="color:green;">true</span>([pow*4^9, -10],)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> real((1+3im) * x^2), 5+7im)</span><span style="color:red;"> == </span><span style="color:gray;">(-32 - 44im,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> real((1+3im) * x^2), 5+7im)<span style="color:green;">true</span>(-32 - 44im,)</span>
+<span style="color:inherit;"> |</span>  @test gradient(p -> real((1+3im) * (5+7im)^p), 2)[1] ≈ (-234 + 2im)*log(5 - 7im)
+<span style="color:inherit;"> |</span>  # D[(1+3I)x^p, p] /. {x->5+7I, p->2} // Conjugate
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-113,15 +113,15</span> ============================================================
+<span style="color:inherit;"> |</span>  @test gradtest(X -> sum(sum(x -> x^2, X; dims=1)), randn(10)) # issue #681
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # Non-differentiable sum of booleans
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(sum, [true, false, true])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(sum, [true, false, true])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x->sum(x .== 0.0), [1.2, 0.2, 0.0, -1.1, 100.0])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x->sum(x .== 0.0), [1.2, 0.2, 0.0, -1.1, 100.0])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # https://github.com/FluxML/Zygote.jl/issues/314
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> sum(yi -> yi*x, y), 1, [1,1])</span><span style="color:red;"> == </span><span style="color:gray;">(2, [1, 1])</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> sum(yi -> yi*x, y), 1, [1,1])<span style="color:green;">true</span>(2, [1, 1])</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> prod(yi -> yi*x, y), 1, [1,1])</span><span style="color:red;"> == </span><span style="color:gray;">(2, [1, 1])</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> prod(yi -> yi*x, y), 1, [1,1])<span style="color:green;">true</span>(2, [1, 1])</span>
+<span style="color:red;">-|</span></span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> sum(map(yi -> yi*x, y)), 1, [1,1])</span><span style="color:red;"> == </span><span style="color:gray;">(2, [1, 1])</span></span>
+<span style="color:green;">+|</span></span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> sum(map(yi -> yi*x, y)), 1, [1,1])<span style="color:green;">true</span>(2, [1, 1])</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> prod(map(yi -> yi*x, y)), 1, [1,1])</span><span style="color:red;"> == </span><span style="color:gray;">(2, [1, 1])</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> prod(map(yi -> yi*x, y)), 1, [1,1])<span style="color:green;">true</span>(2, [1, 1])</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  @test gradtest(x -> prod(x, dims = (2, 3)), (3,4,5))
+<span style="color:inherit;"> |</span>  @test gradtest(x -> prod(x), (3,4))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-156,7 +156,7</span> ============================================================
+<span style="color:inherit;"> |</span>  x = rand(3)
+<span style="color:inherit;"> |</span>  z = [1, 2, 3, 3]
+<span style="color:inherit;"> |</span>  y(x, z) = dot(ones(4), x[z])
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(y, x, z)</span><span style="color:red;"> == </span><span style="color:gray;">([1, 1, 2], nothing)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(y, x, z)<span style="color:green;">true</span>([1, 1, 2], nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # https://github.com/FluxML/Zygote.jl/issues/376
+<span style="color:inherit;"> |</span>  _, back = Zygote._pullback(x->x[1]*im, randn(2))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-164,20 +164,20</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # _droplike
+<span style="color:inherit;"> |</span>  @test gradient(x -> sum(inv, x[1, :]'), ones(2, 2)) == ([-1 -1; 0 0],)
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(inv, x[1:1, :]'), ones(2, 2))</span><span style="color:red;"> == </span><span style="color:gray;">([-1 -1; 0 0],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(inv, x[1:1, :]'), ones(2, 2))<span style="color:green;">true</span>([-1 -1; 0 0],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(inv, transpose(view(x, 1, :))), ones(2, 2))</span><span style="color:red;"> == </span><span style="color:gray;">([-1 -1; 0 0],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(inv, transpose(view(x, 1, :))), ones(2, 2))<span style="color:green;">true</span>([-1 -1; 0 0],)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # https://github.com/FluxML/Zygote.jl/issues/513
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(p -> sum(Float32[1, 0] - p), [2, 3])</span><span style="color:red;"> == </span><span style="color:gray;">([-1, -1],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(p -> sum(Float32[1, 0] - p), [2, 3])<span style="color:green;">true</span>([-1, -1],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(Float32[1, x] .+ x), 4)</span><span style="color:red;"> == </span><span style="color:gray;">(3.0f0,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(Float32[1, x] .+ x), 4)<span style="color:green;">true</span>(3.0f0,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # Ensure that nothings work with numeric types.
+<span style="color:inherit;"> |</span>  _, back = Zygote.pullback(getindex, randn(4), [1])
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test back([nothing])</span><span style="color:red;"> == </span><span style="color:gray;">(zeros(4), nothing)</span></span>
+<span style="color:green;">+|</span></span>  @test back([nothing])<span style="color:green;">true</span>(zeros(4), nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # Ensure that nothings work with non-numeric types.
+<span style="color:inherit;"> |</span>  _, back = Zygote.pullback(getindex, [randn(2) for _ in 1:3], [1])
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test back([nothing])</span><span style="color:red;"> == </span><span style="color:gray;">([nothing for _ in 1:3], nothing)</span></span>
+<span style="color:green;">+|</span></span>  @test back([nothing])<span style="color:green;">true</span>([nothing for _ in 1:3], nothing)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;view&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-187,13 +187,13</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # https://github.com/FluxML/Zygote.jl/issues/272
+<span style="color:inherit;"> |</span>  g(x) = view(x,1:2)[1]
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(g, ones(3))</span><span style="color:red;"> == </span><span style="color:gray;">([1,0,0],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(g, ones(3))<span style="color:green;">true</span>([1,0,0],)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;collect&#34; begin
+<span style="color:inherit;"> |</span>  @test gradient(x -> sum(inv, collect(x)), (1,2)) === ((-1.0, -1/4),)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(collect(view(x, 1:1))), rand(2))</span><span style="color:red;"> == </span><span style="color:gray;">([1,0],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(collect(view(x, 1:1))), rand(2))<span style="color:green;">true</span>([1,0],)</span>
+<span style="color:inherit;"> |</span>  @test gradient(x -> sum(inv, collect(view(x', 1,:))), ones(2,2)) == ([-1 0; -1 0],)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  @test gradient(xs -> sum(inv, [x^2 for x in xs]), ones(2)) == ([-2, -2],)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1072,12 +1072,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;vcat&#34; begin
+<span style="color:inherit;"> |</span>  # Scalar
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> sum(vcat(x,y)), 1,2)</span><span style="color:red;"> == </span><span style="color:gray;">(1,1)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> sum(vcat(x,y)), 1,2)<span style="color:green;">true</span>(1,1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> sum([x;y]), 1,2)</span><span style="color:red;"> == </span><span style="color:gray;">(1,1)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> sum([x;y]), 1,2)<span style="color:green;">true</span>(1,1)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # Scalar + Vector
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(vcat(x, 1, x)), rand(3))</span><span style="color:red;"> == </span><span style="color:gray;">([2,2,2],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(vcat(x, 1, x)), rand(3))<span style="color:green;">true</span>([2,2,2],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> sum(vcat(x, y, y)), rand(3), 4)</span><span style="color:red;"> == </span><span style="color:gray;">([1,1,1], 2)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> sum(vcat(x, y, y)), rand(3), 4)<span style="color:green;">true</span>([1,1,1], 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # Vector-only.
+<span style="color:inherit;"> |</span>  cat_test(vcat, randn(1))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1104,9 +1104,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;hcat&#34; begin
+<span style="color:inherit;"> |</span>  # Scalar
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> sum(hcat(x,y)), 1,2)</span><span style="color:red;"> == </span><span style="color:gray;">(1,1)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> sum(hcat(x,y)), 1,2)<span style="color:green;">true</span>(1,1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((x,y) -> sum([x y]), 1,2)</span><span style="color:red;"> == </span><span style="color:gray;">(1,1)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((x,y) -> sum([x y]), 1,2)<span style="color:green;">true</span>(1,1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient((a,b,c,d) -> sum(sqrt, [a b;c d]), 1,1,1,4)</span><span style="color:red;"> == </span><span style="color:gray;">(0.5, 0.5, 0.5, 0.25)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient((a,b,c,d) -> sum(sqrt, [a b;c d]), 1,1,1,4)<span style="color:green;">true</span>(0.5, 0.5, 0.5, 0.25)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # Vector-only.
+<span style="color:inherit;"> |</span>  for r in [1, 2]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1133,7 +1133,7</span> ============================================================
+<span style="color:inherit;"> |</span>  @test gradient(xs -> hvcat((2,2),xs...)[1,2], [1,2,3,4])[1] == (0,1,0,0)
+<span style="color:inherit;"> |</span>  @test gradient(xs -> hvcat((2,2),xs...)[2,2], [1,2,3,4])[1] == (0,0,0,1)
+<span style="color:inherit;"> |</span>  # https://github.com/FluxML/Zygote.jl/issues/513
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> hvcat((2,2),1,2,3,x)[4], 4.0)</span><span style="color:red;"> == </span><span style="color:gray;">(1.0,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> hvcat((2,2),1,2,3,x)[4], 4.0)<span style="color:green;">true</span>(1.0,)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;cat(..., dims = $dim)&#34; for dim in 1:5
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1254,8 +1254,8</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;* sizing&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test size(Zygote.gradient((x, y)->sum(x * y), randn(1, 1), randn(1, 10))[1])</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1)</span></span>
+<span style="color:green;">+|</span></span>  @test size(Zygote.gradient((x, y)->sum(x * y), randn(1, 1), randn(1, 10))[1])<span style="color:green;">true</span>(1, 1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test size(Zygote.gradient((x, y)->sum(x * y), randn(1, 1), randn(1, 10))[2])</span><span style="color:red;"> == </span><span style="color:gray;">(1, 10)</span></span>
+<span style="color:green;">+|</span></span>  @test size(Zygote.gradient((x, y)->sum(x * y), randn(1, 1), randn(1, 10))[2])<span style="color:green;">true</span>(1, 10)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;broadcast&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1291,7 +1291,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return copy(buf)
+<span style="color:inherit;"> |</span>  end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(vstack(x)), [1, 2, 3])</span><span style="color:red;"> == </span><span style="color:gray;">([5, 5, 5],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(vstack(x)), [1, 2, 3])<span style="color:green;">true</span>([5, 5, 5],)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  buf = Buffer([1, 2, 3])
+<span style="color:inherit;"> |</span>  buf[1] = 1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1302,7 +1302,7</span> ============================================================
+<span style="color:inherit;"> |</span>  @test ndims(buf) === 1
+<span style="color:inherit;"> |</span>  @test size(buf) === (3, )
+<span style="color:inherit;"> |</span>  @test size(buf, 2) === 1
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test axes(buf)</span><span style="color:red;"> == </span><span style="color:gray;">(1:3, )</span></span>
+<span style="color:green;">+|</span></span>  @test axes(buf)<span style="color:green;">true</span>(1:3, )</span>
+<span style="color:inherit;"> |</span>  @test axes(buf, 2) == 1:1
+<span style="color:inherit;"> |</span>  @test eachindex(buf) == 1:3
+<span style="color:inherit;"> |</span>  @test stride(buf, 2) === 3
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1452,7 +1452,7</span> ============================================================
+<span style="color:inherit;"> |</span>  x, y = randn(rng), randn(rng)
+<span style="color:inherit;"> |</span>  @test Zygote.gradient(x->sum(Fill(x, N)), x)[1] == N
+<span style="color:inherit;"> |</span>  @test Zygote.gradient(x->sum(Fill(x, N, 3, 4)), x)[1] == N * 3 * 4
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test Zygote.gradient((x, y)->sum(Fill(x, N)), x, y)</span><span style="color:red;"> == </span><span style="color:gray;">(N, nothing)</span></span>
+<span style="color:green;">+|</span></span>  @test Zygote.gradient((x, y)->sum(Fill(x, N)), x, y)<span style="color:green;">true</span>(N, nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  let
+<span style="color:inherit;"> |</span>    out, back = Zygote.pullback(sum, Fill(x, N))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1501,16 +1501,16</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;@nograd&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x->eachindex([10,20,30])[1], 11)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x->eachindex([10,20,30])[1], 11)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  #These are defined in ChainRules, we test them here to check we are handling them right
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> findfirst(ismissing, x), [1, missing])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> findfirst(ismissing, x), [1, missing])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> findlast(ismissing, x), [1, missing])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> findlast(ismissing, x), [1, missing])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> findall(ismissing, x)[1], [1, missing])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> findall(ismissing, x)[1], [1, missing])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> Zygote.ignore(() -> x*x), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> Zygote.ignore(() -> x*x), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> Zygote.@ignore(x*x), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> Zygote.@ignore(x*x), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:inherit;"> |</span>  @test gradient(1) do x
+<span style="color:inherit;"> |</span>    y = Zygote.@ignore x
+<span style="color:inherit;"> |</span>    x * y
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1525,49 +1525,49</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;UniformScaling to Matrix&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> (Matrix(I, 2, 2); 1.0), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> (Matrix(I, 2, 2); 1.0), [1.0])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> (Matrix(I, (2, 2)); 1.0), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> (Matrix(I, (2, 2)); 1.0), [1.0])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> (Matrix{Float64}(I, 2, 2); 1.0), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> (Matrix{Float64}(I, 2, 2); 1.0), [1.0])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> (Matrix{Float64}(I, (2, 2)); 1.0), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> (Matrix{Float64}(I, (2, 2)); 1.0), [1.0])<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(Matrix(x[1]*I, 2, 2)), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">([2.0],)</span></span>
+<span style="color:green;">+|</span></span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(Matrix(x[1]*I, 2, 2)), [1.0])<span style="color:green;">true</span>([2.0],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(Matrix(x[1]*I, (2, 2))), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">([2.0],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(Matrix(x[1]*I, (2, 2))), [1.0])<span style="color:green;">true</span>([2.0],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(Matrix{Float64}(x[1]*I, 2, 2)), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">([2.0],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(Matrix{Float64}(x[1]*I, 2, 2)), [1.0])<span style="color:green;">true</span>([2.0],)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(Matrix{Float64}(x[1]*I, (2, 2))), [1.0])</span><span style="color:red;"> == </span><span style="color:gray;">([2.0],)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(Matrix{Float64}(x[1]*I, (2, 2))), [1.0])<span style="color:green;">true</span>([2.0],)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>  # Check we haven't broken the forward pass:
+<span style="color:inherit;"> |</span>  @test first(Zygote.pullback(x->Matrix(x*I, 2,2), 8.0)) == Matrix(8.0*I, 2,2)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;random&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> rand(), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> rand(), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(4)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(4)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(4)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(4)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randn(Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randn(Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randn(Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randn(Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randexp(Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randexp(Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randexp(Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randexp(Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> rand(), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> rand(), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, 4)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, 4)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, 4)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, 4)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(rand(Random.GLOBAL_RNG, Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randn(Random.GLOBAL_RNG, Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randn(Random.GLOBAL_RNG, Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randn(Random.GLOBAL_RNG, Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randn(Random.GLOBAL_RNG, Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randexp(Random.GLOBAL_RNG, Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randexp(Random.GLOBAL_RNG, Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> sum(randexp(Random.GLOBAL_RNG, Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> sum(randexp(Random.GLOBAL_RNG, Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @static if VERSION > v&#34;1.3&#34;</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test gradient(x -> sum(rand(Random.default_rng(), 4)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span></span>
+<span style="color:green;">+|</span></span>  @static if VERSION > v&#34;1.3&#34;</span>
+<span style="color:green;">+|</span></span>    @test gradient(x -> sum(rand(Random.default_rng(), 4)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test gradient(x -> sum(rand(Random.default_rng(), Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>    @test gradient(x -> sum(rand(Random.default_rng(), Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test gradient(x -> sum(rand(Random.default_rng(), Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>    @test gradient(x -> sum(rand(Random.default_rng(), Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test gradient(x -> sum(randn(Random.default_rng(), Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>    @test gradient(x -> sum(randn(Random.default_rng(), Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test gradient(x -> sum(randn(Random.default_rng(), Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>    @test gradient(x -> sum(randn(Random.default_rng(), Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test gradient(x -> sum(randexp(Random.default_rng(), Float32, 1,1)), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>    @test gradient(x -> sum(randexp(Random.default_rng(), Float32, 1,1)), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test gradient(x -> sum(randexp(Random.default_rng(), Float32, (1,1))), 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>    @test gradient(x -> sum(randexp(Random.default_rng(), Float32, (1,1))), 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:inherit;"> |</span>  end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1581,10 +1581,10</span> ============================================================
+<span style="color:inherit;"> |</span>      gfun(args...) = gradient((x, y) -> sum(op.(x,y)), args...)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>      @test fun(r, z) == fun(r, bool)
+<span style="color:red;">-|</span></span><span style="color:gray;">      @test gfun(r, bool)</span><span style="color:red;"> == </span><span style="color:gray;">(gfun(r, z)[1], nothing)</span></span>
+<span style="color:green;">+|</span></span>      @test gfun(r, bool)<span style="color:green;">true</span>(gfun(r, z)[1], nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>      @test fun(z, r) == fun(bool, r)
+<span style="color:red;">-|</span></span><span style="color:gray;">      @test gfun(bool, r)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing, gfun(z, r)[2])</span></span>
+<span style="color:green;">+|</span></span>      @test gfun(bool, r)<span style="color:green;">true</span>(nothing, gfun(z, r)[2])</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Implicit&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/forward/forward.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/forward/forward.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-2,9 +2,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>D(f, x) = pushforward(f, x)(1)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test D(x -> sin(cos(x)), 0.5)</span><span style="color:red;"> == </span><span style="color:gray;">-cos(cos(0.5))*sin(0.5)</span></span>
+<span style="color:green;">+|</span></span>@test D(x -> sin(cos(x)), 0.5)<span style="color:green;">true</span>-cos(cos(0.5))*sin(0.5)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test D(x -> D(cos, x), 0.5)</span><span style="color:red;"> == </span><span style="color:gray;">-cos(0.5)</span></span>
+<span style="color:green;">+|</span></span>@test D(x -> D(cos, x), 0.5)<span style="color:green;">true</span>-cos(0.5)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@test D(x -> x*D(y -> x*y, 1), 4) == 8
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/threads.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/threads.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
+<span style="color:inherit;"> |</span>  end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(threads1, 5)</span><span style="color:red;"> == </span><span style="color:gray;">(10,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(threads1, 5)<span style="color:green;">true</span>(10,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function threads2(xs)
+<span style="color:inherit;"> |</span>  n = length(xs)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-30,4 +30,4</span> ============================================================
+<span style="color:inherit;"> |</span>  return p[1]+p[2]
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(threads2, [1, 2, 3, 4])</span><span style="color:red;"> == </span><span style="color:gray;">([1, 1, 1, 1],)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(threads2, [1, 2, 3, 4])<span style="color:green;">true</span>([1, 1, 1, 1],)</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/structures.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/structures.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-5,7 +5,7</span> ============================================================
+<span style="color:inherit;"> |</span>  put!(ch, x^2) + take!(ch)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(tasks1, 5)</span><span style="color:red;"> == </span><span style="color:gray;">(20,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(tasks1, 5)<span style="color:green;">true</span>(20,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function tasks2(x)
+<span style="color:inherit;"> |</span>  ch = Channel(0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
+<span style="color:inherit;"> |</span>  return y
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(tasks2, 5)</span><span style="color:red;"> == </span><span style="color:gray;">(10,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(tasks2, 5)<span style="color:green;">true</span>(10,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function tasks3(x)
+<span style="color:inherit;"> |</span>  ch = Channel(0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-25,13 +25,13</span> ============================================================
+<span style="color:inherit;"> |</span>  end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(tasks3, 5)</span><span style="color:red;"> == </span><span style="color:gray;">(10,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(tasks3, 5)<span style="color:green;">true</span>(10,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>tasks4(x) = fetch(@async x^2)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(tasks4, 5)</span><span style="color:red;"> == </span><span style="color:gray;">(10,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(tasks4, 5)<span style="color:green;">true</span>(10,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>tasks5(x) = fetch(schedule(Task(() -> x^2)))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(tasks5, 5)</span><span style="color:red;"> == </span><span style="color:gray;">(10,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(tasks5, 5)<span style="color:green;">true</span>(10,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>include(&#34;threads.jl&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/features.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/features.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-16,7 +16,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test y == 6
+<span style="color:inherit;"> |</span>@test dx == (12, 8)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(mul, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 2)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(mul, 2, 3)<span style="color:green;">true</span>(3, 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>bool = true
+<span style="color:inherit;"> |</span>b(x) = bool ? 2x : x
+<span style="color:inherit;">@|</span><span style="color:inherit;">-29,14 +29,14</span> ============================================================
+<span style="color:inherit;"> |</span>fglobal = x -> 5x
+<span style="color:inherit;"> |</span>gglobal = x -> fglobal(x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(gglobal, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(5,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(gglobal, 2)<span style="color:green;">true</span>(5,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>global bool = false
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>y, back = pullback(b, 3)
+<span style="color:inherit;"> |</span>dx = back(4)
+<span style="color:inherit;"> |</span>@test y == 3
+<span style="color:red;">-|</span></span><span style="color:gray;">@test getindex.(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(4,)</span></span>
+<span style="color:green;">+|</span></span>@test getindex.(dx)<span style="color:green;">true</span>(4,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>y, back = pullback(x -> sum(x.*x), [1, 2, 3])
+<span style="color:inherit;"> |</span>dxs = back(1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-52,7 +52,7</span> ============================================================
+<span style="color:inherit;"> |</span>  return r
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(pow, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(12,nothing)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(pow, 2, 3)<span style="color:green;">true</span>(12,nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function pow_mut(x, n)
+<span style="color:inherit;"> |</span>  r = Ref(one(x))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-63,7 +63,7</span> ============================================================
+<span style="color:inherit;"> |</span>  return r[]
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(pow_mut, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(12,nothing)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(pow_mut, 2, 3)<span style="color:green;">true</span>(12,nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>r = 1
+<span style="color:inherit;"> |</span>function pow_global(x, n)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-75,15 +75,15</span> ============================================================
+<span style="color:inherit;"> |</span>  return r
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(pow_global, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(12,nothing)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(pow_global, 2, 3)<span style="color:green;">true</span>(12,nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(x -> 1, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(x -> 1, 2)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(t -> t[1]*t[2], (2, 3))</span><span style="color:red;"> == </span><span style="color:gray;">((3, 2),)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(t -> t[1]*t[2], (2, 3))<span style="color:green;">true</span>((3, 2),)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(x -> x.re, 2+3im)</span><span style="color:red;"> == </span><span style="color:gray;">((re = 1, im = nothing),)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(x -> x.re, 2+3im)<span style="color:green;">true</span>((re = 1, im = nothing),)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(x -> x.re*x.im, 2+3im)</span><span style="color:red;"> == </span><span style="color:gray;">((re = 3, im = 2),)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(x -> x.re*x.im, 2+3im)<span style="color:green;">true</span>((re = 3, im = 2),)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>struct Foo{T}
+<span style="color:inherit;"> |</span>  a::T
+<span style="color:inherit;">@|</span><span style="color:inherit;">-95,34 +95,34</span> ============================================================
+<span style="color:inherit;"> |</span>  c.a * c.b
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(mul_struct, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 2)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(mul_struct, 2, 3)<span style="color:green;">true</span>(3, 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function mul_tuple(a, b)
+<span style="color:inherit;"> |</span>  c = (a, b)
+<span style="color:inherit;"> |</span>  c[1] * c[2]
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(mul_tuple, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 2)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(mul_tuple, 2, 3)<span style="color:green;">true</span>(3, 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function mul_lambda(x, y)
+<span style="color:inherit;"> |</span>  g = z -> x * z
+<span style="color:inherit;"> |</span>  g(y)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(mul_lambda, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 2)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(mul_lambda, 2, 3)<span style="color:green;">true</span>(3, 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient((a, b...) -> *(a, b...), 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 2)</span></span>
+<span style="color:green;">+|</span></span>@test gradient((a, b...) -> *(a, b...), 2, 3)<span style="color:green;">true</span>(3, 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient((x, a...) -> x, 1)</span><span style="color:red;"> == </span><span style="color:gray;">(1,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient((x, a...) -> x, 1)<span style="color:green;">true</span>(1,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient((x, a...) -> x, 1, 1)</span><span style="color:red;"> == </span><span style="color:gray;">(1,nothing)</span></span>
+<span style="color:green;">+|</span></span>@test gradient((x, a...) -> x, 1, 1)<span style="color:green;">true</span>(1,nothing)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient((x, a...) -> x == a, 1)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,)</span></span>
+<span style="color:green;">+|</span></span>@test gradient((x, a...) -> x == a, 1)<span style="color:green;">true</span>(nothing,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient((x, a...) -> x == a, 1, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(nothing,nothing)</span></span>
+<span style="color:green;">+|</span></span>@test gradient((x, a...) -> x == a, 1, 2)<span style="color:green;">true</span>(nothing,nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>kwmul(; a = 1, b) = a*b
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>mul_kw(a, b) = kwmul(a = a, b = b)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(mul_kw, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 2)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(mul_kw, 2, 3)<span style="color:green;">true</span>(3, 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function myprod(xs)
+<span style="color:inherit;"> |</span>  s = 1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-139,7 +139,7</span> ============================================================
+<span style="color:inherit;"> |</span>  xs[1] * xs[2]
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(mul_vec, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 2)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(mul_vec, 2, 3)<span style="color:green;">true</span>(3, 2)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@test gradient(2) do x
+<span style="color:inherit;"> |</span>  d = Dict()
+<span style="color:inherit;">@|</span><span style="color:inherit;">-153,7 +153,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>pow_rec(x, n) = n == 0 ? 1 : x*pow_rec(x, n-1)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test gradient(pow_rec, 2, 3)</span><span style="color:red;"> == </span><span style="color:gray;">(12, nothing)</span></span>
+<span style="color:green;">+|</span></span>@test gradient(pow_rec, 2, 3)<span style="color:green;">true</span>(12, nothing)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># For nested AD, until we support errors
+<span style="color:inherit;"> |</span>function grad(f, args...)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-163,7 +163,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>D(f, x) = grad(f, x)[1]
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test D(x -> D(sin, x), 0.5)</span><span style="color:red;"> == </span><span style="color:gray;">-sin(0.5)</span></span>
+<span style="color:green;">+|</span></span>@test D(x -> D(sin, x), 0.5)<span style="color:green;">true</span>-sin(0.5)</span>
+<span style="color:inherit;"> |</span>@test D(x -> x*D(y -> x+y, 1), 1) == 1
+<span style="color:inherit;"> |</span>@test D(x -> x*D(y -> x*y, 1), 4) == 8
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/cuda.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/cuda.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,8 +10,8</span> ============================================================
+<span style="color:inherit;"> |</span>  a = cu(Float32.(1:9))
+<span style="color:inherit;"> |</span>  v(x, n) = x .^ n
+<span style="color:inherit;"> |</span>  pow_grada = cu(Float32[7.0, 448.0, 5103.0, 28672.0, 109375.0, 326592.0, 823543.0, 1.835008e6, 3.720087e6])
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> v(x, 7) |> sum, a)</span><span style="color:red;"> == </span><span style="color:gray;">(pow_grada,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> v(x, 7) |> sum, a)<span style="color:green;">true</span>(pow_grada,)</span>
+<span style="color:inherit;"> |</span>  w(x) = broadcast(log, x)
+<span style="color:inherit;"> |</span>  log_grada = cu(Float32[1.0, 0.5, 0.33333334, 0.25, 0.2, 0.16666667, 0.14285715, 0.125, 0.11111111])
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test gradient(x -> w(x) |> sum, a)</span><span style="color:red;"> == </span><span style="color:gray;">(log_grada,)</span></span>
+<span style="color:green;">+|</span></span>  @test gradient(x -> w(x) |> sum, a)<span style="color:green;">true</span>(log_grada,)</span>
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

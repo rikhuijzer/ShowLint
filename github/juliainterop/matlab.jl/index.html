@@ -1,1 +1,167 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaInterop/MATLAB.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaInterop/MATLAB.jl" target=_blank >JuliaInterop/MATLAB.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaInterop/MATLAB.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaInterop/MATLAB.jl" target=_blank >JuliaInterop/MATLAB.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_22_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 22 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_22_hits ><a href="#omit_a_a_and_a_a_22_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 22 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/mxarray.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/mxarray.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test ncols(a) == 1
+<span style="color:inherit;"> |</span>        @test nelems(a) == n
+<span style="color:inherit;"> |</span>        @test ndims(a) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test size(a)</span><span style="color:red;"> == </span><span style="color:gray;">(n, 1)</span></span>
+<span style="color:green;">+|</span></span>        @test size(a)<span style="color:green;">true</span>(n, 1)</span>
+<span style="color:inherit;"> |</span>        @test size(a, 1) == n
+<span style="color:inherit;"> |</span>        @test size(a, 2) == 1
+<span style="color:inherit;"> |</span>        @test size(a, 3) == 1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-32,7 +32,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test ncols(b) == n
+<span style="color:inherit;"> |</span>        @test nelems(b) == m * n
+<span style="color:inherit;"> |</span>        @test ndims(b) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test size(b)</span><span style="color:red;"> == </span><span style="color:gray;">(m, n)</span></span>
+<span style="color:green;">+|</span></span>        @test size(b)<span style="color:green;">true</span>(m, n)</span>
+<span style="color:inherit;"> |</span>        @test size(b, 1) == m
+<span style="color:inherit;"> |</span>        @test size(b, 2) == n
+<span style="color:inherit;"> |</span>        @test size(b, 3) == 1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-78,7 +78,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test ncols(b) == n
+<span style="color:inherit;"> |</span>        @test nelems(b) == m * n
+<span style="color:inherit;"> |</span>        @test ndims(b) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test size(b)</span><span style="color:red;"> == </span><span style="color:gray;">(m, n)</span></span>
+<span style="color:green;">+|</span></span>        @test size(b)<span style="color:green;">true</span>(m, n)</span>
+<span style="color:inherit;"> |</span>        @test size(b, 1) == m
+<span style="color:inherit;"> |</span>        @test size(b, 2) == n
+<span style="color:inherit;"> |</span>        @test size(b, 3) == 1
+<span style="color:inherit;">@|</span><span style="color:inherit;">-96,7 +96,7</span> ============================================================
+<span style="color:inherit;"> |</span>a = mxarray(Float64, (6, 5, 4))
+<span style="color:inherit;"> |</span>@test elsize(a) == sizeof(Float64)
+<span style="color:inherit;"> |</span>@test eltype(a) === Float64
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a)</span><span style="color:red;"> == </span><span style="color:gray;">(6, 5, 4)</span></span>
+<span style="color:green;">+|</span></span>@test size(a)<span style="color:green;">true</span>(6, 5, 4)</span>
+<span style="color:inherit;"> |</span>@test size(a, 1) == 6
+<span style="color:inherit;"> |</span>@test size(a, 2) == 5
+<span style="color:inherit;"> |</span>@test size(a, 3) == 4
+<span style="color:inherit;">@|</span><span style="color:inherit;">-108,7 +108,7</span> ============================================================
+<span style="color:inherit;"> |</span>a = mxarray(Bool, (6, 5, 4))
+<span style="color:inherit;"> |</span>@test elsize(a) == 1
+<span style="color:inherit;"> |</span>@test eltype(a) === Bool
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a)</span><span style="color:red;"> == </span><span style="color:gray;">(6, 5, 4)</span></span>
+<span style="color:green;">+|</span></span>@test size(a)<span style="color:green;">true</span>(6, 5, 4)</span>
+<span style="color:inherit;"> |</span>@test size(a, 1) == 6
+<span style="color:inherit;"> |</span>@test size(a, 2) == 5
+<span style="color:inherit;"> |</span>@test size(a, 3) == 4
+<span style="color:inherit;">@|</span><span style="color:inherit;">-121,31 +121,31</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a_mx = mxarray(3.25)
+<span style="color:inherit;"> |</span>@test eltype(a_mx) == Float64
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a_mx)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1)</span></span>
+<span style="color:green;">+|</span></span>@test size(a_mx)<span style="color:green;">true</span>(1, 1)</span>
+<span style="color:inherit;"> |</span>@test jscalar(a_mx) == 3.25
+<span style="color:inherit;"> |</span>delete(a_mx)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a_mx = mxarray(Int32(12))
+<span style="color:inherit;"> |</span>@test eltype(a_mx) == Int32
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a_mx)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1)</span></span>
+<span style="color:green;">+|</span></span>@test size(a_mx)<span style="color:green;">true</span>(1, 1)</span>
+<span style="color:inherit;"> |</span>@test jscalar(a_mx) == Int32(12)
+<span style="color:inherit;"> |</span>delete(a_mx)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a_mx = mxarray(true)
+<span style="color:inherit;"> |</span>@test eltype(a_mx) == Bool
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a_mx)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1)</span></span>
+<span style="color:green;">+|</span></span>@test size(a_mx)<span style="color:green;">true</span>(1, 1)</span>
+<span style="color:inherit;"> |</span>@test jscalar(a_mx)
+<span style="color:inherit;"> |</span>delete(a_mx)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a_mx = mxarray(false)
+<span style="color:inherit;"> |</span>@test eltype(a_mx) == Bool
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a_mx)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1)</span></span>
+<span style="color:green;">+|</span></span>@test size(a_mx)<span style="color:green;">true</span>(1, 1)</span>
+<span style="color:inherit;"> |</span>@test !jscalar(a_mx)
+<span style="color:inherit;"> |</span>delete(a_mx)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a_mx = mxarray(3.25 + 4im)
+<span style="color:inherit;"> |</span>@test eltype(a_mx) == Float64
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a_mx)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 1)</span></span>
+<span style="color:green;">+|</span></span>@test size(a_mx)<span style="color:green;">true</span>(1, 1)</span>
+<span style="color:inherit;"> |</span>@test jscalar(a_mx) == 3.25 + 4im
+<span style="color:inherit;"> |</span>delete(a_mx)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-191,7 +191,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test ncols(a_mx) == 9
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a2 = jsparse(a_mx)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a2)</span><span style="color:red;"> == </span><span style="color:gray;">(8, 9)</span></span>
+<span style="color:green;">+|</span></span>@test size(a2)<span style="color:green;">true</span>(8, 9)</span>
+<span style="color:inherit;"> |</span>@test count(!iszero, a2) == count(!iszero, a)
+<span style="color:inherit;"> |</span>@test isequal(a2, a)
+<span style="color:inherit;"> |</span>delete(a_mx)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-204,7 +204,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test ncols(a_mx) == 9
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a2 = jsparse(a_mx)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a2)</span><span style="color:red;"> == </span><span style="color:gray;">(8, 9)</span></span>
+<span style="color:green;">+|</span></span>@test size(a2)<span style="color:green;">true</span>(8, 9)</span>
+<span style="color:inherit;"> |</span>@test count(!iszero, a2) == count(!iszero, a)
+<span style="color:inherit;"> |</span>@test isequal(a2, a)
+<span style="color:inherit;"> |</span>delete(a_mx)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-253,7 +253,7</span> ============================================================
+<span style="color:inherit;"> |</span>delete(a)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>a = mxcellarray((3, 4, 5))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(a)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 4, 5)</span></span>
+<span style="color:green;">+|</span></span>@test size(a)<span style="color:green;">true</span>(3, 4, 5)</span>
+<span style="color:inherit;"> |</span>@test nelems(a) == 60
+<span style="color:inherit;"> |</span>@test classid(a) == MATLAB.mxCELL_CLASS
+<span style="color:inherit;"> |</span>@test is_cell(a)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-261,8 +261,8</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>s = [&#34;abc&#34;, &#34;efg&#34;]
+<span style="color:inherit;"> |</span>s_mx = mxcellarray(s)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test jstring(get_cell(s_mx, 1))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;abc&#34;</span></span>
+<span style="color:green;">+|</span></span>@test jstring(get_cell(s_mx, 1))<span style="color:green;">true</span>&#34;abc&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test jstring(get_cell(s_mx, 2))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;efg&#34;</span></span>
+<span style="color:green;">+|</span></span>@test jstring(get_cell(s_mx, 2))<span style="color:green;">true</span>&#34;efg&#34;</span>
+<span style="color:inherit;"> |</span>delete(s_mx)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># struct
+<span style="color:inherit;">@|</span><span style="color:inherit;">-275,16 +275,16</span> ============================================================
+<span style="color:inherit;"> |</span>@test nelems(a) == 1
+<span style="color:inherit;"> |</span>@test ndims(a) == 2
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test get_fieldname(a, 1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;abc&#34;</span></span>
+<span style="color:green;">+|</span></span>@test get_fieldname(a, 1)<span style="color:green;">true</span>&#34;abc&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test get_fieldname(a, 2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;efg&#34;</span></span>
+<span style="color:green;">+|</span></span>@test get_fieldname(a, 2)<span style="color:green;">true</span>&#34;efg&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test get_fieldname(a, 3)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;xyz&#34;</span></span>
+<span style="color:green;">+|</span></span>@test get_fieldname(a, 3)<span style="color:green;">true</span>&#34;xyz&#34;</span>
+<span style="color:inherit;"> |</span>delete(a)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>s = Dict(&#34;name&#34;=>&#34;MATLAB&#34;, &#34;version&#34;=>12.0, &#34;data&#34;=>[1,2,3])
+<span style="color:inherit;"> |</span>a = mxstruct(s)
+<span style="color:inherit;"> |</span>@test is_struct(a)
+<span style="color:inherit;"> |</span>@test mxnfields(a) == 3
+<span style="color:red;">-|</span></span><span style="color:gray;">@test jstring(get_field(a, &#34;name&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;MATLAB&#34;</span></span>
+<span style="color:green;">+|</span></span>@test jstring(get_field(a, &#34;name&#34;))<span style="color:green;">true</span>&#34;MATLAB&#34;</span>
+<span style="color:inherit;"> |</span>@test jscalar(get_field(a, &#34;version&#34;)) == 12.0
+<span style="color:inherit;"> |</span>@test isequal(jvector(get_field(a, &#34;data&#34;)), [1,2,3])
+<span style="color:inherit;"> |</span>delete(a)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-298,7 +298,7</span> ============================================================
+<span style="color:inherit;"> |</span>a = mxstruct(t)
+<span style="color:inherit;"> |</span>@test is_struct(a)
+<span style="color:inherit;"> |</span>@test mxnfields(a) == 3
+<span style="color:red;">-|</span></span><span style="color:gray;">@test jstring(get_field(a, &#34;name&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;MATLAB&#34;</span></span>
+<span style="color:green;">+|</span></span>@test jstring(get_field(a, &#34;name&#34;))<span style="color:green;">true</span>&#34;MATLAB&#34;</span>
+<span style="color:inherit;"> |</span>@test jscalar(get_field(a, &#34;version&#34;)) == 12.0
+<span style="color:inherit;"> |</span>@test isequal(jvector(get_field(a, &#34;data&#34;)), [1,2,3])
+<span style="color:inherit;"> |</span>delete(a)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-307,10 +307,10</span> ============================================================
+<span style="color:inherit;"> |</span>    TestType(&#34;Julia&#34;, 0.2, [4,5,6])])
+<span style="color:inherit;"> |</span>@test is_struct(a)
+<span style="color:inherit;"> |</span>@test mxnfields(a) == 3
+<span style="color:red;">-|</span></span><span style="color:gray;">@test jstring(get_field(a, 1, &#34;name&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;MATLAB&#34;</span></span>
+<span style="color:green;">+|</span></span>@test jstring(get_field(a, 1, &#34;name&#34;))<span style="color:green;">true</span>&#34;MATLAB&#34;</span>
+<span style="color:inherit;"> |</span>@test jscalar(get_field(a, 1, &#34;version&#34;)) == 12.0
+<span style="color:inherit;"> |</span>@test isequal(jvector(get_field(a, 1, &#34;data&#34;)), [1,2,3])
+<span style="color:red;">-|</span></span><span style="color:gray;">@test jstring(get_field(a, 2, &#34;name&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Julia&#34;</span></span>
+<span style="color:green;">+|</span></span>@test jstring(get_field(a, 2, &#34;name&#34;))<span style="color:green;">true</span>&#34;Julia&#34;</span>
+<span style="color:inherit;"> |</span>@test jscalar(get_field(a, 2, &#34;version&#34;)) == 0.2
+<span style="color:inherit;"> |</span>@test isequal(jvector(get_field(a, 2, &#34;data&#34;)), [4,5,6])
+<span style="color:inherit;"> |</span>delet</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

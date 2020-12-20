@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>odow/SDDP.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/odow/SDDP.jl" target=_blank >odow/SDDP.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_1_hit ><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>odow/SDDP.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/odow/SDDP.jl" target=_blank >odow/SDDP.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_26_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 26 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_1_hit ><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/plugins/parallel_schemes.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/plugins/parallel_schemes.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-161,5 +161,5</span> ============================================================
@@ -7,4 +7,228 @@
 <span style="color:inherit;"> |</span>    @test SDDP.trap_error(ex) === nothing
 <span style="color:orange;">!|</span>    @test flag<span style="color:red;"> == true</span>
 <span style="color:inherit;"> |</span</div>
+</pre> <h3 id=omit_a_a_and_a_a_26_hits ><a href="#omit_a_a_and_a_a_26_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 26 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/user_interface.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/user_interface.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-19,8 +19,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test graph.nodes[5] == Tuple{Int,Float64}[]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        graph = SDDP.LinearGraph(3)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, graph)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m              </span><span style="color:gray;">&#34;Root\n&#34; *</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show, graph)<span style="color:green;">true</span>&#34;Root\n&#34; *</span>
+<span style="color:inherit;"> |</span>        &#34; 0\n&#34; *
+<span style="color:inherit;"> |</span>        &#34;Nodes\n&#34; *
+<span style="color:inherit;"> |</span>        &#34; 1\n&#34; *
+<span style="color:inherit;">@|</span><span style="color:inherit;">-173,7 +172,7</span> ============================================================
+<span style="color:inherit;"> |</span>            push!(nodes, stage)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        @test nodes == Set([1, 2])
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, model)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;A policy graph with 2 nodes.\n Node indices: 1, 2\n&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show, model)<span style="color:green;">true</span>&#34;A policy graph with 2 nodes.\n Node indices: 1, 2\n&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;MarkovianGraph&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-494,7 +493,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Ensure root printed first&#34; begin
+<span style="color:inherit;"> |</span>    g = SDDP.Graph(:root, [:a], [(:root => :a, 1.0)])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, g)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, g)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    Root
+<span style="color:inherit;"> |</span>     root
+<span style="color:inherit;"> |</span>    Nodes
+<span style="color:inherit;">@|</span><span style="color:inherit;">-507,7 +506,7</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;Tuple{Int,Float64} nodes sorted&#34; begin
+<span style="color:inherit;"> |</span>    @test SDDP.sort_nodes([(1, 1.0), (2, 0.1), (1, 0.5)]) == [(1, 0.5), (1, 1.0), (2, 0.1)]
+<span style="color:inherit;"> |</span>    g = SDDP.Graph((0, 0.0), [(1, 1.0), (2, 0.1), (1, 0.5)], [((0, 0.0) => (2, 0.1), 1.0)])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, g)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, g)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    Root
+<span style="color:inherit;"> |</span>     (0, 0.0)
+<span style="color:inherit;"> |</span>    Nodes
+<span style="color:inherit;">@|</span><span style="color:inherit;">-522,7 +521,7</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;String nodes unsorted&#34; begin
+<span style="color:inherit;"> |</span>    @test SDDP.sort_nodes([&#34;c&#34;, &#34;b&#34;]) == [&#34;c&#34;, &#34;b&#34;]
+<span style="color:inherit;"> |</span>    g = SDDP.Graph(&#34;a&#34;, [&#34;c&#34;, &#34;b&#34;], [(&#34;a&#34; => &#34;b&#34;, 1.0), (&#34;b&#34; => &#34;c&#34;, 1.0)])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, g)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, g)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    Root
+<span style="color:inherit;"> |</span>     a
+<span style="color:inherit;"> |</span>    Nodes
+<span style="color:red;">------ </span><span style="color:inherit;">test/modeling_aids.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/modeling_aids.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,9 +4,9</span> ============================================================
+<span style="color:inherit;"> |</span>#  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;find_min&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SDDP.find_min([1.0, 2.0, 3.0], 2.1)</span><span style="color:red;"> == </span><span style="color:gray;">(abs(2.0 - 2.1), 2)</span></span>
+<span style="color:green;">+|</span></span>    @test SDDP.find_min([1.0, 2.0, 3.0], 2.1)<span style="color:green;">true</span>(abs(2.0 - 2.1), 2)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SDDP.find_min([1.0, 2.0, 3.0], 0.0)</span><span style="color:red;"> == </span><span style="color:gray;">(1.0, 1)</span></span>
+<span style="color:green;">+|</span></span>    @test SDDP.find_min([1.0, 2.0, 3.0], 0.0)<span style="color:green;">true</span>(1.0, 1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SDDP.find_min([1.0, 2.0, 3.0], 5.0)</span><span style="color:red;"> == </span><span style="color:gray;">(2.0, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test SDDP.find_min([1.0, 2.0, 3.0], 5.0)<span style="color:green;">true</span>(2.0, 3)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;allocate_support_budget&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/plugins/integrality_handlers.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/plugins/integrality_handlers.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-139,7 +139,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test !JuMP.has_lower_bound(node.subproblem[:i2])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test JuMP.is_integer(node.subproblem[:i3])
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test JuMP.lower_bound(node.subproblem[:i3])</span><span style="color:red;"> == </span><span style="color:gray;">-8</span></span>
+<span style="color:green;">+|</span></span>        @test JuMP.lower_bound(node.subproblem[:i3])<span style="color:green;">true</span>-8</span>
+<span style="color:inherit;"> |</span>        @test JuMP.upper_bound(node.subproblem[:i3]) == 2
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @testset &#34;ContinuousRelaxation&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-166,7 +166,7</span> ============================================================
+<span style="color:inherit;"> |</span>            @test !JuMP.has_lower_bound(node.subproblem[:i2])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @test !JuMP.is_integer(node.subproblem[:i3])
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test JuMP.lower_bound(node.subproblem[:i3])</span><span style="color:red;"> == </span><span style="color:gray;">-8</span></span>
+<span style="color:green;">+|</span></span>            @test JuMP.lower_bound(node.subproblem[:i3])<span style="color:green;">true</span>-8</span>
+<span style="color:inherit;"> |</span>            @test JuMP.upper_bound(node.subproblem[:i3]) == 2
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        SDDP.enforce_integrality(binaries, integers)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-192,7 +192,7</span> ============================================================
+<span style="color:inherit;"> |</span>            @test !JuMP.has_lower_bound(node.subproblem[:i2])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>            @test JuMP.is_integer(node.subproblem[:i3])
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test JuMP.lower_bound(node.subproblem[:i3])</span><span style="color:red;"> == </span><span style="color:gray;">-8</span></span>
+<span style="color:green;">+|</span></span>            @test JuMP.lower_bound(node.subproblem[:i3])<span style="color:green;">true</span>-8</span>
+<span style="color:inherit;"> |</span>            @test JuMP.upper_bound(node.subproblem[:i3]) == 2
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">test/plugins/parallel_schemes.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/plugins/parallel_schemes.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-68,7 +68,7</span> ============================================================
+<span style="color:inherit;"> |</span>        MOI.GreaterThan{Float64},
+<span style="color:inherit;"> |</span>    )
+<span style="color:inherit;"> |</span>    @test length(cons) == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test replace(sprint(print, cons[1]), &#34;≥&#34; => &#34;>=&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;-2 x_out + noname >= -5.0&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test replace(sprint(print, cons[1]), &#34;≥&#34; => &#34;>=&#34;)<span style="color:green;">true</span>&#34;-2 x_out + noname >= -5.0&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    result = SDDP.IterationResult(
+<span style="color:inherit;"> |</span>        1,
+<span style="color:red;">------ </span><span style="color:inherit;">examples/FAST_quickstart.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">examples/FAST_quickstart.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-31,10 +31,10</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    det = SDDP.deterministic_equivalent(model, GLPK.Optimizer)
+<span style="color:inherit;"> |</span>    JuMP.optimize!(det)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test JuMP.objective_value(det)</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>    @test JuMP.objective_value(det)<span style="color:green;">true</span>-2</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    SDDP.train(model, iteration_limit = 3, print_level = 0)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SDDP.calculate_bound(model)</span><span style="color:red;"> == </span><span style="color:gray;">-2</span></span>
+<span style="color:green;">+|</span></span>    @test SDDP.calculate_bound(model)<span style="color:green;">true</span>-2</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>fast_quickstart()
+<span style="color:red;">------ </span><span style="color:inherit;">test/plugins/risk_measures.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/plugins/risk_measures.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
+<span style="color:inherit;"> |</span>using Test
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Expectation&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, SDDP.Expectation())</span><span style="color:red;"> == </span><span style="color:gray;">&#34;SDDP.Expectation()&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, SDDP.Expectation())<span style="color:green;">true</span>&#34;SDDP.Expectation()&#34;</span>
+<span style="color:inherit;"> |</span>    risk_adjusted_probability = Vector{Float64}(undef, 5)
+<span style="color:inherit;"> |</span>    SDDP.adjust_probability(
+<span style="color:inherit;"> |</span>        SDDP.Expectation(),
+<span style="color:inherit;">@|</span><span style="color:inherit;">-112,8 +112,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;EAV@R&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, SDDP.EAVaR(lambda = 0.2, beta = 0.3))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m          </span><span style="color:gray;">&#34;A convex combination of 0.2 * SDDP.Expectation() + 0.8 * SDDP.AVaR(0.3)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, SDDP.EAVaR(lambda = 0.2, beta = 0.3))<span style="color:green;">true</span>&#34;A convex combination of 0.2 * SDDP.Expectation() + 0.8 * SDDP.AVaR(0.3)&#34;</span>
+<span style="color:inherit;"> |</span>    @test_throws Exception SDDP.EAVaR(lambda = 1.1)
+<span style="color:inherit;"> |</span>    @test_throws Exception SDDP.EAVaR(lambda = -0.1)
+<span style="color:inherit;"> |</span>    @test_throws Exception SDDP.EAVaR(beta = 1.1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-174,7 +173,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;ModifiedChiSquared&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, SDDP.ModifiedChiSquared(0.1))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;ModifiedChiSquared with radius=0.1&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, SDDP.ModifiedChiSquared(0.1))<span style="color:green;">true</span>&#34;ModifiedChiSquared with radius=0.1&#34;</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Min - R=0.0&#34; begin
+<span style="color:inherit;"> |</span>        risk_adjusted_probability = Vector{Float64}(undef, 5)
+<span style="color:inherit;"> |</span>        SDDP.adjust_probability(
+<span style="color:inherit;">@|</span><span style="color:inherit;">-335,7 +334,7</span> ============================================================
+<span style="color:inherit;"> |</span>            return abs(x - y)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, default_wasserstein(0.1))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;SDDP.Wasserstein&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, default_wasserstein(0.1))<span style="color:green;">true</span>&#34;SDDP.Wasserstein&#34;</span>
+<span style="color:inherit;"> |</span>    @test_throws Exception default_wasserstein(-1.0)
+<span style="color:inherit;"> |</span>    @testset &#34;:Max Worst case&#34; begin
+<span style="color:inherit;"> |</span>        risk_adjusted_probability = Vector{Float64}(undef, 4)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-412,7 +411,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Entropic&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, SDDP.Entropic(0.1))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Entropic risk measure with γ = 0.1&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, SDDP.Entropic(0.1))<span style="color:green;">true</span>&#34;Entropic risk measure with γ = 0.1&#34;</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Minimization&#34; begin
+<span style="color:inherit;"> |</span>        # Test that increasing values of θ lead to larger values for F[X].
+<span style="color:inherit;"> |</span>        X = [1.0, 2.0, 3.0]
+<span style="color:red;">------ </span><span style="color:inherit;">test/visualization/visualization.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/visualization/visualization.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-27,14 +27,14</span> ============================================================
+<span style="color:inherit;"> |</span>        return 2 * data[:y]
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    SDDP.plot(plt, &#34;test.html&#34;, open = false)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, plt)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;A spaghetti plot with 2 scenarios and 3 stages.&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, plt)<span style="color:green;">true</span>&#34;A spaghetti plot with 2 scenarios and 3 stages.&#34;</span>
+<span style="color:inherit;"> |</span>    control = joinpath(@__DIR__, &#34;control.html&#34;)
+<span style="color:inherit;"> |</span>    if Sys.WORD_SIZE == 64
+<span style="color:inherit;"> |</span>        # This fails on 32-bit machines.
+<span style="color:inherit;"> |</span>        @test read(&#34;test.html&#34;, String) == read(control, String)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    SDDP.save(plt, &#34;test.html&#34;, open = false)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, plt)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;A spaghetti plot with 2 scenarios and 3 stages.&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, plt)<span style="color:green;">true</span>&#34;A spaghetti plot with 2 scenarios and 3 stages.&#34;</span>
+<span style="color:inherit;"> |</span>    if Sys.WORD_SIZE == 64
+<span style="color:inherit;"> |</span>        # This fails on 32-bit machines.
+<span style="color:inherit;"> |</span>        @test read(&#34;test.html&#34;, String) == read(control, String)
+<span style="color:red;">------ </span><span style="color:inherit;">test/visualization/value_functions.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/visualization/value_functions.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,11 +18,11</span> ============================================================
+<span style="color:inherit;"> |</span>        @stageobjective(sp, 2 * x.out)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    V1 = SDDP.ValueFunction(model[1])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SDDP.evaluate(V1, Dict(:x => 1.0))</span><span style="color:red;"> == </span><span style="color:gray;">(0.0, Dict(:x => 0.0))</span></span>
+<span style="color:green;">+|</span></span>    @test SDDP.evaluate(V1, Dict(:x => 1.0))<span style="color:green;">true</span>(0.0, Dict(:x => 0.0))</span>
+<span style="color:inherit;"> |</span>    SDDP.train(model, iteration_limit = 2, print_level = 0)
+<span style="color:inherit;"> |</span>    V1 = SDDP.ValueFunction(model[1])
+<span style="color:inherit;"> |</span>    for (xhat, yhat, pihat) in [(0.0, 0.0, 0.0), (1.0, 2.0, 2.0), (2.0, 4.0, 2.0)]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test SDDP.evaluate(V1, Dict(:x => xhat))</span><span style="color:red;"> == </span><span style="color:gray;">(yhat, Dict(:x => pihat))</span></span>
+<span style="color:green;">+|</span></span>        @test SDDP.evaluate(V1, Dict(:x => xhat))<span style="color:green;">true</span>(yhat, Dict(:x => pihat))</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-84,8 +84,8</span> ============================================================
+<span style="color:inherit;"> |</span>    SDDP.train(model, iteration_limit = 10, print_level = 0)
+<span style="color:inherit;"> |</span>    V1 = SDDP.ValueFunction(model[1])
+<span style="color:inherit;"> |</span>    @test_throws AssertionError SDDP.evaluate(V1, Dict(:x => 1.0))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SDDP.evaluate(V1, Dict(:x => 1.0); objective_state = 1)</span><span style="color:red;"> == </span><span style="color:gray;">(2.5, Dict(:x => 2.5))</span></span>
+<span style="color:green;">+|</span></span>    @test SDDP.evaluate(V1, Dict(:x => 1.0); objective_state = 1)<span style="color:green;">true</span>(2.5, Dict(:x => 2.5))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test SDDP.evaluate(V1, Dict(:x => 0.0); objective_state = 2)</span><span style="color:red;"> == </span><span style="color:gray;">(0.0, Dict(:x => 3.5))</span></span>
+<span style="color:green;">+|</span></span>    @test SDDP.evaluate(V1, Dict(:x => 0.0); objective_state = 2)<span style="color:green;">true</span>(0.0, Dict(:x => 3.5))</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;belief state&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-61,7 +61,7</span> ============================================================
+<span style="color:inherit;"> |</span>    format = Documenter.HTML(
+<span style="color:inherit;"> |</span>        assets = ASSETS,
+<span style="color:inherit;"> |</span>        # See  https://github.com/JuliaDocs/Documenter.jl/issues/868
+<span style="color:red;">-|</span></span><span style="color:gray;">        prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;,</span></span>
+<span style="color:green;">+|</span></span>        prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;,</span>
+<span style="color:inherit;"> |</span>        collapselevel = 1,
+<span style="color:inherit;"> |</span>    ),
+<span style="color:inherit;"> |</span>    strict = t</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaStats/StatsBase.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaStats/StatsBase.jl" target=_blank >JuliaStats/StatsBase.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaStats/StatsBase.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaStats/StatsBase.jl" target=_blank >JuliaStats/StatsBase.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a><li><a href="#omit_a_a_and_a_a_48_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 48 hits</a><li><a href="#omit_fx_fx_and_fx_fx_1_hit">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/common.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/common.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-11,11 +11,11</span> ============================================================
@@ -26,4 +26,387 @@
 <span style="color:inherit;"> |</span>    _wsum1!(R, A, w, init)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># N</div>
+</pre> <h3 id=omit_a_a_and_a_a_48_hits ><a href="#omit_a_a_and_a_a_48_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 48 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/hist.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/hist.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test h1 == Histogram(edg1, :left, false)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test @inferred StatsBase.binindex(h1, -0.5) == 4
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test @inferred StatsBase.binindex(h2, (1.5, 2))</span><span style="color:red;"> == </span><span style="color:gray;">(8, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test @inferred StatsBase.binindex(h2, (1.5, 2))<span style="color:green;">true</span>(8, 3)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test [StatsBase.binvolume(h1, i) for i in axes(h1.weights, 1)] ≈ diff(edg1)
+<span style="color:inherit;"> |</span>    @test [StatsBase.binvolume(h2, (i,j)) for i in axes(h2.weights, 1), j in axes(h2.weights, 2)] ≈ diff(edg1) * diff(edg2)'
+<span style="color:red;">------ </span><span style="color:inherit;">test/counts.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/counts.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,28 +9,28</span> ============================================================
+<span style="color:inherit;"> |</span>w = weights(rand(n))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x, 5)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(5,)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(5,)</span>
+<span style="color:inherit;"> |</span>c0 = Int[count(v->v == i, x) for i in 1:5]
+<span style="color:inherit;"> |</span>@test c == c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 1, 2:6) == c0
+<span style="color:inherit;"> |</span>@test proportions(x, 1:5) ≈ (c0 ./ n)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(5,)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(5,)</span>
+<span style="color:inherit;"> |</span>c0 = Int[count(v->v == i, x) for i in 1:5]
+<span style="color:inherit;"> |</span>@test c == c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 1, 2:6) == c0
+<span style="color:inherit;"> |</span>@test proportions(x) ≈ (c0 ./ n)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x, 5, w)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(5,)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(5,)</span>
+<span style="color:inherit;"> |</span>c0 = Float64[sum(w.values[x .== i]) for i in 1:5]
+<span style="color:inherit;"> |</span>@test c                      ≈ c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 1, 2:6, w) ≈ c0
+<span style="color:inherit;"> |</span>@test proportions(x, 1:5, w) ≈ (c0 ./ sum(w))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x, w)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(5,)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(5,)</span>
+<span style="color:inherit;"> |</span>c0 = Float64[sum(w.values[x .== i]) for i in 1:5]
+<span style="color:inherit;"> |</span>@test c                      ≈ c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 1, 2:6, w) ≈ c0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-43,28 +43,28</span> ============================================================
+<span style="color:inherit;"> |</span>w = weights(rand(n))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x, y, (4, 5))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 5)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(4, 5)</span>
+<span style="color:inherit;"> |</span>c0 = Int[count(t->t != 0,  (x .== i) .& (y .== j)) for i in 1:4, j in 1:5]
+<span style="color:inherit;"> |</span>@test c == c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 2, y .+ 3, (3:6, 4:8)) == c0
+<span style="color:inherit;"> |</span>@test proportions(x, y, (1:4, 1:5)) ≈ (c0 ./ n)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x, y)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 5)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(4, 5)</span>
+<span style="color:inherit;"> |</span>c0 = Int[count(t->t != 0, (x .== i) .& (y .== j)) for i in 1:4, j in 1:5]
+<span style="color:inherit;"> |</span>@test c == c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 2, y .+ 3, (3:6, 4:8)) == c0
+<span style="color:inherit;"> |</span>@test proportions(x, y,) ≈ (c0 ./ n)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x, y, (4, 5), w)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 5)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(4, 5)</span>
+<span style="color:inherit;"> |</span>c0 = Float64[sum(w.values[(x .== i) .& (y .== j)]) for i in 1:4, j in 1:5]
+<span style="color:inherit;"> |</span>@test c                                     ≈ c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 2, y .+ 3, (3:6, 4:8), w) ≈ c0
+<span style="color:inherit;"> |</span>@test proportions(x, y, (1:4, 1:5), w)      ≈ (c0 ./ sum(w))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>c = counts(x, y, w)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(c)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 5)</span></span>
+<span style="color:green;">+|</span></span>@test size(c)<span style="color:green;">true</span>(4, 5)</span>
+<span style="color:inherit;"> |</span>c0 = Float64[sum(w.values[(x .== i) .& (y .== j)]) for i in 1:4, j in 1:5]
+<span style="color:inherit;"> |</span>@test c                                     ≈ c0
+<span style="color:inherit;"> |</span>@test counts(x .+ 2, y .+ 3, (3:6, 4:8), w) ≈ c0
+<span style="color:red;">------ </span><span style="color:inherit;">test/empirical.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/empirical.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,10 +8,10</span> ============================================================
+<span style="color:inherit;"> |</span>    @test isapprox(fnecdf(y), [0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.975], atol=1e-3)
+<span style="color:inherit;"> |</span>    @test isapprox(fnecdf(1.96), 0.975, atol=1e-3)
+<span style="color:inherit;"> |</span>    @test fnecdf(y) ≈ map(fnecdf, y)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test extrema(fnecdf)</span><span style="color:red;"> == </span><span style="color:gray;">(minimum(fnecdf), maximum(fnecdf)) == extrema(x)</span></span>
+<span style="color:green;">+|</span></span>    @test extrema(fnecdf)<span style="color:green;">true</span>(minimum(fnecdf), maximum(fnecdf)) == extrema(x)</span>
+<span style="color:inherit;"> |</span>    fnecdf = ecdf([0.5])
+<span style="color:inherit;"> |</span>    @test fnecdf([zeros(5000); ones(5000)]) == [zeros(5000); ones(5000)]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test extrema(fnecdf)</span><span style="color:red;"> == </span><span style="color:gray;">(minimum(fnecdf), maximum(fnecdf))</span><span style="color:red;"> == </span><span style="color:gray;">(0.5, 0.5)</span></span>
+<span style="color:green;">+|</span></span>    @test extrema(fnecdf)<span style="color:green;">true</span>(minimum(fnecdf), maximum(fnecdf))<span style="color:green;">true</span>(0.5, 0.5)</span>
+<span style="color:inherit;"> |</span>    @test isnan(ecdf([1,2,3])(NaN))
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError ecdf([1, NaN])
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-30,10 +30,10</span> ============================================================
+<span style="color:inherit;"> |</span>    @test isapprox(fnecdf(y), [0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.975], atol=1e-3)
+<span style="color:inherit;"> |</span>    @test isapprox(fnecdf(1.96), 0.975, atol=1e-3)
+<span style="color:inherit;"> |</span>    @test fnecdf(y) ≈ map(fnecdf, y)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test extrema(fnecdf)</span><span style="color:red;"> == </span><span style="color:gray;">(minimum(fnecdf), maximum(fnecdf)) == extrema(x)</span></span>
+<span style="color:green;">+|</span></span>    @test extrema(fnecdf)<span style="color:green;">true</span>(minimum(fnecdf), maximum(fnecdf)) == extrema(x)</span>
+<span style="color:inherit;"> |</span>    fnecdf = ecdf([1.0, 0.5], weights=weights([3, 1]))
+<span style="color:inherit;"> |</span>    @test fnecdf(0.75) == 0.25
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test extrema(fnecdf)</span><span style="color:red;"> == </span><span style="color:gray;">(minimum(fnecdf), maximum(fnecdf))</span><span style="color:red;"> == </span><span style="color:gray;">(0.5, 1.0)</span></span>
+<span style="color:green;">+|</span></span>    @test extrema(fnecdf)<span style="color:green;">true</span>(minimum(fnecdf), maximum(fnecdf))<span style="color:green;">true</span>(0.5, 1.0)</span>
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError ecdf(rand(8), weights=weights(rand(10)))
+<span style="color:inherit;"> |</span>    #  Check frequency weights
+<span style="color:inherit;"> |</span>    v = randn(100)
+<span style="color:red;">------ </span><span style="color:inherit;">test/misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-49,7 +49,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>io = IOBuffer()
+<span style="color:inherit;"> |</span>describe(io, collect(1:10))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test String(take!(io))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>                           Summary Stats:
+<span style="color:inherit;"> |</span>                           Length:         10
+<span style="color:inherit;"> |</span>                           Missing Count:  0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-63,7 +63,7</span> ============================================================
+<span style="color:inherit;"> |</span>                           &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>describe(io, Union{Float32,Missing}[1.0, 4.5, missing, missing, 33.1])
+<span style="color:red;">-|</span></span><span style="color:gray;">@test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test String(take!(io))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>                           Summary Stats:
+<span style="color:inherit;"> |</span>                           Length:         5
+<span style="color:inherit;"> |</span>                           Missing Count:  2
+<span style="color:inherit;">@|</span><span style="color:inherit;">-77,14 +77,14</span> ============================================================
+<span style="color:inherit;"> |</span>                           &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>describe(io, Float64[])
+<span style="color:red;">-|</span></span><span style="color:gray;">@test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test String(take!(io))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>                           Summary Stats:
+<span style="color:inherit;"> |</span>                           Length:         0
+<span style="color:inherit;"> |</span>                           Type:           Float64
+<span style="color:inherit;"> |</span>                           &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>describe(io, fill(&#34;s&#34;, 3))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test String(take!(io))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>                           Summary Stats:
+<span style="color:inherit;"> |</span>                           Length:         3
+<span style="color:inherit;"> |</span>                           Type:           String
+<span style="color:red;">------ </span><span style="color:inherit;">test/scalarstats.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/scalarstats.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-48,9 +48,9</span> ============================================================
+<span style="color:inherit;"> |</span>d2 = ['a', 'b', 'c', 'c', 'd', 'e', 'e', 'c']
+<span style="color:inherit;"> |</span>wv = weights([0.1:0.1:0.7; 0.1])
+<span style="color:inherit;"> |</span>@test mode(d1) == 3
+<span style="color:red;">-|</span></span><span style="color:gray;">@test mode(d2)</span><span style="color:red;"> == 'c'</span></span>
+<span style="color:green;">+|</span></span>@test mode(d2)<span style="color:green;">true'c'</span></span>
+<span style="color:inherit;"> |</span>@test mode(d1, wv) == 5
+<span style="color:red;">-|</span></span><span style="color:gray;">@test mode(d2, wv)</span><span style="color:red;"> == 'e'</span></span>
+<span style="color:green;">+|</span></span>@test mode(d2, wv)<span style="color:green;">true'e'</span></span>
+<span style="color:inherit;"> |</span>@test sort(modes(d1[1:end-1], weights(ones(7)))) == [3, 5]
+<span style="color:inherit;"> |</span>@test sort(modes(d1, weights([.9, .1, .1, .1, .9, .1, .1, .1]))) == [1, 4]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-101,7 +101,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>##### Dispersion
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test span([3, 4, 5, 6, 2])</span><span style="color:red;"> == </span><span style="color:gray;">(2:6)</span></span>
+<span style="color:green;">+|</span></span>@test span([3, 4, 5, 6, 2])<span style="color:green;">true</span>(2:6)</span>
+<span style="color:inherit;"> |</span>@test span(skipmissing([1, missing, 5, missing])) == 1:5
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@test variation([1:5;]) ≈ 0.527046276694730
+<span style="color:red;">------ </span><span style="color:inherit;">test/statquiz.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/statquiz.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-74,7 +74,7</span> ============================================================
+<span style="color:inherit;"> |</span># conversion to Vector{Float64} can be removed when 0.4 is no longer supported
+<span style="color:inherit;"> |</span>@test Vector{Float64}(ctable.cols[1]) ≈ [99999990, 1]
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, ctable)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;\</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, ctable)<span style="color:green;">true</span>&#34;&#34;&#34;\</span>
+<span style="color:inherit;"> |</span>             Estimate Std.Error t value Pr(>|t|)
+<span style="color:inherit;"> |</span>(Intercept)     1.0e8       0.0     Inf   <1e-99
+<span style="color:inherit;"> |</span>x                 1.0       0.0     Inf   <1e-99
+<span style="color:red;">------ </span><span style="color:inherit;">test/statmodels.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/statmodels.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>v5 = [0.12, 0.3467, 1.345e-16]
+<span style="color:inherit;"> |</span>@test sprint(show, CoefTable(Any[v1, v2, v3, v4, v5],
+<span style="color:inherit;"> |</span>    [&#34;Estimate&#34;, &#34;Comments&#34;, &#34;df&#34;, &#34;t&#34;, &#34;p&#34;],
+<span style="color:red;">-|</span></span><span style="color:gray;">    [&#34;x1&#34;, &#34;x2&#34;, &#34;x3&#34;], 5, 4))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    [&#34;x1&#34;, &#34;x2&#34;, &#34;x3&#34;], 5, 4))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>───────────────────────────────────────────────
+<span style="color:inherit;"> |</span>         Estimate  Comments  df       t       p
+<span style="color:inherit;"> |</span>───────────────────────────────────────────────
+<span style="color:inherit;">@|</span><span style="color:inherit;">-20,7 +20,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Random.seed!(10)
+<span style="color:inherit;"> |</span>m = rand(3,4)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, CoefTable(m, [&#34;Estimate&#34;, &#34;Stderror&#34;, &#34;df&#34;, &#34;p&#34;], [], 4))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, CoefTable(m, [&#34;Estimate&#34;, &#34;Stderror&#34;, &#34;df&#34;, &#34;p&#34;], [], 4))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>──────────────────────────────────────────
+<span style="color:inherit;"> |</span>     Estimate   Stderror        df       p
+<span style="color:inherit;"> |</span>──────────────────────────────────────────
+<span style="color:inherit;">@|</span><span style="color:inherit;">-29,25 +29,23</span> ============================================================
+<span style="color:inherit;"> |</span>[3]  0.344454  0.179574   0.242208  0.4531
+<span style="color:inherit;"> |</span>──────────────────────────────────────────&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, PValue(1.0))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;1.0000&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, PValue(1.0))<span style="color:green;">true</span>&#34;1.0000&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, PValue(1e-1))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;0.1000&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, PValue(1e-1))<span style="color:green;">true</span>&#34;0.1000&#34;</span>
+<span style="color:inherit;"> |</span>if VERSION > v&#34;1.6.0-DEV&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, PValue(1e-5))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;<1e-04&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, PValue(1e-5))<span style="color:green;">true</span>&#34;<1e-04&#34;</span>
+<span style="color:inherit;"> |</span>else
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, PValue(1e-5))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;<1e-4&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, PValue(1e-5))<span style="color:green;">true</span>&#34;<1e-4&#34;</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(show, PValue(NaN))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;NaN&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(show, PValue(NaN))<span style="color:green;">true</span>&#34;NaN&#34;</span>
+<span style="color:inherit;"> |</span>@test_throws ErrorException PValue(-0.1)
+<span style="color:inherit;"> |</span>@test_throws ErrorException PValue(1.1)
+<span style="color:inherit;"> |</span>@test PValue(PValue(0.05)) === PValue(0.05)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(showerror, ConvergenceException(10))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;failure to converge after 10 iterations.&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(showerror, ConvergenceException(10))<span style="color:green;">true</span>&#34;failure to converge after 10 iterations.&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(showerror, ConvergenceException(10, 0.2, 0.1))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;failure to converge after 10 iterations. Last change (0.2) was greater than tolerance (0.1).&#34;</span></span>
+<span style="color:green;">+|</span></span>@test sprint(showerror, ConvergenceException(10, 0.2, 0.1))<span style="color:green;">true</span>&#34;failure to converge after 10 iterations. Last change (0.2) was greater than tolerance (0.1).&#34;</span>
+<span style="color:red;">-|</span></span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test sprint(showerror, ConvergenceException(10, 0.2, 0.1, &#34;Try changing maxIter.&#34;))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;failure to converge after 10 iterations. Last change (0.2) was greater than tolerance (0.1). Try changing maxIter.&#34;</span></span>
+<span style="color:green;">+|</span></span></span>
+<span style="color:green;">+|</span></span>@test sprint(showerror, ConvergenceException(10, 0.2, 0.1, &#34;Try changing maxIter.&#34;))<span style="color:green;">true</span>&#34;failure to converge after 10 iterations. Last change (0.2) was greater than tolerance (0.1). Try changing maxIter.&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>err = @test_throws ArgumentError ConvergenceException(10,.1,.2)
+<span style="color:inherit;"> |</span>@test err.value.msg == &#34;Change must be greater than tol.&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">test/weights.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/weights.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-12,7 +12,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test isa(f([1 2 3; 4 5 6]), AbstractWeights{Int})
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test isempty(f(Float64[]))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(f([1, 2, 3]))</span><span style="color:red;"> == </span><span style="color:gray;">(3,)</span></span>
+<span style="color:green;">+|</span></span>    @test size(f([1, 2, 3]))<span style="color:green;">true</span>(3,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    w  = [1., 2., 3.]
+<span style="color:inherit;"> |</span>    wv = f(w)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-135,8 +135,8</span> ============================================================
+<span style="color:inherit;"> |</span>    w1 = rand(6)
+<span style="color:inherit;"> |</span>    w2 = rand(8)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(wsum(x, w1, 1))</span><span style="color:red;"> == </span><span style="color:gray;">(1, 8)</span></span>
+<span style="color:green;">+|</span></span>    @test size(wsum(x, w1, 1))<span style="color:green;">true</span>(1, 8)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(wsum(x, w2, 2))</span><span style="color:red;"> == </span><span style="color:gray;">(6, 1)</span></span>
+<span style="color:green;">+|</span></span>    @test size(wsum(x, w2, 2))<span style="color:green;">true</span>(6, 1)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test wsum(x, w1, 1) ≈ sum(x .* w1, dims=1)
+<span style="color:inherit;"> |</span>    @test wsum(x, w2, 2) ≈ sum(x .* w2', dims=2)
+<span style="color:red;">------ </span><span style="color:inherit;">src/cov.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/cov.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-147,7 +147,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function cor2cov!(C::AbstractMatrix, s::AbstractArray)
+<span style="color:inherit;"> |</span>    n = length(s)
+<span style="color:red;">-|</span></span><span style="color:gray;">    size(C)</span><span style="color:red;"> == </span><span style="color:gray;">(n, n) || throw(DimensionMismatch(&#34;inconsistent dimensions&#34;))</span></span>
+<span style="color:green;">+|</span></span>    size(C)<span style="color:green;">true</span>(n, n) || throw(DimensionMismatch(&#34;inconsistent dimensions&#34;))</span>
+<span style="color:inherit;"> |</span>    for i in CartesianIndices(size(C))
+<span style="color:inherit;"> |</span>        @inbounds C[i] *= s[i[1]] * s[i[2]]
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">src/counts.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/counts.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-119,7 +119,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    kx = length(xlevels)
+<span style="color:inherit;"> |</span>    ky = length(ylevels)
+<span style="color:red;">-|</span></span><span style="color:gray;">    size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(kx, ky) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    size(r)<span style="color:green;">true</span>(kx, ky) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    mx0 = xlevels[1]
+<span style="color:inherit;"> |</span>    mx1 = xlevels[end]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-150,7 +150,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    kx = length(xlevels)
+<span style="color:inherit;"> |</span>    ky = length(ylevels)
+<span style="color:red;">-|</span></span><span style="color:gray;">    size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(kx, ky) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    size(r)<span style="color:green;">true</span>(kx, ky) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    mx0 = xlevels[1]
+<span style="color:inherit;"> |</span>    mx1 = xlevels[end]
+<span style="color:red;">------ </span><span style="color:inherit;">src/signalcorr.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/signalcorr.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +79,7</span> ============================================================
+<span style="color:inherit;"> |</span>    lx = size(x, 1)
+<span style="color:inherit;"> |</span>    ns = size(x, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, ns) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    size(r)<span style="color:green;">true</span>(m, ns) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    T = typeof(zero(eltype(x)) / 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-158,7 +158,7</span> ============================================================
+<span style="color:inherit;"> |</span>    lx = size(x, 1)
+<span style="color:inherit;"> |</span>    ns = size(x, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, ns) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    size(r)<span style="color:green;">true</span>(m, ns) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    T = typeof(zero(eltype(x)) / 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-266,7 +266,7</span> ============================================================
+<span style="color:inherit;"> |</span>    lx = size(x, 1)
+<span style="color:inherit;"> |</span>    ns = size(x, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    (length(y) == lx && size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, ns)) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    (length(y) == lx && size(r)<span style="color:green;">true</span>(m, ns)) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    T = typeof(zero(eltype(x)) / 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-286,7 +286,7</span> ============================================================
+<span style="color:inherit;"> |</span>    lx = length(x)
+<span style="color:inherit;"> |</span>    ns = size(y, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    (size(y, 1) == lx && size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, ns)) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    (size(y, 1) == lx && size(r)<span style="color:green;">true</span>(m, ns)) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    T = typeof(zero(eltype(x)) / 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-307,7 +307,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nx = size(x, 2)
+<span style="color:inherit;"> |</span>    ny = size(y, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    (size(y, 1) == lx && size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, nx, ny)) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    (size(y, 1) == lx && size(r)<span style="color:green;">true</span>(m, nx, ny)) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # cached (centered) columns of x
+<span style="color:inherit;">@|</span><span style="color:inherit;">-418,7 +418,7</span> ============================================================
+<span style="color:inherit;"> |</span>    lx = size(x, 1)
+<span style="color:inherit;"> |</span>    ns = size(x, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    (length(y) == lx && size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, ns)) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    (length(y) == lx && size(r)<span style="color:green;">true</span>(m, ns)) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    T = typeof(zero(eltype(x)) / 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-440,7 +440,7</span> ============================================================
+<span style="color:inherit;"> |</span>    lx = length(x)
+<span style="color:inherit;"> |</span>    ns = size(y, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    (size(y, 1) == lx && size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, ns)) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    (size(y, 1) == lx && size(r)<span style="color:green;">true</span>(m, ns)) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    T = typeof(zero(eltype(x)) / 1)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-463,7 +463,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nx = size(x, 2)
+<span style="color:inherit;"> |</span>    ny = size(y, 2)
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:red;">-|</span></span><span style="color:gray;">    (size(y, 1) == lx && size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, nx, ny)) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    (size(y, 1) == lx && size(r)<span style="color:green;">true</span>(m, nx, ny)) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>    check_lags(lx, lags)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # cached (centered) columns of x
+<span style="color:inherit;">@|</span><span style="color:inherit;">-595,7 +595,7</span> ============================================================
+<span style="color:inherit;"> |</span>    m = length(lags)
+<span style="color:inherit;"> |</span>    minlag, maxlag = extrema(lags)
+<span style="color:inherit;"> |</span>    (0 <= minlag && 2maxlag < lx) || error(&#34;Invalid lag value.&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    size(r)</span><span style="color:red;"> == </span><span style="color:gray;">(m, size(X,2)) || throw(DimensionMismatch())</span></span>
+<span style="color:green;">+|</span></span>    size(r)<span style="color:green;">true</span>(m, size(X,2)) || throw(DimensionMismatch())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    if method == :regression
+<span style="color:inherit;"> |</span>        pacf_regress!(r, X, lags, max</div>
+</pre> <h3 id=omit_fx_fx_and_fx_fx_1_hit ><a href="#omit_fx_fx_and_fx_fx_1_hit">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/sampling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/sampling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,8 +15,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # pre-allocated storage arrays
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # repeatability
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">func(MersenneTwister(1), deepcopy(non_rng_args)...) ==</span></span>
+<span style="color:red;">-|</span></span><span style="color:red;">          func(MersenneTwister(1), deepcopy(non_rng_args)...)</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    # default RNG is Random.GLOBAL_RNG
+<span style="color:inherit;"> |</span>    Random.seed!(47)
+<span style="color:inherit;"> |</span>    x = func(deepcopy(non_rng_args)</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

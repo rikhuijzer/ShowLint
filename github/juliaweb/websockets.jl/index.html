@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/WebSockets.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaWeb/WebSockets.jl" target=_blank >JuliaWeb/WebSockets.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/WebSockets.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaWeb/WebSockets.jl" target=_blank >JuliaWeb/WebSockets.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a><li><a href="#omit_a_a_and_a_a_49_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 49 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">benchmark/ws_hts.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">benchmark/ws_hts.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-106,7 +106,7</span> ============================================================
@@ -90,4 +90,343 @@
 <span style="color:inherit;"> |</span>    @test frag_back.opcode == op
 <span style="color:inherit;"> |</span>    @test frag_back.is_masked == clientwriting
 <span style="color:inherit;"> |</span>    @test frag_back.payload_len ==</div>
+</pre> <h3 id=omit_a_a_and_a_a_49_hits ><a href="#omit_a_a_and_a_a_49_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 49 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">examples/count_with_logger.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">examples/count_with_logger.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +79,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function gatekeeper(req, ws)
+<span style="color:inherit;"> |</span>    @wslog req
+<span style="color:red;">-|</span></span><span style="color:gray;">    if subprotocol(req)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    if subprotocol(req)<span style="color:green;">false</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        coroutine_count(ws)
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        @wslog &#34;No subprotocol&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">test/client_server_functions.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/client_server_functions.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-32,8 +32,8</span> ============================================================
+<span style="color:inherit;"> |</span>    &#96;echows&#96;
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function test_wshandler(req::HTTP.Request, ws::WebSocket)
+<span style="color:red;">-|</span></span><span style="color:gray;">    WebSockets.origin(req)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;&#34; && @error &#34;test_wshandler, got origin header as from a browser.&#34;</span></span>
+<span style="color:green;">+|</span></span>    WebSockets.origin(req)<span style="color:green;">false</span>&#34;&#34; && @error &#34;test_wshandler, got origin header as from a browser.&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    WebSockets.target(req)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;/&#34; && @error &#34;test_wshandler, got origin header as in a POST request.&#34;</span></span>
+<span style="color:green;">+|</span></span>    WebSockets.target(req)<span style="color:green;">false</span>&#34;/&#34; && @error &#34;test_wshandler, got origin header as in a POST request.&#34;</span>
+<span style="color:inherit;"> |</span>    if WebSockets.subprotocol(req) == SUBPROTOCOL
+<span style="color:inherit;"> |</span>        initiatingws(ws, msglengths = MSGLENGTHS)
+<span style="color:inherit;"> |</span>    elseif WebSockets.subprotocol(req) == SUBPROTOCOL_CLOSE
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_websocketlogger.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_websocketlogger.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,8 +38,7</span> ============================================================
+<span style="color:inherit;"> |</span>                @info &#34;test&#34; maxlog=1
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(take!(buf))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test String(take!(buf))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        [ Info: test
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>        with_logger(logger) do
+<span style="color:inherit;">@|</span><span style="color:inherit;">-47,28 +46,19</span> ============================================================
+<span style="color:inherit;"> |</span>                @info &#34;test&#34; maxlog=0
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(take!(buf))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test String(take!(buf))<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @testset &#34;Default metadata formatting&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Debug, Base, :g, :i, expanduser(&#34;~/somefile.jl&#34;), 42)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:blue,      &#34;Debug:&#34;,   &#34;@ Base ~/somefile.jl:42&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Debug, Base, :g, :i, expanduser(&#34;~/somefile.jl&#34;), 42)<span style="color:green;">true</span>(:blue,      &#34;Debug:&#34;,   &#34;@ Base ~/somefile.jl:42&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Info,  Main, :g, :i, &#34;a.jl&#34;, 1)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:cyan,      &#34;Info:&#34;,    &#34;&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Info,  Main, :g, :i, &#34;a.jl&#34;, 1)<span style="color:green;">true</span>(:cyan,      &#34;Info:&#34;,    &#34;&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Warn,  Main, :g, :i, &#34;b.jl&#34;, 2)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:yellow,    &#34;Warning:&#34;, &#34;@ Main b.jl:2&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Warn,  Main, :g, :i, &#34;b.jl&#34;, 2)<span style="color:green;">true</span>(:yellow,    &#34;Warning:&#34;, &#34;@ Main b.jl:2&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Error, Main, :g, :i, &#34;&#34;, 0)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:light_red, &#34;Error:&#34;,   &#34;@ Main :0&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Error, Main, :g, :i, &#34;&#34;, 0)<span style="color:green;">true</span>(:light_red, &#34;Error:&#34;,   &#34;@ Main :0&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        # formatting of nothing</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Warn,  nothing, :g, :i, &#34;b.jl&#34;, 2)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:yellow,    &#34;Warning:&#34;, &#34;@ b.jl:2&#34;)</span></span>
+<span style="color:green;">+|</span></span>        # formatting of nothing</span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Warn,  nothing, :g, :i, &#34;b.jl&#34;, 2)<span style="color:green;">true</span>(:yellow,    &#34;Warning:&#34;, &#34;@ b.jl:2&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Warn,  Main, :g, :i, nothing, 2)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:yellow,    &#34;Warning:&#34;, &#34;@ Main&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Warn,  Main, :g, :i, nothing, 2)<span style="color:green;">true</span>(:yellow,    &#34;Warning:&#34;, &#34;@ Main&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Warn,  Main, :g, :i, &#34;b.jl&#34;, nothing)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:yellow,    &#34;Warning:&#34;, &#34;@ Main b.jl&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Warn,  Main, :g, :i, &#34;b.jl&#34;, nothing)<span style="color:green;">true</span>(:yellow,    &#34;Warning:&#34;, &#34;@ Main b.jl&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Warn,  nothing, :g, :i, nothing, 2)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:yellow,    &#34;Warning:&#34;, &#34;&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Warn,  nothing, :g, :i, nothing, 2)<span style="color:green;">true</span>(:yellow,    &#34;Warning:&#34;, &#34;&#34;)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Logging.default_metafmt(Warn,  Main, :g, :i, &#34;b.jl&#34;, 2:5)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(:yellow,    &#34;Warning:&#34;, &#34;@ Main b.jl:2-5&#34;)</span></span>
+<span style="color:green;">+|</span></span>        @test Logging.default_metafmt(Warn,  Main, :g, :i, &#34;b.jl&#34;, 2:5)<span style="color:green;">true</span>(:yellow,    &#34;Warning:&#34;, &#34;@ Main b.jl:2-5&#34;)</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function dummy_metafmt(level, _module, group, id, file, line)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-92,13 +82,11</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Basic tests for the default setup
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test genmsg(&#34;msg&#34;, level=Info, meta_formatter=Logging.default_metafmt)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test genmsg(&#34;msg&#34;, level=Info, meta_formatter=Logging.default_metafmt)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    [ Info: msg
+<span style="color:inherit;"> |</span>    &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    @test genmsg(&#34;line1\nline2&#34;, level=Warn, _module=Base,
+<span style="color:red;">-|</span></span><span style="color:gray;">                 file=&#34;other.jl&#34;, line=42, meta_formatter=Logging.default_metafmt)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>                 file=&#34;other.jl&#34;, line=42, meta_formatter=Logging.default_metafmt)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    ┌ Warning: line1
+<span style="color:inherit;"> |</span>    │ line2
+<span style="color:inherit;"> |</span>    └ @ Base other.jl:42
+<span style="color:inherit;">@|</span><span style="color:inherit;">-106,8 +94,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # Full metadata formatting
+<span style="color:inherit;"> |</span>    @test genmsg(&#34;msg&#34;, level=Debug,
+<span style="color:inherit;"> |</span>                 meta_formatter=(level, _module, group, id, file, line)->
+<span style="color:red;">-|</span></span><span style="color:gray;">                                (:white,&#34;Foo!&#34;, &#34;$level $_module $group $id $file $line&#34;))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>                                (:white,&#34;Foo!&#34;, &#34;$level $_module $group $id $file $line&#34;))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    ┌ Foo! msg
+<span style="color:inherit;"> |</span>    └ Debug Main a_group an_id some/path.jl 101
+<span style="color:inherit;"> |</span>    &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-118,77 +105,65</span> ============================================================
+<span style="color:inherit;"> |</span>        ┌ PREFIX EOL
+<span style="color:inherit;"> |</span>        └ SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;, &#34;EOL&#34;=>&#34;&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;msg&#34;)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;msg&#34;)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX msg
+<span style="color:inherit;"> |</span>        └ SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>        # Behavior with empty prefix / suffix
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;msg&#34;, meta_formatter=(args...)->(:white, &#34;PREFIX&#34;, &#34;&#34;))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;msg&#34;, meta_formatter=(args...)->(:white, &#34;PREFIX&#34;, &#34;&#34;))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        [ PREFIX msg
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;msg&#34;, meta_formatter=(args...)->(:white, &#34;&#34;, &#34;SUFFIX&#34;))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;msg&#34;, meta_formatter=(args...)->(:white, &#34;&#34;, &#34;SUFFIX&#34;))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ msg
+<span style="color:inherit;"> |</span>        └ SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Metadata suffix, right justification&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;xxx&#34;, width=20, right_justify=200)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;xxx&#34;, width=20, right_justify=200)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        [ PREFIX xxx  SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;xxx\nxxx&#34;, width=20, right_justify=200)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;xxx\nxxx&#34;, width=20, right_justify=200)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX xxx
+<span style="color:inherit;"> |</span>        └ xxx         SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>        # When adding the suffix would overflow the display width, add it on
+<span style="color:inherit;"> |</span>        # the next line:
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;xxxx&#34;, width=20, right_justify=200)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;xxxx&#34;, width=20, right_justify=200)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX xxxx
+<span style="color:inherit;"> |</span>        └             SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>        # Same for multiline messages
+<span style="color:inherit;"> |</span>        @test genmsg(&#34;&#34;&#34;xxx
+<span style="color:red;">-|</span></span><span style="color:gray;">                        xxxxxxxxxx&#34;&#34;&#34;, width=20, right_justify=200)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>                        xxxxxxxxxx&#34;&#34;&#34;, width=20, right_justify=200)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX xxx
+<span style="color:inherit;"> |</span>        └ xxxxxxxxxx  SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>        @test genmsg(&#34;&#34;&#34;xxx
+<span style="color:red;">-|</span></span><span style="color:gray;">                        xxxxxxxxxxx&#34;&#34;&#34;, width=20, right_justify=200)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>                        xxxxxxxxxxx&#34;&#34;&#34;, width=20, right_justify=200)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX xxx
+<span style="color:inherit;"> |</span>        │ xxxxxxxxxxx
+<span style="color:inherit;"> |</span>        └             SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>        # min(right_justify,width) is used
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;xxx&#34;, width=200, right_justify=20)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;xxx&#34;, width=200, right_justify=20)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        [ PREFIX xxx  SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;xxxx&#34;, width=200, right_justify=20)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;xxxx&#34;, width=200, right_justify=20)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX xxxx
+<span style="color:inherit;"> |</span>        └             SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Keywords
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test genmsg(&#34;msg&#34;, a=1, b=&#34;asdf&#34;)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test genmsg(&#34;msg&#34;, a=1, b=&#34;asdf&#34;)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    ┌ PREFIX msg
+<span style="color:inherit;"> |</span>    │   a = 1
+<span style="color:inherit;"> |</span>    │   b = &#34;asdf&#34;
+<span style="color:inherit;"> |</span>    └ SUFFIX
+<span style="color:inherit;"> |</span>    &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    # Exceptions shown with showerror
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test genmsg(&#34;msg&#34;, exception=DivideError())</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test genmsg(&#34;msg&#34;, exception=DivideError())<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    ┌ PREFIX msg
+<span style="color:inherit;"> |</span>    │   exception = DivideError: integer division error
+<span style="color:inherit;"> |</span>    └ SUFFIX
+<span style="color:inherit;">@|</span><span style="color:inherit;">-206,8 +181,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Limiting large data structures&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;msg&#34;, a=fill(1.00001, 100,100), b=fill(2.00002, 10,10))</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;msg&#34;, a=fill(1.00001, 100,100), b=fill(2.00002, 10,10))<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX msg
+<span style="color:inherit;"> |</span>        │   a =
+<span style="color:inherit;"> |</span>        │    100×100 $(Matrix{Float64}):
+<span style="color:inherit;">@|</span><span style="color:inherit;">-228,8 +202,7</span> ============================================================
+<span style="color:inherit;"> |</span>        └ SUFFIX
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>        # Limiting the amount which is printed
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test genmsg(&#34;msg&#34;, a=fill(1.00001, 10,10), show_limited=false)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test genmsg(&#34;msg&#34;, a=fill(1.00001, 10,10), show_limited=false)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        ┌ PREFIX msg
+<span style="color:inherit;"> |</span>        │   a =
+<span style="color:inherit;"> |</span>        │    10×10 $(Matrix{Float64}):
+<span style="color:inherit;">@|</span><span style="color:inherit;">-248,8 +221,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Basic colorization test
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test genmsg(&#34;line1\nline2&#34;, color=true)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test genmsg(&#34;line1\nline2&#34;, color=true)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    \e[36m\e[1m┌ \e[22m\e[39m\e[36m\e[1mPREFIX \e[22m\e[39mline1
+<span style="color:inherit;"> |</span>    \e[36m\e[1m│ \e[22m\e[39mline2
+<span style="color:inherit;"> |</span>    \e[36m\e[1m└ \e[22m\e[39m\e[90mSUFFIX\e[39m
+<span style="color:inherit;">@|</span><span style="color:inherit;">-283,7 +255,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Normal info
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg(&#34;---&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;[ Info: ---\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg(&#34;---&#34;)<span style="color:green;">true</span>&#34;[ Info: ---\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Debug, own format
+<span style="color:inherit;"> |</span>    msg = spec_msg(&#34;---&#34;, level = Debug)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-306,10 +278,10</span> ============================================================
+<span style="color:inherit;"> |</span>        @test startswith(msg, &#34;[ Wslog &#34;)
+<span style="color:inherit;"> |</span>        @test endswith(msg, &#34;: ---\n&#34;)
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg(&#34;---&#34;, shouldlog = spec_shouldlog)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg(&#34;---&#34;, shouldlog = spec_shouldlog)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg(&#34;---&#34;, level = Debug, shouldlog = spec_shouldlog)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg(&#34;---&#34;, level = Debug, shouldlog = spec_shouldlog)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg(&#34;---&#34;, level = Warn, shouldlog = spec_shouldlog)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg(&#34;---&#34;, level = Warn, shouldlog = spec_shouldlog)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg(&#34;---&#34;, level = Error, shouldlog = spec_shouldlog)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg(&#34;---&#34;, level = Error, shouldlog = spec_shouldlog)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check two lines output for all except log level Info and Wslog
+<span style="color:inherit;"> |</span>    @test startswith(spec_msg(&#34;---&#34;, level = Debug), &#34;┌ Debug: ---\n└ &#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-318,14 +290,14</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check colors in first argument show methods are preserved
+<span style="color:inherit;"> |</span>    ws = WebSocket(IOBuffer(), true)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg(ws)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;[ Info: WebSocket{GenericIOBuffer}(server, CONNECTED)\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg(ws)<span style="color:green;">true</span>&#34;[ Info: WebSocket{GenericIOBuffer}(server, CONNECTED)\n&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg(ws, color= true)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\e[36m\e[1m[ \e[22m\e[39m\e[36m\e[1mInfo: \e[22m\e[39mWebSocket{GenericIOBuffer}(server, \e[32mCONNECTED\e[39m)\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg(ws, color= true)<span style="color:green;">true</span>&#34;\e[36m\e[1m[ \e[22m\e[39m\e[36m\e[1mInfo: \e[22m\e[39mWebSocket{GenericIOBuffer}(server, \e[32mCONNECTED\e[39m)\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check tuples in first argument, resembling println(arg1, arg2)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg((&#34;Now testing &#34;, ws), color=true)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\e[36m\e[1m[ \e[22m\e[39m\e[36m\e[1mInfo: \e[22m\e[39mNow testing WebSocket{GenericIOBuffer}(server, \e[32mCONNECTED\e[39m)\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg((&#34;Now testing &#34;, ws), color=true)<span style="color:green;">true</span>&#34;\e[36m\e[1m[ \e[22m\e[39m\e[36m\e[1mInfo: \e[22m\e[39mNow testing WebSocket{GenericIOBuffer}(server, \e[32mCONNECTED\e[39m)\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check tuples in first argument, resembling println(arg1, arg2)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test spec_msg((&#34;Now testing &#34;, ws), color=true)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\e[36m\e[1m[ \e[22m\e[39m\e[36m\e[1mInfo: \e[22m\e[39mNow testing WebSocket{GenericIOBuffer}(server, \e[32mCONNECTED\e[39m)\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test spec_msg((&#34;Now testing &#34;, ws), color=true)<span style="color:green;">true</span>&#34;\e[36m\e[1m[ \e[22m\e[39m\e[36m\e[1mInfo: \e[22m\e[39mNow testing WebSocket{GenericIOBuffer}(server, \e[32mCONNECTED\e[39m)\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check default shouldlog filters away WebSockets. HTTP.Servers, i.e. HTTP.Servers
+<span style="color:inherit;"> |</span>    logger = WebSocketLogger()
+<span style="color:red;">------ </span><span style="color:inherit;">src/HTTP.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/HTTP.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-251,10 +251,10</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function is_upgrade(r::Request)
+<span style="color:inherit;"> |</span>    if (r isa Request && r.method == &#34;GET&#34;)  || (r isa Response && r.status == 101)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if header(r, &#34;Connection&#34;, &#34;&#34;)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;keep-alive&#34;</span></span>
+<span style="color:green;">+|</span></span>        if header(r, &#34;Connection&#34;, &#34;&#34;)<span style="color:green;">false</span>&#34;keep-alive&#34;</span>
+<span style="color:inherit;"> |</span>            # &#34;Connection => upgrade&#34; for most and &#34;Connection => keep-alive, upgrade&#34; for Firefox.
+<span style="color:inherit;"> |</span>            if hasheader(r, &#34;Connection&#34;, &#34;upgrade&#34;) || hasheader(r, &#34;Connection&#34;, &#34;keep-alive, upgrade&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">                if lowercase(header(r, &#34;Upgrade&#34;, &#34;&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;websocket&#34;</span></span>
+<span style="color:green;">+|</span></span>                if lowercase(header(r, &#34;Upgrade&#34;, &#34;&#34;))<span style="color:green;">true</span>&#34;websocket&#34;</span>
+<span style="color:inherit;"> |</span>                    return true
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">------ </span><span style="color:inherit;">test/frametest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/frametest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-46,7 +46,7</span> ============================================================
+<span style="color:inherit;"> |</span>    frame = take!(io)
+<span style="color:inherit;"> |</span>    # Check the frame header
+<span style="color:inherit;"> |</span>    # Last frame bit
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bitstring(frame[1])</span><span style="color:red;"> == </span><span style="color:gray;">(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span></span>
+<span style="color:green;">+|</span></span>    @test bitstring(frame[1])<span style="color:green;">true</span>(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span>
+<span style="color:inherit;"> |</span>    # payload length bit
+<span style="color:inherit;"> |</span>    @test frame[2] & 0b0111_1111 == len
+<span style="color:inherit;"> |</span>    # ismasked bit
+<span style="color:inherit;">@|</span><span style="color:inherit;">-105,7 +105,7</span> ============================================================
+<span style="color:inherit;"> |</span>    write_fragment(io, fin, op, clientwriting, copy(codeunits(test_str)))
+<span style="color:inherit;"> |</span>    frame = take!(io)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bitstring(frame[1])</span><span style="color:red;"> == </span><span style="color:gray;">(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span></span>
+<span style="color:green;">+|</span></span>    @test bitstring(frame[1])<span style="color:green;">true</span>(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span>
+<span style="color:inherit;"> |</span>    @test frame[2] & 0b0111_1111 == 126
+<span style="color:inherit;"> |</span>    @test bitstring(frame[4])*bitstring(frame[3]) == bitstring(hton(UInt16(len)))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-239,7 +239,7</span> ============================================================
+<span style="color:inherit;"> |</span>    len = 0
+<span style="color:inherit;"> |</span>    # Check the frame header
+<span style="color:inherit;"> |</span>    # Last frame bit
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bitstring(frame[1])</span><span style="color:red;"> == </span><span style="color:gray;">(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span></span>
+<span style="color:green;">+|</span></span>    @test bitstring(frame[1])<span style="color:green;">true</span>(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span>
+<span style="color:inherit;"> |</span>    # payload length bit
+<span style="color:inherit;"> |</span>    @test frame[2] & 0b0111_1111 == len
+<span style="color:inherit;"> |</span>    # ismasked bit
+<span style="color:inherit;">@|</span><span style="color:inherit;">-287,7 +287,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check the frame header
+<span style="color:inherit;"> |</span>    # Last frame bit
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bitstring(frame[1])</span><span style="color:red;"> == </span><span style="color:gray;">(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span></span>
+<span style="color:green;">+|</span></span>    @test bitstring(frame[1])<span style="color:green;">true</span>(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span>
+<span style="color:inherit;"> |</span>    # payload length bit
+<span style="color:inherit;"> |</span>    @test frame[2] & 0b0111_1111 == 2
+<span style="color:inherit;"> |</span>    # ismasked bit
+<span style="color:inherit;">@|</span><span style="color:inherit;">-320,7 +320,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check the frame header
+<span style="color:inherit;"> |</span>    # Last frame bit
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test bitstring(frame[1])</span><span style="color:red;"> == </span><span style="color:gray;">(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span></span>
+<span style="color:green;">+|</span></span>    @test bitstring(frame[1])<span style="color:green;">true</span>(fin ? &#34;1&#34; : &#34;0&#34;) * &#34;000&#34; * bitstring(op)[end-3:end]</span>
+<span style="color:inherit;"> |</span>    # payload length bit
+<span style="color:inherit;"> |</span>    @test frame[2] & 0b0111_1111 == length(statuscode)
+<span style="color:inherit;"> |</span>    # ismasked bit
+<span style="color:red;">------ </span><span style="color:inherit;">test/handshaketest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/handshaketest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>include(&#34;handshaketest_functions.jl&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Test generate_websocket_key&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">@test generate_websocket_key(&#34;dGhlIHNhbXBsZSBub25jZQ==&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;s3pPLMBiTxaQ9kYGzzhZRbK+xOo=&#34;</span></span>
+<span style="color:green;">+|</span></span>@test generate_websocket_key(&#34;dGhlIHNhbXBsZSBub25jZQ==&#34;)<span style="color:green;">true</span>&#34;s3pPLMBiTxaQ9kYGzzhZRbK+xOo=&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Test reject / switch format&</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDatabases/Redis.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDatabases/Redis.jl" target=_blank >JuliaDatabases/Redis.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDatabases/Redis.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDatabases/Redis.jl" target=_blank >JuliaDatabases/Redis.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_a_a_and_a_a_17_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 17 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/client.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/client.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-68,7 +68,7</span> ============================================================
@@ -19,4 +19,117 @@
 <span style="color:inherit;"> |</span>    cursor = parse(Int, response[1])
 <span style="color:inherit;"> |</span>    return (cursor, convert_response(Dict{AbstractString, AbstractString}, response[2]))
 <span style="color:inherit;"> |</span</div>
+</pre> <h3 id=omit_a_a_and_a_a_17_hits ><a href="#omit_a_a_and_a_a_17_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 17 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/redis_tests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/redis_tests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,10 +38,10</span> ============================================================
+<span style="color:inherit;"> |</span>    @test set(conn, testkey, 2)
+<span style="color:inherit;"> |</span>    @test incr(conn, testkey) == 3
+<span style="color:inherit;"> |</span>    @test incrby(conn, testkey, 3) == 6
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test incrbyfloat(conn, testkey, 1.5)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;7.5&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test incrbyfloat(conn, testkey, 1.5)<span style="color:green;">true</span>&#34;7.5&#34;</span>
+<span style="color:inherit;"> |</span>    @test mget(conn, testkey, testkey2, testkey3) == [&#34;7.5&#34;, s2, s3]
+<span style="color:inherit;"> |</span>    @test strlen(conn, testkey2) == length(s2)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test rename(conn, testkey2, testkey4)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;OK&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test rename(conn, testkey2, testkey4)<span style="color:green;">true</span>&#34;OK&#34;</span>
+<span style="color:inherit;"> |</span>    @test testkey4 in keys(conn,&#34;*&#34;)
+<span style="color:inherit;"> |</span>    del(conn, testkey, testkey2, testkey3, testkey4)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-110,7 +110,7</span> ============================================================
+<span style="color:inherit;"> |</span>    set(conn, testkey, s1)
+<span style="color:inherit;"> |</span>    @test move(conn, testkey, 1)
+<span style="color:inherit;"> |</span>    @test exists(conn, testkey) == false
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test Redis.select(conn, 1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;OK&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test Redis.select(conn, 1)<span style="color:green;">true</span>&#34;OK&#34;</span>
+<span style="color:inherit;"> |</span>    @test get(conn, testkey) == s1
+<span style="color:inherit;"> |</span>    del(conn, testkey)
+<span style="color:inherit;"> |</span>    Redis.select(conn, 0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-150,13 +150,13</span> ============================================================
+<span style="color:inherit;"> |</span>    @test lindex(conn, testkey, 0) == s3
+<span style="color:inherit;"> |</span>    @test lindex(conn, testkey, 10) == nothing
+<span style="color:inherit;"> |</span>    @test lrem(conn, testkey, 0, &#34;a&#34;) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test lset(conn, testkey, 0, s5)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;OK&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test lset(conn, testkey, 0, s5)<span style="color:green;">true</span>&#34;OK&#34;</span>
+<span style="color:inherit;"> |</span>    @test lindex(conn, testkey, 0) == s5
+<span style="color:inherit;"> |</span>    @test linsert(conn, testkey, &#34;BEFORE&#34;, s2, s3) == 3
+<span style="color:inherit;"> |</span>    @test linsert(conn, testkey, &#34;AFTER&#34;, s3, s6) == 4
+<span style="color:inherit;"> |</span>    @test lpushx(conn, testkey2, &#34;nothing&#34;)  == false
+<span style="color:inherit;"> |</span>    @test rpushx(conn, testkey2, &#34;nothing&#34;)  == false
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test ltrim(conn, testkey, 0, 1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;OK&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test ltrim(conn, testkey, 0, 1)<span style="color:green;">true</span>&#34;OK&#34;</span>
+<span style="color:inherit;"> |</span>    @test lrange(conn, testkey, 0, -1) == [s5; s3]
+<span style="color:inherit;"> |</span>    @test brpop(conn, testkey, 0) == [testkey, s3]
+<span style="color:inherit;"> |</span>    lpush(conn, testkey, s3)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-185,10 +185,10</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Hashes&#34; begin
+<span style="color:inherit;"> |</span>    @test hmset(conn, testhash, Dict(1 => 2, &#34;3&#34; => 4, &#34;5&#34; => &#34;6&#34;))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test hscan(conn,  testhash, 0)</span><span style="color:red;"> == </span><span style="color:gray;">(0, Dict(&#34;1&#34; => &#34;2&#34;, &#34;3&#34; => &#34;4&#34;, &#34;5&#34; => &#34;6&#34;))</span></span>
+<span style="color:green;">+|</span></span>    @test hscan(conn,  testhash, 0)<span style="color:green;">true</span>(0, Dict(&#34;1&#34; => &#34;2&#34;, &#34;3&#34; => &#34;4&#34;, &#34;5&#34; => &#34;6&#34;))</span>
+<span style="color:inherit;"> |</span>    @test hexists(conn, testhash, 1) == true
+<span style="color:inherit;"> |</span>    @test hexists(conn, testhash, &#34;1&#34;) == true
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test hget(conn, testhash, 1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;2&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test hget(conn, testhash, 1)<span style="color:green;">true</span>&#34;2&#34;</span>
+<span style="color:inherit;"> |</span>    @test hgetall(conn, testhash) == Dict(&#34;1&#34; => &#34;2&#34;, &#34;3&#34; => &#34;4&#34;, &#34;5&#34; => &#34;6&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test hget(conn, testhash, &#34;non_existent_field&#34;) == nothing
+<span style="color:inherit;">@|</span><span style="color:inherit;">-200,9 +200,9</span> ============================================================
+<span style="color:inherit;"> |</span>    @test Set(hvals(conn, testhash)) == Set([&#34;2&#34;, &#34;4&#34;, &#34;6&#34;]) # use Set for comp as hash ordering is random
+<span style="color:inherit;"> |</span>    @test Set(hkeys(conn, testhash)) == Set([&#34;1&#34;, &#34;3&#34;, &#34;5&#34;])
+<span style="color:inherit;"> |</span>    @test hset(conn, testhash, &#34;3&#34;, 10) == false # if the field already hset returns false
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test hget(conn, testhash, &#34;3&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;10&#34; # but still sets it to the new value</span></span>
+<span style="color:green;">+|</span></span>    @test hget(conn, testhash, &#34;3&#34;)<span style="color:green;">true</span>&#34;10&#34; # but still sets it to the new value</span>
+<span style="color:inherit;"> |</span>    @test hset(conn, testhash, &#34;10&#34;, &#34;10&#34;) == true # new field hset returns true
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test hget(conn, testhash, &#34;10&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;10&#34; # correctly set new field</span></span>
+<span style="color:green;">+|</span></span>    @test hget(conn, testhash, &#34;10&#34;)<span style="color:green;">true</span>&#34;10&#34; # correctly set new field</span>
+<span style="color:inherit;"> |</span>    @test hsetnx(conn, testhash, &#34;1&#34;, &#34;10&#34;) == false # field exists
+<span style="color:inherit;"> |</span>    @test hsetnx(conn, testhash, &#34;11&#34;, &#34;10&#34;) == true # field doesn't exist
+<span style="color:inherit;"> |</span>    @test hlen(conn, testhash) == 5  # testhash now has 5 fields
+<span style="color:inherit;">@|</span><span style="color:inherit;">-258,7 +258,7</span> ============================================================
+<span style="color:inherit;"> |</span>    zadd(conn, testkey, 1.5, s3)
+<span style="color:inherit;"> |</span>    @test zcount(conn, testkey, 0, 1) == 2   # range as int
+<span style="color:inherit;"> |</span>    @test zcount(conn, testkey, &#34;-inf&#34;, &#34;+inf&#34;) == 3 # range as string
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test zincrby(conn, testkey, 1, s1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;2&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test zincrby(conn, testkey, 1, s1)<span style="color:green;">true</span>&#34;2&#34;</span>
+<span style="color:inherit;"> |</span>    @test parse(Float64, zincrby(conn, testkey, 1.2, s1)) == 3.2
+<span style="color:inherit;"> |</span>    @test zrem(conn, testkey, s1, s2) == 2
+<span style="color:inherit;"> |</span>    del(conn, testkey)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-302,7 +302,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test zrevrangebyscore(conn, testkey, &#34;(6&#34;, &#34;(5&#34;) == OrderedSet{AbstractString}()
+<span style="color:inherit;"> |</span>    @test zrevrank(conn, testkey, &#34;e&#34;) == 5
+<span style="color:inherit;"> |</span>    @test zrevrank(conn, &#34;ordered_set&#34;, &#34;non_existent_member&#34;) == nothing
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test zscore(conn, testkey, &#34;e&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;5&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test zscore(conn, testkey, &#34;e&#34;)<span style="color:green;">true</span>&#34;5&#34;</span>
+<span style="color:inherit;"> |</span>    @test zscore(conn, &#34;ordered_set&#34;, &#34;non_existent_member&#34;) == nothing
+<span style="color:inherit;"> |</span>    del(conn, testkey)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-364,10 +364,10</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Transactions&#34; begin
+<span style="color:inherit;"> |</span>    trans = open_transaction(conn)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test set(trans, testkey, &#34;foobar&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;QUEUED&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test set(trans, testkey, &#34;foobar&#34;)<span style="color:green;">true</span>&#34;QUEUED&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test get(trans, testkey)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;QUEUED&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test get(trans, testkey)<span style="color:green;">true</span>&#34;QUEUED&#34;</span>
+<span style="color:inherit;"> |</span>    @test exec(trans) == [&#34;OK&#34;, &#34;foobar&#34;]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test del(trans, testkey)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;QUEUED&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test del(trans, testkey)<span style="color:green;">true</span>&#34;QUEUED&#34;</span>
+<span style="color:inherit;"> |</span>    @test exec(trans) == [true]
+<span style="color:inherit;"> |</span>    disconnect(trans)
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/client_tests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/client_tests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,9 +1,9</span> ============================================================
+<span style="color:inherit;"> |</span>import Redis: flatten, flatten_command, convert_response
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Flatten&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test flatten(&#34;simple&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;simple&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test flatten(&#34;simple&#34;)<span style="color:green;">true</span>&#34;simple&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test flatten(1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;1&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test flatten(1)<span style="color:green;">true</span>&#34;1&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test flatten(2.5)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;2.5&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test flatten(2.5)<span style="color:green;">true</span>&#34;2.5&#34;</span>
+<span style="color:inherit;"> |</span>    @test flatten([1, &#34;2&#34;, 3.5]) == [&#34;1&#34;, &#34;2&#34;, &#34;3.5&#34;]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    s = Set([1, 5, &#34;10.9&#3</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

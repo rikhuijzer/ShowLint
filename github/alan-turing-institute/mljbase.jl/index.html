@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>alan-turing-institute/MLJBase.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/alan-turing-institute/MLJBase.jl" target=_blank >alan-turing-institute/MLJBase.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_comparison_with_boolean_constant_9_hits">Omit comparison with boolean constant ➤ 9 hits</a><li><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>alan-turing-institute/MLJBase.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/alan-turing-institute/MLJBase.jl" target=_blank >alan-turing-institute/MLJBase.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_comparison_with_boolean_constant_9_hits">Omit comparison with boolean constant ➤ 9 hits</a><li><a href="#omit_a_a_and_a_a_36_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 36 hits</a><li><a href="#omit_fx_fx_and_fx_fx_2_hits">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/univariate_finite/methods.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/univariate_finite/methods.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-74,7 +74,7</span> ============================================================
@@ -62,8 +62,23 @@
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</s</div>
-</pre> <h3 id=omit_a_a_and_a_a_3_hits ><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/composition/models/pipelines.jl</span>
+</pre> <h3 id=omit_a_a_and_a_a_36_hits ><a href="#omit_a_a_and_a_a_36_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 36 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/machines.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/machines.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-104,9 +104,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;serialization&#34; begin
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase._filename(&#34;mymodel.jlso&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;mymodel&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase._filename(&#34;mymodel.jlso&#34;)<span style="color:green;">true</span>&#34;mymodel&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase._filename(&#34;mymodel.gz&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;mymodel&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase._filename(&#34;mymodel.gz&#34;)<span style="color:green;">true</span>&#34;mymodel&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase._filename(&#34;mymodel&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;mymodel&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase._filename(&#34;mymodel&#34;)<span style="color:green;">true</span>&#34;mymodel&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    model = @load DecisionTreeRegressor
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/composition/models/pipelines.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/composition/models/pipelines.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-482,7 +482,7</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -74,8 +89,55 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>mach = machine(p, X, y, w)
 <span style="color:inherit;"> |</span>fit!(mach)
+<span style="color:red;">------ </span><span style="color:inherit;">test/data/datasets_synthetic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/data/datasets_synthetic.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>                            center_box=-5. => 5.,
+<span style="color:inherit;"> |</span>                            cluster_std=stds, rng=534,
+<span style="color:inherit;"> |</span>                            as_table=false, eltype=Float32)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(X)</span><span style="color:red;"> == </span><span style="color:gray;">(n, p)</span></span>
+<span style="color:green;">+|</span></span>    @test size(X)<span style="color:green;">true</span>(n, p)</span>
+<span style="color:inherit;"> |</span>    @test eltype(X) == Float32
+<span style="color:inherit;"> |</span>    @test isapprox(std((X[y .== 1, :])), 1.0, rtol=0.2) # roughly 1
+<span style="color:inherit;"> |</span>    @test isapprox(std((X[y .== 4, :])), 7.0, rtol=0.2) # roughly 7
+<span style="color:inherit;">@|</span><span style="color:inherit;">-84,7 +84,7</span> ============================================================
+<span style="color:inherit;"> |</span>    n, p = 100, 5
+<span style="color:inherit;"> |</span>    X, y = make_regression(n, p)
+<span style="color:inherit;"> |</span>    Xm = MLJBase.matrix(X)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(Xm)</span><span style="color:red;"> == </span><span style="color:gray;">(n, p)</span></span>
+<span style="color:green;">+|</span></span>    @test size(Xm)<span style="color:green;">true</span>(n, p)</span>
+<span style="color:inherit;"> |</span>    @test length(y) == n
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # specific arguments end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-92,7 +92,7</span> ============================================================
+<span style="color:inherit;"> |</span>                                   outliers=0.5, as_table=false,
+<span style="color:inherit;"> |</span>                                   eltype=Float32, rng=155)
+<span style="color:inherit;"> |</span>    @test eltype(X) == Float32
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(X)</span><span style="color:red;"> == </span><span style="color:gray;">(150, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(X)<span style="color:green;">true</span>(150, 3)</span>
+<span style="color:inherit;"> |</span>    @test length(y) == 150
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # binary
 <span style="color:red;">------ </span><span style="color:inherit;">test/composition/models/from_network.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/composition/models/from_network.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-162,7 +162,7</span> ============================================================
+<span style="color:inherit;"> |</span>    MLJBase.from_network_preprocess(TestFromComposite, mach_ex, ex)
+<span style="color:inherit;"> |</span>eval(Parameters.with_kw(struct_ex, TestFromComposite, false))
+<span style="color:inherit;"> |</span>VERSION ≥ v&#34;1.3.0-&#34; &&
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test fieldtypes(Composite8)</span><span style="color:red;"> == </span><span style="color:gray;">(KNNRegressor, Any)</span></span>
+<span style="color:green;">+|</span></span>    @test fieldtypes(Composite8)<span style="color:green;">true</span>(KNNRegressor, Any)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># test that you cannot leave &#34;default&#34; component models unspecified:
+<span style="color:inherit;"> |</span>modeltype_ex = :Composite9
+<span style="color:inherit;">@|</span><span style="color:inherit;">-330,7 +330,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># check nested fitted_params:
+<span style="color:inherit;"> |</span>FP = MLJBase.fitted_params(mach)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test keys(FP)</span><span style="color:red;"> == </span><span style="color:gray;">(:one_hot, :machines, :fitted_params_given_machine)</span></span>
+<span style="color:green;">+|</span></span>@test keys(FP)<span style="color:green;">true</span>(:one_hot, :machines, :fitted_params_given_machine)</span>
+<span style="color:inherit;"> |</span>@test Set(FP.one_hot.fitresult.all_features) == Set(keys(X))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># check data anomynity:
 <span style="color:inherit;">@|</span><span style="color:inherit;">-348,9 +348,9</span> ============================================================
 <span style="color:inherit;"> |</span>y = categorical(rand(rng, &#34;abc&#34;, 3N));
 <span style="color:inherit;"> |</span># define class weights :a, :b, :c in ration 2:4:1
@@ -87,5 +149,212 @@
 <span style="color:green;">+|</span></span>    elseif <span style="color:green;">ηtrue'b'</span></span>
 <span style="color:inherit;"> |</span>        return 4
 <span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        retu</div>
+<span style="color:inherit;"> |</span>        return 1
+<span style="color:red;">------ </span><span style="color:inherit;">test/data/data.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/data/data.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-176,9 +176,9</span> ============================================================
+<span style="color:inherit;"> |</span>    @test_throws MethodError nrows(Val(:other), (1,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    nt = (a=5, b=7)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.project(nt, :)</span><span style="color:red;"> == </span><span style="color:gray;">(a=5, b=7)</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.project(nt, :)<span style="color:green;">true</span>(a=5, b=7)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.project(nt, :a)</span><span style="color:red;"> == </span><span style="color:gray;">(a=5, )</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.project(nt, :a)<span style="color:green;">true</span>(a=5, )</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.project(nt, 1)</span><span style="color:red;"> == </span><span style="color:gray;">(a=5, )</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.project(nt, 1)<span style="color:green;">true</span>(a=5, )</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    X = MLJBase.table((x=[1,2,3], y=[4,5,6]))
+<span style="color:inherit;"> |</span>    @test select(X, 1, :y) == 4
+<span style="color:red;">------ </span><span style="color:inherit;">test/composition/learning_networks/nodes.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/composition/learning_networks/nodes.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-337,13 +337,13</span> ============================================================
+<span style="color:inherit;"> |</span>    a, b, λ = rand(4), rand(4), rand()
+<span style="color:inherit;"> |</span>    as, bs = source(a), source(b)
+<span style="color:inherit;"> |</span>    @test (as + bs)() == a + b
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test (λ * bs)()</span><span style="color:red;"> == λ</span><span style="color:gray;"> * b</span></span>
+<span style="color:green;">+|</span></span>    @test (λ * bs)()<span style="color:green;">trueλ</span> * b</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    X = source(1)
+<span style="color:inherit;"> |</span>    y = source(7)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test glb(X, y)()</span><span style="color:red;"> == </span><span style="color:gray;">(1, 7)</span></span>
+<span style="color:green;">+|</span></span>    @test glb(X, y)()<span style="color:green;">true</span>(1, 7)</span>
+<span style="color:inherit;"> |</span>    glb_node = @tuple X y
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test glb_node()</span><span style="color:red;"> == </span><span style="color:gray;">(1, 7)</span></span>
+<span style="color:green;">+|</span></span>    @test glb_node()<span style="color:green;">true</span>(1, 7)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    X = source(1:10)
+<span style="color:inherit;"> |</span>    Y = node(X->selectrows(X, 3:4), X)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-362,7 +362,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test N() == 10
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    N = @node tuple(X1, 5, X1)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test N()</span><span style="color:red;"> == </span><span style="color:gray;">(4, 5, 4)</span></span>
+<span style="color:green;">+|</span></span>    @test N()<span style="color:green;">true</span>(4, 5, 4)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    Y = @node selectrows(Xp, 3:4)
+<span style="color:inherit;"> |</span>    @test Y() == 3:4
+<span style="color:red;">------ </span><span style="color:inherit;">test/composition/learning_networks/inspection.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/composition/learning_networks/inspection.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,7 +18,7</span> ============================================================
+<span style="color:inherit;"> |</span>@constant K =  2*X
+<span style="color:inherit;"> |</span>@constant all = glb(yhat, K)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test MLJBase.tree(yhat)</span><span style="color:red;"> == </span><span style="color:gray;">(operation = predict,</span></span>
+<span style="color:green;">+|</span></span>@test MLJBase.tree(yhat)<span style="color:green;">true</span>(operation = predict,</span>
+<span style="color:inherit;"> |</span>                             model = knn,
+<span style="color:inherit;"> |</span>                             arg1 = (operation = transform,
+<span style="color:inherit;"> |</span>                                     model = hot,
+<span style="color:red;">------ </span><span style="color:inherit;">test/utilities.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/utilities.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;flat_values&#34; begin
+<span style="color:inherit;"> |</span>    t = (X = (x = 1, y = 2), Y = 3)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test flat_values(t)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 2, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test flat_values(t)<span style="color:green;">true</span>(1, 2, 3)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>mutable struct M
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>    m = (a1 = (a11 = 10, a12 = 20), a2 = (a21 = (a211 = 30, a212 = 40),))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test MLJBase.recursive_getproperty(m, :(a1.a12)) == 20
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.recursive_getproperty(m, :a1)</span><span style="color:red;"> == </span><span style="color:gray;">(a11 = 10, a12 = 20)</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.recursive_getproperty(m, :a1)<span style="color:green;">true</span>(a11 = 10, a12 = 20)</span>
+<span style="color:inherit;"> |</span>    @test MLJBase.recursive_getproperty(m, :(a2.a21.a212)) == 40
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    m = M(A1(10, 20), A2(A21(30, 40)))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-69,11 +69,11</span> ============================================================
+<span style="color:inherit;"> |</span>    rng = 555
+<span style="color:inherit;"> |</span>    Random.seed!(rng)
+<span style="color:inherit;"> |</span>    perm = Random.randperm(5)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.shuffle_rows(x, y; rng=rng)</span><span style="color:red;"> == </span><span style="color:gray;">(x[perm], y[perm])</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.shuffle_rows(x, y; rng=rng)<span style="color:green;">true</span>(x[perm], y[perm])</span>
+<span style="color:inherit;"> |</span>    y = randn(5,5)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.shuffle_rows(x, y; rng=rng)</span><span style="color:red;"> == </span><span style="color:gray;">(x[perm], y[perm,:])</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.shuffle_rows(x, y; rng=rng)<span style="color:green;">true</span>(x[perm], y[perm,:])</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.shuffle_rows(z, y; rng=rng)</span><span style="color:red;"> == </span><span style="color:gray;">(z[perm,:], y[perm,:])</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.shuffle_rows(z, y; rng=rng)<span style="color:green;">true</span>(z[perm,:], y[perm,:])</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.shuffle_rows(x, x; rng=rng)</span><span style="color:red;"> == </span><span style="color:gray;">(x[perm], x[perm])</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.shuffle_rows(x, x; rng=rng)<span style="color:green;">true</span>(x[perm], x[perm])</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;unwind&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/measures/finite.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/measures/finite.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-385,7 +385,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test m(ŷ, y) == tnr(ŷ, y) == specificity(ŷ, y) == selectivity(ŷ, y)
+<span style="color:inherit;"> |</span>    # 'higher order'
+<span style="color:inherit;"> |</span>    m = BACC()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test m(ŷ, y) == bacc(ŷ, y)</span><span style="color:red;"> == </span><span style="color:gray;">(tpr(ŷ, y) + tnr(ŷ, y))/2</span></span>
+<span style="color:green;">+|</span></span>    @test m(ŷ, y) == bacc(ŷ, y)<span style="color:green;">true</span>(tpr(ŷ, y) + tnr(ŷ, y))/2</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    ### External comparisons
+<span style="color:inherit;"> |</span>    sk_prec = 0.6111111111111112 # m.precision_score(y, yhat, pos_label=2)
+<span style="color:red;">------ </span><span style="color:inherit;">test/univariate_finite/arrays.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/univariate_finite/arrays.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-20,14 +20,14</span> ============================================================
+<span style="color:inherit;"> |</span>    @test_throws DomainError UnivariateFinite(supp, probs, pool=missing)
+<span style="color:inherit;"> |</span>    u = UnivariateFinite(supp, probs, pool=missing, augment=true)
+<span style="color:inherit;"> |</span>    @test length(u) == n
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(u)</span><span style="color:red;"> == </span><span style="color:gray;">(n,)</span></span>
+<span style="color:green;">+|</span></span>    @test size(u)<span style="color:green;">true</span>(n,)</span>
+<span style="color:inherit;"> |</span>    @test pdf.(u, &#34;class2&#34;) ≈ probs
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # autosupport:
+<span style="color:inherit;"> |</span>    @test_throws DomainError UnivariateFinite(probs, pool=missing)
+<span style="color:inherit;"> |</span>    u = UnivariateFinite(probs, pool=missing, augment=true)
+<span style="color:inherit;"> |</span>    @test length(u) == n
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(u)</span><span style="color:red;"> == </span><span style="color:gray;">(n,)</span></span>
+<span style="color:green;">+|</span></span>    @test size(u)<span style="color:green;">true</span>(n,)</span>
+<span style="color:inherit;"> |</span>    @test pdf.(u, &#34;class_2&#34;) ≈ probs
+<span style="color:inherit;"> |</span>    probs = probs ./ sum(probs)
+<span style="color:inherit;"> |</span>    u = UnivariateFinite(probs, pool=missing)
+<span style="color:red;">------ </span><span style="color:inherit;">test/static.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/static.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-46,14 +46,14</span> ============================================================
+<span style="color:inherit;"> |</span>    Tuple([args[i] for i in sortperm(p.permutation |> collect)])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>p = PermuteArgs((2, 3, 1))
+<span style="color:red;">-|</span></span><span style="color:gray;">@test transform(p, nothing, 10, 20, 30)</span><span style="color:red;"> == </span><span style="color:gray;">(20, 30, 10)</span></span>
+<span style="color:green;">+|</span></span>@test transform(p, nothing, 10, 20, 30)<span style="color:green;">true</span>(20, 30, 10)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test inverse_transform(p, nothing, 20, 30, 10)</span><span style="color:red;"> == </span><span style="color:gray;">(10, 20, 30)</span></span>
+<span style="color:green;">+|</span></span>@test inverse_transform(p, nothing, 20, 30, 10)<span style="color:green;">true</span>(10, 20, 30)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># no-op
+<span style="color:inherit;"> |</span>fitresult, _, _ = MLJBase.fit(p, 1, (1, 2, 3))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test transform(p, fitresult, 10, 20, 30)</span><span style="color:red;"> == </span><span style="color:gray;">(20, 30, 10)</span></span>
+<span style="color:green;">+|</span></span>@test transform(p, fitresult, 10, 20, 30)<span style="color:green;">true</span>(20, 30, 10)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test inverse_transform(p, fitresult, 20, 30, 10)</span><span style="color:red;"> == </span><span style="color:gray;">(10, 20, 30)</span></span>
+<span style="color:green;">+|</span></span>@test inverse_transform(p, fitresult, 20, 30, 10)<span style="color:green;">true</span>(10, 20, 30)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>true
+<span style="color:red;">------ </span><span style="color:inherit;">test/parameter_inspection.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/parameter_inspection.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-24,7 +24,7</span> ============================================================
+<span style="color:inherit;"> |</span>    t= Transparent(6, Opaque(5))
+<span style="color:inherit;"> |</span>    m = Dummy(t, Opaque(7), 42)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.params(m)</span><span style="color:red;"> == </span><span style="color:gray;">(t = (A = 6,</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.params(m)<span style="color:green;">true</span>(t = (A = 6,</span>
+<span style="color:inherit;"> |</span>                             B = Opaque(5)),
+<span style="color:inherit;"> |</span>                        o = Opaque(7),
+<span style="color:inherit;"> |</span>                        n = 42)
+<span style="color:red;">------ </span><span style="color:inherit;">src/interface/data_utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/interface/data_utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-120,7 +120,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># utils for selectrows
+<span style="color:inherit;"> |</span>typename(X)    = split(string(supertype(typeof(X)).name), '.')[end]
+<span style="color:red;">-|</span></span><span style="color:gray;">isdataframe(X) = typename(X)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;AbstractDataFrame&#34;</span></span>
+<span style="color:green;">+|</span></span>isdataframe(X) = typename(X)<span style="color:green;">true</span>&#34;AbstractDataFrame&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># ----------------------------------------------------------------
+<span style="color:inherit;"> |</span># univariate finite
+<span style="color:red;">------ </span><span style="color:inherit;">test/resampling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/resampling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-347,7 +347,7</span> ============================================================
+<span style="color:inherit;"> |</span>    e3=evaluate(resampling_machine).measurement[1]
+<span style="color:inherit;"> |</span>    @test e3 != e2
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJBase.package_name(Resampler)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;MLJBase&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test MLJBase.package_name(Resampler)<span style="color:green;">true</span>&#34;MLJBase&#34;</span>
+<span style="color:inherit;"> |</span>    @test MLJBase.is_wrapper(Resampler)
+<span style="color:inherit;"> |</span>    rnd = randn(rng,5)
+<span style="color:inherit;"> |</span>    @test evaluate(resampler, rnd) === rnd
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>makedocs(;
+<span style="color:inherit;"> |</span>    modules=[MLJBase],
+<span style="color:red;">-|</span></span><span style="color:gray;">    format=Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;),</span></span>
+<span style="color:green;">+|</span></span>    format=Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;),</span>
+<span style="color:inherit;"> |</span>    pages=[
+<span style="color:inherit;"> |</span>        &#34;Home&#34; => &#34;index.md&#34;,
+<span style="color:inherit;"> |</span>        &#34;Measures&#34; => &#34;measures.md&#</div>
+</pre> <h3 id=omit_fx_fx_and_fx_fx_2_hits ><a href="#omit_fx_fx_and_fx_fx_2_hits">Omit f&#40;x&#41; &#61;&#61; f&#40;x&#41; and f&#40;x&#41; &#33;&#61; f&#40;x&#41; ➤ 2 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/resampling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/resampling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-50,7 +50,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test </span><span style="color:red;">CV(nfolds=6) == CV(nfolds=6)</span></span>
+<span style="color:green;">+|</span></span>@test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>@test CV(nfolds=5) != CV(nfolds=6)
+<span style="color:inherit;"> |</span>@test MLJBase.train_test_pairs(CV(), 1:10) !=
+<span style="color:inherit;"> |</span>     MLJBase.train_test_pairs(CV(shuffle=true), 1:10)
+<span style="color:red;">------ </span><span style="color:inherit;">test/interface/data_utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/interface/data_utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,6 +1,6</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;categorical&#34; begin
+<span style="color:inherit;"> |</span>    x = 1:5
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test MLJModelInterface.</span><span style="color:red;">categorical(x) == categorical(x)</span></span>
+<span style="color:green;">+|</span></span>    @test MLJModelInterface.<span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;classes&#34; b</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -10,17 +10,6 @@
 <span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
 <span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
 <span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
-<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
-<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
-<span style="color:inherit;"> |</span>	
-<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
-<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
-<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -68,6 +57,17 @@
 <span style="color:inherit;"> |</span>    for (i, row) in zip(1:L,rows)
 <span style="color:inherit;"> |</span>        row_data[i] = (i, row_data_for(row))
 <span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
+<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
+<span style="color:inherit;"> |</span>	
+<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
+<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
+<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================

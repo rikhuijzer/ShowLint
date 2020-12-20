@@ -1,16 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGaussianProcesses/KernelFunctions.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGaussianProcesses/KernelFunctions.jl" target=_blank >JuliaGaussianProcesses/KernelFunctions.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_46_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 46 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_46_hits ><a href="#omit_a_a_and_a_a_46_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 46 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-114,7 +114,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function validate_inplace_dims(K::AbstractMatrix, x::AbstractVector, y::AbstractVector)
-<span style="color:inherit;"> |</span>    validate_inputs(x, y)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if size(K)</span><span style="color:red;"> != </span><span style="color:gray;">(length(x), length(y))</span></span>
-<span style="color:green;">+|</span></span>    if size(K)<span style="color:green;">false</span>(length(x), length(y))</span>
-<span style="color:inherit;"> |</span>        throw(DimensionMismatch(
-<span style="color:inherit;"> |</span>            &#34;Size of the target matrix K ($(size(K))) not consistent with lengths of &#34; *
-<span style="color:inherit;"> |</span>            &#34;inputs x ($(length(x))) and y ($(length(y)))&#34;,
-<span style="color:red;">------ </span><span style="color:inherit;">test/utils.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-13,8 +13,8</span> ============================================================
 <span style="color:inherit;"> |</span>    # Test Matrix data sets.
@@ -34,6 +23,17 @@
 <span style="color:inherit;"> |</span>        @test length(DX) == D
 <span style="color:inherit;"> |</span>        @test getindex(DX, 2) isa AbstractVector
 <span style="color:inherit;"> |</span>        @test getindex(DX, 2) == X[2, :]
+<span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-114,7 +114,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function validate_inplace_dims(K::AbstractMatrix, x::AbstractVector, y::AbstractVector)
+<span style="color:inherit;"> |</span>    validate_inputs(x, y)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if size(K)</span><span style="color:red;"> != </span><span style="color:gray;">(length(x), length(y))</span></span>
+<span style="color:green;">+|</span></span>    if size(K)<span style="color:green;">false</span>(length(x), length(y))</span>
+<span style="color:inherit;"> |</span>        throw(DimensionMismatch(
+<span style="color:inherit;"> |</span>            &#34;Size of the target matrix K ($(size(K))) not consistent with lengths of &#34; *
+<span style="color:inherit;"> |</span>            &#34;inputs x ($(length(x))) and y ($(length(y)))&#34;,
 <span style="color:red;">------ </span><span style="color:inherit;">src/test_utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/test_utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-47,7 +47,7</span> ============================================================
@@ -45,6 +45,16 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # Check that elementwise is consistent with pairwise.
 <span style="color:inherit;"> |</span>    @test kerneldiagmatrix(k, x0, x1) ≈ diag(kernelmatrix(k, x0, x1)) atol=atol
+<span style="color:red;">------ </span><span style="color:inherit;">test/generic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/generic.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,6 +1,6</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;generic&#34; begin
+<span style="color:inherit;"> |</span>    k = SqExponentialKernel()
+<span style="color:inherit;"> |</span>    @test length(k) == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test iterate(k)</span><span style="color:red;"> == </span><span style="color:gray;">(k,nothing)</span></span>
+<span style="color:green;">+|</span></span>    @test iterate(k)<span style="color:green;">true</span>(k,nothing)</span>
+<span style="color:inherit;"> |</span>    @test iterate(k,1) == nothing
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/kernels/kernelproduct.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/kernelproduct.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-13,11 +13,11</span> ============================================================
@@ -61,43 +71,6 @@
 <span style="color:inherit;"> |</span>    @test (k * k3)(v1,v2) ≈ (k3 * k)(v1, v2)
 <span style="color:inherit;"> |</span>    @test (k1 * k2)(v1, v2) == KernelProduct(k1, k2)(v1, v2)
 <span style="color:inherit;"> |</span>    @test (k * ks1)(v1, v2) ≈ (ks1 * k)(v1, v2)
-<span style="color:red;">------ </span><span style="color:inherit;">test/kernels/scaledkernel.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/scaledkernel.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
-<span style="color:inherit;"> |</span>    k = SqExponentialKernel()
-<span style="color:inherit;"> |</span>    ks = ScaledKernel(k, s)
-<span style="color:inherit;"> |</span>    @test ks(x, y) == s * k(x, y)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test ks(x, y)</span><span style="color:red;"> == </span><span style="color:gray;">(s * k)(x, y)</span></span>
-<span style="color:green;">+|</span></span>    @test ks(x, y)<span style="color:green;">true</span>(s * k)(x, y)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # Standardised tests.
-<span style="color:inherit;"> |</span>    TestUtils.test_interface(k, Float64)
-<span style="color:red;">------ </span><span style="color:inherit;">test/kernels/kernelsum.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/kernelsum.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-13,11 +13,11</span> ============================================================
-<span style="color:inherit;"> |</span>    ks1 = 2.0*k1
-<span style="color:inherit;"> |</span>    ks2 = 0.5*k2
-<span style="color:inherit;"> |</span>    @test length(k) == 2
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(k)</span><span style="color:red;"> == </span><span style="color:gray;">(</span></span>
-<span style="color:green;">+|</span></span>    @test string(k)<span style="color:green;">true</span>(</span>
-<span style="color:inherit;"> |</span>        &#34;Sum of 2 kernels:\n\tLinear Kernel (c = 0.0)\n\tSquared &#34; *
-<span style="color:inherit;"> |</span>        &#34;Exponential Kernel&#34;
-<span style="color:inherit;"> |</span>    )
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test k(v1, v2)</span><span style="color:red;"> == </span><span style="color:gray;">(k1 + k2)(v1, v2)</span></span>
-<span style="color:green;">+|</span></span>    @test k(v1, v2)<span style="color:green;">true</span>(k1 + k2)(v1, v2)</span>
-<span style="color:inherit;"> |</span>    @test (k + k3)(v1,v2) ≈ (k3 + k)(v1, v2)
-<span style="color:inherit;"> |</span>    @test (k1 + k2)(v1, v2) == KernelSum(k1, k2)(v1, v2)
-<span style="color:inherit;"> |</span>    @test (k + ks1)(v1, v2) ≈ (ks1 + k)(v1, v2)
-<span style="color:red;">------ </span><span style="color:inherit;">test/generic.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/generic.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1,6 +1,6</span> ============================================================
-<span style="color:inherit;"> |</span>@testset &#34;generic&#34; begin
-<span style="color:inherit;"> |</span>    k = SqExponentialKernel()
-<span style="color:inherit;"> |</span>    @test length(k) == 1
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test iterate(k)</span><span style="color:red;"> == </span><span style="color:gray;">(k,nothing)</span></span>
-<span style="color:green;">+|</span></span>    @test iterate(k)<span style="color:green;">true</span>(k,nothing)</span>
-<span style="color:inherit;"> |</span>    @test iterate(k,1) == nothing
-<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/mokernels/slfm.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/mokernels/slfm.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-20,8 +20,8</span> ============================================================
@@ -111,16 +84,6 @@
 <span style="color:inherit;"> |</span>        &#34;Semi-parametric Latent Factor Multi-Output Kernel\n\tgᵢ: &#34; *
 <span style="color:inherit;"> |</span>        &#34;Matern Kernel (ν = 1.5)\n\t\tSquared Exponential Kernel\n&#34; * 
 <span style="color:inherit;"> |</span>        &#34;\t\tFractional Brownian Motion Kernel (h = 0.5)\n\teᵢ: &#34; *
-<span style="color:red;">------ </span><span style="color:inherit;">test/transform/lineartransform.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/lineartransform.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-41,6 +41,6</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch map(t, ColVecs(randn(rng, Din + 1, Dout)))
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Linear transform (size(A) = ($Dout, $Din))&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Linear transform (size(A) = ($Dout, $Din))&#34;</span>
-<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), LinearTransform(x)), randn(rng, 3, 3))
-<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/mokernels/moinput.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/mokernels/moinput.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,13 +4,13</span> ============================================================
@@ -140,17 +103,17 @@
 <span style="color:inherit;"> |</span>    @test_throws BoundsError mgpi[0]
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @test mgpi[2] == (x[2], 1)
-<span style="color:red;">------ </span><span style="color:inherit;">test/transform/functiontransform.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/functiontransform.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">test/kernels/scaledkernel.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/scaledkernel.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>    k = SqExponentialKernel()
+<span style="color:inherit;"> |</span>    ks = ScaledKernel(k, s)
+<span style="color:inherit;"> |</span>    @test ks(x, y) == s * k(x, y)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test ks(x, y)</span><span style="color:red;"> == </span><span style="color:gray;">(s * k)(x, y)</span></span>
+<span style="color:green;">+|</span></span>    @test ks(x, y)<span style="color:green;">true</span>(s * k)(x, y)</span>
 <span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(FunctionTransform(sin))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Function Transform: $(sin)&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test repr(FunctionTransform(sin))<span style="color:green;">true</span>&#34;Function Transform: $(sin)&#34;</span>
-<span style="color:inherit;"> |</span>    f(a, x) = sin.(a .* x)
-<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), FunctionTransform(y->f(x, y))), randn(rng, 3))
-<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>    # Standardised tests.
+<span style="color:inherit;"> |</span>    TestUtils.test_interface(k, Float64)
 <span style="color:red;">------ </span><span style="color:inherit;">test/mokernels/independent.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/mokernels/independent.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-16,5 +16,5</span> ============================================================
@@ -160,16 +123,22 @@
 <span style="color:red;">-|</span></span><span style="color:gray;">    @test string(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Independent Multi-Output Kernel\n\tSquared Exponential Kernel&#34;</span></span>
 <span style="color:green;">+|</span></span>    @test string(k)<span style="color:green;">true</span>&#34;Independent Multi-Output Kernel\n\tSquared Exponential Kernel&#34;</span>
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/transform/chaintransform.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/chaintransform.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-21,6 +21,6</span> ============================================================
-<span style="color:inherit;"> |</span>    @test all([t(x[n]) ≈ x′[n] for n in eachindex(x)])
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # Verify printing works as expected.
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(tp ∘ tf)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Chain of 2 transforms:\n\t - $(tf) |> $(tp)&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test repr(tp ∘ tf)<span style="color:green;">true</span>&#34;Chain of 2 transforms:\n\t - $(tf) |> $(tp)&#34;</span>
-<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), ScaleTransform(exp(x[1])) ∘ ARDTransform(exp.(x[2:4]))), randn(rng, 4))
-<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/kernels/kernelsum.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/kernelsum.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,11 +13,11</span> ============================================================
+<span style="color:inherit;"> |</span>    ks1 = 2.0*k1
+<span style="color:inherit;"> |</span>    ks2 = 0.5*k2
+<span style="color:inherit;"> |</span>    @test length(k) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(k)</span><span style="color:red;"> == </span><span style="color:gray;">(</span></span>
+<span style="color:green;">+|</span></span>    @test string(k)<span style="color:green;">true</span>(</span>
+<span style="color:inherit;"> |</span>        &#34;Sum of 2 kernels:\n\tLinear Kernel (c = 0.0)\n\tSquared &#34; *
+<span style="color:inherit;"> |</span>        &#34;Exponential Kernel&#34;
+<span style="color:inherit;"> |</span>    )
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test k(v1, v2)</span><span style="color:red;"> == </span><span style="color:gray;">(k1 + k2)(v1, v2)</span></span>
+<span style="color:green;">+|</span></span>    @test k(v1, v2)<span style="color:green;">true</span>(k1 + k2)(v1, v2)</span>
+<span style="color:inherit;"> |</span>    @test (k + k3)(v1,v2) ≈ (k3 + k)(v1, v2)
+<span style="color:inherit;"> |</span>    @test (k1 + k2)(v1, v2) == KernelSum(k1, k2)(v1, v2)
+<span style="color:inherit;"> |</span>    @test (k + ks1)(v1, v2) ≈ (ks1 + k)(v1, v2)
 <span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/rationalquad.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/rationalquad.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-18,7 +18,7</span> ============================================================
@@ -190,15 +159,15 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        @testset &#34;Default GammaRQ ≈ RQ for large α with rescaled inputs&#34; begin
 <span style="color:inherit;"> |</span>            @test isapprox(
-<span style="color:red;">------ </span><span style="color:inherit;">test/transform/ardtransform.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/ardtransform.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/lineartransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/lineartransform.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-41,6 +41,6</span> ============================================================
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch map(t, ColVecs(randn(rng, D + 1, 3)))
+<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch map(t, ColVecs(randn(rng, Din + 1, Dout)))
 <span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;ARD Transform (dims: $D)&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;ARD Transform (dims: $D)&#34;</span>
-<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), exp.(x)), randn(rng, 3))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Linear transform (size(A) = ($Dout, $Din))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Linear transform (size(A) = ($Dout, $Din))&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), LinearTransform(x)), randn(rng, 3, 3))
 <span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/cosine.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/cosine.jl</span>
@@ -222,28 +191,36 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    test_interface(k, Vector{Float64})
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">test/transform/selecttransform.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/selecttransform.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-41,8 +41,8</span> ============================================================
-<span style="color:inherit;"> |</span>    KernelFunctions.set!(ts, select_symbols2)
-<span style="color:inherit;"> |</span>    @test ts.select == select_symbols2
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/functiontransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/functiontransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Select Transform (dims: $(select2))&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Select Transform (dims: $(select2))&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(ts)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Select Transform (dims: $(select_symbols2))&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test repr(ts)<span style="color:green;">true</span>&#34;Select Transform (dims: $(select_symbols2))&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(FunctionTransform(sin))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Function Transform: $(sin)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(FunctionTransform(sin))<span style="color:green;">true</span>&#34;Function Transform: $(sin)&#34;</span>
+<span style="color:inherit;"> |</span>    f(a, x) = sin.(a .* x)
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), FunctionTransform(y->f(x, y))), randn(rng, 3))
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/chaintransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/chaintransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,6 +21,6</span> ============================================================
+<span style="color:inherit;"> |</span>    @test all([t(x[n]) ≈ x′[n] for n in eachindex(x)])
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    test_ADs(()->transform(SEKernel(), SelectTransform([1,2])))
+<span style="color:inherit;"> |</span>    # Verify printing works as expected.
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(tp ∘ tf)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Chain of 2 transforms:\n\t - $(tf) |> $(tp)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(tp ∘ tf)<span style="color:green;">true</span>&#34;Chain of 2 transforms:\n\t - $(tf) |> $(tp)&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), ScaleTransform(exp(x[1])) ∘ ARDTransform(exp.(x[2:4]))), randn(rng, 4))
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/ardtransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/ardtransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,6 +41,6</span> ============================================================
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">test/transform/scaletransform.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/scaletransform.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-18,6 +18,6</span> ============================================================
-<span style="color:inherit;"> |</span>    KernelFunctions.set!(t,s2)
-<span style="color:inherit;"> |</span>    @test t.s == [s2]
-<span style="color:inherit;"> |</span>    @test isequal(ScaleTransform(s), ScaleTransform(s))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Scale Transform (s = $(s2))&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Scale Transform (s = $(s2))&#34;</span>
-<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), exp(x[1])), randn(rng, 1))
+<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch map(t, ColVecs(randn(rng, D + 1, 3)))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;ARD Transform (dims: $D)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;ARD Transform (dims: $D)&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), exp.(x)), randn(rng, 3))
 <span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/constant.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/constant.jl</span>
@@ -285,6 +262,19 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # Standardised tests. This kernel appears to be fairly numerically unstable.
 <span style="color:inherit;"> |</span>    TestUtils.test_interface(k; atol=1e-3)
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/selecttransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/selecttransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,8 +41,8</span> ============================================================
+<span style="color:inherit;"> |</span>    KernelFunctions.set!(ts, select_symbols2)
+<span style="color:inherit;"> |</span>    @test ts.select == select_symbols2
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Select Transform (dims: $(select2))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Select Transform (dims: $(select2))&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(ts)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Select Transform (dims: $(select_symbols2))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(ts)<span style="color:green;">true</span>&#34;Select Transform (dims: $(select_symbols2))&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    test_ADs(()->transform(SEKernel(), SelectTransform([1,2])))
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/matern.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/matern.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
@@ -334,6 +324,16 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        # Coherence tests.
 <span style="color:inherit;"> |</span>        @test kappa(PolynomialKernel(d=1.0,c=c),x) ≈ kappa(LinearKernel(c=c),x)
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/scaletransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/scaletransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,6 +18,6</span> ============================================================
+<span style="color:inherit;"> |</span>    KernelFunctions.set!(t,s2)
+<span style="color:inherit;"> |</span>    @test t.s == [s2]
+<span style="color:inherit;"> |</span>    @test isequal(ScaleTransform(s), ScaleTransform(s))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Scale Transform (s = $(s2))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Scale Transform (s = $(s2))&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), exp(x[1])), randn(rng, 1))
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/exponential.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/exponential.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-12,7 +12,7</span> ============================================================

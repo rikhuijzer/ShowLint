@@ -308,17 +308,6 @@
 <span style="color:inherit;"> |</span>    show(io, models(:kb07)[2])
 <span style="color:inherit;"> |</span>    tokens = Set(split(String(take!(io)), r&#34;\s+&#34;))
 <span style="color:inherit;"> |</span>    @test &#34;Corr.&#34; in tokens
-<span style="color:red;">------ </span><span style="color:inherit;">src/simulate.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/simulate.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-167,7 +167,7</span> ============================================================
-<span style="color:inherit;"> |</span>    Z = A.z
-<span style="color:inherit;"> |</span>    k, n = size(Z)
-<span style="color:inherit;"> |</span>    l = nlevs(A)
-<span style="color:red;">-|</span></span><span style="color:gray;">    length(y) == n && size(b)</span><span style="color:red;"> == </span><span style="color:gray;">(k, l) || throw(DimensionMismatch(&#34;&#34;))</span></span>
-<span style="color:green;">+|</span></span>    length(y) == n && size(b)<span style="color:green;">true</span>(k, l) || throw(DimensionMismatch(&#34;&#34;))</span>
-<span style="color:inherit;"> |</span>    @inbounds for (i, ii) in enumerate(A.refs)
-<span style="color:inherit;"> |</span>        for j = 1:k
-<span style="color:inherit;"> |</span>            y[i] += Z[j, i] * b[j, ii]
 <span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
@@ -358,5 +347,16 @@
 <span style="color:green;">+|</span></span>    size(Cd)<span style="color:green;">true</span>(S, S, nlevs(B)) || throw(DimensionMismatch(&#34;&#34;))</span>
 <span style="color:inherit;"> |</span>    fill!(Cd, zero(T))
 <span style="color:inherit;"> |</span>    Awtz = A.wtz
-<span style="color:inherit;"> |</span>    for (j, r) in enumerate(A.r</div>
+<span style="color:inherit;"> |</span>    for (j, r) in enumerate(A.refs)
+<span style="color:red;">------ </span><span style="color:inherit;">src/simulate.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/simulate.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-167,7 +167,7</span> ============================================================
+<span style="color:inherit;"> |</span>    Z = A.z
+<span style="color:inherit;"> |</span>    k, n = size(Z)
+<span style="color:inherit;"> |</span>    l = nlevs(A)
+<span style="color:red;">-|</span></span><span style="color:gray;">    length(y) == n && size(b)</span><span style="color:red;"> == </span><span style="color:gray;">(k, l) || throw(DimensionMismatch(&#34;&#34;))</span></span>
+<span style="color:green;">+|</span></span>    length(y) == n && size(b)<span style="color:green;">true</span>(k, l) || throw(DimensionMismatch(&#34;&#34;))</span>
+<span style="color:inherit;"> |</span>    @inbounds for (i, ii) in enumerate(A.refs)
+<span style="color:inherit;"> |</span>        for j = 1:k
+<span style="color:inherit;"> |</span>            y[i] += Z[j, i] * b[j,</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,0 +1,75 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Downloads.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Downloads.jl" target=_blank >JuliaLang/Downloads.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_11_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 11 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_11_hits ><a href="#omit_a_a_and_a_a_11_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 11 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-131,21 +131,21</span> ============================================================
+<span style="color:inherit;"> |</span>            for (key, value) in headers
+<span style="color:inherit;"> |</span>                @test header(json[&#34;headers&#34;], key) == value
+<span style="color:inherit;"> |</span>            end
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test header(json[&#34;headers&#34;], &#34;Accept&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;*/*&#34;</span></span>
+<span style="color:green;">+|</span></span>            @test header(json[&#34;headers&#34;], &#34;Accept&#34;)<span style="color:green;">true</span>&#34;*/*&#34;</span>
+<span style="color:inherit;"> |</span>            @test header(json[&#34;headers&#34;], &#34;User-Agent&#34;) == Curl.USER_AGENT
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @testset &#34;override default header&#34; begin
+<span style="color:inherit;"> |</span>            headers = [&#34;Accept&#34; => &#34;application/tar&#34;]
+<span style="color:inherit;"> |</span>            json = download_json(url, headers = headers)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test header(json[&#34;headers&#34;], &#34;Accept&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;application/tar&#34;</span></span>
+<span style="color:green;">+|</span></span>            @test header(json[&#34;headers&#34;], &#34;Accept&#34;)<span style="color:green;">true</span>&#34;application/tar&#34;</span>
+<span style="color:inherit;"> |</span>            @test header(json[&#34;headers&#34;], &#34;User-Agent&#34;) == Curl.USER_AGENT
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @testset &#34;override default header with empty value&#34; begin
+<span style="color:inherit;"> |</span>            headers = [&#34;Accept&#34; => &#34;&#34;]
+<span style="color:inherit;"> |</span>            json = download_json(url, headers = headers)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test header(json[&#34;headers&#34;], &#34;Accept&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>            @test header(json[&#34;headers&#34;], &#34;Accept&#34;)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>            @test header(json[&#34;headers&#34;], &#34;User-Agent&#34;) == Curl.USER_AGENT
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/json.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/json.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,35 +21,35</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function pop_comma!(tokens::Iterators.Stateful)
+<span style="color:red;">-|</span></span><span style="color:gray;">    peek(tokens)</span><span style="color:red;"> == '</span><span style="color:gray;">,' || return false</span></span>
+<span style="color:green;">+|</span></span>    peek(tokens)<span style="color:green;">true'</span>,' || return false</span>
+<span style="color:inherit;"> |</span>    popfirst!(tokens)
+<span style="color:inherit;"> |</span>    return true
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function parse_array!(tokens::Iterators.Stateful)
+<span style="color:inherit;"> |</span>    array = []
+<span style="color:red;">-|</span></span><span style="color:gray;">    popfirst!(tokens)</span><span style="color:red;"> == '</span><span style="color:gray;">[' || error()</span></span>
+<span style="color:green;">+|</span></span>    popfirst!(tokens)<span style="color:green;">true'</span>[' || error()</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(tokens)</span><span style="color:red;"> != '</span><span style="color:gray;">]'</span></span>
+<span style="color:green;">+|</span></span>    while peek(tokens)<span style="color:green;">false'</span>]'</span>
+<span style="color:inherit;"> |</span>        value = parse_value!(tokens)
+<span style="color:inherit;"> |</span>        push!(array, value)
+<span style="color:inherit;"> |</span>        pop_comma!(tokens) || break
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    popfirst!(tokens)</span><span style="color:red;"> == '</span><span style="color:gray;">]' || error()</span></span>
+<span style="color:green;">+|</span></span>    popfirst!(tokens)<span style="color:green;">true'</span>]' || error()</span>
+<span style="color:inherit;"> |</span>    return array
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function parse_dict!(tokens::Iterators.Stateful)
+<span style="color:inherit;"> |</span>    dict = Dict{String,Any}()
+<span style="color:red;">-|</span></span><span style="color:gray;">    popfirst!(tokens)</span><span style="color:red;"> == '</span><span style="color:gray;">{' || error()</span></span>
+<span style="color:green;">+|</span></span>    popfirst!(tokens)<span style="color:green;">true'</span>{' || error()</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    while peek(tokens)</span><span style="color:red;"> != '</span><span style="color:gray;">}'</span></span>
+<span style="color:green;">+|</span></span>    while peek(tokens)<span style="color:green;">false'</span>}'</span>
+<span style="color:inherit;"> |</span>        key = popfirst!(tokens)
+<span style="color:inherit;"> |</span>        key isa String || error()
+<span style="color:red;">-|</span></span><span style="color:gray;">        popfirst!(tokens)</span><span style="color:red;"> == '</span><span style="color:gray;">:' || error()</span></span>
+<span style="color:green;">+|</span></span>        popfirst!(tokens)<span style="color:green;">true'</span>:' || error()</span>
+<span style="color:inherit;"> |</span>        value = parse_value!(tokens)
+<span style="color:inherit;"> |</span>        dict[key] = value
+<span style="color:inherit;"> |</span>        pop_comma!(tokens) || break
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    popfirst!(tokens)</span><span style="color:red;"> == '</span><span style="color:gray;">}' || error()</span></span>
+<span style="color:green;">+|</span></span>    popfirst!(tokens)<span style="color:green;">true'</span>}' || error()</span>
+<span style="color:inherit;"> |</span>    return dict
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</s</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

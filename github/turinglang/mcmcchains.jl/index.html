@@ -23,19 +23,7 @@
 <span style="color:inherit;"> |</span>            ess[i] = missing
 <span style="color:inherit;"> |</span>            cont</div>
 </pre> <h3 id=omit_a_a_and_a_a_21_hits ><a href="#omit_a_a_and_a_a_21_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 21 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/tables_tests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/tables_tests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-15,8 +15,7</span> ============================================================
-<span style="color:inherit;"> |</span>            @test Tables.istable(typeof(chn))
-<span style="color:inherit;"> |</span>            @test Tables.columnaccess(typeof(chn))
-<span style="color:inherit;"> |</span>            @test Tables.columns(chn) === chn
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test Tables.columnnames(chn)</span><span style="color:red;"> ==</span></span>
-<span style="color:red;">-|</span></span>[0;7;31m                  </span><span style="color:gray;">(:iteration, :chain, :a, :b, :c, :d, :e, :f, :g, :h)</span></span>
-<span style="color:green;">+|</span></span>            @test Tables.columnnames(chn)<span style="color:green;">true</span>(:iteration, :chain, :a, :b, :c, :d, :e, :f, :g, :h)</span>
-<span style="color:inherit;"> |</span>            @test Tables.getcolumn(chn, :iteration) == [1:1000; 1:1000; 1:1000; 1:1000]
-<span style="color:inherit;"> |</span>            @test Tables.getcolumn(chn, :chain) ==
-<span style="color:inherit;"> |</span>                  [fill(1, 1000); fill(2, 1000); fill(3, 1000); fill(4, 1000)]
-<span style="color:red;">------ </span><span style="color:inherit;">test/arrayconstructor_tests.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/arrayconstructor_tests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/arrayconstructor_tests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-49,19 +49,19</span> ============================================================
 <span style="color:inherit;"> |</span>        @inferred MCMCChains.to_vector_of_matrices(chns)
@@ -68,6 +56,18 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        Array(chns)
 <span style="color:inherit;"> |</span>        Array(chns[:a])
+<span style="color:red;">------ </span><span style="color:inherit;">test/tables_tests.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/tables_tests.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,8 +15,7</span> ============================================================
+<span style="color:inherit;"> |</span>            @test Tables.istable(typeof(chn))
+<span style="color:inherit;"> |</span>            @test Tables.columnaccess(typeof(chn))
+<span style="color:inherit;"> |</span>            @test Tables.columns(chn) === chn
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test Tables.columnnames(chn)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m                  </span><span style="color:gray;">(:iteration, :chain, :a, :b, :c, :d, :e, :f, :g, :h)</span></span>
+<span style="color:green;">+|</span></span>            @test Tables.columnnames(chn)<span style="color:green;">true</span>(:iteration, :chain, :a, :b, :c, :d, :e, :f, :g, :h)</span>
+<span style="color:inherit;"> |</span>            @test Tables.getcolumn(chn, :iteration) == [1:1000; 1:1000; 1:1000; 1:1000]
+<span style="color:inherit;"> |</span>            @test Tables.getcolumn(chn, :chain) ==
+<span style="color:inherit;"> |</span>                  [fill(1, 1000); fill(2, 1000); fill(3, 1000); fill(4, 1000)]
 <span style="color:red;">------ </span><span style="color:inherit;">test/concatenation_tests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/concatenation_tests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-2,8 +2,7</span> ============================================================

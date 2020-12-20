@@ -1,0 +1,27 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>alan-turing-institute/MLJModels.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/alan-turing-institute/MLJModels.jl" target=_blank >alan-turing-institute/MLJModels.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_3_hits ><a href="#omit_a_a_and_a_a_3_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 3 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/builtins/Transformers.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/builtins/Transformers.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-426,7 +426,7</span> ============================================================
+<span style="color:inherit;"> |</span>    t  = OneHotEncoder(ordered_factor=false)
+<span style="color:inherit;"> |</span>    f, = MLJBase.fit(t, 0, X)
+<span style="color:inherit;"> |</span>    Xt = MLJBase.transform(t, f, X)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test keys(Xt)</span><span style="color:red;"> == </span><span style="color:gray;">(:name, :height, :favourite_number__5,</span></span>
+<span style="color:green;">+|</span></span>    @test keys(Xt)<span style="color:green;">true</span>(:name, :height, :favourite_number__5,</span>
+<span style="color:inherit;"> |</span>                       :favourite_number__7, :favourite_number__10, :age)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test :name in Tables.schema(Xt).names
+<span style="color:red;">------ </span><span style="color:inherit;">test/NearestNeighbors.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/NearestNeighbors.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-73,9 +73,9</span> ============================================================
+<span style="color:inherit;"> |</span>    # define sample weights corresponding to class weights 2:4:1 for
+<span style="color:inherit;"> |</span>    # a:b:c:
+<span style="color:inherit;"> |</span>    w = map(y) do η
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">η == 'a'</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">ηtrue'a'</span></span>
+<span style="color:inherit;"> |</span>            return 2
+<span style="color:red;">-|</span></span><span style="color:gray;">        elseif </span><span style="color:red;">η == 'b'</span></span>
+<span style="color:green;">+|</span></span>        elseif <span style="color:green;">ηtrue'b'</span></span>
+<span style="color:inherit;"> |</span>            return 4
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            retu</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

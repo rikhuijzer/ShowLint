@@ -42,18 +42,7 @@
 <span style="color:inherit;"> |</span>mask(t::BitmappedTrie, i::Int) = (((i - 1) >>> shift(t)) & (trielen - 1)) + 1
 <span style="color:inherit;"> |</s</div>
 </pre> <h3 id=omit_a_a_and_a_a_12_hits ><a href="#omit_a_a_and_a_a_12_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 12 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/SparseBitmappedTrieTest.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/SparseBitmappedTrieTest.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
-<span style="color:inherit;"> |</span>        n, _ = update(SparseNode(Int), 33, 33)
-<span style="color:inherit;"> |</span>        @test get(n, 33, &#34;missing&#34;) == 33
-<span style="color:inherit;"> |</span>        @test get(update(SparseNode(Int), 12345, 12345)[1], 12345, &#34;missing&#34;) == 12345
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test get(n, 12345, &#34;missing&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;missing&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test get(n, 12345, &#34;missing&#34;)<span style="color:green;">true</span>&#34;missing&#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;SparseBitmappedTrie length & items&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">test/PersistentQueueTest.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/PersistentQueueTest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/PersistentQueueTest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-5,7 +5,7</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -64,6 +53,17 @@
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @testset &#34;isempty&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/SparseBitmappedTrieTest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/SparseBitmappedTrieTest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
+<span style="color:inherit;"> |</span>        n, _ = update(SparseNode(Int), 33, 33)
+<span style="color:inherit;"> |</span>        @test get(n, 33, &#34;missing&#34;) == 33
+<span style="color:inherit;"> |</span>        @test get(update(SparseNode(Int), 12345, 12345)[1], 12345, &#34;missing&#34;) == 12345
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test get(n, 12345, &#34;missing&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;missing&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test get(n, 12345, &#34;missing&#34;)<span style="color:green;">true</span>&#34;missing&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;SparseBitmappedTrie length & items&#34; begin
 <span style="color:red;">------ </span><span style="color:inherit;">test/PersistentMapTest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/PersistentMapTest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-19,9 +19,9</span> ============================================================

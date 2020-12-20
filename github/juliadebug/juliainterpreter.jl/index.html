@@ -51,17 +51,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># issue #285
 <span style="color:inherit;"> |</span>using LinearAlgebra, SparseArrays, Random
-<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
-<span style="color:inherit;"> |</span>    modules = [JuliaInterpreter],
-<span style="color:inherit;"> |</span>    clean = false,
-<span style="color:inherit;"> |</span>    strict = true,
-<span style="color:red;">-|</span></span><span style="color:gray;">    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;),</span></span>
-<span style="color:green;">+|</span></span>    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;),</span>
-<span style="color:inherit;"> |</span>    sitename = &#34;JuliaInterpreter.jl&#34;,
-<span style="color:inherit;"> |</span>    authors = &#34;Keno Fischer, Tim Holy, Kristoffer Carlsson, and others&#34;,
-<span style="color:inherit;"> |</span>    linkcheck = !(&#34;skiplinks&#34; in ARGS),
 <span style="color:red;">------ </span><span style="color:inherit;">test/toplevel.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/toplevel.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-91,7 +91,7</span> ============================================================
@@ -109,6 +98,17 @@
 <span style="color:inherit;"> |</span>    @test @interpret(Toplevel._feval3(0)) == 3
 <span style="color:inherit;"> |</span>    @test @interpret(Toplevel.feval_add!(0)) == 1
 <span style="color:inherit;"> |</span>    @test @interpret(Toplevel.feval_min!(0)) == 1
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
+<span style="color:inherit;"> |</span>    modules = [JuliaInterpreter],
+<span style="color:inherit;"> |</span>    clean = false,
+<span style="color:inherit;"> |</span>    strict = true,
+<span style="color:red;">-|</span></span><span style="color:gray;">    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;),</span></span>
+<span style="color:green;">+|</span></span>    format = Documenter.HTML(prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;),</span>
+<span style="color:inherit;"> |</span>    sitename = &#34;JuliaInterpreter.jl&#34;,
+<span style="color:inherit;"> |</span>    authors = &#34;Keno Fischer, Tim Holy, Kristoffer Carlsson, and others&#34;,
+<span style="color:inherit;"> |</span>    linkcheck = !(&#34;skiplinks&#34; in ARGS),
 <span style="color:red;">------ </span><span style="color:inherit;">test/breakpoints.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/breakpoints.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-196,11 +196,11</span> ============================================================

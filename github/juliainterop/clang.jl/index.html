@@ -8,17 +8,6 @@
 <span style="color:red;">-|</span></span><span style="color:gray;">    @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\n@cenum(_foo{Int32},\n    BAR = 0,\n    BAZ = -9,\n)\n&#34;</span></span>
 <span style="color:green;">+|</span></span>    @test String(take!(io))<span style="color:green;">true</span>&#34;\n@cenum(_foo{Int32},\n    BAR = 0,\n    BAZ = -9,\n)\n&#34;</span>
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/macro.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/macro.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-19,7 +19,7</span> ============================================================
-<span style="color:inherit;"> |</span>    body = children(func)[1]
-<span style="color:inherit;"> |</span>    op = children(body)[3]
-<span style="color:inherit;"> |</span>    subop = children(op)[2]
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test mapreduce(x->x.text, *, tokenize(subop))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;FOO(foo,1,x)&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test mapreduce(x->x.text, *, tokenize(subop))<span style="color:green;">true</span>&#34;FOO(foo,1,x)&#34;</span>
-<span style="color:inherit;"> |</span>    wrap!(ctx, func)
-<span style="color:inherit;"> |</span>    @test !isempty(ctx.api_buffer)
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/cbasic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/cbasic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-12,13 +12,13</span> ============================================================
@@ -37,6 +26,17 @@
 <span style="color:inherit;"> |</span>    toksCONSTADD = tokenize(cursorCONSTADD[1])
 <span style="color:inherit;"> |</span>    @test toksCONSTADD[1].text == &#34;CONSTADD&#34;
 <span style="color:inherit;"> |</span>    @test toksCONSTADD[2].text == &#34;CONST&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">test/macro.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/macro.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-19,7 +19,7</span> ============================================================
+<span style="color:inherit;"> |</span>    body = children(func)[1]
+<span style="color:inherit;"> |</span>    op = children(body)[3]
+<span style="color:inherit;"> |</span>    subop = children(op)[2]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test mapreduce(x->x.text, *, tokenize(subop))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;FOO(foo,1,x)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test mapreduce(x->x.text, *, tokenize(subop))<span style="color:green;">true</span>&#34;FOO(foo,1,x)&#34;</span>
+<span style="color:inherit;"> |</span>    wrap!(ctx, func)
+<span style="color:inherit;"> |</span>    @test !isempty(ctx.api_buffer)
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/struct.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/struct.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-10,10 +10,10</span> ============================================================

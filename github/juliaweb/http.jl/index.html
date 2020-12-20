@@ -43,7 +43,103 @@
 <span style="color:inherit;"> |</span>                if prev > start
 <span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, pre</div>
 </pre> <h3 id=omit_a_a_and_a_a_76_hits ><a href="#omit_a_a_and_a_a_76_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 76 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/utils.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/types.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/types.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,14 +6,14</span> ============================================================
+<span style="color:inherit;"> |</span>    @test !HTTP.not(1)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test HTTP.status(HTTP.Response(300)) == 300
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test String(HTTP.body(HTTP.Response(&#34;hello world&#34;)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test String(HTTP.body(HTTP.Response(&#34;hello world&#34;)))<span style="color:green;">true</span>&#34;hello world&#34;</span>
+<span style="color:inherit;"> |</span>    @test HTTP.status(HTTP.Response(300, HTTP.Headers(), &#34;&#34;)) == 300
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test HTTP.Response(200) == HTTP.Response(200)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(HTTP.Response(200))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test string(HTTP.Response(200))<span style="color:green;">true</span>&#34;HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    io = IOBuffer()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response(200 OK, 0 headers, 0 bytes in body)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test String(take!(io))<span style="color:green;">true</span>&#34;Response(200 OK, 0 headers, 0 bytes in body)&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(HTTP.Request())</span><span style="color:red;"> == </span><span style="color:gray;">&#34;GET / HTTP/1.1\r\n\r\n&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test string(HTTP.Request())<span style="color:green;">true</span>&#34;GET / HTTP/1.1\r\n\r\n&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Request(\&#34;\&#34;, 0 headers, 0 bytes in body)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test String(take!(io))<span style="color:green;">true</span>&#34;Request(\&#34;\&#34;, 0 headers, 0 bytes in body)&#34;</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/messages.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/messages.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-52,28 +52,28</span> ============================================================
+<span style="color:inherit;"> |</span>        @test req.method == &#34;GET&#34;
+<span style="color:inherit;"> |</span>        @test res.request.method == &#34;GET&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(req)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;GET /foo HTTP/1.1\r\nFoo: Bar\r\n\r\n&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test String(req)<span style="color:green;">true</span>&#34;GET /foo HTTP/1.1\r\nFoo: Bar\r\n\r\n&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(res)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1 200 OK\r\nContent-Length: 5\r\n\r\nHello&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test String(res)<span style="color:green;">true</span>&#34;HTTP/1.1 200 OK\r\nContent-Length: 5\r\n\r\nHello&#34;</span>
+<span style="color:red;">-|</span></span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;Foo&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Bar&#34;</span></span>
+<span style="color:green;">+|</span></span></span>
+<span style="color:green;">+|</span></span>        @test header(req, &#34;Foo&#34;)<span style="color:green;">true</span>&#34;Bar&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(res, &#34;Content-Length&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;5&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test header(res, &#34;Content-Length&#34;)<span style="color:green;">true</span>&#34;5&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        setheader(req, &#34;X&#34; => &#34;Y&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;X&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Y&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test header(req, &#34;X&#34;)<span style="color:green;">true</span>&#34;Y&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Header Append&#34; begin
+<span style="color:inherit;"> |</span>        append_header(m, h) = appendheader(m, SubString(h[1]) => SubString(h[2]))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        append_header(req, &#34;X&#34; => &#34;Z&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;X&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Y, Z&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test header(req, &#34;X&#34;)<span style="color:green;">true</span>&#34;Y, Z&#34;</span>
+<span style="color:inherit;"> |</span>        @test hasheader(req, &#34;X&#34;, &#34;Y, Z&#34;)
+<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Y&#34;)
+<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Z&#34;)
+<span style="color:inherit;"> |</span>        @test !headercontains(req, &#34;X&#34;, &#34;more&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        append_header(req, &#34;X&#34; => &#34;more&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;X&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Y, Z, more&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test header(req, &#34;X&#34;)<span style="color:green;">true</span>&#34;Y, Z, more&#34;</span>
+<span style="color:inherit;"> |</span>        @test hasheader(req, &#34;X&#34;, &#34;Y, Z, more&#34;)
+<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Y&#34;)
+<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Z&#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-81,12 +81,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        append_header(req, &#34;Set-Cookie&#34; => &#34;A&#34;)
+<span style="color:inherit;"> |</span>        append_header(req, &#34;Set-Cookie&#34; => &#34;B&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test filter(x->first(x)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Set-Cookie&#34;, req.headers) == [&#34;Set-Cookie&#34; => &#34;A&#34;, &#34;Set-Cookie&#34; => &#34;B&#34;]</span></span>
+<span style="color:green;">+|</span></span>        @test filter(x->first(x)<span style="color:green;">true</span>&#34;Set-Cookie&#34;, req.headers) == [&#34;Set-Cookie&#34; => &#34;A&#34;, &#34;Set-Cookie&#34; => &#34;B&#34;]</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;HTTP Version&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Messages.httpversion(req)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test Messages.httpversion(req)<span style="color:green;">true</span>&#34;HTTP/1.1&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test Messages.httpversion(res)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test Messages.httpversion(res)<span style="color:green;">true</span>&#34;HTTP/1.1&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        raw = String(req)
+<span style="color:inherit;"> |</span>        req = parse(Request,raw)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-171,15 +171,15</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;Display&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(Response(200, []; body=&#34;Hello world.&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\&#34;\&#34;\&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(Response(200, []; body=&#34;Hello world.&#34;))<span style="color:green;">true</span>&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\&#34;\&#34;\&#34;&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # truncation of long bodies
+<span style="color:inherit;"> |</span>        for body_show_max in (Messages.body_show_max, 100)
+<span style="color:inherit;"> |</span>            Messages.set_show_max(body_show_max)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test repr(Response(200, []; body=&#34;Hello world.\n&#34;*'x'^10000))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\n&#34;*'x'^(body_show_max-13)*&#34;\n⋮\n10013-byte body\n\&#34;\&#34;\&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>            @test repr(Response(200, []; body=&#34;Hello world.\n&#34;*'x'^10000))<span style="color:green;">true</span>&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\n&#34;*'x'^(body_show_max-13)*&#34;\n⋮\n10013-byte body\n\&#34;\&#34;\&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # don't display raw binary (non-Unicode) data:
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(Response(200, []; body=String([0xde,0xad,0xc1,0x71,0x1c])))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\n\n⋮\n5-byte body\n\&#34;\&#34;\&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(Response(200, []; body=String([0xde,0xad,0xc1,0x71,0x1c])))<span style="color:green;">true</span>&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\n\n⋮\n5-byte body\n\&#34;\&#34;\&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-2,28 +2,28</span> ============================================================
 <span style="color:inherit;"> |</span>import HTTP.URIs
@@ -124,28 +220,17 @@
 <span style="color:green;">+|</span></span>        @test last(splitext(gzip_content_encoding_fn))<span style="color:green;">true</span>&#34;.gz&#34;</span>
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/types.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/types.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-6,14 +6,14</span> ============================================================
-<span style="color:inherit;"> |</span>    @test !HTTP.not(1)
+<span style="color:red;">------ </span><span style="color:inherit;">test/parser.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/parser.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-260,7 +260,7</span> ============================================================
+<span style="color:inherit;"> |</span>            @test_throws HTTP.HTTP.ParseError HTTP.parse(Request, &#34;GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection\r\033\065\325eep-Alive\r\nAccept-Encoding: gzip\r\n\r\n&#34;)
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test HTTP.status(HTTP.Response(300)) == 300
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test String(HTTP.body(HTTP.Response(&#34;hello world&#34;)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test String(HTTP.body(HTTP.Response(&#34;hello world&#34;)))<span style="color:green;">true</span>&#34;hello world&#34;</span>
-<span style="color:inherit;"> |</span>    @test HTTP.status(HTTP.Response(300, HTTP.Headers(), &#34;&#34;)) == 300
+<span style="color:inherit;"> |</span>            r = parse(Request,&#34;GET /bad_get_no_headers_no_body/world HTTP/1.1\r\nAccept: */*\r\n\r\nHELLO&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">            @test String(r.body)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>            @test String(r.body)<span style="color:green;">true</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test HTTP.Response(200) == HTTP.Response(200)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(HTTP.Response(200))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test string(HTTP.Response(200))<span style="color:green;">true</span>&#34;HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    io = IOBuffer()
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response(200 OK, 0 headers, 0 bytes in body)&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test String(take!(io))<span style="color:green;">true</span>&#34;Response(200 OK, 0 headers, 0 bytes in body)&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(HTTP.Request())</span><span style="color:red;"> == </span><span style="color:gray;">&#34;GET / HTTP/1.1\r\n\r\n&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test string(HTTP.Request())<span style="color:green;">true</span>&#34;GET / HTTP/1.1\r\n\r\n&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test String(take!(io))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Request(\&#34;\&#34;, 0 headers, 0 bytes in body)&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test String(take!(io))<span style="color:green;">true</span>&#34;Request(\&#34;\&#34;, 0 headers, 0 bytes in body)&#34;</span>
-<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>        @testset &#34;Response - readheaders() - 1&#34; begin
 <span style="color:red;">------ </span><span style="color:inherit;">src/Messages.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Messages.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-296,7 +296,7</span> ============================================================
@@ -175,80 +260,6 @@
 <span style="color:inherit;"> |</span>        setheader(m, v)
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    return
-<span style="color:red;">------ </span><span style="color:inherit;">test/messages.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/messages.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-52,28 +52,28</span> ============================================================
-<span style="color:inherit;"> |</span>        @test req.method == &#34;GET&#34;
-<span style="color:inherit;"> |</span>        @test res.request.method == &#34;GET&#34;
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(req)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;GET /foo HTTP/1.1\r\nFoo: Bar\r\n\r\n&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test String(req)<span style="color:green;">true</span>&#34;GET /foo HTTP/1.1\r\nFoo: Bar\r\n\r\n&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test String(res)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1 200 OK\r\nContent-Length: 5\r\n\r\nHello&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test String(res)<span style="color:green;">true</span>&#34;HTTP/1.1 200 OK\r\nContent-Length: 5\r\n\r\nHello&#34;</span>
-<span style="color:red;">-|</span></span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;Foo&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Bar&#34;</span></span>
-<span style="color:green;">+|</span></span></span>
-<span style="color:green;">+|</span></span>        @test header(req, &#34;Foo&#34;)<span style="color:green;">true</span>&#34;Bar&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(res, &#34;Content-Length&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;5&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test header(res, &#34;Content-Length&#34;)<span style="color:green;">true</span>&#34;5&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        setheader(req, &#34;X&#34; => &#34;Y&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;X&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Y&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test header(req, &#34;X&#34;)<span style="color:green;">true</span>&#34;Y&#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;Header Append&#34; begin
-<span style="color:inherit;"> |</span>        append_header(m, h) = appendheader(m, SubString(h[1]) => SubString(h[2]))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        append_header(req, &#34;X&#34; => &#34;Z&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;X&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Y, Z&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test header(req, &#34;X&#34;)<span style="color:green;">true</span>&#34;Y, Z&#34;</span>
-<span style="color:inherit;"> |</span>        @test hasheader(req, &#34;X&#34;, &#34;Y, Z&#34;)
-<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Y&#34;)
-<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Z&#34;)
-<span style="color:inherit;"> |</span>        @test !headercontains(req, &#34;X&#34;, &#34;more&#34;)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        append_header(req, &#34;X&#34; => &#34;more&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test header(req, &#34;X&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Y, Z, more&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test header(req, &#34;X&#34;)<span style="color:green;">true</span>&#34;Y, Z, more&#34;</span>
-<span style="color:inherit;"> |</span>        @test hasheader(req, &#34;X&#34;, &#34;Y, Z, more&#34;)
-<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Y&#34;)
-<span style="color:inherit;"> |</span>        @test headercontains(req, &#34;X&#34;, &#34;Z&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-81,12 +81,12</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        append_header(req, &#34;Set-Cookie&#34; => &#34;A&#34;)
-<span style="color:inherit;"> |</span>        append_header(req, &#34;Set-Cookie&#34; => &#34;B&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test filter(x->first(x)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Set-Cookie&#34;, req.headers) == [&#34;Set-Cookie&#34; => &#34;A&#34;, &#34;Set-Cookie&#34; => &#34;B&#34;]</span></span>
-<span style="color:green;">+|</span></span>        @test filter(x->first(x)<span style="color:green;">true</span>&#34;Set-Cookie&#34;, req.headers) == [&#34;Set-Cookie&#34; => &#34;A&#34;, &#34;Set-Cookie&#34; => &#34;B&#34;]</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;HTTP Version&#34; begin
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test Messages.httpversion(req)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test Messages.httpversion(req)<span style="color:green;">true</span>&#34;HTTP/1.1&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test Messages.httpversion(res)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;HTTP/1.1&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test Messages.httpversion(res)<span style="color:green;">true</span>&#34;HTTP/1.1&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        raw = String(req)
-<span style="color:inherit;"> |</span>        req = parse(Request,raw)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-171,15 +171,15</span> ============================================================
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;Display&#34; begin
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(Response(200, []; body=&#34;Hello world.&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\&#34;\&#34;\&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test repr(Response(200, []; body=&#34;Hello world.&#34;))<span style="color:green;">true</span>&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\&#34;\&#34;\&#34;&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # truncation of long bodies
-<span style="color:inherit;"> |</span>        for body_show_max in (Messages.body_show_max, 100)
-<span style="color:inherit;"> |</span>            Messages.set_show_max(body_show_max)
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test repr(Response(200, []; body=&#34;Hello world.\n&#34;*'x'^10000))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\n&#34;*'x'^(body_show_max-13)*&#34;\n⋮\n10013-byte body\n\&#34;\&#34;\&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>            @test repr(Response(200, []; body=&#34;Hello world.\n&#34;*'x'^10000))<span style="color:green;">true</span>&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\nHello world.\n&#34;*'x'^(body_show_max-13)*&#34;\n⋮\n10013-byte body\n\&#34;\&#34;\&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # don't display raw binary (non-Unicode) data:
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(Response(200, []; body=String([0xde,0xad,0xc1,0x71,0x1c])))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\n\n⋮\n5-byte body\n\&#34;\&#34;\&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test repr(Response(200, []; body=String([0xde,0xad,0xc1,0x71,0x1c])))<span style="color:green;">true</span>&#34;Response:\n\&#34;\&#34;\&#34;\nHTTP/1.1 200 OK\r\n\r\n\n⋮\n5-byte body\n\&#34;\&#34;\&#34;&#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/client.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/client.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-40,13 +40,13</span> ============================================================
@@ -267,6 +278,17 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        r = HTTP.get(&#34;$sch://httpbin.org/cookies/delete?hey&#34;)
 <span style="color:inherit;"> |</span>        @test isempty(JSON.parse(String(r.body))[&#34;cookies&#34;])
+<span style="color:red;">------ </span><span style="color:inherit;">test/cookies.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/cookies.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-46,7 +46,7</span> ============================================================
+<span style="color:inherit;"> |</span>                   HTTP.Cookie(&#34;cookie-2&#34;, &#34;v\$2&#34;),
+<span style="color:inherit;"> |</span>                   HTTP.Cookie(&#34;cookie-3&#34;, &#34;v\$3&#34;),
+<span style="color:inherit;"> |</span>                  ]
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test HTTP.stringify(&#34;&#34;, cookies)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;cookie-1=v\$1; cookie-2=v\$2; cookie-3=v\$3&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test HTTP.stringify(&#34;&#34;, cookies)<span style="color:green;">true</span>&#34;cookie-1=v\$1; cookie-2=v\$2; cookie-3=v\$3&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;readsetcookies&#34; begin
 <span style="color:red;">------ </span><span style="color:inherit;">src/ConnectionRequest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/ConnectionRequest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-73,7 +73,7</span> ============================================================
@@ -369,6 +391,17 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        hello_sent = false
 <span style="color:inherit;"> |</span>        world_sent = false
+<span style="color:red;">------ </span><span style="color:inherit;">src/download.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/download.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # get the extension, if we are going to save it in encoded form.
+<span style="color:red;">-|</span></span><span style="color:gray;">    if header(resp, &#34;Content-Encoding&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;gzip&#34;</span></span>
+<span style="color:green;">+|</span></span>    if header(resp, &#34;Content-Encoding&#34;)<span style="color:green;">true</span>&#34;gzip&#34;</span>
+<span style="color:inherit;"> |</span>        name *= &#34;.gz&#34;
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    name
 <span style="color:red;">------ </span><span style="color:inherit;">src/BasicAuthRequest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/BasicAuthRequest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-20,7 +20,7</span> ============================================================
@@ -380,28 +413,6 @@
 <span style="color:inherit;"> |</span>        @debug 1 &#34;Adding Authorization: Basic header.&#34;
 <span style="color:inherit;"> |</span>        setkv(headers, &#34;Authorization&#34;, &#34;Basic $(base64encode(userinfo))&#34;)
 <span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">test/parser.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/parser.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-260,7 +260,7</span> ============================================================
-<span style="color:inherit;"> |</span>            @test_throws HTTP.HTTP.ParseError HTTP.parse(Request, &#34;GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection\r\033\065\325eep-Alive\r\nAccept-Encoding: gzip\r\n\r\n&#34;)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>            r = parse(Request,&#34;GET /bad_get_no_headers_no_body/world HTTP/1.1\r\nAccept: */*\r\n\r\nHELLO&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test String(r.body)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>            @test String(r.body)<span style="color:green;">true</span>&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        @testset &#34;Response - readheaders() - 1&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">test/cookies.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/cookies.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-46,7 +46,7</span> ============================================================
-<span style="color:inherit;"> |</span>                   HTTP.Cookie(&#34;cookie-2&#34;, &#34;v\$2&#34;),
-<span style="color:inherit;"> |</span>                   HTTP.Cookie(&#34;cookie-3&#34;, &#34;v\$3&#34;),
-<span style="color:inherit;"> |</span>                  ]
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test HTTP.stringify(&#34;&#34;, cookies)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;cookie-1=v\$1; cookie-2=v\$2; cookie-3=v\$3&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test HTTP.stringify(&#34;&#34;, cookies)<span style="color:green;">true</span>&#34;cookie-1=v\$1; cookie-2=v\$2; cookie-3=v\$3&#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;readsetcookies&#34; begin
 <span style="color:red;">------ </span><span style="color:inherit;">src/ContentTypeRequest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/ContentTypeRequest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
@@ -424,17 +435,17 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # large headers
 <span style="color:inherit;"> |</span>    tcp = Sockets.connect(ip&#34;127.0.0.1&#34;, port)
-<span style="color:red;">------ </span><span style="color:inherit;">src/download.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/download.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
-<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">src/RedirectRequest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/RedirectRequest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-25,7 +25,7</span> ============================================================
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # get the extension, if we are going to save it in encoded form.
-<span style="color:red;">-|</span></span><span style="color:gray;">    if header(resp, &#34;Content-Encoding&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;gzip&#34;</span></span>
-<span style="color:green;">+|</span></span>    if header(resp, &#34;Content-Encoding&#34;)<span style="color:green;">true</span>&#34;gzip&#34;</span>
-<span style="color:inherit;"> |</span>        name *= &#34;.gz&#34;
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    name
+<span style="color:inherit;"> |</span>        if (count == redirect_limit
+<span style="color:inherit;"> |</span>        ||  !isredirect(res)
+<span style="color:red;">-|</span></span><span style="color:gray;">        ||  (location = header(res, &#34;Location&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;)</span></span>
+<span style="color:green;">+|</span></span>        ||  (location = header(res, &#34;Location&#34;))<span style="color:green;">true</span>&#34;&#34;)</span>
+<span style="color:inherit;"> |</span>            return res
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/websockets.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/websockets.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-24,17 +24,17</span> ============================================================
@@ -498,17 +509,6 @@
 <span style="color:red;">-|</span></span><span style="color:gray;">            @test String(readavailable(ws))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Bye!&#34;</span></span>
 <span style="color:green;">+|</span></span>            @test String(readavailable(ws))<span style="color:green;">true</span>&#34;Bye!&#34;</span>
 <span style="color:inherit;"> |</span>            close(ws)
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/RedirectRequest.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/RedirectRequest.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-25,7 +25,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        if (count == redirect_limit
-<span style="color:inherit;"> |</span>        ||  !isredirect(res)
-<span style="color:red;">-|</span></span><span style="color:gray;">        ||  (location = header(res, &#34;Location&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;)</span></span>
-<span style="color:green;">+|</span></span>        ||  (location = header(res, &#34;Location&#34;))<span style="color:green;">true</span>&#34;&#34;)</span>
-<span style="color:inherit;"> |</span>            return res
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

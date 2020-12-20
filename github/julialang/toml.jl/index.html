@@ -1,0 +1,101 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/TOML.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/TOML.jl" target=_blank >JuliaLang/TOML.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_18_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 18 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_18_hits ><a href="#omit_a_a_and_a_a_18_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 18 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/print.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/print.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,15 +1,13</span> ============================================================
+<span style="color:inherit;"> |</span>toml_str(a; kwargs...) = sprint(io -> TOML.print(io, a; kwargs...))
+<span style="color:inherit;"> |</span>toml_str(f, a; kwargs...) = sprint(io -> TOML.print(f, io, a; kwargs...))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test toml_str(Dict(&#34;b&#34; => 1, &#34;c&#34; => 2, &#34;a&#34; => 3); sorted=true)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test toml_str(Dict(&#34;b&#34; => 1, &#34;c&#34; => 2, &#34;a&#34; => 3); sorted=true)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    a = 3
+<span style="color:inherit;"> |</span>    b = 1
+<span style="color:inherit;"> |</span>    c = 2
+<span style="color:inherit;"> |</span>    &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test toml_str(Dict(&#34;b&#34; => 1, &#34;ac&#34; => 2, &#34;abc&#34; => 3); sorted=true, by=length)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m    </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>@test toml_str(Dict(&#34;b&#34; => 1, &#34;ac&#34; => 2, &#34;abc&#34; => 3); sorted=true, by=length)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>    b = 1
+<span style="color:inherit;"> |</span>    ac = 2
+<span style="color:inherit;"> |</span>    abc = 3
+<span style="color:inherit;">@|</span><span style="color:inherit;">-25,7 +23,7</span> ============================================================
+<span style="color:inherit;"> |</span>        foo = 1
+<span style="color:inherit;"> |</span>        &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test toml_str(Dict(&#34;b&#34; => SubString(&#34;foo&#34;)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;b = \&#34;foo\&#34;\n&#34;</span></span>
+<span style="color:green;">+|</span></span>@test toml_str(Dict(&#34;b&#34; => SubString(&#34;foo&#34;)))<span style="color:green;">true</span>&#34;b = \&#34;foo\&#34;\n&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;empty dict print&#34; begin
+<span style="color:inherit;"> |</span>    s = &#34;&#34;&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-34,5 +32,5</span> ============================================================
+<span style="color:inherit;"> |</span>    [option]
+<span style="color:inherit;"> |</span>    &#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    d = TOML.parse(s)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test toml_str(d)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;user = \&#34;me\&#34;\n\n[julia]\n\n[option]\n&#34;    </span></span>
+<span style="color:green;">+|</span></span>    @test toml_str(d)<span style="color:green;">true</span>&#34;user = \&#34;me\&#34;\n\n[julia]\n\n[option]\n&#34;    </span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">src/parser.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/parser.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-463,7 +463,7</span> ============================================================
+<span style="color:inherit;"> |</span>        l.active_table = l.root
+<span style="color:inherit;"> |</span>        @try parse_table(l)
+<span style="color:inherit;"> |</span>        skip_ws_comment(l)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if !(peek(l)</span><span style="color:red;"> == '\n'</span><span style="color:gray;"> || peek(l)</span><span style="color:red;"> == '\r'</span><span style="color:gray;"> || peek(l) == EOF_CHAR)</span></span>
+<span style="color:green;">+|</span></span>        if !(peek(l)<span style="color:green;">true'\n'</span> || peek(l)<span style="color:green;">true'\r'</span> || peek(l) == EOF_CHAR)</span>
+<span style="color:inherit;"> |</span>            eat_char(l)
+<span style="color:inherit;"> |</span>            return ParserError(ErrExpectedNewLineKeyValue)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-471,7 +471,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @try parse_entry(l, l.active_table)
+<span style="color:inherit;"> |</span>        skip_ws_comment(l)
+<span style="color:inherit;"> |</span>        # SPEC: &#34;There must be a newline (or EOF) after a key/value pair.&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">        if !(peek(l)</span><span style="color:red;"> == '\n'</span><span style="color:gray;"> || peek(l)</span><span style="color:red;"> == '\r'</span><span style="color:gray;"> || peek(l) == EOF_CHAR)</span></span>
+<span style="color:green;">+|</span></span>        if !(peek(l)<span style="color:green;">true'\n'</span> || peek(l)<span style="color:green;">true'\r'</span> || peek(l) == EOF_CHAR)</span>
+<span style="color:inherit;"> |</span>            c = eat_char(l)
+<span style="color:inherit;"> |</span>            return ParserError(ErrExpectedNewLineKeyValue)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-598,7 +598,7</span> ============================================================
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        set_marker!(l)
+<span style="color:inherit;"> |</span>        if accept_batch(l, isvalid_barekey_char)
+<span style="color:red;">-|</span></span><span style="color:gray;">            if !(peek(l)</span><span style="color:red;"> == '</span><span style="color:gray;">.' || peek(l)</span><span style="color:red;"> == '</span><span style="color:gray;"> ' || peek(l)</span><span style="color:red;"> == '</span><span style="color:gray;">]' || peek(l)</span><span style="color:red;"> == '</span><span style="color:gray;">=')</span></span>
+<span style="color:green;">+|</span></span>            if !(peek(l)<span style="color:green;">true'</span>.' || peek(l)<span style="color:green;">true'</span> ' || peek(l)<span style="color:green;">true'</span>]' || peek(l)<span style="color:green;">true'</span>=')</span>
+<span style="color:inherit;"> |</span>                c = eat_char(l)
+<span style="color:inherit;"> |</span>                return ParserError(ErrInvalidBareKeyCharacter, c)
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-837,9 +837,9</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    if !read_underscore
+<span style="color:inherit;"> |</span>        # No underscores in date / times
+<span style="color:red;">-|</span></span><span style="color:gray;">        if peek(l)</span><span style="color:red;"> == '</span><span style="color:gray;">-'</span></span>
+<span style="color:green;">+|</span></span>        if peek(l)<span style="color:green;">true'</span>-'</span>
+<span style="color:inherit;"> |</span>            return parse_datetime(l)
+<span style="color:red;">-|</span></span><span style="color:gray;">        elseif peek(l)</span><span style="color:red;"> == '</span><span style="color:gray;">:'</span></span>
+<span style="color:green;">+|</span></span>        elseif peek(l)<span style="color:green;">true'</span>:'</span>
+<span style="color:inherit;"> |</span>            return parse_local_time(l)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1110,10 +1110,10</span> ============================================================
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            accept_batch(l, multiline ? stop_candidates_multiline : stop_candidates_singleline)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        if !multiline && peek(l)</span><span style="color:red;"> == '\n'</span></span>
+<span style="color:green;">+|</span></span>        if !multiline && peek(l)<span style="color:green;">true'\n'</span></span>
+<span style="color:inherit;"> |</span>            return ParserError(ErrNewLineInString)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        next_slash = peek(l)</span><span style="color:red;"> == '\\'</span></span>
+<span style="color:green;">+|</span></span>        next_slash = peek(l)<span style="color:green;">true'\\'</span></span>
+<span style="color:inherit;"> |</span>        if !next_slash
+<span style="color:inherit;"> |</span>            # TODO: Doesn't handle values with e.g. format &#96;&#34;&#34;&#34;&#34;str&#34;&#34;&#34;&#34;&#96;
+<span style="color:inherit;"> |</span>            if accept(l, q) && (!multiline || (accept(l, q) && accept(l, q)))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1124,7 +1124,7</span> ============================================================
+<span style="color:inherit;"> |</span>        c = eat_char(l) # eat the character we stopped at
+<span style="color:inherit;"> |</span>        next_slash = c == '\\'
+<span style="color:inherit;"> |</span>        if next_slash && !quoted
+<span style="color:red;">-|</span></span><span style="color:gray;">            if peek(l)</span><span style="color:red;"> == '\n'</span><span style="color:gray;"> || peek(l)</span><span style="color:red;"> == '\r'</span></span>
+<span style="color:green;">+|</span></span>            if peek(l)<span style="color:green;">true'\n'</span> || peek(l)<span style="color:green;">true'\r'</span></span>
+<span style="color:inherit;"> |</span>                push!(l.chunks, start_chunk:(l.prevpos-1-1)) # -1 due to eating the slash
+<span style="color:inherit;"> |</span>                skip_ws_nl_no_comment(l)
+<span style="color:inherit;"> |</span>                start_chunk = l.pre</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

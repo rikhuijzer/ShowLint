@@ -45,39 +45,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@test partype(Gamma(1, 2)) == Float64
 <span style="color:inherit;"> |</span>@test partype(Gamma(1.1, 2)) == Float64
-<span style="color:red;">------ </span><span style="color:inherit;">test/multinomial.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/multinomial.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-81,9 +81,9</span> ============================================================
-<span style="color:inherit;"> |</span>x4 = [1, 0, 1]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@test logpdf(d1, x2) ≈ log(0.5)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test logpdf(d2, x2)</span><span style="color:red;"> == </span><span style="color:gray;">-Inf</span></span>
-<span style="color:green;">+|</span></span>@test logpdf(d2, x2)<span style="color:green;">true</span>-Inf</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test logpdf(d1, x3)</span><span style="color:red;"> == </span><span style="color:gray;">-Inf</span></span>
-<span style="color:green;">+|</span></span>@test logpdf(d1, x3)<span style="color:green;">true</span>-Inf</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test logpdf(d2, x3)</span><span style="color:red;"> == </span><span style="color:gray;">-Inf</span></span>
-<span style="color:green;">+|</span></span>@test logpdf(d2, x3)<span style="color:green;">true</span>-Inf</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># suffstats
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-107,7 +107,7</span> ============================================================
-<span style="color:inherit;"> |</span># fit
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>x = func[2](d0, 10^5)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test size(x)</span><span style="color:red;"> == </span><span style="color:gray;">(length(d0), 10^5)</span></span>
-<span style="color:green;">+|</span></span>@test size(x)<span style="color:green;">true</span>(length(d0), 10^5)</span>
-<span style="color:inherit;"> |</span>@test all(sum(x, dims=1) .== nt)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>r = fit(Multinomial, x)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-136,7 +136,7</span> ============================================================
-<span style="color:inherit;"> |</span>@test insupport(d0, [0, 0, 0]) == true
-<span style="color:inherit;"> |</span>@test insupport(d0, [0, 0, 4]) == false
-<span style="color:inherit;"> |</span>@test length(d0) == 3
-<span style="color:red;">-|</span></span><span style="color:gray;">@test size(d0)</span><span style="color:red;"> == </span><span style="color:gray;">(3,)</span></span>
-<span style="color:green;">+|</span></span>@test size(d0)<span style="color:green;">true</span>(3,)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># Abstract vector p
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/semicircle.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/semicircle.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-3,11 +3,11</span> ============================================================
@@ -135,6 +102,50 @@
 <span style="color:inherit;"> |</span>@test d.α0 == sum(α)
 <span style="color:inherit;"> |</span>@test partype(d) == eltype(α)
 <span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/multinomial.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/multinomial.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-81,9 +81,9</span> ============================================================
+<span style="color:inherit;"> |</span>x4 = [1, 0, 1]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@test logpdf(d1, x2) ≈ log(0.5)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test logpdf(d2, x2)</span><span style="color:red;"> == </span><span style="color:gray;">-Inf</span></span>
+<span style="color:green;">+|</span></span>@test logpdf(d2, x2)<span style="color:green;">true</span>-Inf</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test logpdf(d1, x3)</span><span style="color:red;"> == </span><span style="color:gray;">-Inf</span></span>
+<span style="color:green;">+|</span></span>@test logpdf(d1, x3)<span style="color:green;">true</span>-Inf</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test logpdf(d2, x3)</span><span style="color:red;"> == </span><span style="color:gray;">-Inf</span></span>
+<span style="color:green;">+|</span></span>@test logpdf(d2, x3)<span style="color:green;">true</span>-Inf</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># suffstats
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-107,7 +107,7</span> ============================================================
+<span style="color:inherit;"> |</span># fit
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>x = func[2](d0, 10^5)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(x)</span><span style="color:red;"> == </span><span style="color:gray;">(length(d0), 10^5)</span></span>
+<span style="color:green;">+|</span></span>@test size(x)<span style="color:green;">true</span>(length(d0), 10^5)</span>
+<span style="color:inherit;"> |</span>@test all(sum(x, dims=1) .== nt)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>r = fit(Multinomial, x)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-136,7 +136,7</span> ============================================================
+<span style="color:inherit;"> |</span>@test insupport(d0, [0, 0, 0]) == true
+<span style="color:inherit;"> |</span>@test insupport(d0, [0, 0, 4]) == false
+<span style="color:inherit;"> |</span>@test length(d0) == 3
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(d0)</span><span style="color:red;"> == </span><span style="color:gray;">(3,)</span></span>
+<span style="color:green;">+|</span></span>@test size(d0)<span style="color:green;">true</span>(3,)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Abstract vector p
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/univariates.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/univariates.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-86,7 +86,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @assert isa(f, Function)
+<span style="color:inherit;"> |</span>        @test isapprox(f(d), expect_v; atol=1e-12, rtol=1e-8, nans=true)
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test extrema(d)</span><span style="color:red;"> == </span><span style="color:gray;">(minimum(d), maximum(d))</span></span>
+<span style="color:green;">+|</span></span>    @test extrema(d)<span style="color:green;">true</span>(minimum(d), maximum(d))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # verify logpdf and cdf at certain points
+<span style="color:inherit;"> |</span>    pts = dct[&#34;points&#34;]
 <span style="color:red;">------ </span><span style="color:inherit;">src/univariate/continuous/generalizedextremevalue.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/univariate/continuous/generalizedextremevalue.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-188,7 +188,7</span> ============================================================
@@ -155,17 +166,6 @@
 <span style="color:inherit;"> |</span>                return zero(T)
 <span style="color:inherit;"> |</span>            else
 <span style="color:inherit;"> |</span>                t = (1 + z*ξ)^(- 1 / ξ)
-<span style="color:red;">------ </span><span style="color:inherit;">test/univariates.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/univariates.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-86,7 +86,7</span> ============================================================
-<span style="color:inherit;"> |</span>        @assert isa(f, Function)
-<span style="color:inherit;"> |</span>        @test isapprox(f(d), expect_v; atol=1e-12, rtol=1e-8, nans=true)
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test extrema(d)</span><span style="color:red;"> == </span><span style="color:gray;">(minimum(d), maximum(d))</span></span>
-<span style="color:green;">+|</span></span>    @test extrema(d)<span style="color:green;">true</span>(minimum(d), maximum(d))</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # verify logpdf and cdf at certain points
-<span style="color:inherit;"> |</span>    pts = dct[&#34;points&#34;]
 <span style="color:red;">------ </span><span style="color:inherit;">test/truncate.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/truncate.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-63,7 +63,7</span> ============================================================
@@ -199,6 +199,17 @@
 <span style="color:inherit;"> |</span>    @test s          ≈ diag(S)
 <span style="color:inherit;"> |</span>    @test md         ≈ exp.(mean(g.normal))
 <span style="color:inherit;"> |</span>    @test mn         ≈ exp.(mean(g.normal) .+ var(g.normal)/2)
+<span style="color:red;">------ </span><span style="color:inherit;">test/logitnormal.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/logitnormal.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-51,7 +51,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # test the location and scale functions
+<span style="color:inherit;"> |</span>    @test location(g) == g.μ
+<span style="color:inherit;"> |</span>    @test scale(g) == g.σ
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test params(g)</span><span style="color:red;"> == </span><span style="color:gray;">(g.μ, g.σ)</span></span>
+<span style="color:green;">+|</span></span>    @test params(g)<span style="color:green;">true</span>(g.μ, g.σ)</span>
+<span style="color:inherit;"> |</span>    @test g == deepcopy(g)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/testutils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/testutils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-256,7 +256,7</span> ============================================================
@@ -219,30 +230,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    if isbounded(d)
 <span style="color:inherit;"> |</span>        if isa(d, DiscreteUnivariateDistribution)
-<span style="color:red;">------ </span><span style="color:inherit;">test/logitnormal.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/logitnormal.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-51,7 +51,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # test the location and scale functions
-<span style="color:inherit;"> |</span>    @test location(g) == g.μ
-<span style="color:inherit;"> |</span>    @test scale(g) == g.σ
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test params(g)</span><span style="color:red;"> == </span><span style="color:gray;">(g.μ, g.σ)</span></span>
-<span style="color:green;">+|</span></span>    @test params(g)<span style="color:green;">true</span>(g.μ, g.σ)</span>
-<span style="color:inherit;"> |</span>    @test g == deepcopy(g)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">test/vonmisesfisher.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/vonmisesfisher.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-82,8 +82,8</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    d = VonMisesFisher(μ, κ)
-<span style="color:inherit;"> |</span>    @test length(d) == p
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test meandir(d)</span><span style="color:red;"> == μ</span></span>
-<span style="color:green;">+|</span></span>    @test meandir(d)<span style="color:green;">trueμ</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test concentration(d)</span><span style="color:red;"> == κ</span></span>
-<span style="color:green;">+|</span></span>    @test concentration(d)<span style="color:green;">trueκ</span></span>
-<span style="color:inherit;"> |</span>    @test partype(d) == Float64
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # conversions
 <span style="color:red;">------ </span><span style="color:inherit;">test/mvnormal.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/mvnormal.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
@@ -263,6 +250,19 @@
 <span style="color:inherit;"> |</span>                @test cov(c_d) == cov(d_c) == cov(d)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>                B_d = B * d
+<span style="color:red;">------ </span><span style="color:inherit;">test/vonmisesfisher.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/vonmisesfisher.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,8 +82,8</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    d = VonMisesFisher(μ, κ)
+<span style="color:inherit;"> |</span>    @test length(d) == p
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test meandir(d)</span><span style="color:red;"> == μ</span></span>
+<span style="color:green;">+|</span></span>    @test meandir(d)<span style="color:green;">trueμ</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test concentration(d)</span><span style="color:red;"> == κ</span></span>
+<span style="color:green;">+|</span></span>    @test concentration(d)<span style="color:green;">trueκ</span></span>
+<span style="color:inherit;"> |</span>    @test partype(d) == Float64
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # conversions
 <span style="color:red;">------ </span><span style="color:inherit;">test/categorical.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/categorical.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-19,7 +19,7</span> ============================================================
@@ -294,23 +294,6 @@
 <span style="color:inherit;"> |</span>@test probs(d) == [0.25, 0.25, 0.25, 0.25]
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>p = ones(10^6) * 1.0e-6
-<span style="color:red;">------ </span><span style="color:inherit;">test/mvtdist.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/mvtdist.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-43,10 +43,10</span> ============================================================
-<span style="color:inherit;"> |</span>@test partype(d) == Float32
-<span style="color:inherit;"> |</span>@test d == deepcopy(d)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MvTDist(1., mu, Sigma)))</span><span style="color:red;"> == </span><span style="color:gray;">(2,)</span></span>
-<span style="color:green;">+|</span></span>@test size(rand(MvTDist(1., mu, Sigma)))<span style="color:green;">true</span>(2,)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MvTDist(1., mu, Sigma), 10))</span><span style="color:red;"> == </span><span style="color:gray;">(2,10)</span></span>
-<span style="color:green;">+|</span></span>@test size(rand(MvTDist(1., mu, Sigma), 10))<span style="color:green;">true</span>(2,10)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma)))</span><span style="color:red;"> == </span><span style="color:gray;">(2,)</span></span>
-<span style="color:green;">+|</span></span>@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma)))<span style="color:green;">true</span>(2,)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma), 10))</span><span style="color:red;"> == </span><span style="color:gray;">(2,10)</span></span>
-<span style="color:green;">+|</span></span>@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma), 10))<span style="color:green;">true</span>(2,10)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># static array for mean/variance
-<span style="color:inherit;"> |</span>mu_static = @SVector [1., 2]
 <span style="color:red;">------ </span><span style="color:inherit;">test/dirichlet.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/dirichlet.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-77,7 +77,7</span> ============================================================
@@ -331,6 +314,23 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># Test MLE
+<span style="color:red;">------ </span><span style="color:inherit;">test/mvtdist.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/mvtdist.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-43,10 +43,10</span> ============================================================
+<span style="color:inherit;"> |</span>@test partype(d) == Float32
+<span style="color:inherit;"> |</span>@test d == deepcopy(d)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MvTDist(1., mu, Sigma)))</span><span style="color:red;"> == </span><span style="color:gray;">(2,)</span></span>
+<span style="color:green;">+|</span></span>@test size(rand(MvTDist(1., mu, Sigma)))<span style="color:green;">true</span>(2,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MvTDist(1., mu, Sigma), 10))</span><span style="color:red;"> == </span><span style="color:gray;">(2,10)</span></span>
+<span style="color:green;">+|</span></span>@test size(rand(MvTDist(1., mu, Sigma), 10))<span style="color:green;">true</span>(2,10)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma)))</span><span style="color:red;"> == </span><span style="color:gray;">(2,)</span></span>
+<span style="color:green;">+|</span></span>@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma)))<span style="color:green;">true</span>(2,)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma), 10))</span><span style="color:red;"> == </span><span style="color:gray;">(2,10)</span></span>
+<span style="color:green;">+|</span></span>@test size(rand(MersenneTwister(123), MvTDist(1., mu, Sigma), 10))<span style="color:green;">true</span>(2,10)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># static array for mean/variance
+<span style="color:inherit;"> |</span>mu_static = @SVector [1., 2]
 <span style="color:red;">------ </span><span style="color:inherit;">src/multivariates.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariates.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-88,7 +88,7</span> ============================================================
@@ -378,17 +378,6 @@
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>        @testset &#34;$k&#34; for (k,dtest) in d_dict
 <span style="color:inherit;"> |</span>            test_support(dtest, dref)
-<span style="color:red;">------ </span><span style="color:inherit;">src/univariate/continuous/beta.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/univariate/continuous/beta.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-85,7 +85,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function skewness(d::Beta)
-<span style="color:inherit;"> |</span>    (α, β) = params(d)
-<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">α == β</span></span>
-<span style="color:green;">+|</span></span>    if <span style="color:green;">αtrueβ</span></span>
-<span style="color:inherit;"> |</span>        return zero(α)
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        s = α + β
 <span style="color:red;">------ </span><span style="color:inherit;">test/poissonbinomial.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/poissonbinomial.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-44,7 +44,7</span> ============================================================
@@ -400,6 +389,17 @@
 <span style="color:inherit;"> |</span>    @test ntrials(d) == n
 <span style="color:inherit;"> |</span>    @test entropy(d)  ≈ entropy(dref)
 <span style="color:inherit;"> |</span>    @test median(d)   ≈ median(dref)
+<span style="color:red;">------ </span><span style="color:inherit;">src/univariate/continuous/beta.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/univariate/continuous/beta.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-85,7 +85,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function skewness(d::Beta)
+<span style="color:inherit;"> |</span>    (α, β) = params(d)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">α == β</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">αtrueβ</span></span>
+<span style="color:inherit;"> |</span>        return zero(α)
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        s = α + β
 <span style="color:red;">------ </span><span style="color:inherit;">test/discretenonparametric.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/discretenonparametric.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-53,12 +53,12</span> ============================================================

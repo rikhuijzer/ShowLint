@@ -11,7 +11,18 @@
 <span style="color:inherit;"> |</span>            x̄s_rd .*= ȳ
 <span style="color:inherit;"> |</span>            y_rd = ReverseDiff.value(tp.out</div>
 </pre> <h3 id=omit_a_a_and_a_a_14_hits ><a href="#omit_a_a_and_a_a_14_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 14 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_utils/staging.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/inference/emcee.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/inference/emcee.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
+<span style="color:inherit;"> |</span>        n_walkers = 250
+<span style="color:inherit;"> |</span>        
+<span style="color:inherit;"> |</span>        spl = Emcee(n_walkers, 2.0)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test DynamicPPL.alg_str(Sampler(spl, gdemo_default))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Emcee&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test DynamicPPL.alg_str(Sampler(spl, gdemo_default))<span style="color:green;">true</span>&#34;Emcee&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        chain = sample(gdemo_default, spl, n_samples)
+<span style="color:inherit;"> |</span>        check_gdemo(chain)
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_utils/staging.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_utils/staging.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1,11 +1,11</span> ============================================================
 <span style="color:inherit;"> |</span>function get_stage()
@@ -27,17 +38,6 @@
 <span style="color:inherit;"> |</span>        if &#34;STAGE&#34; in keys(ENV)
 <span style="color:inherit;"> |</span>            return ENV[&#34;STAGE&#34;]
 <span style="color:inherit;"> |</span>        else
-<span style="color:red;">------ </span><span style="color:inherit;">test/inference/emcee.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/inference/emcee.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
-<span style="color:inherit;"> |</span>        n_walkers = 250
-<span style="color:inherit;"> |</span>        
-<span style="color:inherit;"> |</span>        spl = Emcee(n_walkers, 2.0)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test DynamicPPL.alg_str(Sampler(spl, gdemo_default))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Emcee&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test DynamicPPL.alg_str(Sampler(spl, gdemo_default))<span style="color:green;">true</span>&#34;Emcee&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        chain = sample(gdemo_default, spl, n_samples)
-<span style="color:inherit;"> |</span>        check_gdemo(chain)
 <span style="color:red;">------ </span><span style="color:inherit;">test/inference/Inference.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/inference/Inference.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-107,14 +107,14</span> ============================================================

@@ -20,38 +20,7 @@
 <span style="color:inherit;"> |</span>    stroke_linejoin::LineJoin
 <span style="color:inherit;"> |</span>    visible::</div>
 </pre> <h3 id=omit_a_a_and_a_a_9_hits ><a href="#omit_a_a_and_a_a_9_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 9 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/misc.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/misc.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-130,13 +130,13</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># PR 263
-<span style="color:inherit;"> |</span>@test ~ @isdefined Fontconfig
-<span style="color:red;">-|</span></span><span style="color:gray;">@test Compose.pango_to_svg(&#34;hello world&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
-<span style="color:green;">+|</span></span>@test Compose.pango_to_svg(&#34;hello world&#34;)<span style="color:green;">true</span>&#34;hello world&#34;</span>
-<span style="color:inherit;"> |</span>import Fontconfig
-<span style="color:red;">-|</span></span><span style="color:gray;">@test Compose.pango_to_svg(&#34;hello world&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
-<span style="color:green;">+|</span></span>@test Compose.pango_to_svg(&#34;hello world&#34;)<span style="color:green;">true</span>&#34;hello world&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;pango&#34; begin
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test Compose.escape_tex_chars(&#34;\\&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\\textbackslash{}&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test Compose.escape_tex_chars(&#34;\\&#34;)<span style="color:green;">true</span>&#34;\\textbackslash{}&#34;</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test Compose.pango_to_pgf(&#34;hello\\&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\\text{hello\\textbackslash{}}&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test Compose.pango_to_pgf(&#34;hello\\&#34;)<span style="color:green;">true</span>&#34;\\text{hello\\textbackslash{}}&#34;</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;pango utf-8 text_extents&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">src/table.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/table.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-330,7 +330,7</span> ============================================================
-<span style="color:inherit;"> |</span>            idx = optimal_choice[(j-1)*m + i]
-<span style="color:inherit;"> |</span>            ctx = copy(tbl.children[i, j][idx])
-<span style="color:inherit;"> |</span>        end
-<span style="color:red;">-|</span></span>        </span><span style="color:red;">feasible == feasible</span><span style="color:gray;"> && issatisfied(ctx, w_solution[j], h_solution[i])</span></span>
-<span style="color:green;">+|</span></span>        <span style="color:green;">true</span> && issatisfied(ctx, w_solution[j], h_solution[i])</span>
-<span style="color:inherit;"> |</span>        ctx.box = BoundingBox(
-<span style="color:inherit;"> |</span>            x_solution[j]*mm, y_solution[i]*mm,
-<span style="color:inherit;"> |</span>            w_solution[j]*mm, h_solution[i]*mm)
-<span style="color:red;">------ </span><span style="color:inherit;">src/misc.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/misc.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/misc.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-127,7 +127,7</span> ============================================================
 <span style="color:inherit;"> |</span>    if !isempty(point_arrays) && all([eltype(arr) <: Vec for arr in point_arrays])
@@ -71,6 +40,26 @@
 <span style="color:inherit;"> |</span>            end
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">test/misc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/misc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-130,13 +130,13</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># PR 263
+<span style="color:inherit;"> |</span>@test ~ @isdefined Fontconfig
+<span style="color:red;">-|</span></span><span style="color:gray;">@test Compose.pango_to_svg(&#34;hello world&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
+<span style="color:green;">+|</span></span>@test Compose.pango_to_svg(&#34;hello world&#34;)<span style="color:green;">true</span>&#34;hello world&#34;</span>
+<span style="color:inherit;"> |</span>import Fontconfig
+<span style="color:red;">-|</span></span><span style="color:gray;">@test Compose.pango_to_svg(&#34;hello world&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;hello world&#34;</span></span>
+<span style="color:green;">+|</span></span>@test Compose.pango_to_svg(&#34;hello world&#34;)<span style="color:green;">true</span>&#34;hello world&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;pango&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test Compose.escape_tex_chars(&#34;\\&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\\textbackslash{}&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test Compose.escape_tex_chars(&#34;\\&#34;)<span style="color:green;">true</span>&#34;\\textbackslash{}&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test Compose.pango_to_pgf(&#34;hello\\&#34;)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;\\text{hello\\textbackslash{}}&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test Compose.pango_to_pgf(&#34;hello\\&#34;)<span style="color:green;">true</span>&#34;\\text{hello\\textbackslash{}}&#34;</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;pango utf-8 text_extents&#34; begin
 <span style="color:red;">------ </span><span style="color:inherit;">src/table-jump.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/table-jump.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-148,7 +148,7</span> ============================================================
@@ -90,5 +79,16 @@
 <span style="color:green;">+|</span></span>            <span style="color:green;">true</span> && issatisfied(ctx, w_solution[j], h_solution[i])</span>
 <span style="color:inherit;"> |</span>            ctx.box = BoundingBox(
 <span style="color:inherit;"> |</span>                x_solution[j]*mm, y_solution[i]*mm,
-<span style="color:inherit;"> |</span>                w_solution[j]*mm, h_solution[i]</div>
+<span style="color:inherit;"> |</span>                w_solution[j]*mm, h_solution[i]*mm)
+<span style="color:red;">------ </span><span style="color:inherit;">src/table.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/table.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-330,7 +330,7</span> ============================================================
+<span style="color:inherit;"> |</span>            idx = optimal_choice[(j-1)*m + i]
+<span style="color:inherit;"> |</span>            ctx = copy(tbl.children[i, j][idx])
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">feasible == feasible</span><span style="color:gray;"> && issatisfied(ctx, w_solution[j], h_solution[i])</span></span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">true</span> && issatisfied(ctx, w_solution[j], h_solution[i])</span>
+<span style="color:inherit;"> |</span>        ctx.box = BoundingBox(
+<span style="color:inherit;"> |</span>            x_solution[j]*mm, y_solution[i]*mm,
+<span style="color:inherit;"> |</span>            w_solution[j]*mm, h_solution[i]</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

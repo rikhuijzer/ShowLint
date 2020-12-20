@@ -20,27 +20,7 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        @test our_method ≈ forward_</div>
 </pre> <h3 id=omit_a_a_and_a_a_18_hits ><a href="#omit_a_a_and_a_a_18_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 18 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/bijectors/permute.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/bijectors/permute.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-116,7 +116,7</span> ============================================================
-<span style="color:inherit;"> |</span>        A[src, src] = 0.0  # <= remove &#96;src => src&#96;
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @argcheck (sources ∩ dests)</span><span style="color:red;"> == </span><span style="color:gray;">(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span></span>
-<span style="color:green;">+|</span></span>    @argcheck (sources ∩ dests)<span style="color:green;">true</span>(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    dropzeros!(A)
-<span style="color:inherit;"> |</span>    return Permute(A)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-143,7 +143,7</span> ============================================================
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @argcheck (sources ∩ dests)</span><span style="color:red;"> == </span><span style="color:gray;">(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span></span>
-<span style="color:green;">+|</span></span>    @argcheck (sources ∩ dests)<span style="color:green;">true</span>(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    dropzeros!(A)
-<span style="color:inherit;"> |</span>    return Permute(A)
-<span style="color:red;">------ </span><span style="color:inherit;">test/bijectors/leaky_relu.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/bijectors/leaky_relu.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/bijectors/leaky_relu.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
 <span style="color:inherit;"> |</span>    b = LeakyReLU(0.1; dim=Val(0))
@@ -89,6 +69,26 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    x = (a = 0.0, b = 2.0, c = 1.0)
 <span style="color:inherit;"> |</span>    nc = NamedCoupling(:c, (:a, :b), (a, b) -> Logit(a, b))
+<span style="color:red;">------ </span><span style="color:inherit;">src/bijectors/permute.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/bijectors/permute.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-116,7 +116,7</span> ============================================================
+<span style="color:inherit;"> |</span>        A[src, src] = 0.0  # <= remove &#96;src => src&#96;
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @argcheck (sources ∩ dests)</span><span style="color:red;"> == </span><span style="color:gray;">(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span></span>
+<span style="color:green;">+|</span></span>    @argcheck (sources ∩ dests)<span style="color:green;">true</span>(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    dropzeros!(A)
+<span style="color:inherit;"> |</span>    return Permute(A)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-143,7 +143,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @argcheck (sources ∩ dests)</span><span style="color:red;"> == </span><span style="color:gray;">(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span></span>
+<span style="color:green;">+|</span></span>    @argcheck (sources ∩ dests)<span style="color:green;">true</span>(sources ∪ dests) &#34;$sources ∩ $dests ≠ $sources ∪ $dests&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    dropzeros!(A)
+<span style="color:inherit;"> |</span>    return Permute(A)
 <span style="color:red;">------ </span><span style="color:inherit;">test/bijectors/coupling.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/bijectors/coupling.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-45,8 +45,8</span> ============================================================

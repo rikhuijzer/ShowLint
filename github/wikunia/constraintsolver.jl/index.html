@@ -51,6 +51,17 @@
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        jump_add_sudoku_constr!(m, com_grid)
+<span style="color:red;">------ </span><span style="color:inherit;">src/constraints/reified.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/constraints/reified.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-134,7 +134,7</span> ============================================================
+<span style="color:inherit;"> |</span>        inner_constraint.fct,
+<span style="color:inherit;"> |</span>        inner_constraint.set,
+<span style="color:inherit;"> |</span>        values[2:end],
+<span style="color:red;">-|</span></span><span style="color:gray;">    )</span><span style="color:red;"> == </span><span style="color:gray;">(values[1] == activate_on)</span></span>
+<span style="color:green;">+|</span></span>    )<span style="color:green;">true</span>(values[1] == activate_on)</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
 <span style="color:red;">------ </span><span style="color:inherit;">test/unit/constraints/geqset.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/unit/constraints/geqset.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-68,7 +68,7</span> ============================================================
@@ -71,17 +82,6 @@
 <span style="color:inherit;"> |</span>    @test sort(CS.values(com.search_space[constr_indices[3]])) == 4:4
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/constraints/reified.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/constraints/reified.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-134,7 +134,7</span> ============================================================
-<span style="color:inherit;"> |</span>        inner_constraint.fct,
-<span style="color:inherit;"> |</span>        inner_constraint.set,
-<span style="color:inherit;"> |</span>        values[2:end],
-<span style="color:red;">-|</span></span><span style="color:gray;">    )</span><span style="color:red;"> == </span><span style="color:gray;">(values[1] == activate_on)</span></span>
-<span style="color:green;">+|</span></span>    )<span style="color:green;">true</span>(values[1] == activate_on)</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
 <span style="color:red;">------ </span><span style="color:inherit;">test/unit/constraints/equal.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/unit/constraints/equal.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================

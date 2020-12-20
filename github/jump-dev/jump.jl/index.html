@@ -292,6 +292,17 @@
 <span style="color:inherit;"> |</span>SparseAxisArray{Float64,2,Tuple{Symbol,Char}} with 2 entries:
 <span style="color:inherit;"> |</span>  [b, v]  =  0.5
 <span style="color:inherit;"> |</span>  [a, u]  =  2.0&#34;&#34;&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-49,7 +49,7</span> ============================================================
+<span style="color:inherit;"> |</span>    authors = &#34;Miles Lubin, Iain Dunning, and Joey Huchette&#34;,
+<span style="color:inherit;"> |</span>    format = Documenter.HTML(
+<span style="color:inherit;"> |</span>        # See https://github.com/JuliaDocs/Documenter.jl/issues/868
+<span style="color:red;">-|</span></span><span style="color:gray;">        prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;,</span></span>
+<span style="color:green;">+|</span></span>        prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;,</span>
+<span style="color:inherit;"> |</span>        analytics = &#34;UA-44252521-1&#34;,
+<span style="color:inherit;"> |</span>        collapselevel = 1,
+<span style="color:inherit;"> |</span>    ),
 <span style="color:red;">------ </span><span style="color:inherit;">test/model.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/model.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-400,8 +400,7</span> ============================================================
@@ -374,17 +385,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function test_copy_model_jump_auto()
-<span style="color:red;">------ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">docs/make.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-49,7 +49,7</span> ============================================================
-<span style="color:inherit;"> |</span>    authors = &#34;Miles Lubin, Iain Dunning, and Joey Huchette&#34;,
-<span style="color:inherit;"> |</span>    format = Documenter.HTML(
-<span style="color:inherit;"> |</span>        # See https://github.com/JuliaDocs/Documenter.jl/issues/868
-<span style="color:red;">-|</span></span><span style="color:gray;">        prettyurls = get(ENV, &#34;CI&#34;, nothing)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;true&#34;,</span></span>
-<span style="color:green;">+|</span></span>        prettyurls = get(ENV, &#34;CI&#34;, nothing)<span style="color:green;">true</span>&#34;true&#34;,</span>
-<span style="color:inherit;"> |</span>        analytics = &#34;UA-44252521-1&#34;,
-<span style="color:inherit;"> |</span>        collapselevel = 1,
-<span style="color:inherit;"> |</span>    ),
 <span style="color:red;">------ </span><span style="color:inherit;">test/macros.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/macros.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-427,7 +427,7</span> ============================================================

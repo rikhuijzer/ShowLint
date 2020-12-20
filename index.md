@@ -7,7 +7,7 @@ reeval = true
 # ShowLint
 
 Linters have obvious benefits but, like any tool, can be hard to use.
-Not all users have the time to install and update a linter and inspect its output.
+Not all users have the time to install and update a linter, and inspect its output.
 Also, some linters show many false-positives and cause the code to be littered with ignore <X> comments, and any suggestion by the linter is only interesting once.
 After a decision is made on applying the suggestion, the suggestion should not come back.
 
@@ -31,6 +31,8 @@ println("""
 ```
 \textoutput{insert-numbers}
 
-If the linter shows useful rewrites, then you can use Comby to create a pull request manually.
-All the required information is available on this website and in Comby's documentation.
+If the linter shows useful rewrites, then use Comby to create a pull request or make the changes manually.
+If the linter shows useful rewrites, then consider making a pull request.
+For many changes, use Comby.
+All the required information to apply Comby available on this website and in Comby's documentation.
 To automate pull request creation, see [Sourcegraph Campaigns](https://sourcegraph.com/campaigns).

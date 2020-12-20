@@ -307,6 +307,6 @@ function cloned_loc(; extension=".jl")::Int
     sum(counts)
 end
 
-prettify_loc(n)::String = replace(format(n, commas=true), ',' => ' ')
+prettify_loc(n)::String = format(n, commas=true)
 
 end # module

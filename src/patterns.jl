@@ -6,8 +6,8 @@ struct Pattern
     toml::String
 end
 
-const val_rx = raw"[\w_\[\]:\.]*"
-const fn_rx = raw"[\w_\.]*"
+const val_rx = raw"[\w_\[\]:\.]+"
+const fn_rx = raw"[\w_\.]+"
 
 patterns = [
     Pattern(1, "Replace Array{T,1} with Vector{T}", ["julia"], 
@@ -61,19 +61,7 @@ patterns = [
         rewrite=':[bool]'
         """
     ),
-    Pattern(6, "Omit f(x) == f(x) and f(x) != f(x)", ["julia"],
-        "An extension of p5.",
-        """
-        match=':[[f]](:[x]) :[bool~(=|!)]= :[[f]](:[x])'
-
-        rule='where
-            rewrite :[bool] { "=" -> "true" },
-            rewrite :[bool] { "!" -> "false" }'
-
-        rewrite=':[bool]'
-        """
-    ),
-    Pattern(7, "Avoid findfirst in conditional", ["julia"],
+    Pattern(6, "Avoid findfirst in conditional", ["julia"],
         """
         For example, instead of `findfirst('a', \"ab\") === nothing`,
         use `occursin('a', \"ab\")` or `contains` (Julia ≥1.5).

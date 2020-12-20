@@ -6,7 +6,8 @@ struct Pattern
     toml::String
 end
 
-const val = raw"[\w_\[\]:\.()]*"
+const val_rx = raw"[\w_\[\]:\.()]*"
+const fn_rx = raw"[\w_\.]*"
 
 patterns = [
     Pattern(1, "Replace Array{T,1} with Vector{T}", ["julia"], 
@@ -51,13 +52,28 @@ patterns = [
     Pattern(5, "Omit a == a and a != a", ["julia"],
         "SA4000 in [staticcheck](https://staticcheck.io/docs/checks).",
         """
-        match=':[x~$val] :[bool~(=|!)]= :[x~$val]'
+        match=':[x~$val_rx] :[bool~(=|!)]= :[x~$val_rx]'
 
         rule='where
             rewrite :[bool] { "=" -> "true" },
             rewrite :[bool] { "!" -> "false" }'
 
         rewrite=':[bool]'
+        """
+    ),
+    Pattern(6, "Avoid findfirst in conditional", ["julia"],
+        """
+        For example, instead of `findfirst('a', \"ab\") === nothing`,
+        use `occursin('a', \"ab\")` or `contains` (Julia ≥1.5).
+        """,
+        """
+        match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
+
+        rule='where
+            rewrite :[bool] { "!" -> "" },
+            rewrite :[bool] { "=" -> "!" }'
+
+        rewrite=':[bool]occursin(:[a], :[b])'
         """
     )
 ]

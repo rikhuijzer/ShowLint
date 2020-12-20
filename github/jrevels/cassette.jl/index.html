@@ -21,6 +21,16 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>println(&#34;done (took &#34;, time() - before_time, &#34; seconds)&#34;)
 <span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/overdub.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/overdub.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-61,7 +61,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # assumption holds true for essentially all other kinds of values. I haven't counted in
+<span style="color:inherit;"> |</span>    # a while, but I'm pretty sure I have ~40+ hellish years of Julia experience, and this
+<span style="color:inherit;"> |</span>    # still catches me every time. Who even uses this crazy language?
+<span style="color:orange;">!|</span>    S = Tuple{map(<span style="color:red;">s -> </span>Core.Compiler.has_free_typevars<span style="color:red;">(s)</span> ? typeof(s.parameters[1]) : s, sigtypes)...}
+<span style="color:inherit;"> |</span>    (S.parameters[1]::DataType).name.module === Core.Compiler && return nothing
+<span style="color:inherit;"> |</span>    _methods = Base._methods_by_ftype(S, -1, world)
+<span style="color:inherit;"> |</span>    method_index = 0
 <span style="color:red;">------ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-464,11 +464,11</span> ============================================================
@@ -35,15 +45,5 @@
 <span style="color:orange;">!|</span>@test D(x <span style="color:red;">-> x </span>* foo_bar_identity<span style="color:red;">(x)</span>, 1) === 2.0
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>x = rand()
-<span style="color:inherit;"> |</span>@test D(x -> (x + 2) * (3 + x), x) === 2x + 5
-<span style="color:red;">------ </span><span style="color:inherit;">src/overdub.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/overdub.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-61,7 +61,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # assumption holds true for essentially all other kinds of values. I haven't counted in
-<span style="color:inherit;"> |</span>    # a while, but I'm pretty sure I have ~40+ hellish years of Julia experience, and this
-<span style="color:inherit;"> |</span>    # still catches me every time. Who even uses this crazy language?
-<span style="color:orange;">!|</span>    S = Tuple{map(<span style="color:red;">s -> </span>Core.Compiler.has_free_typevars<span style="color:red;">(s)</span> ? typeof(s.parameters[1]) : s, sigtypes)...}
-<span style="color:inherit;"> |</span>    (S.parameters[1]::DataType).name.module === Core.Compiler && return nothing
-<span style="color:inherit;"> |</span>    _methods = Base._methods_by_ftype(S, -1, world)
-<span style="color:inherit;"> |</span>    method_index</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 19, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<span style="color:inherit;"> |</span>@test D(x -> (x + 2) * (3 + x), x) === 2x</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

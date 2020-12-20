@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/HTTP.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaWeb/HTTP.jl" target=_blank >JuliaWeb/HTTP.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a><li><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/HTTP.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaWeb/HTTP.jl" target=_blank >JuliaWeb/HTTP.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a><li><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a><li><a href="#avoid_findfirst_in_conditional_2_hits">Avoid findfirst in conditional ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_1_hit ><a href="#replace_arrayt1_with_vectort_1_hit">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 1 hit</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/MessageRequest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/MessageRequest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-77,7 +77,7</span> ============================================================
@@ -11,7 +11,19 @@
 <span style="color:inherit;"> |</span>bodylength(body::Vector{IOBuffer}) = sum(bytesavailable, body)
 <span style="color:inherit;"> |</s</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_5_hits ><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/parsemultipart.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/loopback.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/loopback.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-280,8 +280,8</span> ============================================================
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span>        end
+<span style="color:orange;">!|</span>        @test body_aborted<span style="color:red;"> == true</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:gray;">body_sent</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>        @test <span style="color:green;">!</span>body_sent</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @testset &#34;libreq - Sleep&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">src/parsemultipart.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/parsemultipart.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-119,14 +119,14</span> ============================================================
 <span style="color:inherit;"> |</span>    escaped = false
@@ -29,19 +41,7 @@
 <span style="color:green;">+|</span></span>            elseif <span style="color:green;">!</span>quotes && (str[offset] == ';' || str[offset] == '=')</span>
 <span style="color:inherit;"> |</span>                prev = prevind(str, offset)
 <span style="color:inherit;"> |</span>                if prev > start
-<span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, prev)))
-<span style="color:red;">------ </span><span style="color:inherit;">test/loopback.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/loopback.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-280,8 +280,8</span> ============================================================
-<span style="color:inherit;"> |</span>                end
-<span style="color:inherit;"> |</span>            end
-<span style="color:inherit;"> |</span>        end
-<span style="color:orange;">!|</span>        @test body_aborted<span style="color:red;"> == true</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:gray;">body_sent</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test <span style="color:green;">!</span>body_sent</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @testset &#34;libreq - Sleep&#34; b</div>
+<span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, pre</div>
 </pre> <h3 id=omit_a_a_and_a_a_1_hit ><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/types.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/types.jl</span>
@@ -54,4 +54,27 @@
 <span style="color:inherit;"> |</span>    @test string(HTTP.Response(200)) == &#34;HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n&#34;
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    io = IOBuff</div>
+</pre> <h3 id=avoid_findfirst_in_conditional_2_hits ><a href="#avoid_findfirst_in_conditional_2_hits">Avoid findfirst in conditional ➤ 2 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/multipart.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/multipart.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-35,7 +35,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @testset &#34;HTTP.Multipart ensure show() works correctly&#34; begin
+<span style="color:inherit;"> |</span>        # testing that there is no error in printing when nothing is set for filename
+<span style="color:inherit;"> |</span>        str = sprint(show, (HTTP.Multipart(nothing, IOBuffer(&#34;some data&#34;), &#34;plain/text&#34;, &#34;&#34;, &#34;testname&#34;)))
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(&#34;contenttype=\&#34;plain/text\&#34;&#34;, str)</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>        @test <span style="color:green;">occursin</span>(&#34;contenttype=\&#34;plain/text\&#34;&#34;, str)</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @testset &#34;HTTP.Multipart test constructor&#34; begin
+<span style="color:inherit;"> |</span>        @test_nowarn HTTP.Multipart(nothing, IOBuffer(&#34;some data&#34;), &#34;plain/text&#34;, &#34;&#34;, &#34;testname&#34;)
+<span style="color:red;">------ </span><span style="color:inherit;">src/Pairs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Pairs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function defaultbyfirst(c, item, eq = ==)
+<span style="color:inherit;"> |</span>    k = first(item)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">findfirst</span><span style="color:gray;">(x->eq(first(x), k), c)</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!occursin</span>(x->eq(first(x), k), c)</span>
+<span style="color:inherit;"> |</span>        push!(c, item)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    re</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

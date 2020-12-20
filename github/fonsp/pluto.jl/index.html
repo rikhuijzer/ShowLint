@@ -21,46 +21,6 @@
 <span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
 <span style="color:inherit;"> |</span>	
 <span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;Run given cells and all the cells that depend on them, based on the topology information before and after the changes.&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span></span>
-<span style="color:green;">+|</span></span>function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::<span style="color:green;">Vector</span>{Cell}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span>
-<span style="color:inherit;"> |</span>	# make sure that we're the only &#96;run_reactive!&#96; being executed - like a semaphor
-<span style="color:inherit;"> |</span>	take!(notebook.executetoken)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-34,7 +34,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	# get the new topological order
-<span style="color:inherit;"> |</span>	new_order = topological_order(notebook, new_topology, union(cells, keys(old_order.errable)))
-<span style="color:red;">-|</span></span><span style="color:gray;">	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">} # TODO: think if old error cell order matters</span></span>
-<span style="color:green;">+|</span></span>	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::<span style="color:green;">Vector</span>{Cell} # TODO: think if old error cell order matters</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	# change the bar on the sides of cells to &#34;queued&#34;
-<span style="color:inherit;"> |</span>	local listeners = ClientSession[]
-<span style="color:inherit;">@|</span><span style="color:inherit;">-123,7 +123,7</span> ============================================================
-<span style="color:inherit;"> |</span>###
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;Do all the things!&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function update_save_run!(session::ServerSession, notebook::Notebook, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span></span>
-<span style="color:green;">+|</span></span>function update_save_run!(session::ServerSession, notebook::Notebook, cells::<span style="color:green;">Vector</span>{Cell}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span>
-<span style="color:inherit;"> |</span>	update_caches!(notebook, cells)
-<span style="color:inherit;"> |</span>	old = notebook.topology
-<span style="color:inherit;"> |</span>	new = notebook.topology = updated_topology(old, notebook, cells)
-<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-81,7 +81,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#96;expression_boundaries(&#34;sqrt(1)\n\n123&#34;) == [ncodeunits(&#34;sqrt(1)\n\n&#34;) + 1, ncodeunits(&#34;sqrt(1)\n\n123&#34;) + 1]&#96;
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function expression_boundaries(code::String, start=1)::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Integer</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>function expression_boundaries(code::String, start=1)::<span style="color:green;">Vector</span>{<:Integer}</span>
-<span style="color:inherit;"> |</span>    expr, next = Meta.parse(code, start, raise=false)
-<span style="color:inherit;"> |</span>    if next <= ncodeunits(code)
-<span style="color:inherit;"> |</span>        [next, expression_boundaries(code, next)...]
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -132,6 +92,46 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function cell_index_from_id(notebook::Notebook, cell_id::UUID)::Union{Int,Nothing}
 <span style="color:inherit;"> |</span>    findfirst(c -> c.cell_id == cell_id, notebook.cells)
+<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;Run given cells and all the cells that depend on them, based on the topology information before and after the changes.&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span></span>
+<span style="color:green;">+|</span></span>function run_reactive!(session::ServerSession, notebook::Notebook, old_topology::NotebookTopology, new_topology::NotebookTopology, cells::<span style="color:green;">Vector</span>{Cell}; deletion_hook::Function=WorkspaceManager.delete_vars, persist_js_state::Bool=false)::TopologicalOrder</span>
+<span style="color:inherit;"> |</span>	# make sure that we're the only &#96;run_reactive!&#96; being executed - like a semaphor
+<span style="color:inherit;"> |</span>	take!(notebook.executetoken)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-34,7 +34,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	# get the new topological order
+<span style="color:inherit;"> |</span>	new_order = topological_order(notebook, new_topology, union(cells, keys(old_order.errable)))
+<span style="color:red;">-|</span></span><span style="color:gray;">	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">} # TODO: think if old error cell order matters</span></span>
+<span style="color:green;">+|</span></span>	to_run = setdiff(union(new_order.runnable, old_order.runnable), keys(new_order.errable))::<span style="color:green;">Vector</span>{Cell} # TODO: think if old error cell order matters</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	# change the bar on the sides of cells to &#34;queued&#34;
+<span style="color:inherit;"> |</span>	local listeners = ClientSession[]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-123,7 +123,7</span> ============================================================
+<span style="color:inherit;"> |</span>###
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;Do all the things!&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function update_save_run!(session::ServerSession, notebook::Notebook, cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span></span>
+<span style="color:green;">+|</span></span>function update_save_run!(session::ServerSession, notebook::Notebook, cells::<span style="color:green;">Vector</span>{Cell}; save::Bool=true, run_async::Bool=false, prerender_text::Bool=false, kwargs...)</span>
+<span style="color:inherit;"> |</span>	update_caches!(notebook, cells)
+<span style="color:inherit;"> |</span>	old = notebook.topology
+<span style="color:inherit;"> |</span>	new = notebook.topology = updated_topology(old, notebook, cells)
+<span style="color:red;">------ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/Parse.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-81,7 +81,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#96;expression_boundaries(&#34;sqrt(1)\n\n123&#34;) == [ncodeunits(&#34;sqrt(1)\n\n&#34;) + 1, ncodeunits(&#34;sqrt(1)\n\n123&#34;) + 1]&#96;
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function expression_boundaries(code::String, start=1)::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Integer</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>function expression_boundaries(code::String, start=1)::<span style="color:green;">Vector</span>{<:Integer}</span>
+<span style="color:inherit;"> |</span>    expr, next = Meta.parse(code, start, raise=false)
+<span style="color:inherit;"> |</span>    if next <= ncodeunits(code)
+<span style="color:inherit;"> |</span>        [next, expression_boundaries(code, next)...]
 <span style="color:red;">------ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================

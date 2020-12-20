@@ -79,3 +79,23 @@ rewrite=':[bool]'
 </code></pre>
 ~~~
 
+
+~~~ 
+<h3 id="6">6: Avoid findfirst in conditional</h3>
+~~~
+tags: *julia*
+
+For example, instead of `findfirst('a', "ab") === nothing`,
+use `occursin('a', "ab")` or `contains` (Julia ≥1.5).
+
+~~~
+<pre><code class="plaintext">match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
+
+rule='where
+    rewrite :[bool] { "!" -> "" },
+    rewrite :[bool] { "=" -> "!" }'
+
+rewrite=':[bool]occursin(:[a], :[b])'
+</code></pre>
+~~~
+

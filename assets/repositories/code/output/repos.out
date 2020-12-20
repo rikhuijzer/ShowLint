@@ -52,6 +52,7 @@
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/giovineitalia/gadfly.jl/#replace_arrayt1_with_vectort_4_hits)
 - [Use ismissing ➤ 5 hits](/github/giovineitalia/gadfly.jl/#use_ismissing_5_hits)
 - [Omit comparison with boolean constant ➤ 2 hits](/github/giovineitalia/gadfly.jl/#omit_comparison_with_boolean_constant_2_hits)
+- [Avoid findfirst in conditional ➤ 2 hits](/github/giovineitalia/gadfly.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
 </div>
 ~~~
@@ -71,6 +72,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 17 hits](/github/juliacollections/datastructures.jl/#replace_arrayt1_with_vectort_17_hits)
 - [Omit a == a and a != a ➤ 3 hits](/github/juliacollections/datastructures.jl/#omit_a_a_and_a_a_3_hits)
+- [Avoid findfirst in conditional ➤ 4 hits](/github/juliacollections/datastructures.jl/#avoid_findfirst_in_conditional_4_hits)
 ~~~
 </div>
 ~~~
@@ -396,6 +398,7 @@
 <div class="repo-nav">
 ~~~
 - [Omit a == a and a != a ➤ 3 hits](/github/juliaio/ezxml.jl/#omit_a_a_and_a_a_3_hits)
+- [Avoid findfirst in conditional ➤ 2 hits](/github/juliaio/ezxml.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
 </div>
 ~~~
@@ -481,6 +484,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliainterop/cxx.jl/#replace_arrayt1_with_vectort_1_hit)
 - [Omit a == a and a != a ➤ 1 hit](/github/juliainterop/cxx.jl/#omit_a_a_and_a_a_1_hit)
+- [Avoid findfirst in conditional ➤ 1 hit](/github/juliainterop/cxx.jl/#avoid_findfirst_in_conditional_1_hit)
 ~~~
 </div>
 ~~~
@@ -564,6 +568,7 @@
 ~~~
 - [Omit comparison with boolean constant ➤ 11 hits](/github/julialang/pkg.jl/#omit_comparison_with_boolean_constant_11_hits)
 - [Omit a == a and a != a ➤ 4 hits](/github/julialang/pkg.jl/#omit_a_a_and_a_a_4_hits)
+- [Avoid findfirst in conditional ➤ 2 hits](/github/julialang/pkg.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
 </div>
 ~~~
@@ -613,6 +618,7 @@
 - [Avoid x -> f(x) ➤ 3 hits](/github/julialang/julia/#avoid_x_-_fx_3_hits)
 - [Omit comparison with boolean constant ➤ 47 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_47_hits)
 - [Omit a == a and a != a ➤ 221 hits](/github/julialang/julia/#omit_a_a_and_a_a_221_hits)
+- [Avoid findfirst in conditional ➤ 13 hits](/github/julialang/julia/#avoid_findfirst_in_conditional_13_hits)
 ~~~
 </div>
 ~~~
@@ -632,6 +638,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 182 hits](/github/juliaplots/plots.jl/#replace_arrayt1_with_vectort_182_hits)
 - [Omit comparison with boolean constant ➤ 3 hits](/github/juliaplots/plots.jl/#omit_comparison_with_boolean_constant_3_hits)
+- [Avoid findfirst in conditional ➤ 2 hits](/github/juliaplots/plots.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
 </div>
 ~~~
@@ -740,6 +747,7 @@
 - [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliaweb/http.jl/#replace_arrayt1_with_vectort_1_hit)
 - [Omit comparison with boolean constant ➤ 5 hits](/github/juliaweb/http.jl/#omit_comparison_with_boolean_constant_5_hits)
 - [Omit a == a and a != a ➤ 1 hit](/github/juliaweb/http.jl/#omit_a_a_and_a_a_1_hit)
+- [Avoid findfirst in conditional ➤ 2 hits](/github/juliaweb/http.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
 </div>
 ~~~
@@ -805,6 +813,7 @@
 <div class="repo-nav">
 ~~~
 - [Avoid x -> f(x) ➤ 4 hits](/github/wikunia/constraintsolver.jl/#avoid_x_-_fx_4_hits)
+- [Avoid findfirst in conditional ➤ 1 hit](/github/wikunia/constraintsolver.jl/#avoid_findfirst_in_conditional_1_hit)
 ~~~
 </div>
 ~~~
@@ -902,6 +911,7 @@
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/jump-dev/jump.jl/#replace_arrayt1_with_vectort_4_hits)
 - [Omit comparison with boolean constant ➤ 3 hits](/github/jump-dev/jump.jl/#omit_comparison_with_boolean_constant_3_hits)
 - [Omit a == a and a != a ➤ 17 hits](/github/jump-dev/jump.jl/#omit_a_a_and_a_a_17_hits)
+- [Avoid findfirst in conditional ➤ 1 hit](/github/jump-dev/jump.jl/#avoid_findfirst_in_conditional_1_hit)
 ~~~
 </div>
 ~~~
@@ -996,6 +1006,7 @@
 - [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/tlienart/franklin.jl/#replace_arrayt1_with_vectort_3_hits)
 - [Avoid x -> f(x) ➤ 1 hit](/github/tlienart/franklin.jl/#avoid_x_-_fx_1_hit)
 - [Omit comparison with boolean constant ➤ 5 hits](/github/tlienart/franklin.jl/#omit_comparison_with_boolean_constant_5_hits)
+- [Avoid findfirst in conditional ➤ 1 hit](/github/tlienart/franklin.jl/#avoid_findfirst_in_conditional_1_hit)
 ~~~
 </div>
 ~~~

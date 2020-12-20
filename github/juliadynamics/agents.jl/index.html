@@ -10,19 +10,6 @@
 <span style="color:inherit;"> |</span>    for (ind, peak) in enumerate(sugar_peaks)
 <span style="color:inherit;"> |</span>        d = round(Int, sqrt(sum((pos .- peak) .^ 2)))
 <span style="color:inherit;"> |</span>        all_dists[ind] = d
-<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-21,8 +21,8</span> ============================================================
-<span style="color:inherit;"> |</span>    id::Int
-<span style="color:inherit;"> |</span>    pos::Tuple{Int,Int}
-<span style="color:inherit;"> |</span>    stabilized::Bool
-<span style="color:red;">-|</span></span><span style="color:gray;">    opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    opinion::<span style="color:green;">Vector</span>{Int}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    prev_opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    prev_opinion::<span style="color:green;">Vector</span>{Int}</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function create_model(; dims = (10, 10), nopinions = 3, levels_per_opinion = 4)
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,8 +4,8</span> ============================================================
@@ -117,6 +104,19 @@
 <span style="color:inherit;"> |</span>        @test d.metric == :euclidean
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,8 +21,8</span> ============================================================
+<span style="color:inherit;"> |</span>    id::Int
+<span style="color:inherit;"> |</span>    pos::Tuple{Int,Int}
+<span style="color:inherit;"> |</span>    stabilized::Bool
+<span style="color:red;">-|</span></span><span style="color:gray;">    opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    opinion::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    prev_opinion::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    prev_opinion::<span style="color:green;">Vector</span>{Int}</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function create_model(; dims = (10, 10), nopinions = 3, levels_per_opinion = 4)
 <span style="color:red;">------ </span><span style="color:inherit;">examples/sugarscape.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">examples/sugarscape.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
@@ -139,16 +139,17 @@
 <span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
 <span style="color:inherit;"> |</span>    for neighbor in nearby_agents(agent, model)
 <span style="color:inherit;"> |</span>        if agent.group == neighbor.group
-<span style="color:red;">------ </span><span style="color:inherit;">src/spaces/grid.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/spaces/grid.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
-<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
-<span style="color:inherit;"> |</span>    if moore ≠ nothing
-<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
-<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
+<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
+<span style="color:inherit;"> |</span>    matches = model[neighbor].opinion .== agent.opinion
+<span style="color:inherit;"> |</span>    nmatches = count(matches)
+<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand() < nmatches / model.nopinions
+<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
+<span style="color:green;">+|</span></span>        switchId = rand(findall(x -> <span style="color:green;">!</span>x, matches))</span>
+<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    for i in eachindex(s)
-<span style="color:inherit;"> |</span>        s[i] = Int[]
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
@@ -160,6 +161,16 @@
 <span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">src/spaces/grid.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/spaces/grid.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
+<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
+<span style="color:inherit;"> |</span>    if moore ≠ nothing
+<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
+<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    for i in eachindex(s)
+<span style="color:inherit;"> |</span>        s[i] = Int[]
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================
@@ -179,28 +190,6 @@
 <span style="color:inherit;"> |</span>    all_neighbors = Iterators.flatten(ids_in_position(np,model) for np in neighbor_positions)
 <span style="color:orange;">!|</span>    sum(model[i].status <span style="color:red;">== true </span>for i in all_neighbors)
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
-<span style="color:inherit;"> |</span>    matches = model[neighbor].opinion .== agent.opinion
-<span style="color:inherit;"> |</span>    nmatches = count(matches)
-<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand() < nmatches / model.nopinions
-<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
-<span style="color:green;">+|</span></span>        switchId = rand(findall(x -> <span style="color:green;">!</span>x, matches))</span>
-<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">src/simulations/collect.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/simulations/collect.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-130,8 +130,8</span> ============================================================
-<span style="color:inherit;"> |</span>    df_agent = init_agent_dataframe(model, adata)
-<span style="color:inherit;"> |</span>    df_model = init_model_dataframe(model, mdata)
-<span style="color:inherit;"> |</span>    if n isa Integer
-<span style="color:orange;">!|</span>        if when<span style="color:red;"> == true</span>; for c in eachcol(df_agent); sizehint!(c, n); end; end
-<span style="color:orange;">!|</span>        if when_model<span style="color:red;"> == true</span>; for c in eachcol(df_model); sizehint!(c, n); end; end
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    s = 0
 <span style="color:red;">------ </span><span style="color:inherit;">examples/schelling.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">examples/schelling.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
@@ -261,5 +250,16 @@
 <span style="color:orange;">!|</span>ac(x) = x.status <span style="color:red;">== true </span>? :black : :white
 <span style="color:inherit;"> |</span>anim = @animate for i in 0:100
 <span style="color:inherit;"> |</span>    i > 0 && step!(model, dummystep, ca_step!, 1)
-<span style="color:inherit;"> |</span>    p1 = plotabm(model; ac = ac, as = 3, am = :square, showaxis = fa</div>
+<span style="color:inherit;"> |</span>    p1 = plotabm(model; ac = ac, as = 3, am = :square, showaxis = false)
+<span style="color:red;">------ </span><span style="color:inherit;">src/simulations/collect.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/simulations/collect.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-130,8 +130,8</span> ============================================================
+<span style="color:inherit;"> |</span>    df_agent = init_agent_dataframe(model, adata)
+<span style="color:inherit;"> |</span>    df_model = init_model_dataframe(model, mdata)
+<span style="color:inherit;"> |</span>    if n isa Integer
+<span style="color:orange;">!|</span>        if when<span style="color:red;"> == true</span>; for c in eachcol(df_agent); sizehint!(c, n); end; end
+<span style="color:orange;">!|</span>        if when_model<span style="color:red;"> == true</span>; for c in eachcol(df_model); sizehint!(c, n); end; end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

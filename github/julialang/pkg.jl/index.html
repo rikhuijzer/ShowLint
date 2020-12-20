@@ -158,17 +158,6 @@
 <span style="color:inherit;"> |</span>            j1 = adjdict0[p1]
 <span style="color:inherit;"> |</span>            gmsk1 = gmsk[p1]
 <span style="color:inherit;"> |</span>            # This assert is a bit too expensive
-<span style="color:red;">------ </span><span style="color:inherit;">src/REPLMode/completions.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/REPLMode/completions.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
-<span style="color:inherit;"> |</span>    shared = get(options, :shared, false)
-<span style="color:inherit;"> |</span>    if shared
-<span style="color:inherit;"> |</span>        return _shared_envs()
-<span style="color:red;">-|</span></span><span style="color:gray;">    elseif !isempty(partial) && first(partial)</span><span style="color:red;"> == '</span><span style="color:gray;">@'</span></span>
-<span style="color:green;">+|</span></span>    elseif !isempty(partial) && first(partial)<span style="color:green;">true'</span>@'</span>
-<span style="color:inherit;"> |</span>        return &#34;@&#34; .* _shared_envs()
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        return complete_local_dir(partial, i1, i2)
 <span style="color:red;">------ </span><span style="color:inherit;">test/api.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/api.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
@@ -180,6 +169,28 @@
 <span style="color:inherit;"> |</span>        #display(read(output.out, String))
 <span style="color:inherit;"> |</span>        Base.wait(t)
 <span style="color:inherit;"> |</span>        nothing
+<span style="color:red;">------ </span><span style="color:inherit;">src/REPLMode/completions.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/REPLMode/completions.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
+<span style="color:inherit;"> |</span>    shared = get(options, :shared, false)
+<span style="color:inherit;"> |</span>    if shared
+<span style="color:inherit;"> |</span>        return _shared_envs()
+<span style="color:red;">-|</span></span><span style="color:gray;">    elseif !isempty(partial) && first(partial)</span><span style="color:red;"> == '</span><span style="color:gray;">@'</span></span>
+<span style="color:green;">+|</span></span>    elseif !isempty(partial) && first(partial)<span style="color:green;">true'</span>@'</span>
+<span style="color:inherit;"> |</span>        return &#34;@&#34; .* _shared_envs()
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        return complete_local_dir(partial, i1, i2)
+<span style="color:red;">------ </span><span style="color:inherit;">test/artifacts.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/artifacts.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-105,7 +105,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test all(hash.bytes .== hex2bytes(known_hash))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Test that we can look it up and that it sits in the right place
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test basename(dirname(artifact_path(hash)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;artifacts&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test basename(dirname(artifact_path(hash)))<span style="color:green;">true</span>&#34;artifacts&#34;</span>
+<span style="color:inherit;"> |</span>        @test basename(artifact_path(hash)) == known_hash
+<span style="color:inherit;"> |</span>        @test artifact_exists(hash)
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">src/REPLMode/argument_parsers.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/REPLMode/argument_parsers.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-64,9 +64,9</span> ============================================================
@@ -204,17 +215,6 @@
 <span style="color:inherit;"> |</span>            options[:shared] = true
 <span style="color:inherit;"> |</span>            return [x[2:end]]
 <span style="color:inherit;"> |</span>        else
-<span style="color:red;">------ </span><span style="color:inherit;">test/artifacts.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/artifacts.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-105,7 +105,7</span> ============================================================
-<span style="color:inherit;"> |</span>        @test all(hash.bytes .== hex2bytes(known_hash))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # Test that we can look it up and that it sits in the right place
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test basename(dirname(artifact_path(hash)))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;artifacts&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test basename(dirname(artifact_path(hash)))<span style="color:green;">true</span>&#34;artifacts&#34;</span>
-<span style="color:inherit;"> |</span>        @test basename(artifact_path(hash)) == known_hash
-<span style="color:inherit;"> |</span>        @test artifact_exists(hash)
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">src/REPLMode/REPLMode.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/REPLMode/REPLMode.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-143,7 +143,7</span> ============================================================
@@ -266,17 +266,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@testset &#34;issue #1066: package with colliding name/uuid exists in project&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-169,7 +169,7</span> ============================================================
-<span style="color:inherit;"> |</span>        version_info === nothing && continue
-<span style="color:inherit;"> |</span>        hash′ = version_info.git_tree_sha1
-<span style="color:inherit;"> |</span>        if hash !== nothing
-<span style="color:red;">-|</span></span>            </span><span style="color:red;">hash == hash′</span><span style="color:gray;"> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span></span>
-<span style="color:green;">+|</span></span>            <span style="color:green;">true′</span> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span>
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        hash = hash′
-<span style="color:inherit;"> |</span>    end
 <span style="color:red;">------ </span><span style="color:inherit;">test/repl.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/repl.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-333,8 +333,8</span> ============================================================
@@ -367,6 +356,17 @@
 <span style="color:inherit;"> |</span>BasicSandbox.greet()
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-169,7 +169,7</span> ============================================================
+<span style="color:inherit;"> |</span>        version_info === nothing && continue
+<span style="color:inherit;"> |</span>        hash′ = version_info.git_tree_sha1
+<span style="color:inherit;"> |</span>        if hash !== nothing
+<span style="color:red;">-|</span></span>            </span><span style="color:red;">hash == hash′</span><span style="color:gray;"> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span></span>
+<span style="color:green;">+|</span></span>            <span style="color:green;">true′</span> || pkgerror(&#34;hash mismatch in registries for $(pkg.name) at version $(pkg.version)&#34;)</span>
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        hash = hash′
+<span style="color:inherit;"> |</span>    end
 <span style="color:red;">------ </span><span style="color:inherit;">src/Versions.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Versions.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-95,7 +95,7</span> ============================================================

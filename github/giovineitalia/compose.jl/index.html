@@ -40,6 +40,17 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@testset &#34;pango utf-8 text_extents&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">src/table.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/table.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-330,7 +330,7</span> ============================================================
+<span style="color:inherit;"> |</span>            idx = optimal_choice[(j-1)*m + i]
+<span style="color:inherit;"> |</span>            ctx = copy(tbl.children[i, j][idx])
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">feasible == feasible</span><span style="color:gray;"> && issatisfied(ctx, w_solution[j], h_solution[i])</span></span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">true</span> && issatisfied(ctx, w_solution[j], h_solution[i])</span>
+<span style="color:inherit;"> |</span>        ctx.box = BoundingBox(
+<span style="color:inherit;"> |</span>            x_solution[j]*mm, y_solution[i]*mm,
+<span style="color:inherit;"> |</span>            w_solution[j]*mm, h_solution[i]*mm)
 <span style="color:red;">------ </span><span style="color:inherit;">src/misc.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/misc.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-127,7 +127,7</span> ============================================================
@@ -60,17 +71,6 @@
 <span style="color:inherit;"> |</span>            end
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">src/table.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/table.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-330,7 +330,7</span> ============================================================
-<span style="color:inherit;"> |</span>            idx = optimal_choice[(j-1)*m + i]
-<span style="color:inherit;"> |</span>            ctx = copy(tbl.children[i, j][idx])
-<span style="color:inherit;"> |</span>        end
-<span style="color:red;">-|</span></span>        </span><span style="color:red;">feasible == feasible</span><span style="color:gray;"> && issatisfied(ctx, w_solution[j], h_solution[i])</span></span>
-<span style="color:green;">+|</span></span>        <span style="color:green;">true</span> && issatisfied(ctx, w_solution[j], h_solution[i])</span>
-<span style="color:inherit;"> |</span>        ctx.box = BoundingBox(
-<span style="color:inherit;"> |</span>            x_solution[j]*mm, y_solution[i]*mm,
-<span style="color:inherit;"> |</span>            w_solution[j]*mm, h_solution[i]*mm)
 <span style="color:red;">------ </span><span style="color:inherit;">src/table-jump.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/table-jump.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-148,7 +148,7</span> ============================================================

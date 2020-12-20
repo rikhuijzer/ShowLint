@@ -10,6 +10,17 @@
 <span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
 <span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
 <span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
+<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
+<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
+<span style="color:inherit;"> |</span>	
+<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
+<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
+<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -57,17 +68,6 @@
 <span style="color:inherit;"> |</span>    for (i, row) in zip(1:L,rows)
 <span style="color:inherit;"> |</span>        row_data[i] = (i, row_data_for(row))
 <span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
-<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
-<span style="color:inherit;"> |</span>	
-<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
-<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
-<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
@@ -222,17 +222,7 @@
 <span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[3])
 <span style="color:inherit;"> |</span>        @test notebook.cells[3].errored == f</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_137_hits ><a href="#omit_comparison_with_boolean_constant_137_hits">Omit comparison with boolean constant ➤ 137 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
-<span style="color:inherit;"> |</span>    elseif header.opcode == WebSockets.WS_CONTINUATION
-<span style="color:inherit;"> |</span>        error(&#34;WS continuation gone wrong&#34;)
-<span style="color:inherit;"> |</span>    else
-<span style="color:orange;">!|</span>        if header.final<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            return view(ws.rxpayload, 1:l)
-<span style="color:inherit;"> |</span>        else
-<span style="color:inherit;"> |</span>            multi_message_data = UInt8[]
-<span style="color:red;">------ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-30,7 +30,7</span> ============================================================
 <span style="color:inherit;"> |</span>        update_save_run!(🍭, notebookA, notebookA.cells[1])
@@ -242,6 +232,16 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookA))
 <span style="color:inherit;"> |</span>        WorkspaceManager.unmake_workspace((🍭, notebookB))
+<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/WebSocketFix.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
+<span style="color:inherit;"> |</span>    elseif header.opcode == WebSockets.WS_CONTINUATION
+<span style="color:inherit;"> |</span>        error(&#34;WS continuation gone wrong&#34;)
+<span style="color:inherit;"> |</span>    else
+<span style="color:orange;">!|</span>        if header.final<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>            return view(ws.rxpayload, 1:l)
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            multi_message_data = UInt8[]
 <span style="color:red;">------ </span><span style="color:inherit;">test/React.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/React.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-42,12 +42,12</span> ============================================================

@@ -91,7 +91,18 @@
 <span style="color:inherit;"> |</span>    @test frag_back.is_masked == clientwriting
 <span style="color:inherit;"> |</span>    @test frag_back.payload_len ==</div>
 </pre> <h3 id=omit_a_a_and_a_a_49_hits ><a href="#omit_a_a_and_a_a_49_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 49 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/client_server_functions.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">examples/count_with_logger.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">examples/count_with_logger.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +79,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function gatekeeper(req, ws)
+<span style="color:inherit;"> |</span>    @wslog req
+<span style="color:red;">-|</span></span><span style="color:gray;">    if subprotocol(req)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    if subprotocol(req)<span style="color:green;">false</span>&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        coroutine_count(ws)
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        @wslog &#34;No subprotocol&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">test/client_server_functions.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/client_server_functions.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-32,8 +32,8</span> ============================================================
 <span style="color:inherit;"> |</span>    &#96;echows&#96;
@@ -104,17 +115,21 @@
 <span style="color:inherit;"> |</span>    if WebSockets.subprotocol(req) == SUBPROTOCOL
 <span style="color:inherit;"> |</span>        initiatingws(ws, msglengths = MSGLENGTHS)
 <span style="color:inherit;"> |</span>    elseif WebSockets.subprotocol(req) == SUBPROTOCOL_CLOSE
-<span style="color:red;">------ </span><span style="color:inherit;">examples/count_with_logger.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">examples/count_with_logger.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +79,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function gatekeeper(req, ws)
-<span style="color:inherit;"> |</span>    @wslog req
-<span style="color:red;">-|</span></span><span style="color:gray;">    if subprotocol(req)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>    if subprotocol(req)<span style="color:green;">false</span>&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        coroutine_count(ws)
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        @wslog &#34;No subprotocol&#34;
+<span style="color:red;">------ </span><span style="color:inherit;">src/HTTP.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/HTTP.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-251,10 +251,10</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function is_upgrade(r::Request)
+<span style="color:inherit;"> |</span>    if (r isa Request && r.method == &#34;GET&#34;)  || (r isa Response && r.status == 101)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if header(r, &#34;Connection&#34;, &#34;&#34;)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;keep-alive&#34;</span></span>
+<span style="color:green;">+|</span></span>        if header(r, &#34;Connection&#34;, &#34;&#34;)<span style="color:green;">false</span>&#34;keep-alive&#34;</span>
+<span style="color:inherit;"> |</span>            # &#34;Connection => upgrade&#34; for most and &#34;Connection => keep-alive, upgrade&#34; for Firefox.
+<span style="color:inherit;"> |</span>            if hasheader(r, &#34;Connection&#34;, &#34;upgrade&#34;) || hasheader(r, &#34;Connection&#34;, &#34;keep-alive, upgrade&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">                if lowercase(header(r, &#34;Upgrade&#34;, &#34;&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;websocket&#34;</span></span>
+<span style="color:green;">+|</span></span>                if lowercase(header(r, &#34;Upgrade&#34;, &#34;&#34;))<span style="color:green;">true</span>&#34;websocket&#34;</span>
+<span style="color:inherit;"> |</span>                    return true
+<span style="color:inherit;"> |</span>                end
+<span style="color:inherit;"> |</span>            end
 <span style="color:red;">------ </span><span style="color:inherit;">test/frametest.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/frametest.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-46,7 +46,7</span> ============================================================
@@ -162,21 +177,6 @@
 <span style="color:inherit;"> |</span>    # payload length bit
 <span style="color:inherit;"> |</span>    @test frame[2] & 0b0111_1111 == length(statuscode)
 <span style="color:inherit;"> |</span>    # ismasked bit
-<span style="color:red;">------ </span><span style="color:inherit;">src/HTTP.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/HTTP.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-251,10 +251,10</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function is_upgrade(r::Request)
-<span style="color:inherit;"> |</span>    if (r isa Request && r.method == &#34;GET&#34;)  || (r isa Response && r.status == 101)
-<span style="color:red;">-|</span></span><span style="color:gray;">        if header(r, &#34;Connection&#34;, &#34;&#34;)</span><span style="color:red;"> != </span><span style="color:gray;">&#34;keep-alive&#34;</span></span>
-<span style="color:green;">+|</span></span>        if header(r, &#34;Connection&#34;, &#34;&#34;)<span style="color:green;">false</span>&#34;keep-alive&#34;</span>
-<span style="color:inherit;"> |</span>            # &#34;Connection => upgrade&#34; for most and &#34;Connection => keep-alive, upgrade&#34; for Firefox.
-<span style="color:inherit;"> |</span>            if hasheader(r, &#34;Connection&#34;, &#34;upgrade&#34;) || hasheader(r, &#34;Connection&#34;, &#34;keep-alive, upgrade&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">                if lowercase(header(r, &#34;Upgrade&#34;, &#34;&#34;))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;websocket&#34;</span></span>
-<span style="color:green;">+|</span></span>                if lowercase(header(r, &#34;Upgrade&#34;, &#34;&#34;))<span style="color:green;">true</span>&#34;websocket&#34;</span>
-<span style="color:inherit;"> |</span>                    return true
-<span style="color:inherit;"> |</span>                end
-<span style="color:inherit;"> |</span>            end
 <span style="color:red;">------ </span><span style="color:inherit;">test/test_websocketlogger.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_websocketlogger.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-38,8 +38,7</span> ============================================================

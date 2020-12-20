@@ -35,17 +35,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>println(&#34;done (took &#34;, time() - before_time, &#34; seconds)&#34;)
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/pass.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/pass.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-161,7 +161,7</span> ============================================================
-<span style="color:inherit;"> |</span>    for (i, addedstmts) in worklist
-<span style="color:inherit;"> |</span>        i += ssachangemap[i] - addedstmts # correct the index for accumulated offsets
-<span style="color:inherit;"> |</span>        stmts = newstmts(code[i], i)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @assert length(stmts)</span><span style="color:red;"> == </span><span style="color:gray;">(addedstmts + 1)</span></span>
-<span style="color:green;">+|</span></span>        @assert length(stmts)<span style="color:green;">true</span>(addedstmts + 1)</span>
-<span style="color:inherit;"> |</span>        code[i] = stmts[end]
-<span style="color:inherit;"> |</span>        for j in 1:(length(stmts) - 1) # insert in reverse to maintain the provided ordering
-<span style="color:inherit;"> |</span>            insert!(code, i, stmts[end - j])
 <span style="color:red;">------ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/misctaggingtests.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-85,7 +85,7</span> ============================================================
@@ -56,5 +45,16 @@
 <span style="color:green;">+|</span></span>@test untag(result, ctx)<span style="color:green;">true</span>(x, [x], 1)</span>
 <span style="color:inherit;"> |</span>@test untagtype(typeof(result), typeof(ctx)) === typeof((x, [x], 1))
 <span style="color:inherit;"> |</span>@test istagged(result, ctx)
-<span style="color:inherit;"> |</span>@test istaggedtype(typeof(result), typeof(c</div>
+<span style="color:inherit;"> |</span>@test istaggedtype(typeof(result), typeof(ctx))
+<span style="color:red;">------ </span><span style="color:inherit;">src/pass.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/pass.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-161,7 +161,7</span> ============================================================
+<span style="color:inherit;"> |</span>    for (i, addedstmts) in worklist
+<span style="color:inherit;"> |</span>        i += ssachangemap[i] - addedstmts # correct the index for accumulated offsets
+<span style="color:inherit;"> |</span>        stmts = newstmts(code[i], i)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @assert length(stmts)</span><span style="color:red;"> == </span><span style="color:gray;">(addedstmts + 1)</span></span>
+<span style="color:green;">+|</span></span>        @assert length(stmts)<span style="color:green;">true</span>(addedstmts + 1)</span>
+<span style="color:inherit;"> |</span>        code[i] = stmts[end]
+<span style="color:inherit;"> |</span>        for j in 1:(length(stmts) - 1) # insert in reverse to maintain the provided ordering
+<span style="color:inherit;"> |</span>            insert!(code, i, stmts[end -</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

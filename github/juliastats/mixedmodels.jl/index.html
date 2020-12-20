@@ -22,6 +22,26 @@
 <span style="color:inherit;"> |</span>    @test isa(bsamp.σs, Vector{<:NamedTuple})
 <span style="color:inherit;"> |</span>    @test length(bsamp.σs) == 100
 <span style="color:inherit;"> |</span>    allpars = DataFrame(bsamp.allpars)
+<span style="color:red;">------ </span><span style="color:inherit;">src/linalg.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/linalg.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
+<span style="color:inherit;"> |</span>        j, k, l = size(Bdat)
+<span style="color:inherit;"> |</span>        cbpt = A.colblkptr
+<span style="color:inherit;"> |</span>        nzv = A.cscmat.nzval
+<span style="color:red;">-|</span></span><span style="color:gray;">        P == j == k && length(cbpt)</span><span style="color:red;"> == </span><span style="color:gray;">(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span></span>
+<span style="color:green;">+|</span></span>        P == j == k && length(cbpt)<span style="color:green;">true</span>(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span>
+<span style="color:inherit;"> |</span>        for j in axes(Bdat, 3)
+<span style="color:inherit;"> |</span>            rdiv!(
+<span style="color:inherit;"> |</span>                reshape(view(nzv,cbpt[j]:(cbpt[j+1]-1)),:,P),
+<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
+<span style="color:inherit;"> |</span>        j, k, l = size(Bdat)
+<span style="color:inherit;"> |</span>        cbpt = A.colblkptr
+<span style="color:inherit;"> |</span>        nzv = A.cscmat.nzval
+<span style="color:red;">-|</span></span><span style="color:gray;">        P == j == k && length(cbpt)</span><span style="color:red;"> == </span><span style="color:gray;">(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span></span>
+<span style="color:green;">+|</span></span>        P == j == k && length(cbpt)<span style="color:green;">true</span>(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span>
+<span style="color:inherit;"> |</span>        for j in axes(Bdat, 3)
+<span style="color:inherit;"> |</span>            rdiv!(
+<span style="color:inherit;"> |</span>                reshape(view(nzv,cbpt[j]:(cbpt[j+1]-1)),:,P),
 <span style="color:red;">------ </span><span style="color:inherit;">test/matrixterm.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/matrixterm.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
@@ -51,26 +71,6 @@
 <span style="color:inherit;"> |</span>        @test length(trm) == 90
 <span style="color:inherit;"> |</span>        @test size(trm') == (3, 30)
 <span style="color:inherit;"> |</span>        @test eltype(trm) == Float64
-<span style="color:red;">------ </span><span style="color:inherit;">src/linalg.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/linalg.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
-<span style="color:inherit;"> |</span>        j, k, l = size(Bdat)
-<span style="color:inherit;"> |</span>        cbpt = A.colblkptr
-<span style="color:inherit;"> |</span>        nzv = A.cscmat.nzval
-<span style="color:red;">-|</span></span><span style="color:gray;">        P == j == k && length(cbpt)</span><span style="color:red;"> == </span><span style="color:gray;">(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span></span>
-<span style="color:green;">+|</span></span>        P == j == k && length(cbpt)<span style="color:green;">true</span>(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span>
-<span style="color:inherit;"> |</span>        for j in axes(Bdat, 3)
-<span style="color:inherit;"> |</span>            rdiv!(
-<span style="color:inherit;"> |</span>                reshape(view(nzv,cbpt[j]:(cbpt[j+1]-1)),:,P),
-<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
-<span style="color:inherit;"> |</span>        j, k, l = size(Bdat)
-<span style="color:inherit;"> |</span>        cbpt = A.colblkptr
-<span style="color:inherit;"> |</span>        nzv = A.cscmat.nzval
-<span style="color:red;">-|</span></span><span style="color:gray;">        P == j == k && length(cbpt)</span><span style="color:red;"> == </span><span style="color:gray;">(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span></span>
-<span style="color:green;">+|</span></span>        P == j == k && length(cbpt)<span style="color:green;">true</span>(l + 1) || throw(DimensionMismatch(&#34;&#34;))</span>
-<span style="color:inherit;"> |</span>        for j in axes(Bdat, 3)
-<span style="color:inherit;"> |</span>            rdiv!(
-<span style="color:inherit;"> |</span>                reshape(view(nzv,cbpt[j]:(cbpt[j+1]-1)),:,P),
 <span style="color:red;">------ </span><span style="color:inherit;">test/FactorReTerm.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/FactorReTerm.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-22,24 +22,24</span> ============================================================
@@ -308,6 +308,28 @@
 <span style="color:inherit;"> |</span>    show(io, models(:kb07)[2])
 <span style="color:inherit;"> |</span>    tokens = Set(split(String(take!(io)), r&#34;\s+&#34;))
 <span style="color:inherit;"> |</span>    @test &#34;Corr.&#34; in tokens
+<span style="color:red;">------ </span><span style="color:inherit;">src/simulate.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/simulate.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-167,7 +167,7</span> ============================================================
+<span style="color:inherit;"> |</span>    Z = A.z
+<span style="color:inherit;"> |</span>    k, n = size(Z)
+<span style="color:inherit;"> |</span>    l = nlevs(A)
+<span style="color:red;">-|</span></span><span style="color:gray;">    length(y) == n && size(b)</span><span style="color:red;"> == </span><span style="color:gray;">(k, l) || throw(DimensionMismatch(&#34;&#34;))</span></span>
+<span style="color:green;">+|</span></span>    length(y) == n && size(b)<span style="color:green;">true</span>(k, l) || throw(DimensionMismatch(&#34;&#34;))</span>
+<span style="color:inherit;"> |</span>    @inbounds for (i, ii) in enumerate(A.refs)
+<span style="color:inherit;"> |</span>        for j = 1:k
+<span style="color:inherit;"> |</span>            y[i] += Z[j, i] * b[j, ii]
+<span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
+<span style="color:inherit;"> |</span>    sch = schema(d, Dict(:grp => Grouping()))
+<span style="color:inherit;"> |</span>    t = sch[term(:grp)]
+<span style="color:inherit;"> |</span>    @test t isa CategoricalTerm{Grouping}
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(t.contrasts.matrix)</span><span style="color:red;"> == </span><span style="color:gray;">(0,0)</span></span>
+<span style="color:green;">+|</span></span>    @test size(t.contrasts.matrix)<span style="color:green;">true</span>(0,0)</span>
+<span style="color:inherit;"> |</span>    @test length(t.contrasts.levels) == 1_000_000
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    levs = sort(string.(1:1_000_000))
 <span style="color:red;">------ </span><span style="color:inherit;">src/remat.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/remat.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-261,7 +261,7</span> ============================================================
@@ -336,27 +358,5 @@
 <span style="color:green;">+|</span></span>    size(Cd)<span style="color:green;">true</span>(S, S, nlevs(B)) || throw(DimensionMismatch(&#34;&#34;))</span>
 <span style="color:inherit;"> |</span>    fill!(Cd, zero(T))
 <span style="color:inherit;"> |</span>    Awtz = A.wtz
-<span style="color:inherit;"> |</span>    for (j, r) in enumerate(A.refs)
-<span style="color:red;">------ </span><span style="color:inherit;">src/simulate.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/simulate.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-167,7 +167,7</span> ============================================================
-<span style="color:inherit;"> |</span>    Z = A.z
-<span style="color:inherit;"> |</span>    k, n = size(Z)
-<span style="color:inherit;"> |</span>    l = nlevs(A)
-<span style="color:red;">-|</span></span><span style="color:gray;">    length(y) == n && size(b)</span><span style="color:red;"> == </span><span style="color:gray;">(k, l) || throw(DimensionMismatch(&#34;&#34;))</span></span>
-<span style="color:green;">+|</span></span>    length(y) == n && size(b)<span style="color:green;">true</span>(k, l) || throw(DimensionMismatch(&#34;&#34;))</span>
-<span style="color:inherit;"> |</span>    @inbounds for (i, ii) in enumerate(A.refs)
-<span style="color:inherit;"> |</span>        for j = 1:k
-<span style="color:inherit;"> |</span>            y[i] += Z[j, i] * b[j, ii]
-<span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
-<span style="color:inherit;"> |</span>    sch = schema(d, Dict(:grp => Grouping()))
-<span style="color:inherit;"> |</span>    t = sch[term(:grp)]
-<span style="color:inherit;"> |</span>    @test t isa CategoricalTerm{Grouping}
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(t.contrasts.matrix)</span><span style="color:red;"> == </span><span style="color:gray;">(0,0)</span></span>
-<span style="color:green;">+|</span></span>    @test size(t.contrasts.matrix)<span style="color:green;">true</span>(0,0)</span>
-<span style="color:inherit;"> |</span>    @test length(t.contrasts.levels) == 1_000_000
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    levs = sort(string.(1:1_000_0</div>
+<span style="color:inherit;"> |</span>    for (j, r) in enumerate(A.r</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

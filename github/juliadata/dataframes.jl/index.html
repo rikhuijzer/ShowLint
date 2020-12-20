@@ -37,7 +37,55 @@
 <span style="color:inherit;"> |</span>        @test res.x1_mean ≈ res.x1_function
 <span style="color:inherit;"> |</span></div>
 </pre> <h3 id=omit_a_a_and_a_a_277_hits ><a href="#omit_a_a_and_a_a_277_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 277 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/utils.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/iteration.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/iteration.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,11 +6,11</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;eachrow and eachcol&#34; begin
+<span style="color:inherit;"> |</span>    df = DataFrame(A = Vector{Union{Int, Missing}}(1:2), B = Vector{Union{Int, Missing}}(2:3))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(eachrow(df))</span><span style="color:red;"> == </span><span style="color:gray;">(size(df, 1),)</span></span>
+<span style="color:green;">+|</span></span>    @test size(eachrow(df))<span style="color:green;">true</span>(size(df, 1),)</span>
+<span style="color:inherit;"> |</span>    @test parent(eachrow(df)) === df
+<span style="color:inherit;"> |</span>    @test names(eachrow(df)) == names(df)
+<span style="color:inherit;"> |</span>    @test IndexStyle(eachrow(df)) == IndexLinear()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(summary, eachrow(df))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;2-element DataFrameRows&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(summary, eachrow(df))<span style="color:green;">true</span>&#34;2-element DataFrameRows&#34;</span>
+<span style="color:inherit;"> |</span>    @test Base.IndexStyle(eachrow(df)) == IndexLinear()
+<span style="color:inherit;"> |</span>    @test eachrow(df)[1] == DataFrameRow(df, 1, :)
+<span style="color:inherit;"> |</span>    @test collect(eachrow(df)) isa Vector{<:DataFrameRow}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test parent(eachcol(df)) === df
+<span style="color:inherit;"> |</span>    @test names(eachcol(df)) == names(df)
+<span style="color:inherit;"> |</span>    @test length(eachcol(df)) == size(df, 2)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(eachcol(df))</span><span style="color:red;"> == </span><span style="color:gray;">(size(df, 2),)</span></span>
+<span style="color:green;">+|</span></span>    @test size(eachcol(df))<span style="color:green;">true</span>(size(df, 2),)</span>
+<span style="color:inherit;"> |</span>    @test size(eachcol(df), 1) == size(df, 2)
+<span style="color:inherit;"> |</span>    @test size(eachcol(df), 2) == 1
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError size(eachcol(df), 0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
+<span style="color:inherit;"> |</span>    sdf = view(df, [3, 1, 4], [3, 1, 4])
+<span style="color:inherit;"> |</span>    @test sdf == df[[3, 1, 4], [3, 1, 4]]
+<span style="color:inherit;"> |</span>    @test eachrow(sdf) == eachrow(df[[3, 1, 4], [3, 1, 4]])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(eachrow(sdf))</span><span style="color:red;"> == </span><span style="color:gray;">(3,)</span></span>
+<span style="color:green;">+|</span></span>    @test size(eachrow(sdf))<span style="color:green;">true</span>(3,)</span>
+<span style="color:inherit;"> |</span>    @test eachcol(sdf) == eachcol(df[[3, 1, 4], [3, 1, 4]])
+<span style="color:inherit;"> |</span>    @test length(eachcol(sdf)) == 3
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-115,11 +115,11</span> ============================================================
+<span style="color:inherit;"> |</span>    rename!(df, Symbol.(string.(&#34;y&#34;, 1:4)))
+<span style="color:inherit;"> |</span>    df[!, 1] = 51:56
+<span style="color:inherit;"> |</span>    @test df[1, :] == erd[1]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test copy(erv[1])</span><span style="color:red;"> == </span><span style="color:gray;">(y3=33, y1=53, y4=43)</span></span>
+<span style="color:green;">+|</span></span>    @test copy(erv[1])<span style="color:green;">true</span>(y3=33, y1=53, y4=43)</span>
+<span style="color:inherit;"> |</span>    df[!, :z] .= 1
+<span style="color:inherit;"> |</span>    @test length(erd[1]) == 5 # the added column is reflected
+<span style="color:inherit;"> |</span>    select!(df, Not([4, 5]))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test copy(erd[1])</span><span style="color:red;"> == </span><span style="color:gray;">(y1 = 51, y2 = 21, y3 = 31) # the removed columns are reflected</span></span>
+<span style="color:green;">+|</span></span>    @test copy(erd[1])<span style="color:green;">true</span>(y1 = 51, y2 = 21, y3 = 31) # the removed columns are reflected</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;getproperty and propertynames&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/utils.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-15,8 +15,8</span> ============================================================
 <span style="color:inherit;"> |</span>    @test repeat(df, 2) == ref
@@ -88,54 +136,81 @@
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    df = DataFrame(a = 1:2, b = 3:4)
-<span style="color:red;">------ </span><span style="color:inherit;">test/iteration.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/iteration.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-6,11 +6,11</span> ============================================================
-<span style="color:inherit;"> |</span>@testset &#34;eachrow and eachcol&#34; begin
-<span style="color:inherit;"> |</span>    df = DataFrame(A = Vector{Union{Int, Missing}}(1:2), B = Vector{Union{Int, Missing}}(2:3))
+<span style="color:red;">------ </span><span style="color:inherit;">test/data.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/data.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
+<span style="color:inherit;"> |</span>    df6 = DataFrame([[1, 2, missing, 4], [1, 2, missing, 4], [&#34;one&#34;, &#34;two&#34;, missing, &#34;four&#34;]],
+<span style="color:inherit;"> |</span>                    [:A, :B, :C])
+<span style="color:inherit;"> |</span>    df7 = DataFrame(x = [1, 2, missing, 4], y = [&#34;one&#34;, &#34;two&#34;, missing, &#34;four&#34;])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df7)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df7)<span style="color:green;">true</span>(4, 2)</span>
+<span style="color:inherit;"> |</span>    @test df7[!, :x] ≅ [1, 2, missing, 4]
 <span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(eachrow(df))</span><span style="color:red;"> == </span><span style="color:gray;">(size(df, 1),)</span></span>
-<span style="color:green;">+|</span></span>    @test size(eachrow(df))<span style="color:green;">true</span>(size(df, 1),)</span>
-<span style="color:inherit;"> |</span>    @test parent(eachrow(df)) === df
-<span style="color:inherit;"> |</span>    @test names(eachrow(df)) == names(df)
-<span style="color:inherit;"> |</span>    @test IndexStyle(eachrow(df)) == IndexLinear()
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(summary, eachrow(df))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;2-element DataFrameRows&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(summary, eachrow(df))<span style="color:green;">true</span>&#34;2-element DataFrameRows&#34;</span>
-<span style="color:inherit;"> |</span>    @test Base.IndexStyle(eachrow(df)) == IndexLinear()
-<span style="color:inherit;"> |</span>    @test eachrow(df)[1] == DataFrameRow(df, 1, :)
-<span style="color:inherit;"> |</span>    @test collect(eachrow(df)) isa Vector{<:DataFrameRow}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test parent(eachcol(df)) === df
-<span style="color:inherit;"> |</span>    @test names(eachcol(df)) == names(df)
-<span style="color:inherit;"> |</span>    @test length(eachcol(df)) == size(df, 2)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(eachcol(df))</span><span style="color:red;"> == </span><span style="color:gray;">(size(df, 2),)</span></span>
-<span style="color:green;">+|</span></span>    @test size(eachcol(df))<span style="color:green;">true</span>(size(df, 2),)</span>
-<span style="color:inherit;"> |</span>    @test size(eachcol(df), 1) == size(df, 2)
-<span style="color:inherit;"> |</span>    @test size(eachcol(df), 2) == 1
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError size(eachcol(df), 0)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
-<span style="color:inherit;"> |</span>    sdf = view(df, [3, 1, 4], [3, 1, 4])
-<span style="color:inherit;"> |</span>    @test sdf == df[[3, 1, 4], [3, 1, 4]]
-<span style="color:inherit;"> |</span>    @test eachrow(sdf) == eachrow(df[[3, 1, 4], [3, 1, 4]])
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(eachrow(sdf))</span><span style="color:red;"> == </span><span style="color:gray;">(3,)</span></span>
-<span style="color:green;">+|</span></span>    @test size(eachrow(sdf))<span style="color:green;">true</span>(3,)</span>
-<span style="color:inherit;"> |</span>    @test eachcol(sdf) == eachcol(df[[3, 1, 4], [3, 1, 4]])
-<span style="color:inherit;"> |</span>    @test length(eachcol(sdf)) == 3
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;">@|</span><span style="color:inherit;">-115,11 +115,11</span> ============================================================
-<span style="color:inherit;"> |</span>    rename!(df, Symbol.(string.(&#34;y&#34;, 1:4)))
-<span style="color:inherit;"> |</span>    df[!, 1] = 51:56
-<span style="color:inherit;"> |</span>    @test df[1, :] == erd[1]
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test copy(erv[1])</span><span style="color:red;"> == </span><span style="color:gray;">(y3=33, y1=53, y4=43)</span></span>
-<span style="color:green;">+|</span></span>    @test copy(erv[1])<span style="color:green;">true</span>(y3=33, y1=53, y4=43)</span>
-<span style="color:inherit;"> |</span>    df[!, :z] .= 1
-<span style="color:inherit;"> |</span>    @test length(erd[1]) == 5 # the added column is reflected
-<span style="color:inherit;"> |</span>    select!(df, Not([4, 5]))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test copy(erd[1])</span><span style="color:red;"> == </span><span style="color:gray;">(y1 = 51, y2 = 21, y3 = 31) # the removed columns are reflected</span></span>
-<span style="color:green;">+|</span></span>    @test copy(erd[1])<span style="color:green;">true</span>(y1 = 51, y2 = 21, y3 = 31) # the removed columns are reflected</span>
+<span style="color:inherit;"> |</span>    #test_group(&#34;description functions&#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-28,9 +28,9</span> ============================================================
+<span style="color:inherit;"> |</span>    @test size(df6[:, [2, 3]], 2) == 2
+<span style="color:inherit;"> |</span>    @test size(df6[2, :], 1) == ncol(df6) # this is a DataFrameRow
+<span style="color:inherit;"> |</span>    @test size(df6[2:2, :], 1) == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df6[[1, 3], [1, 3]])</span><span style="color:red;"> == </span><span style="color:gray;">(2, 2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df6[[1, 3], [1, 3]])<span style="color:green;">true</span>(2, 2)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df6[1:2, 1:2])</span><span style="color:red;"> == </span><span style="color:gray;">(2, 2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df6[1:2, 1:2])<span style="color:green;">true</span>(2, 2)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(first(df6, 2))</span><span style="color:red;"> == </span><span style="color:gray;">(2, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(first(df6, 2))<span style="color:green;">true</span>(2, 3)</span>
+<span style="color:inherit;"> |</span>    # lots more to do
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    #test_group(&#34;assign&#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-51,13 +51,13</span> ============================================================
+<span style="color:inherit;"> |</span>    sdf6a = view(df6, 1:1, :)
+<span style="color:inherit;"> |</span>    sdf6b = view(df6, 2:3, :)
+<span style="color:inherit;"> |</span>    sdf6c = view(df6, [true, false, true, false], :)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6a)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(sdf6a)<span style="color:green;">true</span>(1, 3)</span>
+<span style="color:inherit;"> |</span>    sdf6d = view(df6, [1, 3], [:B])
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6d)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 1)</span></span>
+<span style="color:green;">+|</span></span>    @test size(sdf6d)<span style="color:green;">true</span>(2, 1)</span>
+<span style="color:inherit;"> |</span>    sdf6e = view(df6, [0x01], :)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6e)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(sdf6e)<span style="color:green;">true</span>(1, 3)</span>
+<span style="color:inherit;"> |</span>    sdf6f = view(df6, UInt64[1, 2], :)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6f)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(sdf6f)<span style="color:green;">true</span>(2, 3)</span>
+<span style="color:inherit;"> |</span>    sdf6g = view(df6, [1, 3], :B)
+<span style="color:inherit;"> |</span>    sdf6h = view(df6, 1, :B)
+<span style="color:inherit;"> |</span>    sdf6i = view(df6, 1, [:B])
+<span style="color:inherit;">@|</span><span style="color:inherit;">-171,7 +171,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test dropmissing!(df) === df
+<span style="color:inherit;"> |</span>    @test a === df.a
+<span style="color:inherit;"> |</span>    dfx = dropmissing(df)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">df == df</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:inherit;"> |</span>    @test dfx !== df
+<span style="color:inherit;"> |</span>    @test dfx.a !== df.a
+<span style="color:inherit;"> |</span>    @test a === df.a # we did not touch df
+<span style="color:inherit;">@|</span><span style="color:inherit;">-248,12 +248,12</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError innerjoin(df1, df2, on = :A)
+<span style="color:inherit;"> |</span>    m1 = innerjoin(df1, df2, on = :A, matchmissing=:equal)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(m1)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(m1)<span style="color:green;">true</span>(3, 3)</span>
+<span style="color:inherit;"> |</span>    @test m1[!, :A] ≅ [&#34;a&#34;, &#34;a&#34;, missing]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError outerjoin(df1, df2, on = :A)
+<span style="color:inherit;"> |</span>    m2 = outerjoin(df1, df2, on = :A, matchmissing=:equal)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(m2)</span><span style="color:red;"> == </span><span style="color:gray;">(5, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(m2)<span style="color:green;">true</span>(5, 3)</span>
+<span style="color:inherit;"> |</span>    @test m2[!, :A] ≅ [&#34;a&#34;, &#34;b&#34;, &#34;a&#34;, missing, &#34;c&#34;]
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;getproperty and propertynames&#34; begin
+<span style="color:inherit;">@|</span><span style="color:inherit;">-445,7 +445,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function testfun(x)
+<span style="color:inherit;"> |</span>        @assert x isa NamedTuple
+<span style="color:red;">-|</span></span><span style="color:gray;">        @assert propertynames(x)</span><span style="color:red;"> == </span><span style="color:gray;">(:x,)</span></span>
+<span style="color:green;">+|</span></span>        @assert propertynames(x)<span style="color:green;">true</span>(:x,)</span>
+<span style="color:inherit;"> |</span>        return x.x > 1
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/io.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/io.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-142,8 +142,7</span> ============================================================
@@ -260,81 +335,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@testset &#34;consistency&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">test/data.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/data.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
-<span style="color:inherit;"> |</span>    df6 = DataFrame([[1, 2, missing, 4], [1, 2, missing, 4], [&#34;one&#34;, &#34;two&#34;, missing, &#34;four&#34;]],
-<span style="color:inherit;"> |</span>                    [:A, :B, :C])
-<span style="color:inherit;"> |</span>    df7 = DataFrame(x = [1, 2, missing, 4], y = [&#34;one&#34;, &#34;two&#34;, missing, &#34;four&#34;])
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df7)</span><span style="color:red;"> == </span><span style="color:gray;">(4, 2)</span></span>
-<span style="color:green;">+|</span></span>    @test size(df7)<span style="color:green;">true</span>(4, 2)</span>
-<span style="color:inherit;"> |</span>    @test df7[!, :x] ≅ [1, 2, missing, 4]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    #test_group(&#34;description functions&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-28,9 +28,9</span> ============================================================
-<span style="color:inherit;"> |</span>    @test size(df6[:, [2, 3]], 2) == 2
-<span style="color:inherit;"> |</span>    @test size(df6[2, :], 1) == ncol(df6) # this is a DataFrameRow
-<span style="color:inherit;"> |</span>    @test size(df6[2:2, :], 1) == 1
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df6[[1, 3], [1, 3]])</span><span style="color:red;"> == </span><span style="color:gray;">(2, 2)</span></span>
-<span style="color:green;">+|</span></span>    @test size(df6[[1, 3], [1, 3]])<span style="color:green;">true</span>(2, 2)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df6[1:2, 1:2])</span><span style="color:red;"> == </span><span style="color:gray;">(2, 2)</span></span>
-<span style="color:green;">+|</span></span>    @test size(df6[1:2, 1:2])<span style="color:green;">true</span>(2, 2)</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(first(df6, 2))</span><span style="color:red;"> == </span><span style="color:gray;">(2, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(first(df6, 2))<span style="color:green;">true</span>(2, 3)</span>
-<span style="color:inherit;"> |</span>    # lots more to do
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    #test_group(&#34;assign&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-51,13 +51,13</span> ============================================================
-<span style="color:inherit;"> |</span>    sdf6a = view(df6, 1:1, :)
-<span style="color:inherit;"> |</span>    sdf6b = view(df6, 2:3, :)
-<span style="color:inherit;"> |</span>    sdf6c = view(df6, [true, false, true, false], :)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6a)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(sdf6a)<span style="color:green;">true</span>(1, 3)</span>
-<span style="color:inherit;"> |</span>    sdf6d = view(df6, [1, 3], [:B])
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6d)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 1)</span></span>
-<span style="color:green;">+|</span></span>    @test size(sdf6d)<span style="color:green;">true</span>(2, 1)</span>
-<span style="color:inherit;"> |</span>    sdf6e = view(df6, [0x01], :)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6e)</span><span style="color:red;"> == </span><span style="color:gray;">(1, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(sdf6e)<span style="color:green;">true</span>(1, 3)</span>
-<span style="color:inherit;"> |</span>    sdf6f = view(df6, UInt64[1, 2], :)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(sdf6f)</span><span style="color:red;"> == </span><span style="color:gray;">(2, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(sdf6f)<span style="color:green;">true</span>(2, 3)</span>
-<span style="color:inherit;"> |</span>    sdf6g = view(df6, [1, 3], :B)
-<span style="color:inherit;"> |</span>    sdf6h = view(df6, 1, :B)
-<span style="color:inherit;"> |</span>    sdf6i = view(df6, 1, [:B])
-<span style="color:inherit;">@|</span><span style="color:inherit;">-171,7 +171,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test dropmissing!(df) === df
-<span style="color:inherit;"> |</span>    @test a === df.a
-<span style="color:inherit;"> |</span>    dfx = dropmissing(df)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">df == df</span></span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>    @test dfx !== df
-<span style="color:inherit;"> |</span>    @test dfx.a !== df.a
-<span style="color:inherit;"> |</span>    @test a === df.a # we did not touch df
-<span style="color:inherit;">@|</span><span style="color:inherit;">-248,12 +248,12</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError innerjoin(df1, df2, on = :A)
-<span style="color:inherit;"> |</span>    m1 = innerjoin(df1, df2, on = :A, matchmissing=:equal)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(m1)</span><span style="color:red;"> == </span><span style="color:gray;">(3, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(m1)<span style="color:green;">true</span>(3, 3)</span>
-<span style="color:inherit;"> |</span>    @test m1[!, :A] ≅ [&#34;a&#34;, &#34;a&#34;, missing]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError outerjoin(df1, df2, on = :A)
-<span style="color:inherit;"> |</span>    m2 = outerjoin(df1, df2, on = :A, matchmissing=:equal)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(m2)</span><span style="color:red;"> == </span><span style="color:gray;">(5, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(m2)<span style="color:green;">true</span>(5, 3)</span>
-<span style="color:inherit;"> |</span>    @test m2[!, :A] ≅ [&#34;a&#34;, &#34;b&#34;, &#34;a&#34;, missing, &#34;c&#34;]
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-445,7 +445,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    function testfun(x)
-<span style="color:inherit;"> |</span>        @assert x isa NamedTuple
-<span style="color:red;">-|</span></span><span style="color:gray;">        @assert propertynames(x)</span><span style="color:red;"> == </span><span style="color:gray;">(:x,)</span></span>
-<span style="color:green;">+|</span></span>        @assert propertynames(x)<span style="color:green;">true</span>(:x,)</span>
-<span style="color:inherit;"> |</span>        return x.x > 1
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/dataframerow.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/dataframerow.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-17,11 +17,11</span> ============================================================
@@ -649,44 +649,6 @@
 <span style="color:inherit;"> |</span>        @test parent(r) === df
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/select.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/select.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-998,7 +998,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, names(df) .=> first, [] => (() -> Int[]) => :x1)
-<span style="color:inherit;"> |</span>    df2 = combine(df, names(df) .=> first, [] => (() -> Int[]) => :x1)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
-<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
-<span style="color:inherit;"> |</span>    @test df2.x1_first isa Vector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x2_first isa CategoricalVector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x3_first isa Vector{Missing}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1006,7 +1006,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, names(df) .=> last, [] => (() -> Int[]) => :x1)
-<span style="color:inherit;"> |</span>    df2 = combine(df, names(df) .=> last, [] => (() -> Int[]) => :x1)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
-<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
-<span style="color:inherit;"> |</span>    @test df2.x1_last isa Vector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x2_last isa CategoricalVector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x3_last isa Vector{Int}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1014,7 +1014,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, [] => (() -> Int[]) => :x1, names(df) .=> first)
-<span style="color:inherit;"> |</span>    df2 = combine(df, [] => (() -> Int[]) => :x1, names(df) .=> first)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
-<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
-<span style="color:inherit;"> |</span>    @test df2.x1_first isa Vector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x2_first isa CategoricalVector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x3_first isa Vector{Missing}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1022,7 +1022,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, [] => (() -> Int[]) => :x1, names(df) .=> last)
-<span style="color:inherit;"> |</span>    df2 = combine(df, [] => (() -> Int[]) => :x1, names(df) .=> last)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
-<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
-<span style="color:inherit;"> |</span>    @test df2.x1_last isa Vector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x2_last isa CategoricalVector{Int}
-<span style="color:inherit;"> |</span>    @test df2.x3_last isa Vector{Int}
 <span style="color:red;">------ </span><span style="color:inherit;">test/subdataframe.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/subdataframe.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-40,14 +40,14</span> ============================================================
@@ -764,41 +726,44 @@
 <span style="color:inherit;"> |</span>    @test df2.y isa SubArray{Int, 1, Vector{Int}, Tuple{UnitRange{Int}}, true}
 <span style="color:inherit;"> |</span>    @test df2.y == [12, 13]
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/reshape.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/reshape.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-238,19 +238,19</span> ============================================================
-<span style="color:inherit;"> |</span>    # test empty measures or ids
-<span style="color:inherit;"> |</span>    dx = stack(d1, [], [:a])
-<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;xxx&#34;, r&#34;a&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(0, 3)</span>
-<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:a, :variable, :value]
-<span style="color:inherit;"> |</span>    dx = stack(d1, :a, [])
-<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;a&#34;, r&#34;xxx&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(12, 2)</span></span>
-<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(12, 2)</span>
-<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:variable, :value]
-<span style="color:inherit;"> |</span>    dx = stack(d1, [:a], [])
-<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;a&#34;, r&#34;xxx&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(12, 2)</span></span>
-<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(12, 2)</span>
-<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:variable, :value]
-<span style="color:inherit;"> |</span>    dx = stack(d1, [], :a)
-<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;xxx&#34;, r&#34;a&#34;)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 3)</span></span>
-<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(0, 3)</span>
-<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:a, :variable, :value]
+<span style="color:red;">------ </span><span style="color:inherit;">test/select.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/select.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-998,7 +998,7</span> ============================================================
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test stack(d1, :a, view=true) == stack(d1, [:a], view=true)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-331,7 +331,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # test unstack with exactly one key column that is not passed
-<span style="color:inherit;"> |</span>    df1 = stack(DataFrame(rand(10, 10), :auto))
-<span style="color:inherit;"> |</span>    df1[!, :id] = 1:100
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(unstack(df1, :variable, :value))</span><span style="color:red;"> == </span><span style="color:gray;">(100, 11)</span></span>
-<span style="color:green;">+|</span></span>    @test size(unstack(df1, :variable, :value))<span style="color:green;">true</span>(100, 11)</span>
-<span style="color:inherit;"> |</span>    @test unstack(df1, :variable, :value) ≅ unstack(df1)
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, names(df) .=> first, [] => (() -> Int[]) => :x1)
+<span style="color:inherit;"> |</span>    df2 = combine(df, names(df) .=> first, [] => (() -> Int[]) => :x1)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
+<span style="color:inherit;"> |</span>    @test df2.x1_first isa Vector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x2_first isa CategoricalVector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x3_first isa Vector{Missing}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1006,7 +1006,7</span> ============================================================
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # test empty keycol
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, names(df) .=> last, [] => (() -> Int[]) => :x1)
+<span style="color:inherit;"> |</span>    df2 = combine(df, names(df) .=> last, [] => (() -> Int[]) => :x1)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
+<span style="color:inherit;"> |</span>    @test df2.x1_last isa Vector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x2_last isa CategoricalVector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x3_last isa Vector{Int}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1014,7 +1014,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, [] => (() -> Int[]) => :x1, names(df) .=> first)
+<span style="color:inherit;"> |</span>    df2 = combine(df, [] => (() -> Int[]) => :x1, names(df) .=> first)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
+<span style="color:inherit;"> |</span>    @test df2.x1_first isa Vector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x2_first isa CategoricalVector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x3_first isa Vector{Missing}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1022,7 +1022,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError select(df, [] => (() -> Int[]) => :x1, names(df) .=> last)
+<span style="color:inherit;"> |</span>    df2 = combine(df, [] => (() -> Int[]) => :x1, names(df) .=> last)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(df2)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 5)</span></span>
+<span style="color:green;">+|</span></span>    @test size(df2)<span style="color:green;">true</span>(0, 5)</span>
+<span style="color:inherit;"> |</span>    @test df2.x1_last isa Vector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x2_last isa CategoricalVector{Int}
+<span style="color:inherit;"> |</span>    @test df2.x3_last isa Vector{Int}
 <span style="color:red;">------ </span><span style="color:inherit;">test/tables.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/tables.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-136,23 +136,23</span> ============================================================
@@ -861,6 +826,41 @@
 <span style="color:inherit;"> |</span>    @test eltype(df.a) == Int
 <span style="color:inherit;"> |</span>    @test DataFrame(Vector[], :auto) == DataFrame()
 <span style="color:inherit;"> |</span>    @test DataFrame(Pair{Symbol, Vector}[], :auto) == DataFrame()
+<span style="color:red;">------ </span><span style="color:inherit;">test/reshape.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/reshape.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-238,19 +238,19</span> ============================================================
+<span style="color:inherit;"> |</span>    # test empty measures or ids
+<span style="color:inherit;"> |</span>    dx = stack(d1, [], [:a])
+<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;xxx&#34;, r&#34;a&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(0, 3)</span>
+<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:a, :variable, :value]
+<span style="color:inherit;"> |</span>    dx = stack(d1, :a, [])
+<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;a&#34;, r&#34;xxx&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(12, 2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(12, 2)</span>
+<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:variable, :value]
+<span style="color:inherit;"> |</span>    dx = stack(d1, [:a], [])
+<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;a&#34;, r&#34;xxx&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(12, 2)</span></span>
+<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(12, 2)</span>
+<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:variable, :value]
+<span style="color:inherit;"> |</span>    dx = stack(d1, [], :a)
+<span style="color:inherit;"> |</span>    @test dx == stack(d1, r&#34;xxx&#34;, r&#34;a&#34;)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(dx)</span><span style="color:red;"> == </span><span style="color:gray;">(0, 3)</span></span>
+<span style="color:green;">+|</span></span>    @test size(dx)<span style="color:green;">true</span>(0, 3)</span>
+<span style="color:inherit;"> |</span>    @test propertynames(dx) == [:a, :variable, :value]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test stack(d1, :a, view=true) == stack(d1, [:a], view=true)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-331,7 +331,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # test unstack with exactly one key column that is not passed
+<span style="color:inherit;"> |</span>    df1 = stack(DataFrame(rand(10, 10), :auto))
+<span style="color:inherit;"> |</span>    df1[!, :id] = 1:100
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(unstack(df1, :variable, :value))</span><span style="color:red;"> == </span><span style="color:gray;">(100, 11)</span></span>
+<span style="color:green;">+|</span></span>    @test size(unstack(df1, :variable, :value))<span style="color:green;">true</span>(100, 11)</span>
+<span style="color:inherit;"> |</span>    @test unstack(df1, :variable, :value) ≅ unstack(df1)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # test empty keycol
 <span style="color:red;">------ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/grouping.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-270,14 +270,14</span> ============================================================

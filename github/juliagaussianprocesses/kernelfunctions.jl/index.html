@@ -1,0 +1,414 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGaussianProcesses/KernelFunctions.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGaussianProcesses/KernelFunctions.jl" target=_blank >JuliaGaussianProcesses/KernelFunctions.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_a_a_and_a_a_46_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 46 hits</a></ol></div> <h3 id=omit_a_a_and_a_a_46_hits ><a href="#omit_a_a_and_a_a_46_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 46 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-114,7 +114,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function validate_inplace_dims(K::AbstractMatrix, x::AbstractVector, y::AbstractVector)
+<span style="color:inherit;"> |</span>    validate_inputs(x, y)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if size(K)</span><span style="color:red;"> != </span><span style="color:gray;">(length(x), length(y))</span></span>
+<span style="color:green;">+|</span></span>    if size(K)<span style="color:green;">false</span>(length(x), length(y))</span>
+<span style="color:inherit;"> |</span>        throw(DimensionMismatch(
+<span style="color:inherit;"> |</span>            &#34;Size of the target matrix K ($(size(K))) not consistent with lengths of &#34; *
+<span style="color:inherit;"> |</span>            &#34;inputs x ($(length(x))) and y ($(length(y)))&#34;,
+<span style="color:red;">------ </span><span style="color:inherit;">test/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,8 +13,8</span> ============================================================
+<span style="color:inherit;"> |</span>    # Test Matrix data sets.
+<span style="color:inherit;"> |</span>    @testset &#34;ColVecs&#34; begin
+<span style="color:inherit;"> |</span>        DX = ColVecs(X)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:red;">DX == DX</span></span>
+<span style="color:green;">+|</span></span>        @test <span style="color:green;">true</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test size(DX)</span><span style="color:red;"> == </span><span style="color:gray;">(N,)</span></span>
+<span style="color:green;">+|</span></span>        @test size(DX)<span style="color:green;">true</span>(N,)</span>
+<span style="color:inherit;"> |</span>        @test length(DX) == N
+<span style="color:inherit;"> |</span>        @test getindex(DX, 5) isa AbstractVector
+<span style="color:inherit;"> |</span>        @test getindex(DX, 5) == X[:, 5]
+<span style="color:inherit;">@|</span><span style="color:inherit;">-50,8 +50,8</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    @testset &#34;RowVecs&#34; begin
+<span style="color:inherit;"> |</span>        DX = RowVecs(X)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test </span><span style="color:red;">DX == DX</span></span>
+<span style="color:green;">+|</span></span>        @test <span style="color:green;">true</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test size(DX)</span><span style="color:red;"> == </span><span style="color:gray;">(D,)</span></span>
+<span style="color:green;">+|</span></span>        @test size(DX)<span style="color:green;">true</span>(D,)</span>
+<span style="color:inherit;"> |</span>        @test length(DX) == D
+<span style="color:inherit;"> |</span>        @test getindex(DX, 2) isa AbstractVector
+<span style="color:inherit;"> |</span>        @test getindex(DX, 2) == X[2, :]
+<span style="color:red;">------ </span><span style="color:inherit;">src/test_utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/test_utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-47,7 +47,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check that pairwise basically works.
+<span style="color:inherit;"> |</span>    @test kernelmatrix(k, x0, x2) isa AbstractMatrix
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(kernelmatrix(k, x0, x2))</span><span style="color:red;"> == </span><span style="color:gray;">(length(x0), length(x2))</span></span>
+<span style="color:green;">+|</span></span>    @test size(kernelmatrix(k, x0, x2))<span style="color:green;">true</span>(length(x0), length(x2))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Check that elementwise is consistent with pairwise.
+<span style="color:inherit;"> |</span>    @test kerneldiagmatrix(k, x0, x1) ≈ diag(kernelmatrix(k, x0, x1)) atol=atol
+<span style="color:red;">------ </span><span style="color:inherit;">test/kernels/kernelproduct.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/kernelproduct.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,11 +13,11</span> ============================================================
+<span style="color:inherit;"> |</span>    ks1 = 2.0*k1
+<span style="color:inherit;"> |</span>    ks2 = 0.5*k2
+<span style="color:inherit;"> |</span>    @test length(k) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(k)</span><span style="color:red;"> == </span><span style="color:gray;">(</span></span>
+<span style="color:green;">+|</span></span>    @test string(k)<span style="color:green;">true</span>(</span>
+<span style="color:inherit;"> |</span>        &#34;Product of 2 kernels:\n\tLinear Kernel (c = 0.0)\n\tSquared &#34; *
+<span style="color:inherit;"> |</span>        &#34;Exponential Kernel&#34;
+<span style="color:inherit;"> |</span>    )
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test k(v1, v2)</span><span style="color:red;"> == </span><span style="color:gray;">(k1 * k2)(v1, v2)</span></span>
+<span style="color:green;">+|</span></span>    @test k(v1, v2)<span style="color:green;">true</span>(k1 * k2)(v1, v2)</span>
+<span style="color:inherit;"> |</span>    @test (k * k3)(v1,v2) ≈ (k3 * k)(v1, v2)
+<span style="color:inherit;"> |</span>    @test (k1 * k2)(v1, v2) == KernelProduct(k1, k2)(v1, v2)
+<span style="color:inherit;"> |</span>    @test (k * ks1)(v1, v2) ≈ (ks1 * k)(v1, v2)
+<span style="color:red;">------ </span><span style="color:inherit;">test/kernels/scaledkernel.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/scaledkernel.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>    k = SqExponentialKernel()
+<span style="color:inherit;"> |</span>    ks = ScaledKernel(k, s)
+<span style="color:inherit;"> |</span>    @test ks(x, y) == s * k(x, y)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test ks(x, y)</span><span style="color:red;"> == </span><span style="color:gray;">(s * k)(x, y)</span></span>
+<span style="color:green;">+|</span></span>    @test ks(x, y)<span style="color:green;">true</span>(s * k)(x, y)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Standardised tests.
+<span style="color:inherit;"> |</span>    TestUtils.test_interface(k, Float64)
+<span style="color:red;">------ </span><span style="color:inherit;">test/kernels/kernelsum.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/kernels/kernelsum.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,11 +13,11</span> ============================================================
+<span style="color:inherit;"> |</span>    ks1 = 2.0*k1
+<span style="color:inherit;"> |</span>    ks2 = 0.5*k2
+<span style="color:inherit;"> |</span>    @test length(k) == 2
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(k)</span><span style="color:red;"> == </span><span style="color:gray;">(</span></span>
+<span style="color:green;">+|</span></span>    @test string(k)<span style="color:green;">true</span>(</span>
+<span style="color:inherit;"> |</span>        &#34;Sum of 2 kernels:\n\tLinear Kernel (c = 0.0)\n\tSquared &#34; *
+<span style="color:inherit;"> |</span>        &#34;Exponential Kernel&#34;
+<span style="color:inherit;"> |</span>    )
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test k(v1, v2)</span><span style="color:red;"> == </span><span style="color:gray;">(k1 + k2)(v1, v2)</span></span>
+<span style="color:green;">+|</span></span>    @test k(v1, v2)<span style="color:green;">true</span>(k1 + k2)(v1, v2)</span>
+<span style="color:inherit;"> |</span>    @test (k + k3)(v1,v2) ≈ (k3 + k)(v1, v2)
+<span style="color:inherit;"> |</span>    @test (k1 + k2)(v1, v2) == KernelSum(k1, k2)(v1, v2)
+<span style="color:inherit;"> |</span>    @test (k + ks1)(v1, v2) ≈ (ks1 + k)(v1, v2)
+<span style="color:red;">------ </span><span style="color:inherit;">test/generic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/generic.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,6 +1,6</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;generic&#34; begin
+<span style="color:inherit;"> |</span>    k = SqExponentialKernel()
+<span style="color:inherit;"> |</span>    @test length(k) == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test iterate(k)</span><span style="color:red;"> == </span><span style="color:gray;">(k,nothing)</span></span>
+<span style="color:green;">+|</span></span>    @test iterate(k)<span style="color:green;">true</span>(k,nothing)</span>
+<span style="color:inherit;"> |</span>    @test iterate(k,1) == nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/mokernels/slfm.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/mokernels/slfm.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-20,8 +20,8</span> ============================================================
+<span style="color:inherit;"> |</span>    @test kernelmatrix(k, x1, x2) ≈ kernelmatrix(k, collect(x1), collect(x2))
+<span style="color:inherit;"> |</span>    @test kernelmatrix(k, x1, x1) ≈ kernelmatrix(k, x1)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Semi-parametric Latent Factor Multi-Output Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test string(k)<span style="color:green;">true</span>&#34;Semi-parametric Latent Factor Multi-Output Kernel&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(&#34;text/plain&#34;, k)</span><span style="color:red;"> == </span><span style="color:gray;">(</span></span>
+<span style="color:green;">+|</span></span>    @test repr(&#34;text/plain&#34;, k)<span style="color:green;">true</span>(</span>
+<span style="color:inherit;"> |</span>        &#34;Semi-parametric Latent Factor Multi-Output Kernel\n\tgᵢ: &#34; *
+<span style="color:inherit;"> |</span>        &#34;Matern Kernel (ν = 1.5)\n\t\tSquared Exponential Kernel\n&#34; * 
+<span style="color:inherit;"> |</span>        &#34;\t\tFractional Brownian Motion Kernel (h = 0.5)\n\teᵢ: &#34; *
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/lineartransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/lineartransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,6 +41,6</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch map(t, ColVecs(randn(rng, Din + 1, Dout)))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Linear transform (size(A) = ($Dout, $Din))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Linear transform (size(A) = ($Dout, $Din))&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), LinearTransform(x)), randn(rng, 3, 3))
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/mokernels/moinput.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/mokernels/moinput.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,13 +4,13</span> ============================================================
+<span style="color:inherit;"> |</span>    mgpi = MOInput(x, 3)
+<span style="color:inherit;"> |</span>    
+<span style="color:inherit;"> |</span>    @test length(mgpi) == 12
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test size(mgpi)</span><span style="color:red;"> == </span><span style="color:gray;">(12,)</span></span>
+<span style="color:green;">+|</span></span>    @test size(mgpi)<span style="color:green;">true</span>(12,)</span>
+<span style="color:inherit;"> |</span>    @test size(mgpi, 1) == 12
+<span style="color:inherit;"> |</span>    @test size(mgpi, 2) == 1
+<span style="color:inherit;"> |</span>    @test lastindex(mgpi) == 12
+<span style="color:inherit;"> |</span>    @test firstindex(mgpi) == 1
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test iterate(mgpi)</span><span style="color:red;"> == </span><span style="color:gray;">(mgpi[1], 1)</span></span>
+<span style="color:green;">+|</span></span>    @test iterate(mgpi)<span style="color:green;">true</span>(mgpi[1], 1)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test iterate(mgpi, 2)</span><span style="color:red;"> == </span><span style="color:gray;">(mgpi[3], 3)</span></span>
+<span style="color:green;">+|</span></span>    @test iterate(mgpi, 2)<span style="color:green;">true</span>(mgpi[3], 3)</span>
+<span style="color:inherit;"> |</span>    @test_throws BoundsError mgpi[0]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test mgpi[2] == (x[2], 1)
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/functiontransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/functiontransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-26,7 +26,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(FunctionTransform(sin))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Function Transform: $(sin)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(FunctionTransform(sin))<span style="color:green;">true</span>&#34;Function Transform: $(sin)&#34;</span>
+<span style="color:inherit;"> |</span>    f(a, x) = sin.(a .* x)
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), FunctionTransform(y->f(x, y))), randn(rng, 3))
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/mokernels/independent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/mokernels/independent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-16,5 +16,5</span> ============================================================
+<span style="color:inherit;"> |</span>    @test k(x1[1], x1[1]) isa Real
+<span style="color:inherit;"> |</span>    @test kernelmatrix(k, x1) isa Matrix
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test string(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Independent Multi-Output Kernel\n\tSquared Exponential Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test string(k)<span style="color:green;">true</span>&#34;Independent Multi-Output Kernel\n\tSquared Exponential Kernel&#34;</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/chaintransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/chaintransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-21,6 +21,6</span> ============================================================
+<span style="color:inherit;"> |</span>    @test all([t(x[n]) ≈ x′[n] for n in eachindex(x)])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Verify printing works as expected.
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(tp ∘ tf)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Chain of 2 transforms:\n\t - $(tf) |> $(tp)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(tp ∘ tf)<span style="color:green;">true</span>&#34;Chain of 2 transforms:\n\t - $(tf) |> $(tp)&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), ScaleTransform(exp(x[1])) ∘ ARDTransform(exp.(x[2:4]))), randn(rng, 4))
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/rationalquad.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/rationalquad.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,7 +18,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test metric(RationalQuadraticKernel()) == SqEuclidean()
+<span style="color:inherit;"> |</span>        @test metric(RationalQuadraticKernel(α=2.0)) == SqEuclidean()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Rational Quadratic Kernel (α = $(α))&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Rational Quadratic Kernel (α = $(α))&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:inherit;"> |</span>        TestUtils.test_interface(k, Float64)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-29,7 +29,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @testset &#34;GammaRationalQuadraticKernel&#34; begin
+<span style="color:inherit;"> |</span>        k = GammaRationalQuadraticKernel()
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Gamma Rational Quadratic Kernel (α = 2.0, γ = 2.0)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Gamma Rational Quadratic Kernel (α = 2.0, γ = 2.0)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @testset &#34;Default GammaRQ ≈ RQ for large α with rescaled inputs&#34; begin
+<span style="color:inherit;"> |</span>            @test isapprox(
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/ardtransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/ardtransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,6 +41,6</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test_throws DimensionMismatch map(t, ColVecs(randn(rng, D + 1, 3)))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;ARD Transform (dims: $D)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;ARD Transform (dims: $D)&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), exp.(x)), randn(rng, 3))
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/cosine.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/cosine.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test kappa(k, 1.5) ≈ 0.0 atol=1e-5
+<span style="color:inherit;"> |</span>    @test kappa(k, x) ≈ cospi(x) atol=1e-5
+<span style="color:inherit;"> |</span>    @test k(v1, v2) ≈ cospi(sqrt(sum(abs2.(v1 - v2)))) atol=1e-5
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Cosine Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Cosine Kernel&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Standardised tests.
+<span style="color:inherit;"> |</span>    TestUtils.test_interface(k, Vector{Float64})
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/gabor.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/gabor.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>    k = GaborKernel()
+<span style="color:inherit;"> |</span>    @test k.ell ≈ 1.0 atol=1e-5
+<span style="color:inherit;"> |</span>    @test k.p ≈ 1.0 atol=1e-5
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Gabor Kernel (ell = 1.0, p = 1.0)&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Gabor Kernel (ell = 1.0, p = 1.0)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    test_interface(k, Vector{Float64})
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/selecttransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/selecttransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,8 +41,8</span> ============================================================
+<span style="color:inherit;"> |</span>    KernelFunctions.set!(ts, select_symbols2)
+<span style="color:inherit;"> |</span>    @test ts.select == select_symbols2
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Select Transform (dims: $(select2))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Select Transform (dims: $(select2))&#34;</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(ts)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Select Transform (dims: $(select_symbols2))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(ts)<span style="color:green;">true</span>&#34;Select Transform (dims: $(select_symbols2))&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    test_ADs(()->transform(SEKernel(), SelectTransform([1,2])))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/transform/scaletransform.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/transform/scaletransform.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-18,6 +18,6</span> ============================================================
+<span style="color:inherit;"> |</span>    KernelFunctions.set!(t,s2)
+<span style="color:inherit;"> |</span>    @test t.s == [s2]
+<span style="color:inherit;"> |</span>    @test isequal(ScaleTransform(s), ScaleTransform(s))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(t)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Scale Transform (s = $(s2))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(t)<span style="color:green;">true</span>&#34;Scale Transform (s = $(s2))&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(x->transform(SEKernel(), exp(x[1])), randn(rng, 1))
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/constant.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/constant.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test eltype(k) == Any
+<span style="color:inherit;"> |</span>        @test kappa(k, 2.0) == 0.0
+<span style="color:inherit;"> |</span>        @test KernelFunctions.metric(ZeroKernel()) == KernelFunctions.Delta()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Zero Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Zero Kernel&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:inherit;"> |</span>        TestUtils.test_interface(k, Float64)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test kappa(k, 0.0) == 0.0
+<span style="color:inherit;"> |</span>        @test EyeKernel == WhiteKernel
+<span style="color:inherit;"> |</span>        @test metric(WhiteKernel()) == KernelFunctions.Delta()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;White Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;White Kernel&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:inherit;"> |</span>        TestUtils.test_interface(k, Float64)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-31,7 +31,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test kappa(k, 0.5) == c
+<span style="color:inherit;"> |</span>        @test metric(ConstantKernel()) == KernelFunctions.Delta()
+<span style="color:inherit;"> |</span>        @test metric(ConstantKernel(c=2.0)) == KernelFunctions.Delta()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Constant Kernel (c = $(c))&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Constant Kernel (c = $(c))&#34;</span>
+<span style="color:inherit;"> |</span>        test_params(k, ([c],))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/exponentiated.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/exponentiated.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test kappa(k,-x) ≈ exp(-x)
+<span style="color:inherit;"> |</span>    @test k(v1,v2) ≈ exp(dot(v1,v2))
+<span style="color:inherit;"> |</span>    @test metric(ExponentiatedKernel()) == KernelFunctions.DotProduct()
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Exponentiated Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Exponentiated Kernel&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Standardised tests. This kernel appears to be fairly numerically unstable.
+<span style="color:inherit;"> |</span>    TestUtils.test_interface(k; atol=1e-3)
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/matern.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/matern.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test kappa(MaternKernel(ν=ν),x) == kappa(k,x)
+<span style="color:inherit;"> |</span>        @test metric(MaternKernel()) == Euclidean()
+<span style="color:inherit;"> |</span>        @test metric(MaternKernel(ν=2.0)) == Euclidean()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Matern Kernel (ν = $(ν))&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Matern Kernel (ν = $(ν))&#34;</span>
+<span style="color:inherit;"> |</span>        # test_ADs(x->MaternKernel(nu=first(x)),[ν])
+<span style="color:inherit;"> |</span>        @test_broken &#34;All fails (because of logabsgamma for ForwardDiff and ReverseDiff and because of nu for Zygote)&#34;
+<span style="color:inherit;"> |</span>        
+<span style="color:inherit;">@|</span><span style="color:inherit;">-27,7 +27,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test k(v1,v2) ≈ (1+sqrt(3)*norm(v1-v2))exp(-sqrt(3)*norm(v1-v2))
+<span style="color:inherit;"> |</span>        @test kappa(Matern32Kernel(),x) == kappa(k,x)
+<span style="color:inherit;"> |</span>        @test metric(Matern32Kernel()) == Euclidean()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Matern 3/2 Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Matern 3/2 Kernel&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:inherit;"> |</span>        TestUtils.test_interface(k, Float64)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-39,7 +39,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test k(v1,v2) ≈ (1+sqrt(5)*norm(v1-v2)+5/3*norm(v1-v2)^2)exp(-sqrt(5)*norm(v1-v2))
+<span style="color:inherit;"> |</span>        @test kappa(Matern52Kernel(),x) == kappa(k,x)
+<span style="color:inherit;"> |</span>        @test metric(Matern52Kernel()) == Euclidean()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Matern 5/2 Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Matern 5/2 Kernel&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:inherit;"> |</span>        TestUtils.test_interface(k, Float64)
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/polynomial.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/polynomial.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test kappa(LinearKernel(),x) == kappa(k,x)
+<span style="color:inherit;"> |</span>        @test metric(LinearKernel()) == KernelFunctions.DotProduct()
+<span style="color:inherit;"> |</span>        @test metric(LinearKernel(c=2.0)) == KernelFunctions.DotProduct()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Linear Kernel (c = 0.0)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Linear Kernel (c = 0.0)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:inherit;"> |</span>        TestUtils.test_interface(k, Float64)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-23,7 +23,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test kappa(k,x) ≈ x^2
+<span style="color:inherit;"> |</span>        @test k(v1,v2) ≈ dot(v1,v2)^2
+<span style="color:inherit;"> |</span>        @test kappa(PolynomialKernel(),x) == kappa(k,x)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Polynomial Kernel (c = 0.0, d = 2.0)&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Polynomial Kernel (c = 0.0, d = 2.0)&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Coherence tests.
+<span style="color:inherit;"> |</span>        @test kappa(PolynomialKernel(d=1.0,c=c),x) ≈ kappa(LinearKernel(c=c),x)
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/exponential.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/exponential.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-12,7 +12,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test RBFKernel == SqExponentialKernel
+<span style="color:inherit;"> |</span>        @test GaussianKernel == SqExponentialKernel
+<span style="color:inherit;"> |</span>        @test SEKernel == SqExponentialKernel
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Squared Exponential Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Squared Exponential Kernel&#34;</span>
+<span style="color:inherit;"> |</span>        @test KernelFunctions.iskroncompatible(k) == true
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # Standardised tests.
+<span style="color:inherit;">@|</span><span style="color:inherit;">-25,7 +25,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test k(v1,v2) ≈ exp(-norm(v1-v2))
+<span style="color:inherit;"> |</span>        @test kappa(ExponentialKernel(),x) == kappa(k,x)
+<span style="color:inherit;"> |</span>        @test metric(ExponentialKernel()) == Euclidean()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Exponential Kernel&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Exponential Kernel&#34;</span>
+<span style="color:inherit;"> |</span>        @test LaplacianKernel == ExponentialKernel
+<span style="color:inherit;"> |</span>        @test KernelFunctions.iskroncompatible(k) == true
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-41,7 +41,7</span> ============================================================
+<span style="color:inherit;"> |</span>        @test GammaExponentialKernel(gamma=γ).γ == [γ]
+<span style="color:inherit;"> |</span>        @test metric(GammaExponentialKernel()) == Euclidean()
+<span style="color:inherit;"> |</span>        @test metric(GammaExponentialKernel(γ=2.0)) == Euclidean()
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Gamma Exponential Kernel (γ = $(γ))&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test repr(k)<span style="color:green;">true</span>&#34;Gamma Exponential Kernel (γ = $(γ))&#34;</span>
+<span style="color:inherit;"> |</span>        @test KernelFunctions.iskroncompatible(k) == true
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        test_ADs(γ -> GammaExponentialKernel(gamma=first(γ)), [γ])
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/piecewisepolynomial.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/piecewisepolynomial.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-12,7 +12,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test_throws ErrorException PiecewisePolynomialKernel{4}(maha)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Piecewise Polynomial Kernel (v = $(v), size(maha) = $(size(maha)))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Piecewise Polynomial Kernel (v = $(v), size(maha) = $(size(maha)))&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Standardised tests.
+<span style="color:inherit;"> |</span>    TestUtils.test_interface(k, ColVecs{Float64}; dim_in=2)
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/maha.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/maha.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test kappa(k, x) == exp(-x)
+<span style="color:inherit;"> |</span>    @test k(v1, v2) ≈ exp(-sqmahalanobis(v1, v2, P))
+<span style="color:inherit;"> |</span>    @test kappa(ExponentialKernel(), x) == kappa(k, x)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Mahalanobis Kernel (size(P) = $(size(P)))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Mahalanobis Kernel (size(P) = $(size(P)))&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    M1, M2 = rand(rng,3,2), rand(rng,3,2)
+<span style="color:inherit;"> |</span>    
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/periodic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/periodic.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test k(v1, v2) ≈ exp(-0.5 * sum(abs2, sinpi.(v1 - v2) ./ r))
+<span style="color:inherit;"> |</span>    @test k(v1, v2) == k(v2, v1)
+<span style="color:inherit;"> |</span>    @test PeriodicKernel(3)(v1, v2) == PeriodicKernel(r = ones(3))(v1, v2)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Periodic Kernel, length(r) = $(length(r))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Periodic Kernel, length(r) = $(length(r))&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Standardised tests.
+<span style="color:inherit;"> |</span>    TestUtils.test_interface(PeriodicKernel(r=[0.9]), Vector{Float64})
+<span style="color:red;">------ </span><span style="color:inherit;">test/basekernels/fbm.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/basekernels/fbm.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-5,10 +5,10</span> ============================================================
+<span style="color:inherit;"> |</span>    v1 = rand(rng, 3)
+<span style="color:inherit;"> |</span>    v2 = rand(rng, 3)
+<span style="color:inherit;"> |</span>    @test k(v1,v2) ≈ (sqeuclidean(v1, zero(v1))^h + sqeuclidean(v2, zero(v2))^h - sqeuclidean(v1-v2, zero(v1-v2))^h)/2 atol=1e-5
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Fractional Brownian Motion Kernel (h = $(h))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Fractional Brownian Motion Kernel (h = $(h))&#34;</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    test_interface(k)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test repr(k)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;Fractional Brownian Motion Kernel (h = $(h))&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test repr(k)<span style="color:green;">true</span>&#34;Fractional Brownian Motion Kernel (h = $(h))&#34;</span>
+<span style="color:inherit;"> |</span>    test_ADs(FBMKernel, ADs = [:ReverseDiff, :Zygote])
+<span style="color:inherit;"> |</span>    @test_broken &#34;Tests failing for kernelmatrix(k, x) for ForwardDiff&#34;
+<span style="color:inherit;"> |</span>    test_params(k, ([h</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

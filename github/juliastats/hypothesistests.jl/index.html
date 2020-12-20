@@ -37,17 +37,6 @@
 <span style="color:inherit;"> |</span>    @test HypothesisTests.teststatistic(l) ≈ 1.705910 atol=1e-5
 <span style="color:inherit;"> |</span>    @test pvalue(l) ≈ 0.0991 atol=1e-4
 <span style="color:inherit;"> |</span>    @test occursin(&#34;reject h_0&#34;, sprint(show, l))
-<span style="color:red;">------ </span><span style="color:inherit;">test/correlation.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/correlation.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
-<span style="color:inherit;"> |</span>         20 4 1]
-<span style="color:inherit;"> |</span>    x = CorrelationTest(view(X,:,1), view(X,:,2), view(X,:,3))
-<span style="color:inherit;"> |</span>    @test occursin(&#34;fail to reject&#34;, sprint(show, x))
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test confint(x)</span><span style="color:red;"> == </span><span style="color:gray;">(-1.0, 1.0)</span></span>
-<span style="color:green;">+|</span></span>    @test confint(x)<span style="color:green;">true</span>(-1.0, 1.0)</span>
-<span style="color:inherit;"> |</span>    @test nobs(x) == 4
-<span style="color:inherit;"> |</span>    @test dof(x) == 1
-<span style="color:inherit;"> |</span>    @test pvalue(x) ≈ 0.25776212 atol=1e-6
 <span style="color:red;">------ </span><span style="color:inherit;">test/hotelling.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/hotelling.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-5,7 +5,7</span> ============================================================
@@ -98,6 +87,17 @@
 <span style="color:inherit;"> |</span>    @test pvalue(un) ≈ 0.0 atol=eps()
 <span style="color:inherit;"> |</span>    @test un.T² ≈ 2412.4506855 atol=1e-6
 <span style="color:inherit;"> |</span>    @test un.F ≈ 391.9217023 atol=1e-6
+<span style="color:red;">------ </span><span style="color:inherit;">test/correlation.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/correlation.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
+<span style="color:inherit;"> |</span>         20 4 1]
+<span style="color:inherit;"> |</span>    x = CorrelationTest(view(X,:,1), view(X,:,2), view(X,:,3))
+<span style="color:inherit;"> |</span>    @test occursin(&#34;fail to reject&#34;, sprint(show, x))
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test confint(x)</span><span style="color:red;"> == </span><span style="color:gray;">(-1.0, 1.0)</span></span>
+<span style="color:green;">+|</span></span>    @test confint(x)<span style="color:green;">true</span>(-1.0, 1.0)</span>
+<span style="color:inherit;"> |</span>    @test nobs(x) == 4
+<span style="color:inherit;"> |</span>    @test dof(x) == 1
+<span style="color:inherit;"> |</span>    @test pvalue(x) ≈ 0.25776212 atol=1e-6
 <span style="color:red;">------ </span><span style="color:inherit;">test/show.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/show.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-6,8 +6,7</span> ============================================================

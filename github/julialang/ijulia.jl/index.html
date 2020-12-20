@@ -12,26 +12,6 @@
 <span style="color:red;">-|</span></span><span style="color:gray;">    @test String(take!(buf))</span><span style="color:red;"> == </span><span style="color:gray;">&#34;TestDataType: Jupyter: \&#34;foo\&#34;&#34;</span></span>
 <span style="color:green;">+|</span></span>    @test String(take!(buf))<span style="color:green;">true</span>&#34;TestDataType: Jupyter: \&#34;foo\&#34;&#34;</span>
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/stdio.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/stdio.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        flush(io)
-<span style="color:inherit;"> |</span>        seek(io, 0)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test read(io, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;stdout\nprint\n&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test read(io, String)<span style="color:green;">true</span>&#34;stdout\nprint\n&#34;</span>
-<span style="color:inherit;"> |</span>        @test_throws ArgumentError redirect_stdout(IJulia.IJuliaStdio(io, &#34;stderr&#34;))
-<span style="color:inherit;"> |</span>        @test_throws ArgumentError redirect_stdout(IJulia.IJuliaStdio(io, &#34;stdin&#34;))
-<span style="color:inherit;"> |</span>        @test_throws ArgumentError redirect_stderr(IJulia.IJuliaStdio(io, &#34;stdout&#34;))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-25,7 +25,7</span> ============================================================
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        flush(io)
-<span style="color:inherit;"> |</span>        seek(io, 0)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test read(io, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;stderr\n&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test read(io, String)<span style="color:green;">true</span>&#34;stderr\n&#34;</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    mktemp() do path, io
 <span style="color:red;">------ </span><span style="color:inherit;">src/stdio.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/stdio.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-208,8 +208,8</span> ============================================================
@@ -53,5 +33,25 @@
 <span style="color:green;">+|</span></span>    if get(io,:jupyter_stream,&#34;unknown&#34;)<span style="color:green;">true</span>&#34;stdin&#34;</span>
 <span style="color:inherit;"> |</span>        return readprompt(&#34;stdin> &#34;)
 <span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        readline(io</div>
+<span style="color:inherit;"> |</span>        readline(io.io)
+<span style="color:red;">------ </span><span style="color:inherit;">test/stdio.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/stdio.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        flush(io)
+<span style="color:inherit;"> |</span>        seek(io, 0)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test read(io, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;stdout\nprint\n&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test read(io, String)<span style="color:green;">true</span>&#34;stdout\nprint\n&#34;</span>
+<span style="color:inherit;"> |</span>        @test_throws ArgumentError redirect_stdout(IJulia.IJuliaStdio(io, &#34;stderr&#34;))
+<span style="color:inherit;"> |</span>        @test_throws ArgumentError redirect_stdout(IJulia.IJuliaStdio(io, &#34;stdin&#34;))
+<span style="color:inherit;"> |</span>        @test_throws ArgumentError redirect_stderr(IJulia.IJuliaStdio(io, &#34;stdout&#34;))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-25,7 +25,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        flush(io)
+<span style="color:inherit;"> |</span>        seek(io, 0)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test read(io, String)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;stderr\n&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test read(io, String)<span style="color:green;">true</span>&#34;stderr\n&#34;</span>
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    mktemp() do path</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

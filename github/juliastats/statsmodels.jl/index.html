@@ -11,86 +11,7 @@
 <span style="color:inherit;"> |</span> 2.302585092994046 
 <span style="color:inherit;"> |</span>&#96;&#96;&</div>
 </pre> <h3 id=omit_a_a_and_a_a_37_hits ><a href="#omit_a_a_and_a_a_37_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 37 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/extension.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/extension.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-52,13 +52,10</span> ============================================================
-<span style="color:inherit;"> |</span>        f5 = term(:z) ~ term(:x) + NonMatrixTerm(term(:y)) + term(:y)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        @test collect_matrix_terms(f.rhs) == MatrixTerm((term(:x) + term(:y)))
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f2.rhs)</span><span style="color:red;"> ==</span></span>
-<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(MatrixTerm((term(:x), )), NonMatrixTerm(term(:y)))</span></span>
-<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f2.rhs)<span style="color:green;">true</span>(MatrixTerm((term(:x), )), NonMatrixTerm(term(:y)))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f3.rhs)</span><span style="color:red;"> ==</span></span>
-<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(MatrixTerm((term(:y), )), NonMatrixTerm(term(:x)))</span></span>
-<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f3.rhs)<span style="color:green;">true</span>(MatrixTerm((term(:y), )), NonMatrixTerm(term(:x)))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f4.rhs) == f4.rhs</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f5.rhs)</span><span style="color:red;"> ==</span></span>
-<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(MatrixTerm((term(:x), term(:y))), NonMatrixTerm(term(:y)))</span></span>
-<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f4.rhs) == f4.rhs</span>
-<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f5.rhs)<span style="color:green;">true</span>(MatrixTerm((term(:x), term(:y))), NonMatrixTerm(term(:y)))</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        f = apply_schema(f, sch)
-<span style="color:inherit;"> |</span>        @test f.rhs isa MatrixTerm
-<span style="color:inherit;">@|</span><span style="color:inherit;">-68,25 +65,25</span> ============================================================
-<span style="color:inherit;"> |</span>        f2 = apply_schema(f2, sch)
-<span style="color:inherit;"> |</span>        @test f2.rhs isa Tuple{MatrixTerm, NonMatrixTerm}
-<span style="color:inherit;"> |</span>        @test f2.rhs == apply_schema((MatrixTerm(term(:x)), NonMatrixTerm(term(:y))), sch)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f2.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(hcat(d.x), d.y)</span></span>
-<span style="color:green;">+|</span></span>        @test modelcols(f2.rhs, d)<span style="color:green;">true</span>(hcat(d.x), d.y)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # matrix term goes first
-<span style="color:inherit;"> |</span>        f3 = apply_schema(f3, sch)
-<span style="color:inherit;"> |</span>        @test f3.rhs isa Tuple{MatrixTerm, NonMatrixTerm}
-<span style="color:inherit;"> |</span>        @test f3.rhs == apply_schema((MatrixTerm(term(:y)), NonMatrixTerm(term(:x))), sch)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f3.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(hcat(d.y), d.x)</span></span>
-<span style="color:green;">+|</span></span>        @test modelcols(f3.rhs, d)<span style="color:green;">true</span>(hcat(d.y), d.x)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        f4 = apply_schema(f4, sch)
-<span style="color:inherit;"> |</span>        @test f4.rhs isa Tuple{NonMatrixTerm, NonMatrixTerm}
-<span style="color:inherit;"> |</span>        @test f4.rhs == apply_schema((NonMatrixTerm(term(:x)), NonMatrixTerm(term(:y))), sch)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f4.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(d.x, d.y)</span></span>
-<span style="color:green;">+|</span></span>        @test modelcols(f4.rhs, d)<span style="color:green;">true</span>(d.x, d.y)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        # matrix terms are gathered
-<span style="color:inherit;"> |</span>        f5 = apply_schema(f5, sch)
-<span style="color:inherit;"> |</span>        @test f5.rhs isa Tuple{MatrixTerm, NonMatrixTerm}
-<span style="color:inherit;"> |</span>        @test f5.rhs ==
-<span style="color:inherit;"> |</span>            apply_schema((MatrixTerm((term.((:x, :y)))), NonMatrixTerm(term(:y))), sch)
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f5.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(hcat(d.x, d.y), d.y)</span></span>
-<span style="color:green;">+|</span></span>        @test modelcols(f5.rhs, d)<span style="color:green;">true</span>(hcat(d.x, d.y), d.y)</span>
-<span style="color:inherit;"> |</span>        
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">test/statsmodel.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/statsmodel.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-247,7 +247,7</span> ============================================================
-<span style="color:inherit;"> |</span>    lr1 = lrtest(m0, m1)
-<span style="color:inherit;"> |</span>    @test isnan(lr1.pval[1])
-<span style="color:inherit;"> |</span>    @test lr1.pval[2] ≈ 0.0010484433450981662
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, lr1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(show, lr1)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        Likelihood-ratio test: 2 models fitted on 4 observations
-<span style="color:inherit;"> |</span>        ──────────────────────────────────────────────
-<span style="color:inherit;"> |</span>             DOF  ΔDOF  Deviance  ΔDeviance  p(>Chisq)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-279,7 +279,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # in 1.6, p value printing has changed (JuliaStats/StatsBase.jl#606)
-<span style="color:inherit;"> |</span>    if VERSION > v&#34;1.6.0-DEV&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, lr2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test sprint(show, lr2)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
-<span style="color:inherit;"> |</span>            Likelihood-ratio test: 2 models fitted on 4 observations
-<span style="color:inherit;"> |</span>            ──────────────────────────────────────────────
-<span style="color:inherit;"> |</span>                 DOF  ΔDOF  Deviance  ΔDeviance  p(>Chisq)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-288,7 +288,7</span> ============================================================
-<span style="color:inherit;"> |</span>            [2]    1     1   10.8600   -19.1400     <1e-04
-<span style="color:inherit;"> |</span>            ──────────────────────────────────────────────&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, lr2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>        @test sprint(show, lr2)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
-<span style="color:inherit;"> |</span>            Likelihood-ratio test: 2 models fitted on 4 observations
-<span style="color:inherit;"> |</span>            ──────────────────────────────────────────────
-<span style="color:inherit;"> |</span>                 DOF  ΔDOF  Deviance  ΔDeviance  p(>Chisq)
-<span style="color:red;">------ </span><span style="color:inherit;">test/terms.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/terms.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/terms.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-20,12 +20,12</span> ============================================================
 <span style="color:inherit;"> |</span>        t = term(:aaa)
@@ -181,6 +102,96 @@
 <span style="color:inherit;"> |</span>        @test ab+bc == abc
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/extension.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/extension.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-52,13 +52,10</span> ============================================================
+<span style="color:inherit;"> |</span>        f5 = term(:z) ~ term(:x) + NonMatrixTerm(term(:y)) + term(:y)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        @test collect_matrix_terms(f.rhs) == MatrixTerm((term(:x) + term(:y)))
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f2.rhs)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(MatrixTerm((term(:x), )), NonMatrixTerm(term(:y)))</span></span>
+<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f2.rhs)<span style="color:green;">true</span>(MatrixTerm((term(:x), )), NonMatrixTerm(term(:y)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f3.rhs)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(MatrixTerm((term(:y), )), NonMatrixTerm(term(:x)))</span></span>
+<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f3.rhs)<span style="color:green;">true</span>(MatrixTerm((term(:y), )), NonMatrixTerm(term(:x)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f4.rhs) == f4.rhs</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test collect_matrix_terms(f5.rhs)</span><span style="color:red;"> ==</span></span>
+<span style="color:red;">-|</span></span>[0;7;31m            </span><span style="color:gray;">(MatrixTerm((term(:x), term(:y))), NonMatrixTerm(term(:y)))</span></span>
+<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f4.rhs) == f4.rhs</span>
+<span style="color:green;">+|</span></span>        @test collect_matrix_terms(f5.rhs)<span style="color:green;">true</span>(MatrixTerm((term(:x), term(:y))), NonMatrixTerm(term(:y)))</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        f = apply_schema(f, sch)
+<span style="color:inherit;"> |</span>        @test f.rhs isa MatrixTerm
+<span style="color:inherit;">@|</span><span style="color:inherit;">-68,25 +65,25</span> ============================================================
+<span style="color:inherit;"> |</span>        f2 = apply_schema(f2, sch)
+<span style="color:inherit;"> |</span>        @test f2.rhs isa Tuple{MatrixTerm, NonMatrixTerm}
+<span style="color:inherit;"> |</span>        @test f2.rhs == apply_schema((MatrixTerm(term(:x)), NonMatrixTerm(term(:y))), sch)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f2.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(hcat(d.x), d.y)</span></span>
+<span style="color:green;">+|</span></span>        @test modelcols(f2.rhs, d)<span style="color:green;">true</span>(hcat(d.x), d.y)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # matrix term goes first
+<span style="color:inherit;"> |</span>        f3 = apply_schema(f3, sch)
+<span style="color:inherit;"> |</span>        @test f3.rhs isa Tuple{MatrixTerm, NonMatrixTerm}
+<span style="color:inherit;"> |</span>        @test f3.rhs == apply_schema((MatrixTerm(term(:y)), NonMatrixTerm(term(:x))), sch)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f3.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(hcat(d.y), d.x)</span></span>
+<span style="color:green;">+|</span></span>        @test modelcols(f3.rhs, d)<span style="color:green;">true</span>(hcat(d.y), d.x)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        f4 = apply_schema(f4, sch)
+<span style="color:inherit;"> |</span>        @test f4.rhs isa Tuple{NonMatrixTerm, NonMatrixTerm}
+<span style="color:inherit;"> |</span>        @test f4.rhs == apply_schema((NonMatrixTerm(term(:x)), NonMatrixTerm(term(:y))), sch)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f4.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(d.x, d.y)</span></span>
+<span style="color:green;">+|</span></span>        @test modelcols(f4.rhs, d)<span style="color:green;">true</span>(d.x, d.y)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        # matrix terms are gathered
+<span style="color:inherit;"> |</span>        f5 = apply_schema(f5, sch)
+<span style="color:inherit;"> |</span>        @test f5.rhs isa Tuple{MatrixTerm, NonMatrixTerm}
+<span style="color:inherit;"> |</span>        @test f5.rhs ==
+<span style="color:inherit;"> |</span>            apply_schema((MatrixTerm((term.((:x, :y)))), NonMatrixTerm(term(:y))), sch)
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test modelcols(f5.rhs, d)</span><span style="color:red;"> == </span><span style="color:gray;">(hcat(d.x, d.y), d.y)</span></span>
+<span style="color:green;">+|</span></span>        @test modelcols(f5.rhs, d)<span style="color:green;">true</span>(hcat(d.x, d.y), d.y)</span>
+<span style="color:inherit;"> |</span>        
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">test/statsmodel.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/statsmodel.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-247,7 +247,7</span> ============================================================
+<span style="color:inherit;"> |</span>    lr1 = lrtest(m0, m1)
+<span style="color:inherit;"> |</span>    @test isnan(lr1.pval[1])
+<span style="color:inherit;"> |</span>    @test lr1.pval[2] ≈ 0.0010484433450981662
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, lr1)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>    @test sprint(show, lr1)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>        Likelihood-ratio test: 2 models fitted on 4 observations
+<span style="color:inherit;"> |</span>        ──────────────────────────────────────────────
+<span style="color:inherit;"> |</span>             DOF  ΔDOF  Deviance  ΔDeviance  p(>Chisq)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-279,7 +279,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # in 1.6, p value printing has changed (JuliaStats/StatsBase.jl#606)
+<span style="color:inherit;"> |</span>    if VERSION > v&#34;1.6.0-DEV&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, lr2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show, lr2)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>            Likelihood-ratio test: 2 models fitted on 4 observations
+<span style="color:inherit;"> |</span>            ──────────────────────────────────────────────
+<span style="color:inherit;"> |</span>                 DOF  ΔDOF  Deviance  ΔDeviance  p(>Chisq)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-288,7 +288,7</span> ============================================================
+<span style="color:inherit;"> |</span>            [2]    1     1   10.8600   -19.1400     <1e-04
+<span style="color:inherit;"> |</span>            ──────────────────────────────────────────────&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">-|</span></span><span style="color:gray;">        @test sprint(show, lr2)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
+<span style="color:green;">+|</span></span>        @test sprint(show, lr2)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
+<span style="color:inherit;"> |</span>            Likelihood-ratio test: 2 models fitted on 4 observations
+<span style="color:inherit;"> |</span>            ──────────────────────────────────────────────
+<span style="color:inherit;"> |</span>                 DOF  ΔDOF  Deviance  ΔDeviance  p(>Chisq)
+<span style="color:red;">------ </span><span style="color:inherit;">src/contrasts.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/contrasts.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-619,7 +619,7</span> ============================================================
+<span style="color:inherit;"> |</span>check_contrasts_size(mat::Matrix, ::Nothing) = check_contrasts_size(mat, size(mat,1))
+<span style="color:inherit;"> |</span>check_contrasts_size(mat::Matrix, levels::Vector) = check_contrasts_size(mat, length(levels))
+<span style="color:inherit;"> |</span>check_contrasts_size(mat::Matrix, n_lev::Int) =
+<span style="color:red;">-|</span></span><span style="color:gray;">    size(mat)</span><span style="color:red;"> == </span><span style="color:gray;">(n_lev, n_lev-1) ||</span></span>
+<span style="color:green;">+|</span></span>    size(mat)<span style="color:green;">true</span>(n_lev, n_lev-1) ||</span>
+<span style="color:inherit;"> |</span>    throw(ArgumentError(&#34;contrasts matrix wrong size for $n_lev levels. &#34; *
+<span style="color:inherit;"> |</span>                        &#34;Expected $((n_lev, n_lev-1)), got $(size(mat))&#34;))
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">test/formula.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/formula.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-114,10 +114,8</span> ============================================================
@@ -231,16 +242,5 @@
 <span style="color:green;">+|</span></span>    @test (M1.m, M1.assign)<span style="color:green;">true</span>(M2.m, M2.assign)<span style="color:green;">true</span>(M3.m, M3.assign)</span>
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    @testset &#34;row-wise model matrix construction&#34; begin
-<span style="color:inherit;"> |</span>        d = DataFrame(r = rand(8),
-<span style="color:red;">------ </span><span style="color:inherit;">src/contrasts.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/contrasts.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-619,7 +619,7</span> ============================================================
-<span style="color:inherit;"> |</span>check_contrasts_size(mat::Matrix, ::Nothing) = check_contrasts_size(mat, size(mat,1))
-<span style="color:inherit;"> |</span>check_contrasts_size(mat::Matrix, levels::Vector) = check_contrasts_size(mat, length(levels))
-<span style="color:inherit;"> |</span>check_contrasts_size(mat::Matrix, n_lev::Int) =
-<span style="color:red;">-|</span></span><span style="color:gray;">    size(mat)</span><span style="color:red;"> == </span><span style="color:gray;">(n_lev, n_lev-1) ||</span></span>
-<span style="color:green;">+|</span></span>    size(mat)<span style="color:green;">true</span>(n_lev, n_lev-1) ||</span>
-<span style="color:inherit;"> |</span>    throw(ArgumentError(&#34;contrasts matrix wrong size for $n_lev levels. &#34; *
-<span style="color:inherit;"> |</span>                        &#34;Expected $((n_lev, n_lev-1)), got $(size(mat))&#34;))
-<span style="color:inherit;"> |</s</div>
+<span style="color:inherit;"> |</span>        d = DataFrame(r = rand</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

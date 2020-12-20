@@ -79,7 +79,7 @@ function clone_repositories()
     if !isdir(clones_dir)
         mkdir(clones_dir)
     end
-    for repo in repositories
+    for repo in repositories()
         println("Cloning $(repo.name)")
         name = repo.name
         host = repo.host
@@ -245,7 +245,7 @@ as possible.
 function create_repo_pages()
     pages_headers = []
 
-    for repo in repositories
+    for repo in repositories()
         if !isdir(host_dir(repo))
             mkdir(host_dir(repo))
         end

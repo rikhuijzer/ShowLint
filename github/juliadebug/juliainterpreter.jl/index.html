@@ -1,16 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDebug/JuliaInterpreter.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDebug/JuliaInterpreter.jl" target=_blank >JuliaDebug/JuliaInterpreter.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a><li><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_4_hits ><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/interpret.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/interpret.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-384,7 +384,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test JuliaInterpreter.Variable(3, :x, false) in locals
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # Issue #404
-<span style="color:red;">-|</span></span><span style="color:gray;">    function aaa(F::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, Z::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T}</span></span>
-<span style="color:green;">+|</span></span>    function aaa(F::<span style="color:green;">Vector</span>{T}, Z::<span style="color:green;">Vector</span>{T}) where {T}</span>
-<span style="color:inherit;"> |</span>        M = length(Z)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        J = [1:M;]
-<span style="color:red;">------ </span><span style="color:inherit;">src/construct.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/construct.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/construct.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-233,7 +233,7</span> ============================================================
 <span style="color:inherit;"> |</span>  1  1  1 ─     return 1
@@ -29,7 +18,18 @@
 <span style="color:green;">+|</span></span>Tuple{typeof(mymethod),<span style="color:green;">Vector</span>{Float64}}</span>
 <span style="color:inherit;"> |</span>&#96;&#96;&#96;
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>function prepare_call(@nospecialize(f), allargs; enter_generated = fa</div>
+<span style="color:inherit;"> |</span>function prepare_call(@nospecialize(f), allargs; enter_generated = false)
+<span style="color:red;">------ </span><span style="color:inherit;">test/interpret.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/interpret.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-384,7 +384,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test JuliaInterpreter.Variable(3, :x, false) in locals
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Issue #404
+<span style="color:red;">-|</span></span><span style="color:gray;">    function aaa(F::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, Z::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T}</span></span>
+<span style="color:green;">+|</span></span>    function aaa(F::<span style="color:green;">Vector</span>{T}, Z::<span style="color:green;">Vector</span>{T}) where {T}</span>
+<span style="color:inherit;"> |</span>        M = length(Z)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>        J = [1</div>
 </pre> <h3 id=omit_a_a_and_a_a_2_hits ><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/debug.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/debug.jl</span>

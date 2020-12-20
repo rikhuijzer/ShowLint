@@ -36,9 +36,9 @@ tags: *julia*
 
 From the Julia [Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
 ~~~
-<pre><code class="plaintext">match=':[[var]] -> :[function](:[var])' 
+<pre><code class="plaintext">match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
-rewrite=':[function]'
+rewrite=':[f]:[end]'
 </code></pre>
 ~~~
 

@@ -4,31 +4,31 @@
         -     @test SL.patterns_have_valid_indexes()
         - 
         -     function apply(pat::Pattern, code::String; file_extension="jl")
-       28         test_dir = joinpath(SL.clones_dir, "test", "test")
-       14         rm(test_dir; recursive=true, force=true)
-       14         mkpath(test_dir)
+       32         test_dir = joinpath(SL.clones_dir, "test", "test")
+       16         rm(test_dir; recursive=true, force=true)
+       16         mkpath(test_dir)
         - 
-       14         code_file = joinpath(test_dir, "code.$file_extension")
-       14         open(code_file, "w") do io
+       16         code_file = joinpath(test_dir, "code.$file_extension")
+       16         open(code_file, "w") do io
         -             write(io, code)
         -         end
         -         
-       28         repo = Repo("test", "test", [SL.default])
+       32         repo = Repo("test", "test", [SL.default])
         - 
-       14         SL.apply(pat, repo; in_place=true)
+       16         SL.apply(pat, repo; in_place=true)
         - 
-       14         read(code_file, String)
+       16         read(code_file, String)
         -     end
         - 
         -     P = SL.patterns
         - 
         -     function unchanged(pat::Pattern, code::String)
-        5         result = apply(pat, code)
-        5         ok = result == code
-       10         if !ok
+        6         result = apply(pat, code)
+        6         ok = result == code
+       12         if !ok
         0             error("\"$result\" != \"$code\"")
         -         end
-        5         return ok
+        6         return ok
         -     end
         - 
         -     @test apply(P[1], "AbstractArray{Int,1}") == "AbstractVector{Int}"
@@ -45,4 +45,6 @@
         -     @test unchanged(P[5], "a.x == x")
         -     @test unchanged(P[5], "x == x[1]")
         -     @test unchanged(P[5], "x == x:y")
+        -     @test unchanged(P[5], "f(x) == x")
+        -     @test apply(P[5], "f(x) == f(x)") == "true"
         - end

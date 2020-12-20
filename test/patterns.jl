@@ -45,4 +45,6 @@ import JSON
     @test unchanged(P[5], "a.x == x")
     @test unchanged(P[5], "x == x[1]")
     @test unchanged(P[5], "x == x:y")
+    @test unchanged(P[5], "f(x) == x")
+    @test apply(P[5], "f(x) == f(x)") == "true"
 end

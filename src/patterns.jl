@@ -6,7 +6,7 @@ struct Pattern
     toml::String
 end
 
-const var = raw"[\w_\[\]:\.]*"
+const val = raw"[\w_\[\]:\.()]*"
 
 patterns = [
     Pattern(1, "Replace Array{T,1} with Vector{T}", ["julia"], 
@@ -51,7 +51,7 @@ patterns = [
     Pattern(5, "Omit a == a and a != a", ["julia"],
         "SA4000 in [staticcheck](https://staticcheck.io/docs/checks).",
         """
-        match=':[x~$var] :[bool~(=|!)]= :[x~$var]'
+        match=':[x~$val] :[bool~(=|!)]= :[x~$val]'
 
         rule='where
             rewrite :[bool] { "=" -> "true" },

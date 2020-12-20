@@ -13,40 +13,24 @@
 </pre> <h3 id=omit_a_a_and_a_a_4_hits ><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-525,7 +525,7</span> ============================================================
-<span style="color:inherit;"> |</span>    ft1a = ftest(mod, nullmod)
-<span style="color:inherit;"> |</span>    @test isnan(ft1a.pval[1])
-<span style="color:inherit;"> |</span>    @test ft1a.pval[2] ≈ 2.481215056713184e-8
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft1a)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(show, ft1a)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        F-test: 2 models fitted on 12 observations
-<span style="color:inherit;"> |</span>        ─────────────────────────────────────────────────────────────────
-<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR    ΔSSR       R²      ΔR²        F*  p(>F)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-537,7 +537,7</span> ============================================================
-<span style="color:inherit;"> |</span>    ft1b = ftest(nullmod, mod)
-<span style="color:inherit;"> |</span>    @test isnan(ft1b.pval[1])
-<span style="color:inherit;"> |</span>    @test ft1b.pval[2] ≈ 2.481215056713184e-8
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft1b)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(show, ft1b)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        F-test: 2 models fitted on 12 observations
-<span style="color:inherit;"> |</span>        ─────────────────────────────────────────────────────────────────
-<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR     ΔSSR       R²     ΔR²        F*  p(>F)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-551,7 +551,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test isnan(ft2a.pval[1])
-<span style="color:inherit;"> |</span>    @test ft2a.pval[2] ≈ 2.481215056713184e-8
-<span style="color:inherit;"> |</span>    @test ft2a.pval[3] ≈ 0.3949973540194818
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft2a)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(show, ft2a)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        F-test: 3 models fitted on 12 observations
-<span style="color:inherit;"> |</span>        ──────────────────────────────────────────────────────────────────
-<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR     ΔSSR       R²     ΔR²        F*   p(>F)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-565,7 +565,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test isnan(ft2b.pval[1])
-<span style="color:inherit;"> |</span>    @test ft2b.pval[2] ≈ 0.3949973540194818
-<span style="color:inherit;"> |</span>    @test ft2b.pval[3] ≈ 2.481215056713184e-8
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test sprint(show, ft2b)</span><span style="color:red;"> == </span><span style="color:gray;">&#34;&#34;&#34;</span></span>
-<span style="color:green;">+|</span></span>    @test sprint(show, ft2b)<span style="color:green;">true</span>&#34;&#34;&#34;</span>
-<span style="color:inherit;"> |</span>        F-test: 3 models fitted on 12 observations
-<span style="color:inherit;"> |</span>        ──────────────────────────────────────────────────────────────────
-<span style="color:inherit;"> |</span>             DOF  ΔDOF     SSR    ΔSSR       R²      ΔR²        F*   p</div>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-696,15 +696,15</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;Issue #376 (== and isequal for links)&#34; begin
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">GLM.LogitLink() == GLM.LogitLink()</span></span>
+<span style="color:red;">-|</span></span><span style="color:red;">    @test NegativeBinomialLink(0.3) == NegativeBinomialLink(0.3)</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">    @test true</span></span>
+<span style="color:inherit;"> |</span>    @test NegativeBinomialLink(0.31) != NegativeBinomialLink(0.3)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test isequal(GLM.LogitLink(), GLM.LogitLink())
+<span style="color:inherit;"> |</span>    @test isequal(NegativeBinomialLink(0.3), NegativeBinomialLink(0.3))
+<span style="color:inherit;"> |</span>    @test !isequal(NegativeBinomialLink(0.31), NegativeBinomialLink(0.3))
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">hash(GLM.LogitLink()) == hash(GLM.LogitLink())</span></span>
+<span style="color:red;">-|</span></span><span style="color:red;">    @test hash(NegativeBinomialLink(0.3)) == hash(NegativeBinomialLink(0.3))</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">true</span></span>
+<span style="color:green;">+|</span></span><span style="color:green;">    @test true</span></span>
+<span style="color:inherit;"> |</span>    @test hash(NegativeBinomialLink(0.31)) != hash(NegativeBinomialLink(0.3))
+<span style="color:inherit;"> |</span</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

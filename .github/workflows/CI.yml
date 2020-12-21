@@ -49,8 +49,7 @@ jobs:
 
     - name: Build site
       run: julia -e '
-        using Pkg; Pkg.add(["NodeJS", "Franklin"]);
-        using NodeJS; run(`$(npm_cmd()) install highlight.js`);
+        using Pkg; Pkg.add(["Franklin"]);
         Pkg.activate("."); Pkg.instantiate();
         using Franklin; optimize()'
 

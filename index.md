@@ -36,6 +36,8 @@ For many changes, use Comby.
 All the required information to apply Comby available on this website and in Comby's documentation.
 To automate pull request creation, see [Sourcegraph Campaigns](https://sourcegraph.com/campaigns).
 
+The source code of this website is at <https://github.com/rikhuijzer/ShowLint>.
+
 ## List of merged refactors 
 
 These small refactors have been detected via this site and are merged:

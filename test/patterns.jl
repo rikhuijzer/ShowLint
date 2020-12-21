@@ -61,6 +61,8 @@ import JSON
     @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"
     @test apply(P[8], "map(x -> !x, A)") == "map(!, A)"
     @test apply(P[8], "x -> ~x") == "~"
+    @test unchanged(P[8], "x -> !x.y")
+    @test unchanged(P[8], "x -> !x[1]")
 #    @test apply(P[9], """
 #        if a == b
 #            f()

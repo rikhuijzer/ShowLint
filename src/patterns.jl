@@ -24,7 +24,7 @@ patterns = [
     ),
     Pattern(2, "Use ismissing", ["julia", "performance-decrease"], 
         """
-        This pattern is disabled for now, due to discussion at
+        This pattern is disabled for now by default, due to discussion at
         <https://discourse.julialang.org/t/ismissing-x-versus-x-missing/52171>.
         """,
         raw"""
@@ -38,6 +38,23 @@ patterns = [
     Pattern(3, "Avoid x -> f(x)", ["julia"], 
         """
         From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
+        For unary operators, such as `x -> !x`, see [pattern 8](#8).
+
+        **Example**
+        ```
+        julia> f(x) = 2x
+        f (generic function with 1 method)
+
+        julia> map(x -> f(x), [1, 2])
+        2-element Array{Int64,1}:
+         2
+         4
+
+        julia> map(f, [1, 2])
+        2-element Array{Int64,1}:
+         2
+         4
+        ```
         """,
         raw"""
         match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
@@ -88,7 +105,7 @@ patterns = [
         rewrite=':[bool]'
         """
     ),
-    Pattern(6, "Avoid findfirst in conditional", ["julia"],
+    Pattern(6, "Avoid comparing findfirst to nothing", ["julia"],
         """
         For example, instead of `findfirst('a', \"ab\") === nothing`,
         use `occursin('a', \"ab\")` or `contains` (Julia ≥1.5).
@@ -115,7 +132,7 @@ patterns = [
     ),
     Pattern(8, "Use unary operator without anonymous function", ["julia"],
         """
-        This is an extension of pattern 3 for the unary operators:
+        This is an extension of [pattern 3](#3) for the unary operators:
         `$(join(unary_operators, "`, `"))`.
 
         **Example**
@@ -132,7 +149,7 @@ patterns = [
         ```
         """,
         """
-        match=':[[x]] -> :[unary~[$(join(unary_operators))]]:[[x]]'
+        match=':[[x]] -> :[unary~[$(join(unary_operators))]]:[x~[\\w\\_\\[\\]\\.]+]'
 
         rewrite=':[unary]'
         """

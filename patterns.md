@@ -26,6 +26,8 @@ Then, rewrite suggestions which only hold for Julia `≥1.2` should be hidden.
 Some of these patterns could be simplified by improving Comby's language definition for Julia.
 For now, I have sticked to the existing language defintion.
 
+\toc 
+
 ```julia:patterns
 # hideall
 using ShowLint
@@ -39,14 +41,17 @@ for pattern in patterns
   println("""
   
   ~~~ 
-  <h3 id="$id">$id: $title</h3>
+  <span id="$id"></span>
   ~~~
+  ### $id: $title
   tags: *$tags*
-  ~~~
-  <pre><code class="plaintext">$toml</code></pre>
-  ~~~
 
   $descr
+
+  ~~~
+  <b>Defintion</b>
+  <pre><code class="plaintext">$toml</code></pre>
+  ~~~
   """)
 end
 ```

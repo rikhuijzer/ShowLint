@@ -6,7 +6,7 @@ struct Pattern
     toml::String
 end
 
-const val_rx = raw"[\w_\[\]:\.*+-]+"
+const val_rx = raw"[\w_\[\]:\.\\'*+-]+"
 const fn_rx = raw"[\w_\.]+"
 
 patterns = [
@@ -52,7 +52,7 @@ patterns = [
     Pattern(5, "Omit a == a and a != a", ["julia"],
         "SA4000 in [staticcheck](https://staticcheck.io/docs/checks).",
         """
-        match=':[x~$val_rx] :[bool~(=|!)]= :[x~$val_rx]'
+        match=''':[x~$val_rx] :[bool~(=|!)]= :[x~$val_rx]'''
 
         rule='where
             rewrite :[bool] { "=" -> "true" },

@@ -22,7 +22,7 @@ rewrite='Vector{:[T]}'
 ### 2: Use ismissing
 tags: *julia, performance-decrease*
 
-This pattern is disabled for now, due to discussion at
+This pattern is disabled for now by default, due to discussion at
 <https://discourse.julialang.org/t/ismissing-x-versus-x-missing/52171>.
 
 
@@ -44,6 +44,23 @@ rewrite=':[first]ismissing(:[var])'
 tags: *julia*
 
 From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
+For unary operators, such as `x -> !x`, see [pattern 8](#8).
+
+**Example**
+```
+julia> f(x) = 2x
+f (generic function with 1 method)
+
+julia> map(x -> f(x), [1, 2])
+2-element Array{Int64,1}:
+ 2
+ 4
+
+julia> map(f, [1, 2])
+2-element Array{Int64,1}:
+ 2
+ 4
+```
 
 
 ~~~
@@ -118,7 +135,7 @@ rewrite=':[bool]'
 ~~~ 
 <span id="6"></span>
 ~~~
-### 6: Avoid findfirst in conditional
+### 6: Avoid comparing findfirst to nothing
 tags: *julia*
 
 For example, instead of `findfirst('a', "ab") === nothing`,
@@ -162,7 +179,7 @@ rewrite='findall(.!:[Y])'
 ### 8: Use unary operator without anonymous function
 tags: *julia*
 
-This is an extension of pattern 3 for the unary operators:
+This is an extension of [pattern 3](#3) for the unary operators:
 `!`, `~`, `+`, `-`.
 
 **Example**
@@ -181,7 +198,7 @@ julia> map(!, [true, missing]
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match=':[[x]] -> :[unary~[!~+-]]:[[x]]'
+<pre><code class="plaintext">match=':[[x]] -> :[unary~[!~+-]]:[x~[\w\_\[\]\.]+]'
 
 rewrite=':[unary]'
 </code></pre>

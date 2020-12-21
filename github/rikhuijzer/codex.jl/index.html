@@ -10,6 +10,17 @@
 <span style="color:inherit;"> |</span>    df = DataFrame(df)
 <span style="color:inherit;"> |</span>    for o in orderings
 <span style="color:inherit;"> |</span>        if o.newlevels != nothing
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
+<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
+<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
+<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
+<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
 <span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-15,19 +15,19</span> ============================================================
@@ -38,17 +49,6 @@
 <span style="color:inherit;"> |</span>	map(i -> n_equal(get_answers(i, df), &#34;Weet ik niet&#34;), 1:nrow(df))
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
-<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
-<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
-<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
-<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
 <span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,8 +8,8</span> ============================================================

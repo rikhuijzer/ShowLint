@@ -60,17 +60,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>update_g!(d, state, method::ConjugateGradient) = nothing
-<span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-70,7 +70,7</span> ============================================================
-<span style="color:inherit;"> |</span>    state.x .= state.y .+ scaling.*(state.y .- state.y_previous)
-<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::AcceleratedGradientDescent, options, curr_time=time())
 <span style="color:red;">------ </span><span style="color:inherit;">test/multivariate/solvers/first_order/ngmres.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/multivariate/solvers/first_order/ngmres.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
@@ -89,6 +78,17 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    defopts = Optim.default_options(solver)
 <span style="color:inherit;"> |</span>    @test defopts == Dict(:allow_f_increases => true)
+<span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-70,7 +70,7</span> ============================================================
+<span style="color:inherit;"> |</span>    state.x .= state.y .+ scaling.*(state.y .- state.y_previous)
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::AcceleratedGradientDescent, options, curr_time=time())
 <span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================

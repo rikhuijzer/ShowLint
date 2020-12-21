@@ -12,7 +12,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 2 hits](/github/frbny-dsge/smc.jl/#replace_arrayt1_with_vectort_2_hits)
-- [Use unary operator without anonymous function ➤ 1 hit](/github/frbny-dsge/smc.jl/#use_unary_operator_without_anonymous_function_1_hit)
 ~~~
 </div>
 ~~~
@@ -30,7 +29,7 @@
 <h3><a href="https://github.com/FluxML/Metalhead.jl" target="_blank">FluxML/Metalhead.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Use unary operator without anonymous function ➤ 1 hit](/github/fluxml/metalhead.jl/#use_unary_operator_without_anonymous_function_1_hit)
+
 ~~~
 </div>
 ~~~
@@ -61,8 +60,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/giovineitalia/gadfly.jl/#replace_arrayt1_with_vectort_4_hits)
 - [Omit comparison with boolean constant ➤ 2 hits](/github/giovineitalia/gadfly.jl/#omit_comparison_with_boolean_constant_2_hits)
-- [Avoid findfirst in conditional ➤ 2 hits](/github/giovineitalia/gadfly.jl/#avoid_findfirst_in_conditional_2_hits)
-- [Use unary operator without anonymous function ➤ 1 hit](/github/giovineitalia/gadfly.jl/#use_unary_operator_without_anonymous_function_1_hit)
+- [Avoid comparing findfirst to nothing ➤ 2 hits](/github/giovineitalia/gadfly.jl/#avoid_comparing_findfirst_to_nothing_2_hits)
 ~~~
 </div>
 ~~~
@@ -81,7 +79,7 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 17 hits](/github/juliacollections/datastructures.jl/#replace_arrayt1_with_vectort_17_hits)
-- [Avoid findfirst in conditional ➤ 4 hits](/github/juliacollections/datastructures.jl/#avoid_findfirst_in_conditional_4_hits)
+- [Avoid comparing findfirst to nothing ➤ 4 hits](/github/juliacollections/datastructures.jl/#avoid_comparing_findfirst_to_nothing_4_hits)
 ~~~
 </div>
 ~~~
@@ -146,7 +144,6 @@
 ~~~
 - [Avoid x -> f(x) ➤ 4 hits](/github/juliadata/dataframes.jl/#avoid_x_-_fx_4_hits)
 - [Omit a == a and a != a ➤ 3 hits](/github/juliadata/dataframes.jl/#omit_a_a_and_a_a_3_hits)
-- [Use unary operator without anonymous function ➤ 1 hit](/github/juliadata/dataframes.jl/#use_unary_operator_without_anonymous_function_1_hit)
 ~~~
 </div>
 ~~~
@@ -480,7 +477,7 @@
 <h3><a href="https://github.com/JuliaIO/EzXML.jl" target="_blank">JuliaIO/EzXML.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Avoid findfirst in conditional ➤ 2 hits](/github/juliaio/ezxml.jl/#avoid_findfirst_in_conditional_2_hits)
+- [Avoid comparing findfirst to nothing ➤ 2 hits](/github/juliaio/ezxml.jl/#avoid_comparing_findfirst_to_nothing_2_hits)
 ~~~
 </div>
 ~~~
@@ -563,7 +560,7 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliainterop/cxx.jl/#replace_arrayt1_with_vectort_1_hit)
-- [Avoid findfirst in conditional ➤ 1 hit](/github/juliainterop/cxx.jl/#avoid_findfirst_in_conditional_1_hit)
+- [Avoid comparing findfirst to nothing ➤ 1 hit](/github/juliainterop/cxx.jl/#avoid_comparing_findfirst_to_nothing_1_hit)
 ~~~
 </div>
 ~~~
@@ -647,7 +644,7 @@
 ~~~
 - [Omit comparison with boolean constant ➤ 11 hits](/github/julialang/pkg.jl/#omit_comparison_with_boolean_constant_11_hits)
 - [Omit a == a and a != a ➤ 2 hits](/github/julialang/pkg.jl/#omit_a_a_and_a_a_2_hits)
-- [Avoid findfirst in conditional ➤ 2 hits](/github/julialang/pkg.jl/#avoid_findfirst_in_conditional_2_hits)
+- [Avoid comparing findfirst to nothing ➤ 2 hits](/github/julialang/pkg.jl/#avoid_comparing_findfirst_to_nothing_2_hits)
 ~~~
 </div>
 ~~~
@@ -696,8 +693,7 @@
 - [Avoid x -> f(x) ➤ 3 hits](/github/julialang/julia/#avoid_x_-_fx_3_hits)
 - [Omit comparison with boolean constant ➤ 47 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_47_hits)
 - [Omit a == a and a != a ➤ 82 hits](/github/julialang/julia/#omit_a_a_and_a_a_82_hits)
-- [Avoid findfirst in conditional ➤ 13 hits](/github/julialang/julia/#avoid_findfirst_in_conditional_13_hits)
-- [Use unary operator without anonymous function ➤ 3 hits](/github/julialang/julia/#use_unary_operator_without_anonymous_function_3_hits)
+- [Avoid comparing findfirst to nothing ➤ 13 hits](/github/julialang/julia/#avoid_comparing_findfirst_to_nothing_13_hits)
 ~~~
 </div>
 ~~~
@@ -781,7 +777,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 182 hits](/github/juliaplots/plots.jl/#replace_arrayt1_with_vectort_182_hits)
 - [Omit comparison with boolean constant ➤ 3 hits](/github/juliaplots/plots.jl/#omit_comparison_with_boolean_constant_3_hits)
-- [Avoid findfirst in conditional ➤ 2 hits](/github/juliaplots/plots.jl/#avoid_findfirst_in_conditional_2_hits)
+- [Avoid comparing findfirst to nothing ➤ 2 hits](/github/juliaplots/plots.jl/#avoid_comparing_findfirst_to_nothing_2_hits)
 ~~~
 </div>
 ~~~
@@ -884,7 +880,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/juliaweb/http.jl/#replace_arrayt1_with_vectort_1_hit)
 - [Omit comparison with boolean constant ➤ 5 hits](/github/juliaweb/http.jl/#omit_comparison_with_boolean_constant_5_hits)
-- [Avoid findfirst in conditional ➤ 2 hits](/github/juliaweb/http.jl/#avoid_findfirst_in_conditional_2_hits)
+- [Avoid comparing findfirst to nothing ➤ 2 hits](/github/juliaweb/http.jl/#avoid_comparing_findfirst_to_nothing_2_hits)
 ~~~
 </div>
 ~~~
@@ -958,7 +954,7 @@
 <div class="repo-nav">
 ~~~
 - [Avoid x -> f(x) ➤ 4 hits](/github/wikunia/constraintsolver.jl/#avoid_x_-_fx_4_hits)
-- [Avoid findfirst in conditional ➤ 1 hit](/github/wikunia/constraintsolver.jl/#avoid_findfirst_in_conditional_1_hit)
+- [Avoid comparing findfirst to nothing ➤ 1 hit](/github/wikunia/constraintsolver.jl/#avoid_comparing_findfirst_to_nothing_1_hit)
 ~~~
 </div>
 ~~~
@@ -1034,7 +1030,6 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 21 hits](/github/fonsp/pluto.jl/#replace_arrayt1_with_vectort_21_hits)
 - [Omit comparison with boolean constant ➤ 137 hits](/github/fonsp/pluto.jl/#omit_comparison_with_boolean_constant_137_hits)
-- [Use unary operator without anonymous function ➤ 1 hit](/github/fonsp/pluto.jl/#use_unary_operator_without_anonymous_function_1_hit)
 ~~~
 </div>
 ~~~
@@ -1091,7 +1086,7 @@
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/jump-dev/jump.jl/#replace_arrayt1_with_vectort_4_hits)
 - [Omit comparison with boolean constant ➤ 3 hits](/github/jump-dev/jump.jl/#omit_comparison_with_boolean_constant_3_hits)
-- [Avoid findfirst in conditional ➤ 1 hit](/github/jump-dev/jump.jl/#avoid_findfirst_in_conditional_1_hit)
+- [Avoid comparing findfirst to nothing ➤ 1 hit](/github/jump-dev/jump.jl/#avoid_comparing_findfirst_to_nothing_1_hit)
 ~~~
 </div>
 ~~~
@@ -1185,7 +1180,7 @@
 - [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/tlienart/franklin.jl/#replace_arrayt1_with_vectort_3_hits)
 - [Avoid x -> f(x) ➤ 1 hit](/github/tlienart/franklin.jl/#avoid_x_-_fx_1_hit)
 - [Omit comparison with boolean constant ➤ 5 hits](/github/tlienart/franklin.jl/#omit_comparison_with_boolean_constant_5_hits)
-- [Avoid findfirst in conditional ➤ 1 hit](/github/tlienart/franklin.jl/#avoid_findfirst_in_conditional_1_hit)
+- [Avoid comparing findfirst to nothing ➤ 1 hit](/github/tlienart/franklin.jl/#avoid_comparing_findfirst_to_nothing_1_hit)
 ~~~
 </div>
 ~~~

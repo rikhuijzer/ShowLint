@@ -21,17 +21,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>macro RR(x) return:(round.($x,digits = 3)) end
 <span style="color:inherit;"> |</span>println(&#34;Found best lambda for regularization: &#34;, bestLambda)
-<span style="color:red;">------ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    waitingRoom = Queue{Float64}()
-<span style="color:inherit;"> |</span>    serverBusy = false
-<span style="color:red;">-|</span></span><span style="color:gray;">    waitTimes = </span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
-<span style="color:green;">+|</span></span>    waitTimes = <span style="color:green;">Vector</span>{Float64}()</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    while t<T
-<span style="color:inherit;"> |</span>        if t == tNextArr
 <span style="color:red;">------ </span><span style="color:inherit;">9_chapter/hClustering.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">9_chapter/hClustering.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
@@ -54,6 +43,17 @@
 <span style="color:inherit;"> |</span>shuffle!(dataPoints)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>xMin,xMax = minimum(first.(dataPoints)),maximum(first.(dataPoints))
+<span style="color:red;">------ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    waitingRoom = Queue{Float64}()
+<span style="color:inherit;"> |</span>    serverBusy = false
+<span style="color:red;">-|</span></span><span style="color:gray;">    waitTimes = </span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
+<span style="color:green;">+|</span></span>    waitTimes = <span style="color:green;">Vector</span>{Float64}()</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    while t<T
+<span style="color:inherit;"> |</span>        if t == tNextArr
 <span style="color:red;">------ </span><span style="color:inherit;">1_chapter/lcg.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">1_chapter/lcg.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================

@@ -86,7 +86,7 @@ false
 ```
 
 ~~~
-<pre><code class="plaintext">match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^]+]'''
+<pre><code class="plaintext">match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
 
 rule='where
     rewrite :[bool] { "=" -> "true" },

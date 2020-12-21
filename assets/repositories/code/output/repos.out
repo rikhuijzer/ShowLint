@@ -145,7 +145,7 @@
 <div class="repo-nav">
 ~~~
 - [Avoid x -> f(x) ➤ 4 hits](/github/juliadata/dataframes.jl/#avoid_x_-_fx_4_hits)
-- [Omit a == a and a != a ➤ 9 hits](/github/juliadata/dataframes.jl/#omit_a_a_and_a_a_9_hits)
+- [Omit a == a and a != a ➤ 3 hits](/github/juliadata/dataframes.jl/#omit_a_a_and_a_a_3_hits)
 ~~~
 </div>
 ~~~
@@ -646,7 +646,7 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 11 hits](/github/julialang/pkg.jl/#omit_comparison_with_boolean_constant_11_hits)
-- [Omit a == a and a != a ➤ 3 hits](/github/julialang/pkg.jl/#omit_a_a_and_a_a_3_hits)
+- [Omit a == a and a != a ➤ 2 hits](/github/julialang/pkg.jl/#omit_a_a_and_a_a_2_hits)
 - [Avoid findfirst in conditional ➤ 2 hits](/github/julialang/pkg.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
 </div>
@@ -696,7 +696,7 @@
 - [Use ismissing ➤ 18 hits](/github/julialang/julia/#use_ismissing_18_hits)
 - [Avoid x -> f(x) ➤ 3 hits](/github/julialang/julia/#avoid_x_-_fx_3_hits)
 - [Omit comparison with boolean constant ➤ 47 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_47_hits)
-- [Omit a == a and a != a ➤ 84 hits](/github/julialang/julia/#omit_a_a_and_a_a_84_hits)
+- [Omit a == a and a != a ➤ 82 hits](/github/julialang/julia/#omit_a_a_and_a_a_82_hits)
 - [Avoid findfirst in conditional ➤ 13 hits](/github/julialang/julia/#avoid_findfirst_in_conditional_13_hits)
 ~~~
 </div>

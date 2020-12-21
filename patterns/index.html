@@ -24,7 +24,7 @@ julia&gt; a == a
 <span class=hljs-literal >true</span>
 
 julia&gt; a != a
-<span class=hljs-literal >false</span></code></pre> <pre><code class="plaintext hljs">match=&#x27;&#x27;&#x27;:[x~(?&lt;![+-\/*] )[\w_\[\]:\.\\&#x27;*+-^]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\&#x27;*+-^]+]&#x27;&#x27;&#x27;
+<span class=hljs-literal >false</span></code></pre> <pre><code class="plaintext hljs">match=&#x27;&#x27;&#x27;:[x~(?&lt;![+-\/*] )[\w_\[\]:\.\\&#x27;*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\&#x27;*+-^′]+]&#x27;&#x27;&#x27;
 
 rule=&#x27;where
     rewrite :[bool] { &quot;=&quot; -&gt; &quot;true&quot; },

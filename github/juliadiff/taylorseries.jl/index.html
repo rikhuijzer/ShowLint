@@ -1,5 +1,41 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDiff/TaylorSeries.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDiff/TaylorSeries.jl" target=_blank >JuliaDiff/TaylorSeries.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_69_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 69 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_69_hits ><a href="#replace_arrayt1_with_vectort_69_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 69 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/auxiliary.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/manyvariables.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/manyvariables.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-127,7 +127,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test zeroT[0] == HomogeneousPolynomial(0, 0)
+<span style="color:inherit;"> |</span>    @test uT[0] == HomogeneousPolynomial(1, 0)
+<span style="color:inherit;"> |</span>    @test ones(xH,1) == [1, xH+yH]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(ones(xH,2)) == </span><span style="color:red;">Array</span><span style="color:gray;">{HomogeneousPolynomial{Int}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(ones(xH,2)) == <span style="color:green;">Vector</span>{HomogeneousPolynomial{Int}}</span>
+<span style="color:inherit;"> |</span>    @test length(ones(xH,2)) == 3
+<span style="color:inherit;"> |</span>    @test ones(HomogeneousPolynomial{Complex{Int}},0) ==
+<span style="color:inherit;"> |</span>        [HomogeneousPolynomial([complex(1,0)], 0)]
+<span style="color:red;">------ </span><span style="color:inherit;">test/mixtures.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/mixtures.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-99,9 +99,9</span> ============================================================
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError abs(tN1)
+<span style="color:inherit;"> |</span>    @test_throws ArgumentError abs(t1N)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test convert(</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{TaylorN{Float64}}</span><span style="color:red;">,1</span><span style="color:gray;">}, [tN1, tN1]) == [t1N, t1N]</span></span>
+<span style="color:green;">+|</span></span>    @test convert(<span style="color:green;">Vector</span>{Taylor1{TaylorN{Float64}}}, [tN1, tN1]) == [t1N, t1N]</span>
+<span style="color:inherit;"> |</span>    @test convert(Array{Taylor1{TaylorN{Float64}},2}, [tN1 tN1]) == [t1N t1N]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test convert(</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{Taylor1{Float64}}</span><span style="color:red;">,1</span><span style="color:gray;">}, [t1N, t1N]) == [tN1, tN1]</span></span>
+<span style="color:green;">+|</span></span>    @test convert(<span style="color:green;">Vector</span>{TaylorN{Taylor1{Float64}}}, [t1N, t1N]) == [tN1, tN1]</span>
+<span style="color:inherit;"> |</span>    @test convert(Array{TaylorN{Taylor1{Float64}},2}, [t1N t1N]) == [tN1 tN1]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test evaluate(t1N, 0.0) == TaylorN(xH, 2)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-190,8 +190,8</span> ============================================================
+<span style="color:inherit;"> |</span>    aTN1 = TaylorN(aH1); bTN1 = TaylorN(bH1)
+<span style="color:inherit;"> |</span>    x = [aTN1, bTN1]
+<span style="color:inherit;"> |</span>    δx = [Taylor1(rand(3)) for i in 1:4]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(x) == </span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{Taylor1{Float64}}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(x) == <span style="color:green;">Vector</span>{TaylorN{Taylor1{Float64}}}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(δx) == </span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{Float64}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(δx) == <span style="color:green;">Vector</span>{Taylor1{Float64}}</span>
+<span style="color:inherit;"> |</span>    x0 = Array{Taylor1{Float64}}(undef, length(x))
+<span style="color:inherit;"> |</span>    eval_x_δx = evaluate(x,δx)
+<span style="color:inherit;"> |</span>    @test x(δx) == eval_x_δx
+<span style="color:red;">------ </span><span style="color:inherit;">src/auxiliary.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/auxiliary.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-14,7 +14,7</span> ============================================================
 <span style="color:inherit;"> |</span>If the length of &#96;coeffs&#96; is smaller than &#96;order+1&#96;, it resizes
@@ -140,17 +176,71 @@
 <span style="color:inherit;"> |</span>    @assert length(u) == length(x)
 <span style="color:inherit;"> |</span>    for ind in eachindex(x)
 <span style="color:inherit;"> |</span>        a[u[ind]] = x[ind]
-<span style="color:red;">------ </span><span style="color:inherit;">test/manyvariables.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/manyvariables.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-127,7 +127,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test zeroT[0] == HomogeneousPolynomial(0, 0)
-<span style="color:inherit;"> |</span>    @test uT[0] == HomogeneousPolynomial(1, 0)
-<span style="color:inherit;"> |</span>    @test ones(xH,1) == [1, xH+yH]
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(ones(xH,2)) == </span><span style="color:red;">Array</span><span style="color:gray;">{HomogeneousPolynomial{Int}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(ones(xH,2)) == <span style="color:green;">Vector</span>{HomogeneousPolynomial{Int}}</span>
-<span style="color:inherit;"> |</span>    @test length(ones(xH,2)) == 3
-<span style="color:inherit;"> |</span>    @test ones(HomogeneousPolynomial{Complex{Int}},0) ==
-<span style="color:inherit;"> |</span>        [HomogeneousPolynomial([complex(1,0)], 0)]
+<span style="color:red;">------ </span><span style="color:inherit;">src/evaluate.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluate.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-125,7 +125,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>## Evaluation of multivariable
+<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{T},</span>
+<span style="color:inherit;"> |</span>        x0::AbstractArray{T}) where {T<:Number}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-135,7 +135,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{Taylor1{T}},</span>
+<span style="color:inherit;"> |</span>        x0::AbstractArray{Taylor1{T}}) where {T<:NumberNotSeriesN}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-145,7 +145,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{TaylorN{T}},</span>
+<span style="color:inherit;"> |</span>        x0::AbstractArray{TaylorN{T}}) where {T<:NumberNotSeriesN}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-197,7 +197,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::HomogeneousPolynomial{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">} ) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::HomogeneousPolynomial{T}, vals::<span style="color:green;">Vector</span>{S} ) where</span>
+<span style="color:inherit;"> |</span>        {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>evaluate(a::HomogeneousPolynomial, v, vals...) = evaluate(a, (v, vals...,))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-259,7 +259,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return suma
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{Taylor1{S}}) where</span>
+<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{Taylor1{T}}, vals::NTuple{N, Taylor1{T}}) where
+<span style="color:inherit;">@|</span><span style="color:inherit;">-277,7 +277,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return suma
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{Taylor1{T}}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::TaylorN{Taylor1{T}}, vals::<span style="color:green;">Vector</span>{Taylor1{T}}) where</span>
+<span style="color:inherit;"> |</span>    {T<:NumberNotSeries} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, vals::NTuple{N, TaylorN{S}}) where
+<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return suma
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{TaylorN{S}}) where</span>
+<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeries} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, s::Symbol, val::S) where
 <span style="color:red;">------ </span><span style="color:inherit;">src/conversion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/conversion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,18 +8,18</span> ============================================================
@@ -260,71 +350,6 @@
 <span style="color:inherit;"> |</span>    {T<:Number, S<:Number} = TaylorN{promote_type(T,S)}
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>promote_rule(::Type{TaylorN{T}}, ::Type{S}) where {T<:Number, S<:Number} =
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluate.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluate.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-125,7 +125,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>## Evaluation of multivariable
-<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
-<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{T},</span>
-<span style="color:inherit;"> |</span>        x0::AbstractArray{T}) where {T<:Number}
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-135,7 +135,7</span> ============================================================
-<span style="color:inherit;"> |</span>    nothing
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
-<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{Taylor1{T}},</span>
-<span style="color:inherit;"> |</span>        x0::AbstractArray{Taylor1{T}}) where {T<:NumberNotSeriesN}
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-145,7 +145,7</span> ============================================================
-<span style="color:inherit;"> |</span>    nothing
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
-<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{TaylorN{T}},</span>
-<span style="color:inherit;"> |</span>        x0::AbstractArray{TaylorN{T}}) where {T<:NumberNotSeriesN}
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-197,7 +197,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::HomogeneousPolynomial{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">} ) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::HomogeneousPolynomial{T}, vals::<span style="color:green;">Vector</span>{S} ) where</span>
-<span style="color:inherit;"> |</span>        {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>evaluate(a::HomogeneousPolynomial, v, vals...) = evaluate(a, (v, vals...,))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-259,7 +259,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return suma
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{Taylor1{S}}) where</span>
-<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{Taylor1{T}}, vals::NTuple{N, Taylor1{T}}) where
-<span style="color:inherit;">@|</span><span style="color:inherit;">-277,7 +277,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return suma
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{Taylor1{T}}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::TaylorN{Taylor1{T}}, vals::<span style="color:green;">Vector</span>{Taylor1{T}}) where</span>
-<span style="color:inherit;"> |</span>    {T<:NumberNotSeries} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, vals::NTuple{N, TaylorN{S}}) where
-<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return suma
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{TaylorN{S}}) where</span>
-<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeries} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, s::Symbol, val::S) where
 <span style="color:red;">------ </span><span style="color:inherit;">src/calculus.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/calculus.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-238,7 +238,7</span> ============================================================
@@ -475,30 +500,5 @@
 <span style="color:green;">+|</span></span>TaylorN(x::<span style="color:green;">Vector</span>{HomogeneousPolynomial{T}}) where {T<:Number} =</span>
 <span style="color:inherit;"> |</span>    TaylorN(x, maxorderH(x))
 <span style="color:inherit;"> |</span>TaylorN(x::HomogeneousPolynomial{T}, order::Int) where {T<:Number} =
-<span style="color:inherit;"> |</span>    TaylorN( [x], order )
-<span style="color:red;">------ </span><span style="color:inherit;">test/mixtures.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/mixtures.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-99,9 +99,9</span> ============================================================
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError abs(tN1)
-<span style="color:inherit;"> |</span>    @test_throws ArgumentError abs(t1N)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test convert(</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{TaylorN{Float64}}</span><span style="color:red;">,1</span><span style="color:gray;">}, [tN1, tN1]) == [t1N, t1N]</span></span>
-<span style="color:green;">+|</span></span>    @test convert(<span style="color:green;">Vector</span>{Taylor1{TaylorN{Float64}}}, [tN1, tN1]) == [t1N, t1N]</span>
-<span style="color:inherit;"> |</span>    @test convert(Array{Taylor1{TaylorN{Float64}},2}, [tN1 tN1]) == [t1N t1N]
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test convert(</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{Taylor1{Float64}}</span><span style="color:red;">,1</span><span style="color:gray;">}, [t1N, t1N]) == [tN1, tN1]</span></span>
-<span style="color:green;">+|</span></span>    @test convert(<span style="color:green;">Vector</span>{TaylorN{Taylor1{Float64}}}, [t1N, t1N]) == [tN1, tN1]</span>
-<span style="color:inherit;"> |</span>    @test convert(Array{TaylorN{Taylor1{Float64}},2}, [t1N t1N]) == [tN1 tN1]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test evaluate(t1N, 0.0) == TaylorN(xH, 2)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-190,8 +190,8</span> ============================================================
-<span style="color:inherit;"> |</span>    aTN1 = TaylorN(aH1); bTN1 = TaylorN(bH1)
-<span style="color:inherit;"> |</span>    x = [aTN1, bTN1]
-<span style="color:inherit;"> |</span>    δx = [Taylor1(rand(3)) for i in 1:4]
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(x) == </span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{Taylor1{Float64}}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(x) == <span style="color:green;">Vector</span>{TaylorN{Taylor1{Float64}}}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(δx) == </span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{Float64}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(δx) == <span style="color:green;">Vector</span>{Taylor1{Float64}}</span>
-<span style="color:inherit;"> |</span>    x0 = Array{Taylor1{Float64}}(undef, length(x))
-<span style="color:inherit;"> |</span>    eval_x_δx = evaluate(x,δx)
-<span style="color:inherit;"> |</span>    @test x(δx) == eval_x</div>
+<span style="color:inherit;"> |</span>    TaylorN( [x], ord</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

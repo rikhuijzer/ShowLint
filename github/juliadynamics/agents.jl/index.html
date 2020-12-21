@@ -139,16 +139,6 @@
 <span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
 <span style="color:inherit;"> |</span>    for neighbor in nearby_agents(agent, model)
 <span style="color:inherit;"> |</span>        if agent.group == neighbor.group
-<span style="color:red;">------ </span><span style="color:inherit;">src/spaces/grid.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/spaces/grid.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
-<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
-<span style="color:inherit;"> |</span>    if moore ≠ nothing
-<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
-<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    for i in eachindex(s)
-<span style="color:inherit;"> |</span>        s[i] = Int[]
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/opinion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
@@ -160,17 +150,16 @@
 <span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
-<span style="color:inherit;"> |</span>    matches = model[neighbor].opinion .== agent.opinion
-<span style="color:inherit;"> |</span>    nmatches = count(matches)
-<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand() < nmatches / model.nopinions
-<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
-<span style="color:green;">+|</span></span>        switchId = rand(findall(x -> <span style="color:green;">!</span>x, matches))</span>
-<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
+<span style="color:red;">------ </span><span style="color:inherit;">src/spaces/grid.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/spaces/grid.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
+<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
+<span style="color:inherit;"> |</span>    if moore ≠ nothing
+<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
+<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
 <span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>    for i in eachindex(s)
+<span style="color:inherit;"> |</span>        s[i] = Int[]
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================
@@ -189,6 +178,17 @@
 <span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
 <span style="color:inherit;"> |</span>    all_neighbors = Iterators.flatten(ids_in_position(np,model) for np in neighbor_positions)
 <span style="color:orange;">!|</span>    sum(model[i].status <span style="color:red;">== true </span>for i in all_neighbors)
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">examples/opinion_spread.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
+<span style="color:inherit;"> |</span>    matches = model[neighbor].opinion .== agent.opinion
+<span style="color:inherit;"> |</span>    nmatches = count(matches)
+<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand() < nmatches / model.nopinions
+<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
+<span style="color:green;">+|</span></span>        switchId = rand(findall(x -> <span style="color:green;">!</span>x, matches))</span>
+<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
+<span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">src/simulations/collect.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/simulations/collect.jl</span>

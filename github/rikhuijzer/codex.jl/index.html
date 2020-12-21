@@ -10,17 +10,6 @@
 <span style="color:inherit;"> |</span>    df = DataFrame(df)
 <span style="color:inherit;"> |</span>    for o in orderings
 <span style="color:inherit;"> |</span>        if o.newlevels != nothing
-<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
-<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
-<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
-<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
-<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
 <span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/intelligence.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-15,19 +15,19</span> ============================================================
@@ -49,6 +38,17 @@
 <span style="color:inherit;"> |</span>	map(i -> n_equal(get_answers(i, df), &#34;Weet ik niet&#34;), 1:nrow(df))
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/personality.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-132,7 +132,7</span> ============================================================
+<span style="color:inherit;"> |</span>	score_everyone(facet::String) = map(row -> sum(answers(row, facet)), 1:nrow(lima_digits))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>	domains = Set(map(key -> string(key)[1], collect(keys(facets))))
+<span style="color:red;">-|</span></span><span style="color:gray;">	get_facets(domain::Char)::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span></span>
+<span style="color:green;">+|</span></span>	get_facets(domain::Char)::<span style="color:green;">Vector</span>{String} = filter(key -> string(key)[1] == domain, collect(keys(facets)))</span>
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	facet_scores(domain::Char) = map(score_everyone, get_facets(domain))
+<span style="color:inherit;"> |</span>	score_everyone(domain::Char) = sum(facet_scores(domain))
 <span style="color:red;">------ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/Questionnaires/questionnaires.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,8 +8,8</span> ============================================================
@@ -72,18 +72,7 @@
 <span style="color:inherit;"> |</span>        df = first_measurement(raw_dir, q)
 <span style="color:inherit;"> |</span>        filter!(:group => x -> x in groups,</div>
 </pre> <h3 id=use_ismissing_3_hits ><a href="#use_ismissing_3_hits">Use ismissing ➤ 3 hits</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">categorical2simple(A) = map(x -> </span><span style="color:red;">x === missing</span><span style="color:gray;"> ? missing : get(x), A)</span></span>
-<span style="color:green;">+|</span></span>categorical2simple(A) = map(x -> <span style="color:green;">ismissing(x)</span> ? missing : get(x), A)</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    dirparent(path)::String
-<span style="color:red;">------ </span><span style="color:inherit;">src/TransformExport/transformexport.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/TransformExport/transformexport.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/TransformExport/transformexport.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -102,7 +91,18 @@
 <span style="color:green;">+|</span></span>        if <span style="color:green;">ismissing(value)</span></span>
 <span style="color:inherit;"> |</span>            false
 <span style="color:inherit;"> |</span>        else  
-<span style="color:inherit;"> |</span>            contains(value, _description_regex</div>
+<span style="color:inherit;"> |</span>            contains(value, _description_regex()) 
+<span style="color:red;">------ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/utils.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Returns simple Julia collection for the CategoricalArray &#96;a&#96;.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">categorical2simple(A) = map(x -> </span><span style="color:red;">x === missing</span><span style="color:gray;"> ? missing : get(x), A)</span></span>
+<span style="color:green;">+|</span></span>categorical2simple(A) = map(x -> <span style="color:green;">ismissing(x)</span> ? missing : get(x), A)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    dirparent(path)::St</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_1_hit ><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/gitlab.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/gitlab.jl</span>

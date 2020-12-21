@@ -68,8 +68,25 @@ rewrite=':[first]:[bool]:[var]'
 tags: *julia*
 
 SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
+
+Be careful when applying this pattern to situations where `a` can
+be of type `Missing`. 
+For example, `a == a` returns `missing` and not `true`.
+
+### Examples
+```
+julia> a == 1
+true
+
+julia> a == a
+true
+
+julia> a != a
+false
+```
+
 ~~~
-<pre><code class="plaintext">match=''':[x~[\w_\[\]:\.\\'*+-]+] :[bool~(=|!)]= :[x~[\w_\[\]:\.\\'*+-]+]'''
+<pre><code class="plaintext">match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^]+]'''
 
 rule='where
     rewrite :[bool] { "=" -> "true" },

@@ -106,20 +106,7 @@
 <span style="color:inherit;"> |</span>        for i in 1:15
 <span style="color:inherit;"> |</span>            insert!(d, rand('a':'f'), rand()>0.5 ? [rand(1:10)] : rand(1:10, rand(1:</div>
 </pre> <h3 id=avoid_findfirst_in_conditional_4_hits ><a href="#avoid_findfirst_in_conditional_4_hits">Avoid findfirst in conditional ➤ 4 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-302,8 +302,8</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), RobinDict(:a=>1, :b=>2)) == :a
-<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), RobinDict(:a=>1, :b=>1, :c=>3)) in (:a, :b)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), RobinDict())</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), RobinDict())</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), RobinDict(:a=>2, :b=>3))</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), RobinDict(:a=>2, :b=>3))</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;haskey&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-304,8 +304,8</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -129,6 +116,19 @@
 <span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), SwissDict())</span>
 <span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), SwissDict(:a=>2, :b=>3))</span><span style="color:red;"> === nothing</span></span>
 <span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), SwissDict(:a=>2, :b=>3))</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;haskey&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-302,8 +302,8</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), RobinDict(:a=>1, :b=>2)) == :a
+<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), RobinDict(:a=>1, :b=>1, :c=>3)) in (:a, :b)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), RobinDict())</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), RobinDict())</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), RobinDict(:a=>2, :b=>3))</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), RobinDict(:a=>2, :b=>3))</span>
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@testset &#34;haskey&#34; b</div>

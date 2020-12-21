@@ -17,14 +17,21 @@ rule=&#x27;where
     rewrite :[bool] { &quot;true&quot; -&gt; &quot;&quot; }&#x27;
 
 rewrite=&#x27;:[first]:[bool]:[var]&#x27;
-</code></pre> </p> <p> <h3 id=5 >5: Omit a == a and a != a</h3> tags: <em>julia</em></p> <p>SA4000 in <a href="https://staticcheck.io/docs/checks">staticcheck</a>. <pre><code class="plaintext hljs">match=&#x27;&#x27;&#x27;:[x~[\w_\[\]:\.\\&#x27;*+-]+] :[bool~(=|!)]= :[x~[\w_\[\]:\.\\&#x27;*+-]+]&#x27;&#x27;&#x27;
+</code></pre> </p> <p> <h3 id=5 >5: Omit a == a and a != a</h3> tags: <em>julia</em></p> <p>SA4000 in <a href="https://staticcheck.io/docs/checks">staticcheck</a>.</p> <p>Be careful when applying this pattern to situations where <code>a</code> can be of type <code>Missing</code>. For example, <code>a &#61;&#61; a</code> returns <code>missing</code> and not <code>true</code>.</p> <h3 id=examples ><a href="#examples">Examples</a></h3> <pre><code class="julia hljs">julia&gt; a == <span class=hljs-number >1</span>
+<span class=hljs-literal >true</span>
+
+julia&gt; a == a
+<span class=hljs-literal >true</span>
+
+julia&gt; a != a
+<span class=hljs-literal >false</span></code></pre> <pre><code class="plaintext hljs">match=&#x27;&#x27;&#x27;:[x~(?&lt;![+-\/*] )[\w_\[\]:\.\\&#x27;*+-^]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\&#x27;*+-^]+]&#x27;&#x27;&#x27;
 
 rule=&#x27;where
     rewrite :[bool] { &quot;=&quot; -&gt; &quot;true&quot; },
     rewrite :[bool] { &quot;!&quot; -&gt; &quot;false&quot; }&#x27;
 
 rewrite=&#x27;:[bool]&#x27;
-</code></pre> </p> <p> <h3 id=6 >6: Avoid findfirst in conditional</h3> tags: <em>julia</em></p> <p>For example, instead of <code>findfirst&#40;&#39;a&#39;, &quot;ab&quot;&#41; &#61;&#61;&#61; nothing</code>, use <code>occursin&#40;&#39;a&#39;, &quot;ab&quot;&#41;</code> or <code>contains</code> &#40;Julia ≥1.5&#41;.</p> <pre><code class="plaintext hljs">match=&#x27;findfirst(:[a], :[b]) :[bool~(=|!)]== nothing&#x27;
+</code></pre> <p> <h3 id=6 >6: Avoid findfirst in conditional</h3> tags: <em>julia</em></p> <p>For example, instead of <code>findfirst&#40;&#39;a&#39;, &quot;ab&quot;&#41; &#61;&#61;&#61; nothing</code>, use <code>occursin&#40;&#39;a&#39;, &quot;ab&quot;&#41;</code> or <code>contains</code> &#40;Julia ≥1.5&#41;.</p> <pre><code class="plaintext hljs">match=&#x27;findfirst(:[a], :[b]) :[bool~(=|!)]== nothing&#x27;
 
 rule=&#x27;where
     rewrite :[bool] { &quot;!&quot; -&gt; &quot;&quot; },

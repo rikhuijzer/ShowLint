@@ -38,7 +38,7 @@ To automate pull request creation, see [Sourcegraph Campaigns](https://sourcegra
 
 ## List of merged refactors 
 
-These small refactors have been spotted via this site and are merged:
+These small refactors have been detected via this site and are merged:
 
-1. https://github.com/JuliaLang/Pkg.jl/pull/2297
-1. https://github.com/JuliaData/YAML.jl/pull/103
+1. <https://github.com/JuliaLang/Pkg.jl/pull/2297>
+1. <https://github.com/JuliaData/YAML.jl/pull/103>

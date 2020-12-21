@@ -45,9 +45,11 @@ import JSON
     @test unchanged(P[5], "a.x == x")
     @test unchanged(P[5], "x == x[1]")
     @test unchanged(P[5], "x == x:y")
+    @test unchanged(P[5], "a/x == x")
     @test unchanged(P[5], "f(x) == x")
     @test unchanged(P[5], "f(a, x) == x)")
     @test unchanged(P[5], "1*x == x)")
+    @test unchanged(P[5], "x == x′")
     @test unchanged(P[5], "2 * x == x)")
     # I have no clue how to fix this false positive.
     # @test unchanged(P[5], "x == x + 2)")
@@ -57,4 +59,17 @@ import JSON
     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
     @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"
+#    @test apply(P[8], """
+#        if a == b
+#            f()
+#            g()
+#        elseif a == b
+#            h()
+#        end""") == """
+#        if a == b
+#            f()
+#            g()
+#            h()
+#        end
+#        """
 end

@@ -42,11 +42,11 @@ for pattern in patterns
   <h3 id="$id">$id: $title</h3>
   ~~~
   tags: *$tags*
-
-  $descr
   ~~~
   <pre><code class="plaintext">$toml</code></pre>
   ~~~
+
+  $descr
   """)
 end
 ```

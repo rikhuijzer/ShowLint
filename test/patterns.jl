@@ -48,9 +48,12 @@ import JSON
     @test unchanged(P[5], "f(x) == x")
     @test unchanged(P[5], "f(a, x) == x)")
     @test unchanged(P[5], "1*x == x)")
-    # I have no clue how to fix this false-positive.
-    # @test unchanged(P[5], "1 * x == x)")
+    @test unchanged(P[5], "2 * x == x)")
+    # I have no clue how to fix this false positive.
+    # @test unchanged(P[5], "x == x + 2)")
+    @test unchanged(P[5], "6x == x)")
     @test unchanged(P[5], "x == x'")
+    @test unchanged(P[5], "x == x^2'")
     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
     @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"

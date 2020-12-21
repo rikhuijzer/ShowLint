@@ -6,8 +6,10 @@ struct Pattern
     toml::String
 end
 
-const val_rx = raw"[\w_\[\]:\.\\'*+-]+"
-const fn_rx = raw"[\w_\.]+"
+val_rx = raw"[\w_\[\]:\.\\'*+-^]+"
+extend_val_rx_left = raw"(?<![+-\/*] )"
+extend_val_rx_right = raw"(?! [+-\/*])"
+fn_rx = raw"[\w_\.]+"
 
 patterns = [
     Pattern(1, "Replace Array{T,1} with Vector{T}", ["julia"], 
@@ -50,9 +52,27 @@ patterns = [
         """
     ),
     Pattern(5, "Omit a == a and a != a", ["julia"],
-        "SA4000 in [staticcheck](https://staticcheck.io/docs/checks).",
+        raw"""
+        SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
+
+        Be careful when applying this pattern to situations where `a` can
+        be of type `Missing`. 
+        For example, `a == a` returns `missing` and not `true`.
+
+        ### Examples
+        ```
+        julia> a == 1
+        true
+
+        julia> a == a
+        true
+
+        julia> a != a
+        false
+        ```
+        """,
         """
-        match=''':[x~$val_rx] :[bool~(=|!)]= :[x~$val_rx]'''
+        match=''':[x~$extend_val_rx_left$val_rx] :[bool~(=|!)]= :[x~$extend_val_rx_right$val_rx]'''
 
         rule='where
             rewrite :[bool] { "=" -> "true" },

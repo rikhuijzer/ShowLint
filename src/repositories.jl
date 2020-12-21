@@ -5,7 +5,8 @@ struct Repo
 end
 
 any_tag(tags) = true
-default(tags) = !any(tag -> tag == "test", tags)
+default(tags) = !any(t -> t == "test" || 
+    t == "performance-decrease", tags)
 
 const DEBUG = !haskey(ENV, "CI")
 

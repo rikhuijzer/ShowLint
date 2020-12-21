@@ -1,5 +1,5 @@
         - struct Pattern
-        -     id::Int
+        7     id::Int
         -     title::String
         -     tags::Vector{String}
         -     description::String
@@ -20,7 +20,7 @@
         -         rewrite='Vector{:[T]}'
         -         """
         -     ),
-        -     Pattern(2, "Use ismissing", ["julia"], 
+        -     Pattern(2, "Use ismissing", ["julia", "performance-decrease"], 
         -         "Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.",
         -         raw"""
         -         match=':[[var]] :[first~[=|!]]== missing' 
@@ -31,7 +31,9 @@
         -         """
         -     ),
         -     Pattern(3, "Avoid x -> f(x)", ["julia"], 
-        -         "From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).",
+        -         """
+        -         From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
+        -         """,
         -         raw"""
         -         match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
         - 
@@ -59,7 +61,7 @@
         -         be of type `Missing`. 
         -         For example, `a == a` returns `missing` and not `true`.
         - 
-        -         ### Examples
+        -         **Examples**
         -         ```
         -         julia> a == 1
         -         true
@@ -141,5 +143,5 @@
         - ]
         - 
         - function patterns_have_valid_indexes()::Bool
-        1     collect(1:length(patterns)) == [p.id for p in patterns]
+        -     collect(1:length(patterns)) == [p.id for p in patterns]
         - end

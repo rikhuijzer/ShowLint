@@ -20,7 +20,7 @@ patterns = [
         rewrite='Vector{:[T]}'
         """
     ),
-    Pattern(2, "Use ismissing", ["julia"], 
+    Pattern(2, "Use ismissing", ["julia", "performance-decrease"], 
         "Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.",
         raw"""
         match=':[[var]] :[first~[=|!]]== missing' 
@@ -31,7 +31,9 @@ patterns = [
         """
     ),
     Pattern(3, "Avoid x -> f(x)", ["julia"], 
-        "From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).",
+        """
+        From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
+        """,
         raw"""
         match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
@@ -59,7 +61,7 @@ patterns = [
         be of type `Missing`. 
         For example, `a == a` returns `missing` and not `true`.
 
-        ### Examples
+        **Examples**
         ```
         julia> a == 1
         true

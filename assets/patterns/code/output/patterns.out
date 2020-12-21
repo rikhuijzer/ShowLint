@@ -3,8 +3,6 @@
 <h3 id="1">1: Replace Array{T,1} with Vector{T}</h3>
 ~~~
 tags: *julia*
-
-Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
 ~~~
 <pre><code class="plaintext">match='Array{:[T],1}'
 
@@ -12,13 +10,13 @@ rewrite='Vector{:[T]}'
 </code></pre>
 ~~~
 
+Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
+
 
 ~~~ 
 <h3 id="2">2: Use ismissing</h3>
 ~~~
-tags: *julia*
-
-Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.
+tags: *julia, performance-decrease*
 ~~~
 <pre><code class="plaintext">match=':[[var]] :[first~[=|!]]== missing' 
 
@@ -28,13 +26,13 @@ rewrite=':[first]ismissing(:[var])'
 </code></pre>
 ~~~
 
+Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.
+
 
 ~~~ 
 <h3 id="3">3: Avoid x -> f(x)</h3>
 ~~~
 tags: *julia*
-
-From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
 ~~~
 <pre><code class="plaintext">match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
@@ -42,13 +40,14 @@ rewrite=':[f]:[end]'
 </code></pre>
 ~~~
 
+From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
+
+
 
 ~~~ 
 <h3 id="4">4: Omit comparison with boolean constant</h3>
 ~~~
 tags: *generic*
-
-From [staticcheck](https://staticcheck.io/docs/checks).
 ~~~
 <pre><code class="plaintext">match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
 
@@ -61,30 +60,13 @@ rewrite=':[first]:[bool]:[var]'
 </code></pre>
 ~~~
 
+From [staticcheck](https://staticcheck.io/docs/checks).
+
 
 ~~~ 
 <h3 id="5">5: Omit a == a and a != a</h3>
 ~~~
 tags: *julia*
-
-SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
-
-Be careful when applying this pattern to situations where `a` can
-be of type `Missing`. 
-For example, `a == a` returns `missing` and not `true`.
-
-### Examples
-```
-julia> a == 1
-true
-
-julia> a == a
-true
-
-julia> a != a
-false
-```
-
 ~~~
 <pre><code class="plaintext">match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
 
@@ -96,15 +78,30 @@ rewrite=':[bool]'
 </code></pre>
 ~~~
 
+SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
+
+Be careful when applying this pattern to situations where `a` can
+be of type `Missing`. 
+For example, `a == a` returns `missing` and not `true`.
+
+**Examples**
+```
+julia> a == 1
+true
+
+julia> a == a
+true
+
+julia> a != a
+false
+```
+
+
 
 ~~~ 
 <h3 id="6">6: Avoid findfirst in conditional</h3>
 ~~~
 tags: *julia*
-
-For example, instead of `findfirst('a', "ab") === nothing`,
-use `occursin('a', "ab")` or `contains` (Julia ≥1.5).
-
 ~~~
 <pre><code class="plaintext">match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
 
@@ -116,18 +113,22 @@ rewrite=':[bool]occursin(:[a], :[b])'
 </code></pre>
 ~~~
 
+For example, instead of `findfirst('a', "ab") === nothing`,
+use `occursin('a', "ab")` or `contains` (Julia ≥1.5).
+
+
 
 ~~~ 
 <h3 id="7">7: Avoid findall(x -> x == false, Y)</h3>
 ~~~
 tags: *julia*
-
-Instead, use `findall(.!Y)`.
-
 ~~~
 <pre><code class="plaintext">match='findall(:[x] -> :[x] == false, :[Y])'
 
 rewrite='findall(.!:[Y])'
 </code></pre>
 ~~~
+
+Instead, use `findall(.!Y)`.
+
 

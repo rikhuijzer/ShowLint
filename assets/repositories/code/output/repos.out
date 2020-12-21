@@ -59,7 +59,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 4 hits](/github/giovineitalia/gadfly.jl/#replace_arrayt1_with_vectort_4_hits)
-- [Use ismissing ➤ 5 hits](/github/giovineitalia/gadfly.jl/#use_ismissing_5_hits)
 - [Omit comparison with boolean constant ➤ 2 hits](/github/giovineitalia/gadfly.jl/#omit_comparison_with_boolean_constant_2_hits)
 - [Avoid findfirst in conditional ➤ 2 hits](/github/giovineitalia/gadfly.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
@@ -135,7 +134,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 42 hits](/github/juliadata/csv.jl/#replace_arrayt1_with_vectort_42_hits)
-- [Use ismissing ➤ 2 hits](/github/juliadata/csv.jl/#use_ismissing_2_hits)
 ~~~
 </div>
 ~~~
@@ -226,7 +224,6 @@
 <h3><a href="https://github.com/JuliaDebug/Debugger.jl" target="_blank">JuliaDebug/Debugger.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Use ismissing ➤ 4 hits](/github/juliadebug/debugger.jl/#use_ismissing_4_hits)
 - [Omit a == a and a != a ➤ 1 hit](/github/juliadebug/debugger.jl/#omit_a_a_and_a_a_1_hit)
 ~~~
 </div>
@@ -693,7 +690,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 290 hits](/github/julialang/julia/#replace_arrayt1_with_vectort_290_hits)
-- [Use ismissing ➤ 18 hits](/github/julialang/julia/#use_ismissing_18_hits)
 - [Avoid x -> f(x) ➤ 3 hits](/github/julialang/julia/#avoid_x_-_fx_3_hits)
 - [Omit comparison with boolean constant ➤ 47 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_47_hits)
 - [Omit a == a and a != a ➤ 82 hits](/github/julialang/julia/#omit_a_a_and_a_a_82_hits)
@@ -855,7 +851,7 @@
 <h3><a href="https://github.com/JuliaStats/MixedModels.jl" target="_blank">JuliaStats/MixedModels.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Use ismissing ➤ 1 hit](/github/juliastats/mixedmodels.jl/#use_ismissing_1_hit)
+
 ~~~
 </div>
 ~~~
@@ -940,7 +936,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 1 hit](/github/turinglang/mcmcchains.jl/#replace_arrayt1_with_vectort_1_hit)
-- [Use ismissing ➤ 1 hit](/github/turinglang/mcmcchains.jl/#use_ismissing_1_hit)
 ~~~
 </div>
 ~~~
@@ -1034,7 +1029,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 21 hits](/github/fonsp/pluto.jl/#replace_arrayt1_with_vectort_21_hits)
-- [Use ismissing ➤ 3 hits](/github/fonsp/pluto.jl/#use_ismissing_3_hits)
 - [Omit comparison with boolean constant ➤ 137 hits](/github/fonsp/pluto.jl/#omit_comparison_with_boolean_constant_137_hits)
 ~~~
 </div>
@@ -1044,7 +1038,7 @@
 <h3><a href="https://github.com/fonsp/PlutoUI.jl" target="_blank">fonsp/PlutoUI.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Use ismissing ➤ 1 hit](/github/fonsp/plutoui.jl/#use_ismissing_1_hit)
+
 ~~~
 </div>
 ~~~
@@ -1120,7 +1114,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 12 hits](/github/rikhuijzer/codex.jl/#replace_arrayt1_with_vectort_12_hits)
-- [Use ismissing ➤ 3 hits](/github/rikhuijzer/codex.jl/#use_ismissing_3_hits)
 - [Omit comparison with boolean constant ➤ 1 hit](/github/rikhuijzer/codex.jl/#omit_comparison_with_boolean_constant_1_hit)
 ~~~
 </div>

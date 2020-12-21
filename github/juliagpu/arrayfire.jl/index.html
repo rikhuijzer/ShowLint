@@ -1,33 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGPU/ArrayFire.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGPU/ArrayFire.jl" target=_blank >JuliaGPU/ArrayFire.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_21_hits ><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/math.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/math.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-45,14 +45,14</span> ============================================================
-<span style="color:inherit;"> |</span>@testset &#34;Arrays&#34; begin
-<span style="color:inherit;"> |</span>    @test err_to_string(Cuint(0)) == &#34;Success&#34;
-<span style="color:inherit;"> |</span>    @test_throws ErrorException set_device(-5)
-<span style="color:red;">-|</span></span><span style="color:gray;">    arr1 = @inferred </span><span style="color:red;">AFArray</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}([1, 2])</span></span>
-<span style="color:green;">+|</span></span>    arr1 = @inferred <span style="color:green;">AFVector</span>{Int}([1, 2])</span>
-<span style="color:inherit;"> |</span>    @test eltype(arr1) == Int
-<span style="color:inherit;"> |</span>    @test ndims(arr1) == 1
-<span style="color:inherit;"> |</span>    @test (@inferred size(arr1)) == (2,)
-<span style="color:inherit;"> |</span>    arr2 = @inferred copy(arr1)
-<span style="color:inherit;"> |</span>    arr3 = @inferred deepcopy(arr2)
-<span style="color:inherit;"> |</span>    @test typeof(arr3) == typeof(arr2)
-<span style="color:red;">-|</span></span><span style="color:gray;">    arr4 = @inferred </span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}(arr1)</span></span>
-<span style="color:green;">+|</span></span>    arr4 = @inferred <span style="color:green;">Vector</span>{Int}(arr1)</span>
-<span style="color:inherit;"> |</span>    @test arr4 == [1, 2]
-<span style="color:inherit;"> |</span>    arr5 = AFArray{Int,2}([1 2 3; 4 5 6])
-<span style="color:inherit;"> |</span>    @test (@inferred size(arr5)) == (2,3)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-313,7 +313,7</span> ============================================================
-<span style="color:inherit;"> |</span>ss[1] = 10
-<span style="color:inherit;"> |</span>@test s[1] != 10f0 && ss[1] == 10f0
-<span style="color:inherit;"> |</span>ssa = similar(s, Float64)
-<span style="color:red;">-|</span></span><span style="color:gray;">@test typeof(ssa) == </span><span style="color:red;">AFArray</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>@test typeof(ssa) == <span style="color:green;">AFVector</span>{Float64}</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>aa = [NaN Inf 3]
-<span style="color:inherit;"> |</span>a = AFArray(aa)
-<span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
 <span style="color:inherit;"> |</span>    end
@@ -64,6 +36,34 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function reshape(_in::AFArray{T},dims::NTuple{N,Int}) where {T,N}
+<span style="color:red;">------ </span><span style="color:inherit;">test/math.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/math.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-45,14 +45,14</span> ============================================================
+<span style="color:inherit;"> |</span>@testset &#34;Arrays&#34; begin
+<span style="color:inherit;"> |</span>    @test err_to_string(Cuint(0)) == &#34;Success&#34;
+<span style="color:inherit;"> |</span>    @test_throws ErrorException set_device(-5)
+<span style="color:red;">-|</span></span><span style="color:gray;">    arr1 = @inferred </span><span style="color:red;">AFArray</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}([1, 2])</span></span>
+<span style="color:green;">+|</span></span>    arr1 = @inferred <span style="color:green;">AFVector</span>{Int}([1, 2])</span>
+<span style="color:inherit;"> |</span>    @test eltype(arr1) == Int
+<span style="color:inherit;"> |</span>    @test ndims(arr1) == 1
+<span style="color:inherit;"> |</span>    @test (@inferred size(arr1)) == (2,)
+<span style="color:inherit;"> |</span>    arr2 = @inferred copy(arr1)
+<span style="color:inherit;"> |</span>    arr3 = @inferred deepcopy(arr2)
+<span style="color:inherit;"> |</span>    @test typeof(arr3) == typeof(arr2)
+<span style="color:red;">-|</span></span><span style="color:gray;">    arr4 = @inferred </span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">}(arr1)</span></span>
+<span style="color:green;">+|</span></span>    arr4 = @inferred <span style="color:green;">Vector</span>{Int}(arr1)</span>
+<span style="color:inherit;"> |</span>    @test arr4 == [1, 2]
+<span style="color:inherit;"> |</span>    arr5 = AFArray{Int,2}([1 2 3; 4 5 6])
+<span style="color:inherit;"> |</span>    @test (@inferred size(arr5)) == (2,3)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-313,7 +313,7</span> ============================================================
+<span style="color:inherit;"> |</span>ss[1] = 10
+<span style="color:inherit;"> |</span>@test s[1] != 10f0 && ss[1] == 10f0
+<span style="color:inherit;"> |</span>ssa = similar(s, Float64)
+<span style="color:red;">-|</span></span><span style="color:gray;">@test typeof(ssa) == </span><span style="color:red;">AFArray</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>@test typeof(ssa) == <span style="color:green;">AFVector</span>{Float64}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>aa = [NaN Inf 3]
+<span style="color:inherit;"> |</span>a = AFArray(aa)
 <span style="color:red;">------ </span><span style="color:inherit;">src/wrap.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/wrap.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1755,19 +1755,19</span> ============================================================

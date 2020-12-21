@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/fonsp/Pluto.jl" target=_blank >fonsp/Pluto.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a><li><a href="#use_ismissing_3_hits">Use ismissing ➤ 3 hits</a><li><a href="#omit_comparison_with_boolean_constant_137_hits">Omit comparison with boolean constant ➤ 137 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_21_hits ><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/fonsp/Pluto.jl" target=_blank >fonsp/Pluto.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a><li><a href="#omit_comparison_with_boolean_constant_137_hits">Omit comparison with boolean constant ➤ 137 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_21_hits ><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-177,7 +177,7</span> ============================================================
@@ -10,17 +10,6 @@
 <span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
 <span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
 <span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
-<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
-<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
-<span style="color:inherit;"> |</span>	
-<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
-<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
-<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================
@@ -68,6 +57,41 @@
 <span style="color:inherit;"> |</span>    for (i, row) in zip(1:L,rows)
 <span style="color:inherit;"> |</span>        row_data[i] = (i, row_data_for(row))
 <span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
+<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
+<span style="color:inherit;"> |</span>	
+<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
+<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
+<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
+<span style="color:red;">------ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;Like a [&#96;Diary&#96;](@ref) but more serious. 📓&#34;
+<span style="color:inherit;"> |</span>mutable struct Notebook
+<span style="color:inherit;"> |</span>    &#34;Cells are ordered in a &#96;Notebook&#96;, and this order can be changed by the user. Cells will always have a constant UUID.&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">    cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    cells::<span style="color:green;">Vector</span>{Cell}</span>
+<span style="color:inherit;"> |</span>    
+<span style="color:inherit;"> |</span>    # i still don't really know what an AbstractString is but it makes this package look more professional
+<span style="color:inherit;"> |</span>    path::AbstractString
+<span style="color:inherit;">@|</span><span style="color:inherit;">-35,10 +35,10</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span># We can keep 128 updates pending. After this, any put! calls (i.e. calls that push an update to the notebook) will simply block, which is fine.
+<span style="color:inherit;"> |</span># This does mean that the Notebook can't be used if nothing is clearing the update channel.
+<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString, notebook_id::UUID) = </span></span>
+<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString, notebook_id::UUID) = </span>
+<span style="color:inherit;"> |</span>    Notebook(cells, path, notebook_id, NotebookTopology(), Channel(1024), Token(), nothing)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span></span>
+<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function cell_index_from_id(notebook::Notebook, cell_id::UUID)::Union{Int,Nothing}
+<span style="color:inherit;"> |</span>    findfirst(c -> c.cell_id == cell_id, notebook.cells)
 <span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
@@ -108,30 +132,6 @@
 <span style="color:inherit;"> |</span>    expr, next = Meta.parse(code, start, raise=false)
 <span style="color:inherit;"> |</span>    if next <= ncodeunits(code)
 <span style="color:inherit;"> |</span>        [next, expression_boundaries(code, next)...]
-<span style="color:red;">------ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/notebook/Notebook.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;Like a [&#96;Diary&#96;](@ref) but more serious. 📓&#34;
-<span style="color:inherit;"> |</span>mutable struct Notebook
-<span style="color:inherit;"> |</span>    &#34;Cells are ordered in a &#96;Notebook&#96;, and this order can be changed by the user. Cells will always have a constant UUID.&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">    cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    cells::<span style="color:green;">Vector</span>{Cell}</span>
-<span style="color:inherit;"> |</span>    
-<span style="color:inherit;"> |</span>    # i still don't really know what an AbstractString is but it makes this package look more professional
-<span style="color:inherit;"> |</span>    path::AbstractString
-<span style="color:inherit;">@|</span><span style="color:inherit;">-35,10 +35,10</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span># We can keep 128 updates pending. After this, any put! calls (i.e. calls that push an update to the notebook) will simply block, which is fine.
-<span style="color:inherit;"> |</span># This does mean that the Notebook can't be used if nothing is clearing the update channel.
-<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString, notebook_id::UUID) = </span></span>
-<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString, notebook_id::UUID) = </span>
-<span style="color:inherit;"> |</span>    Notebook(cells, path, notebook_id, NotebookTopology(), Channel(1024), Token(), nothing)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">Notebook(cells::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span></span>
-<span style="color:green;">+|</span></span>Notebook(cells::<span style="color:green;">Vector</span>{Cell}, path::AbstractString=numbered_until_new(joinpath(new_notebooks_directory(), cutename()))) = Notebook(cells, path, uuid1())</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function cell_index_from_id(notebook::Notebook, cell_id::UUID)::Union{Int,Nothing}
-<span style="color:inherit;"> |</span>    findfirst(c -> c.cell_id == cell_id, notebook.cells)
 <span style="color:red;">------ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
@@ -193,34 +193,6 @@
 <span style="color:inherit;"> |</span>	self = topology[myself]
 <span style="color:inherit;"> |</span>	return filter(notebook.cells) do cell
 <span style="color:inherit;"> |</span>		other = topology[c</div>
-</pre> <h3 id=use_ismissing_3_hits ><a href="#use_ismissing_3_hits">Use ismissing ➤ 3 hits</a></h3> <p><a href="/patterns/#2">Pattern #2</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/React.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/React.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-35,11 +35,11</span> ============================================================
-<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[1:2])
-<span style="color:inherit;"> |</span>        @test notebook.cells[1].output_repr == notebook.cells[2].output_repr
-<span style="color:inherit;"> |</span>        @test notebook.cells[1].rootassignee == :x
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test notebook.cells[1].</span><span style="color:red;">runtime !== missing</span></span>
-<span style="color:green;">+|</span></span>        @test notebook.cells[1].<span style="color:green;">!ismissing(runtime)</span></span>
-<span style="color:inherit;"> |</span>        setcode(notebook.cells[1], &#34;x = 12&#34;)
-<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[1])
-<span style="color:inherit;"> |</span>        @test notebook.cells[1].output_repr == notebook.cells[2].output_repr
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test notebook.cells[2].</span><span style="color:red;">runtime !== missing</span></span>
-<span style="color:green;">+|</span></span>        @test notebook.cells[2].<span style="color:green;">!ismissing(runtime)</span></span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        update_run!(🍭, notebook, notebook.cells[3])
-<span style="color:inherit;"> |</span>        @test notebook.cells[3].errored == false
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/PutUpdates.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
-<span style="color:inherit;"> |</span>    if message.cell !== nothing
-<span style="color:inherit;"> |</span>        to_send[:cell_id] = message.cell.cell_id
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">-|</span></span><span style="color:gray;">    if message.</span><span style="color:red;">initiator !== missing</span></span>
-<span style="color:green;">+|</span></span>    if message.<span style="color:green;">!ismissing(initiator)</span></span>
-<span style="color:inherit;"> |</span>        to_send[:initiator_id] = message.initiator.client_id
-<span style="color:inherit;"> |</span>        to_send[:request_id] = message.initiator.request_id
-<span style="color:inherit;"> |</span></div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_137_hits ><a href="#omit_comparison_with_boolean_constant_137_hits">Omit comparison with boolean constant ➤ 137 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/WorkspaceManager.jl</span>

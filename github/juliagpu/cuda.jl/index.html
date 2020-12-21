@@ -1,5 +1,16 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGPU/CUDA.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGPU/CUDA.jl" target=_blank >JuliaGPU/CUDA.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_20_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 20 hits</a><li><a href="#avoid_x_-_fx_7_hits">Avoid x -&gt; f&#40;x&#41; ➤ 7 hits</a><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a><li><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_20_hits ><a href="#replace_arrayt1_with_vectort_20_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 20 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">lib/cusparse/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">lib/cusparse/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
+<span style="color:inherit;"> |</span>using SparseArrays: nonzeroinds, dimlub
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>abstract type AbstractCuSparseArray{Tv, N} <: AbstractSparseArray{Tv, Cint, N} end
+<span style="color:red;">-|</span></span><span style="color:gray;">const AbstractCuSparseVector{Tv} = </span><span style="color:red;">AbstractCuSparseArray</span><span style="color:gray;">{Tv</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>const AbstractCuSparseVector{Tv} = <span style="color:green;">AbstractCuSparseVector</span>{Tv}</span>
+<span style="color:inherit;"> |</span>const AbstractCuSparseMatrix{Tv} = AbstractCuSparseArray{Tv,2}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Base.convert(T::Type{<:AbstractCuSparseArray}, m::AbstractArray) = m isa T ? m : T(m)
+<span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-65,7 +65,7</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -55,28 +66,6 @@
 <span style="color:inherit;"> |</span>AnyCuMatrix{T} = AnyCuArray{T,2}
 <span style="color:inherit;"> |</span>AnyCuVecOrMat{T} = Union{AnyCuVector{T}, AnyCuMatrix{T}}
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">lib/cusparse/array.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">lib/cusparse/array.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-9,7 +9,7</span> ============================================================
-<span style="color:inherit;"> |</span>using SparseArrays: nonzeroinds, dimlub
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>abstract type AbstractCuSparseArray{Tv, N} <: AbstractSparseArray{Tv, Cint, N} end
-<span style="color:red;">-|</span></span><span style="color:gray;">const AbstractCuSparseVector{Tv} = </span><span style="color:red;">AbstractCuSparseArray</span><span style="color:gray;">{Tv</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>const AbstractCuSparseVector{Tv} = <span style="color:green;">AbstractCuSparseVector</span>{Tv}</span>
-<span style="color:inherit;"> |</span>const AbstractCuSparseMatrix{Tv} = AbstractCuSparseArray{Tv,2}
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>Base.convert(T::Type{<:AbstractCuSparseArray}, m::AbstractArray) = m isa T ? m : T(m)
-<span style="color:red;">------ </span><span style="color:inherit;">src/texture.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/texture.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-103,7 +103,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>## memory operations
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function Base.copyto!(dst::</span><span style="color:red;">CuTextureArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, src::Union{</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, </span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}}) where {T}</span></span>
-<span style="color:green;">+|</span></span>function Base.copyto!(dst::<span style="color:green;">CuTextureVector</span>{T}, src::Union{<span style="color:green;">Vector</span>{T}, <span style="color:green;">CuVector</span>{T}}) where {T}</span>
-<span style="color:inherit;"> |</span>    size(dst) == size(src) || throw(DimensionMismatch(&#34;source and destination sizes must match&#34;))
-<span style="color:inherit;"> |</span>    Base.unsafe_copyto!(pointer(dst), pointer(src), length(dst))
-<span style="color:inherit;"> |</span>    return dst
 <span style="color:red;">------ </span><span style="color:inherit;">test/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-27,9 +27,9</span> ============================================================
@@ -92,6 +81,17 @@
 <span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, (1,2)),            CuArray{Nothing,2}(CU_NULL, (1,2)))
 <span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, (1,2)),   CuArray{Nothing,2}(CU_NULL, (1,2)))
 <span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing,2}, CU_NULL, (1,2)), CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:red;">------ </span><span style="color:inherit;">src/texture.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/texture.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-103,7 +103,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>## memory operations
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function Base.copyto!(dst::</span><span style="color:red;">CuTextureArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, src::Union{</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, </span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}}) where {T}</span></span>
+<span style="color:green;">+|</span></span>function Base.copyto!(dst::<span style="color:green;">CuTextureVector</span>{T}, src::Union{<span style="color:green;">Vector</span>{T}, <span style="color:green;">CuVector</span>{T}}) where {T}</span>
+<span style="color:inherit;"> |</span>    size(dst) == size(src) || throw(DimensionMismatch(&#34;source and destination sizes must match&#34;))
+<span style="color:inherit;"> |</span>    Base.unsafe_copyto!(pointer(dst), pointer(src), length(dst))
+<span style="color:inherit;"> |</span>    return dst
 <span style="color:red;">------ </span><span style="color:inherit;">test/texture.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/texture.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================

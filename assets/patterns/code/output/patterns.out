@@ -1,23 +1,33 @@
 
 ~~~ 
-<h3 id="1">1: Replace Array{T,1} with Vector{T}</h3>
+<span id="1"></span>
 ~~~
+### 1: Replace Array{T,1} with Vector{T}
 tags: *julia*
+
+Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
+
 ~~~
+<b>Defintion</b>
 <pre><code class="plaintext">match='Array{:[T],1}'
 
 rewrite='Vector{:[T]}'
 </code></pre>
 ~~~
 
-Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
-
 
 ~~~ 
-<h3 id="2">2: Use ismissing</h3>
+<span id="2"></span>
 ~~~
+### 2: Use ismissing
 tags: *julia, performance-decrease*
+
+This pattern is disabled for now, due to discussion at
+<https://discourse.julialang.org/t/ismissing-x-versus-x-missing/52171>.
+
+
 ~~~
+<b>Defintion</b>
 <pre><code class="plaintext">match=':[[var]] :[first~[=|!]]== missing' 
 
 rule='where rewrite :[first] { "=" -> "" }'
@@ -26,29 +36,35 @@ rewrite=':[first]ismissing(:[var])'
 </code></pre>
 ~~~
 
-Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.
-
 
 ~~~ 
-<h3 id="3">3: Avoid x -> f(x)</h3>
+<span id="3"></span>
 ~~~
+### 3: Avoid x -> f(x)
 tags: *julia*
+
+From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
+
+
 ~~~
+<b>Defintion</b>
 <pre><code class="plaintext">match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
 rewrite=':[f]:[end]'
 </code></pre>
 ~~~
 
-From the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/).
-
-
 
 ~~~ 
-<h3 id="4">4: Omit comparison with boolean constant</h3>
+<span id="4"></span>
 ~~~
+### 4: Omit comparison with boolean constant
 tags: *generic*
+
+From [staticcheck](https://staticcheck.io/docs/checks).
+
 ~~~
+<b>Defintion</b>
 <pre><code class="plaintext">match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
 
 rule='where 
@@ -60,23 +76,12 @@ rewrite=':[first]:[bool]:[var]'
 </code></pre>
 ~~~
 
-From [staticcheck](https://staticcheck.io/docs/checks).
-
 
 ~~~ 
-<h3 id="5">5: Omit a == a and a != a</h3>
+<span id="5"></span>
 ~~~
+### 5: Omit a == a and a != a
 tags: *julia*
-~~~
-<pre><code class="plaintext">match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
-
-rule='where
-    rewrite :[bool] { "=" -> "true" },
-    rewrite :[bool] { "!" -> "false" }'
-
-rewrite=':[bool]'
-</code></pre>
-~~~
 
 SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
 
@@ -97,12 +102,31 @@ false
 ```
 
 
+~~~
+<b>Defintion</b>
+<pre><code class="plaintext">match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
+
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
+
+rewrite=':[bool]'
+</code></pre>
+~~~
+
 
 ~~~ 
-<h3 id="6">6: Avoid findfirst in conditional</h3>
+<span id="6"></span>
 ~~~
+### 6: Avoid findfirst in conditional
 tags: *julia*
+
+For example, instead of `findfirst('a', "ab") === nothing`,
+use `occursin('a', "ab")` or `contains` (Julia ≥1.5).
+
+
 ~~~
+<b>Defintion</b>
 <pre><code class="plaintext">match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
 
 rule='where
@@ -113,22 +137,53 @@ rewrite=':[bool]occursin(:[a], :[b])'
 </code></pre>
 ~~~
 
-For example, instead of `findfirst('a', "ab") === nothing`,
-use `occursin('a', "ab")` or `contains` (Julia ≥1.5).
-
-
 
 ~~~ 
-<h3 id="7">7: Avoid findall(x -> x == false, Y)</h3>
+<span id="7"></span>
 ~~~
+### 7: Avoid findall(x -> x == false, Y)
 tags: *julia*
+
+Instead, use `findall(.!Y)`.
+
+
 ~~~
+<b>Defintion</b>
 <pre><code class="plaintext">match='findall(:[x] -> :[x] == false, :[Y])'
 
 rewrite='findall(.!:[Y])'
 </code></pre>
 ~~~
 
-Instead, use `findall(.!Y)`.
 
+~~~ 
+<span id="8"></span>
+~~~
+### 8: Use unary operator without anonymous function
+tags: *julia*
+
+This is an extension of pattern 3 for the unary operators:
+`!`, `~`, `+`, `-`.
+
+**Example**
+```
+julia> map(x -> !x, [true, missing])
+2-element Array{Union{Missing, Bool},1}:
+ false
+      missing
+
+julia> map(!, [true, missing]
+2-element Array{Union{Missing, Bool},1}:
+ false
+      missing
+```
+
+
+~~~
+<b>Defintion</b>
+<pre><code class="plaintext">match=':[[x]] -> :[unary~[!~+-]]:[[x]]'
+
+rewrite=':[unary]'
+</code></pre>
+~~~
 

@@ -6,6 +6,8 @@ struct Pattern
     toml::String
 end
 
+unary_operators = ['!', '~', '+', '-']
+
 val_rx = raw"[\w_\[\]:\.\\'*+-^′]+"
 extend_val_rx_left = raw"(?<![+-\/*] )"
 extend_val_rx_right = raw"(?! [+-\/*])"
@@ -21,7 +23,10 @@ patterns = [
         """
     ),
     Pattern(2, "Use ismissing", ["julia", "performance-decrease"], 
-        "Note that `ismissing` can be slower, see <https://github.com/JuliaLang/julia/issues/27681>.",
+        """
+        This pattern is disabled for now, due to discussion at
+        <https://discourse.julialang.org/t/ismissing-x-versus-x-missing/52171>.
+        """,
         raw"""
         match=':[[var]] :[first~[=|!]]== missing' 
 
@@ -108,7 +113,32 @@ patterns = [
         rewrite='findall(.!:[Y])'
         """
     ),
-#    Pattern(8, "Avoid duplicate condition", ["julia"],
+    Pattern(8, "Use unary operator without anonymous function", ["julia"],
+        """
+        This is an extension of pattern 3 for the unary operators:
+        `$(join(unary_operators, "`, `"))`.
+
+        **Example**
+        ```
+        julia> map(x -> !x, [true, missing])
+        2-element Array{Union{Missing, Bool},1}:
+         false
+              missing
+
+        julia> map(!, [true, missing]
+        2-element Array{Union{Missing, Bool},1}:
+         false
+              missing
+        ```
+        """,
+        """
+        match=':[[x]] -> :[unary~[$(join(unary_operators))]]:[[x]]'
+
+        rewrite=':[unary]'
+        """
+    ),
+
+#    Pattern(9, "Avoid duplicate condition", ["julia"],
 #        """
 #        For example, replace
 #        ```

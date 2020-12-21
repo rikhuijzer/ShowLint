@@ -35,7 +35,6 @@ import JSON
     @test apply(P[2], "if x === missing") == "if ismissing(x)"
     @test apply(P[2], "x !== missing") == "!ismissing(x)"
     @test apply(P[3], "map(x -> f(x), A)") == "map(f, A)"
-    # @test apply(P[3], "map(x -> !x, A)") == "map(!, A)"
     @test unchanged(P[3], "y = x -> f(x) ? a : b")
     @test unchanged(P[3], "x -> f.(x),")
     @test apply(P[4], "x == true") == "x"
@@ -60,7 +59,9 @@ import JSON
     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
     @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"
-#    @test apply(P[8], """
+    @test apply(P[8], "map(x -> !x, A)") == "map(!, A)"
+    @test apply(P[8], "x -> ~x") == "~"
+#    @test apply(P[9], """
 #        if a == b
 #            f()
 #            g()

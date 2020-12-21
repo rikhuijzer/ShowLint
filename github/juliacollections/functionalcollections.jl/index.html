@@ -1,25 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/FunctionalCollections.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/FunctionalCollections.jl" target=_blank >JuliaCollections/FunctionalCollections.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_4_hits ><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/PersistentVector.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/PersistentVector.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1,7 +1,7</span> ============================================================
-<span style="color:inherit;"> |</span># Persistent Vectors
-<span style="color:inherit;"> |</span># ==================
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">struct PersistentVector{T} <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>struct PersistentVector{T} <: <span style="color:green;">AbstractVector</span>{T}</span>
-<span style="color:inherit;"> |</span>    trie::DenseBitmappedTrie{Vector{T}}
-<span style="color:inherit;"> |</span>    tail::Vector{T}
-<span style="color:inherit;"> |</span>    length::Int
-<span style="color:inherit;">@|</span><span style="color:inherit;">-60,7 +60,7</span> ============================================================
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        # T[el] will give an error when T is an tuple type in v0.3
-<span style="color:inherit;"> |</span>        # workaround:
-<span style="color:red;">-|</span></span><span style="color:gray;">        arr = </span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, 1)</span></span>
-<span style="color:green;">+|</span></span>        arr = <span style="color:green;">Vector</span>{T}(undef, 1)</span>
-<span style="color:inherit;"> |</span>        arr[1] = convert(T, el)
-<span style="color:inherit;"> |</span>        PersistentVector{T}(append(v.trie, v.tail), arr, 1 + v.length)
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">src/PersistentMap.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/PersistentMap.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/PersistentMap.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-186,7 +186,7</span> ============================================================
 <span style="color:inherit;"> |</span>end
@@ -40,5 +20,25 @@
 <span style="color:green;">+|</span></span>    copy_to(from, <span style="color:green;">Vector</span>{T}(undef, len), min(len, length(from)))</span>
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>mask(t::BitmappedTrie, i::Int) = (((i - 1) >>> shift(t)) & (trielen - 1)) + 1
-<span style="color:inherit;"> |</s</div>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">src/PersistentVector.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/PersistentVector.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1,7 +1,7</span> ============================================================
+<span style="color:inherit;"> |</span># Persistent Vectors
+<span style="color:inherit;"> |</span># ==================
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">struct PersistentVector{T} <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>struct PersistentVector{T} <: <span style="color:green;">AbstractVector</span>{T}</span>
+<span style="color:inherit;"> |</span>    trie::DenseBitmappedTrie{Vector{T}}
+<span style="color:inherit;"> |</span>    tail::Vector{T}
+<span style="color:inherit;"> |</span>    length::Int
+<span style="color:inherit;">@|</span><span style="color:inherit;">-60,7 +60,7</span> ============================================================
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        # T[el] will give an error when T is an tuple type in v0.3
+<span style="color:inherit;"> |</span>        # workaround:
+<span style="color:red;">-|</span></span><span style="color:gray;">        arr = </span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, 1)</span></span>
+<span style="color:green;">+|</span></span>        arr = <span style="color:green;">Vector</span>{T}(undef, 1)</span>
+<span style="color:inherit;"> |</span>        arr[1] = convert(T, el)
+<span style="color:inherit;"> |</span>        PersistentVector{T}(append(v.trie, v.tail), arr, 1 + v.length)
+<span style="color:inherit;"> |</span></div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

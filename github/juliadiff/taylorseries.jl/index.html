@@ -140,6 +140,82 @@
 <span style="color:inherit;"> |</span>    @assert length(u) == length(x)
 <span style="color:inherit;"> |</span>    for ind in eachindex(x)
 <span style="color:inherit;"> |</span>        a[u[ind]] = x[ind]
+<span style="color:red;">------ </span><span style="color:inherit;">test/manyvariables.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/manyvariables.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-127,7 +127,7</span> ============================================================
+<span style="color:inherit;"> |</span>    @test zeroT[0] == HomogeneousPolynomial(0, 0)
+<span style="color:inherit;"> |</span>    @test uT[0] == HomogeneousPolynomial(1, 0)
+<span style="color:inherit;"> |</span>    @test ones(xH,1) == [1, xH+yH]
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(ones(xH,2)) == </span><span style="color:red;">Array</span><span style="color:gray;">{HomogeneousPolynomial{Int}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    @test typeof(ones(xH,2)) == <span style="color:green;">Vector</span>{HomogeneousPolynomial{Int}}</span>
+<span style="color:inherit;"> |</span>    @test length(ones(xH,2)) == 3
+<span style="color:inherit;"> |</span>    @test ones(HomogeneousPolynomial{Complex{Int}},0) ==
+<span style="color:inherit;"> |</span>        [HomogeneousPolynomial([complex(1,0)], 0)]
+<span style="color:red;">------ </span><span style="color:inherit;">src/evaluate.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluate.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-125,7 +125,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>## Evaluation of multivariable
+<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{T},</span>
+<span style="color:inherit;"> |</span>        x0::AbstractArray{T}) where {T<:Number}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-135,7 +135,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{Taylor1{T}},</span>
+<span style="color:inherit;"> |</span>        x0::AbstractArray{Taylor1{T}}) where {T<:NumberNotSeriesN}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-145,7 +145,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{TaylorN{T}},</span>
+<span style="color:inherit;"> |</span>        x0::AbstractArray{TaylorN{T}}) where {T<:NumberNotSeriesN}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-197,7 +197,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::HomogeneousPolynomial{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">} ) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::HomogeneousPolynomial{T}, vals::<span style="color:green;">Vector</span>{S} ) where</span>
+<span style="color:inherit;"> |</span>        {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>evaluate(a::HomogeneousPolynomial, v, vals...) = evaluate(a, (v, vals...,))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-259,7 +259,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return suma
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{Taylor1{S}}) where</span>
+<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{Taylor1{T}}, vals::NTuple{N, Taylor1{T}}) where
+<span style="color:inherit;">@|</span><span style="color:inherit;">-277,7 +277,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return suma
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{Taylor1{T}}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::TaylorN{Taylor1{T}}, vals::<span style="color:green;">Vector</span>{Taylor1{T}}) where</span>
+<span style="color:inherit;"> |</span>    {T<:NumberNotSeries} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, vals::NTuple{N, TaylorN{S}}) where
+<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return suma
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
+<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{TaylorN{S}}) where</span>
+<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeries} = evaluate(a, (vals...,))
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, s::Symbol, val::S) where
 <span style="color:red;">------ </span><span style="color:inherit;">src/conversion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/conversion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,18 +8,18</span> ============================================================
@@ -249,82 +325,77 @@
 <span style="color:inherit;"> |</span>    {T<:Number, S<:Number} = TaylorN{promote_type(T,S)}
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>promote_rule(::Type{TaylorN{T}}, ::Type{S}) where {T<:Number, S<:Number} =
-<span style="color:red;">------ </span><span style="color:inherit;">test/manyvariables.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/manyvariables.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-127,7 +127,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test zeroT[0] == HomogeneousPolynomial(0, 0)
-<span style="color:inherit;"> |</span>    @test uT[0] == HomogeneousPolynomial(1, 0)
-<span style="color:inherit;"> |</span>    @test ones(xH,1) == [1, xH+yH]
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test typeof(ones(xH,2)) == </span><span style="color:red;">Array</span><span style="color:gray;">{HomogeneousPolynomial{Int}</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    @test typeof(ones(xH,2)) == <span style="color:green;">Vector</span>{HomogeneousPolynomial{Int}}</span>
-<span style="color:inherit;"> |</span>    @test length(ones(xH,2)) == 3
-<span style="color:inherit;"> |</span>    @test ones(HomogeneousPolynomial{Complex{Int}},0) ==
-<span style="color:inherit;"> |</span>        [HomogeneousPolynomial([complex(1,0)], 0)]
-<span style="color:red;">------ </span><span style="color:inherit;">src/evaluate.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluate.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-125,7 +125,7</span> ============================================================
+<span style="color:red;">------ </span><span style="color:inherit;">src/calculus.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/calculus.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-238,7 +238,7</span> ============================================================
+<span style="color:inherit;"> |</span>Compute the jacobian matrix of &#96;vf&#96;, a vector of &#96;TaylorN&#96; polynomials,
+<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;. If &#96;vals&#96; is ommited, it is evaluated at zero.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian(vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
+<span style="color:green;">+|</span></span>function jacobian(vf::<span style="color:green;">Vector</span>{TaylorN{T}}) where {T<:Number}</span>
+<span style="color:inherit;"> |</span>    numVars = get_numvars()
+<span style="color:inherit;"> |</span>    @assert length(vf) == numVars
+<span style="color:inherit;"> |</span>    jac = Array{T}(undef, numVars, numVars)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-249,7 +249,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    return transpose(jac)
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian(vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
+<span style="color:green;">+|</span></span>function jacobian(vf::<span style="color:green;">Vector</span>{TaylorN{T}}, vals::<span style="color:green;">Vector</span>{S}) where</span>
+<span style="color:inherit;"> |</span>        {T<:Number, S<:Number}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    R = promote_type(T,S)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-267,8 +267,8</span> ============================================================
+<span style="color:inherit;"> |</span>    return transpose(jac)
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>## Evaluation of multivariable
-<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
-<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{T},</span>
-<span style="color:inherit;"> |</span>        x0::AbstractArray{T}) where {T<:Number}
+<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian(vf::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{TaylorN{T}}</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
+<span style="color:green;">+|</span></span>function jacobian(vf::<span style="color:green;">Vector</span>{Taylor1{TaylorN{T}}}) where {T<:Number}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    vv = convert(</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{Taylor1{T}}</span><span style="color:red;">,1</span><span style="color:gray;">}, vf)</span></span>
+<span style="color:green;">+|</span></span>    vv = convert(<span style="color:green;">Vector</span>{TaylorN{Taylor1{T}}}, vf)</span>
+<span style="color:inherit;"> |</span>    jacobian(vv)
+<span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-135,7 +135,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-282,7 +282,7</span> ============================================================
+<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;, and write results to &#96;jac&#96;. If &#96;vals&#96; is ommited,
+<span style="color:inherit;"> |</span>it is evaluated at zero.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian!(jac::Array{T,2}, vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
+<span style="color:green;">+|</span></span>function jacobian!(jac::Array{T,2}, vf::<span style="color:green;">Vector</span>{TaylorN{T}}) where {T<:Number}</span>
+<span style="color:inherit;"> |</span>    numVars = get_numvars()
+<span style="color:inherit;"> |</span>    @assert length(vf) == numVars
+<span style="color:inherit;"> |</span>    @assert (numVars, numVars) == size(jac)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-293,8 +293,8</span> ============================================================
+<span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    nothing
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian!(jac::Array{T,2}, vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function jacobian!(jac::Array{T,2}, vf::<span style="color:green;">Vector</span>{TaylorN{T}},</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        vals::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
+<span style="color:green;">+|</span></span>        vals::<span style="color:green;">Vector</span>{T}) where {T<:Number}</span>
 <span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
-<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{Taylor1{T}},</span>
-<span style="color:inherit;"> |</span>        x0::AbstractArray{Taylor1{T}}) where {T<:NumberNotSeriesN}
+<span style="color:inherit;"> |</span>    numVars = get_numvars()
+<span style="color:inherit;"> |</span>    @assert length(vf) == numVars == length(vals)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-318,8 +318,8</span> ============================================================
+<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;. If &#96;vals&#96; is ommited, it is evaluated at
+<span style="color:inherit;"> |</span>zero.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">hessian(f::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number, S<:Number} =</span></span>
+<span style="color:green;">+|</span></span>hessian(f::TaylorN{T}, vals::<span style="color:green;">Vector</span>{S}) where {T<:Number, S<:Number} =</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    (R = promote_type(T,S); jacobian( gradient(f), vals::</span><span style="color:red;">Array</span><span style="color:gray;">{R</span><span style="color:red;">,1</span><span style="color:gray;">}) )</span></span>
+<span style="color:green;">+|</span></span>    (R = promote_type(T,S); jacobian( gradient(f), vals::<span style="color:green;">Vector</span>{R}) )</span>
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-145,7 +145,7</span> ============================================================
-<span style="color:inherit;"> |</span>    nothing
-<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>hessian(f::TaylorN{T}) where {T<:Number} = hessian( f, zeros(T, get_numvars()) )
 <span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function evaluate!(x::AbstractArray{TaylorN{T}}, δx::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
-<span style="color:green;">+|</span></span>function evaluate!(x::AbstractArray{TaylorN{T}}, δx::<span style="color:green;">Vector</span>{TaylorN{T}},</span>
-<span style="color:inherit;"> |</span>        x0::AbstractArray{TaylorN{T}}) where {T<:NumberNotSeriesN}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-333,7 +333,7</span> ============================================================
+<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;, and write results to &#96;hes&#96;. If &#96;vals&#96; is
+<span style="color:inherit;"> |</span>ommited, it is evaluated at zero.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">hessian!(hes::Array{T,2}, f::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number} =</span></span>
+<span style="color:green;">+|</span></span>hessian!(hes::Array{T,2}, f::TaylorN{T}, vals::<span style="color:green;">Vector</span>{T}) where {T<:Number} =</span>
+<span style="color:inherit;"> |</span>    jacobian!(hes, gradient(f), vals)
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # @assert length(x) == length(x0)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-197,7 +197,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::HomogeneousPolynomial{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">} ) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::HomogeneousPolynomial{T}, vals::<span style="color:green;">Vector</span>{S} ) where</span>
-<span style="color:inherit;"> |</span>        {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>evaluate(a::HomogeneousPolynomial, v, vals...) = evaluate(a, (v, vals...,))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-259,7 +259,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return suma
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{Taylor1{S}}) where</span>
-<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeriesN} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{Taylor1{T}}, vals::NTuple{N, Taylor1{T}}) where
-<span style="color:inherit;">@|</span><span style="color:inherit;">-277,7 +277,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return suma
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{Taylor1{T}}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::TaylorN{Taylor1{T}}, vals::<span style="color:green;">Vector</span>{Taylor1{T}}) where</span>
-<span style="color:inherit;"> |</span>    {T<:NumberNotSeries} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, vals::NTuple{N, TaylorN{S}}) where
-<span style="color:inherit;">@|</span><span style="color:inherit;">-295,7 +295,7</span> ============================================================
-<span style="color:inherit;"> |</span>    return suma
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">evaluate(a::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{S}</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
-<span style="color:green;">+|</span></span>evaluate(a::TaylorN{T}, vals::<span style="color:green;">Vector</span>{TaylorN{S}}) where</span>
-<span style="color:inherit;"> |</span>    {T<:Number, S<:NumberNotSeries} = evaluate(a, (vals...,))
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function evaluate(a::TaylorN{T}, s::Symbol, val::S) where
+<span style="color:inherit;"> |</span>hessian!(hes::Array{T,2}, f::TaylorN{T}) where {T<:Number} =
 <span style="color:red;">------ </span><span style="color:inherit;">src/constructors.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/constructors.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-33,11 +33,11</span> ============================================================
@@ -405,77 +476,6 @@
 <span style="color:inherit;"> |</span>    TaylorN(x, maxorderH(x))
 <span style="color:inherit;"> |</span>TaylorN(x::HomogeneousPolynomial{T}, order::Int) where {T<:Number} =
 <span style="color:inherit;"> |</span>    TaylorN( [x], order )
-<span style="color:red;">------ </span><span style="color:inherit;">src/calculus.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/calculus.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-238,7 +238,7</span> ============================================================
-<span style="color:inherit;"> |</span>Compute the jacobian matrix of &#96;vf&#96;, a vector of &#96;TaylorN&#96; polynomials,
-<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;. If &#96;vals&#96; is ommited, it is evaluated at zero.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian(vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
-<span style="color:green;">+|</span></span>function jacobian(vf::<span style="color:green;">Vector</span>{TaylorN{T}}) where {T<:Number}</span>
-<span style="color:inherit;"> |</span>    numVars = get_numvars()
-<span style="color:inherit;"> |</span>    @assert length(vf) == numVars
-<span style="color:inherit;"> |</span>    jac = Array{T}(undef, numVars, numVars)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-249,7 +249,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    return transpose(jac)
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian(vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where</span></span>
-<span style="color:green;">+|</span></span>function jacobian(vf::<span style="color:green;">Vector</span>{TaylorN{T}}, vals::<span style="color:green;">Vector</span>{S}) where</span>
-<span style="color:inherit;"> |</span>        {T<:Number, S<:Number}
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    R = promote_type(T,S)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-267,8 +267,8</span> ============================================================
-<span style="color:inherit;"> |</span>    return transpose(jac)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian(vf::</span><span style="color:red;">Array</span><span style="color:gray;">{Taylor1{TaylorN{T}}</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
-<span style="color:green;">+|</span></span>function jacobian(vf::<span style="color:green;">Vector</span>{Taylor1{TaylorN{T}}}) where {T<:Number}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    vv = convert(</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{Taylor1{T}}</span><span style="color:red;">,1</span><span style="color:gray;">}, vf)</span></span>
-<span style="color:green;">+|</span></span>    vv = convert(<span style="color:green;">Vector</span>{TaylorN{Taylor1{T}}}, vf)</span>
-<span style="color:inherit;"> |</span>    jacobian(vv)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-282,7 +282,7</span> ============================================================
-<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;, and write results to &#96;jac&#96;. If &#96;vals&#96; is ommited,
-<span style="color:inherit;"> |</span>it is evaluated at zero.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian!(jac::Array{T,2}, vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
-<span style="color:green;">+|</span></span>function jacobian!(jac::Array{T,2}, vf::<span style="color:green;">Vector</span>{TaylorN{T}}) where {T<:Number}</span>
-<span style="color:inherit;"> |</span>    numVars = get_numvars()
-<span style="color:inherit;"> |</span>    @assert length(vf) == numVars
-<span style="color:inherit;"> |</span>    @assert (numVars, numVars) == size(jac)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-293,8 +293,8</span> ============================================================
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    nothing
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">-|</span></span><span style="color:gray;">function jacobian!(jac::Array{T,2}, vf::</span><span style="color:red;">Array</span><span style="color:gray;">{TaylorN{T}</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
-<span style="color:green;">+|</span></span>function jacobian!(jac::Array{T,2}, vf::<span style="color:green;">Vector</span>{TaylorN{T}},</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        vals::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number}</span></span>
-<span style="color:green;">+|</span></span>        vals::<span style="color:green;">Vector</span>{T}) where {T<:Number}</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    numVars = get_numvars()
-<span style="color:inherit;"> |</span>    @assert length(vf) == numVars == length(vals)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-318,8 +318,8</span> ============================================================
-<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;. If &#96;vals&#96; is ommited, it is evaluated at
-<span style="color:inherit;"> |</span>zero.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">hessian(f::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{S</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number, S<:Number} =</span></span>
-<span style="color:green;">+|</span></span>hessian(f::TaylorN{T}, vals::<span style="color:green;">Vector</span>{S}) where {T<:Number, S<:Number} =</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    (R = promote_type(T,S); jacobian( gradient(f), vals::</span><span style="color:red;">Array</span><span style="color:gray;">{R</span><span style="color:red;">,1</span><span style="color:gray;">}) )</span></span>
-<span style="color:green;">+|</span></span>    (R = promote_type(T,S); jacobian( gradient(f), vals::<span style="color:green;">Vector</span>{R}) )</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>hessian(f::TaylorN{T}) where {T<:Number} = hessian( f, zeros(T, get_numvars()) )
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-333,7 +333,7</span> ============================================================
-<span style="color:inherit;"> |</span>evaluated at the vector &#96;vals&#96;, and write results to &#96;hes&#96;. If &#96;vals&#96; is
-<span style="color:inherit;"> |</span>ommited, it is evaluated at zero.
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">hessian!(hes::Array{T,2}, f::TaylorN{T}, vals::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T<:Number} =</span></span>
-<span style="color:green;">+|</span></span>hessian!(hes::Array{T,2}, f::TaylorN{T}, vals::<span style="color:green;">Vector</span>{T}) where {T<:Number} =</span>
-<span style="color:inherit;"> |</span>    jacobian!(hes, gradient(f), vals)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>hessian!(hes::Array{T,2}, f::TaylorN{T}) where {T<:Number} =
 <span style="color:red;">------ </span><span style="color:inherit;">test/mixtures.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/mixtures.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-99,9 +99,9</span> ============================================================

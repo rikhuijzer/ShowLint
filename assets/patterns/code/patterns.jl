@@ -11,13 +11,16 @@ for pattern in patterns
   println("""
   
   ~~~ 
-  <h3 id="$id">$id: $title</h3>
+  <span id="$id"></span>
   ~~~
+  ### $id: $title
   tags: *$tags*
-  ~~~
-  <pre><code class="plaintext">$toml</code></pre>
-  ~~~
 
   $descr
+
+  ~~~
+  <b>Defintion</b>
+  <pre><code class="plaintext">$toml</code></pre>
+  ~~~
   """)
 end

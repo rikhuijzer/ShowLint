@@ -4,20 +4,20 @@
         -     @test SL.patterns_have_valid_indexes()
         - 
         -     function apply(pat::Pattern, code::String; file_extension="jl")
-       52         test_dir = joinpath(SL.clones_dir, "test", "test")
-       26         rm(test_dir; recursive=true, force=true)
-       26         mkpath(test_dir)
+       56         test_dir = joinpath(SL.clones_dir, "test", "test")
+       28         rm(test_dir; recursive=true, force=true)
+       28         mkpath(test_dir)
         - 
-       26         code_file = joinpath(test_dir, "code.$file_extension")
-       26         open(code_file, "w") do io
+       28         code_file = joinpath(test_dir, "code.$file_extension")
+       28         open(code_file, "w") do io
         -             write(io, code)
         -         end
         -         
-       52         repo = Repo("test", "test", [SL.default])
+       56         repo = Repo("test", "test", [SL.default])
         - 
-       26         SL.apply(pat, repo; in_place=true)
+       28         SL.apply(pat, repo; in_place=true)
         - 
-       26         read(code_file, String)
+       28         read(code_file, String)
         -     end
         - 
         -     P = SL.patterns
@@ -35,7 +35,6 @@
         -     @test apply(P[2], "if x === missing") == "if ismissing(x)"
         -     @test apply(P[2], "x !== missing") == "!ismissing(x)"
         -     @test apply(P[3], "map(x -> f(x), A)") == "map(f, A)"
-        -     # @test apply(P[3], "map(x -> !x, A)") == "map(!, A)"
         -     @test unchanged(P[3], "y = x -> f(x) ? a : b")
         -     @test unchanged(P[3], "x -> f.(x),")
         -     @test apply(P[4], "x == true") == "x"
@@ -60,7 +59,9 @@
         -     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
         -     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
         -     @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"
-        - #    @test apply(P[8], """
+        -     @test apply(P[8], "map(x -> !x, A)") == "map(!, A)"
+        -     @test apply(P[8], "x -> ~x") == "~"
+        - #    @test apply(P[9], """
         - #        if a == b
         - #            f()
         - #            g()

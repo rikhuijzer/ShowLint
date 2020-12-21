@@ -1,5 +1,18 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaCollections/DataStructures.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaCollections/DataStructures.jl" target=_blank >JuliaCollections/DataStructures.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a><li><a href="#avoid_findfirst_in_conditional_4_hits">Avoid findfirst in conditional ➤ 4 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_17_hits ><a href="#replace_arrayt1_with_vectort_17_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 17 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/balanced_tree.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/robin_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/robin_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-28,8 +28,8</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>mutable struct RobinDict{K,V} <: AbstractDict{K,V}
+<span style="color:inherit;"> |</span>    hashes::Vector{UInt32}
+<span style="color:red;">-|</span></span><span style="color:gray;">    keys::</span><span style="color:red;">Array</span><span style="color:gray;">{K</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    keys::<span style="color:green;">Vector</span>{K}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    vals::</span><span style="color:red;">Array</span><span style="color:gray;">{V</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    vals::<span style="color:green;">Vector</span>{V}</span>
+<span style="color:inherit;"> |</span>    count::Int
+<span style="color:inherit;"> |</span>    idxfloor::Int
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">src/balanced_tree.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/balanced_tree.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-72,13 +72,13</span> ============================================================
 <span style="color:inherit;"> |</span>## marker whose index is 1 and the after-end marker whose index is 2.
@@ -59,19 +72,6 @@
 <span style="color:inherit;"> |</span>    if isempty(freelocs)
 <span style="color:inherit;"> |</span>        push!(a, item)
 <span style="color:inherit;"> |</span>        return length(a)
-<span style="color:red;">------ </span><span style="color:inherit;">src/robin_dict.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/robin_dict.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-28,8 +28,8</span> ============================================================
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>mutable struct RobinDict{K,V} <: AbstractDict{K,V}
-<span style="color:inherit;"> |</span>    hashes::Vector{UInt32}
-<span style="color:red;">-|</span></span><span style="color:gray;">    keys::</span><span style="color:red;">Array</span><span style="color:gray;">{K</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    keys::<span style="color:green;">Vector</span>{K}</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    vals::</span><span style="color:red;">Array</span><span style="color:gray;">{V</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    vals::<span style="color:green;">Vector</span>{V}</span>
-<span style="color:inherit;"> |</span>    count::Int
-<span style="color:inherit;"> |</span>    idxfloor::Int
-<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">test/test_multi_dict.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_multi_dict.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-12,9 +12,9</span> ============================================================
@@ -106,20 +106,7 @@
 <span style="color:inherit;"> |</span>        for i in 1:15
 <span style="color:inherit;"> |</span>            insert!(d, rand('a':'f'), rand()>0.5 ? [rand(1:10)] : rand(1:10, rand(1:</div>
 </pre> <h3 id=avoid_findfirst_in_conditional_4_hits ><a href="#avoid_findfirst_in_conditional_4_hits">Avoid findfirst in conditional ➤ 4 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-304,8 +304,8</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), SwissDict(:a=>1, :b=>2)) == :a
-<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), SwissDict(:a=>1, :b=>1, :c=>3)) in (:a, :b)
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), SwissDict())</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), SwissDict())</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), SwissDict(:a=>2, :b=>3))</span><span style="color:red;"> === nothing</span></span>
-<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), SwissDict(:a=>2, :b=>3))</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;haskey&#34; begin
-<span style="color:red;">------ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/test_robin_dict.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-302,8 +302,8</span> ============================================================
 <span style="color:inherit;"> |</span>
@@ -131,5 +118,18 @@
 <span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), RobinDict(:a=>2, :b=>3))</span>
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>@testset &#34;haskey&#34; begin
+<span style="color:red;">------ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_swiss_dict.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-304,8 +304,8</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), SwissDict(:a=>1, :b=>2)) == :a
+<span style="color:inherit;"> |</span>    @test findfirst(isequal(1), SwissDict(:a=>1, :b=>1, :c=>3)) in (:a, :b)
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), SwissDict())</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), SwissDict())</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    @test </span><span style="color:red;">findfirst</span><span style="color:gray;">(isequal(1), SwissDict(:a=>2, :b=>3))</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    @test <span style="color:green;">!occursin</span>(isequal(1), SwissDict(:a=>2, :b=>3))</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>@testset &#34;haskey&#34; b</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

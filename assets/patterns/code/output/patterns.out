@@ -69,7 +69,7 @@ tags: *julia*
 
 SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
 ~~~
-<pre><code class="plaintext">match=':[x~[\w_\[\]:\.*+-]+] :[bool~(=|!)]= :[x~[\w_\[\]:\.*+-]+]'
+<pre><code class="plaintext">match=''':[x~[\w_\[\]:\.\\'*+-]+] :[bool~(=|!)]= :[x~[\w_\[\]:\.\\'*+-]+]'''
 
 rule='where
     rewrite :[bool] { "=" -> "true" },

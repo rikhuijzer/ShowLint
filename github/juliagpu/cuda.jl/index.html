@@ -10,6 +10,21 @@
 <span style="color:inherit;"> |</span>const AbstractCuSparseMatrix{Tv} = AbstractCuSparseArray{Tv,2}
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>Base.convert(T::Type{<:AbstractCuSparseArray}, m::AbstractArray) = m isa T ? m : T(m)
+<span style="color:red;">------ </span><span style="color:inherit;">test/array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">test/array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-27,9 +27,9</span> ============================================================
+<span style="color:inherit;"> |</span>  ## compare structs without using mapreduce
+<span style="color:inherit;"> |</span>  structeq(a,b) = false
+<span style="color:inherit;"> |</span>  structeq(a::T,b::T) where T = all(field->getfield(a,field) == getfield(b,field), fieldnames(T))
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(</span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}, CU_NULL, 2),     </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
+<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(<span style="color:green;">CuVector</span>{Nothing}, CU_NULL, 2),     <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, (1,2)),            CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, (1,2)),   CuArray{Nothing,2}(CU_NULL, (1,2)))
+<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing,2}, CU_NULL, (1,2)), CuArray{Nothing,2}(CU_NULL, (1,2)))
 <span style="color:red;">------ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-65,7 +65,7</span> ============================================================
@@ -66,32 +81,6 @@
 <span style="color:inherit;"> |</span>AnyCuMatrix{T} = AnyCuArray{T,2}
 <span style="color:inherit;"> |</span>AnyCuVecOrMat{T} = Union{AnyCuVector{T}, AnyCuMatrix{T}}
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">test/array.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/array.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-27,9 +27,9</span> ============================================================
-<span style="color:inherit;"> |</span>  ## compare structs without using mapreduce
-<span style="color:inherit;"> |</span>  structeq(a,b) = false
-<span style="color:inherit;"> |</span>  structeq(a::T,b::T) where T = all(field->getfield(a,field) == getfield(b,field), fieldnames(T))
-<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
-<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, 2),                <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
-<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, 2),       <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">  @test structeq(Base.unsafe_wrap(</span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}, CU_NULL, 2),     </span><span style="color:red;">CuArray</span><span style="color:gray;">{Nothing</span><span style="color:red;">,1</span><span style="color:gray;">}(CU_NULL, (2,)))</span></span>
-<span style="color:green;">+|</span></span>  @test structeq(Base.unsafe_wrap(<span style="color:green;">CuVector</span>{Nothing}, CU_NULL, 2),     <span style="color:green;">CuVector</span>{Nothing}(CU_NULL, (2,)))</span>
-<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray, CU_NULL, (1,2)),            CuArray{Nothing,2}(CU_NULL, (1,2)))
-<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing}, CU_NULL, (1,2)),   CuArray{Nothing,2}(CU_NULL, (1,2)))
-<span style="color:inherit;"> |</span>  @test structeq(Base.unsafe_wrap(CuArray{Nothing,2}, CU_NULL, (1,2)), CuArray{Nothing,2}(CU_NULL, (1,2)))
-<span style="color:red;">------ </span><span style="color:inherit;">src/texture.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/texture.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-103,7 +103,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>## memory operations
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">function Base.copyto!(dst::</span><span style="color:red;">CuTextureArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, src::Union{</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, </span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}}) where {T}</span></span>
-<span style="color:green;">+|</span></span>function Base.copyto!(dst::<span style="color:green;">CuTextureVector</span>{T}, src::Union{<span style="color:green;">Vector</span>{T}, <span style="color:green;">CuVector</span>{T}}) where {T}</span>
-<span style="color:inherit;"> |</span>    size(dst) == size(src) || throw(DimensionMismatch(&#34;source and destination sizes must match&#34;))
-<span style="color:inherit;"> |</span>    Base.unsafe_copyto!(pointer(dst), pointer(src), length(dst))
-<span style="color:inherit;"> |</span>    return dst
 <span style="color:red;">------ </span><span style="color:inherit;">test/texture.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/texture.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
@@ -103,6 +92,17 @@
 <span style="color:inherit;"> |</span>    i, u = calcpoint(blockIdx().x, blockDim().x, threadIdx().x, size(dst)[1])
 <span style="color:inherit;"> |</span>    @inbounds dst[i] = texture[u]
 <span style="color:inherit;"> |</span>    return nothing
+<span style="color:red;">------ </span><span style="color:inherit;">src/texture.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/texture.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-103,7 +103,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>## memory operations
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function Base.copyto!(dst::</span><span style="color:red;">CuTextureArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, src::Union{</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, </span><span style="color:red;">CuArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}}) where {T}</span></span>
+<span style="color:green;">+|</span></span>function Base.copyto!(dst::<span style="color:green;">CuTextureVector</span>{T}, src::Union{<span style="color:green;">Vector</span>{T}, <span style="color:green;">CuVector</span>{T}}) where {T}</span>
+<span style="color:inherit;"> |</span>    size(dst) == size(src) || throw(DimensionMismatch(&#34;source and destination sizes must match&#34;))
+<span style="color:inherit;"> |</span>    Base.unsafe_copyto!(pointer(dst), pointer(src), length(dst))
+<span style="color:inherit;"> |</span>    return dst
 <span style="color:red;">------ </span><span style="color:inherit;">test/device/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/device/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-21,9 +21,9</span> ============================================================
@@ -211,4 +211,4 @@
 <span style="color:inherit;"> |</span>    @test link != CuLink()
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # PTX</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

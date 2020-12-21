@@ -311,7 +311,7 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 69 hits](/github/juliadiff/taylorseries.jl/#replace_arrayt1_with_vectort_69_hits)
-- [Omit a == a and a != a ➤ 12 hits](/github/juliadiff/taylorseries.jl/#omit_a_a_and_a_a_12_hits)
+- [Omit a == a and a != a ➤ 11 hits](/github/juliadiff/taylorseries.jl/#omit_a_a_and_a_a_11_hits)
 ~~~
 </div>
 ~~~
@@ -648,7 +648,7 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 11 hits](/github/julialang/pkg.jl/#omit_comparison_with_boolean_constant_11_hits)
-- [Omit a == a and a != a ➤ 4 hits](/github/julialang/pkg.jl/#omit_a_a_and_a_a_4_hits)
+- [Omit a == a and a != a ➤ 3 hits](/github/julialang/pkg.jl/#omit_a_a_and_a_a_3_hits)
 - [Avoid findfirst in conditional ➤ 2 hits](/github/julialang/pkg.jl/#avoid_findfirst_in_conditional_2_hits)
 ~~~
 </div>
@@ -698,7 +698,7 @@
 - [Use ismissing ➤ 18 hits](/github/julialang/julia/#use_ismissing_18_hits)
 - [Avoid x -> f(x) ➤ 3 hits](/github/julialang/julia/#avoid_x_-_fx_3_hits)
 - [Omit comparison with boolean constant ➤ 47 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_47_hits)
-- [Omit a == a and a != a ➤ 110 hits](/github/julialang/julia/#omit_a_a_and_a_a_110_hits)
+- [Omit a == a and a != a ➤ 106 hits](/github/julialang/julia/#omit_a_a_and_a_a_106_hits)
 - [Avoid findfirst in conditional ➤ 13 hits](/github/julialang/julia/#avoid_findfirst_in_conditional_13_hits)
 ~~~
 </div>

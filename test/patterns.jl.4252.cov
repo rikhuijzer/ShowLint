@@ -4,31 +4,31 @@
         -     @test SL.patterns_have_valid_indexes()
         - 
         -     function apply(pat::Pattern, code::String; file_extension="jl")
-       40         test_dir = joinpath(SL.clones_dir, "test", "test")
-       20         rm(test_dir; recursive=true, force=true)
-       20         mkpath(test_dir)
+       42         test_dir = joinpath(SL.clones_dir, "test", "test")
+       21         rm(test_dir; recursive=true, force=true)
+       21         mkpath(test_dir)
         - 
-       20         code_file = joinpath(test_dir, "code.$file_extension")
-       20         open(code_file, "w") do io
+       21         code_file = joinpath(test_dir, "code.$file_extension")
+       21         open(code_file, "w") do io
         -             write(io, code)
         -         end
         -         
-       40         repo = Repo("test", "test", [SL.default])
+       42         repo = Repo("test", "test", [SL.default])
         - 
-       20         SL.apply(pat, repo; in_place=true)
+       21         SL.apply(pat, repo; in_place=true)
         - 
-       20         read(code_file, String)
+       21         read(code_file, String)
         -     end
         - 
         -     P = SL.patterns
         - 
         -     function unchanged(pat::Pattern, code::String)
-        8         result = apply(pat, code)
-        8         ok = result == code
-       16         if !ok
+        9         result = apply(pat, code)
+        9         ok = result == code
+       18         if !ok
         0             error("\"$result\" != \"$code\"")
         -         end
-        8         return ok
+        9         return ok
         -     end
         - 
         -     @test apply(P[1], "AbstractArray{Int,1}") == "AbstractVector{Int}"
@@ -50,6 +50,7 @@
         -     @test unchanged(P[5], "1*x == x)")
         -     # I have no clue how to fix this false-positive.
         -     # @test unchanged(P[5], "1 * x == x)")
+        -     @test unchanged(P[5], "x == x'")
         -     @test apply(P[6], "findfirst(a, b) === nothing") == "!occursin(a, b)"
         -     @test apply(P[6], "findfirst(a, b) !== nothing") == "occursin(a, b)"
         -     @test apply(P[7], "findall(x -> x == false, Y)") == "findall(.!Y)"

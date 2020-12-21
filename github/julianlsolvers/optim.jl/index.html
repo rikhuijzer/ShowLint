@@ -78,6 +78,28 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    defopts = Optim.default_options(solver)
 <span style="color:inherit;"> |</span>    @test defopts == Dict(:allow_f_increases => true)
+<span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-70,7 +70,7</span> ============================================================
+<span style="color:inherit;"> |</span>    state.x .= state.y .+ scaling.*(state.y .- state.y_previous)
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::AcceleratedGradientDescent, options, curr_time=time())
+<span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # Update current position # x = x + alpha * s
+<span style="color:inherit;"> |</span>    @. state.x = state.x + state.alpha * state.s
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::GradientDescent, options, curr_time=time())
 <span style="color:red;">------ </span><span style="color:inherit;">test/general/callbacks.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">test/general/callbacks.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-17,7 +17,7</span> ============================================================
@@ -128,28 +150,6 @@
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    res = optimize(x->x^2, -5, 5, callback=_->true)
 <span style="color:inherit;"> |</span>    @test res.iterations == 0
-<span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-70,7 +70,7</span> ============================================================
-<span style="color:inherit;"> |</span>    state.x .= state.y .+ scaling.*(state.y .- state.y_previous)
-<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::AcceleratedGradientDescent, options, curr_time=time())
-<span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/gradient_descent.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # Update current position # x = x + alpha * s
-<span style="color:inherit;"> |</span>    @. state.x = state.x + state.alpha * state.s
-<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
-<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::GradientDescent, options, curr_time=time())
 <span style="color:red;">------ </span><span style="color:inherit;">src/multivariate/solvers/first_order/ngmres.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/multivariate/solvers/first_order/ngmres.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-392,7 +392,7</span> ============================================================
@@ -220,4 +220,4 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::Newton, options, curr_time=tim</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 20, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

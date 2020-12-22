@@ -161,39 +161,7 @@ patterns = [
         rewrite=':[unary]'
         """
     ),
-    Pattern(9, "Avoid duplicate condition", ["julia"],
-        """
-        For example, replace
-        ```
-        if a == b
-            f()
-            g()
-        elseif a == b
-            h()
-        end
-        ```
-        with
-        ```
-        if a == b
-            f()
-            g()
-        end
-        ```
-        """,
-        raw"""
-        match='''
-        if :[cond~[^\n]+]
-            :[a]
-        elseif :[cond~[^\n]+]
-            :[b]'''
-
-        rewrite='''
-        if :[cond]
-            :[a]
-            :[b]'''
-        """
-    ),
-    Pattern(10, "Abbreviate keyword argument values", ["julia", 1.5],
+    Pattern(9, "Abbreviate keyword argument values", ["julia", 1.5],
         """
         From [Julia 1.5](https://julialang.org/blog/2020/08/julia-1.5-highlights)
         it is possible to abbreviate
@@ -209,8 +177,7 @@ patterns = [
         match="(:[a]; :[c] = :[c])"
         rewrite="(:[a]; :[c])"
         """
-    ),
-
+    )
 ]
 
 function patterns_have_valid_indexes()::Bool

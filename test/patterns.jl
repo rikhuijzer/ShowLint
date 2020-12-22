@@ -48,19 +48,5 @@ using ShowLint: apply
     @test apply(P[8], "x -> ~x") == "~"
     @test unchanged(P[8], "x -> !x.y")
     @test unchanged(P[8], "x -> !x[1]")
-    @test apply(P[9], """
-        if a == b
-            f()
-            g()
-        elseif a == b
-            h()
-        end
-        """) == """
-        if a == b
-            f()
-            g()
-            h()
-        end
-        """
-    @test apply(P[10], "f(a, b; c = c)") == "f(a, b; c)"
+    @test apply(P[9], "f(a, b; c = c)") == "f(a, b; c)"
 end

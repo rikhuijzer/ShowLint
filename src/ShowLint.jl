@@ -178,7 +178,6 @@ function apply(pat::Pattern, repo::Repo;
             -stats \
             -exclude-dir $exclude_prefixes \
             -config /configs/$name.toml \
-            -match-newline-at-toplevel \
             -directory /repo \
             -file-extensions $file_extensions \
             2>/repo/stderr.log
@@ -190,7 +189,6 @@ function apply(pat::Pattern, repo::Repo;
         --volume $repo_path:/repo
         -it comby/comby
         -exclude-dir $exclude_prefixes
-        -match-newline-at-toplevel
         -config /configs/$name.toml
         -directory /repo
         -file-extensions $file_extensions

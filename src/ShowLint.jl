@@ -5,6 +5,7 @@ using Formatting
 using Serialization
 
 export 
+    apply,
     Pattern,
     Repo,
     project_root,
@@ -160,9 +161,10 @@ function apply(pat::Pattern, repo::Repo;
 
     configs_dir = "configs"
     configs_path = joinpath(project_root, "configs")
-    repo_path = joinpath(target_dir(repo), repo.dir)
+    repo_path = target_dir(repo)
 
     name = create_config(pat, configs_path)
+    exclude_prefixes = join(repo.exclude_prefixes, ',')
 
     # Not pretty but it works.
     cmd = !in_place ? 
@@ -174,7 +176,9 @@ function apply(pat::Pattern, repo::Repo;
         -it comby/comby
         -c "comby \
             -stats \
+            -exclude-dir $exclude_prefixes \
             -config /configs/$name.toml \
+            -match-newline-at-toplevel \
             -directory /repo \
             -file-extensions $file_extensions \
             2>/repo/stderr.log
@@ -185,6 +189,8 @@ function apply(pat::Pattern, repo::Repo;
         --volume $configs_path:/configs
         --volume $repo_path:/repo
         -it comby/comby
+        -exclude-dir $exclude_prefixes
+        -match-newline-at-toplevel
         -config /configs/$name.toml
         -directory /repo
         -file-extensions $file_extensions
@@ -208,6 +214,23 @@ function apply(pat::Pattern, repo::Repo;
         err = read(joinpath(repo_path, "stderr.log"), String) 
     end
     return (out, err)
+end
+
+function apply(pat::Pattern, code::String; file_extension="jl")
+    test_dir = joinpath(clones_dir, "tmp", "tmp")
+    rm(test_dir; recursive=true, force=true)
+    mkpath(test_dir)
+
+    code_file = joinpath(test_dir, "code.$file_extension")
+    open(code_file, "w") do io
+        write(io, code)
+    end
+    
+    repo = Repo("tmp", "tmp"; exclude=["nah"])
+
+    apply(pat, repo; in_place=true)
+
+    read(code_file, String)
 end
 
 function repo_page(repo::Repo)

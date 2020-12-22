@@ -204,3 +204,43 @@ rewrite=':[unary]'
 </code></pre>
 ~~~
 
+
+~~~ 
+<span id="9"></span>
+~~~
+### 9: Avoid duplicate condition
+tags: *julia*
+
+For example, replace
+```
+if a == b
+    f()
+    g()
+elseif a == b
+    h()
+end
+```
+with
+```
+if a == b
+    f()
+    g()
+end
+```
+
+
+~~~
+<b>Defintion</b>
+<pre><code class="plaintext">match='''
+if :[cond~[^\n]*]
+    :[a]
+elseif :[cond~[^\n]*]
+    :[b]'''
+
+rewrite='''
+if :[cond]
+    :[a]
+    :[b]'''
+</code></pre>
+~~~
+

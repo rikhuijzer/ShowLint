@@ -1,10 +1,11 @@
-        - module ShowLint
+        2 module ShowLint
         - 
         - using DocStringExtensions
         - using Formatting
         - using Serialization
         - 
         - export 
+        -     apply,
         -     Pattern,
         -     Repo,
         -     project_root,
@@ -25,7 +26,7 @@
         - $(TYPEDSIGNATURES) 
         - """
         - function ansi2html(text::String)::String
-        0   escape_codes = Dict(
+        -   escape_codes = Dict(
         -     "0;30" => "inherit",
         -     "0;31" => "red",
         -     "0;32" => "green",
@@ -37,22 +38,22 @@
         -     "0;43;30" => "orange",
         -     "0;2" => "gray"
         -   )
-        0   for code in keys(escape_codes)
-        0     before = "[" * code * "m"
-        0     color = escape_codes[code]
-        0     after = "<span style=\"color:$color;\">"
-        0     text = replace(text, before => after)
+        -   for code in keys(escape_codes)
+        -     before = "[" * code * "m"
+        -     color = escape_codes[code]
+        -     after = "<span style=\"color:$color;\">"
+        -     text = replace(text, before => after)
         -   end
-        0   no_color = "[0m"
-        0   text = replace(text, no_color => "</span>")
-        0   text = replace(text, r"WARNING: [^\n]*$" => "")
-        0   text = replace(text, "/repo/" => "")
-        0   text = replace(text, "" => "") 
-        0   text = replace(text, "<!" => "&#60;!")
-        0   text = replace(text, "[0;7;2m" => "")
-        0   text = text[1:end-6]
-        0   text = strip(text)
-        0   return length(text) < 6 ? 
+        -   no_color = "[0m"
+        -   text = replace(text, no_color => "</span>")
+        -   text = replace(text, r"WARNING: [^\n]*$" => "")
+        -   text = replace(text, "/repo/" => "")
+        -   text = replace(text, "" => "") 
+        -   text = replace(text, "<!" => "&#60;!")
+        -   text = replace(text, "[0;7;2m" => "")
+        -   text = text[1:end-6]
+        -   text = strip(text)
+        -   return length(text) < 6 ? 
         -         "" :
         -         """
         -         ~~~ 
@@ -77,14 +78,14 @@
         - ```
         - """
         - function host_dir(repo::Repo)::String
-       30     host = repo.host
-       30     host_dir = startswith(host, "https://") ? host[9:end] : host
-       30     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+        -     host = repo.host
+        -     host_dir = startswith(host, "https://") ? host[9:end] : host
+        -     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
         - end
         - 
         - function target_dir(repo::Repo)
-       30     name = repo.name
-       30     joinpath(clones_dir, host_dir(repo), name) 
+        -     name = repo.name
+        -     joinpath(clones_dir, host_dir(repo), name) 
         - end
         - 
         - function page_path(repo::Repo)
@@ -117,24 +118,24 @@
         - $(TYPEDSIGNATURES)
         - """
         - function create_config(pat::Pattern, dir::String)::String
-       30     id = pat.id
-       30     toml = pat.toml
-       30     name = "p$id"
-       30     text = """
+        -     id = pat.id
+        -     toml = pat.toml
+        -     name = "p$id"
+        -     text = """
         -         [$name] 
         - 
         -         $toml
         -         """
-       30     if isdir(dir)
-      197         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+        -     if isdir(dir)
+        -         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
         -     else
-        1         mkdir(dir)
+        -         mkdir(dir)
         -     end
-       30     file = joinpath(dir, "$name.toml")
-       30     open(file, "w") do io
+        -     file = joinpath(dir, "$name.toml")
+        -     open(file, "w") do io
         -         write(io, text)
         -     end
-       30     name
+        -     name
         - end
         - 
         - """
@@ -158,14 +159,15 @@
         - function apply(pat::Pattern, repo::Repo; 
         -     file_extensions="jl", in_place=false)
         - 
-       60     configs_dir = "configs"
-       30     configs_path = joinpath(project_root, "configs")
-       30     repo_path = joinpath(target_dir(repo), repo.dir)
+        -     configs_dir = "configs"
+        -     configs_path = joinpath(project_root, "configs")
+        -     repo_path = target_dir(repo)
         - 
-       30     name = create_config(pat, configs_path)
+        -     name = create_config(pat, configs_path)
+        -     exclude_prefixes = join(repo.exclude_prefixes, ',')
         - 
         -     # Not pretty but it works.
-       60     cmd = !in_place ? 
+        -     cmd = !in_place ? 
         -         `podman run
         -         --rm
         -         --volume $configs_path:/configs
@@ -174,7 +176,9 @@
         -         -it comby/comby
         -         -c "comby \
         -             -stats \
+        -             -exclude-dir $exclude_prefixes \
         -             -config /configs/$name.toml \
+        -             -match-newline-at-toplevel \
         -             -directory /repo \
         -             -file-extensions $file_extensions \
         -             2>/repo/stderr.log
@@ -185,29 +189,48 @@
         -         --volume $configs_path:/configs
         -         --volume $repo_path:/repo
         -         -it comby/comby
+        -         -exclude-dir $exclude_prefixes
+        -         -match-newline-at-toplevel
         -         -config /configs/$name.toml
         -         -directory /repo
         -         -file-extensions $file_extensions
         -         -in-place
         -         `
         - 
-       30     stdout = IOBuffer()
-       30     run(pipeline(cmd; stdout))
-       30     out = String(take!(stdout))
-       30     err = ""
-       30     function avoid_franklin_parse_errors(out)
-        0         out = replace(out, '`' => "&#96;")
-        0         out = replace(out, '"' => "&#34;")
-        0         out
+        -     stdout = IOBuffer()
+        -     run(pipeline(cmd; stdout))
+        -     out = String(take!(stdout))
+        -     err = ""
+        -     function avoid_franklin_parse_errors(out)
+        -         out = replace(out, '`' => "&#96;")
+        -         out = replace(out, '"' => "&#34;")
+        -         out
         -     end
-       30     if !in_place
-        0         out = avoid_franklin_parse_errors(out)
-        0         if !isnothing(out)
-        0             out = ansi2html(out)
+        -     if !in_place
+        -         out = avoid_franklin_parse_errors(out)
+        -         if !isnothing(out)
+        -             out = ansi2html(out)
         -         end
-        0         err = read(joinpath(repo_path, "stderr.log"), String) 
+        -         err = read(joinpath(repo_path, "stderr.log"), String) 
         -     end
-       30     return (out, err)
+        -     return (out, err)
+        - end
+        - 
+        - function apply(pat::Pattern, code::String; file_extension="jl")
+        -     test_dir = joinpath(clones_dir, "tmp", "tmp")
+        -     rm(test_dir; recursive=true, force=true)
+        -     mkpath(test_dir)
+        - 
+        -     code_file = joinpath(test_dir, "code.$file_extension")
+        -     open(code_file, "w") do io
+        -         write(io, code)
+        -     end
+        -     
+        -     repo = Repo("tmp", "tmp"; exclude=["nah"])
+        - 
+        -     apply(pat, repo; in_place=true)
+        - 
+        -     read(code_file, String)
         - end
         - 
         - function repo_page(repo::Repo)
@@ -334,6 +357,6 @@
         -     sum(counts)
         - end
         - 
-        1 prettify_loc(n::Number)::String = format(n, commas=true)
+        - prettify_loc(n::Number)::String = format(n, commas=true)
         - 
         - end # module

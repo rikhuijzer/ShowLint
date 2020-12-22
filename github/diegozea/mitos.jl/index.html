@@ -1,0 +1,103 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>diegozea/MIToS.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/diegozea/MIToS.jl" target=_blank >diegozea/MIToS.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_12_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 12 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_12_hits ><a href="#replace_arrayt1_with_vectort_12_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 12 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/MSA/GeneralParserMethods.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/MSA/GeneralParserMethods.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-23,7 +23,7</span> ============================================================
+<span style="color:inherit;"> |</span>    join(seq_ann, ','), init - 1
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function _to_msa_mapping(sequences::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function _to_msa_mapping(sequences::<span style="color:green;">Vector</span>{String})</span>
+<span style="color:inherit;"> |</span>    nseq = size(sequences,1)
+<span style="color:inherit;"> |</span>    nres = length(sequences[1])
+<span style="color:inherit;"> |</span>    aln = Array{Residue}(undef, nres, nseq)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-39,7 +39,7</span> ============================================================
+<span style="color:inherit;"> |</span>    (msa, mapp)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function _to_msa_mapping(sequences::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}, ids)</span></span>
+<span style="color:green;">+|</span></span>function _to_msa_mapping(sequences::<span style="color:green;">Vector</span>{String}, ids)</span>
+<span style="color:inherit;"> |</span>    nseq = size(sequences,1)
+<span style="color:inherit;"> |</span>    nres = length(sequences[1])
+<span style="color:inherit;"> |</span>    aln = Array{Residue}(undef, nres, nseq)
+<span style="color:red;">------ </span><span style="color:inherit;">src/MSA/Alphabet.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/MSA/Alphabet.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-43,8 +43,8</span> ============================================================
+<span style="color:inherit;"> |</span>&#96;&#96;&#96;
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>struct ReducedAlphabet <: ResidueAlphabet
+<span style="color:red;">-|</span></span><span style="color:gray;">    mapping::</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">} # Residue -> Int</span></span>
+<span style="color:green;">+|</span></span>    mapping::<span style="color:green;">Vector</span>{Int} # Residue -> Int</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    named::NamedArray{Int,1,</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{OrderedDict{String,Int}}}</span></span>
+<span style="color:green;">+|</span></span>    named::NamedArray{Int,1,<span style="color:green;">Vector</span>{Int},Tuple{OrderedDict{String,Int}}}</span>
+<span style="color:inherit;"> |</span>    len::Int
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-186,7 +186,7</span> ============================================================
+<span style="color:inherit;"> |</span># Dict of names to indexes
+<span style="color:inherit;"> |</span># ------------------------
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@inline _getdict(n::NamedArray{Int,1,</span><span style="color:red;">Array</span><span style="color:gray;">{Int</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{OrderedDict{String,Int}}}) = n.dicts[1]</span></span>
+<span style="color:green;">+|</span></span>@inline _getdict(n::NamedArray{Int,1,<span style="color:green;">Vector</span>{Int},Tuple{OrderedDict{String,Int}}}) = n.dicts[1]</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>const _UngappedAlphabet_Names = OrderedDict{String,Int}(string(Residue(i))=>i for i in 1:20)
+<span style="color:inherit;"> |</span>const _GappedAlphabet_Names = OrderedDict{String,Int}(string(Residue(i))=>i for i in 1:21)
+<span style="color:red;">------ </span><span style="color:inherit;">src/MSA/Clusters.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/MSA/Clusters.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
+<span style="color:inherit;"> |</span>@auto_hash_equals struct Clusters <: ClusteringResult
+<span style="color:inherit;"> |</span>    clustersize::Vector{Int}
+<span style="color:inherit;"> |</span>    clusters::Vector{Int}
+<span style="color:red;">-|</span></span><span style="color:gray;">    weights::StatsBase.Weights{Float64, Float64, </span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}}</span></span>
+<span style="color:green;">+|</span></span>    weights::StatsBase.Weights{Float64, Float64, <span style="color:green;">Vector</span>{Float64}}</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>nelements(cl::Clusters) = length(cl.clusters)
+<span style="color:red;">------ </span><span style="color:inherit;">src/SIFTS/ResidueMapping.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/SIFTS/ResidueMapping.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-197,13 +197,13</span> ============================================================
+<span style="color:inherit;"> |</span>    UniProt::Union{dbUniProt,Missing}
+<span style="color:inherit;"> |</span>    Pfam::Union{dbPfam,Missing}
+<span style="color:inherit;"> |</span>    NCBI::Union{dbNCBI,Missing}
+<span style="color:red;">-|</span></span><span style="color:gray;">    InterPro::</span><span style="color:red;">Array</span><span style="color:gray;">{dbInterPro</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    InterPro::<span style="color:green;">Vector</span>{dbInterPro}</span>
+<span style="color:inherit;"> |</span>    PDB::Union{dbPDB,Missing}
+<span style="color:inherit;"> |</span>    SCOP::Union{dbSCOP,Missing}
+<span style="color:red;">-|</span></span><span style="color:gray;">    SCOP2::</span><span style="color:red;">Array</span><span style="color:gray;">{dbSCOP2</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    SCOP2::<span style="color:green;">Vector</span>{dbSCOP2}</span>
+<span style="color:inherit;"> |</span>    SCOP2B::Union{dbSCOP2B,Missing}
+<span style="color:inherit;"> |</span>    CATH::Union{dbCATH,Missing}
+<span style="color:red;">-|</span></span><span style="color:gray;">    Ensembl::</span><span style="color:red;">Array</span><span style="color:gray;">{dbEnsembl</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    Ensembl::<span style="color:green;">Vector</span>{dbEnsembl}</span>
+<span style="color:inherit;"> |</span>    # residueDetail
+<span style="color:inherit;"> |</span>    missing::Bool  # XML: <residueDetail dbSource=&#34;PDBe&#34; property=&#34;Annotation&#34; ...
+<span style="color:inherit;"> |</span>    sscode::String # XML: <residueDetail dbSource=&#34;PDBe&#34; property=&#34;codeSecondaryStructure&#34;...
+<span style="color:red;">------ </span><span style="color:inherit;">src/MSA/Residues.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/MSA/Residues.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-237,7 +237,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>Base.String(seq::Vector{Residue}) = convert(String, seq)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function _get_msa_size(sequences::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function _get_msa_size(sequences::<span style="color:green;">Vector</span>{String})</span>
+<span style="color:inherit;"> |</span>    nseq = length(sequences)
+<span style="color:inherit;"> |</span>    if nseq == 0
+<span style="color:inherit;"> |</span>        throw(ErrorException(&#34;There are not sequences.&#34;))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-246,7 +246,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nseq, nres
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function _convert_to_matrix_residues(sequences::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">}, size::Tuple{Int,Int})</span></span>
+<span style="color:green;">+|</span></span>function _convert_to_matrix_residues(sequences::<span style="color:green;">Vector</span>{String}, size::Tuple{Int,Int})</span>
+<span style="color:inherit;"> |</span>   nseq, nres = size
+<span style="color:inherit;"> |</span>   aln = Array{Residue}(undef, nseq, nres)
+<span style="color:inherit;"> |</span>   @inbounds for (i, str) in enumerate(sequences)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-259,7 +259,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># For convert a MSA stored as Vector{String} to Matrix{Residue}
+<span style="color:inherit;"> |</span># This checks that all the sequences have the same length
+<span style="color:red;">-|</span></span><span style="color:gray;">function Base.convert(::Type{Matrix{Residue}}, sequences::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function Base.convert(::Type{Matrix{Residue}}, sequences::<span style="color:green;">Vector</span>{String})</span>
+<span style="color:inherit;"> |</span>    nseq, nres = _get_msa_size(sequences)
+<span style="color:inherit;"> |</span>    # throw() can be used with @threads : https://github.com/JuliaLang/julia/issues/17532
+<span style="color:inherit;"> |</span>    for seq in seque</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

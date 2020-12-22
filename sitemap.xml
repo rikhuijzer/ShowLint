@@ -56,6 +56,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaregistries/registrator.jl/index.html</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/alan-turing-institute/mljmodels.jl/index.html</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -98,7 +104,19 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/bcbi/simplecontainergenerator.jl/index.html</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliagaussianprocesses/abstractgps.jl/index.html</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliamath/specialfunctions.jl/index.html</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -110,7 +128,7 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliamath/specialfunctions.jl/index.html</loc>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaregistries/compathelper.jl/index.html</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -225,6 +243,12 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliamath/calculus.jl/index.html</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/diegozea/mitos.jl/index.html</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -494,6 +518,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/julia-actions/massinstallaction.jl/index.html</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/julialang/toml.jl/index.html</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -507,6 +537,12 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/github/juliaml/mllabelutils.jl/index.html</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/domluna/juliaformatter.jl/index.html</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -741,6 +777,12 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/patterns/index.html</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://tlienart.github.io/FranklinTemplates.jl/github/bcbi/predictmd.jl/index.html</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

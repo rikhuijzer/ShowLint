@@ -1,10 +1,11 @@
-        2 module ShowLint
+        - module ShowLint
         - 
         - using DocStringExtensions
         - using Formatting
         - using Serialization
         - 
         - export 
+        -     apply,
         -     Pattern,
         -     Repo,
         -     project_root,
@@ -77,14 +78,14 @@
         - ```
         - """
         - function host_dir(repo::Repo)::String
-        -     host = repo.host
-        -     host_dir = startswith(host, "https://") ? host[9:end] : host
-        -     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+       31     host = repo.host
+       31     host_dir = startswith(host, "https://") ? host[9:end] : host
+       31     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
         - end
         - 
         - function target_dir(repo::Repo)
-        -     name = repo.name
-        -     joinpath(clones_dir, host_dir(repo), name) 
+       31     name = repo.name
+       31     joinpath(clones_dir, host_dir(repo), name) 
         - end
         - 
         - function page_path(repo::Repo)
@@ -117,24 +118,24 @@
         - $(TYPEDSIGNATURES)
         - """
         - function create_config(pat::Pattern, dir::String)::String
-        -     id = pat.id
-        -     toml = pat.toml
-        -     name = "p$id"
-        -     text = """
+       31     id = pat.id
+       31     toml = pat.toml
+       31     name = "p$id"
+       31     text = """
         -         [$name] 
         - 
         -         $toml
         -         """
-        -     if isdir(dir)
-        -         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+       31     if isdir(dir)
+      207         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
         -     else
-        -         mkdir(dir)
+        1         mkdir(dir)
         -     end
-        -     file = joinpath(dir, "$name.toml")
-        -     open(file, "w") do io
+       31     file = joinpath(dir, "$name.toml")
+       31     open(file, "w") do io
         -         write(io, text)
         -     end
-        -     name
+       31     name
         - end
         - 
         - """
@@ -158,14 +159,15 @@
         - function apply(pat::Pattern, repo::Repo; 
         -     file_extensions="jl", in_place=false)
         - 
-        -     configs_dir = "configs"
-        -     configs_path = joinpath(project_root, "configs")
-        -     repo_path = joinpath(target_dir(repo), repo.dir)
+       62     configs_dir = "configs"
+       31     configs_path = joinpath(project_root, "configs")
+       31     repo_path = target_dir(repo)
         - 
-        -     name = create_config(pat, configs_path)
+       31     name = create_config(pat, configs_path)
+       31     exclude_prefixes = join(repo.exclude_prefixes, ',')
         - 
         -     # Not pretty but it works.
-        -     cmd = !in_place ? 
+       31     cmd = !in_place ? 
         -         `podman run
         -         --rm
         -         --volume $configs_path:/configs
@@ -174,7 +176,9 @@
         -         -it comby/comby
         -         -c "comby \
         -             -stats \
+        -             -exclude-dir $exclude_prefixes \
         -             -config /configs/$name.toml \
+        -             -match-newline-at-toplevel \
         -             -directory /repo \
         -             -file-extensions $file_extensions \
         -             2>/repo/stderr.log
@@ -185,29 +189,48 @@
         -         --volume $configs_path:/configs
         -         --volume $repo_path:/repo
         -         -it comby/comby
+        -         -exclude-dir $exclude_prefixes
+        -         -match-newline-at-toplevel
         -         -config /configs/$name.toml
         -         -directory /repo
         -         -file-extensions $file_extensions
         -         -in-place
         -         `
         - 
-        -     stdout = IOBuffer()
-        -     run(pipeline(cmd; stdout))
-        -     out = String(take!(stdout))
-        -     err = ""
-        -     function avoid_franklin_parse_errors(out)
+       31     stdout = IOBuffer()
+       31     run(pipeline(cmd; stdout))
+       31     out = String(take!(stdout))
+       31     err = ""
+       31     function avoid_franklin_parse_errors(out)
         -         out = replace(out, '`' => "&#96;")
         -         out = replace(out, '"' => "&#34;")
         -         out
         -     end
-        -     if !in_place
-        -         out = avoid_franklin_parse_errors(out)
-        -         if !isnothing(out)
-        -             out = ansi2html(out)
+       31     if !in_place
+        0         out = avoid_franklin_parse_errors(out)
+        0         if !isnothing(out)
+        0             out = ansi2html(out)
         -         end
-        -         err = read(joinpath(repo_path, "stderr.log"), String) 
+        0         err = read(joinpath(repo_path, "stderr.log"), String) 
         -     end
-        -     return (out, err)
+       31     return (out, err)
+        - end
+        - 
+        - function apply(pat::Pattern, code::String; file_extension="jl")
+       62     test_dir = joinpath(clones_dir, "tmp", "tmp")
+       31     rm(test_dir; recursive=true, force=true)
+       31     mkpath(test_dir)
+        - 
+       31     code_file = joinpath(test_dir, "code.$file_extension")
+       31     open(code_file, "w") do io
+        -         write(io, code)
+        -     end
+        -     
+       31     repo = Repo("tmp", "tmp"; exclude=["nah"])
+        - 
+       31     apply(pat, repo; in_place=true)
+        - 
+       31     read(code_file, String)
         - end
         - 
         - function repo_page(repo::Repo)
@@ -334,6 +357,6 @@
         -     sum(counts)
         - end
         - 
-        - prettify_loc(n::Number)::String = format(n, commas=true)
+        1 prettify_loc(n::Number)::String = format(n, commas=true)
         - 
         - end # module

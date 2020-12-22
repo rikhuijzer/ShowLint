@@ -1,5 +1,16 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>fonsp/Pluto.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/fonsp/Pluto.jl" target=_blank >fonsp/Pluto.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a><li><a href="#omit_comparison_with_boolean_constant_1_hit">Omit comparison with boolean constant ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_21_hits ><a href="#replace_arrayt1_with_vectort_21_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 21 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-177,7 +177,7</span> ============================================================
+<span style="color:inherit;"> |</span>        putnotebookupdates!(session, notebook, UpdateMessage(:bond_update, reponse, notebook, nothing, initiator))
+<span style="color:inherit;"> |</span>        
+<span style="color:inherit;"> |</span>        if !cancel_run_early
+<span style="color:red;">-|</span></span><span style="color:gray;">            function custom_deletion_hook((session, notebook)::Tuple{ServerSession,Notebook}, to_delete_vars::Set{Symbol}, funcs_to_delete::Set{Tuple{UUID,FunctionName}}, to_reimport::Set{Expr}; to_run::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>            function custom_deletion_hook((session, notebook)::Tuple{ServerSession,Notebook}, to_delete_vars::Set{Symbol}, funcs_to_delete::Set{Tuple{UUID,FunctionName}}, to_reimport::Set{Expr}; to_run::<span style="color:green;">Vector</span>{Cell})</span>
+<span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
+<span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
+<span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
+<span style="color:red;">------ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/evaluation/Run.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-21,7 +21,7</span> ============================================================
 <span style="color:inherit;"> |</span>end
@@ -39,17 +50,17 @@
 <span style="color:inherit;"> |</span>    expr, next = Meta.parse(code, start, raise=false)
 <span style="color:inherit;"> |</span>    if next <= ncodeunits(code)
 <span style="color:inherit;"> |</span>        [next, expression_boundaries(code, next)...]
-<span style="color:red;">------ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/webserver/Dynamic.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-177,7 +177,7</span> ============================================================
-<span style="color:inherit;"> |</span>        putnotebookupdates!(session, notebook, UpdateMessage(:bond_update, reponse, notebook, nothing, initiator))
-<span style="color:inherit;"> |</span>        
-<span style="color:inherit;"> |</span>        if !cancel_run_early
-<span style="color:red;">-|</span></span><span style="color:gray;">            function custom_deletion_hook((session, notebook)::Tuple{ServerSession,Notebook}, to_delete_vars::Set{Symbol}, funcs_to_delete::Set{Tuple{UUID,FunctionName}}, to_reimport::Set{Expr}; to_run::</span><span style="color:red;">Array</span><span style="color:gray;">{Cell</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>            function custom_deletion_hook((session, notebook)::Tuple{ServerSession,Notebook}, to_delete_vars::Set{Symbol}, funcs_to_delete::Set{Tuple{UUID,FunctionName}}, to_reimport::Set{Expr}; to_run::<span style="color:green;">Vector</span>{Cell})</span>
-<span style="color:inherit;"> |</span>                push!(to_delete_vars, bound_sym) # also delete the bound symbol
-<span style="color:inherit;"> |</span>                WorkspaceManager.delete_vars((session, notebook), to_delete_vars, funcs_to_delete, to_reimport)
-<span style="color:inherit;"> |</span>                WorkspaceManager.eval_in_workspace((session, notebook), :($bound_sym = $new_val))
+<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
+<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
+<span style="color:inherit;"> |</span>	
+<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
+<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
+<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
+<span style="color:inherit;"> |</span>	
+<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/analysis/ExpressionExplorer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
@@ -70,17 +81,6 @@
 <span style="color:inherit;"> |</span>    if length(assignee) == 0
 <span style="color:inherit;"> |</span>        false
 <span style="color:inherit;"> |</span>    elseif length(assignee) > 1
-<span style="color:red;">------ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">sample/Tower of Hanoi.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>function run_solution(solver::Function, start = starting_stacks)
-<span style="color:inherit;"> |</span>	moves = solver(deepcopy(start)) #apply the solver
-<span style="color:inherit;"> |</span>	
-<span style="color:red;">-|</span></span><span style="color:gray;">	all_states = </span><span style="color:red;">Array</span><span style="color:gray;">{Any</span><span style="color:red;">,1</span><span style="color:gray;">}(undef, length(moves) + 1)</span></span>
-<span style="color:green;">+|</span></span>	all_states = <span style="color:green;">Vector</span>{Any}(undef, length(moves) + 1)</span>
-<span style="color:inherit;"> |</span>	all_states[1] = starting_stacks
-<span style="color:inherit;"> |</span>	
-<span style="color:inherit;"> |</span>	for (i, m) in enumerate(moves)
 <span style="color:red;">------ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/runner/PlutoRunner.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-618,7 +618,7</span> ============================================================

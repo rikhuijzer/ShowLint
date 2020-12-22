@@ -52,25 +52,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>nelements(cl::Clusters) = length(cl.clusters)
-<span style="color:red;">------ </span><span style="color:inherit;">src/SIFTS/ResidueMapping.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/SIFTS/ResidueMapping.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-197,13 +197,13</span> ============================================================
-<span style="color:inherit;"> |</span>    UniProt::Union{dbUniProt,Missing}
-<span style="color:inherit;"> |</span>    Pfam::Union{dbPfam,Missing}
-<span style="color:inherit;"> |</span>    NCBI::Union{dbNCBI,Missing}
-<span style="color:red;">-|</span></span><span style="color:gray;">    InterPro::</span><span style="color:red;">Array</span><span style="color:gray;">{dbInterPro</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    InterPro::<span style="color:green;">Vector</span>{dbInterPro}</span>
-<span style="color:inherit;"> |</span>    PDB::Union{dbPDB,Missing}
-<span style="color:inherit;"> |</span>    SCOP::Union{dbSCOP,Missing}
-<span style="color:red;">-|</span></span><span style="color:gray;">    SCOP2::</span><span style="color:red;">Array</span><span style="color:gray;">{dbSCOP2</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    SCOP2::<span style="color:green;">Vector</span>{dbSCOP2}</span>
-<span style="color:inherit;"> |</span>    SCOP2B::Union{dbSCOP2B,Missing}
-<span style="color:inherit;"> |</span>    CATH::Union{dbCATH,Missing}
-<span style="color:red;">-|</span></span><span style="color:gray;">    Ensembl::</span><span style="color:red;">Array</span><span style="color:gray;">{dbEnsembl</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    Ensembl::<span style="color:green;">Vector</span>{dbEnsembl}</span>
-<span style="color:inherit;"> |</span>    # residueDetail
-<span style="color:inherit;"> |</span>    missing::Bool  # XML: <residueDetail dbSource=&#34;PDBe&#34; property=&#34;Annotation&#34; ...
-<span style="color:inherit;"> |</span>    sscode::String # XML: <residueDetail dbSource=&#34;PDBe&#34; property=&#34;codeSecondaryStructure&#34;...
 <span style="color:red;">------ </span><span style="color:inherit;">src/MSA/Residues.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/MSA/Residues.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-237,7 +237,7</span> ============================================================
@@ -99,5 +80,24 @@
 <span style="color:green;">+|</span></span>function Base.convert(::Type{Matrix{Residue}}, sequences::<span style="color:green;">Vector</span>{String})</span>
 <span style="color:inherit;"> |</span>    nseq, nres = _get_msa_size(sequences)
 <span style="color:inherit;"> |</span>    # throw() can be used with @threads : https://github.com/JuliaLang/julia/issues/17532
-<span style="color:inherit;"> |</span>    for seq in seque</div>
+<span style="color:inherit;"> |</span>    for seq in sequences
+<span style="color:red;">------ </span><span style="color:inherit;">src/SIFTS/ResidueMapping.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/SIFTS/ResidueMapping.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-197,13 +197,13</span> ============================================================
+<span style="color:inherit;"> |</span>    UniProt::Union{dbUniProt,Missing}
+<span style="color:inherit;"> |</span>    Pfam::Union{dbPfam,Missing}
+<span style="color:inherit;"> |</span>    NCBI::Union{dbNCBI,Missing}
+<span style="color:red;">-|</span></span><span style="color:gray;">    InterPro::</span><span style="color:red;">Array</span><span style="color:gray;">{dbInterPro</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    InterPro::<span style="color:green;">Vector</span>{dbInterPro}</span>
+<span style="color:inherit;"> |</span>    PDB::Union{dbPDB,Missing}
+<span style="color:inherit;"> |</span>    SCOP::Union{dbSCOP,Missing}
+<span style="color:red;">-|</span></span><span style="color:gray;">    SCOP2::</span><span style="color:red;">Array</span><span style="color:gray;">{dbSCOP2</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    SCOP2::<span style="color:green;">Vector</span>{dbSCOP2}</span>
+<span style="color:inherit;"> |</span>    SCOP2B::Union{dbSCOP2B,Missing}
+<span style="color:inherit;"> |</span>    CATH::Union{dbCATH,Missing}
+<span style="color:red;">-|</span></span><span style="color:gray;">    Ensembl::</span><span style="color:red;">Array</span><span style="color:gray;">{dbEnsembl</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    Ensembl::<span style="color:green;">Vector</span>{dbEnsembl}</span>
+<span style="color:inherit;"> |</span>    # residueDetail
+<span style="color:inherit;"> |</span>    missing::Bool  # XML: <residueDetail dbSource=&#34;PDBe&#34; property=&#34;Annotation&#34; ...
+<span style="color:inherit;"> |</span>    sscode::String # XML: <residueDetail dbSource=&#34;PDBe&#34; property=&#34;codeSecondaryStructure&#34</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

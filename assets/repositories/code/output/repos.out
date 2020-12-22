@@ -331,6 +331,7 @@
 - [Replace Array{T,1} with Vector{T} ➤ 6 hits](/github/juliadynamics/agents.jl/#replace_arrayt1_with_vectort_6_hits)
 - [Omit comparison with boolean constant ➤ 15 hits](/github/juliadynamics/agents.jl/#omit_comparison_with_boolean_constant_15_hits)
 - [Avoid findall(x -> x == false, Y) ➤ 2 hits](/github/juliadynamics/agents.jl/#avoid_findallx_-_x_false_y_2_hits)
+- [Abbreviate keyword argument values ➤ 26 hits](/github/juliadynamics/agents.jl/#abbreviate_keyword_argument_values_26_hits)
 ~~~
 </div>
 ~~~
@@ -681,7 +682,6 @@
 - [Omit comparison with boolean constant ➤ 10 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_10_hits)
 - [Omit a == a and a != a ➤ 24 hits](/github/julialang/julia/#omit_a_a_and_a_a_24_hits)
 - [Avoid comparing findfirst to nothing ➤ 1 hit](/github/julialang/julia/#avoid_comparing_findfirst_to_nothing_1_hit)
-- [Avoid duplicate condition ➤ 2 hits](/github/julialang/julia/#avoid_duplicate_condition_2_hits)
 ~~~
 </div>
 ~~~
@@ -957,7 +957,6 @@
 <div class="repo-nav">
 ~~~
 - [Replace Array{T,1} with Vector{T} ➤ 3 hits](/github/juliastats/statsbase.jl/#replace_arrayt1_with_vectort_3_hits)
-- [Avoid duplicate condition ➤ 1 hit](/github/juliastats/statsbase.jl/#avoid_duplicate_condition_1_hit)
 ~~~
 </div>
 ~~~

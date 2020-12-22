@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/julia</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/julia" target=_blank >JuliaLang/julia</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_116_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 116 hits</a><li><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a><li><a href="#omit_a_a_and_a_a_24_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 24 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_1_hit">Avoid comparing findfirst to nothing ➤ 1 hit</a><li><a href="#avoid_duplicate_condition_2_hits">Avoid duplicate condition ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_116_hits ><a href="#replace_arrayt1_with_vectort_116_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 116 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/julia</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/julia" target=_blank >JuliaLang/julia</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_116_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 116 hits</a><li><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a><li><a href="#omit_a_a_and_a_a_24_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 24 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_1_hit">Avoid comparing findfirst to nothing ➤ 1 hit</a></ol></div> <h3 id=replace_arrayt1_with_vectort_116_hits ><a href="#replace_arrayt1_with_vectort_116_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 116 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">base/indices.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/indices.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-239,10 +239,10</span> ============================================================
@@ -244,35 +244,6 @@
 <span style="color:inherit;"> |</span>StridedMatrix{T} = StridedArray{T,2}
 <span style="color:inherit;"> |</span>StridedVecOrMat{T} = Union{StridedVector{T}, StridedMatrix{T}}
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
-<span style="color:inherit;"> |</span>    # the local partition into the array when viewed as a single dimensional array.
-<span style="color:inherit;"> |</span>    # this can be removed when @distributed or its equivalent supports looping on
-<span style="color:inherit;"> |</span>    # a subset of workers.
-<span style="color:red;">-|</span></span><span style="color:gray;">    loc_subarr_1d::SubArray{T,1,</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{UnitRange{Int}},true}</span></span>
-<span style="color:green;">+|</span></span>    loc_subarr_1d::SubArray{T,1,<span style="color:green;">Vector</span>{T},Tuple{UnitRange{Int}},true}</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    function SharedArray{T,N}(d,p,r,sn,s) where {T,N}
-<span style="color:inherit;"> |</span>        S = new(RRID(),d,p,r,sn,s,0,view(Array{T}(undef, ntuple(d->0,N)), 1:0))
-<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
-<span style="color:inherit;"> |</span>SharedArray{T}(I::Integer...; kwargs...) where {T} =
-<span style="color:inherit;"> |</span>    SharedArray{T,length(I)}(I; kwargs...)
-<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer; kwargs...) where {T} =
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(m; kwargs...)</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">SharedVector</span>{T}(m; kwargs...)</span>
-<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer; kwargs...) where {T} =
-<span style="color:inherit;"> |</span>    SharedArray{T,2}(m, n; kwargs...)
-<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer, o::Integer; kwargs...) where {T} =
-<span style="color:inherit;">@|</span><span style="color:inherit;">-280,7 +280,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>A one-dimensional [&#96;SharedArray&#96;](@ref).
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">-|</span></span><span style="color:gray;">const SharedVector{T} = </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>const SharedVector{T} = <span style="color:green;">SharedVector</span>{T}</span>
-<span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:inherit;"> |</span>    SharedMatrix
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">base/compiler/tfuncs.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/tfuncs.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1406,7 +1406,7</span> ============================================================
@@ -302,6 +273,35 @@
 <span style="color:inherit;"> |</span>                           sv::Union{InferenceState,Nothing})
 <span style="color:inherit;"> |</span>    if f === tuple
 <span style="color:inherit;"> |</span>        return tuple_tfunc(argtypes)
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/SharedArrays/src/SharedArrays.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # the local partition into the array when viewed as a single dimensional array.
+<span style="color:inherit;"> |</span>    # this can be removed when @distributed or its equivalent supports looping on
+<span style="color:inherit;"> |</span>    # a subset of workers.
+<span style="color:red;">-|</span></span><span style="color:gray;">    loc_subarr_1d::SubArray{T,1,</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">},Tuple{UnitRange{Int}},true}</span></span>
+<span style="color:green;">+|</span></span>    loc_subarr_1d::SubArray{T,1,<span style="color:green;">Vector</span>{T},Tuple{UnitRange{Int}},true}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function SharedArray{T,N}(d,p,r,sn,s) where {T,N}
+<span style="color:inherit;"> |</span>        S = new(RRID(),d,p,r,sn,s,0,view(Array{T}(undef, ntuple(d->0,N)), 1:0))
+<span style="color:inherit;">@|</span><span style="color:inherit;">-165,7 +165,7</span> ============================================================
+<span style="color:inherit;"> |</span>SharedArray{T}(I::Integer...; kwargs...) where {T} =
+<span style="color:inherit;"> |</span>    SharedArray{T,length(I)}(I; kwargs...)
+<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer; kwargs...) where {T} =
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(m; kwargs...)</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">SharedVector</span>{T}(m; kwargs...)</span>
+<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer; kwargs...) where {T} =
+<span style="color:inherit;"> |</span>    SharedArray{T,2}(m, n; kwargs...)
+<span style="color:inherit;"> |</span>SharedArray{T}(m::Integer, n::Integer, o::Integer; kwargs...) where {T} =
+<span style="color:inherit;">@|</span><span style="color:inherit;">-280,7 +280,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>A one-dimensional [&#96;SharedArray&#96;](@ref).
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">const SharedVector{T} = </span><span style="color:red;">SharedArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>const SharedVector{T} = <span style="color:green;">SharedVector</span>{T}</span>
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>    SharedMatrix
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">base/compiler/utilities.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/utilities.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-36,7 +36,7</span> ============================================================
@@ -333,17 +333,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function isknownlength(t::DataType)
 <span style="color:inherit;"> |</span>    isvatuple(t) || return true
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-499,7 +499,7</span> ============================================================
-<span style="color:inherit;"> |</span>##### Array : internal functions
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># internal array-like type to circumevent the lack of flexibility with reinterpret
-<span style="color:red;">-|</span></span><span style="color:gray;">struct UnsafeView{T} <: </span><span style="color:red;">DenseArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>struct UnsafeView{T} <: <span style="color:green;">DenseVector</span>{T}</span>
-<span style="color:inherit;"> |</span>    ptr::Ptr{T}
-<span style="color:inherit;"> |</span>    len::Int
-<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">base/compiler/typeinfer.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/typeinfer.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-54,7 +54,7</span> ============================================================
@@ -394,6 +383,17 @@
 <span style="color:inherit;"> |</span>    nexpr = length(body)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # replace GotoIfNot with its condition if the branch target is unreachable
+<span style="color:red;">------ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Random/src/RNGs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-499,7 +499,7</span> ============================================================
+<span style="color:inherit;"> |</span>##### Array : internal functions
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># internal array-like type to circumevent the lack of flexibility with reinterpret
+<span style="color:red;">-|</span></span><span style="color:gray;">struct UnsafeView{T} <: </span><span style="color:red;">DenseArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>struct UnsafeView{T} <: <span style="color:green;">DenseVector</span>{T}</span>
+<span style="color:inherit;"> |</span>    ptr::Ptr{T}
+<span style="color:inherit;"> |</span>    len::Int
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/REPL/src/TerminalMenus/MultiSelectMenu.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/REPL/src/TerminalMenus/MultiSelectMenu.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-28,7 +28,7</span> ============================================================
@@ -414,17 +414,6 @@
 <span style="color:inherit;"> |</span>    length(options) < 1 && error(&#34;MultiSelectMenu must have at least one option&#34;)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # if pagesize is -1, use automatic paging
-<span style="color:red;">------ </span><span style="color:inherit;">base/docs/core.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/docs/core.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
-<span style="color:inherit;"> |</span>    push!(DOCS, Core.svec(mod, ex, str, source.file, source.line))
-<span style="color:inherit;"> |</span>    nothing
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">-|</span></span><span style="color:gray;">const DOCS = </span><span style="color:red;">Array</span><span style="color:gray;">{Core.SimpleVector</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
-<span style="color:green;">+|</span></span>const DOCS = <span style="color:green;">Vector</span>{Core.SimpleVector}()</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>isexpr(x, h::Symbol) = isa(x, Expr) && x.head === h
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">stdlib/REPL/src/TerminalMenus/RadioMenu.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/REPL/src/TerminalMenus/RadioMenu.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-20,7 +20,7</span> ============================================================
@@ -445,6 +434,17 @@
 <span style="color:inherit;"> |</span>    length(options) < 1 && error(&#34;RadioMenu must have at least one option&#34;)
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    # if pagesize is -1, use automatic paging
+<span style="color:red;">------ </span><span style="color:inherit;">base/docs/core.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/docs/core.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-10,7 +10,7</span> ============================================================
+<span style="color:inherit;"> |</span>    push!(DOCS, Core.svec(mod, ex, str, source.file, source.line))
+<span style="color:inherit;"> |</span>    nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">-|</span></span><span style="color:gray;">const DOCS = </span><span style="color:red;">Array</span><span style="color:gray;">{Core.SimpleVector</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
+<span style="color:green;">+|</span></span>const DOCS = <span style="color:green;">Vector</span>{Core.SimpleVector}()</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>isexpr(x, h::Symbol) = isa(x, Expr) && x.head === h
+<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">base/Base.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/Base.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-6,7 +6,7</span> ============================================================
@@ -664,6 +664,28 @@
 <span style="color:inherit;"> |</span>    ndel::Int
 <span style="color:inherit;"> |</span>    count::Int
 <span style="color:inherit;"> |</span>    age::UInt
+<span style="color:red;">------ </span><span style="color:inherit;">base/asyncmap.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/asyncmap.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-296,7 +296,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>mutable struct AsyncCollectorState
+<span style="color:inherit;"> |</span>    chnl::Channel
+<span style="color:red;">-|</span></span><span style="color:gray;">    worker_tasks::</span><span style="color:red;">Array</span><span style="color:gray;">{Task</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    worker_tasks::<span style="color:green;">Vector</span>{Task}</span>
+<span style="color:inherit;"> |</span>    enum_state      # enumerator state
+<span style="color:inherit;"> |</span>    AsyncCollectorState(chnl::Channel, worker_tasks::Vector) =
+<span style="color:inherit;"> |</span>        new(chnl, convert(Vector{Task}, worker_tasks))
+<span style="color:red;">------ </span><span style="color:inherit;">base/libdl.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/libdl.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-273,7 +273,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # This callback function called by dl_iterate_phdr() on Linux and BSD's
+<span style="color:inherit;"> |</span>    # DL_ITERATE_PHDR(3) on freebsd
+<span style="color:red;">-|</span></span><span style="color:gray;">    function dl_phdr_info_callback(di::dl_phdr_info, size::Csize_t, dynamic_libraries::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>    function dl_phdr_info_callback(di::dl_phdr_info, size::Csize_t, dynamic_libraries::<span style="color:green;">Vector</span>{String})</span>
+<span style="color:inherit;"> |</span>        name = unsafe_string(di.name)
+<span style="color:inherit;"> |</span>        push!(dynamic_libraries, name)
+<span style="color:inherit;"> |</span>        return Cint(0)
 <span style="color:red;">------ </span><span style="color:inherit;">base/array.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/array.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-20,7 +20,7</span> ============================================================
@@ -793,28 +815,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function findmeta_block(exargs, argsmatch=args->true)
 <span style="color:inherit;"> |</span>    for i = 1:length(exargs)
-<span style="color:red;">------ </span><span style="color:inherit;">base/asyncmap.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/asyncmap.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-296,7 +296,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>mutable struct AsyncCollectorState
-<span style="color:inherit;"> |</span>    chnl::Channel
-<span style="color:red;">-|</span></span><span style="color:gray;">    worker_tasks::</span><span style="color:red;">Array</span><span style="color:gray;">{Task</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>    worker_tasks::<span style="color:green;">Vector</span>{Task}</span>
-<span style="color:inherit;"> |</span>    enum_state      # enumerator state
-<span style="color:inherit;"> |</span>    AsyncCollectorState(chnl::Channel, worker_tasks::Vector) =
-<span style="color:inherit;"> |</span>        new(chnl, convert(Vector{Task}, worker_tasks))
-<span style="color:red;">------ </span><span style="color:inherit;">base/libdl.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/libdl.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-273,7 +273,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # This callback function called by dl_iterate_phdr() on Linux and BSD's
-<span style="color:inherit;"> |</span>    # DL_ITERATE_PHDR(3) on freebsd
-<span style="color:red;">-|</span></span><span style="color:gray;">    function dl_phdr_info_callback(di::dl_phdr_info, size::Csize_t, dynamic_libraries::</span><span style="color:red;">Array</span><span style="color:gray;">{String</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
-<span style="color:green;">+|</span></span>    function dl_phdr_info_callback(di::dl_phdr_info, size::Csize_t, dynamic_libraries::<span style="color:green;">Vector</span>{String})</span>
-<span style="color:inherit;"> |</span>        name = unsafe_string(di.name)
-<span style="color:inherit;"> |</span>        push!(dynamic_libraries, name)
-<span style="color:inherit;"> |</span>        return Cint(0)
 <span style="color:red;">------ </span><span style="color:inherit;">base/multidimensional.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/multidimensional.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-779,7 +779,7</span> ============================================================
@@ -827,7 +827,31 @@
 <span style="color:inherit;"> |</span>@inline checkbounds(::Type{Bool}, A::AbstractArray, I::LogicalIndex) = axes(A) == axes(I.mask)
 <span style="color:inherit;"> |</span>@inline checkindex(::Type{Bool}, indx::AbstractUnitRange, I::LogicalIndex) = (indx,) == axes(I.m</div>
 </pre> <h3 id=omit_comparison_with_boolean_constant_10_hits ><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">base/stream.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">base/bitarray.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">base/bitarray.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1461,8 +1461,8</span> ============================================================
+<span style="color:inherit;"> |</span>function findnext(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
+<span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
+<span style="color:inherit;"> |</span>    v = pred.x
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findnextnot(B, Int(start))</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findnext(B, start)</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findnextnot(B, Int(start))</span>
+<span style="color:green;">+|</span></span>    v && return findnext(B, start)</span>
+<span style="color:inherit;"> |</span>    return nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>#findfirst(B::BitArray, v) = findnext(B, 1, v)  ## defined in array.jl
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1537,8 +1537,8</span> ============================================================
+<span style="color:inherit;"> |</span>function findprev(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
+<span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
+<span style="color:inherit;"> |</span>    v = pred.x
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findprevnot(B, Int(start))</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findprev(B, start)</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findprevnot(B, Int(start))</span>
+<span style="color:green;">+|</span></span>    v && return findprev(B, start)</span>
+<span style="color:inherit;"> |</span>    return nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>#findlast(B::BitArray, v) = findprev(B, 1, v)  ## defined in array.jl
+<span style="color:red;">------ </span><span style="color:inherit;">base/stream.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/stream.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-837,7 +837,7</span> ============================================================
 <span style="color:inherit;"> |</span>function readbytes!(s::LibuvStream, a::Vector{UInt8}, nb::Int)
@@ -874,30 +898,6 @@
 <span style="color:inherit;"> |</span>    if !occursin(c, buf) # fast path checks first
 <span style="color:inherit;"> |</span>        x.readerror === nothing || throw(x.readerror)
 <span style="color:inherit;"> |</span>        if isopen(x)
-<span style="color:red;">------ </span><span style="color:inherit;">base/bitarray.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/bitarray.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1461,8 +1461,8</span> ============================================================
-<span style="color:inherit;"> |</span>function findnext(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
-<span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
-<span style="color:inherit;"> |</span>    v = pred.x
-<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findnextnot(B, Int(start))</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findnext(B, start)</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findnextnot(B, Int(start))</span>
-<span style="color:green;">+|</span></span>    v && return findnext(B, start)</span>
-<span style="color:inherit;"> |</span>    return nothing
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>#findfirst(B::BitArray, v) = findnext(B, 1, v)  ## defined in array.jl
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1537,8 +1537,8</span> ============================================================
-<span style="color:inherit;"> |</span>function findprev(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
-<span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
-<span style="color:inherit;"> |</span>    v = pred.x
-<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findprevnot(B, Int(start))</span></span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findprev(B, start)</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findprevnot(B, Int(start))</span>
-<span style="color:green;">+|</span></span>    v && return findprev(B, start)</span>
-<span style="color:inherit;"> |</span>    return nothing
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>#findlast(B::BitArray, v) = findprev(B, 1, v)  ## defined in array.jl
 <span style="color:red;">------ </span><span style="color:inherit;">base/mpfr.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">base/mpfr.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-980,7 +980,7</span> ============================================================
@@ -1113,35 +1113,4 @@
 <span style="color:inherit;"> |</span>docsearch(haystack::Symbol, needle) = docsearch(string(haystack), needle)
 <span style="color:inherit;"> |</span>docsearch(::Nothing, needle) = false
 <span style="color:inherit;"> |</span>function docsearch(haystack::Array, nee</div>
-</pre> <h3 id=avoid_duplicate_condition_2_hits ><a href="#avoid_duplicate_condition_2_hits">Avoid duplicate condition ➤ 2 hits</a></h3> <p><a href="/patterns/#9">Pattern #9</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">stdlib/LinearAlgebra/src/cholesky.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/LinearAlgebra/src/cholesky.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-448,7 +448,7</span> ============================================================
-<span style="color:inherit;"> |</span>    if d === :U
-<span style="color:inherit;"> |</span>        return UpperTriangular(Cuplo === char_uplo(d) ? Cfactors : copy(Cfactors'))
-<span style="color:inherit;"> |</span>    elseif d === :L
-<span style="color:red;">-|</span></span>[0;7;31m        </span><span style="color:gray;">return LowerTriangular(Cuplo === char_uplo(d) ? Cfactors : copy(Cfactors'))</span></span>
-<span style="color:green;">+|</span></span>[0;7;32m    </span>return LowerTriangular(Cuplo === char_uplo(d) ? Cfactors : copy(Cfactors'))</span>
-<span style="color:inherit;"> |</span>    elseif d === :UL
-<span style="color:inherit;"> |</span>        return (Cuplo === 'U' ? UpperTriangular(Cfactors) : LowerTriangular(Cfactors))
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;">@|</span><span style="color:inherit;">-463,8 +463,7</span> ============================================================
-<span style="color:inherit;"> |</span>    Cuplo    = getfield(C, :uplo)
-<span style="color:inherit;"> |</span>    if d === :U
-<span style="color:inherit;"> |</span>        return UpperTriangular(sym_uplo(Cuplo) == d ? Cfactors : copy(Cfactors'))
-<span style="color:orange;">!|</span>    <span style="color:red;">elseif d === :L</span>
-<span style="color:orange;">!|</span>[0;7;31m        </span>return LowerTriangular(sym_uplo(Cuplo) == d ? Cfactors : copy(Cfactors'))
-<span style="color:inherit;"> |</span>    elseif d === :p
-<span style="color:inherit;"> |</span>        return getfield(C, :piv)
-<span style="color:inherit;"> |</span>    elseif d === :P
-<span style="color:red;">------ </span><span style="color:inherit;">base/libc.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/libc.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-116,7 +116,6</span> ============================================================
-<span style="color:inherit;"> |</span># TODO: check for usleep errors?
-<span style="color:inherit;"> |</span>if Sys.isunix()
-<span style="color:inherit;"> |</span>    systemsleep(s::Real) = ccall(:usleep, Int32, (UInt32,), round(UInt32, s*1e6))
-<span style="color:red;">-|</span><span style="color:red;">elseif Sys.iswindows()</span>
-<span style="color:inherit;"> |</span>    function systemsleep(s::Real)
-<span style="color:inherit;"> |</span>        ccall(:Sleep, stdcall, Cvoid, (UInt32,), round(UInt32, s * 1e3))
-<span style="color:inherit;"> |</span>        return Int3</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

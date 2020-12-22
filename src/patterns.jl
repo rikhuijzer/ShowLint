@@ -8,7 +8,7 @@ where `toml` is a Comby configuration.
 struct Pattern
     id::Int
     title::String
-    tags::Vector{String}
+    tags::Vector{Any}
     description::String
     toml::String
 end
@@ -161,36 +161,21 @@ patterns = [
         rewrite=':[unary]'
         """
     ),
-    Pattern(9, "Avoid duplicate condition", ["julia"],
+    Pattern(9, "Abbreviate keyword argument values", ["julia", 1.5],
         """
-        For example, replace
+        From [Julia 1.5](https://julialang.org/blog/2020/08/julia-1.5-highlights)
+        it is possible to abbreviate
         ```
-        if a == b
-            f()
-            g()
-        elseif a == b
-            h()
-        end
+        printstyled("text"; color = color)
         ```
-        with
+        to
         ```
-        if a == b
-            f()
-            g()
-        end
+        printstyled("text"; color)
         ```
         """,
-        raw"""
-        match='''
-        if :[cond~[^\n]*]
-            :[a]
-        elseif :[cond~[^\n]*]
-            :[b]'''
-
-        rewrite='''
-        if :[cond]
-            :[a]
-            :[b]'''
+        """
+        match="(:[a]; :[c] = :[c])"
+        rewrite="(:[a]; :[c])"
         """
     )
 ]

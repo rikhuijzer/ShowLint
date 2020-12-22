@@ -8,7 +8,7 @@ where `toml` is a Comby configuration.
 struct Pattern
     id::Int
     title::String
-    tags::Vector{String}
+    tags::Vector{Any}
     description::String
     toml::String
 end
@@ -182,9 +182,9 @@ patterns = [
         """,
         raw"""
         match='''
-        if :[cond~[^\n]*]
+        if :[cond~[^\n]+]
             :[a]
-        elseif :[cond~[^\n]*]
+        elseif :[cond~[^\n]+]
             :[b]'''
 
         rewrite='''
@@ -192,7 +192,25 @@ patterns = [
             :[a]
             :[b]'''
         """
-    )
+    ),
+    Pattern(10, "Abbreviate keyword argument values", ["julia", 1.5],
+        """
+        From [Julia 1.5](https://julialang.org/blog/2020/08/julia-1.5-highlights)
+        it is possible to abbreviate
+        ```
+        printstyled("text"; color = color)
+        ```
+        to
+        ```
+        printstyled("text"; color)
+        ```
+        """,
+        """
+        match="(:[a]; :[c] = :[c])"
+        rewrite="(:[a]; :[c])"
+        """
+    ),
+
 ]
 
 function patterns_have_valid_indexes()::Bool

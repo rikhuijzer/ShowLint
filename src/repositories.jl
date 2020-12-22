@@ -17,7 +17,23 @@ struct Repo
 end
 
 any_tag(tags) = true
-default_predicate(tags) = all(t -> t != "performance-decrease", tags)
+
+"""
+Ensures that suggestions for a repository are not too new.
+
+$(SIGNATURES)
+"""
+function version(tags, n::Number)
+    check(t) = isa(t, Number) ? n<t : false
+    !any(check, tags)
+end
+version(n::Number) = Base.Fix2(version, n)
+
+function default_predicate(tags) 
+    decr(t) = t == "performance-decrease"
+    all(!decr, tags) && !too_new(tags, 1.0)
+end
+
 default_excludes = ["test"]
 
 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
@@ -67,7 +83,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaDiff/TaylorSeries.jl"),
         Repo("https://github.com", "JuliaDocs/DocStringExtensions.jl"),
         Repo("https://github.com", "JuliaDocs/Documenter.jl"),
-        Repo("https://github.com", "JuliaDynamics/Agents.jl"),
+        Repo("https://github.com", "JuliaDynamics/Agents.jl"; predicates=[version(1.5)]),
         Repo("https://github.com", "JuliaDynamics/ChaosTools.jl"),
         Repo("https://github.com", "JuliaDynamics/DrWatson.jl"),
         Repo("https://github.com", "JuliaDynamics/DynamicalBilliards.jl"),

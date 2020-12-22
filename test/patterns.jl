@@ -62,4 +62,5 @@ using ShowLint: apply
             h()
         end
         """
+    @test apply(P[10], "f(a, b; c = c)") == "f(a, b; c)"
 end

@@ -31,7 +31,7 @@ jobs:
     - name: Validate that Comby is available
       run: podman run -it comby/comby -version
 
-    # Python is necessary for the pre-rendering (minification) step
+    # Python is used for the pre-rendering (minification) step
     - name: Install Python
       uses: actions/setup-python@v2
       with:

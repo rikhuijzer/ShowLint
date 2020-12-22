@@ -18,7 +18,8 @@ any_tag(tags) = true
 default_predicate(tags) = all(t -> t != "performance-decrease", tags)
 default_dir = "src"
 
-Repo(host, name) = Repo(host, name, [default_predicate], default_dir)
+Repo(host, name; predicates=[default_predicate], dir=default_dir) =
+    Repo(host, name, tags_predicates, dir)
 
 const DEBUG = !haskey(ENV, "CI")
 
@@ -141,7 +142,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "fonsp/Pluto.jl"),
         Repo("https://github.com", "fonsp/PlutoUI.jl"),
         Repo("https://github.com", "fonsp/PlutoUtils.jl"),
-        Repo("https://github.com", "h-Klok/StatsWithJuliaBook"),
+        Repo("https://github.com", "h-Klok/StatsWithJuliaBook"; dir="/"),
         Repo("https://github.com", "joshday/OnlineStats.jl"),
         Repo("https://github.com", "jrevels/Cassette.jl"),
         Repo("https://github.com", "jump-dev/JuMP.jl"),

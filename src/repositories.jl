@@ -19,7 +19,7 @@ default_predicate(tags) = all(t -> t != "performance-decrease", tags)
 default_dir = "src"
 
 Repo(host, name; predicates=[default_predicate], dir=default_dir) =
-    Repo(host, name, tags_predicates, dir)
+    Repo(host, name, predicates, dir)
 
 const DEBUG = !haskey(ENV, "CI")
 
@@ -103,11 +103,22 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaLang/Statistics.jl"),
         Repo("https://github.com", "JuliaLang/TOML.jl"),
         Repo("https://github.com", "JuliaLang/Tokenize.jl"),
-        Repo("https://github.com", "JuliaLang/julia"),
+        Repo("https://github.com", "JuliaLang/julia"; dir="/"),
         Repo("https://github.com", "JuliaML/LossFunctions.jl"),
         Repo("https://github.com", "JuliaML/MLDataUtils.jl"),
         Repo("https://github.com", "JuliaML/MLLabelUtils.jl"),
         Repo("https://github.com", "JuliaML/Reinforce.jl"),
+        Repo("https://github.com", "JuliaMath/Calculus.jl"),
+        Repo("https://github.com", "JuliaMath/Combinatorics.jl"),
+        Repo("https://github.com", "JuliaMath/DoubleFloats.jl"),
+        Repo("https://github.com", "JuliaMath/FFTW.jl"),
+        Repo("https://github.com", "JuliaMath/FixedPointNumbers.jl"),
+        Repo("https://github.com", "JuliaMath/HCubature.jl"),
+        Repo("https://github.com", "JuliaMath/Interpolations.jl"),
+        Repo("https://github.com", "JuliaMath/Polynomials.jl"),
+        Repo("https://github.com", "JuliaMath/Roots.jl"),
+        Repo("https://github.com", "JuliaMath/SpecialFunctions.jl"),
+        Repo("https://github.com", "JuliaMath/openlibm.jl"),
         Repo("https://github.com", "JuliaNLSolvers/LsqFit.jl"),
         Repo("https://github.com", "JuliaNLSolvers/NLsolve.jl"),
         Repo("https://github.com", "JuliaNLSolvers/Optim.jl"),

@@ -13,7 +13,7 @@ import JSON
             write(io, code)
         end
         
-        repo = Repo("test", "test", [SL.default])
+        repo = Repo("test", "test", [SL.default_predicate], "")
 
         SL.apply(pat, repo; in_place=true)
 

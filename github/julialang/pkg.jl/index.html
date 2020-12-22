@@ -1,59 +1,6 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Pkg.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Pkg.jl" target=_blank >JuliaLang/Pkg.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a><li><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_2_hits">Avoid comparing findfirst to nothing ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_11_hits ><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/platformengines.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/platformengines.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-57,7 +57,7</span> ============================================================
-<span style="color:inherit;"> |</span>        # Check that verifying with the right hash works
-<span style="color:inherit;"> |</span>        @test_logs (:info, r&#34;No hash cache found&#34;) match_mode=:any begin
-<span style="color:inherit;"> |</span>            ret, status = verify(foo_path, foo_hash; verbose=true, report_cache_status=true)
-<span style="color:orange;">!|</span>            @test ret<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test status == :hash_cache_missing
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-67,7 +67,7</span> ============================================================
-<span style="color:inherit;"> |</span>        # Check that it verifies the second time around properly
-<span style="color:inherit;"> |</span>        @test_logs (:info, r&#34;Hash cache is consistent&#34;) match_mode=:any begin
-<span style="color:inherit;"> |</span>            ret, status = verify(foo_path, foo_hash; verbose=true, report_cache_status=true)
-<span style="color:orange;">!|</span>            @test ret<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test status == :hash_cache_consistent
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-78,7 +78,7</span> ============================================================
-<span style="color:inherit;"> |</span>        touch(foo_path)
-<span style="color:inherit;"> |</span>        @test_logs (:info, r&#34;File has been modified&#34;) match_mode=:any begin
-<span style="color:inherit;"> |</span>            ret, status = verify(foo_path, foo_hash; verbose=true, report_cache_status=true)
-<span style="color:orange;">!|</span>            @test ret<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test status == :file_modified
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-99,7 +99,7</span> ============================================================
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        @test_logs (:info, r&#34;hash cache invalidated&#34;) match_mode=:any begin
-<span style="color:inherit;"> |</span>            ret, status = verify(foo_path, foo_hash; verbose=true, report_cache_status=true)
-<span style="color:orange;">!|</span>            @test ret<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test status == :hash_cache_mismatch
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-112,7 +112,7</span> ============================================================
-<span style="color:inherit;"> |</span>        rm(&#34;$(foo_path).sha256&#34;; force=true)
-<span style="color:inherit;"> |</span>        @test_logs (:error, r&#34;Hash Mismatch!&#34;) match_mode=:any begin
-<span style="color:inherit;"> |</span>            ret, status = verify(foo_path, foo_hash; verbose=true, report_cache_status=true)
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test </span><span style="color:gray;">ret</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>            @test <span style="color:green;">!</span>ret</span>
-<span style="color:inherit;"> |</span>            @test status == :hash_mismatch
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">test/new.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/new.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
-<span style="color:inherit;"> |</span>            @test haskey(Pkg.project().dependencies, &#34;Test&#34;)
-<span style="color:inherit;"> |</span>            @test haskey(Pkg.project().dependencies, &#34;BasicTestTarget&#34;)
-<span style="color:inherit;"> |</span>            Pkg.dependencies(basic_test_target) do pkg
-<span style="color:orange;">!|</span>                @test pkg.is_tracking_path<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>                @test haskey(pkg.dependencies, &#34;UUIDs&#34;)
-<span style="color:inherit;"> |</span>                @test !haskey(pkg.dependencies, &#34;Markdown&#34;)
-<span style="color:inherit;"> |</span>                @test !haskey(pkg.dependencies, &#34;Test&#34;)
-<span style="color:red;">------ </span><span style="color:inherit;">src/API.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/API.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Pkg.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Pkg.jl" target=_blank >JuliaLang/Pkg.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_2_hits">Avoid comparing findfirst to nothing ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_5_hits ><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">API.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">API.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-277,7 +277,7</span> ============================================================
 <span style="color:inherit;"> |</span>        if pkg.name === nothing && pkg.uuid === nothing
 <span style="color:inherit;"> |</span>            pkgerror(&#34;name or UUID specification required when calling &#96;rm&#96;&#34;)
@@ -94,32 +41,9 @@
 <span style="color:inherit;"> |</span>            rethrow(e)
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>        Registry.update(; io=ctx.io, force=fa</div>
-</pre> <h3 id=omit_a_a_and_a_a_2_hits ><a href="#omit_a_a_and_a_a_2_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 2 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_packages/BasicSandbox/test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
-<span style="color:inherit;"> |</span>using Test
-<span style="color:inherit;"> |</span>import BasicSandbox
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test </span><span style="color:red;">2 == 2</span></span>
-<span style="color:green;">+|</span></span>@test <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>BasicSandbox.greet()
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">test/test_packages/BasicSandbox/deps/build.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/test_packages/BasicSandbox/deps/build.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-3,7 +3,7</span> ============================================================
-<span style="color:inherit;"> |</span>using Test
-<span style="color:inherit;"> |</span>import BasicSandbox
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@test </span><span style="color:red;">2 == 2</span></span>
-<span style="color:green;">+|</span></span>@test <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>BasicSandbox.greet()
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span</div>
 </pre> <h3 id=avoid_comparing_findfirst_to_nothing_2_hits ><a href="#avoid_comparing_findfirst_to_nothing_2_hits">Avoid comparing findfirst to nothing ➤ 2 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/Operations.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/Operations.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">Operations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">Operations.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
 <span style="color:inherit;"> |</span>                          preserve::PreserveLevel=PRESERVE_DIRECT)
 <span style="color:inherit;"> |</span>    pkgs = copy(pkgs)
@@ -138,4 +62,4 @@
 <span style="color:inherit;"> |</span>        push!(pkgs, PackageSpec(
 <span style="color:inherit;"> |</span>            uuid      = uuid,
 <span style="color:inherit;"> |</span>            name      = entry.n</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

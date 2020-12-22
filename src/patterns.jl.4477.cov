@@ -1,5 +1,12 @@
+        - 
+        - """
+        - $(TYPEDEF)
+        - $(TYPEDFIELDS)
+        - 
+        - where `toml` is a Comby configuration.
+        - """
         - struct Pattern
-        8     id::Int
+        -     id::Int
         -     title::String
         -     tags::Vector{String}
         -     description::String
@@ -190,5 +197,5 @@
         - ]
         - 
         - function patterns_have_valid_indexes()::Bool
-        -     collect(1:length(patterns)) == [p.id for p in patterns]
+        1     collect(1:length(patterns)) == [p.id for p in patterns]
         - end

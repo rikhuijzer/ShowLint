@@ -13,7 +13,7 @@
         -             write(io, code)
         -         end
         -         
-       60         repo = Repo("test", "test", [SL.default])
+       60         repo = Repo("test", "test", [SL.default_predicate], "")
         - 
        30         SL.apply(pat, repo; in_place=true)
         - 

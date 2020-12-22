@@ -1,3 +1,10 @@
+
+"""
+$(TYPEDEF)
+$(TYPEDFIELDS)
+
+where `toml` is a Comby configuration.
+"""
 struct Pattern
     id::Int
     title::String

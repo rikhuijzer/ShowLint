@@ -1,17 +1,6 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDebug/JuliaInterpreter.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDebug/JuliaInterpreter.jl" target=_blank >JuliaDebug/JuliaInterpreter.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a><li><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_4_hits ><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/interpret.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/interpret.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-384,7 +384,7</span> ============================================================
-<span style="color:inherit;"> |</span>    @test JuliaInterpreter.Variable(3, :x, false) in locals
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    # Issue #404
-<span style="color:red;">-|</span></span><span style="color:gray;">    function aaa(F::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}, Z::</span><span style="color:red;">Array</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}) where {T}</span></span>
-<span style="color:green;">+|</span></span>    function aaa(F::<span style="color:green;">Vector</span>{T}, Z::<span style="color:green;">Vector</span>{T}) where {T}</span>
-<span style="color:inherit;"> |</span>        M = length(Z)
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>        J = [1:M;]
-<span style="color:red;">------ </span><span style="color:inherit;">src/construct.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/construct.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDebug/JuliaInterpreter.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDebug/JuliaInterpreter.jl" target=_blank >JuliaDebug/JuliaInterpreter.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">construct.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">construct.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-233,7 +233,7</span> ============================================================
 <span style="color:inherit;"> |</span>  1  1  1 ─     return 1
 <span style="color:inherit;"> |</span>
@@ -30,31 +19,4 @@
 <span style="color:inherit;"> |</span>&#96;&#96;&#96;
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
 <span style="color:inherit;"> |</span>function prepare_call(@nospecialize(f), allargs; enter_generated = fa</div>
-</pre> <h3 id=omit_a_a_and_a_a_4_hits ><a href="#omit_a_a_and_a_a_4_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 4 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/debug.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/debug.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-52,19 +52,19</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># Putting this into a @testset introduces a closure that breaks the kwprep detection
-<span style="color:inherit;"> |</span>function complicated_keyword_stuff(a, b=-1; x=1, y=2)
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">a == a</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>    (a, b, :x=>x, :y=>y)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>function complicated_keyword_stuff_splatargs(args...; x=1, y=2)
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">args[1] == args[1]</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>    (args..., :x=>x, :y=>y)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>function complicated_keyword_stuff_splatkws(a, b=-1; kw...)
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">a == a</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>    (a, b, kw...)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>function complicated_keyword_stuff_splat2(args...; kw...)
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">args[1] == args[1]</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">true</span></span>
-<span style="color:inherit;"> |</span>    (args..., kw...)
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</s</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

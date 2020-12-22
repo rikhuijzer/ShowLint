@@ -1,6 +1,6 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>alan-turing-institute/MLJBase.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/alan-turing-institute/MLJBase.jl" target=_blank >alan-turing-institute/MLJBase.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a><li><a href="#omit_comparison_with_boolean_constant_9_hits">Omit comparison with boolean constant ➤ 9 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/univariate_finite/methods.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/univariate_finite/methods.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>alan-turing-institute/MLJBase.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/alan-turing-institute/MLJBase.jl" target=_blank >alan-turing-institute/MLJBase.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">univariate_finite/methods.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">univariate_finite/methods.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-74,7 +74,7</span> ============================================================
 <span style="color:inherit;"> |</span>    print(stream, str)
 <span style="color:inherit;"> |</span>end
@@ -10,8 +10,8 @@
 <span style="color:inherit;"> |</span>    &#34;$(length(u))-element&#34;
 <span style="color:inherit;"> |</span>show_prefix(u::UnivariateFiniteArray) = join(size(u),'x')
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">src/univariate_finite/types.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/univariate_finite/types.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">univariate_finite/types.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">univariate_finite/types.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-24,7 +24,7</span> ============================================================
 <span style="color:inherit;"> |</span>    prob_given_ref::LittleDict{R,Array{P,N},Vector{R}, Vector{Array{P,N}}}
 <span style="color:inherit;"> |</span>end
@@ -21,45 +21,4 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>## CONSTRUCTORS TO EXTEND MLJModelInter</div>
-</pre> <h3 id=omit_comparison_with_boolean_constant_9_hits ><a href="#omit_comparison_with_boolean_constant_9_hits">Omit comparison with boolean constant ➤ 9 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/measures/finite.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/measures/finite.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-293,8 +293,8</span> ============================================================
-<span style="color:inherit;"> |</span>        @test e.target_scitype <: AbstractVector{<:Finite}
-<span style="color:inherit;"> |</span>        @test e.prediction_type == :deterministic
-<span style="color:inherit;"> |</span>        @test e.orientation == :score
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test e.</span><span style="color:gray;">reports_each_observation</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test e.<span style="color:green;">!</span>reports_each_observation</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test e.</span><span style="color:gray;">is_feature_dependent</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test e.<span style="color:green;">!</span>is_feature_dependent</span>
-<span style="color:inherit;"> |</span>        if m == accuracy
-<span style="color:inherit;"> |</span>            @test e.supports_weights
-<span style="color:inherit;"> |</span>        else
-<span style="color:inherit;">@|</span><span style="color:inherit;">-305,9 +305,9</span> ============================================================
-<span style="color:inherit;"> |</span>    @test e.name == &#34;AreaUnderCurve&#34;
-<span style="color:inherit;"> |</span>    @test e.target_scitype == AbstractVector{<:Finite{2}}
-<span style="color:inherit;"> |</span>    @test e.prediction_type == :probabilistic
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test e.</span><span style="color:gray;">reports_each_observation</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>    @test e.<span style="color:green;">!</span>reports_each_observation</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test e.</span><span style="color:gray;">is_feature_dependent</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>    @test e.<span style="color:green;">!</span>is_feature_dependent</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test e.</span><span style="color:gray;">supports_weights</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>    @test e.<span style="color:green;">!</span>supports_weights</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>@testset &#34;Metadata multiclass&#34; begin
-<span style="color:inherit;">@|</span><span style="color:inherit;">-325,10 +325,10</span> ============================================================
-<span style="color:inherit;"> |</span>        @test e.target_scitype <: AbstractVector{<:Finite}
-<span style="color:inherit;"> |</span>        @test e.prediction_type == :deterministic
-<span style="color:inherit;"> |</span>        @test e.orientation == :score
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test e.</span><span style="color:gray;">reports_each_observation</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test e.<span style="color:green;">!</span>reports_each_observation</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test e.</span><span style="color:gray;">is_feature_dependent</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test e.<span style="color:green;">!</span>is_feature_dependent</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test e.</span><span style="color:gray;">supports_weights</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test e.<span style="color:green;">!</span>supports_weights</span>
-<span style="color:orange;">!|</span>        @test e.supports_class_weights<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</s</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

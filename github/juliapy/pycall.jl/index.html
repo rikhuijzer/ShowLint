@@ -1,17 +1,6 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaPy/PyCall.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaPy/PyCall.jl" target=_blank >JuliaPy/PyCall.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a><li><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_3_hits ><a href="#replace_arrayt1_with_vectort_3_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 3 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-129,7 +129,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    @test roundtripeq(Any[1 2 3; 4 5 6])
-<span style="color:inherit;"> |</span>    @test roundtripeq([])
-<span style="color:red;">-|</span></span><span style="color:gray;">    @test convert(</span><span style="color:red;">Array</span><span style="color:gray;">{PyAny</span><span style="color:red;">,1</span><span style="color:gray;">}, PyObject(Any[1 2 3; 4 5 6])) == Any[Any[1,2,3],Any[4,5,6]]</span></span>
-<span style="color:green;">+|</span></span>    @test convert(<span style="color:green;">Vector</span>{PyAny}, PyObject(Any[1 2 3; 4 5 6])) == Any[Any[1,2,3],Any[4,5,6]]</span>
-<span style="color:inherit;"> |</span>    if PyCall.npy_initialized
-<span style="color:inherit;"> |</span>        @test roundtripeq(begin A = Array{Int}(undef); A[1] = 3; A; end)
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">src/pyarray.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/pyarray.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaPy/PyCall.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaPy/PyCall.jl" target=_blank >JuliaPy/PyCall.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_2_hits ><a href="#replace_arrayt1_with_vectort_2_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 2 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">pyarray.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">pyarray.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-181,7 +181,7</span> ============================================================
 <span style="color:inherit;"> |</span>    unsafe_data_load(a, data_index(a, j))
 <span style="color:inherit;"> |</span>end
@@ -30,81 +19,4 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># linear indexing
 <span style="color:inherit;"> |</span>function setindex!(a::PyArray, v, i::Inte</div>
-</pre> <h3 id=omit_comparison_with_boolean_constant_11_hits ><a href="#omit_comparison_with_boolean_constant_11_hits">Omit comparison with boolean constant ➤ 11 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/runtests.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-221,9 +221,9</span> ============================================================
-<span style="color:inherit;"> |</span>        @test String(take!(buf)) == &#34;first\nsecond\nthird&#34;
-<span style="color:inherit;"> |</span>        obuf.write(b&#34;möre stuff&#34;)
-<span style="color:inherit;"> |</span>        @test String(take!(buf)) == &#34;möre stuff&#34;
-<span style="color:orange;">!|</span>        @test isopen(buf) == !obuf.closed<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>        obuf.close()
-<span style="color:red;">-|</span></span><span style="color:gray;">        @test isopen(buf) == !obuf.</span><span style="color:gray;">closed</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>        @test isopen(buf) == !obuf.<span style="color:green;">!</span>closed</span>
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    let buf = IOBuffer(&#34;hello\nagain&#34;), obuf = PyObject(buf)
-<span style="color:inherit;"> |</span>        @test !obuf.writable()
-<span style="color:red;">------ </span><span style="color:inherit;">test/testpybuffer.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">test/testpybuffer.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-71,8 +71,8</span> ============================================================
-<span style="color:inherit;"> |</span>            apyo = arrpyo(1.0:10.0, &#34;d&#34;)
-<span style="color:inherit;"> |</span>            pyarr = PyArray(apyo)
-<span style="color:inherit;"> |</span>            jlcopy = copy(pyarr)
-<span style="color:orange;">!|</span>            @test pyarr.f_contig<span style="color:red;"> == true</span>
-<span style="color:orange;">!|</span>            @test pyarr.c_contig<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test all(jlcopy .== pyarr)
-<span style="color:inherit;"> |</span>            # check it's not aliasing the same data
-<span style="color:inherit;"> |</span>            jlcopy[1] = -1.0
-<span style="color:inherit;">@|</span><span style="color:inherit;">-83,8 +83,8</span> ============================================================
-<span style="color:inherit;"> |</span>            apyo = pytestarray(2,3) # arrpyo([[1,2,3],[4,5,6]], &#34;d&#34;)
-<span style="color:inherit;"> |</span>            pyarr = PyArray(apyo)
-<span style="color:inherit;"> |</span>            jlcopy = copy(pyarr)
-<span style="color:orange;">!|</span>            @test pyarr.c_contig<span style="color:red;"> == true</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">            @test pyarr.</span><span style="color:gray;">f_contig</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>            @test pyarr.<span style="color:green;">!</span>f_contig</span>
-<span style="color:inherit;"> |</span>            # check all is in order
-<span style="color:inherit;"> |</span>            for i in 1:size(pyarr, 1)
-<span style="color:inherit;"> |</span>                for j in 1:size(pyarr, 1)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-111,7 +111,7</span> ============================================================
-<span style="color:inherit;"> |</span>                @test sizeof(eltype(pyarr)) == 4
-<span style="color:inherit;"> |</span>                @test pyarr.info.st == (8,)
-<span style="color:inherit;"> |</span>                # not f_contig because not contiguous
-<span style="color:red;">-|</span></span><span style="color:gray;">                @test pyarr.</span><span style="color:gray;">f_contig</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>                @test pyarr.<span style="color:green;">!</span>f_contig</span>
-<span style="color:inherit;"> |</span>                @test copy(pyarr) == Int32[1, 1, 1, 1]
-<span style="color:inherit;"> |</span>            end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-128,7 +128,7</span> ============================================================
-<span style="color:inherit;"> |</span>                @test eltype(pyarr) == Int32
-<span style="color:inherit;"> |</span>                @test pyarr.info.st == (8, 16)
-<span style="color:inherit;"> |</span>                # not f_contig because not contiguous
-<span style="color:red;">-|</span></span><span style="color:gray;">                @test pyarr.</span><span style="color:gray;">f_contig</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>                @test pyarr.<span style="color:green;">!</span>f_contig</span>
-<span style="color:inherit;"> |</span>                @test copy(pyarr) == Int32[1 1 1 1; 2 2 2 2]
-<span style="color:inherit;"> |</span>            end
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;">@|</span><span style="color:inherit;">-138,7 +138,7</span> ============================================================
-<span style="color:inherit;"> |</span>            pybuf = PyBuffer(ao, PyBUF_ND_CONTIGUOUS)
-<span style="color:inherit;"> |</span>            T, native_byteorder = array_format(pybuf)
-<span style="color:inherit;"> |</span>            @test T == Float64
-<span style="color:orange;">!|</span>            @test native_byteorder<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test size(pybuf) == (10,)
-<span style="color:inherit;"> |</span>            @test strides(pybuf) == (1,) .* sizeof(T)
-<span style="color:inherit;"> |</span>            nca = NoCopyArray(ao)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-153,7 +153,7</span> ============================================================
-<span style="color:inherit;"> |</span>            pybuf = PyBuffer(ao, PyBUF_ND_CONTIGUOUS)
-<span style="color:inherit;"> |</span>            T, native_byteorder = array_format(pybuf)
-<span style="color:inherit;"> |</span>            @test T == Float64
-<span style="color:orange;">!|</span>            @test native_byteorder<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test size(pybuf) == (3,4)
-<span style="color:inherit;"> |</span>            @test strides(pybuf) == (1, 3) .* sizeof(T)
-<span style="color:inherit;"> |</span>            nca = NoCopyArray(ao)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-171,7 +171,7</span> ============================================================
-<span style="color:inherit;"> |</span>            pybuf = PyBuffer(ao, PyBUF_ND_CONTIGUOUS)
-<span style="color:inherit;"> |</span>            T, native_byteorder = array_format(pybuf)
-<span style="color:inherit;"> |</span>            @test T == Float64
-<span style="color:orange;">!|</span>            @test native_byteorder<span style="color:red;"> == true</span>
-<span style="color:inherit;"> |</span>            @test size(pybuf) == (3,4,5)
-<span style="color:inherit;"> |</span>            @test strides(pybuf) == (20,5,1) .* sizeof(T)
-<span style="color:inherit;"> |</span>            nca = NoCopyArray</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

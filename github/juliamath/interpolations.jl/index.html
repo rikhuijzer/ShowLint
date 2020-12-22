@@ -1,0 +1,40 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaMath/Interpolations.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaMath/Interpolations.jl" target=_blank >JuliaMath/Interpolations.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_4_hits ><a href="#replace_arrayt1_with_vectort_4_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 4 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">monotonic/monotonic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">monotonic/monotonic.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-108,7 +108,7</span> ============================================================
+<span style="color:inherit;"> |</span>coefficients.
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>struct MonotonicInterpolation{T, TCoeffs1, TCoeffs2, TCoeffs3, TEl, TInterpolationType<:MonotonicInterpolationType,
+<span style="color:red;">-|</span></span><span style="color:gray;">    TKnots<:AbstractVector{<:Number}, TACoeff <: </span><span style="color:red;">AbstractArray</span><span style="color:gray;">{TEl</span><span style="color:red;">,1</span><span style="color:gray;">}} <: AbstractInterpolation{T,1,DimSpec{TInterpolationType}}</span></span>
+<span style="color:green;">+|</span></span>    TKnots<:AbstractVector{<:Number}, TACoeff <: <span style="color:green;">AbstractVector</span>{TEl}} <: AbstractInterpolation{T,1,DimSpec{TInterpolationType}}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    it::TInterpolationType
+<span style="color:inherit;"> |</span>    knots::TKnots
+<span style="color:inherit;">@|</span><span style="color:inherit;">-133,7 +133,7</span> ============================================================
+<span style="color:inherit;"> |</span>itpflag(A::MonotonicInterpolation) = A.it
+<span style="color:inherit;"> |</span>coefficients(A::MonotonicInterpolation) = A.A
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function MonotonicInterpolation(::Type{TWeights}, it::TInterpolationType, knots::TKnots, A::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{TEl</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function MonotonicInterpolation(::Type{TWeights}, it::TInterpolationType, knots::TKnots, A::<span style="color:green;">AbstractVector</span>{TEl},</span>
+<span style="color:inherit;"> |</span>    m::Vector{TCoeffs1}, c::Vector{TCoeffs2}, d::Vector{TCoeffs3}) where {TWeights, TCoeffs1, TCoeffs2, TCoeffs3, TEl, TInterpolationType<:MonotonicInterpolationType, TKnots<:AbstractVector{<:Number}}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    isconcretetype(TInterpolationType) || error(&#34;The spline type must be a leaf type (was $TInterpolationType)&#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-152,7 +152,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function interpolate(::Type{TWeights}, ::Type{TCoeffs1},::Type{TCoeffs2},::Type{TCoeffs3}, knots::TKnots,
+<span style="color:red;">-|</span></span><span style="color:gray;">    A::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{TEl</span><span style="color:red;">,1</span><span style="color:gray;">}, it::TInterpolationType) where {TWeights,TCoeffs1,TCoeffs2,TCoeffs3,TEl,TKnots<:AbstractVector{<:Number},TInterpolationType<:MonotonicInterpolationType}</span></span>
+<span style="color:green;">+|</span></span>    A::<span style="color:green;">AbstractVector</span>{TEl}, it::TInterpolationType) where {TWeights,TCoeffs1,TCoeffs2,TCoeffs3,TEl,TKnots<:AbstractVector{<:Number},TInterpolationType<:MonotonicInterpolationType}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    check_monotonic(knots, A)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-175,7 +175,7</span> ============================================================
+<span style="color:inherit;"> |</span>    MonotonicInterpolation(TWeights, it, knots, A, m, c, d)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function interpolate(knots::AbstractVector{<:Number}, A::</span><span style="color:red;">AbstractArray</span><span style="color:gray;">{TEl</span><span style="color:red;">,1</span><span style="color:gray;">},</span></span>
+<span style="color:green;">+|</span></span>function interpolate(knots::AbstractVector{<:Number}, A::<span style="color:green;">AbstractVector</span>{TEl},</span>
+<span style="color:inherit;"> |</span>    it::TInterpolationType) where {TEl,TInterpolationType<:MonotonicInterpolationType}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    interpolate(tweight(A),typeof(oneunit(eltype(A)) / oneunit(eltype(knots</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

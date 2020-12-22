@@ -17,6 +17,12 @@ jobs:
       with:
         persist-credentials: false
 
+    - name: Cache cloned repositories
+      uses: actions/cache@v2
+      with:
+        path: ~/clones
+      key: ${{ hashFiles('~/clones') }}
+
     - name: Install Podman
       run: |
         sudo apt-get -y update

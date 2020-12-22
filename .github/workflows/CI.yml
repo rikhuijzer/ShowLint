@@ -21,7 +21,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/clones
-        key: key-${{ hashFiles('~/clones') }}
+        key: key-${{ hashFiles('src/repositories.jl') }}
 
     - name: Install Podman
       run: |

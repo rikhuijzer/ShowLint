@@ -2,24 +2,26 @@
 $(TYPEDEF)
 $(TYPEDFIELDS)
 
+where `exclude_prefixes` are prefixes of directories to exclude.
+
 ### Example
 ```
-Repo("https://github.com", "JuliaLang/Julia", [], [])
+Repo("https://github.com", "JuliaLang/Julia", [], ["test"])
 ```
 """
 struct Repo
     host::String
     name::String
     tags_predicates::Vector{Function}
-    dir::String
+    exclude_prefixes::Vector{String}
 end
 
 any_tag(tags) = true
 default_predicate(tags) = all(t -> t != "performance-decrease", tags)
-default_dir = "src"
+default_excludes = ["test"]
 
-Repo(host, name; predicates=[default_predicate], dir=default_dir) =
-    Repo(host, name, predicates, dir)
+Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
+    Repo(host, name, predicates, exclude)
 
 const DEBUG = !haskey(ENV, "CI")
 
@@ -103,7 +105,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaLang/Statistics.jl"),
         Repo("https://github.com", "JuliaLang/TOML.jl"),
         Repo("https://github.com", "JuliaLang/Tokenize.jl"),
-        Repo("https://github.com", "JuliaLang/julia"; dir=""),
+        Repo("https://github.com", "JuliaLang/julia"),
         Repo("https://github.com", "JuliaML/LossFunctions.jl"),
         Repo("https://github.com", "JuliaML/MLDataUtils.jl"),
         Repo("https://github.com", "JuliaML/MLLabelUtils.jl"),
@@ -126,6 +128,9 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaPy/Pandas.jl"),
         Repo("https://github.com", "JuliaPy/PyCall.jl"),
         Repo("https://github.com", "JuliaPy/PyPlot.jl"),
+        Repo("https://github.com", "JuliaRegistries/CompatHelper.jl"),
+        Repo("https://github.com", "JuliaRegistries/Registrator.jl"),
+        Repo("https://github.com", "JuliaRegistries/TagBot.jl"),
         Repo("https://github.com", "JuliaStats/Distributions.jl"),
         Repo("https://github.com", "JuliaStats/GLM.jl"),
         Repo("https://github.com", "JuliaStats/HypothesisTests.jl"),
@@ -147,14 +152,19 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "alan-turing-institute/MLJBase.jl"),
         Repo("https://github.com", "alan-turing-institute/MLJModels.jl"),
         Repo("https://github.com", "alan-turing-institute/MLJTuning.jl"),
+        Repo("https://github.com", "bcbi/PredictMD.jl"),
+        Repo("https://github.com", "bcbi/SimpleContainerGenerator.jl"),
         Repo("https://github.com", "cstjean/ScikitLearn.jl"),
         Repo("https://github.com", "denizyuret/AutoGrad.jl"),
+        Repo("https://github.com", "diegozea/MIToS.jl"),
+        Repo("https://github.com", "domluna/JuliaFormatter.jl"),
         Repo("https://github.com", "fonsp/Pluto.jl"),
         Repo("https://github.com", "fonsp/PlutoUI.jl"),
         Repo("https://github.com", "fonsp/PlutoUtils.jl"),
-        Repo("https://github.com", "h-Klok/StatsWithJuliaBook"; dir=""),
+        Repo("https://github.com", "h-Klok/StatsWithJuliaBook"),
         Repo("https://github.com", "joshday/OnlineStats.jl"),
         Repo("https://github.com", "jrevels/Cassette.jl"),
+        Repo("https://github.com", "julia-actions/MassInstallAction.jl"),
         Repo("https://github.com", "jump-dev/JuMP.jl"),
         Repo("https://github.com", "odow/SDDP.jl"),
         Repo("https://github.com", "queryverse/Query.jl"),
@@ -169,7 +179,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "tlienart/FranklinTemplates.jl"),
     ]
 
-function valid_repository_names()::Bool
+function repository_ordering_is_valid()::Bool
     names = [r.name for r in repositories(; debug=false)]
     sorted = Base.sort(names)
     unique_and_sorted = unique(sorted)
@@ -185,8 +195,4 @@ function valid_repository_names()::Bool
         end
     end
     ok
-end
-
-function repository_dirs_are_valid()::Bool
-    !any(r -> r.dir == "/", repositories(; debug=false))
 end

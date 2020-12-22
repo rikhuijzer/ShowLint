@@ -3,7 +3,6 @@ import JSON
 @testset "Patterns" begin
     @test SL.patterns_have_valid_indexes()
 
-
     function apply(pat::Pattern, code::String; file_extension="jl")
         test_dir = joinpath(SL.clones_dir, "test", "test")
         rm(test_dir; recursive=true, force=true)
@@ -14,7 +13,7 @@ import JSON
             write(io, code)
         end
         
-        repo = Repo("test", "test", [SL.default_predicate], "")
+        repo = Repo("test", "test"; exclude=["nah"])
 
         SL.apply(pat, repo; in_place=true)
 

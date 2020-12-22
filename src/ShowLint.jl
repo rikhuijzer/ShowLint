@@ -160,9 +160,10 @@ function apply(pat::Pattern, repo::Repo;
 
     configs_dir = "configs"
     configs_path = joinpath(project_root, "configs")
-    repo_path = joinpath(target_dir(repo), repo.dir)
+    repo_path = target_dir(repo)
 
     name = create_config(pat, configs_path)
+    exclude_prefixes = join(repo.exclude_prefixes, ',')
 
     # Not pretty but it works.
     cmd = !in_place ? 
@@ -174,6 +175,7 @@ function apply(pat::Pattern, repo::Repo;
         -it comby/comby
         -c "comby \
             -stats \
+            -exclude-dir $exclude_prefixes \
             -config /configs/$name.toml \
             -directory /repo \
             -file-extensions $file_extensions \
@@ -185,6 +187,7 @@ function apply(pat::Pattern, repo::Repo;
         --volume $configs_path:/configs
         --volume $repo_path:/repo
         -it comby/comby
+        -exclude-dir $exclude_prefixes
         -config /configs/$name.toml
         -directory /repo
         -file-extensions $file_extensions

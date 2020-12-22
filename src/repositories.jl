@@ -130,7 +130,6 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaPy/PyPlot.jl"),
         Repo("https://github.com", "JuliaRegistries/CompatHelper.jl"),
         Repo("https://github.com", "JuliaRegistries/Registrator.jl"),
-        Repo("https://github.com", "JuliaRegistries/TagBot.jl"),
         Repo("https://github.com", "JuliaStats/Distributions.jl"),
         Repo("https://github.com", "JuliaStats/GLM.jl"),
         Repo("https://github.com", "JuliaStats/HypothesisTests.jl"),

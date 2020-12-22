@@ -1,26 +1,9 @@
 import JSON
 
+using ShowLint: apply
+
 @testset "Patterns" begin
     @test SL.patterns_have_valid_indexes()
-
-    function apply(pat::Pattern, code::String; file_extension="jl")
-        test_dir = joinpath(SL.clones_dir, "test", "test")
-        rm(test_dir; recursive=true, force=true)
-        mkpath(test_dir)
-
-        code_file = joinpath(test_dir, "code.$file_extension")
-        open(code_file, "w") do io
-            write(io, code)
-        end
-        
-        repo = Repo("test", "test"; exclude=["nah"])
-
-        SL.apply(pat, repo; in_place=true)
-
-        read(code_file, String)
-    end
-
-    P = SL.patterns
 
     function unchanged(pat::Pattern, code::String)
         result = apply(pat, code)
@@ -30,6 +13,8 @@ import JSON
         end
         return ok
     end
+
+    P = SL.patterns
 
     @test apply(P[1], "AbstractArray{Int,1}") == "AbstractVector{Int}"
     @test apply(P[2], "if x === missing") == "if ismissing(x)"
@@ -63,17 +48,18 @@ import JSON
     @test apply(P[8], "x -> ~x") == "~"
     @test unchanged(P[8], "x -> !x.y")
     @test unchanged(P[8], "x -> !x[1]")
-#    @test apply(P[9], """
-#        if a == b
-#            f()
-#            g()
-#        elseif a == b
-#            h()
-#        end""") == """
-#        if a == b
-#            f()
-#            g()
-#            h()
-#        end
-#        """
+    @test apply(P[9], """
+        if a == b
+            f()
+            g()
+        elseif a == b
+            h()
+        end
+        """) == """
+        if a == b
+            f()
+            g()
+            h()
+        end
+        """
 end

@@ -5,6 +5,9 @@ reeval = true
 
 # Repositories
 
+Please note that this list is not meant as a way of showing which repository contains the most "mistakes".
+The goal is to aid busy package developers in avoiding bugs and keeping the packages up-to-date.
+
 ~~~
 <div class="repositories-list">
 ~~~

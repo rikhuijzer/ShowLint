@@ -1,5 +1,6 @@
 module ShowLint
 
+using DocStringExtensions
 using Formatting
 using Serialization
 
@@ -18,7 +19,12 @@ include("repositories.jl")
 
 const project_root = pwd()
 
-function ansi2html(text)
+"""
+Remove ANSI color codes from `text`.
+
+$(TYPEDSIGNATURES) 
+"""
+function ansi2html(text::String)::String
   escape_codes = Dict(
     "0;30" => "inherit",
     "0;31" => "red",
@@ -59,7 +65,18 @@ end
 
 const clones_dir = joinpath(homedir(), "clones") 
 
-function host_dir(repo::Repo)
+"""
+Directory of the host of `repo`. 
+
+$(TYPEDSIGNATURES)
+
+### Example
+```
+julia> host_dir("https://github.com") 
+"github"
+```
+"""
+function host_dir(repo::Repo)::String
     host = repo.host
     host_dir = startswith(host, "https://") ? host[9:end] : host
     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
@@ -94,7 +111,12 @@ function clone_repositories()
     end
 end
 
-function create_config(pat::Pattern, dir)::String
+"""
+Create a Comby configuration file for `pat` at `dir`.
+
+$(TYPEDSIGNATURES)
+"""
+function create_config(pat::Pattern, dir::String)::String
     id = pat.id
     toml = pat.toml
     name = "p$id"
@@ -115,25 +137,30 @@ function create_config(pat::Pattern, dir)::String
     name
 end
 
-function number_of_matches(err)
+"""
+Obtains the number of matches from Comby's `-stats` output 
+on stderr.
+
+$(TYPEDSIGNATURES)
+"""
+function number_of_matches(stderr::String)::Int
     regex = r"\"number_of_matches\": ([0-9]*)"
-    m = match(regex, err)
+    m = match(regex, stderr)
     n_str = m[1]
     parse(Int, n_str)
 end
 
 """
-    apply(pat::Pattern, repo::Repo; file_extensions="jl")::String
-
 Apply `pattern` to `repo`.
-```
+
+$(TYPEDSIGNATURES)
 """
 function apply(pat::Pattern, repo::Repo; 
     file_extensions="jl", in_place=false)
 
     configs_dir = "configs"
     configs_path = joinpath(project_root, "configs")
-    repo_path = target_dir(repo)
+    repo_path = joinpath(target_dir(repo), repo.dir)
 
     name = create_config(pat, configs_path)
 
@@ -307,6 +334,6 @@ function cloned_loc(; extension=".jl")::Int
     sum(counts)
 end
 
-prettify_loc(n)::String = format(n, commas=true)
+prettify_loc(n::Number)::String = format(n, commas=true)
 
 end # module

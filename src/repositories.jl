@@ -26,7 +26,7 @@ const DEBUG = !haskey(ENV, "CI")
 repositories(; debug=DEBUG) = debug ?
     [
         Repo("https://github.com", "fonsp/Pluto.jl"),
-        Repo("https://github.com", "rikhuijzer/Codex.jl")
+        Repo("https://github.com", "rikhuijzer/Codex.jl"),
     ] : 
     [
         Repo("https://github.com", "Evizero/UnicodePlots.jl"),
@@ -103,7 +103,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaLang/Statistics.jl"),
         Repo("https://github.com", "JuliaLang/TOML.jl"),
         Repo("https://github.com", "JuliaLang/Tokenize.jl"),
-        Repo("https://github.com", "JuliaLang/julia"; dir="/"),
+        Repo("https://github.com", "JuliaLang/julia"; dir=""),
         Repo("https://github.com", "JuliaML/LossFunctions.jl"),
         Repo("https://github.com", "JuliaML/MLDataUtils.jl"),
         Repo("https://github.com", "JuliaML/MLLabelUtils.jl"),
@@ -152,7 +152,7 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "fonsp/Pluto.jl"),
         Repo("https://github.com", "fonsp/PlutoUI.jl"),
         Repo("https://github.com", "fonsp/PlutoUtils.jl"),
-        Repo("https://github.com", "h-Klok/StatsWithJuliaBook"; dir="/"),
+        Repo("https://github.com", "h-Klok/StatsWithJuliaBook"; dir=""),
         Repo("https://github.com", "joshday/OnlineStats.jl"),
         Repo("https://github.com", "jrevels/Cassette.jl"),
         Repo("https://github.com", "jump-dev/JuMP.jl"),

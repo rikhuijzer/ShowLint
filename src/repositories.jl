@@ -31,7 +31,7 @@ version(n::Number) = Base.Fix2(version, n)
 
 function default_predicate(tags) 
     decr(t) = t == "performance-decrease"
-    all(!decr, tags) && !too_new(tags, 1.0)
+    all(!decr, tags) && version(tags, 1.0)
 end
 
 default_excludes = ["test"]

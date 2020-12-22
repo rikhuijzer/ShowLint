@@ -118,7 +118,6 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "JuliaMath/Polynomials.jl"),
         Repo("https://github.com", "JuliaMath/Roots.jl"),
         Repo("https://github.com", "JuliaMath/SpecialFunctions.jl"),
-        Repo("https://github.com", "JuliaMath/openlibm.jl"),
         Repo("https://github.com", "JuliaNLSolvers/LsqFit.jl"),
         Repo("https://github.com", "JuliaNLSolvers/NLsolve.jl"),
         Repo("https://github.com", "JuliaNLSolvers/Optim.jl"),

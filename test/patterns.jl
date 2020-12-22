@@ -3,6 +3,7 @@ import JSON
 @testset "Patterns" begin
     @test SL.patterns_have_valid_indexes()
 
+
     function apply(pat::Pattern, code::String; file_extension="jl")
         test_dir = joinpath(SL.clones_dir, "test", "test")
         rm(test_dir; recursive=true, force=true)

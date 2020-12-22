@@ -186,3 +186,7 @@ function valid_repository_names()::Bool
     end
     ok
 end
+
+function repository_dirs_are_valid()::Bool
+    !any(r -> r.dir == "/", repositories(; debug=false))
+end

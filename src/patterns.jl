@@ -199,3 +199,4 @@ patterns = [
 function patterns_have_valid_indexes()::Bool
     collect(1:length(patterns)) == [p.id for p in patterns]
 end
+

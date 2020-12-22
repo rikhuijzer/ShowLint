@@ -1,5 +1,42 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaGPU/ArrayFire.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaGPU/ArrayFire.jl" target=_blank >JuliaGPU/ArrayFire.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_18_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 18 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_18_hits ><a href="#replace_arrayt1_with_vectort_18_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 18 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">indexing.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">array.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">array.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">AFVector{T} = </span><span style="color:red;">AFArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>AFVector{T} = <span style="color:green;">AFVector</span>{T}</span>
+<span style="color:inherit;"> |</span>AFMatrix{T} = AFArray{T,2}
+<span style="color:inherit;"> |</span>AFVolume{T} = AFArray{T,3}
+<span style="color:inherit;"> |</span>AFTensor{T} = AFArray{T,4}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-182,14 +182,14</span> ============================================================
+<span style="color:inherit;"> |</span>    out = RefValue{af_array}(0)
+<span style="color:inherit;"> |</span>    _error(ccall((:af_matmul,af_lib),af_err,(Ptr{af_array},af_array,af_array,af_mat_prop,af_mat_prop),
+<span style="color:inherit;"> |</span>                 out,a.arr,b.arr,AF_MAT_TRANS, AF_MAT_NONE))
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">AFArray</span><span style="color:gray;">{typed(T1,T2)</span><span style="color:red;">,1</span><span style="color:gray;">}(out[])</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">AFVector</span>{typed(T1,T2)}(out[])</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function A_mul_B(a::AFMatrix{T1}, b::AFVector{T2}) where {T1,T2}
+<span style="color:inherit;"> |</span>    out = RefValue{af_array}(0)
+<span style="color:inherit;"> |</span>    _error(ccall((:af_matmul,af_lib),af_err,(Ptr{af_array},af_array,af_array,af_mat_prop,af_mat_prop),
+<span style="color:inherit;"> |</span>                 out,a.arr,b.arr,AF_MAT_NONE, AF_MAT_NONE))
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">AFArray</span><span style="color:gray;">{typed(T1,T2)</span><span style="color:red;">,1</span><span style="color:gray;">}(out[])</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">AFVector</span>{typed(T1,T2)}(out[])</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function transpose(_in::AFArray{T,N},conjugate::Bool=false) where {T,N}
+<span style="color:inherit;">@|</span><span style="color:inherit;">-203,7 +203,7</span> ============================================================
+<span style="color:inherit;"> |</span>function vec(_in::AFArray{T,N}) where {T,N}
+<span style="color:inherit;"> |</span>    out = RefValue{af_array}(0)
+<span style="color:inherit;"> |</span>    _error(ccall((:af_flat,af_lib),af_err,(Ptr{af_array},af_array),out,_in.arr))
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">AFArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(out[])</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">AFVector</span>{T}(out[])</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function reshape(_in::AFArray{T},dims::NTuple{N,Int}) where {T,N}
+<span style="color:red;">------ </span><span style="color:inherit;">indexing.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">indexing.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-91,7 +91,7</span> ============================================================
 <span style="color:inherit;"> |</span>    _error(ccall((:af_index_gen,af_lib),
@@ -62,43 +99,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function rfft1(_in::AFArray{T,N},norm_factor=1.0,pad0::dim_t=0) where {T<:Real,N}
-<span style="color:red;">------ </span><span style="color:inherit;">array.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">array.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">AFVector{T} = </span><span style="color:red;">AFArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
-<span style="color:green;">+|</span></span>AFVector{T} = <span style="color:green;">AFVector</span>{T}</span>
-<span style="color:inherit;"> |</span>AFMatrix{T} = AFArray{T,2}
-<span style="color:inherit;"> |</span>AFVolume{T} = AFArray{T,3}
-<span style="color:inherit;"> |</span>AFTensor{T} = AFArray{T,4}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-182,14 +182,14</span> ============================================================
-<span style="color:inherit;"> |</span>    out = RefValue{af_array}(0)
-<span style="color:inherit;"> |</span>    _error(ccall((:af_matmul,af_lib),af_err,(Ptr{af_array},af_array,af_array,af_mat_prop,af_mat_prop),
-<span style="color:inherit;"> |</span>                 out,a.arr,b.arr,AF_MAT_TRANS, AF_MAT_NONE))
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">AFArray</span><span style="color:gray;">{typed(T1,T2)</span><span style="color:red;">,1</span><span style="color:gray;">}(out[])</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">AFVector</span>{typed(T1,T2)}(out[])</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function A_mul_B(a::AFMatrix{T1}, b::AFVector{T2}) where {T1,T2}
-<span style="color:inherit;"> |</span>    out = RefValue{af_array}(0)
-<span style="color:inherit;"> |</span>    _error(ccall((:af_matmul,af_lib),af_err,(Ptr{af_array},af_array,af_array,af_mat_prop,af_mat_prop),
-<span style="color:inherit;"> |</span>                 out,a.arr,b.arr,AF_MAT_NONE, AF_MAT_NONE))
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">AFArray</span><span style="color:gray;">{typed(T1,T2)</span><span style="color:red;">,1</span><span style="color:gray;">}(out[])</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">AFVector</span>{typed(T1,T2)}(out[])</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function transpose(_in::AFArray{T,N},conjugate::Bool=false) where {T,N}
-<span style="color:inherit;">@|</span><span style="color:inherit;">-203,7 +203,7</span> ============================================================
-<span style="color:inherit;"> |</span>function vec(_in::AFArray{T,N}) where {T,N}
-<span style="color:inherit;"> |</span>    out = RefValue{af_array}(0)
-<span style="color:inherit;"> |</span>    _error(ccall((:af_flat,af_lib),af_err,(Ptr{af_array},af_array),out,_in.arr))
-<span style="color:red;">-|</span></span>    </span><span style="color:red;">AFArray</span><span style="color:gray;">{T</span><span style="color:red;">,1</span><span style="color:gray;">}(out[])</span></span>
-<span style="color:green;">+|</span></span>    <span style="color:green;">AFVector</span>{T}(out[])</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function reshape(_in::AFArray{T},dims::NTuple{N,Int}) where {T,N}
 <span style="color:red;">------ </span><span style="color:inherit;">util.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">util.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-374,7 +374,7</span> ============================================================

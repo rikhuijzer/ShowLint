@@ -3,6 +3,7 @@
         - @testset "Patterns" begin
         -     @test SL.patterns_have_valid_indexes()
         - 
+        - 
         -     function apply(pat::Pattern, code::String; file_extension="jl")
        60         test_dir = joinpath(SL.clones_dir, "test", "test")
        30         rm(test_dir; recursive=true, force=true)

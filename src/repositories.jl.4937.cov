@@ -8,7 +8,7 @@
         - ```
         - """
         - struct Repo
-      306     host::String
+      582     host::String
         -     name::String
         -     tags_predicates::Vector{Function}
         -     dir::String
@@ -18,12 +18,12 @@
         - default_predicate(tags) = all(t -> t != "performance-decrease", tags)
         - default_dir = "src"
         - 
-      278 Repo(host, name; predicates=[default_predicate], dir=default_dir) =
+      556 Repo(host, name; predicates=[default_predicate], dir=default_dir) =
         -     Repo(host, name, predicates, dir)
         - 
         - const DEBUG = !haskey(ENV, "CI")
         - 
-        2 repositories(; debug=DEBUG) = debug ?
+        4 repositories(; debug=DEBUG) = debug ?
         -     [
         -         Repo("https://github.com", "fonsp/Pluto.jl"),
         -         Repo("https://github.com", "rikhuijzer/Codex.jl"),
@@ -185,4 +185,8 @@
         -         end
         -     end
         1     ok
+        - end
+        - 
+        - function repository_dirs_are_valid()::Bool
+      139     !any(r -> r.dir == "/", repositories(; debug=false))
         - end

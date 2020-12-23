@@ -39,13 +39,9 @@ default_excludes = ["test"]
 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
     Repo(host, name, predicates, exclude)
 
-const DEBUG = !haskey(ENV, "CI")
+is_production()::Bool = haskey(ENV, "CI")
 
-repositories(; debug=DEBUG) = debug ?
-    [
-        Repo("https://github.com", "fonsp/Pluto.jl"),
-        Repo("https://github.com", "rikhuijzer/Codex.jl"),
-    ] : 
+repositories(; production=is_production()) = production ?
     [
         Repo("https://github.com", "Evizero/UnicodePlots.jl"),
         Repo("https://github.com", "FRBNY-DSGE/SMC.jl"),
@@ -195,10 +191,14 @@ repositories(; debug=DEBUG) = debug ?
         Repo("https://github.com", "timholy/SnoopCompile.jl"),
         Repo("https://github.com", "tlienart/Franklin.jl"),
         Repo("https://github.com", "tlienart/FranklinTemplates.jl"),
+    ] :
+    [
+        Repo("https://github.com", "fonsp/Pluto.jl"),
+        Repo("https://github.com", "rikhuijzer/Codex.jl"),
     ]
 
 function repository_ordering_is_valid()::Bool
-    names = [r.name for r in repositories(; debug=false)]
+    names = [r.name for r in repositories(; production=true)]
     sorted = Base.sort(names)
     unique_and_sorted = unique(sorted)
     ok = names == unique_and_sorted

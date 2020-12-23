@@ -218,6 +218,11 @@ function apply(pat::Pattern, repo::Repo;
     return (out, err)
 end
 
+"""
+Apply `pattern` to `code`.
+
+$(TYPEDSIGNATURES)
+"""
 function apply(pat::Pattern, code::String; file_extension="jl")
     test_dir = joinpath(clones_dir, "tmp", "tmp")
     rm(test_dir; recursive=true, force=true)
@@ -235,6 +240,12 @@ function apply(pat::Pattern, code::String; file_extension="jl")
     read(code_file, String)
 end
 
+function filter_patterns(repo::Repo, patterns::Vector{Pattern})
+    predicates = repo.tags_predicates
+    all_predicates_hold(tags) = all([P(tags) for P in predicates])
+    filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
+end
+
 function repo_page(repo::Repo)
     predicates_str = join(repo.tags_predicates, " && ")
     headers = []
@@ -250,10 +261,6 @@ function repo_page(repo::Repo)
         \\toc
 
         """ 
-
-    predicates = repo.tags_predicates
-    all_predicates_hold(tags) = all([p(tags) for p in predicates])
-    filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
 
     function pattern_section(pat)
         diff, err = ShowLint.apply(pat, repo)
@@ -277,6 +284,7 @@ function repo_page(repo::Repo)
             """
         end
     end
+    filtered_patterns = filter_patterns(patterns, repo.tags_predicates)
     sections = pattern_section.(filtered_patterns)
 
     return (

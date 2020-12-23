@@ -106,7 +106,11 @@ function clone_repositories()
             cd(dest)
             run(`git pull --ff-only`)
         else
-            run(`git clone $host/$name $dest`)
+            run(`git clone
+                --depth=1
+                --no-tags
+                --single-branch
+                $host/$name $dest`)
         end
         println()
     end

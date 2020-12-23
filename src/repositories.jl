@@ -182,6 +182,9 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "jrevels/Cassette.jl"),
         Repo("https://github.com", "julia-actions/MassInstallAction.jl"),
         Repo("https://github.com", "jump-dev/JuMP.jl"),
+        Repo("https://github.com", "kellertuer/Manifolds.jl"),
+        Repo("https://github.com", "kellertuer/ManifoldsBase.jl"),
+        Repo("https://github.com", "kellertuer/Manopt.jl"),
         Repo("https://github.com", "odow/SDDP.jl"),
         Repo("https://github.com", "queryverse/Query.jl"),
         Repo("https://github.com", "rikhuijzer/Codex.jl"),
@@ -195,7 +198,6 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "tlienart/FranklinTemplates.jl"),
     ] :
     [
-        Repo("https://github.com", "fonsp/Pluto.jl"),
         Repo("https://github.com", "rikhuijzer/Codex.jl"),
     ]
 

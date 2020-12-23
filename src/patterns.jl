@@ -21,12 +21,24 @@ extend_val_rx_right = raw"(?! [+-\/*])"
 fn_rx = raw"[\w_\.]+"
 
 patterns = [
-    Pattern(1, "Replace Array{T,1} with Vector{T}", ["julia"], 
-        "Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.",
+    Pattern(1, "Use rand() instead of rand(1)[1]", ["julia"],
         """
-        match='Array{:[T],1}'
+        According to [DNF](https://stackoverflow.com/questions/65403410/), many people use 
+        ```
+        julia> using Random
 
-        rewrite='Vector{:[T]}'
+        julia> Random.seed!(1234); rand(1)[1]
+        0.5908446386657102
+        ```
+        instead of (the more performant)
+        ```
+        julia> Random.seed!(1234); rand()
+        0.5908446386657102
+        ```
+        """,
+        """
+        match="foobarbaz"
+        rewrite=""
         """
     ),
     Pattern(2, "Use ismissing", ["julia", "performance-decrease"], 
@@ -163,7 +175,7 @@ patterns = [
     ),
     Pattern(9, "Abbreviate keyword argument values", ["julia", 1.5],
         """
-        From [Julia 1.5](https://julialang.org/blog/2020/08/julia-1.5-highlights)
+        From [Julia 1.5 onwards](https://julialang.org/blog/2020/08/julia-1.5-highlights)
         it is possible to abbreviate
         ```
         printstyled("text"; color = color)
@@ -177,7 +189,7 @@ patterns = [
         match="(:[a]; :[c] = :[c])"
         rewrite="(:[a]; :[c])"
         """
-    )
+    ),
 ]
 
 function patterns_have_valid_indexes()::Bool

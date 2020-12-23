@@ -16,7 +16,8 @@ using ShowLint: apply
 
     P = SL.patterns
 
-    @test apply(P[1], "AbstractArray{Int,1}") == "AbstractVector{Int}"
+    # @test apply(P[10], "rand(1)[1]") == "rand()"
+    # @test apply(P[10], "rand(Bernoulli(0.5),1)[1]") == "rand(Bernoulli(0.5))"
     @test apply(P[2], "if x === missing") == "if ismissing(x)"
     @test apply(P[2], "x !== missing") == "!ismissing(x)"
     @test apply(P[3], "map(x -> f(x), A)") == "map(f, A)"

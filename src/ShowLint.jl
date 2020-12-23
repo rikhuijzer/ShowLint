@@ -284,7 +284,7 @@ function repo_page(repo::Repo)
             """
         end
     end
-    filtered_patterns = filter_patterns(patterns, repo.tags_predicates)
+    filtered_patterns = filter_patterns(repo, patterns)
     sections = pattern_section.(filtered_patterns)
 
     return (

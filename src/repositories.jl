@@ -152,6 +152,8 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "JuliaWeb/HTTP.jl"),
         Repo("https://github.com", "JuliaWeb/WebSockets.jl"),
         Repo("https://github.com", "JunoLab/Weave.jl"),
+        Repo("https://github.com", "STOR-i/Changepoints.jl"),
+        Repo("https://github.com", "STOR-i/GaussianProcesses.jl"),
         Repo("https://github.com", "SciML/DifferentialEquations.jl"),
         Repo("https://github.com", "StatisticalRethinkingJulia/DynamicHMCModels.jl"),
         Repo("https://github.com", "StatisticalRethinkingJulia/StatisticalRethinking.jl"),

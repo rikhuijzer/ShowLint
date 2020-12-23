@@ -1,5 +1,16 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>h-Klok/StatsWithJuliaBook</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/h-Klok/StatsWithJuliaBook" target=_blank >h-Klok/StatsWithJuliaBook</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a><li><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_7_hits ><a href="#replace_arrayt1_with_vectort_7_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 7 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">9_chapter/ridgeRegressionCross.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    waitingRoom = Queue{Float64}()
+<span style="color:inherit;"> |</span>    serverBusy = false
+<span style="color:red;">-|</span></span><span style="color:gray;">    waitTimes = </span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
+<span style="color:green;">+|</span></span>    waitTimes = <span style="color:green;">Vector</span>{Float64}()</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    while t<T
+<span style="color:inherit;"> |</span>        if t == tNextArr
+<span style="color:red;">------ </span><span style="color:inherit;">9_chapter/ridgeRegressionCross.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">9_chapter/ridgeRegressionCross.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-19,8 +19,8</span> ============================================================
 <span style="color:inherit;"> |</span>xTrain(k) = convert(Array{Float64,2},df[trainSet(k),[:Cach, :ChMin]])
@@ -32,17 +43,6 @@
 <span style="color:inherit;"> |</span>shuffle!(dataPoints)
 <span style="color:inherit;"> |</span>D = [norm(pt1 - pt2) for pt1 in dataPoints, pt2 in dataPoints]
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">10_chapter/mm1DESwaitingTimes.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    waitingRoom = Queue{Float64}()
-<span style="color:inherit;"> |</span>    serverBusy = false
-<span style="color:red;">-|</span></span><span style="color:gray;">    waitTimes = </span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}()</span></span>
-<span style="color:green;">+|</span></span>    waitTimes = <span style="color:green;">Vector</span>{Float64}()</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    while t<T
-<span style="color:inherit;"> |</span>        if t == tNextArr
 <span style="color:red;">------ </span><span style="color:inherit;">9_chapter/kMeansManual.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">9_chapter/kMeansManual.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-4,7 +4,7</span> ============================================================
@@ -88,4 +88,4 @@
 <span style="color:inherit;"> |</span>    global nCorrect += predictionIsCorrect
 <span style="color:inherit;"> |</span>    global iC; global iR
 <span style="color:inherit;"> |</span>    if predictionIsCorrect && trueLabel =</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 22, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 23, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

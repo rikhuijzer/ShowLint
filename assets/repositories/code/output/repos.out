@@ -1009,6 +1009,33 @@
 ~~~
 
 ~~~
+<h3><a href="https://github.com/StatisticalRethinkingJulia/DynamicHMCModels.jl" target="_blank">StatisticalRethinkingJulia/DynamicHMCModels.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace Array{T,1} with Vector{T} ➤ 8 hits](/github/statisticalrethinkingjulia/dynamichmcmodels.jl/#replace_arrayt1_with_vectort_8_hits)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl" target="_blank">StatisticalRethinkingJulia/StatisticalRethinking.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/StatisticalRethinkingJulia/TuringModels.jl" target="_blank">StatisticalRethinkingJulia/TuringModels.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 1 hit](/github/statisticalrethinkingjulia/turingmodels.jl/#avoid_x_-_fx_1_hit)
+~~~
+</div>
+~~~
+
+~~~
 <h3><a href="https://github.com/TuringLang/AdvancedHMC.jl" target="_blank">TuringLang/AdvancedHMC.jl</a></h3>
 <div class="repo-nav">
 ~~~

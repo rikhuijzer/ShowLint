@@ -1,4 +1,4 @@
-145-element Array{Any,1}:
+148-element Array{Any,1}:
  Any[]
  Any[]
  Any[]
@@ -109,6 +109,9 @@
  Any["Replace Array{T,1} with Vector{T} ➤ 3 hits"]
  Any[]
  Any["Omit comparison with boolean constant ➤ 2 hits"]
+ Any["Replace Array{T,1} with Vector{T} ➤ 8 hits"]
+ Any[]
+ Any["Avoid x -> f(x) ➤ 1 hit"]
  Any[]
  Any[]
  Any["Replace Array{T,1} with Vector{T} ➤ 1 hit"]

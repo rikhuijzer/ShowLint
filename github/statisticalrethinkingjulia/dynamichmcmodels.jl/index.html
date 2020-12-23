@@ -1,0 +1,72 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>StatisticalRethinkingJulia/DynamicHMCModels.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/StatisticalRethinkingJulia/DynamicHMCModels.jl" target=_blank >StatisticalRethinkingJulia/DynamicHMCModels.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_arrayt1_with_vectort_8_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 8 hits</a></ol></div> <h3 id=replace_arrayt1_with_vectort_8_hits ><a href="#replace_arrayt1_with_vectort_8_hits">Replace Array&#123;T,1&#125; with Vector&#123;T&#125; ➤ 8 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">benchmarks/LBA/LBA.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmarks/LBA/LBA.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-76,7 +76,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return sum(logpdf.(d,data...))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">logpdf(dist::LBA,data::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Tuple</span><span style="color:red;">,1</span><span style="color:gray;">}) = sum(d -> logpdf(dist, d), data)</span></span>
+<span style="color:green;">+|</span></span>logpdf(dist::LBA,data::<span style="color:green;">Vector</span>{<:Tuple}) = sum(d -> logpdf(dist, d), data)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function logpdf(d::LBA, c, rt)
+<span style="color:inherit;"> |</span>    @unpack τ,A,k,ν,σ = d
+<span style="color:red;">------ </span><span style="color:inherit;">benchmarks/LBA/LBAMCMCChains.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmarks/LBA/LBAMCMCChains.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-76,7 +76,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return sum(logpdf.(d,data...))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">logpdf(dist::LBA,data::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Tuple</span><span style="color:red;">,1</span><span style="color:gray;">}) = sum(d -> logpdf(dist, d), data)</span></span>
+<span style="color:green;">+|</span></span>logpdf(dist::LBA,data::<span style="color:green;">Vector</span>{<:Tuple}) = sum(d -> logpdf(dist, d), data)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function logpdf(d::LBA, c, rt)
+<span style="color:inherit;"> |</span>    @unpack τ,A,k,ν,σ = d
+<span style="color:red;">------ </span><span style="color:inherit;">benchmarks/Linear_regression/linear_regression.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmarks/Linear_regression/linear_regression.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-7,7 +7,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span> struct RegressionProb
+<span style="color:inherit;"> |</span>    x::Array{Float64,2}
+<span style="color:red;">-|</span></span><span style="color:gray;">    y::</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>    y::<span style="color:green;">Vector</span>{Float64}</span>
+<span style="color:inherit;"> |</span>    Nd::Int64
+<span style="color:inherit;"> |</span>    Nc::Int64
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">benchmarks/LBA/LBA_functions.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmarks/LBA/LBA_functions.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-72,7 +72,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return sum(logpdf.(d,data...))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">function logpdf(dist::LBA,data::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Tuple</span><span style="color:red;">,1</span><span style="color:gray;">})</span></span>
+<span style="color:green;">+|</span></span>function logpdf(dist::LBA,data::<span style="color:green;">Vector</span>{<:Tuple})</span>
+<span style="color:inherit;"> |</span>    LL = 0.0
+<span style="color:inherit;"> |</span>    for d in data
+<span style="color:inherit;"> |</span>        LL += logpdf(dist,d...)
+<span style="color:red;">------ </span><span style="color:inherit;">benchmarks/LBA/LBAStresstest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmarks/LBA/LBAStresstest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-76,7 +76,7</span> ============================================================
+<span style="color:inherit;"> |</span>    return sum(logpdf.(d,data...))
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">logpdf(dist::LBA,data::</span><span style="color:red;">Array</span><span style="color:gray;">{<:Tuple</span><span style="color:red;">,1</span><span style="color:gray;">}) = sum(d -> logpdf(dist, d), data)</span></span>
+<span style="color:green;">+|</span></span>logpdf(dist::LBA,data::<span style="color:green;">Vector</span>{<:Tuple}) = sum(d -> logpdf(dist, d), data)</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function logpdf(d::LBA, c, rt)
+<span style="color:inherit;"> |</span>    @unpack τ,A,k,ν,σ = d
+<span style="color:red;">------ </span><span style="color:inherit;">benchmarks/Hierarchical_Poisson/hierachical_poisson.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">benchmarks/Hierarchical_Poisson/hierachical_poisson.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-8,9 +8,9</span> ============================================================
+<span style="color:inherit;"> |</span>include(&#34;simulatePoisson.jl&#34;)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>struct PoissonProb
+<span style="color:red;">-|</span></span><span style="color:gray;">   y::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>   y::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">   x::</span><span style="color:red;">Array</span><span style="color:gray;">{Float64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>   x::<span style="color:green;">Vector</span>{Float64}</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">   idx::</span><span style="color:red;">Array</span><span style="color:gray;">{Int64</span><span style="color:red;">,1</span><span style="color:gray;">}</span></span>
+<span style="color:green;">+|</span></span>   idx::<span style="color:green;">Vector</span>{Int64}</span>
+<span style="color:inherit;"> |</span>   N::Int64
+<span style="color:inherit;"> |</span>   Ns::Int64
+<span style="color:inherit;"> |</span</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 23, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

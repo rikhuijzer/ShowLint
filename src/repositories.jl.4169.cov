@@ -10,7 +10,7 @@
         - ```
         - """
         - struct Repo
-      352     host::String
+      358     host::String
         -     name::String
         -     tags_predicates::Vector{Function}
         -     exclude_prefixes::Vector{String}
@@ -36,7 +36,7 @@
         - 
         - default_excludes = ["test"]
         - 
-      383 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
+      389 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
         -     Repo(host, name, predicates, exclude)
         - 
         - const DEBUG = !haskey(ENV, "CI")
@@ -157,6 +157,9 @@
         -         Repo("https://github.com", "JuliaWeb/WebSockets.jl"),
         -         Repo("https://github.com", "JunoLab/Weave.jl"),
         -         Repo("https://github.com", "SciML/DifferentialEquations.jl"),
+        -         Repo("https://github.com", "StatisticalRethinkingJulia/DynamicHMCModels.jl"),
+        -         Repo("https://github.com", "StatisticalRethinkingJulia/StatisticalRethinking.jl"),
+        -         Repo("https://github.com", "StatisticalRethinkingJulia/TuringModels.jl"),
         -         Repo("https://github.com", "TuringLang/AdvancedHMC.jl"),
         -         Repo("https://github.com", "TuringLang/Bijectors.jl"),
         -         Repo("https://github.com", "TuringLang/MCMCChains.jl"),

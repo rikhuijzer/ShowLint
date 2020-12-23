@@ -2,16 +2,27 @@
 ~~~ 
 <span id="1"></span>
 ~~~
-### 1: Replace Array{T,1} with Vector{T}
+### 1: Use rand() instead of rand(1)[1]
 tags: *julia*
 
-Vector{T} and AbstractVector{T} are aliases for respectively Array{T,1} and AbstractArray{T,1}.
+According to [DNF](https://stackoverflow.com/questions/65403410/), many people use 
+```
+julia> using Random
+
+julia> Random.seed!(1234); rand(1)[1]
+0.5908446386657102
+```
+instead of (the more performant)
+```
+julia> Random.seed!(1234); rand()
+0.5908446386657102
+```
+
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match='Array{:[T],1}'
-
-rewrite='Vector{:[T]}'
+<pre><code class="plaintext">match="foobarbaz"
+rewrite=""
 </code></pre>
 ~~~
 
@@ -211,7 +222,7 @@ rewrite=':[unary]'
 ### 9: Abbreviate keyword argument values
 tags: *julia, 1.5*
 
-From [Julia 1.5](https://julialang.org/blog/2020/08/julia-1.5-highlights)
+From [Julia 1.5 onwards](https://julialang.org/blog/2020/08/julia-1.5-highlights)
 it is possible to abbreviate
 ```
 printstyled("text"; color = color)

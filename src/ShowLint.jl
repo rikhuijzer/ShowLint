@@ -93,11 +93,11 @@ function page_path(repo::Repo)
     lowercase(joinpath(host_dir(repo), "$name.md"))
 end
 
-function clone_repositories()
+function clone_repositories(; production=is_production())
     if !isdir(clones_dir)
         mkdir(clones_dir)
     end
-    for repo in repositories()
+    for repo in repositories(; production)
         println("Cloning $(repo.name)")
         name = repo.name
         host = repo.host
@@ -302,10 +302,10 @@ We could process all the diffs when this function is called
 or when `serve` runs. It seems more flexible to do it as early
 as possible.
 """
-function create_repo_pages()
+function create_repo_pages(; production=is_production())
     pages_headers = []
 
-    for repo in repositories()
+    for repo in repositories(; production)
         if !isdir(host_dir(repo))
             mkdir(host_dir(repo))
         end

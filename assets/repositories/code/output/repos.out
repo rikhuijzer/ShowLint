@@ -715,6 +715,33 @@
 ~~~
 
 ~~~
+<h3><a href="https://github.com/JuliaManifolds/Manifolds.jl" target="_blank">JuliaManifolds/Manifolds.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 1 hit](/github/juliamanifolds/manifolds.jl/#avoid_x_-_fx_1_hit)
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaManifolds/ManifoldsBase.jl" target="_blank">JuliaManifolds/ManifoldsBase.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaManifolds/Manopt.jl" target="_blank">JuliaManifolds/Manopt.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Omit comparison with boolean constant ➤ 2 hits](/github/juliamanifolds/manopt.jl/#omit_comparison_with_boolean_constant_2_hits)
+~~~
+</div>
+~~~
+
+~~~
 <h3><a href="https://github.com/JuliaMath/Calculus.jl" target="_blank">JuliaMath/Calculus.jl</a></h3>
 <div class="repo-nav">
 ~~~
@@ -1027,7 +1054,7 @@
 <h3><a href="https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl" target="_blank">StatisticalRethinkingJulia/StatisticalRethinking.jl</a></h3>
 <div class="repo-nav">
 ~~~
-
+- [Use rand(...) instead of rand(..., 1)[1] ➤ 2 hits](/github/statisticalrethinkingjulia/statisticalrethinking.jl/#use_rand_instead_of_rand_11_2_hits)
 ~~~
 </div>
 ~~~

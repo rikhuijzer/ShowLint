@@ -1,4 +1,4 @@
-150-element Array{Any,1}:
+153-element Array{Any,1}:
  Any[]
  Any[]
  Any[]
@@ -78,6 +78,9 @@
  Any[]
  Any[]
  Any[]
+ Any["Avoid x -> f(x) ➤ 1 hit"]
+ Any[]
+ Any["Omit comparison with boolean constant ➤ 2 hits"]
  Any[]
  Any["Omit comparison with boolean constant ➤ 1 hit", "Omit a == a and a != a ➤ 1 hit"]
  Any[]
@@ -112,7 +115,7 @@
  Any[]
  Any["Omit comparison with boolean constant ➤ 2 hits"]
  Any[]
- Any[]
+ Any["Use rand(...) instead of rand(..., 1)[1] ➤ 2 hits"]
  Any["Avoid x -> f(x) ➤ 1 hit"]
  Any[]
  Any[]

@@ -21,8 +21,8 @@ julia> Random.seed!(1234); rand()
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match="foobarbaz"
-rewrite=""
+<pre><code class="plaintext">match="rand(1)[1]"
+rewrite="rand()"
 </code></pre>
 ~~~
 
@@ -237,6 +237,23 @@ printstyled("text"; color)
 <b>Defintion</b>
 <pre><code class="plaintext">match="(:[a]; :[c] = :[c])"
 rewrite="(:[a]; :[c])"
+</code></pre>
+~~~
+
+
+~~~ 
+<span id="10"></span>
+~~~
+### 10: Use rand(...) instead of rand(..., 1)[1]
+tags: *julia*
+
+See [pattern 1](#1).
+
+
+~~~
+<b>Defintion</b>
+<pre><code class="plaintext">match="rand(:[a~[^1,]*],:[space~[ ]*]1)[1]"
+rewrite="rand(:[a])"
 </code></pre>
 ~~~
 

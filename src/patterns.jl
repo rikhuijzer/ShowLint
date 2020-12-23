@@ -37,8 +37,8 @@ patterns = [
         ```
         """,
         """
-        match="foobarbaz"
-        rewrite=""
+        match="rand(1)[1]"
+        rewrite="rand()"
         """
     ),
     Pattern(2, "Use ismissing", ["julia", "performance-decrease"], 
@@ -190,6 +190,15 @@ patterns = [
         rewrite="(:[a]; :[c])"
         """
     ),
+    Pattern(10, "Use rand(...) instead of rand(..., 1)[1]", ["julia"],
+        """
+        See [pattern 1](#1).
+        """,
+        """
+        match="rand(:[a~[^1,]*],:[space~[ ]*]1)[1]"
+        rewrite="rand(:[a])"
+        """
+    )
 ]
 
 function patterns_have_valid_indexes()::Bool

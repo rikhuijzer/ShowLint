@@ -16,8 +16,7 @@ using ShowLint: apply
 
     P = SL.patterns
 
-    # @test apply(P[10], "rand(1)[1]") == "rand()"
-    # @test apply(P[10], "rand(Bernoulli(0.5),1)[1]") == "rand(Bernoulli(0.5))"
+    @test apply(P[1], "rand(1)[1]") == "rand()"
     @test apply(P[2], "if x === missing") == "if ismissing(x)"
     @test apply(P[2], "x !== missing") == "!ismissing(x)"
     @test apply(P[3], "map(x -> f(x), A)") == "map(f, A)"
@@ -50,4 +49,6 @@ using ShowLint: apply
     @test unchanged(P[8], "x -> !x.y")
     @test unchanged(P[8], "x -> !x[1]")
     @test apply(P[9], "f(a, b; c = c)") == "f(a, b; c)"
+    @test apply(P[10], "rand(Bernoulli(0.5), 1)[1]") == "rand(Bernoulli(0.5))"
+    @test apply(P[10], "rand(Bernoulli(0.5),1)[1]") == "rand(Bernoulli(0.5))"
 end

@@ -122,6 +122,9 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "JuliaML/MLDataUtils.jl"),
         Repo("https://github.com", "JuliaML/MLLabelUtils.jl"),
         Repo("https://github.com", "JuliaML/Reinforce.jl"),
+        Repo("https://github.com", "JuliaManifolds/Manifolds.jl"),
+        Repo("https://github.com", "JuliaManifolds/ManifoldsBase.jl"),
+        Repo("https://github.com", "JuliaManifolds/Manopt.jl"),
         Repo("https://github.com", "JuliaMath/Calculus.jl"),
         Repo("https://github.com", "JuliaMath/Combinatorics.jl"),
         Repo("https://github.com", "JuliaMath/DoubleFloats.jl"),
@@ -195,7 +198,6 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "tlienart/FranklinTemplates.jl"),
     ] :
     [
-        Repo("https://github.com", "fonsp/Pluto.jl"),
         Repo("https://github.com", "rikhuijzer/Codex.jl"),
     ]
 

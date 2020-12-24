@@ -10,6 +10,24 @@
 <span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/examples/schelling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/examples/schelling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
+<span style="color:inherit;"> |</span># agent when activated.
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function agent_step!(agent, model)
+<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
+<span style="color:inherit;"> |</span>    minhappy = model.min_to_be_happy
+<span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
+<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-248,7 +248,7</span> ============================================================
+<span style="color:inherit;"> |</span># We now also define a processing function, that returns the percentage of
+<span style="color:inherit;"> |</span># happy agents:
+<span style="color:inherit;"> |</span>
+<span style="color:orange;">!|</span>happyperc(moods) = count(x -> x<span style="color:red;"> == true</span>, moods) / length(moods)
+<span style="color:inherit;"> |</span>adata = [(:mood, happyperc)]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>parameters = Dict(
 <span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================
@@ -29,24 +47,6 @@
 <span style="color:inherit;"> |</span>    all_neighbors = Iterators.flatten(ids_in_position(np,model) for np in neighbor_positions)
 <span style="color:orange;">!|</span>    sum(model[i].status <span style="color:red;">== true </span>for i in all_neighbors)
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/examples/schelling.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/examples/schelling.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
-<span style="color:inherit;"> |</span># agent when activated.
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function agent_step!(agent, model)
-<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
-<span style="color:inherit;"> |</span>    minhappy = model.min_to_be_happy
-<span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
-<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
-<span style="color:inherit;">@|</span><span style="color:inherit;">-248,7 +248,7</span> ============================================================
-<span style="color:inherit;"> |</span># We now also define a processing function, that returns the percentage of
-<span style="color:inherit;"> |</span># happy agents:
-<span style="color:inherit;"> |</span>
-<span style="color:orange;">!|</span>happyperc(moods) = count(x -> x<span style="color:red;"> == true</span>, moods) / length(moods)
-<span style="color:inherit;"> |</span>adata = [(:mood, happyperc)]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>parameters = Dict(
 <span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/examples/game_of_life_2D_CA.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaDynamics/Agents.jl/examples/game_of_life_2D_CA.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-58,9 +58,9</span> ============================================================

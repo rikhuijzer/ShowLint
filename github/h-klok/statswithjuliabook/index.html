@@ -22,17 +22,7 @@
 <span style="color:inherit;"> |</span>    global iC; global iR
 <span style="color:inherit;"> |</span>    if predictionIsCorrect && trueLabel</div>
 </pre> <h3 id=replace_p_p_with_p_5_hits ><a href="#replace_p_p_with_p_5_hits">Replace P &amp;&amp; P with P ➤ 5 hits</a></h3> <p><a href="/patterns/#10">Pattern #10</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/5_chapter/ciCoverage.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/5_chapter/ciCoverage.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
-<span style="color:inherit;"> |</span>for i in 1:N
-<span style="color:inherit;"> |</span>    observation = rand(triDist)
-<span style="color:inherit;"> |</span>    LL, UU = L(observation), U(observation)
-<span style="color:orange;">!|</span>    if LL <= mu <span style="color:red;">&& mu </span><= UU
-<span style="color:inherit;"> |</span>        hitBounds[i,:] = [LL  UU-LL]
-<span style="color:inherit;"> |</span>    else
-<span style="color:inherit;"> |</span>        missBounds[i,:] = [LL  UU-LL]
-<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/6_chapter/varianceCIalphas.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/6_chapter/varianceCIalphas.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/6_chapter/varianceCIalphas.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-14,7 +14,7</span> ============================================================
 <span style="color:inherit;"> |</span>        sVar = var(rand(dist, n))
@@ -62,6 +52,16 @@
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    println(&#34;n = &#34;,n,&#34;\t coverage = &#34;, coverageCount/M)
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/5_chapter/ciCoverage.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/5_chapter/ciCoverage.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-13,7 +13,7</span> ============================================================
+<span style="color:inherit;"> |</span>for i in 1:N
+<span style="color:inherit;"> |</span>    observation = rand(triDist)
+<span style="color:inherit;"> |</span>    LL, UU = L(observation), U(observation)
+<span style="color:orange;">!|</span>    if LL <= mu <span style="color:red;">&& mu </span><= UU
+<span style="color:inherit;"> |</span>        hitBounds[i,:] = [LL  UU-LL]
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        missBounds[i,:] = [LL  UU-LL]
 <span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/4_chapter/manualHistogram.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/h-Klok/StatsWithJuliaBook/4_chapter/manualHistogram.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-12,7 +12,7</span> ============================================================

@@ -6,7 +6,8 @@ package.json
 package-lock.json
 tmp/
 
-configs
+# Generated config files.
+configs/
 
 # Generated Franklin files.
 github/

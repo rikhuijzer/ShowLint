@@ -46,5 +46,6 @@ These small refactors have been detected via this site and are merged:
 1. <https://github.com/JuliaData/YAML.jl/pull/103>
 1. <https://github.com/JuliaDynamics/Agents.jl/pull/357>
 1. <https://github.com/JuliaPlots/Plots.jl/pull/3200>
+1. <https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl/pull/104>
 
 For stale and closed PRs, see [notes](/notes).

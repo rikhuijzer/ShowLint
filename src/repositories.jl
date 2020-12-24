@@ -6,7 +6,7 @@ where `exclude_prefixes` are prefixes of directories to exclude.
 
 ### Example
 ```
-Repo("https://github.com", "JuliaLang/Julia", [], ["test"])
+Repo("https://github.com", "JuliaLang/julia", [], ["test"])
 ```
 """
 struct Repo

@@ -64,3 +64,4 @@ van Tonder, R., & Le Goues, C. (2016, May).
 Defending against the attack of the micro-clones. 
 In 2016 IEEE 24th International Conference on Program Comprehension (ICPC) (pp. 1-4). 
 IEEE.
+<https://doi.org/10.1109/ICPC.2016.7503736>.

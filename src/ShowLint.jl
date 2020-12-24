@@ -19,7 +19,7 @@ export
 include("patterns.jl")
 include("repositories.jl")
 
-const project_root = pwd()
+const project_root = dirname(dirname(pathof(ShowLint)))
 
 """
 Remove ANSI color codes from `text`.
@@ -124,21 +124,12 @@ $(TYPEDSIGNATURES)
 """
 function create_config(pat::Pattern, dir::String)::String
     id = pat.id
-    toml = pat.toml
     name = "p$id"
-    text = """
-        $toml
-        """
-    if isdir(dir)
-        foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
-    else
-        mkdir(dir)
+    config_path = joinpath(dir, "$name.toml")
+    open(config_path, "w") do io
+        write(io, pat.toml)
     end
-    file = joinpath(dir, "$name.toml")
-    open(file, "w") do io
-        write(io, text)
-    end
-    name
+    config_path
 end
 
 """
@@ -167,42 +158,31 @@ function apply(pat::Pattern, repo::Repo;
     configs_path = joinpath(project_root, "configs")
     repo_path = target_dir(repo)
 
-    name = create_config(pat, configs_path)
+    config_path = create_config(pat, configs_path)
     exclude_prefixes = join(repo.exclude_prefixes, ',')
+    stats_path = joinpath(tempdir(), "comby_stats.log")
 
-    # Not pretty but it works.
     cmd = !in_place ? 
-        `podman run
-        --rm
-        --volume $configs_path:/configs
-        --volume $repo_path:/repo
-        --entrypoint="sh"
-        -it comby/comby
-        -c "comby \
-            -stats \
-            -exclude-dir $exclude_prefixes \
-            -config /configs/$name.toml \
-            -directory /repo \
-            -file-extensions $file_extensions \
-            2>/repo/stderr.log
-        "
+        `comby
+            -exclude-dir $exclude_prefixes
+            -config $config_path
+            -directory $repo_path
+            -file-extensions $file_extensions
+            -stats
         ` :
-        `podman run
-        --rm
-        --volume $configs_path:/configs
-        --volume $repo_path:/repo
-        -it comby/comby
-        -exclude-dir $exclude_prefixes
-        -config /configs/$name.toml
-        -directory /repo
-        -file-extensions $file_extensions
-        -in-place
+        `comby
+            -exclude-dir $exclude_prefixes
+            -config $config_path
+            -directory $repo_path
+            -file-extensions $file_extensions
+            -in-place
         `
 
     stdout = IOBuffer()
-    run(pipeline(cmd; stdout))
+    stderr = IOBuffer()
+    run(pipeline(cmd; stdout, stderr))
     out = String(take!(stdout))
-    err = ""
+    err = String(take!(stderr))
     function avoid_franklin_parse_errors(out)
         out = replace(out, '`' => "&#96;")
         out = replace(out, '"' => "&#34;")
@@ -213,7 +193,6 @@ function apply(pat::Pattern, repo::Repo;
         if !isnothing(out)
             out = ansi2html(out)
         end
-        err = read(joinpath(repo_path, "stderr.log"), String) 
     end
     time = Dates.now() - start
     println("$(pat.id): $time")

@@ -20,6 +20,7 @@ include("patterns.jl")
 include("repositories.jl")
 
 const project_root = dirname(dirname(pathof(ShowLint)))
+const configs_dir = joinpath(project_root, "configs")
 
 """
 Remove ANSI color codes from `text`.
@@ -117,19 +118,34 @@ function clone_repositories(; production=is_production())
     end
 end
 
+function config_path(pat::Pattern)::String
+    id = pat.id
+    name = "p$id"
+    joinpath(configs_dir, "$name.toml")
+end
+
 """
 Create a Comby configuration file for `pat` at `dir`.
 
 $(TYPEDSIGNATURES)
 """
-function create_config(pat::Pattern, dir::String)::String
-    id = pat.id
-    name = "p$id"
-    config_path = joinpath(dir, "$name.toml")
-    open(config_path, "w") do io
+function write_config(pat::Pattern, dir::String)
+    open(config_path(pat), "w") do io
         write(io, pat.toml)
     end
-    config_path
+end
+
+"""
+Write Comby configurations from `src/patterns.jl` to `project_root/configs`.
+
+$(TYPEDSIGNATURES)
+"""
+function write_configs()
+    rm(configs_dir; force=true, recursive=true)
+    mkpath(configs_dir)
+    for pat in patterns
+        write_config(pat, configs_dir)
+    end
 end
 
 """
@@ -154,25 +170,22 @@ function apply(pat::Pattern, repo::Repo;
     file_extensions="jl", in_place=false)
 
     start = Dates.now()
-    configs_dir = "configs"
-    configs_path = joinpath(project_root, "configs")
     repo_path = target_dir(repo)
 
-    config_path = create_config(pat, configs_path)
     exclude_prefixes = join(repo.exclude_prefixes, ',')
     stats_path = joinpath(tempdir(), "comby_stats.log")
 
     cmd = !in_place ? 
         `comby
             -exclude-dir $exclude_prefixes
-            -config $config_path
+            -config $(config_path(pat))
             -directory $repo_path
             -file-extensions $file_extensions
             -stats
         ` :
         `comby
             -exclude-dir $exclude_prefixes
-            -config $config_path
+            -config $(config_path(pat))
             -directory $repo_path
             -file-extensions $file_extensions
             -in-place
@@ -274,6 +287,7 @@ function repo_page(repo::Repo)
     )
 end
 
+
 """
 Create one webpage per repository.
 We could process all the diffs when this function is called or when `serve` runs. 
@@ -282,6 +296,7 @@ It seems more flexible to do it as early as possible.
 $(TYPEDSIGNATURES)
 """
 function create_repo_pages(; production=is_production())
+    write_configs()
     pages_headers = []
 
     for repo in repositories(; production)

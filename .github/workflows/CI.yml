@@ -26,10 +26,7 @@ jobs:
       env: 
         TERM: xterm
 
-    - name: Validate that Comby is available
-      run: comby -version
-
-    # Python is used for the pre-rendering (minification) step
+    # Python is used for Franklin's pre-rendering (minification) step
     - name: Install Python
       uses: actions/setup-python@v2
       with:

@@ -115,7 +115,7 @@
  Any[]
  Any["Omit comparison with boolean constant ➤ 2 hits"]
  Any[]
- Any["Use rand() instead of rand(1)[1] ➤ 7 hits"]
+ Any[]
  Any["Avoid x -> f(x) ➤ 1 hit"]
  Any[]
  Any[]

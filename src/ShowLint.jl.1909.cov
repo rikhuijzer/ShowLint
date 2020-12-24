@@ -19,7 +19,8 @@
         - include("patterns.jl")
         - include("repositories.jl")
         - 
-        - const project_root = pwd()
+        - const project_root = dirname(dirname(pathof(ShowLint)))
+        - const configs_dir = joinpath(project_root, "configs")
         - 
         - """
         - Remove ANSI color codes from `text`.
@@ -104,10 +105,10 @@
         1         host = repo.host
         1         dest = target_dir(repo)
         1         if isdir(dest)
-        1             cd(dest)
-        1             run(`git pull --ff-only`)
+        0             cd(dest)
+        0             run(`git pull --ff-only`)
         -         else
-        0             run(`git clone
+        1             run(`git clone
         -                 --depth=1
         -                 --no-tags
         -                 --single-branch
@@ -117,28 +118,34 @@
         -     end
         - end
         - 
+        - function config_path(pat::Pattern)::String
+       64     id = pat.id
+       64     name = "p$id"
+       64     joinpath(configs_dir, "$name.toml")
+        - end
+        - 
         - """
         - Create a Comby configuration file for `pat` at `dir`.
         - 
         - $(TYPEDSIGNATURES)
         - """
-        - function create_config(pat::Pattern, dir::String)::String
-       44     id = pat.id
-       44     toml = pat.toml
-       44     name = "p$id"
-       44     text = """
-        -         $toml
-        -         """
-       44     if isdir(dir)
-      344         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
-        -     else
-        1         mkdir(dir)
+        - function write_config(pat::Pattern, dir::String)
+       20     open(config_path(pat), "w") do io
+        -         write(io, pat.toml)
         -     end
-       44     file = joinpath(dir, "$name.toml")
-       44     open(file, "w") do io
-        -         write(io, text)
+        - end
+        - 
+        - """
+        - Write Comby configurations from `src/patterns.jl` to `project_root/configs`.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        - function write_configs()
+        2     rm(configs_dir; force=true, recursive=true)
+        2     mkpath(configs_dir)
+        2     for pat in patterns
+       20         write_config(pat, configs_dir)
         -     end
-       44     name
         - end
         - 
         - """
@@ -163,46 +170,32 @@
         -     file_extensions="jl", in_place=false)
         - 
        88     start = Dates.now()
-       44     configs_dir = "configs"
-       44     configs_path = joinpath(project_root, "configs")
        44     repo_path = target_dir(repo)
         - 
-       44     name = create_config(pat, configs_path)
        44     exclude_prefixes = join(repo.exclude_prefixes, ',')
+       44     stats_path = joinpath(tempdir(), "comby_stats.log")
         - 
-        -     # Not pretty but it works.
-       44     cmd = !in_place ? 
-        -         `podman run
-        -         --rm
-        -         --volume $configs_path:/configs
-        -         --volume $repo_path:/repo
-        -         --entrypoint="sh"
-        -         -it comby/comby
-        -         -c "comby \
-        -             -stats \
-        -             -exclude-dir $exclude_prefixes \
-        -             -config /configs/$name.toml \
-        -             -directory /repo \
-        -             -file-extensions $file_extensions \
-        -             2>/repo/stderr.log
-        -         "
+       80     cmd = !in_place ? 
+        -         `comby
+        -             -exclude-dir $exclude_prefixes
+        -             -config $(config_path(pat))
+        -             -directory $repo_path
+        -             -file-extensions $file_extensions
+        -             -stats
         -         ` :
-        -         `podman run
-        -         --rm
-        -         --volume $configs_path:/configs
-        -         --volume $repo_path:/repo
-        -         -it comby/comby
-        -         -exclude-dir $exclude_prefixes
-        -         -config /configs/$name.toml
-        -         -directory /repo
-        -         -file-extensions $file_extensions
-        -         -in-place
+        -         `comby
+        -             -exclude-dir $exclude_prefixes
+        -             -config $(config_path(pat))
+        -             -directory $repo_path
+        -             -file-extensions $file_extensions
+        -             -in-place
         -         `
         - 
        44     stdout = IOBuffer()
-       44     run(pipeline(cmd; stdout))
+       44     stderr = IOBuffer()
+       44     run(pipeline(cmd; stdout, stderr))
        44     out = String(take!(stdout))
-       44     err = ""
+       44     err = String(take!(stderr))
        44     function avoid_franklin_parse_errors(out)
         8         out = replace(out, '`' => "&#96;")
         8         out = replace(out, '"' => "&#34;")
@@ -213,7 +206,6 @@
         8         if !isnothing(out)
         8             out = ansi2html(out)
         -         end
-        8         err = read(joinpath(repo_path, "stderr.log"), String) 
         -     end
        44     time = Dates.now() - start
        44     println("$(pat.id): $time")
@@ -295,6 +287,7 @@
         -     )
         - end
         - 
+        - 
         - """
         - Create one webpage per repository.
         - We could process all the diffs when this function is called or when `serve` runs. 
@@ -303,7 +296,8 @@
         - $(TYPEDSIGNATURES)
         - """
         - function create_repo_pages(; production=is_production())
-        2     pages_headers = []
+        2     write_configs()
+        1     pages_headers = []
         - 
         1     for repo in repositories(; production)
         1         if !isdir(host_dir(repo))

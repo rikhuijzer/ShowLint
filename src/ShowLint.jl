@@ -19,7 +19,8 @@ export
 include("patterns.jl")
 include("repositories.jl")
 
-const project_root = pwd()
+const project_root = dirname(dirname(pathof(ShowLint)))
+const configs_dir = joinpath(project_root, "configs")
 
 """
 Remove ANSI color codes from `text`.
@@ -117,28 +118,34 @@ function clone_repositories(; production=is_production())
     end
 end
 
+function config_path(pat::Pattern)::String
+    id = pat.id
+    name = "p$id"
+    joinpath(configs_dir, "$name.toml")
+end
+
 """
 Create a Comby configuration file for `pat` at `dir`.
 
 $(TYPEDSIGNATURES)
 """
-function create_config(pat::Pattern, dir::String)::String
-    id = pat.id
-    toml = pat.toml
-    name = "p$id"
-    text = """
-        $toml
-        """
-    if isdir(dir)
-        foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
-    else
-        mkdir(dir)
+function write_config(pat::Pattern, dir::String)
+    open(config_path(pat), "w") do io
+        write(io, pat.toml)
     end
-    file = joinpath(dir, "$name.toml")
-    open(file, "w") do io
-        write(io, text)
+end
+
+"""
+Write Comby configurations from `src/patterns.jl` to `project_root/configs`.
+
+$(TYPEDSIGNATURES)
+"""
+function write_configs()
+    rm(configs_dir; force=true, recursive=true)
+    mkpath(configs_dir)
+    for pat in patterns
+        write_config(pat, configs_dir)
     end
-    name
 end
 
 """
@@ -163,46 +170,32 @@ function apply(pat::Pattern, repo::Repo;
     file_extensions="jl", in_place=false)
 
     start = Dates.now()
-    configs_dir = "configs"
-    configs_path = joinpath(project_root, "configs")
     repo_path = target_dir(repo)
 
-    name = create_config(pat, configs_path)
     exclude_prefixes = join(repo.exclude_prefixes, ',')
+    stats_path = joinpath(tempdir(), "comby_stats.log")
 
-    # Not pretty but it works.
     cmd = !in_place ? 
-        `podman run
-        --rm
-        --volume $configs_path:/configs
-        --volume $repo_path:/repo
-        --entrypoint="sh"
-        -it comby/comby
-        -c "comby \
-            -stats \
-            -exclude-dir $exclude_prefixes \
-            -config /configs/$name.toml \
-            -directory /repo \
-            -file-extensions $file_extensions \
-            2>/repo/stderr.log
-        "
+        `comby
+            -exclude-dir $exclude_prefixes
+            -config $(config_path(pat))
+            -directory $repo_path
+            -file-extensions $file_extensions
+            -stats
         ` :
-        `podman run
-        --rm
-        --volume $configs_path:/configs
-        --volume $repo_path:/repo
-        -it comby/comby
-        -exclude-dir $exclude_prefixes
-        -config /configs/$name.toml
-        -directory /repo
-        -file-extensions $file_extensions
-        -in-place
+        `comby
+            -exclude-dir $exclude_prefixes
+            -config $(config_path(pat))
+            -directory $repo_path
+            -file-extensions $file_extensions
+            -in-place
         `
 
     stdout = IOBuffer()
-    run(pipeline(cmd; stdout))
+    stderr = IOBuffer()
+    run(pipeline(cmd; stdout, stderr))
     out = String(take!(stdout))
-    err = ""
+    err = String(take!(stderr))
     function avoid_franklin_parse_errors(out)
         out = replace(out, '`' => "&#96;")
         out = replace(out, '"' => "&#34;")
@@ -213,7 +206,6 @@ function apply(pat::Pattern, repo::Repo;
         if !isnothing(out)
             out = ansi2html(out)
         end
-        err = read(joinpath(repo_path, "stderr.log"), String) 
     end
     time = Dates.now() - start
     println("$(pat.id): $time")
@@ -295,6 +287,7 @@ function repo_page(repo::Repo)
     )
 end
 
+
 """
 Create one webpage per repository.
 We could process all the diffs when this function is called or when `serve` runs. 
@@ -303,6 +296,7 @@ It seems more flexible to do it as early as possible.
 $(TYPEDSIGNATURES)
 """
 function create_repo_pages(; production=is_production())
+    write_configs()
     pages_headers = []
 
     for repo in repositories(; production)

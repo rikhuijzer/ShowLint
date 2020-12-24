@@ -1,6 +1,6 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/julia</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/julia" target=_blank >JuliaLang/julia</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a><li><a href="#omit_a_a_and_a_a_24_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 24 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_1_hit">Avoid comparing findfirst to nothing ➤ 1 hit</a><li><a href="#replace_p_p_with_p_4_hits">Replace P &amp;&amp; P with P ➤ 4 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_10_hits ><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">base/bitarray.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/bitarray.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/bitarray.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/bitarray.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1461,8 +1461,8</span> ============================================================
 <span style="color:inherit;"> |</span>function findnext(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
 <span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
@@ -23,8 +23,8 @@
 <span style="color:inherit;"> |</span>    return nothing
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>#findlast(B::BitArray, v) = findprev(B, 1, v)  ## defined in array.jl
-<span style="color:red;">------ </span><span style="color:inherit;">base/stream.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/stream.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/stream.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/stream.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-837,7 +837,7</span> ============================================================
 <span style="color:inherit;"> |</span>function readbytes!(s::LibuvStream, a::Vector{UInt8}, nb::Int)
 <span style="color:inherit;"> |</span>    iolock_begin()
@@ -70,8 +70,8 @@
 <span style="color:inherit;"> |</span>    if !occursin(c, buf) # fast path checks first
 <span style="color:inherit;"> |</span>        x.readerror === nothing || throw(x.readerror)
 <span style="color:inherit;"> |</span>        if isopen(x)
-<span style="color:red;">------ </span><span style="color:inherit;">base/mpfr.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/mpfr.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/mpfr.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/mpfr.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-980,7 +980,7</span> ============================================================
 <span style="color:inherit;"> |</span>                string(int, frac, '0'^(expo-length(frac)), '.', '0')
 <span style="color:inherit;"> |</span>        else
@@ -81,19 +81,8 @@
 <span style="color:inherit;"> |</span>            string(neg ? '-' : &#34;&#34;, '0', '.', '0'^(-expo-1), int, frac)
 <span style="color:inherit;"> |</span></div>
 </pre> <h3 id=omit_a_a_and_a_a_24_hits ><a href="#omit_a_a_and_a_a_24_hits">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 24 hits</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">stdlib/Mmap/src/Mmap.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Mmap/src/Mmap.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-298,7 +298,7</span> ============================================================
-<span style="color:inherit;"> |</span>    if !isreadonly(io)
-<span style="color:inherit;"> |</span>        chunks[end] &= Base._msk_end(n)
-<span style="color:inherit;"> |</span>    else
-<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">chunks[end] != chunks[end]</span><span style="color:gray;"> & Base._msk_end(n)</span></span>
-<span style="color:green;">+|</span></span>        if <span style="color:green;">false</span> & Base._msk_end(n)</span>
-<span style="color:inherit;"> |</span>            throw(ArgumentError(&#34;the given file does not contain a valid BitArray of size $(join(dims, 'x')) (open with \&#34;r+\&#34; mode to override)&#34;))
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:red;">------ </span><span style="color:inherit;">base/reflection.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/reflection.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/reflection.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/reflection.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-352,7 +352,7</span> ============================================================
 <span style="color:inherit;"> |</span>    @_pure_meta
 <span style="color:inherit;"> |</span>    dt.layout == C_NULL && throw(UndefRefError())
@@ -103,8 +92,19 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
-<span style="color:red;">------ </span><span style="color:inherit;">base/math.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/math.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/Mmap/src/Mmap.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/Mmap/src/Mmap.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-298,7 +298,7</span> ============================================================
+<span style="color:inherit;"> |</span>    if !isreadonly(io)
+<span style="color:inherit;"> |</span>        chunks[end] &= Base._msk_end(n)
+<span style="color:inherit;"> |</span>    else
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:red;">chunks[end] != chunks[end]</span><span style="color:gray;"> & Base._msk_end(n)</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">false</span> & Base._msk_end(n)</span>
+<span style="color:inherit;"> |</span>            throw(ArgumentError(&#34;the given file does not contain a valid BitArray of size $(join(dims, 'x')) (open with \&#34;r+\&#34; mode to override)&#34;))
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/math.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/math.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1017,7 +1017,7</span> ============================================================
 <span style="color:inherit;"> |</span>    n,y = rem_pio2_kernel(x)
 <span style="color:inherit;"> |</span>
@@ -177,8 +177,8 @@
 <span style="color:inherit;"> |</span>            return add22condh(y.hi,y.lo,-pi1o2_h,-pi1o2_l)
 <span style="color:inherit;"> |</span>        else          # n % 4 == 1: sub 3pi/2
 <span style="color:inherit;"> |</span>            return add22condh(y.hi,y.lo,-pi3o2_h,-pi3o2_l)
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/LibGit2/src/utils.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/LibGit2/src/utils.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/LibGit2/src/utils.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/LibGit2/src/utils.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>Test whether the bits of &#96;val&#96; indexed by &#96;flag&#96; are set (&#96;1&#96;) or unset (&#96;0&#96;).
@@ -188,8 +188,8 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
 <span style="color:inherit;"> |</span>    reset(val::Integer, flag::Integer)
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/SparseArrays/src/sparsematrix.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/SparseArrays/src/sparsematrix.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/SparseArrays/src/sparsematrix.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/SparseArrays/src/sparsematrix.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-2106,8 +2106,8</span> ============================================================
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
@@ -201,8 +201,8 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>findmin(A::AbstractSparseMatrixCSC{Tv,Ti}, region) where {Tv,Ti} = _findr(_isless_fm, A, region, Tv)
 <span style="color:inherit;"> |</span>findmax(A::AbstractSparseMatrixCSC{Tv,Ti}, region) where {Tv,Ti} = _findr(_isgreater_fm, A, region, Tv)
-<span style="color:red;">------ </span><span style="color:inherit;">base/float.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/float.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/float.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/float.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-470,7 +470,7</span> ============================================================
 <span style="color:inherit;"> |</span>Test whether a number value is a NaN, an indeterminate value which is neither an infinity
 <span style="color:inherit;"> |</span>nor a finite number (&#34;not a number&#34;).
@@ -212,8 +212,8 @@
 <span style="color:inherit;"> |</span>isnan(x::Number) = false
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>isfinite(x::AbstractFloat) = x - x == 0
-<span style="color:red;">------ </span><span style="color:inherit;">base/reduce.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/reduce.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/reduce.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/reduce.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-612,10 +612,10</span> ============================================================
 <span style="color:inherit;"> |</span>    simdstop  = start + chunk_len - 4
 <span style="color:inherit;"> |</span>    while simdstop <= last - 3
@@ -229,8 +229,8 @@
 <span style="color:inherit;"> |</span>        @inbounds for i in start:4:simdstop
 <span style="color:inherit;"> |</span>            v1 = _fast(op, v1, f(A[i+0]))
 <span style="color:inherit;"> |</span>            v2 = _fast(op, v2, f(A[i+1]))
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/LinearAlgebra/src/generic.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/LinearAlgebra/src/generic.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/LinearAlgebra/src/generic.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/LinearAlgebra/src/generic.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1213,7 +1213,7</span> ============================================================
 <span style="color:inherit;"> |</span>    return true
 <span style="color:inherit;"> |</span>end
@@ -240,8 +240,8 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>&#34;&#34;&#34;
 <span style="color:inherit;"> |</span>    ishermitian(A) -> Bool
-<span style="color:red;">------ </span><span style="color:inherit;">stdlib/LinearAlgebra/src/givens.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/LinearAlgebra/src/givens.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/LinearAlgebra/src/givens.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/LinearAlgebra/src/givens.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-8,7 +8,7</span> ============================================================
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function (*)(R::AbstractRotation{T}, A::AbstractVecOrMat{S}) where {T,S}
@@ -251,8 +251,8 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>(*)(A::AbstractVector, adjR::Adjoint{<:Any,<:AbstractRotation}) = _absvecormat_mul_adjrot(A, adjR)
 <span style="color:inherit;"> |</span>(*)(A::AbstractMatrix, adjR::Adjoint{<:Any,<:AbstractRotation}) = _absvecormat_mul_adjrot(A, adjR)
-<span style="color:red;">------ </span><span style="color:inherit;">base/reducedim.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/reducedim.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/reducedim.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/reducedim.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-148,7 +148,7</span> ============================================================
 <span style="color:inherit;"> |</span>            Tr = v0 isa T ? T : typeof(v0)
 <span style="color:inherit;"> |</span>
@@ -262,8 +262,8 @@
 <span style="color:inherit;"> |</span>                # v0 is NaN
 <span style="color:inherit;"> |</span>                v0 = $initval
 <span style="color:inherit;"> |</span>            elseif isunordered(v0)
-<span style="color:red;">------ </span><span style="color:inherit;">base/bitset.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/bitset.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/bitset.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/bitset.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-421,7 +421,7</span> ============================================================
 <span style="color:inherit;"> |</span>    shift = b.offset - a.offset
 <span style="color:inherit;"> |</span>    i, j = shift, shift + length(b.bits)
@@ -272,10 +272,10 @@
 <span style="color:green;">+|</span></span>    f(a, b) = <span style="color:green;">true</span> & b</span>
 <span style="color:inherit;"> |</span>    return (
 <span style="color:inherit;"> |</span>        all(@inbounds iszero(a.bits[i]) for i in 1:min(n, i)) &&
-<span style="color:inherit;"> |</span>        all(@inbounds f(a.bits[i], b.bits[i - shift]) for i in max(1, i+1):min(n, j)</div>
+<span style="color:inherit;"> |</span>        all(@inbounds f(a.bits[i], b.bits[i - shift]) for i in max(1, i+1):min(n, j</div>
 </pre> <h3 id=avoid_comparing_findfirst_to_nothing_1_hit ><a href="#avoid_comparing_findfirst_to_nothing_1_hit">Avoid comparing findfirst to nothing ➤ 1 hit</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">stdlib/REPL/src/docview.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/REPL/src/docview.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/REPL/src/docview.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/REPL/src/docview.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-652,7 +652,7</span> ============================================================
 <span style="color:inherit;"> |</span># Searching and apropos
 <span style="color:inherit;"> |</span>
@@ -284,10 +284,10 @@
 <span style="color:green;">+|</span></span>docsearch(haystack::AbstractString, needle) = <span style="color:green;">occursin</span>(needle, haystack)</span>
 <span style="color:inherit;"> |</span>docsearch(haystack::Symbol, needle) = docsearch(string(haystack), needle)
 <span style="color:inherit;"> |</span>docsearch(::Nothing, needle) = false
-<span style="color:inherit;"> |</span>function docsearch(haystack::Array, nee</div>
+<span style="color:inherit;"> |</span>function docsearch(haystack::Array, ne</div>
 </pre> <h3 id=replace_p_p_with_p_4_hits ><a href="#replace_p_p_with_p_4_hits">Replace P &amp;&amp; P with P ➤ 4 hits</a></h3> <p><a href="/patterns/#10">Pattern #10</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">stdlib/Serialization/src/Serialization.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">stdlib/Serialization/src/Serialization.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/Serialization/src/Serialization.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/stdlib/Serialization/src/Serialization.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-1013,7 +1013,7</span> ============================================================
 <span style="color:inherit;"> |</span>            meth.generator = linfo
 <span style="color:inherit;"> |</span>        end
@@ -296,8 +296,8 @@
 <span style="color:inherit;"> |</span>            ccall(:jl_method_table_insert, Cvoid, (Any, Any, Ptr{Cvoid}), mt, meth, C_NULL)
 <span style="color:inherit;"> |</span>        end
 <span style="color:inherit;"> |</span>        remember_object(s, meth, lnumber)
-<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/ssair/domtree.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/ssair/domtree.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/compiler/ssair/domtree.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/compiler/ssair/domtree.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-615,7 +615,7</span> ============================================================
 <span style="color:inherit;"> |</span>            i == dom && continue
 <span style="color:inherit;"> |</span>            hasany = false
@@ -306,8 +306,8 @@
 <span style="color:inherit;"> |</span>                    hasany = true; break
 <span style="color:inherit;"> |</span>                end
 <span style="color:inherit;"> |</span>            end
-<span style="color:red;">------ </span><span style="color:inherit;">base/compiler/typelattice.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/compiler/typelattice.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/compiler/typelattice.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/compiler/typelattice.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-201,7 +201,7</span> ============================================================
 <span style="color:inherit;"> |</span>    isa(b, PartialStruct) && return false
 <span style="color:inherit;"> |</span>    a isa Const && return false
@@ -316,8 +316,8 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>widenconst(c::Conditional) = Bool
-<span style="color:red;">------ </span><span style="color:inherit;">base/promotion.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">base/promotion.jl</span>
+<span style="color:red;">------ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/promotion.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">/home/runner/clones/github/JuliaLang/julia/base/promotion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
 <span style="color:inherit;"> |</span>            vars = []
 <span style="color:inherit;"> |</span>            for i = 1:n
@@ -325,5 +325,5 @@
 <span style="color:orange;">!|</span>                if ai === bi || (isa(ai,Type) && isa(bi,Type) && ai <: bi <span style="color:red;">&& bi </span><: ai)
 <span style="color:inherit;"> |</span>                    aprimary = aprimary{ai}
 <span style="color:inherit;"> |</span>                else
-<span style="color:inherit;"> |</span>                    # pushfirst!(vars, aprimary.</div>
+<span style="color:inherit;"> |</span>                    # pushfirst!(vars, aprimary</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 24, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

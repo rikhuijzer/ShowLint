@@ -5,8 +5,6 @@ on:
     # Sunday at 04:15.
     - cron: "15 4 * * 0"
   push:
-    branches:
-      - main
 
 jobs:
   build-and-deploy:
@@ -23,13 +21,11 @@ jobs:
         path: ~/clones
         key: key-${{ hashFiles('src/repositories.jl') }}
 
-    - name: Install Podman
-      run: |
-        sudo apt-get -y update
-        sudo apt-get -y install podman
+    - name: Install Comby
+      run: bash <(curl -sL get.comby.dev)
 
     - name: Validate that Comby is available
-      run: podman run -it comby/comby -version
+      run: comby -version
 
     # Python is used for the pre-rendering (minification) step
     - name: Install Python

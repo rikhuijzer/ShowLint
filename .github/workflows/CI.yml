@@ -23,6 +23,8 @@ jobs:
 
     - name: Install Comby
       run: bash <(curl -sL get.comby.dev)
+      env: 
+        TERM=xterm
 
     - name: Validate that Comby is available
       run: comby -version

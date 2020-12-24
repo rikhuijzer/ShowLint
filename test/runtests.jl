@@ -4,6 +4,7 @@ using Test
 SL = ShowLint
 
 @testset "ShowLint" begin
+    SL.write_configs()
     include("patterns.jl")
     include("repositories.jl")
 

@@ -1,5 +1,6 @@
 module ShowLint
 
+using Dates
 using DocStringExtensions
 using Formatting
 using Serialization
@@ -161,6 +162,7 @@ $(TYPEDSIGNATURES)
 function apply(pat::Pattern, repo::Repo; 
     file_extensions="jl", in_place=false)
 
+    start = Dates.now()
     configs_dir = "configs"
     configs_path = joinpath(project_root, "configs")
     repo_path = target_dir(repo)
@@ -213,6 +215,8 @@ function apply(pat::Pattern, repo::Repo;
         end
         err = read(joinpath(repo_path, "stderr.log"), String) 
     end
+    time = Dates.now() - start
+    println("$(pat.id): $time")
     return (out, err)
 end
 
@@ -292,13 +296,11 @@ function repo_page(repo::Repo)
 end
 
 """
-    create_repo_pages()
-
 Create one webpage per repository.
-This step should happen before `serve()` is called.
-We could process all the diffs when this function is called
-or when `serve` runs. It seems more flexible to do it as early
-as possible.
+We could process all the diffs when this function is called or when `serve` runs. 
+It seems more flexible to do it as early as possible.
+
+$(TYPEDSIGNATURES)
 """
 function create_repo_pages(; production=is_production())
     pages_headers = []
@@ -344,10 +346,10 @@ function count_without_comments(path)::Int
 end
 
 """
-    cloned_loc(dir=clones_dir, extension=".jl")
-
 Counts the number of lines of codes in files with `extension` in
 `dir`.
+
+$(TYPEDSIGNATURES)
 """
 function cloned_loc(; extension=".jl")::Int
     counts = []
@@ -366,5 +368,16 @@ function cloned_loc(; extension=".jl")::Int
 end
 
 prettify_loc(n::Number)::String = format(n, commas=true)
+
+"""
+Helper function to build the site locally.
+`Franklin.serve` can be called after this function, but it is also possible to have Franklin already running.
+
+$(TYPEDSIGNATURES)
+"""
+function build_site(; production=true)
+    clone_repositories()
+    create_repo_pages()
+end
 
 end # module

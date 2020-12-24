@@ -57,6 +57,7 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 2 hits](/github/giovineitalia/gadfly.jl/#omit_comparison_with_boolean_constant_2_hits)
+- [Replace P && P with P ➤ 2 hits](/github/giovineitalia/gadfly.jl/#replace_p_p_with_p_2_hits)
 ~~~
 </div>
 ~~~
@@ -74,7 +75,7 @@
 <h3><a href="https://github.com/JuliaCollections/DataStructures.jl" target="_blank">JuliaCollections/DataStructures.jl</a></h3>
 <div class="repo-nav">
 ~~~
-
+- [Replace P && P with P ➤ 1 hit](/github/juliacollections/datastructures.jl/#replace_p_p_with_p_1_hit)
 ~~~
 </div>
 ~~~
@@ -410,6 +411,7 @@
 <div class="repo-nav">
 ~~~
 - [Avoid x -> f(x) ➤ 1 hit](/github/juliagpu/cuda.jl/#avoid_x_-_fx_1_hit)
+- [Replace P && P with P ➤ 2 hits](/github/juliagpu/cuda.jl/#replace_p_p_with_p_2_hits)
 ~~~
 </div>
 ~~~
@@ -535,7 +537,7 @@
 <h3><a href="https://github.com/JuliaInterop/Clang.jl" target="_blank">JuliaInterop/Clang.jl</a></h3>
 <div class="repo-nav">
 ~~~
-
+- [Replace P && P with P ➤ 1 hit](/github/juliainterop/clang.jl/#replace_p_p_with_p_1_hit)
 ~~~
 </div>
 ~~~
@@ -674,6 +676,7 @@
 - [Omit comparison with boolean constant ➤ 10 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_10_hits)
 - [Omit a == a and a != a ➤ 24 hits](/github/julialang/julia/#omit_a_a_and_a_a_24_hits)
 - [Avoid comparing findfirst to nothing ➤ 1 hit](/github/julialang/julia/#avoid_comparing_findfirst_to_nothing_1_hit)
+- [Replace P && P with P ➤ 4 hits](/github/julialang/julia/#replace_p_p_with_p_4_hits)
 ~~~
 </div>
 ~~~
@@ -926,7 +929,7 @@
 <h3><a href="https://github.com/JuliaStats/Distributions.jl" target="_blank">JuliaStats/Distributions.jl</a></h3>
 <div class="repo-nav">
 ~~~
-
+- [Replace P && P with P ➤ 1 hit](/github/juliastats/distributions.jl/#replace_p_p_with_p_1_hit)
 ~~~
 </div>
 ~~~
@@ -991,6 +994,7 @@
 ~~~
 - [Omit comparison with boolean constant ➤ 3 hits](/github/juliaweb/http.jl/#omit_comparison_with_boolean_constant_3_hits)
 - [Avoid comparing findfirst to nothing ➤ 1 hit](/github/juliaweb/http.jl/#avoid_comparing_findfirst_to_nothing_1_hit)
+- [Replace P && P with P ➤ 1 hit](/github/juliaweb/http.jl/#replace_p_p_with_p_1_hit)
 ~~~
 </div>
 ~~~
@@ -1198,7 +1202,7 @@
 <h3><a href="https://github.com/diegozea/MIToS.jl" target="_blank">diegozea/MIToS.jl</a></h3>
 <div class="repo-nav">
 ~~~
-
+- [Replace P && P with P ➤ 1 hit](/github/diegozea/mitos.jl/#replace_p_p_with_p_1_hit)
 ~~~
 </div>
 ~~~
@@ -1244,6 +1248,7 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 2 hits](/github/h-klok/statswithjuliabook/#omit_comparison_with_boolean_constant_2_hits)
+- [Replace P && P with P ➤ 5 hits](/github/h-klok/statswithjuliabook/#replace_p_p_with_p_5_hits)
 ~~~
 </div>
 ~~~
@@ -1352,7 +1357,7 @@
 <h3><a href="https://github.com/timholy/Revise.jl" target="_blank">timholy/Revise.jl</a></h3>
 <div class="repo-nav">
 ~~~
-
+- [Replace P && P with P ➤ 1 hit](/github/timholy/revise.jl/#replace_p_p_with_p_1_hit)
 ~~~
 </div>
 ~~~

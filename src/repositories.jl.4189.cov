@@ -10,7 +10,7 @@
         - ```
         - """
         - struct Repo
-      383     host::String
+      387     host::String
         -     name::String
         -     tags_predicates::Vector{Function}
         -     exclude_prefixes::Vector{String}
@@ -36,7 +36,7 @@
         - 
         - default_excludes = ["test"]
         - 
-      418 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
+      424 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
         -     Repo(host, name, predicates, exclude)
         - 
         - is_production()::Bool = haskey(ENV, "CI")

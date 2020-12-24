@@ -1,5 +1,6 @@
-        - module ShowLint
+        2 module ShowLint
         - 
+        - using Dates
         - using DocStringExtensions
         - using Formatting
         - using Serialization
@@ -26,7 +27,7 @@
         - $(TYPEDSIGNATURES) 
         - """
         - function ansi2html(text::String)::String
-       16   escape_codes = Dict(
+        -   escape_codes = Dict(
         -     "0;30" => "inherit",
         -     "0;31" => "red",
         -     "0;32" => "green",
@@ -38,22 +39,22 @@
         -     "0;43;30" => "orange",
         -     "0;2" => "gray"
         -   )
-       16   for code in keys(escape_codes)
-       80     before = "[" * code * "m"
-       80     color = escape_codes[code]
-       80     after = "<span style=\"color:$color;\">"
-      160     text = replace(text, before => after)
+        -   for code in keys(escape_codes)
+        -     before = "[" * code * "m"
+        -     color = escape_codes[code]
+        -     after = "<span style=\"color:$color;\">"
+        -     text = replace(text, before => after)
         -   end
-        8   no_color = "[0m"
-        8   text = replace(text, no_color => "</span>")
-        8   text = replace(text, r"WARNING: [^\n]*$" => "")
-        8   text = replace(text, "/repo/" => "")
-        8   text = replace(text, "" => "") 
-        8   text = replace(text, "<!" => "&#60;!")
-        8   text = replace(text, "[0;7;2m" => "")
-        8   text = text[1:end-6]
-        8   text = strip(text)
-        8   return length(text) < 6 ? 
+        -   no_color = "[0m"
+        -   text = replace(text, no_color => "</span>")
+        -   text = replace(text, r"WARNING: [^\n]*$" => "")
+        -   text = replace(text, "/repo/" => "")
+        -   text = replace(text, "" => "") 
+        -   text = replace(text, "<!" => "&#60;!")
+        -   text = replace(text, "[0;7;2m" => "")
+        -   text = text[1:end-6]
+        -   text = strip(text)
+        -   return length(text) < 6 ? 
         -         "" :
         -         """
         -         ~~~ 
@@ -78,41 +79,41 @@
         - ```
         - """
         - function host_dir(repo::Repo)::String
-       46     host = repo.host
-       58     host_dir = startswith(host, "https://") ? host[9:end] : host
-       46     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+        -     host = repo.host
+        -     host_dir = startswith(host, "https://") ? host[9:end] : host
+        -     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
         - end
         - 
         - function target_dir(repo::Repo)
-       43     name = repo.name
-       43     joinpath(clones_dir, host_dir(repo), name) 
+        -     name = repo.name
+        -     joinpath(clones_dir, host_dir(repo), name) 
         - end
         - 
         - function page_path(repo::Repo)
-        1     name = repo.name
-        1     lowercase(joinpath(host_dir(repo), "$name.md"))
+        -     name = repo.name
+        -     lowercase(joinpath(host_dir(repo), "$name.md"))
         - end
         - 
         - function clone_repositories(; production=is_production())
-        2     if !isdir(clones_dir)
-        0         mkdir(clones_dir)
+        -     if !isdir(clones_dir)
+        -         mkdir(clones_dir)
         -     end
-        1     for repo in repositories(; production)
-        1         println("Cloning $(repo.name)")
-        1         name = repo.name
-        1         host = repo.host
-        1         dest = target_dir(repo)
-        1         if isdir(dest)
-        1             cd(dest)
-        1             run(`git pull --ff-only`)
+        -     for repo in repositories(; production)
+        -         println("Cloning $(repo.name)")
+        -         name = repo.name
+        -         host = repo.host
+        -         dest = target_dir(repo)
+        -         if isdir(dest)
+        -             cd(dest)
+        -             run(`git pull --ff-only`)
         -         else
-        0             run(`git clone
+        -             run(`git clone
         -                 --depth=1
         -                 --no-tags
         -                 --single-branch
         -                 $host/$name $dest`)
         -         end
-        1         println()
+        -         println()
         -     end
         - end
         - 
@@ -122,22 +123,22 @@
         - $(TYPEDSIGNATURES)
         - """
         - function create_config(pat::Pattern, dir::String)::String
-       42     id = pat.id
-       42     toml = pat.toml
-       42     name = "p$id"
-       42     text = """
+        -     id = pat.id
+        -     toml = pat.toml
+        -     name = "p$id"
+        -     text = """
         -         $toml
         -         """
-       42     if isdir(dir)
-      320         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
+        -     if isdir(dir)
+        -         foreach(name -> rm(name; recursive=true, force=true), readdir(dir))
         -     else
-        1         mkdir(dir)
+        -         mkdir(dir)
         -     end
-       42     file = joinpath(dir, "$name.toml")
-       42     open(file, "w") do io
+        -     file = joinpath(dir, "$name.toml")
+        -     open(file, "w") do io
         -         write(io, text)
         -     end
-       42     name
+        -     name
         - end
         - 
         - """
@@ -147,10 +148,10 @@
         - $(TYPEDSIGNATURES)
         - """
         - function number_of_matches(stderr::String)::Int
-        8     regex = r"\"number_of_matches\": ([0-9]*)"
-        8     m = match(regex, stderr)
-        8     n_str = m[1]
-        8     parse(Int, n_str)
+        -     regex = r"\"number_of_matches\": ([0-9]*)"
+        -     m = match(regex, stderr)
+        -     n_str = m[1]
+        -     parse(Int, n_str)
         - end
         - 
         - """
@@ -161,15 +162,16 @@
         - function apply(pat::Pattern, repo::Repo; 
         -     file_extensions="jl", in_place=false)
         - 
-       84     configs_dir = "configs"
-       42     configs_path = joinpath(project_root, "configs")
-       42     repo_path = target_dir(repo)
+        -     start = Dates.now()
+        -     configs_dir = "configs"
+        -     configs_path = joinpath(project_root, "configs")
+        -     repo_path = target_dir(repo)
         - 
-       42     name = create_config(pat, configs_path)
-       42     exclude_prefixes = join(repo.exclude_prefixes, ',')
+        -     name = create_config(pat, configs_path)
+        -     exclude_prefixes = join(repo.exclude_prefixes, ',')
         - 
         -     # Not pretty but it works.
-       42     cmd = !in_place ? 
+        -     cmd = !in_place ? 
         -         `podman run
         -         --rm
         -         --volume $configs_path:/configs
@@ -197,23 +199,25 @@
         -         -in-place
         -         `
         - 
-       42     stdout = IOBuffer()
-       42     run(pipeline(cmd; stdout))
-       42     out = String(take!(stdout))
-       42     err = ""
-       42     function avoid_franklin_parse_errors(out)
-        8         out = replace(out, '`' => "&#96;")
-        8         out = replace(out, '"' => "&#34;")
-        8         out
+        -     stdout = IOBuffer()
+        -     run(pipeline(cmd; stdout))
+        -     out = String(take!(stdout))
+        -     err = ""
+        -     function avoid_franklin_parse_errors(out)
+        -         out = replace(out, '`' => "&#96;")
+        -         out = replace(out, '"' => "&#34;")
+        -         out
         -     end
-       42     if !in_place
-        8         out = avoid_franklin_parse_errors(out)
-        8         if !isnothing(out)
-        8             out = ansi2html(out)
+        -     if !in_place
+        -         out = avoid_franklin_parse_errors(out)
+        -         if !isnothing(out)
+        -             out = ansi2html(out)
         -         end
-        8         err = read(joinpath(repo_path, "stderr.log"), String) 
+        -         err = read(joinpath(repo_path, "stderr.log"), String) 
         -     end
-       42     return (out, err)
+        -     time = Dates.now() - start
+        -     println("$(pat.id): $time")
+        -     return (out, err)
         - end
         - 
         - """
@@ -222,33 +226,33 @@
         - $(TYPEDSIGNATURES)
         - """
         - function apply(pat::Pattern, code::String; file_extension="jl")
-       68     test_dir = joinpath(clones_dir, "tmp", "tmp")
-       34     rm(test_dir; recursive=true, force=true)
-       34     mkpath(test_dir)
+        -     test_dir = joinpath(clones_dir, "tmp", "tmp")
+        -     rm(test_dir; recursive=true, force=true)
+        -     mkpath(test_dir)
         - 
-       34     code_file = joinpath(test_dir, "code.$file_extension")
-       34     open(code_file, "w") do io
+        -     code_file = joinpath(test_dir, "code.$file_extension")
+        -     open(code_file, "w") do io
         -         write(io, code)
         -     end
         -     
-       34     repo = Repo("tmp", "tmp"; exclude=["nah"])
+        -     repo = Repo("tmp", "tmp"; exclude=["nah"])
         - 
-       34     apply(pat, repo; in_place=true)
+        -     apply(pat, repo; in_place=true)
         - 
-       34     read(code_file, String)
+        -     read(code_file, String)
         - end
         - 
         - function filter_patterns(repo::Repo, patterns::Vector{Pattern})
-        4     predicates = repo.tags_predicates
-       17     all_predicates_hold(tags) = all([P(tags) for P in predicates])
-        4     filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
+        -     predicates = repo.tags_predicates
+        -     all_predicates_hold(tags) = all([P(tags) for P in predicates])
+        -     filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
         - end
         - 
         - function repo_page(repo::Repo)
-        1     predicates_str = join(repo.tags_predicates, " && ")
-        1     headers = []
-        1     repo_url = joinpath(repo.host, repo.name)
-        1     head = """
+        -     predicates_str = join(repo.tags_predicates, " && ")
+        -     headers = []
+        -     repo_url = joinpath(repo.host, repo.name)
+        -     head = """
         -         ~~~
         -         <h1><a href="$repo_url" target="_blank">$(repo.name)</a></h1>
         -         ~~~
@@ -260,20 +264,20 @@
         - 
         -         """ 
         - 
-        1     function pattern_section(pat)
-        8         diff, err = ShowLint.apply(pat, repo)
-        8         title = pat.title
-        8         id = pat.id
-        8         n_matches = number_of_matches(err)
-        8         n_text = n_matches == 1 ? "hit" : "hits"
-        8         unicode_em_space = " " 
-        8         header = "$title$(unicode_em_space)➤$(unicode_em_space)$n_matches $n_text"
+        -     function pattern_section(pat)
+        -         diff, err = ShowLint.apply(pat, repo)
+        -         title = pat.title
+        -         id = pat.id
+        -         n_matches = number_of_matches(err)
+        -         n_text = n_matches == 1 ? "hit" : "hits"
+        -         unicode_em_space = " " 
+        -         header = "$title$(unicode_em_space)➤$(unicode_em_space)$n_matches $n_text"
         - 
-        8         if diff == ""
-        8             return ""
+        -         if diff == ""
+        -             return ""
         -         else
-        0             push!(headers, header)
-        0             return """
+        -             push!(headers, header)
+        -             return """
         -             ### $header
         -             [Pattern #$id](/patterns/#$id)
         - 
@@ -282,41 +286,39 @@
         -             """
         -         end
         -     end
-        1     filtered_patterns = filter_patterns(repo, patterns)
-        2     sections = pattern_section.(filtered_patterns)
+        -     filtered_patterns = filter_patterns(repo, patterns)
+        -     sections = pattern_section.(filtered_patterns)
         - 
-        1     return (
+        -     return (
         -         headers = headers,
         -         text = join([head, sections...], '\n') 
         -     )
         - end
         - 
         - """
-        -     create_repo_pages()
-        - 
         - Create one webpage per repository.
-        - This step should happen before `serve()` is called.
-        - We could process all the diffs when this function is called
-        - or when `serve` runs. It seems more flexible to do it as early
-        - as possible.
+        - We could process all the diffs when this function is called or when `serve` runs. 
+        - It seems more flexible to do it as early as possible.
+        - 
+        - $(TYPEDSIGNATURES)
         - """
         - function create_repo_pages(; production=is_production())
-        2     pages_headers = []
+        -     pages_headers = []
         - 
-        1     for repo in repositories(; production)
-        1         if !isdir(host_dir(repo))
-        1             mkdir(host_dir(repo))
+        -     for repo in repositories(; production)
+        -         if !isdir(host_dir(repo))
+        -             mkdir(host_dir(repo))
         -         end
-        1         franklin_file = page_path(repo)
-        1         println("Creating repository page at $franklin_file")
-        1         if !isdir(dirname(franklin_file))
-        1             mkdir(dirname(franklin_file))
+        -         franklin_file = page_path(repo)
+        -         println("Creating repository page at $franklin_file")
+        -         if !isdir(dirname(franklin_file))
+        -             mkdir(dirname(franklin_file))
         -         end
         - 
-        1         page_headers, page_text = repo_page(repo)
-        1         push!(pages_headers, page_headers)
+        -         page_headers, page_text = repo_page(repo)
+        -         push!(pages_headers, page_headers)
         - 
-        2         open(franklin_file, "w") do io
+        -         open(franklin_file, "w") do io
         -             write(io, """
         -                 +++
         -                 title = "$(repo.name)"
@@ -329,10 +331,10 @@
         -             )
         -         end
         -     end
-        1     headers_path = joinpath(project_root, "__site", "pages-headers.txt")
-        1     mkpath(dirname(headers_path))
-        1     Serialization.serialize(headers_path, pages_headers)
-        1     pages_headers
+        -     headers_path = joinpath(project_root, "__site", "pages-headers.txt")
+        -     mkpath(dirname(headers_path))
+        -     Serialization.serialize(headers_path, pages_headers)
+        -     pages_headers
         - end
         - 
         - function count_without_comments(path)::Int
@@ -344,10 +346,10 @@
         - end
         - 
         - """
-        -     cloned_loc(dir=clones_dir, extension=".jl")
-        - 
         - Counts the number of lines of codes in files with `extension` in
         - `dir`.
+        - 
+        - $(TYPEDSIGNATURES)
         - """
         - function cloned_loc(; extension=".jl")::Int
         -     counts = []
@@ -365,6 +367,17 @@
         -     sum(counts)
         - end
         - 
-        1 prettify_loc(n::Number)::String = format(n, commas=true)
+        - prettify_loc(n::Number)::String = format(n, commas=true)
+        - 
+        - """
+        - Helper function to build the site locally.
+        - `Franklin.serve` can be called after this function, but it is also possible to have Franklin already running.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        - function build_site(; production=true)
+        -     clone_repositories()
+        -     create_repo_pages()
+        - end
         - 
         - end # module

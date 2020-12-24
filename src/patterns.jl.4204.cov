@@ -6,7 +6,7 @@
         - where `toml` is a Comby configuration.
         - """
         - struct Pattern
-        9     id::Int
+        1     id::Int
         -     title::String
         -     tags::Vector{Any}
         -     description::String
@@ -201,10 +201,33 @@
         -         match="(:[a]; :[c] = :[c])"
         -         rewrite="(:[a]; :[c])"
         -         """
+        -     ), 
+        -     Pattern(10, "Replace P && P by P", ["julia"],
+        -         """
+        -         The statement `P && P` is logically equivalent to `P`.
+        -         This is called a micro-clone \\citep{pTonder2016}.
+        - 
+        -         ### Example
+        -         ```
+        -         julia> P = 3 < 1
+        -         false
+        - 
+        -         julia> P && P
+        -         false
+        - 
+        -         julia> P
+        -         false
+        -         ```
+        -         """,
+        -         """
+        -         [p10a]
+        -         match=" :[var] && :[var]"
+        -         rewrite=" :[var]"
+        -         """
         -     )
         - ]
         - 
         - function patterns_have_valid_indexes()::Bool
-        -     collect(1:length(patterns)) == [p.id for p in patterns]
+        1     collect(1:length(patterns)) == [p.id for p in patterns]
         - end
         - 

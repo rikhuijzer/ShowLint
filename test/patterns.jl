@@ -51,4 +51,5 @@ using ShowLint: apply
     @test unchanged(P[8], "x -> !x.y")
     @test unchanged(P[8], "x -> !x[1]")
     @test apply(P[9], "f(a, b; c = c)") == "f(a, b; c)"
+    @test apply(P[10], "if a == b && a == b") == "if a == b"
 end

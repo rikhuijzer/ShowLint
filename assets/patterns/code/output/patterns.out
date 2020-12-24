@@ -252,3 +252,34 @@ rewrite="(:[a]; :[c])"
 </code></pre>
 ~~~
 
+
+~~~ 
+<span id="10"></span>
+~~~
+### 10: Replace P && P by P
+tags: *julia*
+
+The statement `P && P` is logically equivalent to `P`.
+This is called a micro-clone \citep{pTonder2016}.
+
+### Example
+```
+julia> P = 3 < 1
+false
+
+julia> P && P
+false
+
+julia> P
+false
+```
+
+
+~~~
+<b>Defintion</b>
+<pre><code class="plaintext">[p10a]
+match=" :[var] && :[var]"
+rewrite=" :[var]"
+</code></pre>
+~~~
+

@@ -10,7 +10,7 @@
         - ```
         - """
         - struct Repo
-      381     host::String
+      383     host::String
         -     name::String
         -     tags_predicates::Vector{Function}
         -     exclude_prefixes::Vector{String}
@@ -24,19 +24,19 @@
         - $(SIGNATURES)
         - """
         - function version(tags, n::Number)
-       23     check(t) = isa(t, Number) ? n<t : false
-       20     !any(check, tags)
+       25     check(t) = isa(t, Number) ? n<t : false
+       22     !any(check, tags)
         - end
         2 version(n::Number) = Base.Fix2(version, n)
         - 
         - function default_predicate(tags) 
-       10     decr(t) = t == "performance-decrease"
-       19     all(!decr, tags) && version(tags, 1.0)
+       11     decr(t) = t == "performance-decrease"
+       21     all(!decr, tags) && version(tags, 1.0)
         - end
         - 
         - default_excludes = ["test"]
         - 
-      415 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
+      418 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
         -     Repo(host, name, predicates, exclude)
         - 
         - is_production()::Bool = haskey(ENV, "CI")

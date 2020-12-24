@@ -1,16 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDynamics/Agents.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDynamics/Agents.jl" target=_blank >JuliaDynamics/Agents.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>Base.Fix2&#123;typeof&#40;ShowLint.version&#41;,Float64&#125;&#40;ShowLint.version, 1.5&#41;</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_15_hits">Omit comparison with boolean constant ➤ 15 hits</a><li><a href="#avoid_findallx_-_x_false_y_2_hits">Avoid findall&#40;x -&gt; x &#61;&#61; false, Y&#41; ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_15_hits ><a href="#omit_comparison_with_boolean_constant_15_hits">Omit comparison with boolean constant ➤ 15 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/models/opinion.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">src/models/opinion.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
-<span style="color:inherit;"> |</span>    nmatches = count(matches)
-<span style="color:inherit;"> |</span>    # Adopt a different opinion w/ calculated probability
-<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand() < nmatches / model.nopinions
-<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
-<span style="color:green;">+|</span></span>        switchId = rand(findall(x -> <span style="color:green;">!</span>x, matches))</span>
-<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">examples/schelling.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">examples/schelling.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">examples/schelling.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
 <span style="color:inherit;"> |</span># agent when activated.
@@ -71,6 +60,17 @@
 <span style="color:inherit;"> |</span>anim = @animate for i in 0:100
 <span style="color:inherit;"> |</span>    i > 0 && step!(model, dummystep, ca_step!, 1)
 <span style="color:inherit;"> |</span>    p1 = plotabm(model; ac = ac, as = 3, am = :square, showaxis = false)
+<span style="color:red;">------ </span><span style="color:inherit;">src/models/opinion.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/models/opinion.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>    nmatches = count(matches)
+<span style="color:inherit;"> |</span>    # Adopt a different opinion w/ calculated probability
+<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand() < nmatches / model.nopinions
+<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
+<span style="color:green;">+|</span></span>        switchId = rand(findall(x -> <span style="color:green;">!</span>x, matches))</span>
+<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/models/game_of_life.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================

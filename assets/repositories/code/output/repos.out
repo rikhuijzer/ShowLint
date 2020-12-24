@@ -873,7 +873,6 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 2 hits](/github/juliaplots/plots.jl/#omit_comparison_with_boolean_constant_2_hits)
-- [Avoid comparing findfirst to nothing ➤ 2 hits](/github/juliaplots/plots.jl/#avoid_comparing_findfirst_to_nothing_2_hits)
 ~~~
 </div>
 ~~~

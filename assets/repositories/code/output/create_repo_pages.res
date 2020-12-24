@@ -95,7 +95,7 @@
  Any[]
  Any["Omit comparison with boolean constant ➤ 12 hits"]
  Any[]
- Any["Omit comparison with boolean constant ➤ 2 hits", "Avoid comparing findfirst to nothing ➤ 2 hits"]
+ Any["Omit comparison with boolean constant ➤ 2 hits"]
  Any[]
  Any[]
  Any[]

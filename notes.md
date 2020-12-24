@@ -37,7 +37,7 @@ findall(!, matches)
 ```
 at <https://github.com/JuliaDynamics/Agents.jl/pull/358/files>.
 
-Clearly, the former is much bigger, but more difficult to validate.
+Clearly, the former is much bigger, but easier to validate.
 
 ## Size of rewrite
 

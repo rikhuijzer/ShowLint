@@ -126,8 +126,6 @@ function create_config(pat::Pattern, dir::String)::String
     toml = pat.toml
     name = "p$id"
     text = """
-        [$name] 
-
         $toml
         """
     if isdir(dir)

@@ -1,5 +1,27 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>StatisticalRethinkingJulia/StatisticalRethinking.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl" target=_blank >StatisticalRethinkingJulia/StatisticalRethinking.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#use_rand_instead_of_rand_11_2_hits">Use rand&#40;...&#41; instead of rand&#40;..., 1&#41;&#91;1&#93; ➤ 2 hits</a></ol></div> <h3 id=use_rand_instead_of_rand_11_2_hits ><a href="#use_rand_instead_of_rand_11_2_hits">Use rand&#40;...&#41; instead of rand&#40;..., 1&#41;&#91;1&#93; ➤ 2 hits</a></h3> <p><a href="/patterns/#10">Pattern #10</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/simulate.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>StatisticalRethinkingJulia/StatisticalRethinking.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl" target=_blank >StatisticalRethinkingJulia/StatisticalRethinking.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#use_rand_instead_of_rand11_7_hits">Use rand&#40;&#41; instead of rand&#40;1&#41;&#91;1&#93; ➤ 7 hits</a></ol></div> <h3 id=use_rand_instead_of_rand11_7_hits ><a href="#use_rand_instead_of_rand11_7_hits">Use rand&#40;&#41; instead of rand&#40;1&#41;&#91;1&#93; ➤ 7 hits</a></h3> <p><a href="/patterns/#1">Pattern #1</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">src/plotbounds.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/plotbounds.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-90,7 +90,7</span> ============================================================
+<span style="color:inherit;"> |</span>    for i in 1:length(x)
+<span style="color:inherit;"> |</span>      for j in 1:nrow(dfs)
+<span style="color:inherit;"> |</span>        predictions[i, j] = 
+<span style="color:red;">-|</span></span><span style="color:gray;">          ybar .+ rand(Normal(dfs[j, linkvars[1]] + ystd/xstd * dfs[j, linkvars[2]] * (x[i] - xbar), ystd*dfs[j, linkvars[3]])</span><span style="color:red;">, 1)[1]</span> </span></span>
+<span style="color:green;">+|</span></span>          ybar .+ rand(Normal(dfs[j, linkvars[1]] + ystd/xstd * dfs[j, linkvars[2]] * (x[i] - xbar), ystd*dfs[j, linkvars[3]])<span style="color:green;">)</span> </span>
+<span style="color:inherit;"> |</span>      end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    pred_hpd = [hpdi(predictions[i, :], alpha=alpha) for i in 1:length(x)]
+<span style="color:red;">------ </span><span style="color:inherit;">src/require/hmc.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">src/require/hmc.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-57,7 +57,7</span> ============================================================
+<span style="color:inherit;"> |</span>  # Return either position at the end or initial position
+<span style="color:inherit;"> |</span>  local accept = 0
+<span style="color:inherit;"> |</span>  local new_q
+<span style="color:red;">-|</span></span><span style="color:gray;">  if rand(Uniform(0, 1)</span><span style="color:red;">, 1)[1]</span><span style="color:gray;"> < exp(dH)</span></span>
+<span style="color:green;">+|</span></span>  if rand(Uniform(0, 1)<span style="color:green;">)</span> < exp(dH)</span>
+<span style="color:inherit;"> |</span>    new_q = q # Accept
+<span style="color:inherit;"> |</span>    accept = 1
+<span style="color:inherit;"> |</span>  else
+<span style="color:red;">------ </span><span style="color:inherit;">src/simulate.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">src/simulate.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-23,7 +23,7</span> ============================================================
 <span style="color:inherit;"> |</span>  for j in 1:size(df, 1)
@@ -18,5 +40,29 @@
 <span style="color:green;">+|</span></span>      d_sim[j, i] = rand(d<span style="color:green;">)</span></span>
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>  end
-<span style="color:inherit;"> |</span>  (m_sim, d_</div>
+<span style="color:inherit;"> |</span>  (m_sim, d_sim)
+<span style="color:red;">------ </span><span style="color:inherit;">research/ribbon_test.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">research/ribbon_test.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-6,8 +6,8</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>n = 100
+<span style="color:inherit;"> |</span>df = DataFrame(:M => rand(Normal(), n));
+<span style="color:red;">-|</span></span><span style="color:gray;">df[!, :NC] = [rand(Normal(df[i, :M])</span><span style="color:red;">, 1)[1]</span><span style="color:gray;"> for i in 1:n];</span></span>
+<span style="color:green;">+|</span></span>df[!, :NC] = [rand(Normal(df[i, :M])<span style="color:green;">)</span> for i in 1:n];</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">df[!, :K] = [rand(Normal(df[i, :NC] - df[i, :M])</span><span style="color:red;">, 1)[1]</span><span style="color:gray;"> for i in 1:n];</span></span>
+<span style="color:green;">+|</span></span>df[!, :K] = [rand(Normal(df[i, :NC] - df[i, :M])<span style="color:green;">)</span> for i in 1:n];</span>
+<span style="color:inherit;"> |</span>scale!(df, [:K, :M, :NC])
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>include(&#34;$(ProjDir)/m5.7_A.jl&#34;) 
+<span style="color:red;">------ </span><span style="color:inherit;">research/pb_ribbon_test.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">research/pb_ribbon_test.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-56,7 +56,7</span> ============================================================
+<span style="color:inherit;"> |</span>      for j in 1:nrow(dfs)
+<span style="color:inherit;"> |</span>        p_sim[i, j] = 
+<span style="color:inherit;"> |</span>          ybar .+ rand(Normal(dfs[j, linkvars[1]] + ystd/xstd * dfs[j, 
+<span style="color:red;">-|</span></span><span style="color:gray;">            linkvars[2]] * (x[i] - xbar), ystd*dfs[j, linkvars[3]])</span><span style="color:red;">, 1)[1]</span></span>
+<span style="color:green;">+|</span></span>            linkvars[2]] * (x[i] - xbar), ystd*dfs[j, linkvars[3]])<span style="color:green;">)</span></span>
+<span style="color:inherit;"> |</span>      end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</s</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 24, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

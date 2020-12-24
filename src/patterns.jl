@@ -37,8 +37,13 @@ patterns = [
         ```
         """,
         """
+        [p1a]
         match="rand(1)[1]"
         rewrite="rand()"
+
+        [p1b]
+        match="rand(:[a],:[space~[ ]*]1)[1]"
+        rewrite="rand(:[a])"
         """
     ),
     Pattern(2, "Use ismissing", ["julia", "performance-decrease"], 
@@ -47,6 +52,7 @@ patterns = [
         <https://discourse.julialang.org/t/ismissing-x-versus-x-missing/52171>.
         """,
         raw"""
+        [p2]
         match=':[[var]] :[first~[=|!]]== missing' 
 
         rule='where rewrite :[first] { "=" -> "" }'
@@ -76,6 +82,7 @@ patterns = [
         ```
         """,
         raw"""
+        [p3]
         match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
         rewrite=':[f]:[end]'
@@ -84,6 +91,7 @@ patterns = [
     Pattern(4, "Omit comparison with boolean constant", ["generic"],
         "From [staticcheck](https://staticcheck.io/docs/checks).",
         """
+        [p4]
         match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
 
         rule='where 
@@ -98,9 +106,9 @@ patterns = [
         raw"""
         SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
 
-        Be careful when applying this pattern to situations where `a` can
-        be of type `Missing`. 
+        Be careful when applying this pattern to situations where `a` can be of type `Missing`. 
         For example, `a == a` returns `missing` and not `true`.
+        On the other hand, `if missing` returns an error, so maybe this isn't a valid argument.
 
         **Examples**
         ```
@@ -115,6 +123,7 @@ patterns = [
         ```
         """,
         """
+        [p5]
         match=''':[x~$extend_val_rx_left$val_rx] :[bool~(=|!)]= :[x~$extend_val_rx_right$val_rx]'''
 
         rule='where
@@ -126,10 +135,10 @@ patterns = [
     ),
     Pattern(6, "Avoid comparing findfirst to nothing", ["julia"],
         """
-        For example, instead of `findfirst('a', \"ab\") === nothing`,
-        use `occursin('a', \"ab\")` or `contains` (Julia ≥1.5).
+        For example, instead of `findfirst('a', \"ab\") === nothing`, use `occursin('a', \"ab\")` or `contains` (Julia ≥1.5).
         """,
         """
+        [p6]
         match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
 
         rule='where
@@ -144,6 +153,7 @@ patterns = [
         Instead, use `findall(.!Y)`.
         """,
         """
+        [p7]
         match='findall(:[x] -> :[x] == false, :[Y])'
 
         rewrite='findall(.!:[Y])'
@@ -168,6 +178,7 @@ patterns = [
         ```
         """,
         """
+        [p8]
         match=':[[x]] -> :[unary~[$(join(unary_operators))]]:[x~[\\w\\_\\[\\]\\.]+]'
 
         rewrite=':[unary]'
@@ -186,17 +197,9 @@ patterns = [
         ```
         """,
         """
+        [p9]
         match="(:[a]; :[c] = :[c])"
         rewrite="(:[a]; :[c])"
-        """
-    ),
-    Pattern(10, "Use rand(...) instead of rand(..., 1)[1]", ["julia"],
-        """
-        See [pattern 1](#1).
-        """,
-        """
-        match="rand(:[a~[^1,]*],:[space~[ ]*]1)[1]"
-        rewrite="rand(:[a])"
         """
     )
 ]

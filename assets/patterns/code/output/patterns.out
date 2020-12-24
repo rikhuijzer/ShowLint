@@ -21,8 +21,13 @@ julia> Random.seed!(1234); rand()
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match="rand(1)[1]"
+<pre><code class="plaintext">[p1a]
+match="rand(1)[1]"
 rewrite="rand()"
+
+[p1b]
+match="rand(:[a],:[space~[ ]*]1)[1]"
+rewrite="rand(:[a])"
 </code></pre>
 ~~~
 
@@ -39,7 +44,8 @@ This pattern is disabled for now by default, due to discussion at
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match=':[[var]] :[first~[=|!]]== missing' 
+<pre><code class="plaintext">[p2]
+match=':[[var]] :[first~[=|!]]== missing' 
 
 rule='where rewrite :[first] { "=" -> "" }'
 
@@ -76,7 +82,8 @@ julia> map(f, [1, 2])
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
+<pre><code class="plaintext">[p3]
+match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
 
 rewrite=':[f]:[end]'
 </code></pre>
@@ -93,7 +100,8 @@ From [staticcheck](https://staticcheck.io/docs/checks).
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
+<pre><code class="plaintext">[p4]
+match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
 
 rule='where 
     rewrite :[first] { "=" -> "" },
@@ -113,9 +121,9 @@ tags: *julia*
 
 SA4000 in [staticcheck](https://staticcheck.io/docs/checks).
 
-Be careful when applying this pattern to situations where `a` can
-be of type `Missing`. 
+Be careful when applying this pattern to situations where `a` can be of type `Missing`. 
 For example, `a == a` returns `missing` and not `true`.
+On the other hand, `if missing` returns an error, so maybe this isn't a valid argument.
 
 **Examples**
 ```
@@ -132,7 +140,8 @@ false
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
+<pre><code class="plaintext">[p5]
+match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
 
 rule='where
     rewrite :[bool] { "=" -> "true" },
@@ -149,13 +158,13 @@ rewrite=':[bool]'
 ### 6: Avoid comparing findfirst to nothing
 tags: *julia*
 
-For example, instead of `findfirst('a', "ab") === nothing`,
-use `occursin('a', "ab")` or `contains` (Julia ≥1.5).
+For example, instead of `findfirst('a', "ab") === nothing`, use `occursin('a', "ab")` or `contains` (Julia ≥1.5).
 
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
+<pre><code class="plaintext">[p6]
+match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
 
 rule='where
     rewrite :[bool] { "!" -> "" },
@@ -177,7 +186,8 @@ Instead, use `findall(.!Y)`.
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match='findall(:[x] -> :[x] == false, :[Y])'
+<pre><code class="plaintext">[p7]
+match='findall(:[x] -> :[x] == false, :[Y])'
 
 rewrite='findall(.!:[Y])'
 </code></pre>
@@ -209,7 +219,8 @@ julia> map(!, [true, missing]
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match=':[[x]] -> :[unary~[!~+-]]:[x~[\w\_\[\]\.]+]'
+<pre><code class="plaintext">[p8]
+match=':[[x]] -> :[unary~[!~+-]]:[x~[\w\_\[\]\.]+]'
 
 rewrite=':[unary]'
 </code></pre>
@@ -235,25 +246,9 @@ printstyled("text"; color)
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">match="(:[a]; :[c] = :[c])"
+<pre><code class="plaintext">[p9]
+match="(:[a]; :[c] = :[c])"
 rewrite="(:[a]; :[c])"
-</code></pre>
-~~~
-
-
-~~~ 
-<span id="10"></span>
-~~~
-### 10: Use rand(...) instead of rand(..., 1)[1]
-tags: *julia*
-
-See [pattern 1](#1).
-
-
-~~~
-<b>Defintion</b>
-<pre><code class="plaintext">match="rand(:[a~[^1,]*],:[space~[ ]*]1)[1]"
-rewrite="rand(:[a])"
 </code></pre>
 ~~~
 

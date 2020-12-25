@@ -140,13 +140,18 @@ false
 
 ~~~
 <b>Defintion</b>
-<pre><code class="plaintext">[p5]
-match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
-
+<pre><code class="plaintext">[p5a]
+match='if :[x] :[bool~(=|!)]= :[x]'
 rule='where
     rewrite :[bool] { "=" -> "true" },
     rewrite :[bool] { "!" -> "false" }'
+rewrite='if :[bool]'
 
+[p5b]
+match=''':[x~[\w_\[\]:\.\\'*+-^′]+]:[bool~(=|!)]=:[x~[\w_\[\]:\.\\'*+-^′]+]'''
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
 rewrite=':[bool]'
 </code></pre>
 ~~~

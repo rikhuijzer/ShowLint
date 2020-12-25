@@ -10,7 +10,7 @@
         - ```
         - """
         - struct Repo
-      387     host::String
+      403     host::String
         -     name::String
         -     tags_predicates::Vector{Function}
         -     exclude_prefixes::Vector{String}
@@ -36,7 +36,7 @@
         - 
         - default_excludes = ["test"]
         - 
-      424 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
+      440 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
         -     Repo(host, name, predicates, exclude)
         - 
         - is_production()::Bool = haskey(ENV, "CI")
@@ -68,6 +68,7 @@
         -         Repo("https://github.com", "JuliaDatabases/Redis.jl"),
         -         Repo("https://github.com", "JuliaDatabases/SQLite.jl"),
         -         Repo("https://github.com", "JuliaDebug/Debugger.jl"),
+        -         Repo("https://github.com", "JuliaDebug/Gallium.jl"),
         -         Repo("https://github.com", "JuliaDebug/JuliaInterpreter.jl"),
         -         Repo("https://github.com", "JuliaDiff/ChainRules.jl"),
         -         Repo("https://github.com", "JuliaDiff/ChainRulesCore.jl"),
@@ -138,6 +139,11 @@
         -         Repo("https://github.com", "JuliaNLSolvers/LsqFit.jl"),
         -         Repo("https://github.com", "JuliaNLSolvers/NLsolve.jl"),
         -         Repo("https://github.com", "JuliaNLSolvers/Optim.jl"),
+        -         Repo("https://github.com", "JuliaPackaging/BinaryBuilder.jl"),
+        -         Repo("https://github.com", "JuliaPackaging/BinaryBuilderBase.jl"),
+        -         Repo("https://github.com", "JuliaPackaging/PkgServer.jl"),
+        -         Repo("https://github.com", "JuliaPackaging/Requires.jl"),
+        -         Repo("https://github.com", "JuliaPackaging/Yggdrasil"),
         -         Repo("https://github.com", "JuliaPlots/Makie.jl"),
         -         Repo("https://github.com", "JuliaPlots/Plots.jl"),
         -         Repo("https://github.com", "JuliaPy/Pandas.jl"),
@@ -152,6 +158,7 @@
         -         Repo("https://github.com", "JuliaStats/MixedModels.jl"),
         -         Repo("https://github.com", "JuliaStats/StatsBase.jl"),
         -         Repo("https://github.com", "JuliaStats/StatsModels.jl"),
+        -         Repo("https://github.com", "JuliaTPU/XLA.jl"),
         -         Repo("https://github.com", "JuliaWeb/HTTP.jl"),
         -         Repo("https://github.com", "JuliaWeb/WebSockets.jl"),
         -         Repo("https://github.com", "JunoLab/Weave.jl"),
@@ -173,6 +180,7 @@
         -         Repo("https://github.com", "alan-turing-institute/MLJTuning.jl"),
         -         Repo("https://github.com", "bcbi/PredictMD.jl"),
         -         Repo("https://github.com", "bcbi/SimpleContainerGenerator.jl"),
+        -         Repo("https://github.com", "chriselrod/LoopVectorization.jl"),
         -         Repo("https://github.com", "cstjean/ScikitLearn.jl"),
         -         Repo("https://github.com", "denizyuret/AutoGrad.jl"),
         -         Repo("https://github.com", "diegozea/MIToS.jl"),

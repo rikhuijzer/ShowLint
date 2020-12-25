@@ -47,7 +47,7 @@
 <h3><a href="https://github.com/GiovineItalia/Compose.jl" target="_blank">GiovineItalia/Compose.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Omit a == a and a != a ➤ 3 hits](/github/giovineitalia/compose.jl/#omit_a_a_and_a_a_3_hits)
+
 ~~~
 </div>
 ~~~
@@ -217,6 +217,15 @@
 
 ~~~
 <h3><a href="https://github.com/JuliaDebug/Debugger.jl" target="_blank">JuliaDebug/Debugger.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaDebug/Gallium.jl" target="_blank">JuliaDebug/Gallium.jl</a></h3>
 <div class="repo-nav">
 ~~~
 
@@ -674,8 +683,7 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 10 hits](/github/julialang/julia/#omit_comparison_with_boolean_constant_10_hits)
-- [Omit a == a and a != a ➤ 24 hits](/github/julialang/julia/#omit_a_a_and_a_a_24_hits)
-- [Avoid comparing findfirst to nothing ➤ 1 hit](/github/julialang/julia/#avoid_comparing_findfirst_to_nothing_1_hit)
+- [Omit a == a and a != a ➤ 1 hit](/github/julialang/julia/#omit_a_a_and_a_a_1_hit)
 - [Replace P && P with P ➤ 4 hits](/github/julialang/julia/#replace_p_p_with_p_4_hits)
 ~~~
 </div>
@@ -758,7 +766,6 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 1 hit](/github/juliamath/combinatorics.jl/#omit_comparison_with_boolean_constant_1_hit)
-- [Omit a == a and a != a ➤ 1 hit](/github/juliamath/combinatorics.jl/#omit_a_a_and_a_a_1_hit)
 ~~~
 </div>
 ~~~
@@ -863,6 +870,51 @@
 ~~~
 
 ~~~
+<h3><a href="https://github.com/JuliaPackaging/BinaryBuilder.jl" target="_blank">JuliaPackaging/BinaryBuilder.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaPackaging/BinaryBuilderBase.jl" target="_blank">JuliaPackaging/BinaryBuilderBase.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaPackaging/PkgServer.jl" target="_blank">JuliaPackaging/PkgServer.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaPackaging/Requires.jl" target="_blank">JuliaPackaging/Requires.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaPackaging/Yggdrasil" target="_blank">JuliaPackaging/Yggdrasil</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
 <h3><a href="https://github.com/JuliaPlots/Makie.jl" target="_blank">JuliaPlots/Makie.jl</a></h3>
 <div class="repo-nav">
 ~~~
@@ -920,7 +972,7 @@
 <h3><a href="https://github.com/JuliaRegistries/Registrator.jl" target="_blank">JuliaRegistries/Registrator.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Omit a == a and a != a ➤ 1 hit](/github/juliaregistries/registrator.jl/#omit_a_a_and_a_a_1_hit)
+
 ~~~
 </div>
 ~~~
@@ -981,6 +1033,15 @@
 
 ~~~
 <h3><a href="https://github.com/JuliaStats/StatsModels.jl" target="_blank">JuliaStats/StatsModels.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/JuliaTPU/XLA.jl" target="_blank">JuliaTPU/XLA.jl</a></h3>
 <div class="repo-nav">
 ~~~
 
@@ -1173,6 +1234,15 @@
 
 ~~~
 <h3><a href="https://github.com/bcbi/SimpleContainerGenerator.jl" target="_blank">bcbi/SimpleContainerGenerator.jl</a></h3>
+<div class="repo-nav">
+~~~
+
+~~~
+</div>
+~~~
+
+~~~
+<h3><a href="https://github.com/chriselrod/LoopVectorization.jl" target="_blank">chriselrod/LoopVectorization.jl</a></h3>
 <div class="repo-nav">
 ~~~
 

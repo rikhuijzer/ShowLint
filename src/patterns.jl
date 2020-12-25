@@ -122,14 +122,21 @@ patterns = [
         false
         ```
         """,
+        # Keep this pattern specific to avoid massive slowdown.
+        # So, don't do ":[x] :[bool] :[x]" without "if".
         """
-        [p5]
-        match=''':[x~$extend_val_rx_left$val_rx] :[bool~(=|!)]= :[x~$extend_val_rx_right$val_rx]'''
-
+        [p5a]
+        match='if :[x] :[bool~(=|!)]= :[x]'
         rule='where
             rewrite :[bool] { "=" -> "true" },
             rewrite :[bool] { "!" -> "false" }'
+        rewrite='if :[bool]'
 
+        [p5b]
+        match=''':[x~$val_rx]:[bool~(=|!)]=:[x~$val_rx]'''
+        rule='where
+            rewrite :[bool] { "=" -> "true" },
+            rewrite :[bool] { "!" -> "false" }'
         rewrite=':[bool]'
         """
     ),

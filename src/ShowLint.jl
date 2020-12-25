@@ -49,7 +49,7 @@ function ansi2html(text::String)::String
   no_color = "[0m"
   text = replace(text, no_color => "</span>")
   text = replace(text, r"WARNING: [^\n]*$" => "")
-  text = replace(text, "/repo/" => "")
+  text = replace(text, "/home/runner/clones/github/" => "")
   text = replace(text, "" => "") 
   text = replace(text, "<!" => "&#60;!")
   text = replace(text, "[0;7;2m" => "")

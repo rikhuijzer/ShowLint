@@ -46,13 +46,18 @@ julia&gt; a &#61;&#61; a
 true
 
 julia&gt; a &#33;&#61; a
-false</code></pre> <b>Defintion</b> <pre><code class=plaintext >[p5]
-match=''':[x~(?<![+-\/*] )[\w_\[\]:\.\\'*+-^′]+] :[bool~(=|!)]= :[x~(?! [+-\/*])[\w_\[\]:\.\\'*+-^′]+]'''
-
+false</code></pre> <b>Defintion</b> <pre><code class=plaintext >[p5a]
+match='if :[x] :[bool~(=|!)]= :[x]'
 rule='where
     rewrite :[bool] { "=" -> "true" },
     rewrite :[bool] { "!" -> "false" }'
+rewrite='if :[bool]'
 
+[p5b]
+match=''':[x~[\w_\[\]:\.\\'*+-^′]+]:[bool~(=|!)]=:[x~[\w_\[\]:\.\\'*+-^′]+]'''
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
 rewrite=':[bool]'
 </code></pre> <span id=6 ></span> <h3 id=6_avoid_comparing_findfirst_to_nothing ><a href="#6_avoid_comparing_findfirst_to_nothing">6: Avoid comparing findfirst to nothing</a></h3> <p>tags: <em>julia</em></p> <p>For example, instead of <code>findfirst&#40;&#39;a&#39;, &quot;ab&quot;&#41; &#61;&#61;&#61; nothing</code>, use <code>occursin&#40;&#39;a&#39;, &quot;ab&quot;&#41;</code> or <code>contains</code> &#40;Julia ≥1.5&#41;.</p> <b>Defintion</b> <pre><code class=plaintext >[p6]
 match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
@@ -117,7 +122,7 @@ rewrite=":[a]"
 <p><a id=ptonder2016  class=anchor ></a> van Tonder, R., &amp; Le Goues, C. &#40;2016, May&#41;.  Defending against the attack of the micro-clones.  In 2016 IEEE 24th International Conference on Program Comprehension &#40;ICPC&#41; &#40;pp. 1-4&#41;.  IEEE. <a href="https://doi.org/10.1109/ICPC.2016.7503736">https://doi.org/10.1109/ICPC.2016.7503736</a>.</p>
 <div class=page-foot >
   <div class=copyright >
-    <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 24, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+    <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 25, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
   </div>
 </div>
 </div>

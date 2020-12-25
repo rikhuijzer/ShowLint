@@ -27,8 +27,8 @@ using ShowLint: apply
     @test apply(P[4], "x == true") == "x"
     @test apply(P[4], "x == false") == "!x"
     @test apply(P[4], "x != false") == "!!x"
-    @test apply(P[5], "if x == x") == "if true"
-    @test apply(P[5], "x != x") == "false"
+    @test apply(P[5], "if x == x\n") == "if true\n"
+    @test apply(P[5], "if x != x") == "if false"
     @test unchanged(P[5], "a.x == x")
     @test unchanged(P[5], "x == x[1]")
     @test unchanged(P[5], "x == x:y")
@@ -54,4 +54,5 @@ using ShowLint: apply
     @test apply(P[10], "if a == b && a == b") == "if a == b"
     @test apply(P[10], "if a == b && a == b") == "if a == b"
     @test apply(P[10], "x.y[1] && x.y[1]") == "x.y[1]"
+    # @test unchanged(P[10], "a < b && b")
 end

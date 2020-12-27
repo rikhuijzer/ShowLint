@@ -10,25 +10,6 @@
 <span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================
-<span style="color:inherit;"> |</span>    new_status = fill(false, nagents(model))
-<span style="color:inherit;"> |</span>    for agent in allagents(model)
-<span style="color:inherit;"> |</span>        nlive = nlive_neighbors(agent, model)
-<span style="color:orange;">!|</span>        if agent.status <span style="color:red;">== true </span>&& (nlive ≤ model.rules[4] && nlive ≥ model.rules[1])
-<span style="color:inherit;"> |</span>            new_status[agent.id] = true
-<span style="color:red;">-|</span></span><span style="color:gray;">        elseif agent.</span><span style="color:gray;">status</span><span style="color:red;"> == false</span><span style="color:gray;"> && (nlive ≥ model.rules[3] && nlive ≤ model.rules[4])</span></span>
-<span style="color:green;">+|</span></span>        elseif agent.<span style="color:green;">!</span>status && (nlive ≥ model.rules[3] && nlive ≤ model.rules[4])</span>
-<span style="color:inherit;"> |</span>            new_status[agent.id] = true
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;">@|</span><span style="color:inherit;">-51,5 +51,5</span> ============================================================
-<span style="color:inherit;"> |</span>function nlive_neighbors(agent, model)
-<span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
-<span style="color:inherit;"> |</span>    all_neighbors = Iterators.flatten(ids_in_position(np,model) for np in neighbor_positions)
-<span style="color:orange;">!|</span>    sum(model[i].status <span style="color:red;">== true </span>for i in all_neighbors)
-<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/schelling.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/schelling.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
@@ -47,16 +28,6 @@
 <span style="color:inherit;"> |</span>adata = [(:mood, happyperc)]
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>parameters = Dict(
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
-<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
-<span style="color:inherit;"> |</span>    if moore ≠ nothing
-<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
-<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    for i in eachindex(s)
-<span style="color:inherit;"> |</span>        s[i] = Int[]
 <span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/game_of_life_2D_CA.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/game_of_life_2D_CA.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-58,9 +58,9</span> ============================================================
@@ -86,6 +57,25 @@
 <span style="color:inherit;"> |</span>anim = @animate for i in 0:100
 <span style="color:inherit;"> |</span>    i > 0 && step!(model, dummystep, ca_step!, 1)
 <span style="color:inherit;"> |</span>    p1 = plotabm(model; ac = ac, as = 3, am = :square, showaxis = false)
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================
+<span style="color:inherit;"> |</span>    new_status = fill(false, nagents(model))
+<span style="color:inherit;"> |</span>    for agent in allagents(model)
+<span style="color:inherit;"> |</span>        nlive = nlive_neighbors(agent, model)
+<span style="color:orange;">!|</span>        if agent.status <span style="color:red;">== true </span>&& (nlive ≤ model.rules[4] && nlive ≥ model.rules[1])
+<span style="color:inherit;"> |</span>            new_status[agent.id] = true
+<span style="color:red;">-|</span></span><span style="color:gray;">        elseif agent.</span><span style="color:gray;">status</span><span style="color:red;"> == false</span><span style="color:gray;"> && (nlive ≥ model.rules[3] && nlive ≤ model.rules[4])</span></span>
+<span style="color:green;">+|</span></span>        elseif agent.<span style="color:green;">!</span>status && (nlive ≥ model.rules[3] && nlive ≤ model.rules[4])</span>
+<span style="color:inherit;"> |</span>            new_status[agent.id] = true
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;">@|</span><span style="color:inherit;">-51,5 +51,5</span> ============================================================
+<span style="color:inherit;"> |</span>function nlive_neighbors(agent, model)
+<span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
+<span style="color:inherit;"> |</span>    all_neighbors = Iterators.flatten(ids_in_position(np,model) for np in neighbor_positions)
+<span style="color:orange;">!|</span>    sum(model[i].status <span style="color:red;">== true </span>for i in all_neighbors)
+<span style="color:inherit;"> |</span>end
 <span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-29,7 +29,7</span> ============================================================
@@ -107,6 +97,16 @@
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>    s = 0
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-48,7 +48,7</span> ============================================================
+<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
+<span style="color:inherit;"> |</span>    if moore ≠ nothing
+<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
+<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    for i in eachindex(s)
+<span style="color:inherit;"> |</span>        s[i] = Int[]
 <span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/opinion_spread.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/opinion_spread.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-53,7 +53,7</span> ============================================================
@@ -141,4 +141,4 @@
 <span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</spa</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 25, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 27, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

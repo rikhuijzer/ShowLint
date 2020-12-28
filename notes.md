@@ -15,6 +15,7 @@ title = "Notes"
 - <https://github.com/JuliaDynamics/Agents.jl/pull/358> (`findall(!, Y)` not considered readable)
 - <https://github.com/fonsp/Pluto.jl/pull/802> (`Vector`)
 - <https://github.com/diegozea/MIToS.jl/pull/58> (`Vector`)
+- <https://github.com/JuliaLang/Pkg.jl/pull/2301> (my bad; didn't validate)
 
 ## Ease of validation
 

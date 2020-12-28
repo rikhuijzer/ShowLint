@@ -126,6 +126,15 @@
 ~~~
 
 ~~~
+<h3><a href="https://github.com/JuliaControl/ControlSystems.jl" target="_blank">JuliaControl/ControlSystems.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Replace P && P with P ➤ 1 hit](/github/juliacontrol/controlsystems.jl/#replace_p_p_with_p_1_hit)
+~~~
+</div>
+~~~
+
+~~~
 <h3><a href="https://github.com/JuliaData/CSV.jl" target="_blank">JuliaData/CSV.jl</a></h3>
 <div class="repo-nav">
 ~~~
@@ -1287,6 +1296,15 @@
 ~~~
 
 ~~~
+<h3><a href="https://github.com/femtomc/Jaynes.jl" target="_blank">femtomc/Jaynes.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 3 hits](/github/femtomc/jaynes.jl/#avoid_x_-_fx_3_hits)
+~~~
+</div>
+~~~
+
+~~~
 <h3><a href="https://github.com/fonsp/Pluto.jl" target="_blank">fonsp/Pluto.jl</a></h3>
 <div class="repo-nav">
 ~~~
@@ -1370,6 +1388,15 @@
 ~~~
 
 ~~~
+<h3><a href="https://github.com/probcomp/Gen.jl" target="_blank">probcomp/Gen.jl</a></h3>
+<div class="repo-nav">
+~~~
+- [Avoid x -> f(x) ➤ 1 hit](/github/probcomp/gen.jl/#avoid_x_-_fx_1_hit)
+~~~
+</div>
+~~~
+
+~~~
 <h3><a href="https://github.com/queryverse/Query.jl" target="_blank">queryverse/Query.jl</a></h3>
 <div class="repo-nav">
 ~~~
@@ -1383,15 +1410,6 @@
 <div class="repo-nav">
 ~~~
 
-~~~
-</div>
-~~~
-
-~~~
-<h3><a href="https://github.com/rikhuijzer/ShowLint" target="_blank">rikhuijzer/ShowLint</a></h3>
-<div class="repo-nav">
-~~~
-- [Use rand() instead of rand(1)[1] ➤ 1 hit](/github/rikhuijzer/showlint/#use_rand_instead_of_rand11_1_hit)
 ~~~
 </div>
 ~~~

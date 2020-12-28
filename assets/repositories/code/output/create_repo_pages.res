@@ -1,4 +1,4 @@
-161-element Array{Any,1}:
+163-element Array{Any,1}:
  Any[]
  Any[]
  Any[]
@@ -13,6 +13,7 @@
  Any[]
  Any[]
  Any[]
+ Any["Replace P && P with P ➤ 1 hit"]
  Any[]
  Any[]
  Any[]
@@ -141,6 +142,7 @@
  Any[]
  Any["Replace P && P with P ➤ 1 hit"]
  Any["Avoid comparing findfirst to nothing ➤ 7 hits"]
+ Any["Avoid x -> f(x) ➤ 3 hits"]
  Any["Omit comparison with boolean constant ➤ 1 hit"]
  Any[]
  Any[]
@@ -150,9 +152,9 @@
  Any[]
  Any["Omit comparison with boolean constant ➤ 3 hits", "Avoid comparing findfirst to nothing ➤ 1 hit"]
  Any[]
+ Any["Avoid x -> f(x) ➤ 1 hit"]
  Any["Omit comparison with boolean constant ➤ 1 hit"]
  Any[]
- Any["Use rand() instead of rand(1)[1] ➤ 1 hit"]
  Any[]
  Any[]
  Any[]

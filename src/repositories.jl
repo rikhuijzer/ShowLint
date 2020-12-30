@@ -31,7 +31,10 @@ version(n::Number) = Base.Fix2(version, n)
 
 function default_predicate(tags) 
     decr(t) = t == "performance-decrease"
-    all(!decr, tags) && version(tags, 1.0)
+    disabled(t) = t == "disabled"
+    all(!decr, tags) && 
+        version(tags, 1.0) &&
+        all(!disabled, tags)
 end
 
 default_excludes = ["test"]
@@ -157,7 +160,7 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "JuliaStats/HypothesisTests.jl"),
         Repo("https://github.com", "JuliaStats/Lasso.jl"),
         Repo("https://github.com", "JuliaStats/MixedModels.jl"),
-        Repo("https://github.com", "JuliaStats/StatsBase.jl"),
+        Repo("https://github.com", "JuliaStats/StatsKit.jl"),
         Repo("https://github.com", "JuliaStats/StatsModels.jl"),
         Repo("https://github.com", "JuliaTPU/XLA.jl"),
         Repo("https://github.com", "JuliaWeb/HTTP.jl"),
@@ -191,6 +194,8 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "fonsp/PlutoUI.jl"),
         Repo("https://github.com", "fonsp/PlutoUtils.jl"),
         Repo("https://github.com", "h-Klok/StatsWithJuliaBook"),
+        Repo("https://github.com", "invenia/Impute.jl"),
+        Repo("https://github.com", "invenia/PkgTemplates.jl"),
         Repo("https://github.com", "joshday/OnlineStats.jl"),
         Repo("https://github.com", "jrevels/Cassette.jl"),
         Repo("https://github.com", "julia-actions/MassInstallAction.jl"),
@@ -198,6 +203,7 @@ repositories(; production=is_production()) = production ?
         Repo("https://github.com", "odow/SDDP.jl"),
         Repo("https://github.com", "probcomp/Gen.jl"),
         Repo("https://github.com", "queryverse/Query.jl"),
+        Repo("https://github.com", "queryverse/VegaLite.jl"),
         Repo("https://github.com", "rikhuijzer/Codex.jl"),
         Repo("https://github.com", "timholy/ProfileView.jl"),
         Repo("https://github.com", "timholy/ProgressMeter.jl"),

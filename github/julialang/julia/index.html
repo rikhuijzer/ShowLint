@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/julia</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/julia" target=_blank >JuliaLang/julia</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a><li><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a><li><a href="#replace_p_p_with_p_4_hits">Replace P &amp;&amp; P with P ➤ 4 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_10_hits ><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/julia</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/julia" target=_blank >JuliaLang/julia</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a><li><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_10_hits ><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/stream.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/stream.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-837,7 +837,7</span> ============================================================
@@ -92,45 +92,4 @@
 <span style="color:inherit;"> |</span>isnan(o::Perm, i::Integer) = isnan(o.order,o.data[i])
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>function nans2left!(v::AbstractVector, o::Ordering, lo::Integer=first(axes(v,1)), hi::Integer=last(axes(v</div>
-</pre> <h3 id=replace_p_p_with_p_4_hits ><a href="#replace_p_p_with_p_4_hits">Replace P &amp;&amp; P with P ➤ 4 hits</a></h3> <p><a href="/patterns/#10">Pattern #10</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/stdlib/Serialization/src/Serialization.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/stdlib/Serialization/src/Serialization.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1013,7 +1013,7</span> ============================================================
-<span style="color:inherit;"> |</span>            meth.generator = linfo
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        mt = ccall(:jl_method_table_for, Any, (Any,), sig)
-<span style="color:orange;">!|</span>        if mt !== nothing <span style="color:red;">&& nothing </span>=== ccall(:jl_methtable_lookup, Any, (Any, Any, UInt), mt, sig, typemax(UInt))
-<span style="color:inherit;"> |</span>            ccall(:jl_method_table_insert, Cvoid, (Any, Any, Ptr{Cvoid}), mt, meth, C_NULL)
-<span style="color:inherit;"> |</span>        end
-<span style="color:inherit;"> |</span>        remember_object(s, meth, lnumber)
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/compiler/ssair/domtree.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/compiler/ssair/domtree.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-615,7 +615,7</span> ============================================================
-<span style="color:inherit;"> |</span>            i == dom && continue
-<span style="color:inherit;"> |</span>            hasany = false
-<span style="color:inherit;"> |</span>            for p in doms
-<span style="color:orange;">!|</span>                if p !== i && p !== dom <span style="color:red;">&& dom </span>in dominators[p]
-<span style="color:inherit;"> |</span>                    hasany = true; break
-<span style="color:inherit;"> |</span>                end
-<span style="color:inherit;"> |</span>            end
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/compiler/typelattice.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/compiler/typelattice.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-201,7 +201,7</span> ============================================================
-<span style="color:inherit;"> |</span>    isa(b, PartialStruct) && return false
-<span style="color:inherit;"> |</span>    a isa Const && return false
-<span style="color:inherit;"> |</span>    b isa Const && return false
-<span style="color:orange;">!|</span>    return a ⊑ b <span style="color:red;">&& b </span>⊑ a
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>widenconst(c::Conditional) = Bool
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/promotion.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/promotion.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-102,7 +102,7</span> ============================================================
-<span style="color:inherit;"> |</span>            vars = []
-<span style="color:inherit;"> |</span>            for i = 1:n
-<span style="color:inherit;"> |</span>                ai, bi = a.parameters[i], b.parameters[i]
-<span style="color:orange;">!|</span>                if ai === bi || (isa(ai,Type) && isa(bi,Type) && ai <: bi <span style="color:red;">&& bi </span><: ai)
-<span style="color:inherit;"> |</span>                    aprimary = aprimary{ai}
-<span style="color:inherit;"> |</span>                else
-<span style="color:inherit;"> |</span>                    # pushfirst!(vars, aprimary</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 28, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 30, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

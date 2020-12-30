@@ -209,8 +209,10 @@ patterns = [
         rewrite="(:[a]; :[c])"
         """
     ), 
-    Pattern(10, "Replace P && P with P", ["julia"],
+    Pattern(10, "Replace P && P with P", ["julia", "disabled"],
         """
+        *Disabled because it has many false-positives and no true-positives.*
+
         The statement `P && P` is logically equivalent to `P`.
         This is called a micro-clone \\citep{pTonder2016}.
 

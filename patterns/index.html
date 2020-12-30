@@ -97,7 +97,8 @@ rewrite="(:[a]; :[c])"
 <span id=10 ></span>
 
 <h3 id=10_replace_p_p_with_p ><a href="#10_replace_p_p_with_p">10: Replace P &amp;&amp; P with P</a></h3>
-<p>tags: <em>julia</em></p>
+<p>tags: <em>julia, disabled</em></p>
+<p><em>Disabled because it has many false-positives and no true-positives.</em></p>
 <p>The statement <code>P &amp;&amp; P</code> is logically equivalent to <code>P</code>. This is called a micro-clone <span class=bibref >(<a href="#ptonder2016">van Tonder & Le Goues, 2016</a>)</span>.</p>
 <p><strong>Example</strong></p>
 <pre><code class=language-julia >julia&gt; P &#61; 3 &lt; 1
@@ -122,7 +123,7 @@ rewrite=":[a]"
 <p><a id=ptonder2016  class=anchor ></a> van Tonder, R., &amp; Le Goues, C. &#40;2016, May&#41;.  Defending against the attack of the micro-clones.  In 2016 IEEE 24th International Conference on Program Comprehension &#40;ICPC&#41; &#40;pp. 1-4&#41;.  IEEE. <a href="https://doi.org/10.1109/ICPC.2016.7503736">https://doi.org/10.1109/ICPC.2016.7503736</a>.</p>
 <div class=page-foot >
   <div class=copyright >
-    <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 28, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+    <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: December 30, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
   </div>
 </div>
 </div>

@@ -10,7 +10,7 @@
         - ```
         - """
         - struct Repo
-      407     host::String
+      413     host::String
         -     name::String
         -     tags_predicates::Vector{Function}
         -     exclude_prefixes::Vector{String}
@@ -24,19 +24,22 @@
         - $(SIGNATURES)
         - """
         - function version(tags, n::Number)
-       25     check(t) = isa(t, Number) ? n<t : false
+       26     check(t) = isa(t, Number) ? n<t : false
        22     !any(check, tags)
         - end
         2 version(n::Number) = Base.Fix2(version, n)
         - 
         - function default_predicate(tags) 
        11     decr(t) = t == "performance-decrease"
-       21     all(!decr, tags) && version(tags, 1.0)
+       11     disabled(t) = t == "disabled"
+       13     all(!decr, tags) && 
+        -         version(tags, 1.0) &&
+        -         all(!disabled, tags)
         - end
         - 
         - default_excludes = ["test"]
         - 
-      444 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
+      450 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
         -     Repo(host, name, predicates, exclude)
         - 
         - is_production()::Bool = haskey(ENV, "CI")
@@ -157,7 +160,7 @@
         -         Repo("https://github.com", "JuliaStats/HypothesisTests.jl"),
         -         Repo("https://github.com", "JuliaStats/Lasso.jl"),
         -         Repo("https://github.com", "JuliaStats/MixedModels.jl"),
-        -         Repo("https://github.com", "JuliaStats/StatsBase.jl"),
+        -         Repo("https://github.com", "JuliaStats/StatsKit.jl"),
         -         Repo("https://github.com", "JuliaStats/StatsModels.jl"),
         -         Repo("https://github.com", "JuliaTPU/XLA.jl"),
         -         Repo("https://github.com", "JuliaWeb/HTTP.jl"),
@@ -191,6 +194,8 @@
         -         Repo("https://github.com", "fonsp/PlutoUI.jl"),
         -         Repo("https://github.com", "fonsp/PlutoUtils.jl"),
         -         Repo("https://github.com", "h-Klok/StatsWithJuliaBook"),
+        -         Repo("https://github.com", "invenia/Impute.jl"),
+        -         Repo("https://github.com", "invenia/PkgTemplates.jl"),
         -         Repo("https://github.com", "joshday/OnlineStats.jl"),
         -         Repo("https://github.com", "jrevels/Cassette.jl"),
         -         Repo("https://github.com", "julia-actions/MassInstallAction.jl"),
@@ -198,6 +203,7 @@
         -         Repo("https://github.com", "odow/SDDP.jl"),
         -         Repo("https://github.com", "probcomp/Gen.jl"),
         -         Repo("https://github.com", "queryverse/Query.jl"),
+        -         Repo("https://github.com", "queryverse/VegaLite.jl"),
         -         Repo("https://github.com", "rikhuijzer/Codex.jl"),
         -         Repo("https://github.com", "timholy/ProfileView.jl"),
         -         Repo("https://github.com", "timholy/ProgressMeter.jl"),

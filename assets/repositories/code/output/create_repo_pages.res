@@ -124,7 +124,7 @@
  Any["Omit comparison with boolean constant ➤ 2 hits"]
  Any[]
  Any[]
- Any["Avoid x -> f(x) ➤ 1 hit"]
+ Any[]
  Any[]
  Any[]
  Any[]

@@ -105,10 +105,10 @@
         1         host = repo.host
         1         dest = target_dir(repo)
         1         if isdir(dest)
-        0             cd(dest)
-        0             run(`git pull --ff-only`)
+        1             cd(dest)
+        1             run(`git pull --ff-only`)
         -         else
-        1             run(`git clone
+        0             run(`git clone
         -                 --depth=1
         -                 --no-tags
         -                 --single-branch

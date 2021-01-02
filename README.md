@@ -17,3 +17,13 @@ Another problem is that any suggestion by the linter is only interesting once.
 After a decision is made on applying the suggestion, the suggestion should not come back.
 
 So, I figured that it might be useful to periodically generate the lint results for many repositories and show the results on a website.
+
+### Why has development slowed down?
+
+- The declarative way of describing rewrite rules with Comby is nice but has its limitations. 
+  The biggest problem is that Comby cannot use or infer types.
+- Coming up with rewrite rules can be quite difficult because often rules
+  + suggest rewrites which alter program behaviour (!!)
+  + show too many false positives
+  + suggest only minor improvements
+  

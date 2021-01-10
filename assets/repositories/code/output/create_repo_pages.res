@@ -163,5 +163,5 @@
  Any[]
  Any[]
  Any[]
- Any["Avoid x -> f(x) ➤ 1 hit", "Avoid comparing findfirst to nothing ➤ 1 hit"]
+ Any["Avoid comparing findfirst to nothing ➤ 1 hit"]
  Any[]

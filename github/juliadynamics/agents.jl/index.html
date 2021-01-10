@@ -1,15 +1,5 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDynamics/Agents.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDynamics/Agents.jl" target=_blank >JuliaDynamics/Agents.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>Base.Fix2&#123;typeof&#40;ShowLint.version&#41;,Float64&#125;&#40;ShowLint.version, 1.5&#41;</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_15_hits">Omit comparison with boolean constant ➤ 15 hits</a><li><a href="#avoid_findallx_-_x_false_y_2_hits">Avoid findall&#40;x -&gt; x &#61;&#61; false, Y&#41; ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_15_hits ><a href="#omit_comparison_with_boolean_constant_15_hits">Omit comparison with boolean constant ➤ 15 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-29,7 +29,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function schelling_agent_step!(agent, model)
-<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
-<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
-<span style="color:inherit;"> |</span>    for neighbor in nearby_agents(agent, model)
-<span style="color:inherit;"> |</span>        if agent.group == neighbor.group
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
 <span style="color:inherit;"> |</span>    nmatches = count(matches)
@@ -86,6 +76,16 @@
 <span style="color:inherit;"> |</span>    all_neighbors = Iterators.flatten(ids_in_position(np,model) for np in neighbor_positions)
 <span style="color:orange;">!|</span>    sum(model[i].status <span style="color:red;">== true </span>for i in all_neighbors)
 <span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-29,7 +29,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function schelling_agent_step!(agent, model)
+<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
+<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
+<span style="color:inherit;"> |</span>    for neighbor in nearby_agents(agent, model)
+<span style="color:inherit;"> |</span>        if agent.group == neighbor.group
 <span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/simulations/collect.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/simulations/collect.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-130,8 +130,8</span> ============================================================
@@ -141,4 +141,4 @@
 <span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</spa</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: January 03, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: January 10, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

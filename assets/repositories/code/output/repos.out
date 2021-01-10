@@ -1485,7 +1485,6 @@
 <h3><a href="https://github.com/tlienart/Franklin.jl" target="_blank">tlienart/Franklin.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Avoid x -> f(x) ➤ 1 hit](/github/tlienart/franklin.jl/#avoid_x_-_fx_1_hit)
 - [Avoid comparing findfirst to nothing ➤ 1 hit](/github/tlienart/franklin.jl/#avoid_comparing_findfirst_to_nothing_1_hit)
 ~~~
 </div>

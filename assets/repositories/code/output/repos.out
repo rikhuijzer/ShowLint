@@ -344,7 +344,7 @@
 <h3><a href="https://github.com/JuliaDynamics/Agents.jl" target="_blank">JuliaDynamics/Agents.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Omit comparison with boolean constant ➤ 15 hits](/github/juliadynamics/agents.jl/#omit_comparison_with_boolean_constant_15_hits)
+- [Omit comparison with boolean constant ➤ 17 hits](/github/juliadynamics/agents.jl/#omit_comparison_with_boolean_constant_17_hits)
 - [Avoid findall(x -> x == false, Y) ➤ 2 hits](/github/juliadynamics/agents.jl/#avoid_findallx_-_x_false_y_2_hits)
 ~~~
 </div>
@@ -643,6 +643,7 @@
 <h3><a href="https://github.com/JuliaLang/Pkg.jl" target="_blank">JuliaLang/Pkg.jl</a></h3>
 <div class="repo-nav">
 ~~~
+- [Avoid x -> f(x) ➤ 1 hit](/github/julialang/pkg.jl/#avoid_x_-_fx_1_hit)
 - [Omit comparison with boolean constant ➤ 5 hits](/github/julialang/pkg.jl/#omit_comparison_with_boolean_constant_5_hits)
 - [Avoid comparing findfirst to nothing ➤ 2 hits](/github/julialang/pkg.jl/#avoid_comparing_findfirst_to_nothing_2_hits)
 ~~~

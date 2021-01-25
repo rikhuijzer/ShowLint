@@ -106,7 +106,11 @@ function clone_repositories(; production=is_production())
         dest = target_dir(repo)
         if isdir(dest)
             cd(dest)
-            run(`git pull --ff-only`)
+            try
+                run(`git pull --ff-only`)
+            catch
+                @warn "git pull failed for $(repo.name)"
+            end
         else
             run(`git clone
                 --depth=1

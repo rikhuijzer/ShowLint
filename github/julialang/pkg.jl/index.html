@@ -31,7 +31,7 @@
 <span style="color:inherit;"> |</span>             pkg.tree_hash === nothing && pkg.repo.source === nothing &&
 <span style="color:inherit;"> |</span>             pkg.repo.rev === nothing && pkg.path === nothing)
 <span style="color:inherit;"> |</span>            pkgerror(&#34;packages may only be specified by name or UUID when calling &#96;free&#96;&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1354,11 +1354,11</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1360,11 +1360,11</span> ============================================================
 <span style="color:inherit;"> |</span>        Types.write_project(Dict(&#34;deps&#34; => deps), ctx.env.project_file)
 <span style="color:inherit;"> |</span>        return instantiate(Context(); manifest=manifest, update_registry=update_registry, verbose=verbose, kwargs...)
 <span style="color:inherit;"> |</span>    end
@@ -44,7 +44,7 @@
 <span style="color:inherit;"> |</span>        pkgerror(&#34;expected manifest file at &#96;$(ctx.env.manifest_file)&#96; but it does not exist&#34;)
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    Operations.prune_manifest(ctx.env)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1380,7 +1380,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1386,7 +1386,7</span> ============================================================
 <span style="color:inherit;"> |</span>        # First try without updating the registry
 <span style="color:inherit;"> |</span>        Operations.check_registered(ctx.registries, pkgs)
 <span style="color:inherit;"> |</span>    catch e
@@ -56,7 +56,7 @@
 </pre> <h3 id=avoid_comparing_findfirst_to_nothing_2_hits ><a href="#avoid_comparing_findfirst_to_nothing_2_hits">Avoid comparing findfirst to nothing ➤ 2 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/Operations.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/Operations.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-66,7 +66,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-67,7 +67,7</span> ============================================================
 <span style="color:inherit;"> |</span>                          preserve::PreserveLevel=PRESERVE_DIRECT)
 <span style="color:inherit;"> |</span>    pkgs = copy(pkgs)
 <span style="color:inherit;"> |</span>    for (name::String, uuid::UUID) in env.project.deps
@@ -65,7 +65,7 @@
 <span style="color:inherit;"> |</span>        entry = manifest_info(env.manifest, uuid)
 <span style="color:inherit;"> |</span>        push!(pkgs, entry === nothing ?
 <span style="color:inherit;"> |</span>              PackageSpec(;uuid=uuid, name=name) :
-<span style="color:inherit;">@|</span><span style="color:inherit;">-87,7 +87,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-88,7 +88,7</span> ============================================================
 <span style="color:inherit;"> |</span>                            preserve::PreserveLevel=PRESERVE_ALL)
 <span style="color:inherit;"> |</span>    pkgs = copy(pkgs)
 <span style="color:inherit;"> |</span>    for (uuid, entry) in manifest
@@ -74,4 +74,4 @@
 <span style="color:inherit;"> |</span>        push!(pkgs, PackageSpec(
 <span style="color:inherit;"> |</span>            uuid      = uuid,
 <span style="color:inherit;"> |</span>            name      = entry.</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: January 25, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: January 31, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

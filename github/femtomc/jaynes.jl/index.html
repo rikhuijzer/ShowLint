@@ -10,17 +10,6 @@
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipeline.
-<span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/compiler/specializer/diffs.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/compiler/specializer/diffs.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
-<span style="color:inherit;"> |</span>struct Change <: Diff end
-<span style="color:inherit;"> |</span>struct Consumed <: Diff end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">@inline tupletype(dfs::Diffed...) = Tuple{map(</span><span style="color:red;">d -> valtype(d)</span><span style="color:gray;">, dfs)...}</span></span>
-<span style="color:green;">+|</span></span>@inline tupletype(dfs::Diffed...) = Tuple{map(<span style="color:green;">valtype</span>, dfs)...}</span>
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>valtype(d::Diffed{V, DV}) where {V, DV} = V
-<span style="color:inherit;"> |</span>
 <span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-109,7 +109,7</span> ============================================================
@@ -31,5 +20,16 @@
 <span style="color:green;">+|</span></span>    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(<span style="color:green;">unwrap</span>, args), ret), ctx.weight, UnknownChange(), ctx.discard</span>
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipe</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: February 14, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+<span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipeline.
+<span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/compiler/specializer/diffs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/compiler/specializer/diffs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
+<span style="color:inherit;"> |</span>struct Change <: Diff end
+<span style="color:inherit;"> |</span>struct Consumed <: Diff end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@inline tupletype(dfs::Diffed...) = Tuple{map(</span><span style="color:red;">d -> valtype(d)</span><span style="color:gray;">, dfs)...}</span></span>
+<span style="color:green;">+|</span></span>@inline tupletype(dfs::Diffed...) = Tuple{map(<span style="color:green;">valtype</span>, dfs)...}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>valtype(d::Diffed{V, DV}) where {V, DV} = V
+<span style="color:inherit;"> |</</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: February 21, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

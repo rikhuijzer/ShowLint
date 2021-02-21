@@ -13,7 +13,7 @@
 </pre> <h3 id=omit_comparison_with_boolean_constant_5_hits ><a href="#omit_comparison_with_boolean_constant_5_hits">Omit comparison with boolean constant ➤ 5 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/API.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/API.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-279,7 +279,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-280,7 +280,7</span> ============================================================
 <span style="color:inherit;"> |</span>        if pkg.name === nothing && pkg.uuid === nothing
 <span style="color:inherit;"> |</span>            pkgerror(&#34;name or UUID specification required when calling &#96;rm&#96;&#34;)
 <span style="color:inherit;"> |</span>        end
@@ -22,7 +22,7 @@
 <span style="color:inherit;"> |</span>             pkg.tree_hash === nothing && pkg.repo.source === nothing &&
 <span style="color:inherit;"> |</span>             pkg.repo.rev === nothing && pkg.path === nothing)
 <span style="color:inherit;"> |</span>            pkgerror(&#34;packages may only be specified by name or UUID when calling &#96;rm&#96;&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-372,7 +372,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-373,7 +373,7</span> ============================================================
 <span style="color:inherit;"> |</span>        if pkg.name === nothing && pkg.uuid === nothing
 <span style="color:inherit;"> |</span>            pkgerror(&#34;name or UUID specification required when calling &#96;free&#96;&#34;)
 <span style="color:inherit;"> |</span>        end
@@ -31,7 +31,7 @@
 <span style="color:inherit;"> |</span>             pkg.tree_hash === nothing && pkg.repo.source === nothing &&
 <span style="color:inherit;"> |</span>             pkg.repo.rev === nothing && pkg.path === nothing)
 <span style="color:inherit;"> |</span>            pkgerror(&#34;packages may only be specified by name or UUID when calling &#96;free&#96;&#34;)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1366,11 +1366,11</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1381,11 +1381,11</span> ============================================================
 <span style="color:inherit;"> |</span>        Types.write_project(Dict(&#34;deps&#34; => deps), ctx.env.project_file)
 <span style="color:inherit;"> |</span>        return instantiate(Context(); manifest=manifest, update_registry=update_registry, verbose=verbose, kwargs...)
 <span style="color:inherit;"> |</span>    end
@@ -44,7 +44,7 @@
 <span style="color:inherit;"> |</span>        pkgerror(&#34;expected manifest file at &#96;$(ctx.env.manifest_file)&#96; but it does not exist&#34;)
 <span style="color:inherit;"> |</span>    end
 <span style="color:inherit;"> |</span>    Operations.prune_manifest(ctx.env)
-<span style="color:inherit;">@|</span><span style="color:inherit;">-1392,7 +1392,7</span> ============================================================
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1407,7 +1407,7</span> ============================================================
 <span style="color:inherit;"> |</span>        # First try without updating the registry
 <span style="color:inherit;"> |</span>        Operations.check_registered(ctx.registries, pkgs)
 <span style="color:inherit;"> |</span>    catch e
@@ -74,4 +74,4 @@
 <span style="color:inherit;"> |</span>        push!(pkgs, PackageSpec(
 <span style="color:inherit;"> |</span>            uuid      = uuid,
 <span style="color:inherit;"> |</span>            name      = entry.</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: February 14, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: February 21, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

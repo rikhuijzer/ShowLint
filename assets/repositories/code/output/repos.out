@@ -344,7 +344,7 @@
 <h3><a href="https://github.com/JuliaDynamics/Agents.jl" target="_blank">JuliaDynamics/Agents.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Omit comparison with boolean constant ➤ 17 hits](/github/juliadynamics/agents.jl/#omit_comparison_with_boolean_constant_17_hits)
+- [Omit comparison with boolean constant ➤ 18 hits](/github/juliadynamics/agents.jl/#omit_comparison_with_boolean_constant_18_hits)
 - [Avoid findall(x -> x == false, Y) ➤ 2 hits](/github/juliadynamics/agents.jl/#avoid_findallx_-_x_false_y_2_hits)
 ~~~
 </div>

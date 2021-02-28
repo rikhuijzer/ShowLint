@@ -37,7 +37,7 @@
  Any[]
  Any[]
  Any[]
- Any["Omit comparison with boolean constant ➤ 17 hits", "Avoid findall(x -> x == false, Y) ➤ 2 hits"]
+ Any["Omit comparison with boolean constant ➤ 18 hits", "Avoid findall(x -> x == false, Y) ➤ 2 hits"]
  Any[]
  Any[]
  Any["Avoid x -> f(x) ➤ 1 hit", "Omit comparison with boolean constant ➤ 2 hits"]

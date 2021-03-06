@@ -916,7 +916,7 @@
 <h3><a href="https://github.com/JuliaPackaging/Yggdrasil" target="_blank">JuliaPackaging/Yggdrasil</a></h3>
 <div class="repo-nav">
 ~~~
-- [Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 3 hits](/github/juliapackaging/yggdrasil/#replace_dirnamedirnamepathofm_with_pkgdirm_3_hits)
+
 ~~~
 </div>
 ~~~
@@ -1051,7 +1051,7 @@
 <h3><a href="https://github.com/JuliaTPU/XLA.jl" target="_blank">JuliaTPU/XLA.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 1 hit](/github/juliatpu/xla.jl/#replace_dirnamedirnamepathofm_with_pkgdirm_1_hit)
+
 ~~~
 </div>
 ~~~
@@ -1306,7 +1306,6 @@
 <div class="repo-nav">
 ~~~
 - [Omit comparison with boolean constant ➤ 2 hits](/github/fonsp/pluto.jl/#omit_comparison_with_boolean_constant_2_hits)
-- [Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 1 hit](/github/fonsp/pluto.jl/#replace_dirnamedirnamepathofm_with_pkgdirm_1_hit)
 ~~~
 </div>
 ~~~
@@ -1351,7 +1350,7 @@
 <h3><a href="https://github.com/invenia/PkgTemplates.jl" target="_blank">invenia/PkgTemplates.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 1 hit](/github/invenia/pkgtemplates.jl/#replace_dirnamedirnamepathofm_with_pkgdirm_1_hit)
+
 ~~~
 </div>
 ~~~
@@ -1478,7 +1477,7 @@
 <h3><a href="https://github.com/timholy/SnoopCompile.jl" target="_blank">timholy/SnoopCompile.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 2 hits](/github/timholy/snoopcompile.jl/#replace_dirnamedirnamepathofm_with_pkgdirm_2_hits)
+
 ~~~
 </div>
 ~~~

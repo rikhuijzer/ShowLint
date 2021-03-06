@@ -237,8 +237,10 @@ patterns = [
         rewrite=":[a]"
         """
     ),
-    Pattern(11, "Replace dirname(dirname(pathof(M))) with pkgdir(M)", ["julia"],
+    Pattern(11, "Replace dirname(dirname(pathof(M))) with pkgdir(M)", ["julia", 1.4],
         """
+        From Julia 1.4 onwards it is possible to use `pkgdir(M)`.
+
         **Example**
         ```
         julia> using DataFrames

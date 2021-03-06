@@ -24,15 +24,15 @@
         - $(SIGNATURES)
         - """
         - function version(tags, n::Number)
-       28     check(t) = isa(t, Number) ? n<t : false
+       29     check(t) = isa(t, Number) ? n<t : false
        24     !any(check, tags)
         - end
         2 version(n::Number) = Base.Fix2(version, n)
         - 
         - function default_predicate(tags) 
-       28     decr(t) = t == "performance-decrease"
-       22     disabled(t) = t == "disabled"
-       14     all(!decr, tags) && 
+       29     decr(t) = t == "performance-decrease"
+       21     disabled(t) = t == "disabled"
+       15     all(!decr, tags) && 
         -         version(tags, 1.0) &&
         -         all(!disabled, tags)
         - end

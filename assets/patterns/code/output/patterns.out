@@ -298,7 +298,9 @@ rewrite=":[a]"
 <span id="11"></span>
 ~~~
 ### 11: Replace dirname(dirname(pathof(M))) with pkgdir(M)
-tags: *julia*
+tags: *julia, 1.4*
+
+From Julia 1.4 onwards it is possible to use `pkgdir(M)`.
 
 **Example**
 ```

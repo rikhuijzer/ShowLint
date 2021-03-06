@@ -293,3 +293,33 @@ rewrite=":[a]"
 </code></pre>
 ~~~
 
+
+~~~ 
+<span id="11"></span>
+~~~
+### 11: Replace dirname(dirname(pathof(M))) with pkgdir(M)
+tags: *julia*
+
+**Example**
+```
+julia> using DataFrames
+
+julia> pathof(DataFrames)
+"/home/rik/.julia/packages/DataFrames/oQ5c7/src/DataFrames.jl"
+
+julia> dirname(dirname(pathof(DataFrames)))
+"/home/rik/.julia/packages/DataFrames/oQ5c7"
+
+julia> pkgdir(DataFrames)
+"/home/rik/.julia/packages/DataFrames/oQ5c7"
+```
+
+
+~~~
+<b>Defintion</b>
+<pre><code class="plaintext">[p11]
+match="dirname(dirname(pathof(:[M])))"
+rewrite="pkgdir(:[M])"
+</code></pre>
+~~~
+

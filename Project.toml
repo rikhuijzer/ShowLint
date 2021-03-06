@@ -12,3 +12,8 @@ JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 ShiftedArrays = "1277b4bf-5013-50f5-be3d-901d8477a67a"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+Formatting = "0.4"
+JSON = "0.21"
+ShiftedArrays = "1.0"

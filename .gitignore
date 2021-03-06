@@ -6,6 +6,8 @@ package.json
 package-lock.json
 tmp/
 
+Manifest.toml
+
 # Generated config files.
 configs/
 

@@ -26,7 +26,7 @@ Then, rewrite suggestions which only hold for Julia `≥1.2` should be hidden.
 Some of these patterns could be simplified by improving Comby's language definition for Julia.
 For now, I have sticked to the existing language defintion.
 
-\toc 
+\toc
 
 ```julia:patterns
 # hideall

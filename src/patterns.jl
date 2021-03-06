@@ -208,7 +208,7 @@ patterns = [
         match="(:[a]; :[c] = :[c])"
         rewrite="(:[a]; :[c])"
         """
-    ), 
+    ),
     Pattern(10, "Replace P && P with P", ["julia", "disabled"],
         """
         *Disabled because it has many false-positives and no true-positives.*
@@ -235,6 +235,28 @@ patterns = [
         [p10b]
         match=":[a~[^ ]+] && :[a~[^ ]+]"
         rewrite=":[a]"
+        """
+    ),
+    Pattern(11, "Replace dirname(dirname(pathof(M))) with pkgdir(M)", ["julia"],
+        """
+        **Example**
+        ```
+        julia> using DataFrames
+
+        julia> pathof(DataFrames)
+        "/home/rik/.julia/packages/DataFrames/oQ5c7/src/DataFrames.jl"
+
+        julia> dirname(dirname(pathof(DataFrames)))
+        "/home/rik/.julia/packages/DataFrames/oQ5c7"
+
+        julia> pkgdir(DataFrames)
+        "/home/rik/.julia/packages/DataFrames/oQ5c7"
+        ```
+        """,
+        """
+        [p11]
+        match="dirname(dirname(pathof(:[M])))"
+        rewrite="pkgdir(:[M])"
         """
     )
 ]

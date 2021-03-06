@@ -55,4 +55,5 @@ using ShowLint: apply
     @test apply(P[10], "if a == b && a == b") == "if a == b"
     @test apply(P[10], "x.y[1] && x.y[1]") == "x.y[1]"
     # @test unchanged(P[10], "a < b && b")
+    @test apply(P[11], "dirname(dirname(pathof(Foo)))") == "pkgdir(Foo)"
 end

@@ -1496,7 +1496,7 @@
 <h3><a href="https://github.com/tlienart/FranklinTemplates.jl" target="_blank">tlienart/FranklinTemplates.jl</a></h3>
 <div class="repo-nav">
 ~~~
-- [Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 1 hit](/github/tlienart/franklintemplates.jl/#replace_dirnamedirnamepathofm_with_pkgdirm_1_hit)
+
 ~~~
 </div>
 ~~~

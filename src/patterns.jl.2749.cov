@@ -6,7 +6,7 @@
         - where `toml` is a Comby configuration.
         - """
         - struct Pattern
-       11     id::Int
+        1     id::Int
         -     title::String
         -     tags::Vector{Any}
         -     description::String
@@ -261,7 +261,7 @@
         -     )
         - ]
         - 
-        - function patterns_have_valid_indexes()::Bool
-        -     collect(1:length(patterns)) == [p.id for p in patterns]
+        1 function patterns_have_valid_indexes()::Bool
+        1     collect(1:length(patterns)) == [p.id for p in patterns]
         - end
         - 

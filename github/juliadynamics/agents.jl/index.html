@@ -1,62 +1,9 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDynamics/Agents.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDynamics/Agents.jl" target=_blank >JuliaDynamics/Agents.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>Base.Fix2&#123;typeof&#40;ShowLint.version&#41;,Float64&#125;&#40;ShowLint.version, 1.5&#41;</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_18_hits">Omit comparison with boolean constant ➤ 18 hits</a><li><a href="#avoid_findallx_-_x_false_y_2_hits">Avoid findall&#40;x -&gt; x &#61;&#61; false, Y&#41; ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_18_hits ><a href="#omit_comparison_with_boolean_constant_18_hits" class=header-anchor >Omit comparison with boolean constant ➤ 18 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/battle.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/battle.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-89,7 +89,7</span> ============================================================
-<span style="color:inherit;"> |</span>            model[id]
-<span style="color:inherit;"> |</span>            for
-<span style="color:inherit;"> |</span>            id in close_ids if
-<span style="color:red;">-|</span></span><span style="color:gray;">            model[id].capture_time == 0 && model[id].</span><span style="color:gray;">has_prisoner</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>            model[id].capture_time == 0 && model[id].<span style="color:green;">!</span>has_prisoner</span>
-<span style="color:inherit;"> |</span>        ])
-<span style="color:inherit;"> |</span>        exploiter.shape = :square
-<span style="color:inherit;"> |</span>        gain = ceil(Int, level(agent) / 2)
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-29,7 +29,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function schelling_agent_step!(agent, model)
-<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
-<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
-<span style="color:inherit;"> |</span>    for neighbor in nearby_agents(agent, model)
-<span style="color:inherit;"> |</span>        if agent.group == neighbor.group
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDynamics/Agents.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDynamics/Agents.jl" target=_blank >JuliaDynamics/Agents.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>Base.Fix2&#123;typeof&#40;ShowLint.version&#41;, Float64&#125;&#40;ShowLint.version, 1.5&#41;</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_18_hits">Omit comparison with boolean constant ➤ 18 hits</a><li><a href="#avoid_findallx_-_x_false_y_2_hits">Avoid findall&#40;x -&gt; x &#61;&#61; false, Y&#41; ➤ 2 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_18_hits ><a href="#omit_comparison_with_boolean_constant_18_hits" class=header-anchor >Omit comparison with boolean constant ➤ 18 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
 <span style="color:inherit;"> |</span>    nmatches = count(matches)
 <span style="color:inherit;"> |</span>    # Adopt a different opinion w/ calculated probability
-<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand(model.rng) < nmatches / model.nopinions
-<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(model.rng, findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
-<span style="color:green;">+|</span></span>        switchId = rand(model.rng, findall(x -> <span style="color:green;">!</span>x, matches))</span>
-<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>end
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-51,7 +51,7</span> ============================================================
-<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
-<span style="color:inherit;"> |</span>    if moore ≠ nothing
-<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
-<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
-<span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>    for i in eachindex(s)
-<span style="color:inherit;"> |</span>        s[i] = Int[]
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/battle.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/battle.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-174,7 +174,7</span> ============================================================
-<span style="color:inherit;"> |</span>                model[id]
-<span style="color:inherit;"> |</span>                for
-<span style="color:inherit;"> |</span>                id in close_ids if
-<span style="color:red;">-|</span></span><span style="color:gray;">                model[id].capture_time == 0 && model[id].</span><span style="color:gray;">has_prisoner</span><span style="color:red;"> == false</span></span>
-<span style="color:green;">+|</span></span>                model[id].capture_time == 0 && model[id].<span style="color:green;">!</span>has_prisoner</span>
-<span style="color:inherit;"> |</span>            ],
-<span style="color:inherit;"> |</span>        )
-<span style="color:inherit;"> |</span>        exploiter.shape = :square
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/opinion_spread.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/opinion_spread.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-59,7 +59,7</span> ============================================================
-<span style="color:inherit;"> |</span>    matches = model[neighbor].opinion .== agent.opinion
-<span style="color:inherit;"> |</span>    nmatches = count(matches)
 <span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand(model.rng) < nmatches / model.nopinions
 <span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(model.rng, findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
 <span style="color:green;">+|</span></span>        switchId = rand(model.rng, findall(x -> <span style="color:green;">!</span>x, matches))</span>
@@ -93,35 +40,38 @@
 <span style="color:inherit;"> |</span>abm_video(
 <span style="color:inherit;"> |</span>    &#34;game of life.mp4&#34;,
 <span style="color:inherit;"> |</span>    model,
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/simulations/collect.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/simulations/collect.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-130,8 +130,8</span> ============================================================
-<span style="color:inherit;"> |</span>    df_agent = init_agent_dataframe(model, adata)
-<span style="color:inherit;"> |</span>    df_model = init_model_dataframe(model, mdata)
-<span style="color:inherit;"> |</span>    if n isa Integer
-<span style="color:orange;">!|</span>        if when<span style="color:red;"> == true</span>; for c in eachcol(df_agent); sizehint!(c, n); end; end
-<span style="color:orange;">!|</span>        if when_model<span style="color:red;"> == true</span>; for c in eachcol(df_model); sizehint!(c, n); end; end
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/opinion_spread.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/opinion_spread.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-59,7 +59,7</span> ============================================================
+<span style="color:inherit;"> |</span>    matches = model[neighbor].opinion .== agent.opinion
+<span style="color:inherit;"> |</span>    nmatches = count(matches)
+<span style="color:inherit;"> |</span>    if nmatches < model.nopinions && rand(model.rng) < nmatches / model.nopinions
+<span style="color:red;">-|</span></span><span style="color:gray;">        switchId = rand(model.rng, findall(x -> </span><span style="color:gray;">x</span><span style="color:red;"> == false</span><span style="color:gray;">, matches))</span></span>
+<span style="color:green;">+|</span></span>        switchId = rand(model.rng, findall(x -> <span style="color:green;">!</span>x, matches))</span>
+<span style="color:inherit;"> |</span>        agent.opinion[switchId] = model[neighbor].opinion[switchId]
 <span style="color:inherit;"> |</span>    end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>    s = 0
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/schelling.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/schelling.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-119,7 +119,7</span> ============================================================
-<span style="color:inherit;"> |</span># agent when activated.
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>function agent_step!(agent, model)
-<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
-<span style="color:inherit;"> |</span>    minhappy = model.min_to_be_happy
-<span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
-<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
-<span style="color:inherit;">@|</span><span style="color:inherit;">-309,7 +309,7</span> ============================================================
-<span style="color:inherit;"> |</span># We now also define a processing function, that returns the percentage of
-<span style="color:inherit;"> |</span># happy agents:
-<span style="color:inherit;"> |</span>
-<span style="color:orange;">!|</span>happyperc(moods) = count(x -> x<span style="color:red;"> == true</span>, moods) / length(moods)
-<span style="color:inherit;"> |</span>adata = [(:mood, happyperc)]
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>parameters = Dict(
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/spaces/grid.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-51,7 +51,7</span> ============================================================
+<span style="color:inherit;"> |</span>    s = Array{Vector{Int},D}(undef, d)
+<span style="color:inherit;"> |</span>    if moore ≠ nothing
+<span style="color:inherit;"> |</span>        @warn &#34;Keyword &#96;moore&#96; is deprecated, use &#96;metric&#96; instead.&#34;
+<span style="color:orange;">!|</span>        metric = moore <span style="color:red;">== true </span>? :chebyshev : :euclidean
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    for i in eachindex(s)
+<span style="color:inherit;"> |</span>        s[i] = Int[]
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/battle.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/battle.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-89,7 +89,7</span> ============================================================
+<span style="color:inherit;"> |</span>            model[id]
+<span style="color:inherit;"> |</span>            for
+<span style="color:inherit;"> |</span>            id in close_ids if
+<span style="color:red;">-|</span></span><span style="color:gray;">            model[id].capture_time == 0 && model[id].</span><span style="color:gray;">has_prisoner</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>            model[id].capture_time == 0 && model[id].<span style="color:green;">!</span>has_prisoner</span>
+<span style="color:inherit;"> |</span>        ])
+<span style="color:inherit;"> |</span>        exploiter.shape = :square
+<span style="color:inherit;"> |</span>        gain = ceil(Int, level(agent) / 2)
 <span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/game_of_life.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-36,9 +36,9</span> ============================================================
@@ -140,7 +90,57 @@
 <span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
 <span style="color:inherit;"> |</span>    all_neighbors = Iterators.flatten(ids_in_position(np,model) for np in neighbor_positions)
 <span style="color:orange;">!|</span>    sum(model[i].status <span style="color:red;">== true </span>for i in all_neighbors)
-<span style="color:inherit;"> |</spa</div>
+<span style="color:inherit;"> |</span>end
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/schelling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-29,7 +29,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function schelling_agent_step!(agent, model)
+<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
+<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
+<span style="color:inherit;"> |</span>    for neighbor in nearby_agents(agent, model)
+<span style="color:inherit;"> |</span>        if agent.group == neighbor.group
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/battle.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/battle.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-174,7 +174,7</span> ============================================================
+<span style="color:inherit;"> |</span>                model[id]
+<span style="color:inherit;"> |</span>                for
+<span style="color:inherit;"> |</span>                id in close_ids if
+<span style="color:red;">-|</span></span><span style="color:gray;">                model[id].capture_time == 0 && model[id].</span><span style="color:gray;">has_prisoner</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>                model[id].capture_time == 0 && model[id].<span style="color:green;">!</span>has_prisoner</span>
+<span style="color:inherit;"> |</span>            ],
+<span style="color:inherit;"> |</span>        )
+<span style="color:inherit;"> |</span>        exploiter.shape = :square
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/schelling.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/examples/schelling.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-119,7 +119,7</span> ============================================================
+<span style="color:inherit;"> |</span># agent when activated.
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function agent_step!(agent, model)
+<span style="color:orange;">!|</span>    agent.mood <span style="color:red;">== true </span>&& return # do nothing if already happy
+<span style="color:inherit;"> |</span>    minhappy = model.min_to_be_happy
+<span style="color:inherit;"> |</span>    neighbor_positions = nearby_positions(agent, model)
+<span style="color:inherit;"> |</span>    count_neighbors_same_group = 0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-309,7 +309,7</span> ============================================================
+<span style="color:inherit;"> |</span># We now also define a processing function, that returns the percentage of
+<span style="color:inherit;"> |</span># happy agents:
+<span style="color:inherit;"> |</span>
+<span style="color:orange;">!|</span>happyperc(moods) = count(x -> x<span style="color:red;"> == true</span>, moods) / length(moods)
+<span style="color:inherit;"> |</span>adata = [(:mood, happyperc)]
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>parameters = Dict(
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/simulations/collect.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/simulations/collect.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-130,8 +130,8</span> ============================================================
+<span style="color:inherit;"> |</span>    df_agent = init_agent_dataframe(model, adata)
+<span style="color:inherit;"> |</span>    df_model = init_model_dataframe(model, mdata)
+<span style="color:inherit;"> |</span>    if n isa Integer
+<span style="color:orange;">!|</span>        if when<span style="color:red;"> == true</span>; for c in eachcol(df_agent); sizehint!(c, n); end; end
+<span style="color:orange;">!|</span>        if when_model<span style="color:red;"> == true</span>; for c in eachcol(df_model); sizehint!(c, n); end; end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span></div>
 </pre> <h3 id=avoid_findallx_-_x_false_y_2_hits ><a href="#avoid_findallx_-_x_false_y_2_hits" class=header-anchor >Avoid findall&#40;x -&gt; x &#61;&#61; false, Y&#41; ➤ 2 hits</a></h3> <p><a href="/patterns/#7">Pattern #7</a></p> <pre>
 <div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/Agents.jl/src/models/opinion.jl</span>

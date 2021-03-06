@@ -1,5 +1,16 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaPackaging/Yggdrasil</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaPackaging/Yggdrasil" target=_blank >JuliaPackaging/Yggdrasil</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#replace_dirnamedirnamepathofm_with_pkgdirm_3_hits">Replace dirname&#40;dirname&#40;pathof&#40;M&#41;&#41;&#41; with pkgdir&#40;M&#41; ➤ 3 hits</a></ol></div> <h3 id=replace_dirnamedirnamepathofm_with_pkgdirm_3_hits ><a href="#replace_dirnamedirnamepathofm_with_pkgdirm_3_hits" class=header-anchor >Replace dirname&#40;dirname&#40;pathof&#40;M&#41;&#41;&#41; with pkgdir&#40;M&#41; ➤ 3 hits</a></h3> <p><a href="/patterns/#11">Pattern #11</a></p> <pre>
-<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaPackaging/Yggdrasil/0_RootFS/common.jl</span>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaPackaging/Yggdrasil/0_RootFS/cull_old_shards.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaPackaging/Yggdrasil/0_RootFS/cull_old_shards.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">artifacts_toml = joinpath(</span><span style="color:red;">dirname(dirname(pathof</span><span style="color:gray;">(BinaryBuilderBase</span><span style="color:red;">))</span><span style="color:gray;">), &#34;Artifacts.toml&#34;)</span></span>
+<span style="color:green;">+|</span></span>artifacts_toml = joinpath(<span style="color:green;">pkgdir</span>(BinaryBuilderBase), &#34;Artifacts.toml&#34;)</span>
+<span style="color:inherit;"> |</span>function unbind_shard(cs::CompilerShard)
+<span style="color:inherit;"> |</span>    @info(&#34;Unbinding $(repr(cs))&#34;)
+<span style="color:inherit;"> |</span>    unbind_artifact!(artifacts_toml, BinaryBuilderBase.artifact_name(cs))
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaPackaging/Yggdrasil/0_RootFS/common.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">JuliaPackaging/Yggdrasil/0_RootFS/common.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-57,7 +57,7</span> ============================================================
 <span style="color:inherit;"> |</span>end
@@ -18,16 +29,5 @@
 <span style="color:green;">+|</span></span>    artifacts_toml = joinpath(<span style="color:green;">pkgdir</span>(BinaryBuilderBase), &#34;Artifacts.toml&#34;)</span>
 <span style="color:inherit;"> |</span>    bind_artifact!(artifacts_toml, BinaryBuilderBase.artifact_name(cs), hash; platform=platform, download_info=download_info, lazy=true, force=true)
 <span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">JuliaPackaging/Yggdrasil/0_RootFS/cull_old_shards.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaPackaging/Yggdrasil/0_RootFS/cull_old_shards.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span>
-<span style="color:red;">-|</span></span><span style="color:gray;">artifacts_toml = joinpath(</span><span style="color:red;">dirname(dirname(pathof</span><span style="color:gray;">(BinaryBuilderBase</span><span style="color:red;">))</span><span style="color:gray;">), &#34;Artifacts.toml&#34;)</span></span>
-<span style="color:green;">+|</span></span>artifacts_toml = joinpath(<span style="color:green;">pkgdir</span>(BinaryBuilderBase), &#34;Artifacts.toml&#34;)</span>
-<span style="color:inherit;"> |</span>function unbind_shard(cs::CompilerShard)
-<span style="color:inherit;"> |</span>    @info(&#34;Unbinding $(repr(cs))&#34;)
-<span style="color:inherit;"> |</span>    unbind_artifact!(artifacts_toml, BinaryBuilderBase.artifact_name</div>
+<span style="color:inherit;"> |</</div>
 </pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: March 06, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

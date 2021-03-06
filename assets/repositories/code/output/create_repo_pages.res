@@ -1,4 +1,4 @@
-166-element Array{Any,1}:
+166-element Vector{Any}:
  Any[]
  Any[]
  Any[]
@@ -164,4 +164,4 @@
  Any[]
  Any["Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 2 hits"]
  Any["Avoid comparing findfirst to nothing ➤ 1 hit"]
- Any["Replace dirname(dirname(pathof(M))) with pkgdir(M) ➤ 1 hit"]
+ Any[]

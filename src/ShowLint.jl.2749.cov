@@ -27,8 +27,8 @@
         - 
         - $(TYPEDSIGNATURES) 
         - """
-        - function ansi2html(text::String)::String
-       16   escape_codes = Dict(
+        8 function ansi2html(text::String)::String
+        8   escape_codes = Dict(
         -     "0;30" => "inherit",
         -     "0;31" => "red",
         -     "0;32" => "green",
@@ -79,7 +79,7 @@
         - "github"
         - ```
         - """
-        - function host_dir(repo::Repo)::String
+       49 function host_dir(repo::Repo)::String
        49     host = repo.host
        61     host_dir = startswith(host, "https://") ? host[9:end] : host
        49     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
@@ -95,7 +95,7 @@
         1     lowercase(joinpath(host_dir(repo), "$name.md"))
         - end
         - 
-        - function clone_repositories(; production=is_production())
+        2 function clone_repositories(; production=is_production())
         2     if !isdir(clones_dir)
         0         mkdir(clones_dir)
         -     end
@@ -135,7 +135,7 @@
         - """
         - function write_config(pat::Pattern, dir::String)
        22     open(config_path(pat), "w") do io
-        -         write(io, pat.toml)
+       22         write(io, pat.toml)
         -     end
         - end
         - 
@@ -144,7 +144,7 @@
         - 
         - $(TYPEDSIGNATURES)
         - """
-        - function write_configs()
+        2 function write_configs()
         2     rm(configs_dir; force=true, recursive=true)
         2     mkpath(configs_dir)
         2     for pat in patterns
@@ -158,7 +158,7 @@
         - 
         - $(TYPEDSIGNATURES)
         - """
-        - function number_of_matches(stderr::String)::Int
+        8 function number_of_matches(stderr::String)::Int
         8     regex = r"\"number_of_matches\": ([0-9]*)"
         8     m = match(regex, stderr)
         8     n_str = m[1]
@@ -170,7 +170,7 @@
         - 
         - $(TYPEDSIGNATURES)
         - """
-        - function apply(pat::Pattern, repo::Repo; 
+       45 function apply(pat::Pattern, repo::Repo; 
         -     file_extensions="jl", in_place=false)
         - 
        90     start = Dates.now()
@@ -221,14 +221,14 @@
         - 
         - $(TYPEDSIGNATURES)
         - """
-        - function apply(pat::Pattern, code::String; file_extension="jl")
+       58 function apply(pat::Pattern, code::String; file_extension="jl")
        74     test_dir = joinpath(clones_dir, "tmp", "tmp")
        37     rm(test_dir; recursive=true, force=true)
        37     mkpath(test_dir)
         - 
        37     code_file = joinpath(test_dir, "code.$file_extension")
        37     open(code_file, "w") do io
-        -         write(io, code)
+       37         write(io, code)
         -     end
         -     
        37     repo = Repo("tmp", "tmp"; exclude=["nah"])
@@ -238,13 +238,13 @@
        37     read(code_file, String)
         - end
         - 
-        - function filter_patterns(repo::Repo, patterns::Vector{Pattern})
+        3 function filter_patterns(repo::Repo, patterns::Vector{Pattern})
         4     predicates = repo.tags_predicates
        18     all_predicates_hold(tags) = all([P(tags) for P in predicates])
-        4     filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
+       18     filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
         - end
         - 
-        - function repo_page(repo::Repo)
+        1 function repo_page(repo::Repo)
         1     predicates_str = join(repo.tags_predicates, " && ")
         1     headers = []
         1     repo_url = joinpath(repo.host, repo.name)
@@ -260,7 +260,7 @@
         - 
         -         """ 
         - 
-        1     function pattern_section(pat)
+        9     function pattern_section(pat)
         8         diff, err = ShowLint.apply(pat, repo)
         8         title = pat.title
         8         id = pat.id
@@ -299,7 +299,7 @@
         - 
         - $(TYPEDSIGNATURES)
         - """
-        - function create_repo_pages(; production=is_production())
+        2 function create_repo_pages(; production=is_production())
         2     write_configs()
         1     pages_headers = []
         - 
@@ -317,7 +317,7 @@
         1         push!(pages_headers, page_headers)
         - 
         2         open(franklin_file, "w") do io
-        -             write(io, """
+        1             write(io, """
         -                 +++
         -                 title = "$(repo.name)"
         -                 +++

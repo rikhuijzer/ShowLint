@@ -5,7 +5,7 @@
         - @testset "Patterns" begin
         -     @test SL.patterns_have_valid_indexes()
         - 
-        -     function unchanged(pat::Pattern, code::String)
+       16     function unchanged(pat::Pattern, code::String)
        16         result = apply(pat, code)
        16         ok = result == code
        16         if !ok

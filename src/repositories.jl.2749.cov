@@ -10,7 +10,7 @@
         - ```
         - """
         - struct Repo
-      415     host::String
+      208     host::String
         -     name::String
         -     tags_predicates::Vector{Function}
         -     exclude_prefixes::Vector{String}
@@ -30,8 +30,8 @@
         2 version(n::Number) = Base.Fix2(version, n)
         - 
         - function default_predicate(tags) 
-       12     decr(t) = t == "performance-decrease"
-       12     disabled(t) = t == "disabled"
+       28     decr(t) = t == "performance-decrease"
+       22     disabled(t) = t == "disabled"
        14     all(!decr, tags) && 
         -         version(tags, 1.0) &&
         -         all(!disabled, tags)
@@ -39,7 +39,7 @@
         - 
         - default_excludes = ["test"]
         - 
-      453 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
+      416 Repo(host, name; predicates=[default_predicate], exclude=default_excludes) =
         -     Repo(host, name, predicates, exclude)
         - 
         - is_production()::Bool = haskey(ENV, "CI")
@@ -217,7 +217,7 @@
         -         Repo("https://github.com", "rikhuijzer/Codex.jl"),
         -     ]
         - 
-        - function repository_ordering_is_valid()::Bool
+        1 function repository_ordering_is_valid()::Bool
         2     names = [r.name for r in repositories(; production=true)]
         1     sorted = Base.sort(names)
         1     unique_and_sorted = unique(sorted)

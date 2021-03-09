@@ -10,17 +10,6 @@
 <span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span>valtype(d::Diffed{V, DV}) where {V, DV} = V
 <span style="color:inherit;"> |</span>
-<span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
-<span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
-<span style="color:inherit;">@|</span><span style="color:inherit;">-109,7 +109,7</span> ============================================================
-<span style="color:inherit;"> |</span>    ret = ctx(cs.fn, tupletype(args...), args...)
-<span style="color:inherit;"> |</span>    adj_w = regenerate_projection_walk(ctx.tr, ctx.visited)
-<span style="color:inherit;"> |</span>    regenerate_discard_walk!(ctx.discard, ctx.visited, get_trace(cs))
-<span style="color:red;">-|</span></span><span style="color:gray;">    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(</span><span style="color:red;">a -> unwrap(a)</span><span style="color:gray;">, args), ret), ctx.weight, UnknownChange(), ctx.discard</span></span>
-<span style="color:green;">+|</span></span>    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(<span style="color:green;">unwrap</span>, args), ret), ctx.weight, UnknownChange(), ctx.discard</span>
-<span style="color:inherit;"> |</span>end
-<span style="color:inherit;"> |</span>
-<span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipeline.
 <span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/update.jl</span>
 <span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/update.jl</span>
 <span style="color:inherit;">@|</span><span style="color:inherit;">-125,7 +125,7</span> ============================================================
@@ -31,5 +20,16 @@
 <span style="color:green;">+|</span></span>    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(<span style="color:green;">unwrap</span>, args), ret), ctx.weight, UnknownChange(), ctx.discard</span>
 <span style="color:inherit;"> |</span>end
 <span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipeline.
+<span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-109,7 +109,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ret = ctx(cs.fn, tupletype(args...), args...)
+<span style="color:inherit;"> |</span>    adj_w = regenerate_projection_walk(ctx.tr, ctx.visited)
+<span style="color:inherit;"> |</span>    regenerate_discard_walk!(ctx.discard, ctx.visited, get_trace(cs))
+<span style="color:red;">-|</span></span><span style="color:gray;">    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(</span><span style="color:red;">a -> unwrap(a)</span><span style="color:gray;">, args), ret), ctx.weight, UnknownChange(), ctx.discard</span></span>
+<span style="color:green;">+|</span></span>    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(<span style="color:green;">unwrap</span>, args), ret), ctx.weight, UnknownChange(), ctx.discard</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
 <span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipe</div>
-</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: March 06, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: March 09, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

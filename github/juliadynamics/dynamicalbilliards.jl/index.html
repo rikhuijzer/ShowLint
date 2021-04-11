@@ -1,0 +1,34 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaDynamics/DynamicalBilliards.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaDynamics/DynamicalBilliards.jl" target=_blank >JuliaDynamics/DynamicalBilliards.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_1_hit">Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a><li><a href="#omit_comparison_with_boolean_constant_2_hits">Omit comparison with boolean constant ➤ 2 hits</a></ol></div> <h3 id=avoid_x_-_fx_1_hit ><a href="#avoid_x_-_fx_1_hit" class=header-anchor >Avoid x -&gt; f&#40;x&#41; ➤ 1 hit</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/DynamicalBilliards.jl/src/testing.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/DynamicalBilliards.jl/src/testing.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-15,7 +15,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function tag(bd::Billiard)
+<span style="color:inherit;"> |</span>    s = DynamicalBilliards.isperiodic(bd) ? &#34;[PERIODIC]&#34; : &#34;&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">    if length(unique(map(</span><span style="color:red;">x -> typeof(x)</span><span style="color:gray;">, bd))) > 7</span></span>
+<span style="color:green;">+|</span></span>    if length(unique(map(<span style="color:green;">typeof</span>, bd))) > 7</span>
+<span style="color:inherit;"> |</span>        s *= &#34;[OMNI]&#34;
+<span style="color:inherit;"> |</span>    elseif any(o -> typeof(o) <: CONCAVE, bd)
+<span style="color:inherit;"> |</span>        s *= &#34;[CONCAVE]</div>
+</pre> <h3 id=omit_comparison_with_boolean_constant_2_hits ><a href="#omit_comparison_with_boolean_constant_2_hits" class=header-anchor >Omit comparison with boolean constant ➤ 2 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/DynamicalBilliards.jl/src/timeevolution/collisions.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/DynamicalBilliards.jl/src/timeevolution/collisions.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-79,7 +79,7</span> ============================================================
+<span style="color:inherit;"> |</span>function collision(p::Particle{T}, d::Antidot{T}) where {T}
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    dotp = dot(p.vel, normalvec(d, p.pos))
+<span style="color:orange;">!|</span>    if d.pflag<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>        dotp ≥ 0 && return nocollision(T)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaDynamics/DynamicalBilliards.jl/src/timeevolution/highleveltimes.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaDynamics/DynamicalBilliards.jl/src/timeevolution/highleveltimes.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-59,7 +59,7</span> ============================================================
+<span style="color:inherit;"> |</span>function escapeind(bd)
+<span style="color:inherit;"> |</span>    j = Int[]
+<span style="color:inherit;"> |</span>    for (i, obst) in enumerate(bd)
+<span style="color:orange;">!|</span>        if typeof(obst) <: FiniteWall && obst.isdoor<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>            push!(j, i)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span></div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

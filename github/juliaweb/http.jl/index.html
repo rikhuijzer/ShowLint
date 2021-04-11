@@ -1,0 +1,33 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaWeb/HTTP.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaWeb/HTTP.jl" target=_blank >JuliaWeb/HTTP.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_3_hits">Omit comparison with boolean constant ➤ 3 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_1_hit">Avoid comparing findfirst to nothing ➤ 1 hit</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_3_hits ><a href="#omit_comparison_with_boolean_constant_3_hits" class=header-anchor >Omit comparison with boolean constant ➤ 3 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaWeb/HTTP.jl/src/parsemultipart.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaWeb/HTTP.jl/src/parsemultipart.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-119,14 +119,14</span> ============================================================
+<span style="color:inherit;"> |</span>    escaped = false
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    for offset in eachindex(str)
+<span style="color:red;">-|</span></span><span style="color:gray;">        if </span><span style="color:gray;">escaped</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>        if <span style="color:green;">!</span>escaped</span>
+<span style="color:orange;">!|</span>            if quotes<span style="color:red;"> == true</span> && str[offset] == '&#34;'
+<span style="color:inherit;"> |</span>                quotes = false
+<span style="color:inherit;"> |</span>            elseif str[offset] == '\\'
+<span style="color:inherit;"> |</span>                escaped = true
+<span style="color:inherit;"> |</span>            elseif str[offset] == '&#34;'
+<span style="color:inherit;"> |</span>                quotes = true
+<span style="color:red;">-|</span></span><span style="color:gray;">            elseif </span><span style="color:gray;">quotes</span><span style="color:red;"> == false</span><span style="color:gray;"> && (str[offset] == ';' || str[offset] == '=')</span></span>
+<span style="color:green;">+|</span></span>            elseif <span style="color:green;">!</span>quotes && (str[offset] == ';' || str[offset] == '=')</span>
+<span style="color:inherit;"> |</span>                prev = prevind(str, offset)
+<span style="color:inherit;"> |</span>                if prev > start
+<span style="color:inherit;"> |</span>                    push!(retval, strip(SubString(str, start, pr</div>
+</pre> <h3 id=avoid_comparing_findfirst_to_nothing_1_hit ><a href="#avoid_comparing_findfirst_to_nothing_1_hit" class=header-anchor >Avoid comparing findfirst to nothing ➤ 1 hit</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaWeb/HTTP.jl/src/Pairs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaWeb/HTTP.jl/src/Pairs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-40,7 +40,7</span> ============================================================
+<span style="color:inherit;"> |</span>&#34;&#34;&#34;
+<span style="color:inherit;"> |</span>function defaultbyfirst(c, item, eq = ==)
+<span style="color:inherit;"> |</span>    k = first(item)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">findfirst</span><span style="color:gray;">(x->eq(first(x), k), c)</span><span style="color:red;"> === nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">!occursin</span>(x->eq(first(x), k), c)</span>
+<span style="color:inherit;"> |</span>        push!(c, item)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    r</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,0 +1,3 @@
+[p11]
+match="dirname(dirname(pathof(:[M])))"
+rewrite="pkgdir(:[M])"

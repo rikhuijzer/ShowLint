@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadynamics/agents.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagpu/cuda.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaregistries/registrator.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadynamics/dynamicalsystems.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/downloads.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadynamics/drwatson.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaplots/plots.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/doublefloats.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagraphs/lightgraphs.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/packagecompiler.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaml/mldatautils.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/combinatorics.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapackaging/binarybuilderbase.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/diegozea/mitos.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/fonsp/plutoui.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/hcubature.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/queryverse/vegalite.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaweb/http.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/sparsedifftools.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/turinglang/advancedhmc.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/roots.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapackaging/binarybuilder.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliastats/statsmodels.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/toml.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamanifolds/manifoldsbase.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaml/mllabelutils.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamanifolds/manopt.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/sciml/differentialequations.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/invenia/pkgtemplates.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/interpolations.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/alan-turing-institute/mljbase.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/taylorseries.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacollections/abstracttrees.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadatabases/mysql.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/patterns/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagpu/amdgpu.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/giovineitalia/gadfly.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadata/tables.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/fixedpointnumbers.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliastats/statskit.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/alan-turing-institute/mljmodels.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/turinglang/bijectors.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaregistries/compathelper.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/statisticalrethinkingjulia/turingmodels.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/specialfunctions.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/fluxml/macrotools.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/statisticalrethinkingjulia/statisticalrethinking.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/ijulia.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/calculus.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliainterop/zmq.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/stor-i/gaussianprocesses.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/pkg.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliastats/distributions.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/jump-dev/jump.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/wikunia/constraintsolver.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/fonsp/pluto.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/fluxml/zygote.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapy/pyplot.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/stor-i/changepoints.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/alan-turing-institute/mljtuning.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapackaging/yggdrasil/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliainterop/cxx.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaio/videoio.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/femtomc/jaynes.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaplots/makie.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadebug/juliainterpreter.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/polynomials.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadynamics/chaostools.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julianlsolvers/optim.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadynamics/dynamicalsystemsbase.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaio/mat.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/finitedifferences.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaimages/images.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/alan-turing-institute/mlj.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacollections/lrucache.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadynamics/entropies.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/bcbi/predictmd.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamath/fftw.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliainterop/matlab.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/evizero/unicodeplots.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/probcomp/gen.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliainterop/rcall.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaweb/websockets.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaml/reinforce.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapy/pycall.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacollections/functionalcollections.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagraphs/graphplot.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagaussianprocesses/kernelfunctions.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadata/dataframesmeta.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadebug/gallium.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliamanifolds/manifolds.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliastats/lasso.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/turinglang/mcmcchains.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/bcbi/simplecontainergenerator.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/tlienart/franklin.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/invenia/impute.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadata/feather.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacollections/memoize.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaio/hdf5.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadatabases/postgresql.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/timholy/revise.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaml/lossfunctions.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/mbedtls.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/frbny-dsge/smc.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadebug/debugger.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadata/yaml.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/tokenize.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacollections/datastructures.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadatabases/redis.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/denizyuret/autograd.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadocs/docstringextensions.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliastats/mixedmodels.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julia-actions/massinstallaction.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/domluna/juliaformatter.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadynamics/dynamicalbilliards.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/timholy/snoopcompile.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julianlsolvers/lsqfit.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadocs/documenter.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/turinglang/turing.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/tlienart/franklintemplates.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacontrol/controlsystems.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaio/ezxml.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadata/csv.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliastats/hypothesistests.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/404/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/odow/sddp.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacollections/orderedcollections.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliainterop/clang.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julianlsolvers/nlsolve.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagaussianprocesses/abstractgps.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapackaging/requires.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaimages/imageview.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/rikhuijzer/codex.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/chainrulescore.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/queryverse/query.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/h-klok/statswithjuliabook/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/pkgdev.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/chriselrod/loopvectorization.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaio/jld.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/timholy/progressmeter.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/jrevels/cassette.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/timholy/profileview.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/reversediff.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/finitediff.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/joshday/onlinestats.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliacollections/itertools.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagpu/arrayfire.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadata/dataframes.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapy/pandas.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/forwarddiff.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliapackaging/pkgserver.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliatpu/xla.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/repositories/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/julia/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/timholy/rebugger.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/compat.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/wikunia/javis.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/statisticalrethinkingjulia/dynamichmcmodels.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/giovineitalia/compose.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/junolab/weave.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/fonsp/plutoutils.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadiff/chainrules.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliadatabases/sqlite.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/fluxml/metalhead.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliastats/glm.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/notes/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/cstjean/scikitlearn.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliagpu/opencl.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/juliaio/formatting.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://rikhuijzer.github.io/ShowLint/github/julialang/statistics.jl/index.html</loc>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+</urlset>

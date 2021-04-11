@@ -1,0 +1,22 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Notes</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=notes ><a href="#notes" class=header-anchor >Notes</a></h1> <div class=franklin-toc ><ol><li><a href="#failed_prs">Failed PRs</a><ol><li><a href="#stale">Stale</a><li><a href="#closed">Closed</a></ol><li><a href="#ease_of_validation">Ease of validation</a><li><a href="#size_of_rewrite">Size of rewrite</a></ol></div> <h2 id=failed_prs ><a href="#failed_prs" class=header-anchor >Failed PRs</a></h2> <h3 id=stale ><a href="#stale" class=header-anchor >Stale</a></h3> <ul> <li><p><a href="https://github.com/GiovineItalia/Compose.jl/pull/407">https://github.com/GiovineItalia/Compose.jl/pull/407</a></p> </ul> <h3 id=closed ><a href="#closed" class=header-anchor >Closed</a></h3> <ul> <li><p><a href="https://github.com/JuliaDynamics/Agents.jl/pull/358">https://github.com/JuliaDynamics/Agents.jl/pull/358</a> &#40;<code>findall&#40;&#33;, Y&#41;</code> not considered readable&#41;</p> <li><p><a href="https://github.com/fonsp/Pluto.jl/pull/802">https://github.com/fonsp/Pluto.jl/pull/802</a> &#40;<code>Vector</code>&#41;</p> <li><p><a href="https://github.com/diegozea/MIToS.jl/pull/58">https://github.com/diegozea/MIToS.jl/pull/58</a> &#40;<code>Vector</code>&#41;</p> <li><p><a href="https://github.com/JuliaLang/Pkg.jl/pull/2301">https://github.com/JuliaLang/Pkg.jl/pull/2301</a> &#40;my bad; didn&#39;t validate&#41;</p> </ul> <h2 id=ease_of_validation ><a href="#ease_of_validation" class=header-anchor >Ease of validation</a></h2> <p>Generally, rewrites which can easily be validated seem to be more appreciated. For example, compare rewriting 26 occurrences of </p> <pre><code class=language-julia >f&#40;a, b; c &#61; c&#41;</code></pre>
+<p>to</p>
+<pre><code class=language-julia >f&#40;a, b; c&#41;</code></pre>
+<p>at <a href="https://github.com/JuliaDynamics/Agents.jl/pull/357">https://github.com/JuliaDynamics/Agents.jl/pull/357</a> with rewriting 2 occurrences of</p>
+<pre><code class=language-julia >findall&#40;x -&gt; x &#61;&#61; false, matches&#41;</code></pre>
+<p>to</p>
+<pre><code class=language-julia >findall&#40;&#33;, matches&#41;</code></pre>
+<p>at <a href="https://github.com/JuliaDynamics/Agents.jl/pull/358/files">https://github.com/JuliaDynamics/Agents.jl/pull/358/files</a>.</p>
+<p>Clearly, the former is much bigger, but easier to validate.</p>
+<h2 id=size_of_rewrite ><a href="#size_of_rewrite" class=header-anchor >Size of rewrite</a></h2>
+<p>Unless the rewrite is easy to validate, bigger rewrites are less likely to be merged.</p>
+<div class=page-foot >
+  <div class=copyright >
+    <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div>
+    </div>  
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>

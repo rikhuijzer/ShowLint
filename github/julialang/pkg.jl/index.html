@@ -1,0 +1,93 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/Pkg.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/Pkg.jl" target=_blank >JuliaLang/Pkg.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_2_hits">Avoid x -&gt; f&#40;x&#41; ➤ 2 hits</a><li><a href="#omit_comparison_with_boolean_constant_6_hits">Omit comparison with boolean constant ➤ 6 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_2_hits">Avoid comparing findfirst to nothing ➤ 2 hits</a></ol></div> <h3 id=avoid_x_-_fx_2_hits ><a href="#avoid_x_-_fx_2_hits" class=header-anchor >Avoid x -&gt; f&#40;x&#41; ➤ 2 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/Pkg.jl/ext/HistoricaStdlibGenerator/generate_historical_stdlibs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/Pkg.jl/ext/HistoricaStdlibGenerator/generate_historical_stdlibs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-154,12 +154,12</span> ============================================================
+<span style="color:inherit;"> |</span>                    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>                    if !isempty(hash)
+<span style="color:red;">-|</span></span><span style="color:gray;">                        calc_hash = bytes2hex(open(</span><span style="color:red;">io -> sha256(io)</span><span style="color:gray;">, fname, &#34;r&#34;))</span></span>
+<span style="color:green;">+|</span></span>                        calc_hash = bytes2hex(open(<span style="color:green;">sha256</span>, fname, &#34;r&#34;))</span>
+<span style="color:inherit;"> |</span>                        if calc_hash != hash
+<span style="color:inherit;"> |</span>                            @error(&#34;Hash mismatch on $(fname); deleting and re-downloading&#34;)
+<span style="color:inherit;"> |</span>                            rm(fname; force=true)
+<span style="color:inherit;"> |</span>                            Downloads.download(url, fname)
+<span style="color:red;">-|</span></span><span style="color:gray;">                            calc_hash = bytes2hex(open(</span><span style="color:red;">io -> sha256(io)</span><span style="color:gray;">, fname, &#34;r&#34;))</span></span>
+<span style="color:green;">+|</span></span>                            calc_hash = bytes2hex(open(<span style="color:green;">sha256</span>, fname, &#34;r&#34;))</span>
+<span style="color:inherit;"> |</span>                            if calc_hash != hash
+<span style="color:inherit;"> |</span>                                @error(&#34;Hash mismatch on $(fname); re-download failed!&#34;)
+<span style="color:inherit;"> |</span>                                con</div>
+</pre> <h3 id=omit_comparison_with_boolean_constant_6_hits ><a href="#omit_comparison_with_boolean_constant_6_hits" class=header-anchor >Omit comparison with boolean constant ➤ 6 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/Registry/Registry.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/Registry/Registry.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-173,7 +173,7</span> ============================================================
+<span style="color:inherit;"> |</span>        # clone to tmpdir first
+<span style="color:inherit;"> |</span>        mktempdir() do tmp
+<span style="color:inherit;"> |</span>            url, registry_urls = pkg_server_registry_url(reg.uuid, registry_urls)
+<span style="color:orange;">!|</span>            if reg.path !== nothing && reg.linked <span style="color:red;">== true </span># symlink to local source
+<span style="color:inherit;"> |</span>                registry = Registry.RegistryInstance(reg.path)
+<span style="color:inherit;"> |</span>                regpath = joinpath(depot, &#34;registries&#34;, registry.name)
+<span style="color:inherit;"> |</span>                printpkgstyle(io, :Symlinking, &#34;registry from &#96;$(Base.contractuser(reg.path))&#96;&#34;)
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/API.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/API.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-279,7 +279,7</span> ============================================================
+<span style="color:inherit;"> |</span>        if pkg.name === nothing && pkg.uuid === nothing
+<span style="color:inherit;"> |</span>            pkgerror(&#34;name or UUID specification required when calling &#96;rm&#96;&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        if !(pkg.version == VersionSpec() && pkg.</span><span style="color:gray;">pinned</span><span style="color:red;"> == false</span><span style="color:gray;"> &&</span></span>
+<span style="color:green;">+|</span></span>        if !(pkg.version == VersionSpec() && pkg.<span style="color:green;">!</span>pinned &&</span>
+<span style="color:inherit;"> |</span>             pkg.tree_hash === nothing && pkg.repo.source === nothing &&
+<span style="color:inherit;"> |</span>             pkg.repo.rev === nothing && pkg.path === nothing)
+<span style="color:inherit;"> |</span>            pkgerror(&#34;packages may only be specified by name or UUID when calling &#96;rm&#96;&#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-380,7 +380,7</span> ============================================================
+<span style="color:inherit;"> |</span>        if pkg.name === nothing && pkg.uuid === nothing
+<span style="color:inherit;"> |</span>            pkgerror(&#34;name or UUID specification required when calling &#96;free&#96;&#34;)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">-|</span></span><span style="color:gray;">        if !(pkg.version == VersionSpec() && pkg.</span><span style="color:gray;">pinned</span><span style="color:red;"> == false</span><span style="color:gray;"> &&</span></span>
+<span style="color:green;">+|</span></span>        if !(pkg.version == VersionSpec() && pkg.<span style="color:green;">!</span>pinned &&</span>
+<span style="color:inherit;"> |</span>             pkg.tree_hash === nothing && pkg.repo.source === nothing &&
+<span style="color:inherit;"> |</span>             pkg.repo.rev === nothing && pkg.path === nothing)
+<span style="color:inherit;"> |</span>            pkgerror(&#34;packages may only be specified by name or UUID when calling &#96;free&#96;&#34;)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1414,11 +1414,11</span> ============================================================
+<span style="color:inherit;"> |</span>        Types.write_project(Dict(&#34;deps&#34; => deps), ctx.env.project_file)
+<span style="color:inherit;"> |</span>        return instantiate(Context(); manifest=manifest, update_registry=update_registry, verbose=verbose, kwargs...)
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    if (!isfile(ctx.env.manifest_file) && manifest === nothing) || </span><span style="color:gray;">manifest</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    if (!isfile(ctx.env.manifest_file) && manifest === nothing) || <span style="color:green;">!</span>manifest</span>
+<span style="color:inherit;"> |</span>        up(ctx; update_registry=update_registry)
+<span style="color:inherit;"> |</span>        return
+<span style="color:inherit;"> |</span>    end
+<span style="color:orange;">!|</span>    if !isfile(ctx.env.manifest_file) && manifest<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>        pkgerror(&#34;expected manifest file at &#96;$(ctx.env.manifest_file)&#96; but it does not exist&#34;)
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    Operations.prune_manifest(ctx.env)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1440,7 +1440,7</span> ============================================================
+<span style="color:inherit;"> |</span>        # First try without updating the registry
+<span style="color:inherit;"> |</span>        Operations.check_registered(ctx.registries, pkgs)
+<span style="color:inherit;"> |</span>    catch e
+<span style="color:red;">-|</span></span><span style="color:gray;">        if !(e isa PkgError) || </span><span style="color:gray;">update_registry</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>        if !(e isa PkgError) || <span style="color:green;">!</span>update_registry</span>
+<span style="color:inherit;"> |</span>            rethrow(e)
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        Registry.update(; io=ctx.io, force=f</div>
+</pre> <h3 id=avoid_comparing_findfirst_to_nothing_2_hits ><a href="#avoid_comparing_findfirst_to_nothing_2_hits" class=header-anchor >Avoid comparing findfirst to nothing ➤ 2 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/Operations.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/Pkg.jl/src/Operations.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-64,7 +64,7</span> ============================================================
+<span style="color:inherit;"> |</span>                          preserve::PreserveLevel=PRESERVE_DIRECT)
+<span style="color:inherit;"> |</span>    pkgs = copy(pkgs)
+<span style="color:inherit;"> |</span>    for (name::String, uuid::UUID) in env.project.deps
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">findfirst</span><span style="color:gray;">(pkg -> pkg.uuid == uuid, pkgs)</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || continue # do not duplicate packages</span></span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">!occursin</span>(pkg -> pkg.uuid == uuid, pkgs) || continue # do not duplicate packages</span>
+<span style="color:inherit;"> |</span>        entry = manifest_info(env.manifest, uuid)
+<span style="color:inherit;"> |</span>        push!(pkgs, entry === nothing ?
+<span style="color:inherit;"> |</span>              PackageSpec(;uuid=uuid, name=name) :
+<span style="color:inherit;">@|</span><span style="color:inherit;">-85,7 +85,7</span> ============================================================
+<span style="color:inherit;"> |</span>                            preserve::PreserveLevel=PRESERVE_ALL)
+<span style="color:inherit;"> |</span>    pkgs = copy(pkgs)
+<span style="color:inherit;"> |</span>    for (uuid, entry) in manifest
+<span style="color:red;">-|</span></span>        </span><span style="color:red;">findfirst</span><span style="color:gray;">(pkg -> pkg.uuid == uuid, pkgs)</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || continue # do not duplicate packages</span></span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">!occursin</span>(pkg -> pkg.uuid == uuid, pkgs) || continue # do not duplicate packages</span>
+<span style="color:inherit;"> |</span>        push!(pkgs, PackageSpec(
+<span style="color:inherit;"> |</span>            uuid      = uuid,
+<span style="color:inherit;"> |</span>            name      = entry.</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

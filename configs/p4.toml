@@ -1,0 +1,9 @@
+[p4]
+match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
+
+rule='where 
+    rewrite :[first] { "=" -> "" },
+    rewrite :[bool] { "false" -> "!" },
+    rewrite :[bool] { "true" -> "" }'
+
+rewrite=':[first]:[bool]:[var]'

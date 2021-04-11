@@ -1,0 +1,13 @@
+[p5a]
+match='if :[x] :[bool~(=|!)]= :[x]'
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
+rewrite='if :[bool]'
+
+[p5b]
+match=''':[x~[\w_\[\]:\.\\'*+-^′]+]:[bool~(=|!)]=:[x~[\w_\[\]:\.\\'*+-^′]+]'''
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
+rewrite=':[bool]'

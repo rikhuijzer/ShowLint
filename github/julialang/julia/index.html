@@ -1,0 +1,95 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaLang/julia</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaLang/julia" target=_blank >JuliaLang/julia</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_10_hits">Omit comparison with boolean constant ➤ 10 hits</a><li><a href="#omit_a_a_and_a_a_1_hit">Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_10_hits ><a href="#omit_comparison_with_boolean_constant_10_hits" class=header-anchor >Omit comparison with boolean constant ➤ 10 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/bitarray.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/bitarray.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1461,8 +1461,8</span> ============================================================
+<span style="color:inherit;"> |</span>function findnext(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
+<span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
+<span style="color:inherit;"> |</span>    v = pred.x
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findnextnot(B, Int(start))</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findnext(B, start)</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findnextnot(B, Int(start))</span>
+<span style="color:green;">+|</span></span>    v && return findnext(B, start)</span>
+<span style="color:inherit;"> |</span>    return nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>#findfirst(B::BitArray, v) = findnext(B, 1, v)  ## defined in array.jl
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1537,8 +1537,8</span> ============================================================
+<span style="color:inherit;"> |</span>function findprev(pred::Fix2{<:Union{typeof(isequal),typeof(==)},Bool},
+<span style="color:inherit;"> |</span>                  B::BitArray, start::Integer)
+<span style="color:inherit;"> |</span>    v = pred.x
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">v</span><span style="color:red;"> == false</span><span style="color:gray;"> && return findprevnot(B, Int(start))</span></span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    v</span><span style="color:red;"> == true</span><span style="color:gray;"> && return findprev(B, start)</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>v && return findprevnot(B, Int(start))</span>
+<span style="color:green;">+|</span></span>    v && return findprev(B, start)</span>
+<span style="color:inherit;"> |</span>    return nothing
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>#findlast(B::BitArray, v) = findprev(B, 1, v)  ## defined in array.jl
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/mpfr.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/mpfr.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-980,7 +980,7</span> ============================================================
+<span style="color:inherit;"> |</span>                string(int, frac, '0'^(expo-length(frac)), '.', '0')
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            neg = startswith(int, '-')
+<span style="color:orange;">!|</span>            neg <span style="color:red;">== true </span>&& (int = lstrip(int, '-'))
+<span style="color:inherit;"> |</span>            @assert length(int) == 1
+<span style="color:inherit;"> |</span>            string(neg ? '-' : &#34;&#34;, '0', '.', '0'^(-expo-1), int, frac)
+<span style="color:inherit;"> |</span>        end
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/stream.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/stream.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-837,7 +837,7</span> ============================================================
+<span style="color:inherit;"> |</span>function readbytes!(s::LibuvStream, a::Vector{UInt8}, nb::Int)
+<span style="color:inherit;"> |</span>    iolock_begin()
+<span style="color:inherit;"> |</span>    sbuf = s.buffer
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert sbuf.</span><span style="color:gray;">seekable</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @assert sbuf.<span style="color:green;">!</span>seekable</span>
+<span style="color:inherit;"> |</span>    @assert sbuf.maxsize >= nb
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function wait_locked(s, buf, nb)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-883,7 +883,7</span> ============================================================
+<span style="color:inherit;"> |</span>function unsafe_read(s::LibuvStream, p::Ptr{UInt8}, nb::UInt)
+<span style="color:inherit;"> |</span>    iolock_begin()
+<span style="color:inherit;"> |</span>    sbuf = s.buffer
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert sbuf.</span><span style="color:gray;">seekable</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @assert sbuf.<span style="color:green;">!</span>seekable</span>
+<span style="color:inherit;"> |</span>    @assert sbuf.maxsize >= nb
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    function wait_locked(s, buf, nb)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-919,7 +919,7</span> ============================================================
+<span style="color:inherit;"> |</span>function read(this::LibuvStream, ::Type{UInt8})
+<span style="color:inherit;"> |</span>    iolock_begin()
+<span style="color:inherit;"> |</span>    sbuf = this.buffer
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert sbuf.</span><span style="color:gray;">seekable</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @assert sbuf.<span style="color:green;">!</span>seekable</span>
+<span style="color:inherit;"> |</span>    while bytesavailable(sbuf) < 1
+<span style="color:inherit;"> |</span>        iolock_end()
+<span style="color:inherit;"> |</span>        eof(this) && throw(EOFError())
+<span style="color:inherit;">@|</span><span style="color:inherit;">-934,7 +934,7</span> ============================================================
+<span style="color:inherit;"> |</span>    wait_readnb(this, 1) # unlike the other &#96;read&#96; family of functions, this one doesn't guarantee error reporting
+<span style="color:inherit;"> |</span>    iolock_begin()
+<span style="color:inherit;"> |</span>    buf = this.buffer
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert buf.</span><span style="color:gray;">seekable</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @assert buf.<span style="color:green;">!</span>seekable</span>
+<span style="color:inherit;"> |</span>    bytes = take!(buf)
+<span style="color:inherit;"> |</span>    iolock_end()
+<span style="color:inherit;"> |</span>    return bytes
+<span style="color:inherit;">@|</span><span style="color:inherit;">-943,7 +943,7</span> ============================================================
+<span style="color:inherit;"> |</span>function readuntil(x::LibuvStream, c::UInt8; keep::Bool=false)
+<span style="color:inherit;"> |</span>    iolock_begin()
+<span style="color:inherit;"> |</span>    buf = x.buffer
+<span style="color:red;">-|</span></span><span style="color:gray;">    @assert buf.</span><span style="color:gray;">seekable</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    @assert buf.<span style="color:green;">!</span>seekable</span>
+<span style="color:inherit;"> |</span>    if !occursin(c, buf) # fast path checks first
+<span style="color:inherit;"> |</span>        x.readerror === nothing || throw(x.readerror)
+<span style="color:inherit;"> |</span>        if isop</div>
+</pre> <h3 id=omit_a_a_and_a_a_1_hit ><a href="#omit_a_a_and_a_a_1_hit" class=header-anchor >Omit a &#61;&#61; a and a &#33;&#61; a ➤ 1 hit</a></h3> <p><a href="/patterns/#5">Pattern #5</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaLang/julia/base/sort.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaLang/julia/base/sort.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-1125,7 +1125,7</span> ============================================================
+<span style="color:inherit;"> |</span>lt(::Left, x::T, y::T) where {T<:Floats} = slt_int(y, x)
+<span style="color:inherit;"> |</span>lt(::Right, x::T, y::T) where {T<:Floats} = slt_int(x, y)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">isnan(o::DirectOrdering, x::Floats) = (</span><span style="color:red;">x!=x</span><span style="color:gray;">)</span></span>
+<span style="color:green;">+|</span></span>isnan(o::DirectOrdering, x::Floats) = (<span style="color:green;">false</span>)</span>
+<span style="color:inherit;"> |</span>isnan(o::DirectOrdering, x::Missing) = false
+<span style="color:inherit;"> |</span>isnan(o::Perm, i::Integer) = isnan(o.order,o.data[i])
+<span style="color:inherit;"> |</</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

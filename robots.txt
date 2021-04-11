@@ -1,0 +1,4 @@
+Sitemap: https://rikhuijzer.github.io/ShowLint/sitemap.xml
+
+User-agent: *
+Disallow:

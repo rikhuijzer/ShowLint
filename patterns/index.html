@@ -1,0 +1,158 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Patterns</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item active" href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <h1 id=patterns ><a href="#patterns" class=header-anchor >Patterns</a></h1> <p>These patterns use <a href="https://comby.dev">Comby</a> for &quot;searching and changing code structure&quot;. Comby allows us to express rewrite rules succinctly. Some suggested rewrites will be inappropriate &#40;false-positive&#41;. This is unavoidable because, for example, these rewrite rules don&#39;t take context into account. Nonetheless, a lot of the rewrites suggested here are appropriate. Use <code>comby -review</code> to <strong>interactively review</strong> and filter out the false-positives.</p> <p>The tags below can be used to filter out patterns. For example, suppose a repository wants to be compatible with Julia <code>≥1.0</code>. Then, rewrite suggestions which only hold for Julia <code>≥1.2</code> should be hidden.</p> <p>Some of these patterns could be simplified by improving Comby&#39;s language definition for Julia. For now, I have sticked to the existing language defintion.</p> <div class=franklin-toc ><ol><li><a href="#1_use_rand_instead_of_rand11">1: Use rand&#40;&#41; instead of rand&#40;1&#41;&#91;1&#93;</a><li><a href="#2_use_ismissing">2: Use ismissing</a><li><a href="#3_avoid_x_-_fx">3: Avoid x -&gt; f&#40;x&#41;</a><li><a href="#4_omit_comparison_with_boolean_constant">4: Omit comparison with boolean constant</a><li><a href="#5_omit_a_a_and_a_a">5: Omit a &#61;&#61; a and a &#33;&#61; a</a><li><a href="#6_avoid_comparing_findfirst_to_nothing">6: Avoid comparing findfirst to nothing</a><li><a href="#7_avoid_findallx_-_x_false_y">7: Avoid findall&#40;x -&gt; x &#61;&#61; false, Y&#41;</a><li><a href="#8_use_unary_operator_without_anonymous_function">8: Use unary operator without anonymous function</a><li><a href="#9_abbreviate_keyword_argument_values">9: Abbreviate keyword argument values</a><li><a href="#10_replace_p_p_with_p">10: Replace P &amp;&amp; P with P</a><li><a href="#11_replace_dirnamedirnamepathofm_with_pkgdirm">11: Replace dirname&#40;dirname&#40;pathof&#40;M&#41;&#41;&#41; with pkgdir&#40;M&#41;</a><li><a href="#references">References</a></ol></div> <span id=1 ></span> </p> <h3 id=1_use_rand_instead_of_rand11 ><a href="#1_use_rand_instead_of_rand11" class=header-anchor >1: Use rand&#40;&#41; instead of rand&#40;1&#41;&#91;1&#93;</a></h3> <p>tags: <em>julia</em></p> <p>According to <a href="https://stackoverflow.com/questions/65403410/">DNF</a>, many people use </p> <pre><code class=language-julia >julia&gt; using Random
+
+julia&gt; Random.seed&#33;&#40;1234&#41;; rand&#40;1&#41;&#91;1&#93;
+0.5908446386657102</code></pre> <p>instead of &#40;the more performant&#41;</p> <pre><code class=language-julia >julia&gt; Random.seed&#33;&#40;1234&#41;; rand&#40;&#41;
+0.5908446386657102</code></pre> <b>Defintion</b> <pre><code class=plaintext >[p1a]
+match="rand(1)[1]"
+rewrite="rand()"
+
+[p1b]
+match="rand(:[a],:[space~[ ]*]1)[1]"
+rewrite="rand(:[a])"
+</code></pre> <span id=2 ></span> <h3 id=2_use_ismissing ><a href="#2_use_ismissing" class=header-anchor >2: Use ismissing</a></h3> <p>tags: <em>julia, performance-decrease</em></p> <p>This pattern is disabled for now by default, due to discussion at <a href="https://discourse.julialang.org/t/ismissing-x-versus-x-missing/52171">https://discourse.julialang.org/t/ismissing-x-versus-x-missing/52171</a>.</p> <b>Defintion</b> <pre><code class=plaintext >[p2]
+match=':[[var]] :[first~[=|!]]== missing' 
+
+rule='where rewrite :[first] { "=" -> "" }'
+
+rewrite=':[first]ismissing(:[var])'
+</code></pre> <span id=3 ></span> <h3 id=3_avoid_x_-_fx ><a href="#3_avoid_x_-_fx" class=header-anchor >3: Avoid x -&gt; f&#40;x&#41;</a></h3> <p>tags: <em>julia</em></p> <p>From the <a href="https://docs.julialang.org/en/v1/manual/style-guide/">Julia Style Guide</a>. For unary operators, such as <code>x -&gt; &#33;x</code>, see <a href="#8">pattern 8</a>.</p> <p><strong>Example</strong></p> <pre><code class=language-julia >julia&gt; f&#40;x&#41; &#61; 2x
+f &#40;generic function with 1 method&#41;
+
+julia&gt; map&#40;x -&gt; f&#40;x&#41;, &#91;1, 2&#93;&#41;
+2-element Array&#123;Int64,1&#125;:
+ 2
+ 4
+
+julia&gt; map&#40;f, &#91;1, 2&#93;&#41;
+2-element Array&#123;Int64,1&#125;:
+ 2
+ 4</code></pre> <b>Defintion</b> <pre><code class=plaintext >[p3]
+match=':[[x]] -> :[f~[\w_]*](:[x]):[end~(,|\n)]'
+
+rewrite=':[f]:[end]'
+</code></pre> <span id=4 ></span> <h3 id=4_omit_comparison_with_boolean_constant ><a href="#4_omit_comparison_with_boolean_constant" class=header-anchor >4: Omit comparison with boolean constant</a></h3> <p>tags: <em>generic</em></p> <p>From <a href="https://staticcheck.io/docs/checks">staticcheck</a>.</p> <b>Defintion</b> <pre><code class=plaintext >[p4]
+match=':[[var]] :[first~(=|!)]= :[bool~(true|false)]'
+
+rule='where 
+    rewrite :[first] { "=" -> "" },
+    rewrite :[bool] { "false" -> "!" },
+    rewrite :[bool] { "true" -> "" }'
+
+rewrite=':[first]:[bool]:[var]'
+</code></pre> <span id=5 ></span> <h3 id=5_omit_a_a_and_a_a ><a href="#5_omit_a_a_and_a_a" class=header-anchor >5: Omit a &#61;&#61; a and a &#33;&#61; a</a></h3> <p>tags: <em>julia</em></p> <p>SA4000 in <a href="https://staticcheck.io/docs/checks">staticcheck</a>.</p> <p>Be careful when applying this pattern to situations where <code>a</code> can be of type <code>Missing</code>. For example, <code>a &#61;&#61; a</code> returns <code>missing</code> and not <code>true</code>. On the other hand, <code>if missing</code> returns an error, so maybe this isn&#39;t a valid argument.</p> <p><strong>Examples</strong></p> <pre><code class=language-julia >julia&gt; a &#61;&#61; 1
+true
+
+julia&gt; a &#61;&#61; a
+true
+
+julia&gt; a &#33;&#61; a
+false</code></pre> <b>Defintion</b> <pre><code class=plaintext >[p5a]
+match='if :[x] :[bool~(=|!)]= :[x]'
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
+rewrite='if :[bool]'
+
+[p5b]
+match=''':[x~[\w_\[\]:\.\\'*+-^′]+]:[bool~(=|!)]=:[x~[\w_\[\]:\.\\'*+-^′]+]'''
+rule='where
+    rewrite :[bool] { "=" -> "true" },
+    rewrite :[bool] { "!" -> "false" }'
+rewrite=':[bool]'
+</code></pre> <span id=6 ></span> <h3 id=6_avoid_comparing_findfirst_to_nothing ><a href="#6_avoid_comparing_findfirst_to_nothing" class=header-anchor >6: Avoid comparing findfirst to nothing</a></h3> <p>tags: <em>julia</em></p> <p>For example, instead of <code>findfirst&#40;&#39;a&#39;, &quot;ab&quot;&#41; &#61;&#61;&#61; nothing</code>, use <code>occursin&#40;&#39;a&#39;, &quot;ab&quot;&#41;</code> or <code>contains</code> &#40;Julia ≥1.5&#41;.</p> <b>Defintion</b> <pre><code class=plaintext >[p6]
+match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
+
+rule='where
+    rewrite :[bool] { "!" -> "" },
+    rewrite :[bool] { "=" -> "!" }'
+
+rewrite=':[bool]occursin(:[a], :[b])'
+</code></pre> <span id=7 ></span> <h3 id=7_avoid_findallx_-_x_false_y ><a href="#7_avoid_findallx_-_x_false_y" class=header-anchor >7: Avoid findall&#40;x -&gt; x &#61;&#61; false, Y&#41;</a></h3> <p>tags: <em>julia</em></p> <p>Instead, use <code>findall&#40;.&#33;Y&#41;</code>.</p> <b>Defintion</b> <pre><code class=plaintext >[p7]
+match='findall(:[x] -> :[x] == false, :[Y])'
+
+rewrite='findall(.!:[Y])'
+</code></pre> <span id=8 ></span> <h3 id=8_use_unary_operator_without_anonymous_function ><a href="#8_use_unary_operator_without_anonymous_function" class=header-anchor >8: Use unary operator without anonymous function</a></h3> <p>tags: <em>julia</em></p> <p>This is an extension of <a href="#3">pattern 3</a> for the unary operators: <code>&#33;</code>, <code>~</code>, <code>&#43;</code>, <code>-</code>.</p> <p><strong>Example</strong></p> <pre><code class=language-julia >julia&gt; map&#40;x -&gt; &#33;x, &#91;true, missing&#93;&#41;
+2-element Array&#123;Union&#123;Missing, Bool&#125;,1&#125;:
+ false
+      missing
+
+julia&gt; map&#40;&#33;, &#91;true, missing&#93;
+2-element Array&#123;Union&#123;Missing, Bool&#125;,1&#125;:
+ false
+      missing</code></pre> <b>Defintion</b> <pre><code class=plaintext >[p8]
+match=':[[x]] -> :[unary~[!~+-]]:[x~[\w\_\[\]\.]+]'
+
+rewrite=':[unary]'
+</code></pre> <span id=9 ></span> <h3 id=9_abbreviate_keyword_argument_values ><a href="#9_abbreviate_keyword_argument_values" class=header-anchor >9: Abbreviate keyword argument values</a></h3> <p>tags: <em>julia, 1.5</em></p> <p>From <a href="https://julialang.org/blog/2020/08/julia-1.5-highlights">Julia 1.5 onwards</a> it is possible to abbreviate</p> <pre><code class=language-julia >printstyled&#40;&quot;text&quot;; color &#61; color&#41;</code></pre>
+<p>to</p>
+<pre><code class=language-julia >printstyled&#40;&quot;text&quot;; color&#41;</code></pre>
+
+<b>Defintion</b>
+<pre><code class=plaintext >[p9]
+match="(:[a]; :[c] = :[c])"
+rewrite="(:[a]; :[c])"
+</code></pre>
+
+ 
+<span id=10 ></span>
+
+<h3 id=10_replace_p_p_with_p ><a href="#10_replace_p_p_with_p" class=header-anchor >10: Replace P &amp;&amp; P with P</a></h3>
+<p>tags: <em>julia, disabled</em></p>
+<p><em>Disabled because it has many false-positives and no true-positives.</em></p>
+<p>The statement <code>P &amp;&amp; P</code> is logically equivalent to <code>P</code>. This is called a micro-clone <span class=bibref >(<a href="#ptonder2016">van Tonder & Le Goues, 2016</a>)</span>.</p>
+<p><strong>Example</strong></p>
+<pre><code class=language-julia >julia&gt; P &#61; 3 &lt; 1
+false
+
+julia&gt; P &amp;&amp; P
+false
+
+julia&gt; P
+false</code></pre>
+
+<b>Defintion</b>
+<pre><code class=plaintext >[p10a]
+match="if :[a] == :[b] && :[a] == :[b]"
+rewrite="if :[a] == :[b]"
+[p10b]
+match=":[a~[^ ]+] && :[a~[^ ]+]"
+rewrite=":[a]"
+</code></pre>
+
+ 
+<span id=11 ></span>
+
+<h3 id=11_replace_dirnamedirnamepathofm_with_pkgdirm ><a href="#11_replace_dirnamedirnamepathofm_with_pkgdirm" class=header-anchor >11: Replace dirname&#40;dirname&#40;pathof&#40;M&#41;&#41;&#41; with pkgdir&#40;M&#41;</a></h3>
+<p>tags: <em>julia, 1.4</em></p>
+<p>From Julia 1.4 onwards it is possible to use <code>pkgdir&#40;M&#41;</code>.</p>
+<p><strong>Example</strong></p>
+<pre><code class=language-julia >julia&gt; using DataFrames
+
+julia&gt; pathof&#40;DataFrames&#41;
+&quot;/home/rik/.julia/packages/DataFrames/oQ5c7/src/DataFrames.jl&quot;
+
+julia&gt; dirname&#40;dirname&#40;pathof&#40;DataFrames&#41;&#41;&#41;
+&quot;/home/rik/.julia/packages/DataFrames/oQ5c7&quot;
+
+julia&gt; pkgdir&#40;DataFrames&#41;
+&quot;/home/rik/.julia/packages/DataFrames/oQ5c7&quot;</code></pre>
+<p>
+<b>Defintion</b>
+<pre><code class=plaintext >[p11]
+match="dirname(dirname(pathof(:[M])))"
+rewrite="pkgdir(:[M])"
+</code></pre>
+
+<h3 id=references ><a href="#references" class=header-anchor >References</a></h3>
+<p><a id=ptonder2016  class=anchor ></a> van Tonder, R., &amp; Le Goues, C. &#40;2016, May&#41;.  Defending against the attack of the micro-clones.  In 2016 IEEE 24th International Conference on Program Comprehension &#40;ICPC&#41; &#40;pp. 1-4&#41;.  IEEE. <a href="https://doi.org/10.1109/ICPC.2016.7503736">https://doi.org/10.1109/ICPC.2016.7503736</a>.</p>
+<div class=page-foot >
+  <div class=copyright >
+    <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div>
+    </div>  
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>

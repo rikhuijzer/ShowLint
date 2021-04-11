@@ -1,0 +1,61 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>domluna/JuliaFormatter.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/domluna/JuliaFormatter.jl" target=_blank >domluna/JuliaFormatter.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_comparing_findfirst_to_nothing_7_hits">Avoid comparing findfirst to nothing ➤ 7 hits</a></ol></div> <h3 id=avoid_comparing_findfirst_to_nothing_7_hits ><a href="#avoid_comparing_findfirst_to_nothing_7_hits" class=header-anchor >Avoid comparing findfirst to nothing ➤ 7 hits</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/styles/blue/nest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/styles/blue/nest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-3,8 +3,8</span> ============================================================
+<span style="color:inherit;"> |</span>    line_margin = s.line_offset + length(fst) + fst.extra_margin
+<span style="color:inherit;"> |</span>    lidx = findlast(n -> n.typ === PLACEHOLDER, fst.nodes)
+<span style="color:inherit;"> |</span>    fidx = findfirst(n -> n.typ === PLACEHOLDER, fst.nodes)
+<span style="color:red;">-|</span></span><span style="color:gray;">    opener = </span><span style="color:red;">findfirst</span><span style="color:gray;">(is_opener, fst.nodes)</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    opener = <span style="color:green;">occursin</span>(is_opener, fst.nodes)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    multiline_arg = </span><span style="color:red;">findfirst</span><span style="color:gray;">(is_block, fst.nodes)</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    multiline_arg = <span style="color:green;">occursin</span>(is_block, fst.nodes)</span>
+<span style="color:inherit;"> |</span>    multiline_arg && (fst.nest_behavior = AlwaysNest)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    if lidx !== nothing && (line_margin > s.opts.margin || must_nest(fst))
+<span style="color:red;">------ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/passes.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/passes.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-122,8 +122,8</span> ============================================================
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function import_to_usings(fst::FST, s::State)
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">findfirst</span><span style="color:gray;">(is_colon, fst.nodes) </span><span style="color:red;">=== nothing </span><span style="color:gray;">|| return FST[]</span></span>
+<span style="color:red;">-|</span></span>    </span><span style="color:red;">findfirst</span><span style="color:gray;">(n -> is_punc(n) && n.val == &#34;.&#34;, fst.nodes)</span><span style="color:red;"> === nothing</span><span style="color:gray;"> || return FST[]</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!occursin</span>(is_colon, fst.nodes) || return FST[]</span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!occursin</span>(n -> is_punc(n) && n.val == &#34;.&#34;, fst.nodes) || return FST[]</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    usings = FST[]
+<span style="color:inherit;"> |</span>    idxs = findall(n -> n.typ === CSTParser.IDENTIFIER, fst.nodes)
+<span style="color:red;">------ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/fst.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/fst.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-207,7 +207,7</span> ============================================================
+<span style="color:inherit;"> |</span>    valid(p)
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">contains_comment(nodes::Vector{FST}) = </span><span style="color:red;">findfirst</span><span style="color:gray;">(is_comment, nodes)</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>contains_comment(nodes::Vector{FST}) = <span style="color:green;">occursin</span>(is_comment, nodes)</span>
+<span style="color:inherit;"> |</span>function contains_comment(fst::FST)
+<span style="color:inherit;"> |</span>    is_leaf(fst) && return false
+<span style="color:inherit;"> |</span>    contains_comment(fst.nodes)
+<span style="color:red;">------ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/styles/default/nest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/styles/default/nest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-229,7 +229,7</span> ============================================================
+<span style="color:inherit;"> |</span>    style = getstyle(ds)
+<span style="color:inherit;"> |</span>    line_margin = s.line_offset + length(fst) + fst.extra_margin
+<span style="color:inherit;"> |</span>    idx = findlast(n -> n.typ === PLACEHOLDER, fst.nodes)
+<span style="color:red;">-|</span></span><span style="color:gray;">    opener = </span><span style="color:red;">findfirst</span><span style="color:gray;">(is_opener, fst.nodes)</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    opener = <span style="color:green;">occursin</span>(is_opener, fst.nodes)</span>
+<span style="color:inherit;"> |</span>    if idx !== nothing && (line_margin > s.opts.margin || must_nest(fst))
+<span style="color:inherit;"> |</span>        line_offset = s.line_offset
+<span style="color:inherit;"> |</span>        if opener
+<span style="color:red;">------ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/styles/yas/nest.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">domluna/JuliaFormatter.jl/src/styles/yas/nest.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-158,7 +158,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function n_binaryopcall!(ys::YASStyle, fst::FST, s::State)
+<span style="color:inherit;"> |</span>    style = getstyle(ys)
+<span style="color:red;">-|</span></span><span style="color:gray;">    if </span><span style="color:red;">findfirst</span><span style="color:gray;">(n -> n.typ === PLACEHOLDER, fst.nodes)</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    if <span style="color:green;">occursin</span>(n -> n.typ === PLACEHOLDER, fst.nodes)</span>
+<span style="color:inherit;"> |</span>        n_binaryopcall!(DefaultStyle(style), fst, s)
+<span style="color:inherit;"> |</span>        return
+<span style="color:inherit;"> |</span></div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

@@ -1,0 +1,35 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>femtomc/Jaynes.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/femtomc/Jaynes.jl" target=_blank >femtomc/Jaynes.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_3_hits">Avoid x -&gt; f&#40;x&#41; ➤ 3 hits</a></ol></div> <h3 id=avoid_x_-_fx_3_hits ><a href="#avoid_x_-_fx_3_hits" class=header-anchor >Avoid x -&gt; f&#40;x&#41; ➤ 3 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/compiler/specializer/diffs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/compiler/specializer/diffs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-11,7 +11,7</span> ============================================================
+<span style="color:inherit;"> |</span>struct Change <: Diff end
+<span style="color:inherit;"> |</span>struct Consumed <: Diff end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">@inline tupletype(dfs::Diffed...) = Tuple{map(</span><span style="color:red;">d -> valtype(d)</span><span style="color:gray;">, dfs)...}</span></span>
+<span style="color:green;">+|</span></span>@inline tupletype(dfs::Diffed...) = Tuple{map(<span style="color:green;">valtype</span>, dfs)...}</span>
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>valtype(d::Diffed{V, DV}) where {V, DV} = V
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/regenerate.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-109,7 +109,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ret = ctx(cs.fn, tupletype(args...), args...)
+<span style="color:inherit;"> |</span>    adj_w = regenerate_projection_walk(ctx.tr, ctx.visited)
+<span style="color:inherit;"> |</span>    regenerate_discard_walk!(ctx.discard, ctx.visited, get_trace(cs))
+<span style="color:red;">-|</span></span><span style="color:gray;">    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(</span><span style="color:red;">a -> unwrap(a)</span><span style="color:gray;">, args), ret), ctx.weight, UnknownChange(), ctx.discard</span></span>
+<span style="color:green;">+|</span></span>    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(<span style="color:green;">unwrap</span>, args), ret), ctx.weight, UnknownChange(), ctx.discard</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipeline.
+<span style="color:red;">------ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/update.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">femtomc/Jaynes.jl/src/pipelines/gfi/update.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-125,7 +125,7</span> ============================================================
+<span style="color:inherit;"> |</span>    ret = ctx(func, tupletype(args...), args...)
+<span style="color:inherit;"> |</span>    adj_w = update_projection_walk(ctx.tr, ctx.visited)
+<span style="color:inherit;"> |</span>    update_discard_walk!(ctx.discard, ctx.visited, unwrap(get_trace(cs)))
+<span style="color:red;">-|</span></span><span style="color:gray;">    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(</span><span style="color:red;">a -> unwrap(a)</span><span style="color:gray;">, args), ret), ctx.weight, UnknownChange(), ctx.discard</span></span>
+<span style="color:green;">+|</span></span>    return ret, DynamicCallSite(ctx.tr, ctx.score - adj_w, cs.fn, map(<span style="color:green;">unwrap</span>, args), ret), ctx.weight, UnknownChange(), ctx.discard</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span># Explicitly parametrize the compilation pipe</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

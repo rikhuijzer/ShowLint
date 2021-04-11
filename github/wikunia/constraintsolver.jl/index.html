@@ -1,0 +1,54 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Wikunia/ConstraintSolver.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/Wikunia/ConstraintSolver.jl" target=_blank >Wikunia/ConstraintSolver.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_4_hits">Avoid x -&gt; f&#40;x&#41; ➤ 4 hits</a><li><a href="#avoid_comparing_findfirst_to_nothing_1_hit">Avoid comparing findfirst to nothing ➤ 1 hit</a></ol></div> <h3 id=avoid_x_-_fx_4_hits ><a href="#avoid_x_-_fx_4_hits" class=header-anchor >Avoid x -&gt; f&#40;x&#41; ➤ 4 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">Wikunia/ConstraintSolver.jl/src/constraints/not_equal.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">Wikunia/ConstraintSolver.jl/src/constraints/not_equal.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-14,7 +14,7</span> ============================================================
+<span style="color:inherit;"> |</span>    indices = constraint.indices
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # check if only one variable is variable
+<span style="color:red;">-|</span></span><span style="color:gray;">    nfixed = count(</span><span style="color:red;">v -> isfixed(v)</span><span style="color:gray;">, com.search_space[constraint.indices])</span></span>
+<span style="color:green;">+|</span></span>    nfixed = count(<span style="color:green;">isfixed</span>, com.search_space[constraint.indices])</span>
+<span style="color:inherit;"> |</span>    if nfixed >= length(constraint.indices) - 1
+<span style="color:inherit;"> |</span>        search_space = com.search_space
+<span style="color:inherit;"> |</span>        sum = -set.value + fct.constant
+<span style="color:inherit;">@|</span><span style="color:inherit;">-62,7 +62,7</span> ============================================================
+<span style="color:inherit;"> |</span>) where {T<:Real}
+<span style="color:inherit;"> |</span>    indices = constraint.indices
+<span style="color:inherit;"> |</span>    # check if only one variable is variable
+<span style="color:red;">-|</span></span><span style="color:gray;">    nfixed = count(</span><span style="color:red;">v -> isfixed(v)</span><span style="color:gray;">, com.search_space[indices])</span></span>
+<span style="color:green;">+|</span></span>    nfixed = count(<span style="color:green;">isfixed</span>, com.search_space[indices])</span>
+<span style="color:inherit;"> |</span>    if nfixed >= length(indices) - 1
+<span style="color:inherit;"> |</span>        search_space = com.search_space
+<span style="color:inherit;"> |</span>        sum = -set.value + fct.constant
+<span style="color:red;">------ </span><span style="color:inherit;">Wikunia/ConstraintSolver.jl/src/ConstraintSolver.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">Wikunia/ConstraintSolver.jl/src/ConstraintSolver.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-763,7 +763,7</span> ============================================================
+<span style="color:inherit;"> |</span>        com.solve_time = time() - com.start_time
+<span style="color:inherit;"> |</span>        return :Infeasible
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">-|</span></span><span style="color:gray;">    if all(</span><span style="color:red;">v -> isfixed(v)</span><span style="color:gray;">, com.search_space)</span></span>
+<span style="color:green;">+|</span></span>    if all(<span style="color:green;">isfixed</span>, com.search_space)</span>
+<span style="color:inherit;"> |</span>        # root node is the first backtrack obj
+<span style="color:inherit;"> |</span>        dummy_backtrack_obj = BacktrackObj(com)
+<span style="color:inherit;"> |</span>        com.best_bound = get_best_bound(com, dummy_backtrack_obj)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-797,7 +797,7</span> ============================================================
+<span style="color:inherit;"> |</span>        return :Infeasible
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if all(</span><span style="color:red;">v -> isfixed(v)</span><span style="color:gray;">, com.search_space)</span></span>
+<span style="color:green;">+|</span></span>    if all(<span style="color:green;">isfixed</span>, com.search_space)</span>
+<span style="color:inherit;"> |</span>        com.best_sol = com.best_bound
+<span style="color:inherit;"> |</span>        com.solve_time = time() - com.start_time
+<span style="color:inherit;"> |</span>        new_sol_obj = Solution(com.best_sol, CS.value.(com.search_space</div>
+</pre> <h3 id=avoid_comparing_findfirst_to_nothing_1_hit ><a href="#avoid_comparing_findfirst_to_nothing_1_hit" class=header-anchor >Avoid comparing findfirst to nothing ➤ 1 hit</a></h3> <p><a href="/patterns/#6">Pattern #6</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">Wikunia/ConstraintSolver.jl/src/constraints/table.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">Wikunia/ConstraintSolver.jl/src/constraints/table.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-557,7 +557,7</span> ============================================================
+<span style="color:inherit;"> |</span>)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    table = set.table
+<span style="color:red;">-|</span></span><span style="color:gray;">    return </span><span style="color:red;">findfirst</span><span style="color:gray;">(ri -> table[ri, :] == values, 1:size(table)[1])</span><span style="color:red;"> !== nothing</span></span>
+<span style="color:green;">+|</span></span>    return <span style="color:green;">occursin</span>(ri -> table[ri, :] == values, 1:size(table)[1])</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>&#34;&#34;</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

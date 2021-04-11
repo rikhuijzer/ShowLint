@@ -1,0 +1,7 @@
+[p1a]
+match="rand(1)[1]"
+rewrite="rand()"
+
+[p1b]
+match="rand(:[a],:[space~[ ]*]1)[1]"
+rewrite="rand(:[a])"

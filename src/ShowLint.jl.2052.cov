@@ -1,0 +1,381 @@
+        - module ShowLint
+        - 
+        - using Dates
+        - using DocStringExtensions
+        - using Formatting
+        - using Serialization
+        - 
+        - export 
+        -     apply,
+        -     Pattern,
+        -     Repo,
+        -     project_root,
+        -     ansi2html,
+        -     clone_repositories,
+        -     target_dir,
+        -     patterns,
+        -     repositories
+        - 
+        - include("patterns.jl")
+        - include("repositories.jl")
+        - 
+        - const project_root = dirname(dirname(pathof(ShowLint)))
+        - const configs_dir = joinpath(project_root, "configs")
+        - 
+        - """
+        - Remove ANSI color codes from `text`.
+        - 
+        - $(TYPEDSIGNATURES) 
+        - """
+        7 function ansi2html(text::String)::String
+        7   escape_codes = Dict(
+        -     "0;30" => "inherit",
+        -     "0;31" => "red",
+        -     "0;32" => "green",
+        -     "0;34" => "blue",
+        -     "0;1" => "inherit",
+        -     "0;100;30" => "inherit",
+        -     "0;41;30" => "red",
+        -     "0;42;30" => "green",
+        -     "0;43;30" => "orange",
+        -     "0;2" => "gray"
+        -   )
+       14   for code in keys(escape_codes)
+       70     before = "[" * code * "m"
+       70     color = escape_codes[code]
+       70     after = "<span style=\"color:$color;\">"
+      140     text = replace(text, before => after)
+        -   end
+        7   no_color = "[0m"
+        7   text = replace(text, no_color => "</span>")
+        7   text = replace(text, r"WARNING: [^\n]*$" => "")
+        7   text = replace(text, "/home/runner/clones/github/" => "")
+        7   text = replace(text, "" => "") 
+        7   text = replace(text, "<!" => "&#60;!")
+        7   text = replace(text, "[0;7;2m" => "")
+        7   text = text[1:end-6]
+        7   text = strip(text)
+        7   return length(text) < 6 ? 
+        -         "" :
+        -         """
+        -         ~~~ 
+        -         <pre>
+        -         <div class="hljs">$text</div>
+        -         </pre>
+        -         ~~~
+        -         """
+        - end
+        - 
+        - const clones_dir = joinpath(homedir(), "clones") 
+        - 
+        - """
+        - Directory of the host of `repo`. 
+        - 
+        - $(TYPEDSIGNATURES)
+        - 
+        - ### Example
+        - ```
+        - julia> host_dir("https://github.com") 
+        - "github"
+        - ```
+        - """
+       48 function host_dir(repo::Repo)::String
+       48     host = repo.host
+       59     host_dir = startswith(host, "https://") ? host[9:end] : host
+       48     host_dir = lowercase(host_dir) == "github.com" ? "github" : host_dir
+        - end
+        - 
+        - function target_dir(repo::Repo)
+       45     name = repo.name
+       45     joinpath(clones_dir, host_dir(repo), name) 
+        - end
+        - 
+        - function page_path(repo::Repo)
+        1     name = repo.name
+        1     lowercase(joinpath(host_dir(repo), "$name.md"))
+        - end
+        - 
+        2 function clone_repositories(; production=is_production())
+        2     if !isdir(clones_dir)
+        0         mkdir(clones_dir)
+        -     end
+        1     for repo in repositories(; production)
+        1         println("Cloning $(repo.name)")
+        1         name = repo.name
+        1         host = repo.host
+        1         dest = target_dir(repo)
+        1         if isdir(dest)
+        1             cd(dest)
+        1             try
+        1                 run(`git pull --ff-only`)
+        -             catch
+        1                 @warn "git pull failed for $(repo.name)"
+        -             end
+        -         else
+        0             run(`git clone
+        -                 --depth=1
+        -                 --no-tags
+        -                 --single-branch
+        -                 $host/$name $dest`)
+        -         end
+        1         println()
+        -     end
+        - end
+        - 
+        - function config_path(pat::Pattern)::String
+       66     id = pat.id
+       66     name = "p$id"
+       66     joinpath(configs_dir, "$name.toml")
+        - end
+        - 
+        - """
+        - Create a Comby configuration file for `pat` at `dir`.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        - function write_config(pat::Pattern, dir::String)
+       22     open(config_path(pat), "w") do io
+       22         write(io, pat.toml)
+        -     end
+        - end
+        - 
+        - """
+        - Write Comby configurations from `src/patterns.jl` to `project_root/configs`.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        2 function write_configs()
+        2     rm(configs_dir; force=true, recursive=true)
+        2     mkpath(configs_dir)
+        2     for pat in patterns
+       22         write_config(pat, configs_dir)
+        -     end
+        - end
+        - 
+        - """
+        - Obtains the number of matches from Comby's `-stats` output 
+        - on stderr.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        7 function number_of_matches(stderr::String)::Int
+        7     regex = r"\"number_of_matches\": ([0-9]*)"
+        7     m = match(regex, stderr)
+        7     n_str = m[1]
+        7     parse(Int, n_str)
+        - end
+        - 
+        - """
+        - Apply `pattern` to `repo`.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+       44 function apply(pat::Pattern, repo::Repo; 
+        -     file_extensions="jl", in_place=false)
+        - 
+       88     start = Dates.now()
+       44     repo_path = target_dir(repo)
+        - 
+       44     exclude_prefixes = join(repo.exclude_prefixes, ',')
+       44     stats_path = joinpath(tempdir(), "comby_stats.log")
+        - 
+       81     cmd = !in_place ? 
+        -         `comby
+        -             -exclude-dir $exclude_prefixes
+        -             -config $(config_path(pat))
+        -             -directory $repo_path
+        -             -file-extensions $file_extensions
+        -             -stats
+        -         ` :
+        -         `comby
+        -             -exclude-dir $exclude_prefixes
+        -             -config $(config_path(pat))
+        -             -directory $repo_path
+        -             -file-extensions $file_extensions
+        -             -in-place
+        -         `
+        - 
+       44     stdout = IOBuffer()
+       44     stderr = IOBuffer()
+       44     run(pipeline(cmd; stdout, stderr))
+       44     out = String(take!(stdout))
+       44     err = String(take!(stderr))
+       44     function avoid_franklin_parse_errors(out)
+        7         out = replace(out, '`' => "&#96;")
+        7         out = replace(out, '"' => "&#34;")
+        7         out
+        -     end
+       44     if !in_place
+        7         out = avoid_franklin_parse_errors(out)
+        7         if !isnothing(out)
+        7             out = ansi2html(out)
+        -         end
+        -     end
+       44     time = Dates.now() - start
+       44     println("$(pat.id): $time")
+       44     return (out, err)
+        - end
+        - 
+        - """
+        - Apply `pattern` to `code`.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+       58 function apply(pat::Pattern, code::String; file_extension="jl")
+       74     test_dir = joinpath(clones_dir, "tmp", "tmp")
+       37     rm(test_dir; recursive=true, force=true)
+       37     mkpath(test_dir)
+        - 
+       37     code_file = joinpath(test_dir, "code.$file_extension")
+       37     open(code_file, "w") do io
+       37         write(io, code)
+        -     end
+        -     
+       37     repo = Repo("tmp", "tmp"; exclude=["nah"])
+        - 
+       37     apply(pat, repo; in_place=true)
+        - 
+       37     read(code_file, String)
+        - end
+        - 
+        3 function filter_patterns(repo::Repo, patterns::Vector{Pattern})
+        4     predicates = repo.tags_predicates
+       18     all_predicates_hold(tags) = all([P(tags) for P in predicates])
+       18     filtered_patterns = filter(pat -> all_predicates_hold(pat.tags), patterns)
+        - end
+        - 
+        1 function repo_page(repo::Repo)
+        1     predicates_str = join(repo.tags_predicates, " && ")
+        1     headers = []
+        1     repo_url = joinpath(repo.host, repo.name)
+        1     head = """
+        -         ~~~
+        -         <h1><a href="$repo_url" target="_blank">$(repo.name)</a></h1>
+        -         ~~~
+        - 
+        -         Showing patterns for which the `tags` satisfy:
+        -         *$predicates_str*, and the pattern resulted in at least one match.
+        - 
+        -         \\toc
+        - 
+        -         """ 
+        - 
+        8     function pattern_section(pat)
+        7         diff, err = ShowLint.apply(pat, repo)
+        7         title = pat.title
+        7         id = pat.id
+        7         n_matches = number_of_matches(err)
+        7         n_text = n_matches == 1 ? "hit" : "hits"
+        7         unicode_em_space = " " 
+        7         header = "$title$(unicode_em_space)➤$(unicode_em_space)$n_matches $n_text"
+        - 
+        7         if diff == ""
+        7             return ""
+        -         else
+        0             push!(headers, header)
+        0             return """
+        -             ### $header
+        -             [Pattern #$id](/patterns/#$id)
+        - 
+        -             $diff
+        - 
+        -             """
+        -         end
+        -     end
+        1     filtered_patterns = filter_patterns(repo, patterns)
+        2     sections = pattern_section.(filtered_patterns)
+        - 
+        1     return (
+        -         headers = headers,
+        -         text = join([head, sections...], '\n') 
+        -     )
+        - end
+        - 
+        - 
+        - """
+        - Create one webpage per repository.
+        - We could process all the diffs when this function is called or when `serve` runs. 
+        - It seems more flexible to do it as early as possible.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        2 function create_repo_pages(; production=is_production())
+        2     write_configs()
+        1     pages_headers = []
+        - 
+        1     for repo in repositories(; production)
+        1         if !isdir(host_dir(repo))
+        1             mkdir(host_dir(repo))
+        -         end
+        1         franklin_file = page_path(repo)
+        1         println("Creating repository page at $franklin_file")
+        1         if !isdir(dirname(franklin_file))
+        1             mkdir(dirname(franklin_file))
+        -         end
+        - 
+        1         page_headers, page_text = repo_page(repo)
+        1         push!(pages_headers, page_headers)
+        - 
+        2         open(franklin_file, "w") do io
+        1             write(io, """
+        -                 +++
+        -                 title = "$(repo.name)"
+        -                 +++
+        - 
+        -                 [//]: # (Generated file. Do not modify.)
+        - 
+        -                 $page_text
+        -                 """
+        -             )
+        -         end
+        -     end
+        1     headers_path = joinpath(project_root, "__site", "pages-headers.txt")
+        1     mkpath(dirname(headers_path))
+        1     Serialization.serialize(headers_path, pages_headers)
+        1     pages_headers
+        - end
+        - 
+        - function count_without_comments(path)::Int
+        -     content = read(path, String)
+        -     lines = split(content, '\n')
+        -     is_comment_line(line) = startswith(lstrip(line), '#')
+        -     non_comment_lines = filter(!is_comment_line, lines)
+        -     length(non_comment_lines)
+        - end
+        - 
+        - """
+        - Counts the number of lines of codes in files with `extension` in
+        - `dir`.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        - function cloned_loc(; extension=".jl")::Int
+        -     counts = []
+        -     
+        -     for (root, dirs, files) in walkdir(clones_dir)
+        -         for file in files
+        -             ext = last(splitext(file))
+        -             if ext == extension 
+        -                 path = joinpath(root, file)
+        -                 count = count_without_comments(path)
+        -                 push!(counts, count)
+        -             end
+        -         end
+        -     end
+        -     sum(counts)
+        - end
+        - 
+        1 prettify_loc(n::Number)::String = format(n, commas=true)
+        - 
+        - """
+        - Helper function to build the site locally.
+        - `Franklin.serve` can be called after this function, but it is also possible to have Franklin already running.
+        - 
+        - $(TYPEDSIGNATURES)
+        - """
+        - function build_site(; production=true)
+        -     clone_repositories()
+        -     create_repo_pages()
+        - end
+        - 
+        - end # module

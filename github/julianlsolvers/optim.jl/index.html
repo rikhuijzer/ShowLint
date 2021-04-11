@@ -1,0 +1,124 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>JuliaNLSolvers/Optim.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/JuliaNLSolvers/Optim.jl" target=_blank >JuliaNLSolvers/Optim.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#omit_comparison_with_boolean_constant_12_hits">Omit comparison with boolean constant ➤ 12 hits</a></ol></div> <h3 id=omit_comparison_with_boolean_constant_12_hits ><a href="#omit_comparison_with_boolean_constant_12_hits" class=header-anchor >Omit comparison with boolean constant ➤ 12 hits</a></h3> <p><a href="/patterns/#4">Pattern #4</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/bfgs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/bfgs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-133,7 +133,7</span> ============================================================
+<span style="color:inherit;"> |</span>    state.x .= state.x .+ state.dx
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function update_h!(d, state, method::BFGS)
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/cg.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/cg.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-197,7 +197,7</span> ============================================================
+<span style="color:inherit;"> |</span>        beta = NaNMath.max(betak, etak) # TODO: Set to zero if betak is NaN?
+<span style="color:inherit;"> |</span>        state.s .= beta.*state.s .- state.pg
+<span style="color:inherit;"> |</span>        project_tangent!(method.manifold, state.s, state.x)
+<span style="color:red;">-|</span></span>        </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>        <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>update_g!(d, state, method::ConjugateGradient) = nothing
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/second_order/newton.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/second_order/newton.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-80,7 +80,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Update current position # x = x + alpha * s
+<span style="color:inherit;"> |</span>    @. state.x = state.x + state.alpha * state.s
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::Newton, options, curr_time=time())
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/ngmres.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/ngmres.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-392,7 +392,7</span> ============================================================
+<span style="color:inherit;"> |</span>    copyto!(state.x_previous, state.x_previous_0)
+<span style="color:inherit;"> |</span>    state.f_x_previous = state.f_x_previous_0
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # Break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # Break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function update_g!(d, state, method::AbstractNGMRES)
+<span style="color:inherit;">@|</span><span style="color:inherit;">-401,7 +401,7</span> ============================================================
+<span style="color:inherit;"> |</span>    value_gradient!(d, state.x)
+<span style="color:inherit;"> |</span>    project_tangent!(method.manifold, gradient(d), state.x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">    if state.</span><span style="color:gray;">restart</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    if state.<span style="color:green;">!</span>restart</span>
+<span style="color:inherit;"> |</span>        state.curw = min(state.curw + 1, method.wmax)
+<span style="color:inherit;"> |</span>    else
+<span style="color:inherit;"> |</span>        state.k = 0
+<span style="color:inherit;">@|</span><span style="color:inherit;">-424,7 +424,7</span> ============================================================
+<span style="color:inherit;"> |</span>        dt[&#34;x&#34;] = copy(state.x)
+<span style="color:inherit;"> |</span>        dt[&#34;g(x)&#34;] = copy(gradient(d))
+<span style="color:inherit;"> |</span>        dt[&#34;subspace-α&#34;] = state.subspacealpha[1:state.curw-1]
+<span style="color:orange;">!|</span>        if state.restart<span style="color:red;"> == true</span>
+<span style="color:inherit;"> |</span>            dt[&#34;Current step size&#34;] = NaN
+<span style="color:inherit;"> |</span>        else
+<span style="color:inherit;"> |</span>            dt[&#34;Current step size&#34;] = state.alpha
+<span style="color:inherit;">@|</span><span style="color:inherit;">-435,7 +435,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>    dt[&#34;Restart&#34;] = state.restart
+<span style="color:red;">-|</span></span><span style="color:gray;">    if state.</span><span style="color:gray;">restart</span><span style="color:red;"> == false</span></span>
+<span style="color:green;">+|</span></span>    if state.<span style="color:green;">!</span>restart</span>
+<span style="color:inherit;"> |</span>        dt[&#34;f(x^P)&#34;] = state.f_xP
+<span style="color:inherit;"> |</span>        dt[&#34;|g(x^P)|&#34;] = state.grnorm_xP
+<span style="color:inherit;"> |</span>    end
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/momentum_gradient_descent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/momentum_gradient_descent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-56,7 +56,7</span> ============================================================
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    state.x .+= state.alpha.*state.s .+ method.mu.*state.x_momentum
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::MomentumGradientDescent, options, curr_time=time())
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/gradient_descent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/gradient_descent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-82,7 +82,7</span> ============================================================
+<span style="color:inherit;"> |</span>    # Update current position # x = x + alpha * s
+<span style="color:inherit;"> |</span>    @. state.x = state.x + state.alpha * state.s
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::GradientDescent, options, curr_time=time())
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/l_bfgs.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/l_bfgs.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-38,7 +38,7</span> ============================================================
+<span style="color:inherit;"> |</span>    end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>    # Copy q into s for forward pass
+<span style="color:orange;">!|</span>    if scaleinvH0 <span style="color:red;">== true </span>&& pseudo_iteration > 1
+<span style="color:inherit;"> |</span>        # Use the initial scaling guess from
+<span style="color:inherit;"> |</span>        # Nocedal & Wright (2nd ed), Equation (7.20)
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-208,7 +208,7</span> ============================================================
+<span style="color:inherit;"> |</span>    state.x .= state.x .+ state.dx
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>
+<span style="color:red;">------ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">JuliaNLSolvers/Optim.jl/src/multivariate/solvers/first_order/accelerated_gradient_descent.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-70,7 +70,7</span> ============================================================
+<span style="color:inherit;"> |</span>    state.x .= state.y .+ scaling.*(state.y .- state.y_previous)
+<span style="color:inherit;"> |</span>    retract!(method.manifold, state.x)
+<span style="color:inherit;"> |</span>
+<span style="color:red;">-|</span></span>    </span><span style="color:gray;">lssuccess</span><span style="color:red;"> == false</span><span style="color:gray;"> # break on linesearch error</span></span>
+<span style="color:green;">+|</span></span>    <span style="color:green;">!</span>lssuccess # break on linesearch error</span>
+<span style="color:inherit;"> |</span>end
+<span style="color:inherit;"> |</span>
+<span style="color:inherit;"> |</span>function trace!(tr, d, state, iteration, method::AcceleratedGradientDescent, options, curr_time=ti</div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

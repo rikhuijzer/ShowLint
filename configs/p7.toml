@@ -1,0 +1,4 @@
+[p7]
+match='findall(:[x] -> :[x] == false, :[Y])'
+
+rewrite='findall(.!:[Y])'

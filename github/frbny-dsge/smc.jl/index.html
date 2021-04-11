@@ -1,0 +1,24 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>FRBNY-DSGE/SMC.jl</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h2><a href="/">ShowLint</a></h2> <p>Showing static code analysis results for open source repositories</p> <br/> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/patterns">Patterns</a> <a class="sidebar-nav-item " href="/repositories">Repositories</a> </nav> <br/> <br/> <br/> <br/> <br/> </div> </div> <div class="content container"> <div class=franklin-content > <p> <h1><a href="https://github.com/FRBNY-DSGE/SMC.jl" target=_blank >FRBNY-DSGE/SMC.jl</a></h1> </p> <p>Showing patterns for which the <code>tags</code> satisfy: <em>default_predicate</em>, and the pattern resulted in at least one match.</p> <div class=franklin-toc ><ol><li><a href="#avoid_x_-_fx_3_hits">Avoid x -&gt; f&#40;x&#41; ➤ 3 hits</a></ol></div> <h3 id=avoid_x_-_fx_3_hits ><a href="#avoid_x_-_fx_3_hits" class=header-anchor >Avoid x -&gt; f&#40;x&#41; ➤ 3 hits</a></h3> <p><a href="/patterns/#3">Pattern #3</a></p> <pre>
+<div class=hljs ><span style="color:red;">------ </span><span style="color:inherit;">FRBNY-DSGE/SMC.jl/src/helpers.jl</span>
+<span style="color:green;">++++++ </span><span style="color:inherit;">FRBNY-DSGE/SMC.jl/src/helpers.jl</span>
+<span style="color:inherit;">@|</span><span style="color:inherit;">-270,8 +270,8</span> ============================================================
+<span style="color:inherit;"> |</span>function check_nan_ess(cloud::Cloud, stage::Int64, incremental_weights::Vector{T},
+<span style="color:inherit;"> |</span>                       normalized_weights::Vector{T}, savepath::String, debug_assertion::Bool) where {T <: AbstractFloat}
+<span style="color:inherit;"> |</span>    if isnan(cloud.ESS[stage])
+<span style="color:red;">-|</span></span><span style="color:gray;">        inf_loglh = any(</span><span style="color:red;">x -> isinf(x)</span><span style="color:gray;">, incremental_weights)</span></span>
+<span style="color:green;">+|</span></span>        inf_loglh = any(<span style="color:green;">isinf</span>, incremental_weights)</span>
+<span style="color:red;">-|</span></span><span style="color:gray;">        nan_loglh = any(</span><span style="color:red;">x -> isnan(x)</span><span style="color:gray;">, incremental_weights)</span></span>
+<span style="color:green;">+|</span></span>        nan_loglh = any(<span style="color:green;">isnan</span>, incremental_weights)</span>
+<span style="color:inherit;"> |</span>        zero_norm_wts = sum(normalized_weights .^2) <= eps()
+<span style="color:inherit;"> |</span>        nan_norm_wts = isnan(sum(normalized_weights .^2))
+<span style="color:inherit;"> |</span>        assert_str = &#34;No particles have non-zero weight.&#34;
+<span style="color:inherit;">@|</span><span style="color:inherit;">-286,7 +286,7</span> ============================================================
+<span style="color:inherit;"> |</span>        end
+<span style="color:inherit;"> |</span>        if nan_norm_wts
+<span style="color:inherit;"> |</span>            assert_str *= &#34; The squared sum of the normalized weights is returning a NaN.&#34;
+<span style="color:red;">-|</span></span><span style="color:gray;">            if nan_norm_wts && any(</span><span style="color:red;">x -> isnan(x)</span><span style="color:gray;">, normalized_weights)</span></span>
+<span style="color:green;">+|</span></span>            if nan_norm_wts && any(<span style="color:green;">isnan</span>, normalized_weights)</span>
+<span style="color:inherit;"> |</span>                assert_str *= &#34; Part of the reason is that one of the normalized weights is a NaN&#34;
+<span style="color:inherit;"> |</span>            end
+<span style="color:inherit;"> |</span></div>
+</pre> <div class=page-foot > <div class=copyright > <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> Rik Huijzer. Last modified: April 11, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div>

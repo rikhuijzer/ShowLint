@@ -1,0 +1,8 @@
+[p6]
+match='findfirst(:[a], :[b]) :[bool~(=|!)]== nothing'
+
+rule='where
+    rewrite :[bool] { "!" -> "" },
+    rewrite :[bool] { "=" -> "!" }'
+
+rewrite=':[bool]occursin(:[a], :[b])'

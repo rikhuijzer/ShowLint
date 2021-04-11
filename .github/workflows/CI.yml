@@ -39,7 +39,7 @@ jobs:
     - name: Install Julia
       uses: julia-actions/setup-julia@v1
       with:
-        version: "^1.6.0-0"
+        version: "1.6"
 
     - uses: julia-actions/julia-buildpkg@v1
     - uses: julia-actions/julia-runtest@v1
@@ -59,9 +59,9 @@ jobs:
         using Franklin; optimize()'
 
     - name: Deploy to secondary branch
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' || github.event_name = 'workflow_dispatch' }}
       uses: peaceiris/actions-gh-pages@v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        force_orphan: true
         publish_dir: ./__site
-        cname: lint.huijzer.xyz

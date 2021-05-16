@@ -26,8 +26,10 @@ jobs:
         key: key-${{ hashFiles('src/repositories.jl') }}
 
     - name: Install Comby
-      run: bash <(curl -sL get.comby.dev)
-      env: 
+      run: |
+        sudo apt-get install libpcre3-dev
+        bash <(curl -sL get.comby.dev)
+      env:
         TERM: xterm
 
     # Python is used for Franklin's pre-rendering (minification) step

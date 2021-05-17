@@ -1,9 +1,9 @@
 name: CI
 
 on:
-  schedule:
+  # schedule:
     # Sunday at 04:15.
-    - cron: "15 4 * * 0"
+    # - cron: "15 4 * * 0"
   push:
     branches:
       - main
